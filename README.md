@@ -119,7 +119,7 @@ Lo que todavía no está transcripto o revisado se marca como **pendiente de rev
 
 ## 🛠️ Para quien quiera tocar el código
 
-Stack: **Astro 7** + MDX + **KaTeX** (se renderiza al construir), JavaScript vanilla, Playwright para los tests y GitHub Pages con Actions. Requiere **Node ≥ 20** (probado con v26). Todos los comandos se corren desde la carpeta del proyecto (la que tiene `package.json`).
+Stack: **Astro 7** + MDX + **KaTeX** (se renderiza al construir), JavaScript vanilla, Playwright para los tests y GitHub Pages con Actions. Requiere **Node ≥ 22.12** (probado con v26). Todos los comandos se corren desde la carpeta del proyecto (la que tiene `package.json`).
 
 <details>
 <summary><b>💻 Correr en tu compu</b></summary>
