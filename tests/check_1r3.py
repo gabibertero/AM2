@@ -97,9 +97,7 @@ yh = C1 + C2*sp.exp(-2*x)
 assert sp.simplify(sp.diff(yh, x, 2) + 2*sp.diff(yh, x)) == 0
 yg = yh + ypv
 dsol = sp.dsolve(sp.Eq(sp.Function("f")(x).diff(x, 2) + 2*sp.Function("f")(x).diff(x), rhs)).rhs   # dsolve independiente
-dC1, dC2 = sorted(dsol.free_symbols - {x}, key=str)
-assert sp.simplify(dsol.subs({dC1: C1 + 0, dC2: C2}) - yg) == 0 or sp.simplify(yg - dsol.subs({dC1: C2, dC2: C1})) == 0 \
-    or sp.simplify(sp.diff(dsol, x, 2) + 2*sp.diff(dsol, x) - rhs) == 0
+assert sp.simplify(sp.diff(dsol, x, 2) + 2*sp.diff(dsol, x) - rhs) == 0 and sp.simplify(sp.diff(yg, x, 2) + 2*sp.diff(yg, x) - rhs) == 0   # sustitución en la EDO
 en_mdx(r"-8D=-4\Rightarrow D=\tfrac12", r"B=-D=-\tfrac12", r"y_p''+2y_p'=(8+8)e^{2x}+(-2-2)\cos2x+(2-2)\sin2x=16e^{2x}-4\cos2x",
        r"y=C_1+C_2e^{-2x}+2e^{2x}-\frac{1}{2}\sin(2x)+\frac{1}{2}\cos(2x)")
 print("OK: 1R3 verificado (ej1 32π/3, ej2 256π/15, ej3 22/5, ej4 exacta, ej5 EDO)")

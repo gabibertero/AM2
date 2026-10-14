@@ -7,12 +7,15 @@ const examenes = (await getCollection('anteriores')).sort((a, b) => a.data.orden
 ---
 <Layout titulo="Años anteriores">
   <h1>Parciales de años anteriores (fotos de clase)</h1>
-  <p>Ocho exámenes (X, Y, Z, W × Tema 1 y 2) que salen de fotos tomadas en clase. No traen fecha ni resolución. Están separados de los <a href={`${base}parciales/`}>parciales oficiales</a> con fecha.</p>
-  <ul class="lista">
+  <p class="lead">Ocho exámenes (X, Y, Z, W × Tema 1 y 2) que salen de fotos tomadas en clase. No traen fecha ni resolución. Están separados de los <a href={`${base}parciales/`}>parciales oficiales</a> con fecha.</p>
+  <ul class="grilla lista-tarjetas">
     {examenes.map((e) => (
-      <li>
-        <a href={`${base}anteriores/${e.id}/`}>{e.data.titulo}</a> · sin fecha
-        <br /><span data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span>
+      <li class="tarjeta examen-card">
+        <div class="ec-top"><span class="chip">sin fecha</span><span class="chip">foto de clase</span></div>
+        <a class="ec-titulo" href={`${base}anteriores/${e.id}/`}>{e.data.titulo}</a>
+        <p class="chips">{e.data.unidades.map((u) => <span class="chip chip-u" data-unidad={u}>{u}</span>)}</p>
+        <span class="barra" aria-hidden="true" data-barra data-ids={idsDeEjercicios(e.body).join(',')}></span>
+        <span class="progreso" data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span>
       </li>
     ))}
   </ul>

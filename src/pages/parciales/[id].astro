@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { idsDeEjercicios } from '../../scripts/ids.js';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -17,8 +18,14 @@ const d = entry.data;
       <li><a href={`${base}parciales/${t.id}/`} aria-current={t.id === entry.id ? 'page' : undefined}>{t.data.comision} · {t.data.fecha}</a></li>
     ))}
   </ul>
-  <h1>{d.titulo}</h1>
-  <p class="meta">{d.fecha} · {d.tipo}{d.tema && ` · Tema ${d.tema}`} · Unidades: {d.unidades.join(', ')}</p>
-  <p class="meta">Fuente: {d.fuente} (enunciado p.{d.paginasEnunciado}, resolución p.{d.paginasResolucion})</p>
-  <Content />
+  <div class="examen-cab tarjeta">
+    <h1>{d.titulo}</h1>
+    <p class="meta">{d.fecha} · {d.tipo}{d.tema && ` · Tema ${d.tema}`} · Unidades: {d.unidades.map((u) => <span class="chip chip-u" data-unidad={u}>{u}</span>)}</p>
+    <p class="meta">Fuente: {d.fuente} (enunciado p.{d.paginasEnunciado}, resolución p.{d.paginasResolucion})</p>
+    <span class="barra" aria-hidden="true" data-barra data-ids={idsDeEjercicios(entry.body).join(',')}></span>
+  </div>
+  <div class="examen-grid">
+    <nav class="indice" aria-label="Ejercicios del examen" data-indice><p class="indice-t">Ejercicios</p><ol></ol></nav>
+    <div class="examen-cont"><Content /></div>
+  </div>
 </Layout>

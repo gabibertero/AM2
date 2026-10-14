@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { UNIDADES_MACHETES } from './unidades-machetes';
 
 const parciales = defineCollection({
   loader: glob({ pattern: '*.mdx', base: './src/content/parciales' }),
@@ -45,7 +46,7 @@ const machetes = defineCollection({
   schema: z.object({
     slug: z.string(),
     titulo: z.string(),
-    unidad: z.enum(['U4', 'U5', 'U8', 'U9']),
+    unidad: z.enum(UNIDADES_MACHETES),
     orden: z.number(),
     ejerciciosOficiales: z.array(z.string().regex(/^[\w-]+#\d+$/)),
     fuentes: z.array(z.string()).min(1),

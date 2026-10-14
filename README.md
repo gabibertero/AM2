@@ -158,7 +158,8 @@ Después:
 ```bash
 npm run check          # ids de ejercicio únicos y con archivo + página de origen
 npm run build          # el build también falla si el chequeo de ids falla
-npx playwright test    # construye, sirve el sitio y prueba el progreso
+npx playwright test    # construye, sirve el sitio y prueba el progreso y la navegación
+npm run test:py        # recalcula el 1R3 con sympy (una vez: python3 -m pip install --user sympy)
 ```
 
 Resultado esperado: todo en verde, sin errores.

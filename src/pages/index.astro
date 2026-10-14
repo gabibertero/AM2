@@ -1,13 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { idsDeEjercicios } from '../scripts/ids.js';
 const base = import.meta.env.BASE_URL;
+const cuerpos = [...(await getCollection('parciales')), ...(await getCollection('anteriores'))];
+const todosIds = cuerpos.flatMap((e) => idsDeEjercicios(e.body)).join(',');
+const alcance = [['U4', 'confirmado'], ['U5', 'confirmado'], ['U6', 'tentativo'], ['U7', 'sin material'], ['U8', 'confirmado'], ['U9', 'confirmado'], ['U10', 'tentativo']];
+const secciones = [
+  ['📝', 'Parciales oficiales', 'parciales/', 'Exámenes reales de 2025–2026, ejercicio por ejercicio.'],
+  ['🗂️', 'Años anteriores', 'anteriores/', 'Fotos de clase, sin fecha ni resolución oficial.'],
+  ['📚', 'Teoría', 'teoria/', 'Resumen por unidad, con alcance y estado.'],
+  ['⚡', 'Machetes', 'machetes/', 'Guías de bolsillo por tipo de problema.'],
+];
 ---
 <Layout titulo="Inicio">
-  <h1>Análisis Matemático II · 2º parcial</h1>
-  <p>
-    Un sitio de estudio para preparar el segundo parcial de Análisis Matemático II (UTN FRC, Ingeniería en Sistemas).
-    Está pensado para practicar con exámenes reales, de a poco, sin que te espoileen la solución antes de tiempo.
-  </p>
+  <section class="hero">
+    <p class="eyebrow">UTN FRC · Ingeniería en Sistemas</p>
+    <h1>Análisis Matemático II · 2º parcial</h1>
+    <p class="lead">
+      Un sitio de estudio para preparar el segundo parcial de Análisis Matemático II (UTN FRC, Ingeniería en Sistemas).
+      Está pensado para practicar con exámenes reales, de a poco, sin que te espoileen la solución antes de tiempo.
+    </p>
+    <p class="hero-acc">
+      <a class="btn btn-primario" href={`${base}parciales/`}>Empezar a practicar</a>
+      <a class="btn" href={`${base}machetes/`}>Ver machetes</a>
+    </p>
+  </section>
+
+  <div class="grilla grilla-sec">
+    {secciones.map(([emo, t, href, d]) => (
+      <a class="tarjeta tarjeta-link" href={`${base}${href}`}>
+        <span class="emo" aria-hidden="true">{emo}</span>
+        <strong>{t}</strong>
+        <span class="suave">{d}</span>
+      </a>
+    ))}
+    <div class="tarjeta tp" data-tu-progreso data-ids={todosIds}>
+      <span class="emo" aria-hidden="true">🎯</span>
+      <strong>Tu progreso</strong>
+      <span class="tp-num"><b data-n>0</b> / <span data-t>{todosIds.split(',').length}</span> ejercicios resueltos</span>
+      <span class="barra" aria-hidden="true"></span>
+    </div>
+  </div>
 
   <h2>Para quién es</h2>
   <p>Para Gabi y sus compañeros que cursan o rinden el 2º parcial. La prioridad es la parte práctica (alrededor del 75 %); la teoría acompaña (25 %).</p>
@@ -22,12 +56,22 @@ const base = import.meta.env.BASE_URL;
   <p><strong>Estado:</strong> los 12 exámenes están transcriptos y verificados contra el escaneo, con el original (datos personales tapados) y la resolución oficial del profe. El <a href={`${base}parciales/1r3-2025-11-14/`}>1R3 (14/11/2025)</a> ya tiene la solución paso a paso; los demás se van completando. Los <a href={`${base}machetes/`}>machetes</a> por tipo de problema están listos.</p>
 
   <h2>Alcance</h2>
+  <p class="chips">
+    {alcance.map(([u, e]) => <span class="chip chip-u chip-lg" data-unidad={u}>{u}<small>{e}</small></span>)}
+  </p>
   <ul>
     <li>Programa 2025, unidades U4 a U10. Fourier (U11) queda fuera.</li>
     <li>Los parciales prácticos reales solo tocan U4, U5, U8 y U9.</li>
     <li>U6 y U10: alcance tentativo, no aparecieron en parciales prácticos.</li>
     <li>U7 (Computación numérica): pendiente, sin material.</li>
   </ul>
+
+  <h2>Cómo distinguir lo oficial de lo demás</h2>
+  <div class="leyenda">
+    <div class="capa oficial"><p class="rotulo">Oficial</p>Enunciados tal cual el examen y resolución del profe (escaneo). Acento azul.</div>
+    <div class="capa elaborado"><p class="rotulo">Elaborado para el sitio — no oficial</p>Pistas, pasos, soluciones y comprobaciones escritas para estudiar. Acento verde.</div>
+    <div class="capa generado"><p class="rotulo">Simulacro generado — no oficial</p>Ejercicios inventados; solo existen si Gabi los pide. Borde punteado ámbar.</div>
+  </div>
 
   <h2>Cómo empezar</h2>
   <ol>
@@ -54,11 +98,4 @@ const base = import.meta.env.BASE_URL;
     <button type="button" data-no>Cancelar</button>
   </div>
   <p role="status" tabindex="-1" data-resultado></p>
-
-  <h2>Cómo distinguir lo oficial de lo demás</h2>
-  <div class="leyenda">
-    <div class="capa oficial"><p class="rotulo">Oficial</p>Enunciados tal cual el examen y resolución del profe (escaneo). Acento azul.</div>
-    <div class="capa elaborado"><p class="rotulo">Elaborado para el sitio — no oficial</p>Pistas, pasos, soluciones y comprobaciones escritas para estudiar. Acento verde.</div>
-    <div class="capa generado"><p class="rotulo">Simulacro generado — no oficial</p>Ejercicios inventados; solo existen si Gabi los pide. Borde punteado ámbar.</div>
-  </div>
 </Layout>

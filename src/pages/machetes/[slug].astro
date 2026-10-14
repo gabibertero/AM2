@@ -7,14 +7,20 @@ export async function getStaticPaths() {
   return todos.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
 }
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2);
 const base = import.meta.env.BASE_URL;
 const d = entry.data;
 ---
 <Layout titulo={d.titulo}>
-  <p class="meta"><a href={`${base}machetes/`}>← Machetes</a> · {d.unidad}</p>
+  <p class="meta"><a href={`${base}machetes/`}>← Machetes</a> · <span class="chip chip-u" data-unidad={d.unidad}>{d.unidad}</span></p>
   <h1>{d.titulo}</h1>
-  <div class="capa elaborado">
+  {toc.length > 0 && (
+    <nav class="toc" aria-label="En esta página"><p class="indice-t">En esta página</p>
+      <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+    </nav>
+  )}
+  <div class="capa elaborado lectura" data-unidad={d.unidad}>
     <p class="rotulo">Machete · Elaborado para el sitio — no oficial</p>
     <Content />
     <h2>En qué ejercicios oficiales aparece</h2>

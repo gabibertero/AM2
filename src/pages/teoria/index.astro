@@ -6,11 +6,11 @@ const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.da
 ---
 <Layout titulo="Teoría">
   <h1>Teoría por unidad</h1>
-  <p class="meta">Contenido elaborado para el sitio a partir de los apuntes; no es material oficial. Cada unidad indica su alcance y su estado.</p>
-  <ul class="lista">
+  <p class="lead">Contenido elaborado para el sitio a partir de los apuntes; no es material oficial. Cada unidad indica su alcance y su estado.</p>
+  <ul class="grilla lista-tarjetas">
     {items.map((i) => (
-      <li data-unidad={i.data.unidad}>
-        <a href={`${base}teoria/${i.id}/`}><strong>{i.data.unidad}</strong> · {i.data.titulo}</a>
+      <li class="tarjeta tarjeta-u" data-unidad={i.data.unidad}>
+        <a class="ec-titulo" href={`${base}teoria/${i.id}/`}><span class="chip chip-u chip-lg" data-unidad={i.data.unidad}>{i.data.unidad}</span> {i.data.titulo}</a>
         <p class="meta">
           <span class="insignia" data-estado={i.data.estado}>{i.data.estado}</span>
           <span class="insignia" data-alcance={i.data.alcance}>alcance {i.data.alcance}</span>
@@ -19,10 +19,3 @@ const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.da
     ))}
   </ul>
 </Layout>
-<style is:global>
-  .insignia { display: inline-block; border: 1px solid var(--borde); border-radius: 999px; padding: 0 10px; margin-right: 6px; font-size: .8rem; font-weight: 600; background: var(--panel); }
-  .insignia[data-estado='borrador'] { border-color: var(--generado); color: var(--generado); }
-  .insignia[data-alcance='tentativo'], .insignia[data-alcance='sin material'] { border-color: var(--pendiente); color: var(--pendiente); }
-  .teoria h2 { margin-top: 2.2rem; border-top: 2px solid var(--borde); padding-top: .8rem; }
-  .teoria h3 { margin-top: 1.6rem; }
-</style>

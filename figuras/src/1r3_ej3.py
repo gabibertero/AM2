@@ -17,4 +17,4 @@ a.plot([-1, 1], [1, 1], "ko"); a.text(1.06, .93, "(1, 1)"); a.text(-1.55, .93, "
 a.text(0, .75, "D\n(3y > 0)", fontsize=14, ha="center"); a.text(0, -.1, "sentido antihorario (+)", ha="center")
 a.set_xlim(-1.8, 1.8); a.set_ylim(-.2, 1.7); a.set_aspect("equal"); a.grid(alpha=.3)
 a.set_xlabel("x"); a.set_ylabel("y"); a.legend(fontsize=11, loc="upper center", bbox_to_anchor=(.5, -.14), frameon=False)
-fig.tight_layout(); fig.savefig(out, format="svg")
+fig.tight_layout(); fig.savefig(out, format="svg", metadata={"Date": None})

@@ -7,12 +7,21 @@ const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden 
 ---
 <Layout titulo="Parciales oficiales">
   <h1>Parciales oficiales</h1>
-  <ul class="lista">
+  <p class="lead">Exámenes reales de 2025–2026, con sus ejercicios en el orden original.</p>
+  <ul class="grilla lista-tarjetas">
     {examenes.map((e) => (
-      <li>
-        <a href={`${base}parciales/${e.id}/`}>{e.data.titulo}</a> · {e.data.fecha} · {e.data.tipo}
-        <br /><span data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span>
+      <li class="tarjeta examen-card">
+        <div class="ec-top">
+          <span class="chip chip-fuerte">{e.data.comision}</span>
+          {e.body.includes('<Solucion') && <span class="chip chip-ok">✔ Con solución</span>}
+        </div>
+        <a class="ec-titulo" href={`${base}parciales/${e.id}/`}>{e.data.titulo}</a>
+        <p class="meta">{e.data.fecha} · {e.data.tipo}</p>
+        <p class="chips">{e.data.unidades.map((u) => <span class="chip chip-u" data-unidad={u}>{u}</span>)}</p>
+        <span class="barra" aria-hidden="true" data-barra data-ids={idsDeEjercicios(e.body).join(',')}></span>
+        <span class="progreso" data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span>
       </li>
     ))}
   </ul>
+  <p class="meta">¿Buscás más práctica? Mirá los <a href={`${base}anteriores/`}>exámenes de años anteriores</a>.</p>
 </Layout>

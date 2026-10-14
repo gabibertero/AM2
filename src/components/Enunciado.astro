@@ -1,6 +1,6 @@
 ---
 const { fuente, pagina, examen } = Astro.props;
-const src = `${import.meta.env.BASE_URL}escaneos/${examen}/p${pagina}.webp`;
+const src = examen && `${import.meta.env.BASE_URL}escaneos/${examen}/p${pagina}.webp`;
 ---
 <div class="capa oficial">
   <p class="rotulo">Enunciado oficial — tal cual la fuente</p>
