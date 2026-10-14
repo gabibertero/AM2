@@ -1,0 +1,8 @@
+---
+const { fuente, pagina } = Astro.props;
+---
+<div class="capa oficial">
+  <p class="rotulo">Enunciado oficial — tal cual la fuente</p>
+  <slot />
+  <p class="cita">Fuente: {fuente}, p.{pagina}</p>
+</div>

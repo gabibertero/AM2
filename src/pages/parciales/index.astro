@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { idsDeEjercicios } from '../../scripts/ids.js';
+const base = import.meta.env.BASE_URL;
+const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden - b.data.orden);
+---
+<Layout titulo="Parciales oficiales">
+  <h1>Parciales oficiales</h1>
+  <ul class="lista">
+    {examenes.map((e) => (
+      <li>
+        <a href={`${base}parciales/${e.id}/`}>{e.data.titulo}</a> · {e.data.fecha} · {e.data.tipo}
+        <br /><span data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span>
+      </li>
+    ))}
+  </ul>
+</Layout>

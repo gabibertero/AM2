@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+<Layout titulo="Inicio">
+  <h1>Análisis Matemático II · 2º parcial</h1>
+  <p>
+    Un sitio de estudio para preparar el segundo parcial de Análisis Matemático II (UTN FRC, Ingeniería en Sistemas).
+    Está pensado para practicar con exámenes reales, de a poco, sin que te espoileen la solución antes de tiempo.
+  </p>
+
+  <h2>Para quién es</h2>
+  <p>Para Gabi y sus compañeros que cursan o rinden el 2º parcial. La prioridad es la parte práctica (alrededor del 75 %); la teoría acompaña (25 %).</p>
+
+  <h2>Qué material incluye</h2>
+  <ul>
+    <li>11 parciales y recuperatorios oficiales prácticos de 2025–2026, cada uno con sus ejercicios en el orden original.</li>
+    <li>Un modelo teórico oficial.</li>
+    <li>Pistas, pasos y soluciones elaboradas para el sitio, más machetes por tipo de problema (se van completando por etapas).</li>
+  </ul>
+  <p>Todavía hay un solo examen de prueba cargado (1R3, 14/11/2025); el resto se suma en las próximas tareas.</p>
+
+  <h2>Alcance</h2>
+  <ul>
+    <li>Programa 2025, unidades U4 a U10. Fourier (U11) queda fuera.</li>
+    <li>Los parciales prácticos reales solo tocan U4, U5, U8 y U9.</li>
+    <li>U6 y U10: alcance tentativo, no aparecieron en parciales prácticos.</li>
+    <li>U7 (Computación numérica): pendiente, sin material.</li>
+  </ul>
+
+  <h2>Cómo empezar</h2>
+  <ol>
+    <li>Entrá a <a href={`${base}parciales/`}>Parciales oficiales</a> y elegí un examen.</li>
+    <li>Intentá cada ejercicio por tu cuenta, en papel.</li>
+    <li>Marcá el estado del ejercicio: pendiente, en curso o resuelto.</li>
+  </ol>
+
+  <h2>Cómo usar las soluciones progresivas</h2>
+  <p>
+    Cada ejercicio esconde su ayuda. "Ver pista" muestra una pista por vez, "Siguiente paso" muestra el desarrollo de a un paso,
+    "Ver solución completa" lo muestra todo y "Ocultar todo" vuelve a esconderlo. Probá siempre con la pista más chica primero.
+  </p>
+
+  <h2>Dónde se guarda tu progreso</h2>
+  <p>
+    En tu navegador (localStorage), con claves que empiezan con <code>am2:v1:</code>. No hay cuentas ni servidor: no se comparte entre dispositivos
+    y se pierde si borrás los datos del navegador. Actualizar el sitio no lo borra.
+  </p>
+  <button type="button" data-reiniciar>Reiniciar progreso</button>
+  <div class="capa generado" data-confirmar hidden role="group" aria-label="Confirmar reinicio">
+    <p><strong>¿Seguro?</strong> Se borran los estados y las ayudas reveladas de todos los ejercicios. No se puede deshacer.</p>
+    <button type="button" data-si>Sí, borrar todo</button>
+    <button type="button" data-no>Cancelar</button>
+  </div>
+  <p role="status" data-resultado></p>
+
+  <h2>Cómo distinguir lo oficial de lo demás</h2>
+  <div class="leyenda">
+    <div class="capa oficial"><p class="rotulo">Oficial</p>Enunciados tal cual el examen y resolución del profe (escaneo). Acento azul.</div>
+    <div class="capa elaborado"><p class="rotulo">Elaborado para el sitio — no oficial</p>Pistas, pasos, soluciones y comprobaciones escritas para estudiar. Acento verde.</div>
+    <div class="capa generado"><p class="rotulo">Simulacro generado — no oficial</p>Ejercicios inventados; solo existen si Gabi los pide. Borde punteado ámbar.</div>
+  </div>
+</Layout>

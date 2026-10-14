@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.data.orden);
+---
+<Layout titulo="Teoría">
+  <h1>Teoría</h1>
+  <p>Todavía no hay contenido: se completa en una tarea posterior.</p>
+  <ul>{items.map((i) => <li>{i.data.titulo}</li>)}</ul>
+</Layout>

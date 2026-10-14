@@ -1,0 +1,67 @@
+:root {
+  --fondo: #ffffff; --texto: #1b1f24; --suave: #4a5260; --borde: #c9ced6; --panel: #f4f6f9;
+  --link: #0b4fb3;
+  --oficial: #0b4fb3; --oficial-fondo: #eef4fd;
+  --elaborado: #0f6b45; --elaborado-fondo: #edf8f2;
+  --generado: #8a4b00; --generado-fondo: #fff4e0;
+  --pendiente: #7a1f1f;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #14171c; --texto: #e8ebf0; --suave: #aab2c0; --borde: #3a414d; --panel: #1c2027;
+    --link: #8ab8ff;
+    --oficial: #8ab8ff; --oficial-fondo: #16233a;
+    --elaborado: #6fd6a2; --elaborado-fondo: #13291f;
+    --generado: #ffc069; --generado-fondo: #33260f;
+    --pendiente: #ff9a9a;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--fondo); color: var(--texto); font: 1rem/1.6 system-ui, sans-serif; overflow-wrap: anywhere; }
+main, .sitio nav { max-width: 52rem; margin: 0 auto; padding: 0 16px; }
+main { padding-bottom: 4rem; }
+a { color: var(--link); }
+:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+.saltar { position: absolute; left: -999px; }
+.saltar:focus { left: 8px; top: 8px; background: var(--fondo); padding: 8px; z-index: 10; }
+.sitio { border-bottom: 1px solid var(--borde); background: var(--panel); }
+.sitio ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.sitio a { display: inline-block; padding: 10px 0; text-decoration: none; font-weight: 600; }
+.sitio a[aria-current] { border-bottom: 3px solid var(--link); }
+h1 { line-height: 1.2; }
+.katex-display { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+button { font: inherit; padding: 8px 14px; border: 1px solid var(--borde); border-radius: 6px; background: var(--panel); color: var(--texto); cursor: pointer; min-height: 44px; }
+button:disabled { opacity: .55; cursor: default; }
+
+/* Ejercicio */
+.ejercicio { border-top: 2px solid var(--borde); margin: 2rem 0; padding-top: 1rem; }
+.ejercicio h2 { margin: 0 0 .25rem; font-size: 1.3rem; }
+.meta { color: var(--suave); font-size: .9rem; margin: 0 0 .75rem; }
+.estado { border: 0; padding: 0; margin: .5rem 0 1rem; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.estado legend { float: left; margin-right: 8px; font-weight: 600; padding: 0; }
+.estado label { border: 1px solid var(--borde); border-radius: 6px; padding: 8px 12px; cursor: pointer; background: var(--panel); min-height: 44px; display: inline-flex; align-items: center; }
+.estado input { position: absolute; opacity: 0; }
+.estado label:has(input:checked) { background: var(--link); color: var(--fondo); border-color: var(--link); font-weight: 600; }
+.estado label:has(input:focus-visible) { outline: 3px solid var(--link); outline-offset: 2px; }
+.acciones { display: flex; flex-wrap: wrap; gap: 8px; margin: 1rem 0; }
+
+/* Capas */
+.capa { border-left: 5px solid; border-radius: 4px; padding: 10px 14px; margin: 1rem 0; }
+.capa > .rotulo { margin: 0 0 .5rem; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.capa > .cita { margin: .5rem 0 0; font-size: .85rem; color: var(--suave); }
+.oficial { border-color: var(--oficial); background: var(--oficial-fondo); }
+.oficial > .rotulo { color: var(--oficial); }
+.elaborado { border-color: var(--elaborado); background: var(--elaborado-fondo); }
+.elaborado > .rotulo { color: var(--elaborado); }
+.generado { border-color: var(--generado); background: var(--generado-fondo); border-style: dashed; border-left-style: solid; }
+.generado > .rotulo { color: var(--generado); }
+.pendiente { color: var(--pendiente); font-weight: 600; }
+.leyenda { display: grid; gap: 8px; }
+
+/* Listas de exámenes */
+.lista { list-style: none; padding: 0; }
+.lista li { border: 1px solid var(--borde); border-radius: 6px; padding: 10px 14px; margin: 8px 0; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+.tabs a { display: inline-block; border: 1px solid var(--borde); border-radius: 6px; padding: 8px 12px; }
+.tabs a[aria-current] { background: var(--link); color: var(--fondo); border-color: var(--link); }
