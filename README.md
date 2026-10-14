@@ -16,7 +16,7 @@ npm install
 npm run dev
 ```
 
-Abrí <http://localhost:4321/AM2-segundoparcial/>. Tenés que ver la página de Inicio con el menú (Inicio · Parciales oficiales · Teoría · Machetes · Simulacros generados). En "Parciales oficiales" está el examen de prueba 1R3, con sus 5 ejercicios.
+Abrí <http://localhost:4321/AM2/>. Tenés que ver la página de Inicio con el menú (Inicio · Parciales oficiales · Teoría · Machetes · Simulacros generados). En "Parciales oficiales" está el examen de prueba 1R3, con sus 5 ejercicios.
 
 ## Build y vista previa
 
@@ -42,17 +42,17 @@ npm test        # Playwright: construye el sitio, lo sirve y prueba el progreso
 
 ## Publicar gratis en GitHub Pages
 
-1. Creá en GitHub un repositorio público llamado `AM2-segundoparcial`.
+1. Creá en GitHub un repositorio público llamado `AM2`.
 2. Subí este proyecto:
    ```bash
    git add .
    git commit -m "Sitio AM II"
    git branch -M main
-   git remote add origin https://github.com/gabibertero/AM2-segundoparcial.git
+   git remote add origin https://github.com/gabibertero/AM2.git
    git push -u origin main
    ```
 3. En GitHub: Settings → Pages → Source: **GitHub Actions**.
-4. El workflow `.github/workflows/deploy.yml` construye y publica solo. El sitio queda en <https://gabibertero.github.io/AM2-segundoparcial/>.
+4. El workflow `.github/workflows/deploy.yml` construye y publica solo. El sitio queda en <https://gabibertero.github.io/AM2/>.
 
 Si cambiás el nombre del repo o el usuario, actualizá `site` y `base` en `astro.config.mjs`.
 

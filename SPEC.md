@@ -44,7 +44,7 @@ Convenciones de la cátedra (de las fuentes; confirmar en cada uso):
 - Privacidad: el repo es público. Las imágenes de escaneos se publican **con el nombre del alumno, la firma y el legajo tapados**. Hay que revisar cada página publicada.
 
 ## Arquitectura
-- **Astro** (salida estática) → GitHub Pages con la acción oficial. Base sugerida: `/AM2-segundoparcial/`.
+- **Astro** (salida estática) → GitHub Pages con la acción oficial. Base sugerida: `/AM2/`.
 - Matemática con `remark-math` + `rehype-katex`, renderizada al construir.
 - Exámenes como content collection: un `.mdx` por examen.
   - Frontmatter con esquema zod: id, comisión, fecha, tipo, tema, archivo fuente, páginas.

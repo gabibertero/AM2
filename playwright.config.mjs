@@ -2,10 +2,10 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  use: { baseURL: 'http://localhost:4321/AM2-segundoparcial/' },
+  use: { baseURL: 'http://localhost:4321/AM2/' },
   webServer: {
     command: 'npm run build && npm run preview',
-    url: 'http://localhost:4321/AM2-segundoparcial/',
+    url: 'http://localhost:4321/AM2/',
     reuseExistingServer: true,
   },
 });

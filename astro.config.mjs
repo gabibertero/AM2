@@ -6,7 +6,7 @@ import { unified } from '@astrojs/markdown-remark';
 
 export default defineConfig({
   site: 'https://gabibertero.github.io',
-  base: '/AM2-segundoparcial/',
+  base: '/AM2/',
   output: 'static',
   integrations: [mdx()],
   markdown: {

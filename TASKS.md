@@ -11,4 +11,4 @@
 - [ ] T09 Revisión final: code-reviewer, E2E desktop/celular, README de publicación.
 
 ## Notas
-- T01 (2026-10-14): Astro 7.3.8 + MDX + KaTeX 0.19 (markdown.processor unified por Astro 7). Progreso: am2:v1:estado:<id> y am2:v1:vista:<id>. check-ids corre en build. 8 tests Playwright OK. Code review aplicado (88d914e). Falta: crear repo GitHub AM2-segundoparcial y push; Pages → Source: GitHub Actions.
+- T01 (2026-10-14): Astro 7.3.8 + MDX + KaTeX 0.19 (markdown.processor unified por Astro 7). Progreso: am2:v1:estado:<id> y am2:v1:vista:<id>. check-ids corre en build. 8 tests Playwright OK. Code review aplicado (88d914e). Falta: crear repo GitHub AM2 y push; Pages → Source: GitHub Actions.
