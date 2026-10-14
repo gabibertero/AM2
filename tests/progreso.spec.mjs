@@ -7,12 +7,12 @@ test('estado y pista persisten tras recargar, con prefijo am2:v1:', async ({ pag
   await page.goto(EXAMEN);
   await ej1(page).getByLabel('Resuelto').check();
   await ej1(page).getByRole('button', { name: 'Ver pista' }).click();
-  await expect(ej1(page).locator('[data-pista]')).toBeVisible();
+  await expect(ej1(page).locator('[data-pista]').first()).toBeVisible();
 
   await page.reload();
   await expect(ej1(page).getByLabel('Resuelto')).toBeChecked();
-  await expect(ej1(page).locator('[data-pista]')).toBeVisible();
-  await expect(ej1(page).locator('[data-paso]')).toBeHidden();
+  await expect(ej1(page).locator('[data-pista]').first()).toBeVisible();
+  await expect(ej1(page).locator('[data-paso]').first()).toBeHidden();
 
   const claves = await page.evaluate(() => Object.keys(localStorage));
   expect(claves).toContain('am2:v1:estado:1r3-2025-11-14#1');
@@ -22,9 +22,9 @@ test('estado y pista persisten tras recargar, con prefijo am2:v1:', async ({ pag
 test('Ocultar todo esconde las ayudas', async ({ page }) => {
   await page.goto(EXAMEN);
   await ej1(page).getByRole('button', { name: 'Ver solución completa' }).click();
-  await expect(ej1(page).locator('[data-solucion]')).toBeVisible();
+  await expect(ej1(page).locator('[data-solucion]').first()).toBeVisible();
   await ej1(page).getByRole('button', { name: 'Ocultar todo' }).click();
-  await expect(ej1(page).locator('[data-solucion]')).toBeHidden();
+  await expect(ej1(page).locator('[data-solucion]').first()).toBeHidden();
 });
 
 test('Reiniciar progreso borra solo claves am2:v1:', async ({ page }) => {
@@ -69,7 +69,7 @@ test('con localStorage roto los botones siguen andando y no hay errores', async 
   });
   await page.goto(EXAMEN);
   await ej1(page).getByRole('button', { name: 'Ver pista' }).click();
-  await expect(ej1(page).locator('[data-pista]')).toBeVisible();
+  await expect(ej1(page).locator('[data-pista]').first()).toBeVisible();
   await ej1(page).getByLabel('Resuelto').check();
   await expect(ej1(page).getByLabel('Resuelto')).toBeChecked();
   expect(errores).toEqual([]);
@@ -85,8 +85,8 @@ test('JSON basura en la clave vista no rompe nada', async ({ page }) => {
   });
   await page.goto(EXAMEN);
   await expect(ej1(page).getByLabel('Pendiente')).toBeChecked();
-  await expect(ej1(page).locator('[data-pista]')).toBeHidden();
-  await expect(page.locator('[data-id="1r3-2025-11-14#2"] [data-pista]')).toBeVisible(); // 99 se acota a 1 pista
-  await expect(page.locator('[data-id="1r3-2025-11-14#2"] [data-paso]')).toBeHidden();
+  await expect(ej1(page).locator('[data-pista]').first()).toBeHidden();
+  await expect(page.locator('[data-id="1r3-2025-11-14#2"] [data-pista]').first()).toBeVisible(); // p=99 se acota a la cantidad real de pistas
+  await expect(page.locator('[data-id="1r3-2025-11-14#2"] [data-paso]').first()).toBeHidden();
   expect(errores).toEqual([]);
 });

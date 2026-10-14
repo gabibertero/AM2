@@ -7,7 +7,7 @@ tipo: "práctico"
 fuente: "parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf"
 paginasEnunciado: "1"
 paginasResolucion: "2–7"
-orden: 1
+orden: 4
 unidades: ["U4", "U5", "U8", "U9"]
 ---
 
@@ -15,96 +15,297 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
 Universidad Tecnológica Nacional - FRC · Análisis Matemático II - Comisión 1R3 · 2° Parcial Práctico - 14/11/2025
 
 <Ejercicio id="1r3-2025-11-14#1" numero={1} fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina={1} unidad="U4" tema="Volumen (polares/cilíndricas)">
-<Enunciado fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
+<Enunciado examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
 
 Calcular el volumen del sólido limitado por:
 
 $$
-\begin{cases} x^2+y^2\le 4 \ \text{(Cilindro)}\\ x^2+y^2+z^2\ge 4 \ \text{(Esfera)}\\ 0\le z\le y+4 \ \text{(Planos)} \end{cases}
+\begin{cases} x^2+y^2\le 4 \ \text{(Cilindro)}\\
+x^2+y^2+z^2\ge 4 \ \text{(Esfera)}\\
+0\le z\le y+4 \ \text{(Planos)} \end{cases}
 $$
 
-"Graficar!"
+<u>Graficar!</u>
 
-"Se recomienda trabajar en coordenadas polares (integral doble) o cilíndricas (integral triple)"
+*Se recomienda trabajar en coordenadas polares (integral doble) o cilíndricas (integral triple)*
 
 </Enunciado>
+
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Leé qué te piden y con qué: un **volumen**, y el sólido está descripto por un cilindro, una esfera y dos planos. Preguntate: ¿qué forma tiene la "sombra" del sólido sobre el plano $xy$, y qué superficie lo cierra por arriba y cuál por abajo?
+
+</Pista>
+<Pista>
+
+Un sólido con base circular, una superficie arriba y otra abajo se resuelve como **volumen entre dos superficies con una integral doble en polares**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$. Hay que identificar techo, piso y la región $D$. Machete: [Volumen en polares/cilíndricas](../../machetes/volumen-polares-cilindricas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: techo $z=y+4$, piso $z=\sqrt{4-r^2}$ (la esfera con $z\ge0$), $D:\ 0\le r\le2,\ 0\le\theta\le2\pi$, $dA=r\,dr\,d\theta$, $y=r\sin\theta$:
+
+$$V=\int_0^{2\pi}\!\!d\theta\int_0^2\big(r\sin\theta+4-\sqrt{4-r^2}\big)\,r\,dr$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el sólido. **Por qué:** para decidir qué superficie es techo y cuál piso. Como $0\le z$, la condición $x^2+y^2+z^2\ge4$ pide $z\ge\sqrt{4-x^2-y^2}$: el sólido queda *encima* de la semiesfera, que es el "hueco" que hay que restar. **Cómo reconocerlo:** una esfera con "$\ge$" dentro de un cilindro de su mismo radio es un hueco semiesférico.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1r3/ej1.svg`} alt="Arriba, vista en perspectiva del cilindro de radio 2 cerrado por el plano z=y+4 con un hueco semiesférico en el fondo. Abajo, corte con x=0: recta z=y+4 como techo, semicircunferencia z=raíz de 4 menos y al cuadrado como piso, hueco rayado que se resta." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
-<ResolucionOficial fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="2" />
+<Paso>
+
+**Qué:** fijar la región de integración $D$. **Por qué:** el cilindro $x^2+y^2\le4$ es la proyección del sólido sobre $xy$, o sea el círculo $r\le2$. La esfera no recorta más la base: tiene el mismo radio 2, y en $r=2$ el piso vale $\sqrt{4-4}=0$.
+
+</Paso>
+<Paso>
+
+**Qué:** plantear la integral doble. **Por qué:** el volumen entre dos superficies es la integral de (techo − piso) sobre $D$:
+
+$$V=\iint_{D}\big[(y+4)-\sqrt{4-x^2-y^2}\big]\,dx\,dy$$
+
+</Paso>
+<Paso>
+
+**Qué:** pasar a polares. **Por qué:** la base es un círculo y $x^2+y^2$ pasa a ser $r^2$. Se reemplaza $y=r\sin\theta$ y $dx\,dy=r\,dr\,d\theta$ (el $r$ extra es el jacobiano). Distribuyendo el $r$:
+
+$$V=\int_0^{2\pi}\!\!d\theta\int_0^2\big(r^2\sin\theta+4r-r\sqrt{4-r^2}\big)\,dr$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$, término por término. **Por qué:** la integral interna va primero y θ se trata como constante.
+
+- $\int_0^2 r^2\sin\theta\,dr=\dfrac{8}{3}\sin\theta$
+- $\int_0^2 4r\,dr=\big[2r^2\big]_0^2=8$
+- $\int_0^2 r\sqrt{4-r^2}\,dr$: sustitución $t=4-r^2$, entonces $dt=-2r\,dr$, o sea $r\,dr=-\tfrac12dt$; para $r=0$ es $t=4$ y para $r=2$ es $t=0$. Queda $-\tfrac12\int_4^0\sqrt t\,dt=\tfrac12\int_0^4\sqrt t\,dt=\tfrac12\cdot\tfrac23\cdot4^{3/2}=\dfrac83$. (Con la primitiva: $-\tfrac13(4-r^2)^{3/2}$; ese signo "−" de la primitiva se invierte porque en el integrando el término va restando, y por eso en el corchete del profe aparece $+\tfrac13(4-r^2)^{3/2}$.)
+
+Juntando, con el signo menos del tercer término:
+
+$$\int_0^2(\dots)\,dr=\frac{8}{3}\sin\theta+8-\frac83=\frac{8}{3}\sin\theta+\frac{16}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** ya queda una sola variable. $\int_0^{2\pi}\sin\theta\,d\theta=-\cos2\pi+\cos0=0$ (las mitades $y>0$ e $y<0$ se cancelan), y la constante se multiplica por la vuelta completa:
+
+$$V=0+\frac{16}{3}\cdot2\pi=\frac{32\pi}{3}$$
+
+</Paso>
+<Solucion>
+
+$$V=\frac{32\pi}{3}\ \text{u}^3\approx 33{,}5\ \text{u}^3$$
+
+**Ojo con:** olvidarse del jacobiano $r$ al pasar a polares, o restar mal el hueco (el piso es la semiesfera, no el plano $z=0$).
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente, sin integrar la semiesfera: el cilindro completo hasta el plano tiene volumen $\iint_D(y+4)\,dA=\iint_D y\,dA+4\cdot\text{Área}(D)=0+4\cdot4\pi=16\pi$ (el término en $y$ se anula por simetría). El hueco es media esfera de radio 2: $\tfrac12\cdot\tfrac43\pi\cdot2^3=\tfrac{16\pi}{3}$. Entonces $V=16\pi-\tfrac{16\pi}{3}=\tfrac{32\pi}{3}$.
+
+</Comprobacion>
+<ResolucionOficial examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="2" />
 </Ejercicio>
 
 <Ejercicio id="1r3-2025-11-14#2" numero={2} fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina={1} unidad="U4" tema="Integral triple (cilíndricas)">
-<Enunciado fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
+<Enunciado examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
 
 Calcular la integral triple: $IT=\iiint_{V_{xyz}}\sqrt{x^2+y^2}\,dx\,dy\,dz$. Siendo $V_{xyz}$ la región limitada por los paraboloides:
 
 $$
-\begin{cases} z=x^2+y^2-3\\ z=-x^2-y^2+5 \end{cases}
+\begin{cases} z=x^2+y^2-3\\
+z=-x^2-y^2+5 \end{cases}
 $$
 
-"Graficar!"
+<u>Graficar!</u>
 
-"Se recomienda trabajar en coordenadas cilíndricas!"
+*Se recomienda trabajar en coordenadas cilíndricas!*
 
 </Enunciado>
+
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá las expresiones del enunciado: ¿qué combinación de $x$ e $y$ se repite en el integrando y en las dos superficies? ¿Qué sólido forman dos paraboloides, uno abierto hacia arriba y otro hacia abajo?
+
+</Pista>
+<Pista>
+
+Como $x^2+y^2$ aparece siempre junto, conviene **coordenadas cilíndricas**: $x^2+y^2=r^2$, $dx\,dy\,dz=r\,dr\,d\theta\,dz$. Hay que hallar dónde se cortan las superficies (igualando las $z$) para fijar los límites de $r$. Machete: [Integral triple en cilíndricas/esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: el integrando $\sqrt{x^2+y^2}=r$ por el jacobiano $r$ da $r^2$; $z$ va de $r^2-3$ a $5-r^2$; $0\le r\le2$:
+
+$$IT=\int_0^{2\pi}\!\!d\theta\int_0^2 r^2\,dr\int_{r^2-3}^{5-r^2}dz$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar la región. **Por qué:** para saber cuál paraboloide es techo. $z=5-r^2$ abre hacia abajo (vértice en 5) y $z=r^2-3$ hacia arriba (vértice en −3): el primero es el techo. **Cómo reconocerlo:** dos paraboloides de ejes en $z$ con signos opuestos encierran una "lenteja".
+
+<img src={`${import.meta.env.BASE_URL}figuras/1r3/ej2.svg`} alt="Arriba, perspectiva de los paraboloides z=5−r² (techo) y z=r²−3 (piso) que se cortan en la circunferencia r=2, z=1. Abajo, corte meridiano de la región entre ambas parábolas, con el punto de cruce r=2, z=1." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
-<ResolucionOficial fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="3" />
+<Paso>
+
+**Qué:** hallar la intersección. **Por qué:** define hasta dónde llega la base en $r$ (la sombra del sólido sobre el plano $xy$). Igualamos las $z$:
+
+$$r^2-3=5-r^2\ \Rightarrow\ 2r^2=8\ \Rightarrow\ r^2=4\ \Rightarrow\ r=2\quad(z=1)$$
+
+Base: $0\le r\le2$, $0\le\theta\le2\pi$.
+
+</Paso>
+<Paso>
+
+**Qué:** pasar el integrando y el elemento de volumen a cilíndricas. **Por qué:** $\sqrt{x^2+y^2}=\sqrt{r^2}=r$ (vale porque $r\ge0$), y el jacobiano agrega otro $r$, así que el integrando es $r\cdot r=r^2$:
+
+$$IT=\int_0^{2\pi}\!\!d\theta\int_0^2 r^2\,dr\int_{r^2-3}^{5-r^2}dz$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $z$. **Por qué:** es la integral más interna y da la altura del sólido a distancia $r$ del eje:
+
+$$\int_{r^2-3}^{5-r^2}dz=(5-r^2)-(r^2-3)=8-2r^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** se multiplica por $r^2$ y se primitiva cada potencia:
+
+$$\int_0^2 r^2(8-2r^2)\,dr=\int_0^2(8r^2-2r^4)\,dr=\Big[\frac{8r^3}{3}-\frac{2r^5}{5}\Big]_0^2=\frac{64}{3}-\frac{64}{5}=\frac{320-192}{15}=\frac{128}{15}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** lo que queda no depende de $\theta$, así que sale una vuelta completa:
+
+$$IT=\frac{128}{15}\cdot2\pi=\frac{256\pi}{15}$$
+
+</Paso>
+<Solucion>
+
+$$IT=\frac{256\pi}{15}\approx 53{,}6$$
+
+**Ojo con:** el jacobiano: si te olvidás el $r$ extra el integrando queda $r$ y no $r^2$, y el resultado cambia.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: otro orden de integración, primero en $r$ con $z$ fijo. Para $-3\le z\le1$ el piso manda y $0\le r\le\sqrt{z+3}$; para $1\le z\le5$ manda el techo y $0\le r\le\sqrt{5-z}$. Como $\int_0^{R}r^2\,dr=\tfrac{R^3}{3}$:
+
+$$IT=2\pi\Big[\int_{-3}^{1}\frac{(z+3)^{3/2}}{3}\,dz+\int_{1}^{5}\frac{(5-z)^{3/2}}{3}\,dz\Big]=2\pi\Big[\frac{64}{15}+\frac{64}{15}\Big]=\frac{256\pi}{15}$$
+
+(cada integral vale $\tfrac13\cdot\tfrac25\cdot4^{5/2}=\tfrac{64}{15}$).
+
+</Comprobacion>
+<ResolucionOficial examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="3" />
 </Ejercicio>
 
 <Ejercicio id="1r3-2025-11-14#3" numero={3} fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina={1} unidad="U5" tema="Integral curvilínea y Green">
-<Enunciado fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
+<Enunciado examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
 
 Sea el campo vectorial: $F(x,y)=(x-y^2)\,i+xy\,j$.
 
 a. Calcular la integral curvilínea por la trayectoria (superior) cerrada recorrida en sentido antihorario (+) a través de las siguientes funciones:
 
 $$
-\begin{cases} C_1:\ x^2+y^2=2\\ C_2:\ y=x^2 \end{cases}
+\begin{cases} C_1:\ x^2+y^2=2\\
+C_2:\ y=x^2 \end{cases}
 $$
 
 b. Realizar planteo y desarrollo por Teorema de Green (en coordenadas cartesianas) sin necesidad de obtener el resultado final.
 
-"Graficar!"
+<u>Graficar!</u>
 
 </Enunciado>
+
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate qué te piden: la integral de un **campo vectorial** sobre una curva **cerrada** que se arma con dos tramos, $C_1$ y $C_2$. Dibujá las dos curvas: ¿en qué puntos se cortan y qué región encierran?
+
+</Pista>
+<Pista>
+
+Es una integral curvilínea que se puede hacer de dos formas: **por definición** (parametrizando cada tramo, inciso a) y con el **teorema de Green** (inciso b). Antes hay que hallar los cortes (igualando las curvas) y respetar el sentido antihorario. Machetes: [Curvilínea por definición](../../machetes/curvilinea-por-definicion/) y [Teorema de Green](../../machetes/teorema-de-green/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: la parábola $C_2$ va de $x=-1$ a $x=1$ y el arco $C_1$ de $x=1$ a $x=-1$. Por definición $IC=\int_{C_1}+\int_{C_2}$ con $P=x-y^2$, $Q=xy$. Por Green $IC=\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$ con $x^2\le y\le\sqrt{2-x^2}$, $-1\le x\le1$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar y hallar los cortes. **Por qué:** para fijar los extremos de cada tramo y el sentido. Igualando, $y=x^2$ en $x^2+y^2=2$ da $y+y^2=2$, o sea $y^2+y-2=(y+2)(y-1)=0$: $y=1$ ($y=-2$ se descarta, la parábola no es negativa), $x=\pm1$. Cortes: $(-1,1)$ y $(1,1)$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1r3/ej3.svg`} alt="Región D encerrada entre la parábola y=x² (abajo, recorrida de izquierda a derecha) y el arco superior de la circunferencia x²+y²=2 (arriba, recorrido de derecha a izquierda), con puntos de corte (−1,1) y (1,1) y sentido antihorario." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
-<ResolucionOficial fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="4–5" />
+<Paso>
+
+**Qué:** calcular $IC_1$ por definición. **Por qué:** se reemplaza la curva dentro de $P\,dx+Q\,dy$. Antihorario sobre el arco *superior* se va de derecha a izquierda, por eso $x$ va de $1$ a $-1$. Con $x$ como parámetro: $y=\sqrt{2-x^2}$, $dy=\dfrac{-x}{\sqrt{2-x^2}}\,dx$.
+
+- $P\,dx=\big(x-(2-x^2)\big)dx=(x-2+x^2)\,dx$
+- $Q\,dy=x\sqrt{2-x^2}\cdot\dfrac{-x}{\sqrt{2-x^2}}\,dx=-x^2\,dx$
+
+Sumando se cancela $x^2$: $\ IC_1=\int_1^{-1}(x-2)\,dx=\Big[\dfrac{x^2}{2}-2x\Big]_1^{-1}=\dfrac52-\Big(-\dfrac32\Big)=4$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_2$ por definición. **Por qué:** igual, ahora con $y=x^2$, $dy=2x\,dx$ y $x$ de $-1$ a $1$ (la parábola se recorre de izquierda a derecha).
+
+- $P\,dx=(x-x^4)\,dx$
+- $Q\,dy=x\cdot x^2\cdot2x\,dx=2x^4\,dx$
+
+$$IC_2=\int_{-1}^{1}(x+x^4)\,dx=\Big[\frac{x^2}{2}+\frac{x^5}{5}\Big]_{-1}^{1}=\frac{7}{10}-\frac{3}{10}=\frac25$$
+
+</Paso>
+<Paso>
+
+**Qué:** sumar los tramos. **Por qué:** la integral sobre la curva cerrada es la suma de los tramos que la forman: $IC=4+\tfrac25=\tfrac{22}{5}$.
+
+</Paso>
+<Paso>
+
+**Qué (inciso b):** plantear y resolver con Green. **Por qué:** la curva es cerrada, simple, antihoraria y $P,Q$ son derivables, así que $\oint P\,dx+Q\,dy=\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$. Acá $\tfrac{\partial Q}{\partial x}=y$ y $\tfrac{\partial P}{\partial y}=-2y$, entonces el integrando es $y-(-2y)=3y$:
+
+$$IC=3\int_{-1}^{1}\!dx\int_{x^2}^{\sqrt{2-x^2}}y\,dy=3\int_{-1}^{1}\frac{(2-x^2)-x^4}{2}\,dx=\frac32\Big[2x-\frac{x^3}{3}-\frac{x^5}{5}\Big]_{-1}^{1}=\frac32\cdot\frac{44}{15}=\frac{22}{5}$$
+
+</Paso>
+<Solucion>
+
+$$IC=\oint_C F\cdot dr=\frac{22}{5}\qquad\Big(IC_1=4,\ IC_2=\tfrac25\Big)$$
+
+**Ojo con:** el sentido de recorrido: si ponés los límites de $C_1$ de $-1$ a $1$ el signo de ese tramo se invierte.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente para $IC_1$: parametrización trigonométrica $x=\sqrt2\cos\theta$, $y=\sqrt2\sin\theta$, con $\theta$ de $\tfrac\pi4$ a $\tfrac{3\pi}4$ (antihorario). El integrando queda $-\sin2\theta+2\sqrt2\sin\theta$ y
+
+$$\int_{\pi/4}^{3\pi/4}\big(-\sin2\theta+2\sqrt2\sin\theta\big)d\theta=\Big[\tfrac{\cos2\theta}{2}-2\sqrt2\cos\theta\Big]_{\pi/4}^{3\pi/4}=0+4=4$$
+
+que coincide con $IC_1$. Además, el resultado de Green ($\tfrac{22}{5}$, con $3y>0$ en $D$, o sea positivo como corresponde a una circulación antihoraria de un integrando positivo) es igual a la suma por definición $4+\tfrac25$: dos caminos distintos, mismo valor.
+
+</Comprobacion>
+<ResolucionOficial examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="4–5" />
 </Ejercicio>
 
 <Ejercicio id="1r3-2025-11-14#4" numero={4} fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina={1} unidad="U8" tema="EDO exacta">
-<Enunciado fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
+<Enunciado examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
 
 Verificar si la siguiente EDO de 1º orden es Exacta, en cuyo caso resolver analíticamente:
 
@@ -113,21 +314,78 @@ $$
 $$
 
 </Enunciado>
+
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá cómo está escrita: aparecen $dx$ y $dy$ sumados e igualados a cero, con una función de $x$ e $y$ multiplicando a cada uno. ¿Podría ser el diferencial total de alguna función $u(x,y)$?
+
+</Pista>
+<Pista>
+
+Una ecuación $P\,dx+Q\,dy=0$ es **exacta** si $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$; hay que verificarlo primero. Si lo es, se busca $u$ con $u_x=P$, $u_y=Q$ y la solución es $u=C$. Machete: [EDO exacta](../../machetes/edo-exacta/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $P=2x\cos(2y)-e^{3x}$, $Q=12y-2x^2\sin(2y)$. Integrá $P$ en $x$ y sumá $\varphi(y)$: $u=\int P\,dx+\varphi(y)$; después $\varphi'(y)=Q-\dfrac{\partial}{\partial y}\int P\,dx$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** identificar $P$ y $Q$. **Por qué:** $P$ es lo que multiplica a $dx$ y $Q$ a $dy$: $P=2x\cos(2y)-e^{3x}$, $Q=12y-2x^2\sin(2y)$. **Cómo reconocerlo:** la ecuación viene con diferenciales, no con $y'$.
 
 </Paso>
-<ResolucionOficial fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="6" />
+<Paso>
+
+**Qué:** verificar la condición de exactitud. **Por qué:** sin ella el método de $u$ no vale. Al derivar $\cos(2y)$ aparece el factor 2 de la regla de la cadena:
+
+$$\frac{\partial P}{\partial y}=2x\cdot\big(-2\sin(2y)\big)=-4x\sin(2y),\qquad \frac{\partial Q}{\partial x}=-2\cdot2x\sin(2y)=-4x\sin(2y)$$
+
+Son iguales: **es exacta**. (Si no lo fuera, se prueba un factor integrante: ver el machete.)
+
+</Paso>
+<Paso>
+
+**Qué:** integrar $P$ respecto de $x$. **Por qué:** $u_x=P$, así que $u$ es una primitiva de $P$ en $x$; lo que no depende de $x$ queda como una función $\varphi(y)$. En $x$ se tiene $\int2x\cos(2y)\,dx=x^2\cos(2y)$ ($\cos 2y$ es constante) y $\int e^{3x}dx=\tfrac13e^{3x}$ (el $\tfrac13$ compensa el $3$ de la regla de la cadena):
+
+$$u=x^2\cos(2y)-\frac13e^{3x}+\varphi(y)$$
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $\varphi(y)$. **Por qué:** $u$ también tiene que cumplir $u_y=Q$. Derivando respecto de $y$:
+
+$$u_y=-2x^2\sin(2y)+\varphi'(y)=12y-2x^2\sin(2y)\ \Rightarrow\ \varphi'(y)=12y\ \Rightarrow\ \varphi(y)=6y^2$$
+
+(La constante de integración de $\varphi$ se absorbe en la $C$ final.)
+
+</Paso>
+<Paso>
+
+**Qué:** escribir la solución. **Por qué:** una EDO exacta tiene como solución general (implícita) las curvas de nivel $u(x,y)=C$.
+
+</Paso>
+<Solucion>
+
+$$x^2\cos(2y)-\frac{1}{3}e^{3x}+6y^2=C$$
+
+**Ojo con:** el $\tfrac13$ al integrar $e^{3x}$ y el factor 2 al derivar $\cos(2y)$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: derivar la solución implícitamente respecto de $x$ (con $y=y(x)$):
+
+$$\frac{d}{dx}\Big[x^2\cos(2y)-\tfrac13e^{3x}+6y^2\Big]=2x\cos(2y)-e^{3x}+\big(-2x^2\sin(2y)+12y\big)\,y'=0$$
+
+Es justo $P+Q\,y'=0$, o sea la ecuación original dividida por $dx$.
+
+</Comprobacion>
+<ResolucionOficial examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="6" />
 </Ejercicio>
 
 <Ejercicio id="1r3-2025-11-14#5" numero={5} fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina={1} unidad="U9" tema="EDO 2º orden, coeficientes indeterminados">
-<Enunciado fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
+<Enunciado examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" pagina="1">
 
 Resolver por el método de los coeficientes indeterminados la siguiente EDO de 2º orden:
 
@@ -136,17 +394,96 @@ y''+2y'=16e^{2x}-4\cos(2x)
 $$
 
 </Enunciado>
+
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Contá qué aparece: $y''$, $y'$ con coeficientes que son números, y del lado derecho una exponencial y un coseno. ¿Qué tipo de ecuación diferencial es y qué forma tiene su solución general?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2º orden **con coeficientes constantes, no homogénea**, con lado derecho "de manual": se resuelve por **coeficientes indeterminados**, $y=y_h+y_p$. Primero $y_h$ con la ecuación característica; después se propone $y_p$ copiando la forma del lado derecho. Machete: [EDO 2º orden, coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $r^2+2r=0$, $y_h=C_1+C_2e^{-2x}$. Para $y_p$ proponé (con coeficientes $A$, $B$, $D$, que no chocan con las constantes $C_1$, $C_2$):
+
+$$y_p=Ae^{2x}+B\sin(2x)+D\cos(2x)$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución con lado derecho cero y siempre forma parte de la general. Se prueba $y=e^{rx}$: $r^2+2r=0\Rightarrow r(r+2)=0$, entonces $r_1=0$, $r_2=-2$ (reales y distintas):
+
+$$y_h=C_1e^{0x}+C_2e^{-2x}=C_1+C_2e^{-2x}$$
 
 </Paso>
-<ResolucionOficial fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="7" />
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el lado derecho es $16e^{2x}-4\cos(2x)$. Para $e^{2x}$ va $Ae^{2x}$; para $\cos(2x)$ van **los dos**, seno y coseno, porque al derivar uno aparece el otro. Hay que mirar que $2$ y $\pm2i$ **no son raíces** de la característica (que son $0$ y $-2$); por eso no se multiplica por $x$. **Cómo reconocerlo:** si el exponente o la frecuencia coincidieran con una raíz, habría resonancia y se multiplicaría por $x$.
+
+$$y_p=Ae^{2x}+B\sin(2x)+D\cos(2x)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces. **Por qué:** para poder reemplazar en la ecuación.
+
+$$y_p'=2Ae^{2x}+2B\cos(2x)-2D\sin(2x)$$
+$$y_p''=4Ae^{2x}-4B\sin(2x)-4D\cos(2x)$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''+2y'$, juntando términos semejantes. **Por qué:** $y_p$ tiene que cumplir la ecuación. Con $2y_p'=4Ae^{2x}+4B\cos(2x)-4D\sin(2x)$:
+
+- $e^{2x}$: $4A+4A=8A$
+- $\cos(2x)$: $-4D+4B$
+- $\sin(2x)$: $-4B-4D$
+
+Del lado derecho: $16$ en $e^{2x}$, $-4$ en $\cos(2x)$ y **$0$ en $\sin(2x)$** (no tiene seno).
+
+$$8Ae^{2x}+(4B-4D)\cos(2x)+(-4B-4D)\sin(2x)=16e^{2x}-4\cos(2x)+0\cdot\sin(2x)$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes y resolver. **Por qué:** dos funciones iguales tienen los mismos coeficientes en $e^{2x}$, $\cos2x$ y $\sin2x$.
+
+- $e^{2x}$: $8A=16\Rightarrow A=2$.
+- $\cos(2x)$: $4B-4D=-4$ (1)
+- $\sin(2x)$: $-4B-4D=0$ (2)
+
+Sumando (1) y (2) se va $B$: $-8D=-4\Rightarrow D=\tfrac12$. De (2): $B=-D=-\tfrac12$.
+
+</Paso>
+<Paso>
+
+**Qué:** armar la general. **Por qué:** $y=y_h+y_p$, con $C_1$ y $C_2$ libres porque no hay condiciones iniciales.
+
+</Paso>
+<Solucion>
+
+$$y=C_1+C_2e^{-2x}+2e^{2x}-\frac{1}{2}\sin(2x)+\frac{1}{2}\cos(2x)$$
+
+**Ojo con:** proponer solo $D\cos(2x)$ porque el lado derecho solo tiene coseno: hace falta el seno también.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: sustituir $y_p$ en la ecuación. Con $y_p=2e^{2x}-\tfrac12\sin2x+\tfrac12\cos2x$:
+
+- $y_p'=4e^{2x}-\cos2x-\sin2x$
+- $y_p''=8e^{2x}+2\sin2x-2\cos2x$
+- $y_p''+2y_p'=(8+8)e^{2x}+(-2-2)\cos2x+(2-2)\sin2x=16e^{2x}-4\cos2x$
+
+$y_h$ no aporta, porque $y_h''+2y_h'=0$.
+
+</Comprobacion>
+<ResolucionOficial examen="1r3-2025-11-14" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R3 2025.pdf" paginas="7" />
 </Ejercicio>
 
-**Importante:** Todos los ejercicios deben ser resueltos, o al menos 2 de ellos con planteo y desarrollo consistente. No se permite el uso de calculadora ni tabla de derivadas/integrales. Se solicita prolijidad, orden y escritura legible, adjuntado todos los cálculos auxiliares, fundamental para poder controlar y evaluar los procedimientos.
+**Importante:** Todos los ejercicios deben ser resueltos, o al menos 2 de ellos con planteo y desarrollo consistente. No se permite el uso de calculadora ni tabla de derivadas/integrales.
+
+Se solicita prolijidad, orden y escritura legible, adjuntado todos los cálculos auxiliares, fundamental para poder controlar y evaluar los procedimientos.

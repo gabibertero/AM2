@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const todos = await getCollection('machetes');
+  return todos.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL;
+const d = entry.data;
+---
+<Layout titulo={d.titulo}>
+  <p class="meta"><a href={`${base}machetes/`}>← Machetes</a> · {d.unidad}</p>
+  <h1>{d.titulo}</h1>
+  <div class="capa elaborado">
+    <p class="rotulo">Machete · Elaborado para el sitio — no oficial</p>
+    <Content />
+    <h2>En qué ejercicios oficiales aparece</h2>
+    {d.ejerciciosOficiales.length === 0 ? (
+      <p>No aparece en los parciales prácticos oficiales relevados.</p>
+    ) : (
+      <ul>
+        {d.ejerciciosOficiales.map((e) => (
+          <li><a href={`${base}parciales/${e.split('#')[0]}/`}><code>{e}</code></a></li>
+        ))}
+      </ul>
+    )}
+    <h2>Fuente</h2>
+    <ul>{d.fuentes.map((f) => <li>{f}</li>)}</ul>
+  </div>
+</Layout>

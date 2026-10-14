@@ -25,8 +25,20 @@ const simple = (base: string) =>
     schema: z.object({ titulo: z.string(), orden: z.number(), unidades: z.array(z.string()).default([]) }),
   });
 
+const machetes = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/machetes' }),
+  schema: z.object({
+    slug: z.string(),
+    titulo: z.string(),
+    unidad: z.enum(['U4', 'U5', 'U8', 'U9']),
+    orden: z.number(),
+    ejerciciosOficiales: z.array(z.string().regex(/^[\w-]+#\d+$/)),
+    fuentes: z.array(z.string()).min(1),
+  }),
+});
+
 export const collections = {
   parciales,
   teoria: simple('./src/content/teoria'),
-  machetes: simple('./src/content/machetes'),
+  machetes,
 };

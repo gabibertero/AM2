@@ -1,10 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
 const items = (await getCollection('machetes')).sort((a, b) => a.data.orden - b.data.orden);
+const unidades = ['U4', 'U5', 'U8', 'U9'];
 ---
 <Layout titulo="Machetes">
   <h1>Machetes</h1>
-  <p>Todavía no hay contenido: se completa en una tarea posterior.</p>
-  <ul>{items.map((i) => <li>{i.data.titulo}</li>)}</ul>
+  <p class="meta">Guías de bolsillo por tipo de problema. Contenido elaborado para el sitio, no oficial.</p>
+  {unidades.map((u) => (
+    <section>
+      <h2>{u}</h2>
+      <ul class="lista">
+        {items.filter((i) => i.data.unidad === u).map((i) => (
+          <li><a href={`${base}machetes/${i.data.slug}/`}>{i.data.titulo}</a></li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </Layout>
