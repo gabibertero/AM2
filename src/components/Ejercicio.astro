@@ -10,6 +10,7 @@ interface Props {
 }
 const { id, numero, fuente, pagina, unidad, tema, machete } = Astro.props;
 const archivo = fuente.split('/').pop();
+const ayudas = `ayudas-${id.replace(/\W/g, '-')}`;
 const base = import.meta.env.BASE_URL;
 const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelto', 'Resuelto']];
 ---
@@ -25,11 +26,11 @@ const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelt
       <label><input type="radio" name={`estado-${id}`} value={valor} checked={valor === 'pendiente'} />{texto}</label>
     ))}
   </fieldset>
-  <slot />
+  <div id={ayudas} aria-live="polite"><slot /></div>
   <div class="acciones">
-    <button type="button" data-accion="pista">Ver pista</button>
-    <button type="button" data-accion="paso">Siguiente paso</button>
-    <button type="button" data-accion="solucion">Ver solución completa</button>
+    <button type="button" data-accion="pista" aria-expanded="false" aria-controls={ayudas}>Ver pista</button>
+    <button type="button" data-accion="paso" aria-expanded="false" aria-controls={ayudas}>Siguiente paso</button>
+    <button type="button" data-accion="solucion" aria-expanded="false" aria-controls={ayudas}>Ver solución completa</button>
     <button type="button" data-accion="ocultar">Ocultar todo</button>
   </div>
 </section>

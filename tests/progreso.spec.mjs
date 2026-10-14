@@ -58,3 +58,35 @@ test.describe('sin scroll horizontal a 375px', () => {
     });
   }
 });
+
+test('con localStorage roto los botones siguen andando y no hay errores', async ({ page }) => {
+  const errores = [];
+  page.on('pageerror', (e) => errores.push(e.message));
+  await page.addInitScript(() => {
+    const falla = () => { throw new Error('storage roto'); };
+    Storage.prototype.getItem = falla;
+    Storage.prototype.setItem = falla;
+  });
+  await page.goto(EXAMEN);
+  await ej1(page).getByRole('button', { name: 'Ver pista' }).click();
+  await expect(ej1(page).locator('[data-pista]')).toBeVisible();
+  await ej1(page).getByLabel('Resuelto').check();
+  await expect(ej1(page).getByLabel('Resuelto')).toBeChecked();
+  expect(errores).toEqual([]);
+});
+
+test('JSON basura en la clave vista no rompe nada', async ({ page }) => {
+  const errores = [];
+  page.on('pageerror', (e) => errores.push(e.message));
+  await page.addInitScript(() => {
+    localStorage.setItem('am2:v1:vista:1r3-2025-11-14#1', '{{{no es json');
+    localStorage.setItem('am2:v1:vista:1r3-2025-11-14#2', '{"p":99,"s":-3,"full":"si"}');
+    localStorage.setItem('am2:v1:estado:1r3-2025-11-14#1', 'cualquiera');
+  });
+  await page.goto(EXAMEN);
+  await expect(ej1(page).getByLabel('Pendiente')).toBeChecked();
+  await expect(ej1(page).locator('[data-pista]')).toBeHidden();
+  await expect(page.locator('[data-id="1r3-2025-11-14#2"] [data-pista]')).toBeVisible(); // 99 se acota a 1 pista
+  await expect(page.locator('[data-id="1r3-2025-11-14#2"] [data-paso]')).toBeHidden();
+  expect(errores).toEqual([]);
+});

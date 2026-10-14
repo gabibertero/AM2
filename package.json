@@ -6,7 +6,7 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/check-ids.mjs && astro build",
     "preview": "astro preview",
     "check": "node scripts/check-ids.mjs",
     "test": "playwright test"
