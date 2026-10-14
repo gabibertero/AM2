@@ -15,4 +15,4 @@ Resultado: 1 error
 
 - Enunciados (p. 1) cotejados contra el escaneo: los 12 exámenes. Para 1v1-a, sólo ejercicios 1 a 3 en recorte, más el punto de Dudas anterior.
 - Mapeo de `ResolucionOficial`: confirmado para los 12 exámenes. Cada ejercicio resuelto corresponde a la página indicada en el MDX. Las páginas se miraron en montaje a menor resolución; la identificación se hizo por número de ejercicio e integrando.
-- Nombres de alumnos en MDX: ninguno (búsqueda de `mazz`, `luis`, `legajo`, `apellido`, `nombre` sin coincidencias).
+- Nombres de alumnos en MDX: ninguno (búsqueda por nombre, apellido y legajo sin coincidencias).
