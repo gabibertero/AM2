@@ -19,3 +19,18 @@ Fuente = ruta relativa a la carpeta de la materia (`../`). Inventario = `docs/in
 | 12 | `modelo-teorico` | parciales/2do-parcial/Modelo P2 teorico.pdf | B·E12 | 4 |
 
 Ejercicios: `<id>#<n>` (ej. `1r3-2025-11-14#3`). Escaneos publicados: `public/escaneos/<id>/p<N>.webp`.
+
+## Años anteriores (fotos de clase, sin fecha)
+
+Colección `anteriores`. Fuente = `fotos-clase/2026-08-28 foto NNN.jpeg`. Imágenes: `public/escaneos/<id>/f<NNN>.webp` (script `scripts/fotos.py`, manifiesto `docs/fotos.json`). Ejercicios: `<id>#1..3`.
+
+| orden | id | foto | inv. |
+|---|---|---|---|
+| 1 | `anterior-x-t1` | 052 | E |
+| 2 | `anterior-x-t2` | 057 | E |
+| 3 | `anterior-y-t1` | 054 | E |
+| 4 | `anterior-y-t2` | 054 | E |
+| 5 | `anterior-z-t1` | 055 (+058) | E |
+| 6 | `anterior-z-t2` | 055 | E |
+| 7 | `anterior-w-t1` | 056 | E |
+| 8 | `anterior-w-t2` | 056 | E |

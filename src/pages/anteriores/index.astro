@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { idsDeEjercicios } from '../../scripts/ids.js';
+const base = import.meta.env.BASE_URL;
+const examenes = (await getCollection('anteriores')).sort((a, b) => a.data.orden - b.data.orden);
+---
+<Layout titulo="Años anteriores">
+  <h1>Parciales de años anteriores (fotos de clase)</h1>
+  <p>Ocho exámenes (X, Y, Z, W × Tema 1 y 2) que salen de fotos tomadas en clase. No traen fecha ni resolución. Están separados de los <a href={`${base}parciales/`}>parciales oficiales</a> con fecha.</p>
+  <ul class="lista">
+    {examenes.map((e) => (
+      <li>
+        <a href={`${base}anteriores/${e.id}/`}>{e.data.titulo}</a> · sin fecha
+        <br /><span data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span>
+      </li>
+    ))}
+  </ul>
+</Layout>

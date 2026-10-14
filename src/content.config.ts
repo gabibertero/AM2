@@ -19,6 +19,21 @@ const parciales = defineCollection({
   }),
 });
 
+const anteriores = defineCollection({
+  loader: glob({ pattern: '*.mdx', base: './src/content/anteriores' }),
+  schema: z.object({
+    id: z.string(),
+    titulo: z.string(),
+    fecha: z.string().optional(), // sin fecha en las fotos
+    tipo: z.enum(['práctico', 'teórico', 'recuperatorio']),
+    tema: z.string(),
+    fuente: z.string(), // ruta de la foto principal relativa a la carpeta de la materia
+    fotos: z.array(z.string()).min(1), // nombres de public/escaneos/<id>/<foto>.webp
+    orden: z.number(),
+    unidades: z.array(z.string()),
+  }),
+});
+
 const simple = (base: string) =>
   defineCollection({
     loader: glob({ pattern: '*.mdx', base }),
@@ -38,7 +53,18 @@ const machetes = defineCollection({
 });
 
 export const collections = {
+  anteriores,
   parciales,
-  teoria: simple('./src/content/teoria'),
+  teoria: defineCollection({
+    loader: glob({ pattern: '*.md', base: './src/content/teoria' }),
+    schema: z.object({
+      unidad: z.enum(['U4', 'U5', 'U6', 'U7', 'U8', 'U9', 'U10']),
+      titulo: z.string(),
+      orden: z.number(),
+      estado: z.enum(['borrador', 'revisado']),
+      alcance: z.enum(['confirmado', 'tentativo', 'sin material']),
+      fuentes: z.array(z.string()).min(1),
+    }),
+  }),
   machetes,
 };

@@ -1,10 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
 const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.data.orden);
 ---
 <Layout titulo="Teoría">
-  <h1>Teoría</h1>
-  <p>Todavía no hay contenido: se completa en una tarea posterior.</p>
-  <ul>{items.map((i) => <li>{i.data.titulo}</li>)}</ul>
+  <h1>Teoría por unidad</h1>
+  <p class="meta">Contenido elaborado para el sitio a partir de los apuntes; no es material oficial. Cada unidad indica su alcance y su estado.</p>
+  <ul class="lista">
+    {items.map((i) => (
+      <li data-unidad={i.data.unidad}>
+        <a href={`${base}teoria/${i.id}/`}><strong>{i.data.unidad}</strong> · {i.data.titulo}</a>
+        <p class="meta">
+          <span class="insignia" data-estado={i.data.estado}>{i.data.estado}</span>
+          <span class="insignia" data-alcance={i.data.alcance}>alcance {i.data.alcance}</span>
+        </p>
+      </li>
+    ))}
+  </ul>
 </Layout>
+<style is:global>
+  .insignia { display: inline-block; border: 1px solid var(--borde); border-radius: 999px; padding: 0 10px; margin-right: 6px; font-size: .8rem; font-weight: 600; background: var(--panel); }
+  .insignia[data-estado='borrador'] { border-color: var(--generado); color: var(--generado); }
+  .insignia[data-alcance='tentativo'], .insignia[data-alcance='sin material'] { border-color: var(--pendiente); color: var(--pendiente); }
+  .teoria h2 { margin-top: 2.2rem; border-top: 2px solid var(--borde); padding-top: .8rem; }
+  .teoria h3 { margin-top: 1.6rem; }
+</style>

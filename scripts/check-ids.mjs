@@ -2,11 +2,11 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { idsDeEjercicios } from '../src/scripts/ids.js';
 
-const dir = new URL('../src/content/parciales/', import.meta.url);
 const vistos = new Map();
 const errores = [];
 
-for (const f of readdirSync(dir).filter((n) => n.endsWith('.mdx'))) {
+for (const sub of ['parciales', 'anteriores']) for (const f of readdirSync(new URL(`../src/content/${sub}/`, import.meta.url)).filter((n) => n.endsWith('.mdx'))) {
+  const dir = new URL(`../src/content/${sub}/`, import.meta.url);
   const texto = readFileSync(new URL(f, dir), 'utf8');
   const examen = texto.match(/^id:\s*"?([^"\n]+?)"?\s*$/m)?.[1];
   if (!examen) errores.push(`${f}: frontmatter sin id`);

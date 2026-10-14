@@ -231,13 +231,16 @@
     ]
    },
    "2": {
-    "cajas": []
+    "cajas": [],
+    "limpiar_fondo": true
    },
    "3": {
-    "cajas": []
+    "cajas": [],
+    "limpiar_fondo": true
    },
    "4": {
-    "cajas": []
+    "cajas": [],
+    "limpiar_fondo": true
    },
    "5": {
     "cajas": []
@@ -329,7 +332,8 @@
       0.08,
       "Nombre de tercero (reverso de la hoja)"
      ]
-    ]
+    ],
+    "limpiar_fondo": true
    },
    "3": {
     "cajas": [
@@ -340,7 +344,8 @@
       0.085,
       "Nombre de tercero (reverso de la hoja)"
      ]
-    ]
+    ],
+    "limpiar_fondo": true
    },
    "4": {
     "cajas": []
@@ -422,13 +427,16 @@
     "cajas": []
    },
    "3": {
-    "cajas": []
+    "cajas": [],
+    "limpiar_fondo": true
    },
    "4": {
-    "cajas": []
+    "cajas": [],
+    "limpiar_fondo": true
    },
    "5": {
-    "cajas": []
+    "cajas": [],
+    "limpiar_fondo": true
    },
    "6": {
     "cajas": []

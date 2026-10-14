@@ -6,7 +6,7 @@
 - [ ] T04 Piloto: 1R3 resuelto completo (pistas, pasos, comprobación, gráficos, resolución oficial) → aprobación de Gabi.
 - [ ] T05 Resto de exámenes resueltos.
 - [x] T06 Machetes por tipo de problema.
-- [ ] T07 Delimitar y transcribir impresos "Tema 1/2/3" de fotos-clase.
+- [x] T07 Delimitar y transcribir impresos "Tema 1/2/3" de fotos-clase.
 - [ ] T08 Teoría U4–U10 (antes: pedir a Gabi cómo fue el 1º parcial).
 - [ ] T09 Revisión final: code-reviewer, E2E desktop/celular, README de publicación.
 
@@ -17,3 +17,6 @@
 - T04: piloto 1R3 resuelto, auditado por profe (91–95) y mejorado; estándar en docs/estandar-soluciones.md. ESPERA aprobación de Gabi antes de T05.
 - T06: 12 machetes, auditoría profe 89,5 + correcciones.
 - T07: lectura hecha (docs/inventario/E-fotos-parciales-viejos.md): 4 exámenes × Tema 1/2, sin fecha; falta integrarlos con fotos tapadas.
+- T07: 8 exámenes de años anteriores (24 ej.) integrados en /anteriores/, verificados 0 errores; fotos sin datos personales.
+- T08: BORRADOR teoría U4–U10 (U6/U10 tentativos, U7 sin material). No cerrar hasta que Gabi cuente cómo fue el 1º parcial. Monllor 11 p.11: ejemplos de armónicas incorrectos (anotado).
+- Privacidad: limpiar_fondo en 8 páginas con reverso transparentado.
