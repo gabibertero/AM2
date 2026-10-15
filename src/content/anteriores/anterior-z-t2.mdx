@@ -88,7 +88,7 @@ $$y=x^2+x-1$$
 
 Las rectas entre sí: $2x+5=-x+2$ da $x=-1$ e $y=3$, o sea el punto $(-1,3)$.
 
-*Lectura del gráfico (pendiente de revisión):* se tomó que la región sombreada es la encerrada por la parábola (abajo) y las dos rectas (arriba), con vértices $(-2,1)$, $(-1,3)$ y $(1,1)$. Los otros cortes ($(3,11)\text{ y }(-3,5)$) caen fuera de la región sombreada. Los puntos de corte no están rotulados en el enunciado.
+*Lectura del gráfico (confirmada con la foto):* se tomó que la región sombreada es la encerrada por la parábola (abajo) y las dos rectas (arriba), con vértices $(-2,1)$, $(-1,3)$ y $(1,1)$. Los otros cortes ($(3,11)\text{ y }(-3,5)$) caen fuera de la región sombreada. Los puntos de corte no están rotulados en el enunciado.
 
 <img src={`${import.meta.env.BASE_URL}figuras/anterior-z-t2/ej1.svg`} alt="Plano xy con la parábola y=x²+x−1 por (−1,−1), (0,−1) y (1,1), las rectas y=2x+5 e y=−x+2 que se cortan en (−1,3), y la región sombreada entre la parábola y las rectas, partida por la vertical x=−1 en dos tramos (azul y naranja), con vértices (−2,1), (−1,3) y (1,1)." style={{maxWidth:'100%',height:'auto'}} />
 
@@ -116,9 +116,9 @@ $$A=\int_{-2}^{-1}\!\!\int_{x^2+x-1}^{2x+5}dy\,dx+\int_{-1}^{1}\!\!\int_{x^2+x-1
 
 $$\int\big(-x^2+x+6\big)dx=-\frac{x^3}{3}+\frac{x^2}{2}+6x$$
 
-$$\text{en }x=-1:\ \frac13+\frac12-6=-\frac{31}{6}$$
+$$\text{en }x=-1:\ \frac13+\frac12-6=\frac26+\frac36-\frac{36}6=-\frac{31}{6}$$
 
-$$\text{en }x=-2:\ \frac83+2-12=-\frac{22}{3}$$
+$$\text{en }x=-2:\ \frac83+2-12=\frac83-10=\frac83-\frac{30}3=-\frac{22}{3}$$
 
 $$A_1=-\frac{31}{6}-\Big(-\frac{22}{3}\Big)=-\frac{31}{6}+\frac{44}{6}=\frac{13}{6}$$
 
@@ -129,9 +129,9 @@ $$A_1=-\frac{31}{6}-\Big(-\frac{22}{3}\Big)=-\frac{31}{6}+\frac{44}{6}=\frac{13}
 
 $$\int\big(-x^2-2x+3\big)dx=-\frac{x^3}{3}-x^2+3x$$
 
-$$\text{en }x=1:\ -\frac13-1+3=\frac53$$
+$$\text{en }x=1:\ -\frac13-1+3=-\frac13+2=-\frac13+\frac63=\frac53$$
 
-$$\text{en }x=-1:\ \frac13-1-3=-\frac{11}{3}$$
+$$\text{en }x=-1:\ \frac13-1-3=\frac13-4=\frac13-\frac{12}3=-\frac{11}{3}$$
 
 $$A_2=\frac53-\Big(-\frac{11}{3}\Big)=\frac53+\frac{11}{3}=\frac{16}{3}$$
 
@@ -171,7 +171,11 @@ Bajo la parábola (con signo, porque en parte es negativa):
 
 $$\int_{-2}^{1}\big(x^2+x-1\big)dx=\Big[\frac{x^3}{3}+\frac{x^2}{2}-x\Big]_{-2}^{1}$$
 
-$$\Big(\frac13+\frac12-1\Big)-\Big(-\frac83+2+2\Big)=-\frac16-\frac43=-\frac32$$
+$$\frac13+\frac12-1=\frac26+\frac36-\frac66=-\frac16$$
+
+$$-\frac83+2+2=-\frac83+4=-\frac83+\frac{12}3=\frac43$$
+
+$$-\frac16-\frac43=-\frac16-\frac86=-\frac96=-\frac32$$
 
 El área de la región es la diferencia:
 
@@ -192,7 +196,7 @@ Resolver las siguientes ecuaciones diferenciales:
 
 <Pista>
 
-Fijate en cada ecuación. En la **b)**: ¿qué pasa si la escribís con todo en un lado, como (algo)$\,dx+$(algo)$\,dy=0$? ¿Hay alguna relación entre esos dos "algo" cuando los derivás? En la **a)**: ¿qué término impide que sea lineal en $y$? ¿Y si dividís por una potencia de $y$?
+Fijate en cada ecuación. En la **b)**: ¿qué pasa si la escribís con todo en un lado, como (algo)$\,dx+$(algo)$\,dy=0$? ¿Hay alguna relación entre esos dos "algo" cuando los derivás? En la **a)**: ¿qué término impide que sea lineal en $y$?
 
 </Pista>
 <Pista>
@@ -365,7 +369,7 @@ $$
 
 <Pista>
 
-Mirá la ecuación: $y''$, $y'$ e $y$ con coeficientes que son números, y del lado derecho una exponencial más un polinomio. ¿Qué tipo de ecuación es y qué forma tiene su solución general? Compará la exponencial del lado derecho con las que aparecen al resolver la parte homogénea.
+Mirá la ecuación: $y''$, $y'$ e $y$ con coeficientes que son números, y del lado derecho una exponencial más un polinomio. ¿Qué tipo de ecuación es y qué forma tiene su solución general?
 
 </Pista>
 <Pista>

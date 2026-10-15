@@ -175,7 +175,7 @@ Resolver las siguientes ecuaciones diferenciales:
 
 <Pista>
 
-Fijate qué hay en cada ecuación. En la **a)**, ¿qué pasa con el cociente $\frac yx$ si lo reemplazás por una nueva variable? En la **b)**, ¿cómo aparece $y$ respecto de $y'$ una vez que abrís la fracción? Mirá si podés agrupar cada ecuación en una forma conocida.
+Fijate qué hay en cada ecuación. En la **a)**, ¿de qué variables depende el lado derecho, y cómo? En la **b)**, ¿cómo aparece $y$ respecto de $y'$ una vez que abrís la fracción? Mirá si podés agrupar cada ecuación en una forma conocida.
 
 </Pista>
 <Pista>
@@ -222,7 +222,12 @@ Despejando $u$ (con $\sin(\alpha-\frac\pi2)=-\cos\alpha$):
 
 $$u=\sin\Big(\ln x-\frac\pi2\Big)=-\cos(\ln x)\ \Rightarrow\ y=-x\cos(\ln x)$$
 
-**Dominio:** hace falta $\sin(\ln x)\ge0$ ($u'x=\sin(\ln x)$ tiene que ser la raíz, no negativa), o sea $1\le x\le e^{\pi}$.
+**Dominio:** hace falta $\sin(\ln x)\ge0$ ($u'x=\sqrt{1-u^2}=\sin(\ln x)$ tiene que ser la raíz, no negativa), o sea $1\le x\le e^{\pi}$. Así, $y=-x\cos(\ln x)$ vale solo en $[1,e^\pi]$: para $x<1$ daría $x\sin(\ln x)<0$, que no puede ser una raíz.
+
+</Paso>
+<Paso>
+
+**Qué (a):** buscar las soluciones constantes $u=\pm1$. **Por qué:** al dividir por $\sqrt{1-u^2}$ se pierden las $u$ que lo anulan. Con $u=-1$ es $y=-x$: $y'=-1$, y $xy'-y=-x+x=0=\sqrt{x^2-y^2}$, así que cumple la EDO y $y(1)=-1$ (y $u=1$ da $y=x$). **No hay unicidad:** $f(x,y)=\frac yx+\sqrt{1-(y/x)^2}$ tiene $\frac{\partial f}{\partial y}$ no acotada cuando $|u|=1$, y el teorema de existencia y unicidad no aplica en $(1,-1)$. La solución de separar variables se despega de $y=-x$ en $x=1$.
 
 </Paso>
 <Paso>
@@ -270,11 +275,11 @@ $$y=x^4\,(e^x+e)$$
 
 **b)** $$y=x^4\,(e^x+e)$$
 
-**Ojo con:** en la **a)** perder la solución constante $u=\pm1$: acá $y=-x$ también cumple la ecuación y la condición $y(1)=-1$, así que el problema no tiene solución única y la respuesta esperada es la que sale de separar variables. En la **b)**, el signo de $P$ (queda $-\frac4x$ al pasar $\frac4x\,y$ restando).
+**Ojo con:** en la **a)** perder la solución constante $u=\pm1$: acá $y=-x$ también cumple la ecuación y la condición $y(1)=-1$, así que el problema no tiene solución única. Lo más probable es que la cátedra espere la que sale de separar variables (estimación, no oficial); conviene mencionar también $y=-x$. En la **b)**, el signo de $P$ (queda $-\frac4x$ al pasar $\frac4x\,y$ restando).
 
 **Criterio estimado — no oficial** (sin consigna de corrección a la vista):
 
-- **Bien:** a) $u=\frac yx$, $\arcsin u=\ln x+C$, $C=-\frac\pi2$ y $y=-x\cos(\ln x)$; b) forma lineal, $v=x^4$, $u=e^x+C$ y $C=e$.
+- **Bien:** a) $u=\frac yx$, $\arcsin u=\ln x+C$, $C=-\frac\pi2$ y $y=-x\cos(\ln x)$; b) forma lineal, $v=x^4$, $u=e^x+C$ y $C=e$. Suma mencionar la solución singular $y=-x$ (no se espera como única respuesta).
 - **A medias:** método correcto en ambas pero un error de signo o de constante, o una de las dos resuelta sin aplicar la condición inicial.
 - **Mal:** no reconoce el tipo de ecuación o usa un método que no corresponde.
 
