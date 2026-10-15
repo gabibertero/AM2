@@ -1,0 +1,6 @@
+---
+// Renderiza el contenido y le saca carpetas y extensiones a las fuentes citadas ("x/y.pdf p.4" -> "y p.4").
+import { limpiarFuente } from '../lib/fuente.js';
+const html = limpiarFuente(await Astro.slots.render('default'));
+---
+<Fragment set:html={html} />

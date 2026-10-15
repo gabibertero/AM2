@@ -8,10 +8,10 @@ const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.da
   <h1>Teoría por unidad</h1>
   <p class="lead">Contenido elaborado para el sitio a partir de los apuntes; no es material oficial. Cada unidad indica su alcance y su estado.</p>
   <p><a class="btn btn-primario" href={`${base}preguntero/`}>Practicá con el preguntero teórico</a></p>
-  <ul class="grilla lista-tarjetas">
+  <ul class="grilla lista-tarjetas llena">
     {items.map((i) => (
       <li class="tarjeta tarjeta-u" data-unidad={i.data.unidad}>
-        <a class="ec-titulo" href={`${base}teoria/${i.id}/`}><span class="chip chip-u chip-lg" data-unidad={i.data.unidad}>{i.data.unidad}</span> {i.data.titulo}</a>
+        <a class="ec-titulo" href={`${base}teoria/${i.id}/`}><span class="chip chip-u chip-lg" data-unidad={i.data.unidad}>{i.data.unidad}</span><span class="ec-t">{i.data.titulo}</span></a>
         <p class="meta">
           <span class="insignia" data-estado={i.data.estado}>{i.data.estado}</span>
           <span class="insignia" data-alcance={i.data.alcance}>alcance {i.data.alcance}</span>

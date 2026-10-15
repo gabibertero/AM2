@@ -27,9 +27,10 @@ const contenidos = await Promise.all(archivos.map(async (a) => (await render(a))
   </div>
 </Layout>
 <style is:global>
-  .sim-panel { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 1rem 0; }
+  .sim-panel { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-12); margin: var(--s-16) 0; }
   .sim-panel label { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; min-height: 44px; }
   .sim-panel input[type='number'] { width: 5rem; min-height: 44px; padding: 0 var(--s-8); border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); background: var(--sup2); color: var(--texto); font: inherit; }
+  .sim-crono { padding-inline: var(--s-8); }
   .sim-panel input[type='checkbox'] { width: 24px; height: 24px; accent-color: var(--acento); }
   .sim-panel input:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
   .sim-reloj { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.3rem; padding: 2px 14px; border: 2px solid var(--acento); border-radius: 999px; }

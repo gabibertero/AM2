@@ -40,11 +40,11 @@ const tipos = [['tema', 'Temas'], ['corta', 'Cortas'], ['choice', 'Choice']];
   </div>
 </Layout>
 <style is:global>
-  .pf { display: grid; gap: 8px; margin: 1rem 0; }
+  .pf { display: grid; gap: 8px; margin: var(--s-16) 0; }
   .pf-grupo { display: flex; flex-wrap: wrap; gap: 8px; }
   .pf button { min-height: 44px; padding: 4px 14px; }
   .pf button[aria-pressed='true'] { background: var(--acento); color: var(--sobre-acento); border-color: var(--acento); }
   .pf button:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
-  section[data-seccion] > h2 { margin-top: 2rem; }
+  section[data-seccion] > h2 { margin-top: var(--s-32); }
 </style>
 <script>import '../../scripts/preguntero.js';</script>

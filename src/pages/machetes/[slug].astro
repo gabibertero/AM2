@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { limpiarFuente } from '../../lib/fuente.js';
+import SinRutas from '../../components/SinRutas.astro';
 
 export async function getStaticPaths() {
   const todos = await getCollection('machetes');
@@ -22,7 +24,7 @@ const d = entry.data;
   )}
   <div class="capa elaborado lectura" data-unidad={d.unidad}>
     <p class="rotulo">Machete · Elaborado para el sitio — no oficial</p>
-    <Content />
+    <SinRutas><Content /></SinRutas>
     <h2>En qué ejercicios oficiales aparece</h2>
     {d.ejerciciosOficiales.length === 0 ? (
       <p>No aparece en los parciales prácticos oficiales relevados.</p>
@@ -34,7 +36,7 @@ const d = entry.data;
       </ul>
     )}
     <h2>Fuente</h2>
-    <ul>{d.fuentes.map((f) => <li>{f}</li>)}</ul>
+    <ul>{d.fuentes.map((f) => <li>{limpiarFuente(f)}</li>)}</ul>
   </div>
 <script>import '../../scripts/figuras.js';</script>
 </Layout>

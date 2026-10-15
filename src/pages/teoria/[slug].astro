@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { limpiarFuente } from '../../lib/fuente.js';
+import SinRutas from '../../components/SinRutas.astro';
 
 export async function getStaticPaths() {
   const todos = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.data.orden);
@@ -29,9 +31,9 @@ const d = entry.data;
   )}
   <div class="capa elaborado teoria lectura" data-unidad={d.unidad}>
     <p class="rotulo">Teoría · Elaborado para el sitio — no oficial</p>
-    <Content />
+    <SinRutas><Content /></SinRutas>
     <h2>Fuentes de la unidad</h2>
-    <ul>{d.fuentes.map((f) => <li>{f}</li>)}</ul>
+    <ul>{d.fuentes.map((f) => <li>{limpiarFuente(f)}</li>)}</ul>
   </div>
   <p class="meta">
     {anterior && <a href={`${base}teoria/${anterior.id}/`}>← {anterior.data.unidad}</a>}

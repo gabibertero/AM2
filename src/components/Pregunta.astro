@@ -1,5 +1,6 @@
 ---
 import IA from './IA.astro';
+import { limpiarFuente } from '../lib/fuente.js';
 import { letra } from '../scripts/preguntero-logica.js';
 // Una pregunta del preguntero. Slots (MDX con KaTeX):
 //   enunciado (obligatorio) · guia (solo tema: lista de "qué tiene que tener") · opciones (solo choice: lista numerada)
@@ -24,7 +25,7 @@ const tieneGuia = Astro.slots.has('guia');
   {tieneGuia && <div class="preg-guia"><p class="preg-guia-t">Qué tiene que tener la respuesta</p><slot name="guia" /></div>}
   {tipo === 'choice' && <div class="preg-ops" data-ops><slot name="opciones" /></div>}
   {tipo === 'choice' && <p class="preg-fb" data-fb role="status"></p>}
-  {fq && <p class="preg-fte">Pregunta: <em>{fq}</em></p>}
+  {fq && <p class="preg-fte">Pregunta: <em>{limpiarFuente(fq)}</em></p>}
   {tipo === 'choice' ? <IA modo="explicar" /> : <IA modo="corregir" />}
   <details class="preg-resp" data-resp>
     <summary><span class="s-ver">{tipo === 'choice' ? 'Mostrar la correcta y por qué' : 'Mostrar respuesta modelo'}</span><span class="s-ocultar">Ocultar respuesta</span></summary>
@@ -32,7 +33,7 @@ const tieneGuia = Astro.slots.has('guia');
       {tipo === 'choice' && <p><strong>Opción correcta: {letra(Number(correcta))})</strong></p>}
       <slot />
     </div>
-    {fr && <p class="preg-fte">Respuesta elaborada a partir de: <em>{fr}</em></p>}
+    {fr && <p class="preg-fte">Respuesta elaborada a partir de: <em>{limpiarFuente(fr)}</em></p>}
   </details>
   <div class="preg-acc" role="group" aria-label="Marcar pregunta" data-js hidden>
     <button type="button" class="btn-sabe" data-marca="sabe" aria-pressed="false">✓ La sé</button>
@@ -51,20 +52,20 @@ const tieneGuia = Astro.slots.has('guia');
   .preg[data-estado='sabe'] .preg-estado { color: var(--e-ok); }
   .preg[data-estado='dudosa'] .preg-estado { color: var(--generado); }
   .preg[data-estado='nose'] .preg-estado { color: var(--pendiente); }
-  .preg-tit { margin: .4rem 0 .5rem; font-size: 1.2rem; }
+  .preg-tit { margin: var(--s-8) 0; font-size: 1.2rem; }
   .preg-enun { margin: 0 0 .6rem; padding: 4px 14px; border-left: 4px solid var(--uc, var(--borde-fuerte)); background: var(--sup2); border-radius: 0 var(--r-s) var(--r-s) 0; overflow-x: auto; position: relative; }
   .preg-enun > :first-child { margin-top: .4em; } .preg-enun > :last-child { margin-bottom: .4em; }
   .preg-guia { margin: .6rem 0; padding: 4px 14px; border: 1px dashed var(--borde-fuerte); border-radius: var(--r-s); overflow-x: auto; position: relative; }
   .preg-guia-t { margin: .4rem 0 0; font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--suave); }
   .preg-guia ul { margin: .3rem 0 .5rem; padding-left: 1.2rem; }
-  .preg-fte { margin: .4rem 0 0; font-size: .8125rem; color: var(--suave); overflow-wrap: anywhere; }
+  .preg-fte { margin: var(--s-8) 0 0; font-size: .8125rem; color: var(--suave); overflow-wrap: anywhere; }
   .preg-ops { overflow-x: auto; position: relative; margin: .5rem 0; }
   .preg-ops ol { margin: 0; padding-left: 1.6rem; list-style: lower-alpha; }
   .preg-ops ol.op-lista { padding: 0; list-style: none; display: grid; gap: 8px; }
-  .op { display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); background: var(--sup2); cursor: pointer; min-height: 44px; }
+  .op { display: flex; align-items: flex-start; gap: var(--s-12); padding: var(--s-8) var(--s-12); border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); background: var(--sup2); cursor: pointer; min-height: 44px; }
   .op:has(input:checked) { border-color: var(--acento); box-shadow: inset 0 0 0 1px var(--acento); }
   .op:has(input:focus-visible) { outline: 3px solid var(--link); outline-offset: 2px; }
-  .op input { margin-top: .3rem; accent-color: var(--acento); flex: none; }
+  .op input { width: 24px; height: 24px; margin: 0; accent-color: var(--acento); flex: none; }
   .op-t { min-width: 0; overflow-wrap: anywhere; }
   .op[data-res='ok'] { border-color: var(--e-ok); background: var(--e-ok-bg); box-shadow: inset 0 0 0 1px var(--e-ok); }
   .op[data-res='mal'] { border-color: var(--pendiente); box-shadow: inset 0 0 0 1px var(--pendiente); }
