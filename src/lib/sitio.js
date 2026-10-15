@@ -1,6 +1,7 @@
 // Única fuente de datos editables del Home.
 // Fecha del 2º parcial en formato 'aaaa-mm-dd'. null = todavía no se conoce → el Home muestra "Fecha a confirmar".
-export const FECHA_PARCIAL = null;
+export const FECHA_PARCIAL = '2026-10-31';
+export const FECHA_RECUP = '2026-11-07'; // recuperatorio del 2º parcial
 
 // Unidades del programa 2025 (U11 Fourier queda fuera). `cae`: qué se vio en parciales prácticos.
 export const UNIDADES = [
