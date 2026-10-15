@@ -5,4 +5,286 @@ orden: 6
 ---
 import Pregunta from '../../components/Pregunta.astro';
 
-{/* Sin preguntas todavía: ver el formato en u4.mdx. */}
+{/* Alcance tentativo de U6. Formato: ver u4.mdx. Notación: rot = ∇×F, div = ∇·F. */}
+
+<Pregunta id="u6-t01" unidad="U6" tipo="tema" titulo="Divergencia de un campo vectorial y qué representa"
+  aparecio="Modelo P2 · P5"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 3-4" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 4; parciales/2do-parcial/Modelo P2 teorico.pdf, p. 3-4">
+<Fragment slot="enunciado">
+
+Escriba el concepto de divergencia de un campo vectorial en un punto e indique qué representa.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $\operatorname{div}\vec F=\nabla\cdot\vec F$ y su carácter escalar.
+- Propiedades: relación con la matriz Jacobiana, campo solenoidal, Laplaciano.
+- Desarrollo: interpretación con un fluido (fuente, sumidero) y vínculo con el Teorema de la Divergencia.
+- Gráfico: campo que sale de un punto (fuente) y campo que converge a un punto (sumidero).
+
+</Fragment>
+
+**Definición.** Dado $\vec F=P\,\vec i+Q\,\vec j+R\,\vec k$, la divergencia es un campo **escalar**:
+
+$$\operatorname{div}\vec F=\nabla\cdot\vec F=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}$$
+
+**Propiedades.**
+- Equivale a la **traza de la matriz Jacobiana** (campos $\mathbb R^n\to\mathbb R^n$).
+- Si $\operatorname{div}\vec F=0$ el campo se llama **solenoidal**; ocurre cuando $\vec F=\operatorname{rot}\vec A$, porque $\operatorname{div}(\operatorname{rot}\vec A)=0$.
+- $\operatorname{div}(\nabla u)=\nabla^2u=\Delta u$ es el **Laplaciano**; si $\Delta u=0$, $u$ es una función **armónica**.
+
+**Qué representa.** Si $\vec F$ es la velocidad de un fluido, la divergencia en un punto mide cuánto fluido **se introduce o se extrae** por unidad de volumen:
+- $\nabla\cdot\vec F>0$: **fuente** (la densidad en el punto disminuye).
+- $\nabla\cdot\vec F<0$: **sumidero** (la densidad aumenta).
+- $\nabla\cdot\vec F=0$: el fluido se mueve sin acumularse (incompresible).
+
+**Relación con el flujo.** Por el Teorema de la Divergencia, $\iiint_V\operatorname{div}\vec F\,dv=\iint_S\vec F\cdot\vec n\,d\sigma$: la integral de la divergencia es el flujo neto hacia afuera.
+
+**Ejemplo.** $\vec F=(x^2y,\,yz,\,xz^2)$: $\operatorname{div}\vec F=2xy+z+2xz$.
+
+**Gráfico.** Dos esquemas en el plano: flechas que salen radialmente desde un punto ($\operatorname{div}>0$) y flechas que entran hacia un punto ($\operatorname{div}<0$).
+</Pregunta>
+
+<Pregunta id="u6-t02" unidad="U6" tipo="tema" titulo="Rotor de un campo vectorial: definición y qué representa"
+  aparecio="el 2º parcial teórico real"
+  fq="Links e Info.md" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 5-8">
+<Fragment slot="enunciado">
+
+Defina el rotor (rotacional) de un campo vectorial e indique qué representa.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $\operatorname{rot}\vec F=\nabla\times\vec F$ por determinante; carácter vectorial.
+- Propiedades: campo irrotacional y su relación con campo conservativo.
+- Desarrollo: interpretación con la velocidad angular de un fluido y conexión con Green/Stokes.
+- Gráfico: campo con giro (por ejemplo $\vec F=(-y,x,0)$).
+
+</Fragment>
+
+**Definición.** Es un campo **vectorial**:
+
+$$\operatorname{rot}\vec F=\nabla\times\vec F=\begin{vmatrix}\vec i&\vec j&\vec k\\ \dfrac{\partial}{\partial x}&\dfrac{\partial}{\partial y}&\dfrac{\partial}{\partial z}\\ P&Q&R\end{vmatrix}=\Big(\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z}\Big)\vec i+\Big(\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x}\Big)\vec j+\Big(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\Big)\vec k$$
+
+**Propiedades.**
+- **Campo irrotacional**: $\operatorname{rot}\vec F=\vec0$ (con derivadas segundas continuas), que equivale a $R_y=Q_z,\ P_z=R_x,\ Q_x=P_y$.
+- **Todo campo conservativo ($\vec F=\nabla u$) es irrotacional**, porque $\operatorname{rot}(\nabla u)=\vec0$ (igualdad de derivadas mixtas).
+- La componente en $\vec k$, $Q_x-P_y$, es el integrando del Teorema de Green.
+
+**Qué representa.** Mide la **velocidad angular** local: si $\vec F$ es la velocidad de un fluido, el rotor da la medida del giro de una pequeña esfera del fluido alrededor de un eje. Por Stokes, la circulación a lo largo del borde es el flujo del rotor a través de una superficie apoyada en él: $\iint_S\operatorname{rot}\vec F\cdot\vec n\,d\sigma=\oint_L\vec F\cdot d\vec s$.
+
+**Ejemplo.** $\vec F=(x^2y,\,yz,\,xz^2)$ tiene $\operatorname{rot}\vec F=(-y,\,-z^2,\,-x^2)$. Para $\vec F=(-y,x,0)$, $\operatorname{rot}\vec F=(0,0,2)$.
+
+**Gráfico.** Campo $\vec F=(-y,x,0)$ en el plano $xy$: flechas tangentes a circunferencias centradas en el origen, en sentido antihorario; una rueda pequeña colocada en el campo giraría.
+</Pregunta>
+
+<Pregunta id="u6-t03" unidad="U6" tipo="tema" titulo="Teorema de Stokes"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 13-16" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 13-16">
+<Fragment slot="enunciado">
+
+Enuncie el Teorema de Stokes, indique sus hipótesis y la compatibilidad de orientaciones, y desarrolle la idea de la demostración.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: enunciado con superficie orientada $S$, borde $L$ y campo $\vec F$.
+- Propiedades: hipótesis de derivadas continuas y orientaciones compatibles.
+- Desarrollo: idea de la demostración para $S:\ z=f(x,y)$ y relación con Green.
+- Gráfico: superficie $S$ con su normal $\vec n$ y el borde $L$ orientado.
+
+</Fragment>
+
+**Enunciado.** Sea $S$ una superficie **orientada** limitada por la curva cerrada $L$ y $\vec F$ un campo con **derivadas parciales continuas en una región abierta que contiene a $S$**. Entonces
+
+$$\iint_S \operatorname{rot}\vec F\cdot\vec n\,d\sigma=\oint_L \vec F\cdot d\vec s=\oint_L P\,dx+Q\,dy+R\,dz$$
+
+**Propiedades / orientaciones.** La normal $\vec n$ y el sentido de $L$ deben ser compatibles: con $\vec n$ formando un ángulo agudo con el eje $z$, un observador que mira desde la punta de $\vec n$ ve el recorrido de $L$ en sentido antihorario. Si se invierte uno, se invierte el signo.
+
+**Desarrollo.** Para $S:\ z=f(x,y)$ se escribe la integral de superficie como doble sobre la proyección $D$, y la curvilínea sobre la proyección $L'$ de $L$ en el plano $xy$. Se aplica Green a esta última usando la regla de la cadena para $\partial/\partial x\,[\,\cdot\,]$ y se ve que ambos miembros coinciden.
+
+**Interpretación y consecuencias.** La circulación del campo por el borde es igual al flujo del rotor a través de cualquier superficie que se apoye en ese borde. Si $S$ es plana y paralela a $xy$ se obtiene Green como caso particular. Si $\operatorname{rot}\vec F=\vec0$, la integral curvilínea no depende de la forma de la curva.
+
+**Ejemplo.** $\vec F=(-y,x,0)$, $S$ el disco $x^2+y^2\le a^2$ en $z=0$, $\vec n=\vec k$: $\operatorname{rot}\vec F=(0,0,2)$, entonces $\iint=2\pi a^2$; por la curva, $\oint_L -y\,dx+x\,dy=2\pi a^2$.
+
+**Gráfico.** Una superficie curva $S$ (tipo cúpula) con un vector normal $\vec n$ apuntando hacia arriba y su borde $L$ con una flecha en sentido antihorario visto desde la punta de $\vec n$.
+</Pregunta>
+
+<Pregunta id="u6-c01" unidad="U6" tipo="corta" titulo="Derivada de un campo vectorial"
+  aparecio="Modelo P2 · P4"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/04 - FUNCIONES VECTORIALES 2015.pdf, p. 6, 9-10; parciales/2do-parcial/Modelo P2 teorico.pdf, p. 3">
+<Fragment slot="enunciado">
+
+¿Cómo se calcula la derivada de un campo vectorial?
+
+</Fragment>
+
+Un campo con $m$ componentes de $n$ variables tiene $m\times n$ derivadas parciales, que se ordenan en la **matriz Jacobiana**, cuyas filas son los gradientes de las componentes:
+
+$$D\vec F=\begin{bmatrix}\dfrac{\partial f_1}{\partial x_1}&\cdots&\dfrac{\partial f_1}{\partial x_n}\\ \vdots&&\vdots\\ \dfrac{\partial f_m}{\partial x_1}&\cdots&\dfrac{\partial f_m}{\partial x_n}\end{bmatrix}=\begin{bmatrix}\nabla f_1\\ \vdots\\ \nabla f_m\end{bmatrix}$$
+
+Si $m=1$ es el gradiente; si $n=1$ es una columna y $\vec r\,'(t)$ es tangente a la curva; si $m=n$ su determinante es el Jacobiano.
+</Pregunta>
+
+<Pregunta id="u6-c02" unidad="U6" tipo="corta" titulo="Dominio de una función vectorial"
+  aparecio="Modelo P2 · P6"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 4" fr="teoria/Apuntes Ing. Monllor/04 - FUNCIONES VECTORIALES 2015.pdf, p. 3">
+<Fragment slot="enunciado">
+
+¿Cómo se determina o se calcula el dominio de una función vectorial o de un campo vectorial?
+
+</Fragment>
+
+El dominio de una función vectorial $\vec r(t)=[f(t),g(t),h(t)]$ es el conjunto de valores de $t$ donde está definida: la **intersección de los dominios de las funciones componentes**. Se pide que cada componente esté definida (denominadores $\ne0$, raíces de índice par con argumento $\ge0$, $\ln$ con argumento $>0$). Para un campo se usa el mismo criterio con $P,Q,R$.
+
+Ejemplo: $\vec F(x,y)=\left[\dfrac1{x-y},\sqrt y\right]$ tiene dominio $\{x\ne y,\ y\ge0\}$.
+</Pregunta>
+
+<Pregunta id="u6-c03" unidad="U6" tipo="corta" titulo="Gradiente"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 2-3" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 2-3">
+<Fragment slot="enunciado">
+
+Defina el gradiente de un campo escalar $u$ e indique su interpretación geométrica.
+
+</Fragment>
+
+Con el operador nabla $\nabla=\frac{\partial}{\partial x}\vec i+\frac{\partial}{\partial y}\vec j+\frac{\partial}{\partial z}\vec k$, $\operatorname{grad}u=\nabla u=\left(\frac{\partial u}{\partial x},\frac{\partial u}{\partial y},\frac{\partial u}{\partial z}\right)$. En cada punto es normal a la superficie de nivel $u=C$ y apunta en la dirección de máximo crecimiento; su módulo es el valor máximo de la derivada direccional.
+</Pregunta>
+
+<Pregunta id="u6-c04" unidad="U6" tipo="corta" titulo="Campo irrotacional y solenoidal"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 5-8" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 5-8">
+<Fragment slot="enunciado">
+
+¿Qué es un campo irrotacional y qué es un campo solenoidal?
+
+</Fragment>
+
+**Irrotacional**: $\operatorname{rot}\vec F=\vec0$. Todo campo conservativo ($\vec F=\nabla u$) es irrotacional, porque $\operatorname{rot}(\nabla u)=\vec0$. **Solenoidal**: $\operatorname{div}\vec F=0$; ocurre cuando $\vec F=\operatorname{rot}\vec A$, porque $\operatorname{div}(\operatorname{rot}\vec A)=0$.
+</Pregunta>
+
+<Pregunta id="u6-c05" unidad="U6" tipo="corta" titulo="Flujo de un campo a través de una superficie"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 9-12" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 9-12">
+<Fragment slot="enunciado">
+
+Defina la integral de superficie (flujo) de $\vec F$ a través de una superficie $S$ orientada y cómo se reduce a una doble para $S:\ z=f(x,y)$.
+
+</Fragment>
+
+$$\Phi=\iint_S \vec F\cdot\vec n\,d\sigma=\iint_S (P\cos\alpha+Q\cos\beta+R\cos\gamma)\,d\sigma$$
+
+La superficie debe estar orientada (en una cerrada, normal exterior); cambiar la orientación cambia el signo. Para $z=f(x,y)$ con $\cos\gamma>0$, como $d\sigma=\frac{dx\,dy}{\cos\gamma}$:
+
+$$\Phi=\iint_D\Big(-P\,\frac{\partial z}{\partial x}-Q\,\frac{\partial z}{\partial y}+R\Big)\,dx\,dy$$
+
+con $P,Q,R$ evaluados en $(x,y,f(x,y))$ y $D$ la proyección sobre $xy$.
+</Pregunta>
+
+<Pregunta id="u6-c06" unidad="U6" tipo="corta" titulo="Teorema de la Divergencia (Gauss)"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 17-19" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 17-19">
+<Fragment slot="enunciado">
+
+Enuncie el Teorema de la Divergencia e indique su interpretación.
+
+</Fragment>
+
+Sea $V$ un volumen limitado por una superficie cerrada $S$ (proyectable sobre los tres planos coordenados) y $\vec F$ continuo con derivadas continuas en una región que contiene a $V$:
+
+$$\iiint_V\operatorname{div}\vec F\,dv=\iint_S\vec F\cdot\vec n\,d\sigma$$
+
+con $\vec n$ la normal **exterior**. El flujo neto hacia afuera es lo que se genera adentro (fuentes menos sumideros); si $\operatorname{div}\vec F=0$ lo que sale es igual a lo que entra.
+</Pregunta>
+
+<Pregunta id="u6-h01" unidad="U6" tipo="choice" correcta={3} titulo="Divergencia y traza"
+  aparecio="Modelo P2 · P5"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 3-4" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 4; parciales/2do-parcial/Modelo P2 teorico.pdf, p. 3-4">
+<Fragment slot="enunciado">
+
+La divergencia de un campo $\vec F:\mathbb R^n\to\mathbb R^n$ equivale a:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. El determinante de la matriz Jacobiana
+2. El gradiente de una de sus componentes
+3. La traza de la matriz Jacobiana
+4. El rotor del campo
+
+</Fragment>
+
+La divergencia es la suma de las derivadas $\partial f_i/\partial x_i$, es decir la traza de la Jacobiana. El determinante es el Jacobiano.
+</Pregunta>
+
+<Pregunta id="u6-h02" unidad="U6" tipo="choice" correcta={1} titulo="Divergencia positiva"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 4" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 4">
+<Fragment slot="enunciado">
+
+Si $\vec F$ es la velocidad de un fluido y $\nabla\cdot\vec F>0$ en un punto, ese punto es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Una fuente
+2. Un sumidero
+3. Un punto de fluido incompresible
+4. Un punto donde el campo es conservativo
+
+</Fragment>
+
+Divergencia positiva = fuente (se extrae fluido, la densidad disminuye). Negativa = sumidero; cero = el fluido no se acumula.
+</Pregunta>
+
+<Pregunta id="u6-h03" unidad="U6" tipo="choice" correcta={2} titulo="Naturaleza del rotor y la divergencia"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 4-5" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 4-5">
+<Fragment slot="enunciado">
+
+¿Cuál de estas afirmaciones es correcta?
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. La divergencia y el rotor son campos vectoriales
+2. La divergencia es un campo escalar y el rotor un campo vectorial
+3. La divergencia es un campo vectorial y el rotor un escalar
+4. Ambos son campos escalares
+
+</Fragment>
+
+$\nabla\cdot\vec F$ (producto escalar con nabla) es un escalar; $\nabla\times\vec F$ (determinante) es un vector.
+</Pregunta>
+
+<Pregunta id="u6-h04" unidad="U6" tipo="choice" correcta={4} titulo="Normal en el Teorema de la Divergencia"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 17-19" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 17-19">
+<Fragment slot="enunciado">
+
+En el Teorema de la Divergencia, el vector $\vec n$ de la integral de superficie es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Siempre $\vec k$
+2. Tangente a $S$
+3. La normal interior
+4. La normal exterior
+
+</Fragment>
+
+Se usa la normal **exterior** a la superficie cerrada $S$.
+</Pregunta>
+
+<Pregunta id="u6-h05" unidad="U6" tipo="choice" correcta={1} titulo="Campo conservativo e irrotacional"
+  fq="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 5-8" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 5-8">
+<Fragment slot="enunciado">
+
+Si $\vec F=\nabla u$ con $u$ de derivadas segundas continuas, entonces:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $\operatorname{rot}\vec F=\vec0$
+2. $\operatorname{div}\vec F=0$ siempre
+3. $\operatorname{rot}\vec F=\nabla u$
+4. $\vec F$ es solenoidal
+
+</Fragment>
+
+$\operatorname{rot}(\nabla u)=\vec0$ por la igualdad de derivadas mixtas: todo campo conservativo es irrotacional. La divergencia de $\nabla u$ es el Laplaciano, que no es nulo en general.
+</Pregunta>

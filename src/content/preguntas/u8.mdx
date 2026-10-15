@@ -5,4 +5,296 @@ orden: 8
 ---
 import Pregunta from '../../components/Pregunta.astro';
 
-{/* Sin preguntas todavía: ver el formato en u4.mdx. */}
+{/* Fuentes: Monllor 08 (pp. según src/content/teoria/u08.md), Modelo P2 teórico p.2, notas de Gabi (Links e Info.md). Factor integrante: no figura en las fuentes, fórmulas estándar (machete edo-exacta). */}
+
+<Pregunta id="u8-t01" unidad="U8" tipo="tema" aparecio="Modelo P2 teórico · pregunta 2" titulo="Solución general de la EDO homogénea de 1.er orden"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6; Modelo P2 teorico.pdf, p. 2">
+<Fragment slot="enunciado">
+
+Desarrolle la obtención de la solución general de ecuaciones diferenciales de 1.er orden homogéneas.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: función homogénea de grado $n$ y ecuación homogénea.
+- Propiedad que se usa: $f(\lambda x,\lambda y)=f(x,y)$ si el grado es cero.
+- Desarrollo: $\lambda=1/x$, sustitución $y=ux$, separación de variables, integración y vuelta a $y/x$.
+- Gráfico (opcional): el campo de direcciones es el mismo sobre cada recta por el origen.
+
+</Fragment>
+
+**Definiciones.** Una función $f(x,y)$ es **homogénea de grado $n$** si $f(\lambda x,\lambda y)=\lambda^n f(x,y)$ para todo $\lambda$. La ecuación $\dfrac{dy}{dx}=f(x,y)$ es **homogénea** si $f$ es homogénea de **grado cero**. En forma diferencial, $M\,dx+N\,dy=0$ es homogénea si $M$ y $N$ son homogéneas **del mismo grado**.
+
+**Desarrollo.** Como $f(\lambda x,\lambda y)=f(x,y)$ para todo $\lambda$, tomo $\lambda=1/x$:
+
+$$y'=f(x,y)=f\!\left(1,\frac yx\right)=\varphi\!\left(\frac yx\right)$$
+
+Hago la sustitución $y=u\,x$ con $u=u(x)$. Entonces $y'=u'x+u$ y la ecuación queda
+
+$$u'x+u=\varphi(u)\ \Rightarrow\ x\frac{du}{dx}=\varphi(u)-u\ \Rightarrow\ \frac{du}{\varphi(u)-u}=\frac{dx}{x}$$
+
+que es de **variables separables**. Integrando:
+
+$$\int\frac{du}{\varphi(u)-u}=\ln|x|+C$$
+
+Si $G$ es una primitiva de $\dfrac{1}{\varphi(u)-u}$ y se vuelve a $u=y/x$, la **solución general** es
+
+$$G\!\left(\frac yx\right)=\ln|x|+C$$
+
+**Observación.** Si $\varphi(u_0)=u_0$ para algún $u_0$, la recta $y=u_0x$ es una solución aparte (se pierde al dividir por $\varphi(u)-u$).
+</Pregunta>
+
+<Pregunta id="u8-t02" unidad="U8" tipo="tema" aparecio="Parcial teórico real · T2 (según Gabi)" titulo="Solución general de la EDO lineal de 1.er orden (y = u·v)"
+  fq="Links e Info.md (parcial unificado, tema 2: solución general lineal)" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 6-8">
+<Fragment slot="enunciado">
+
+Desarrolle la obtención de la solución general de una ecuación diferencial lineal de 1.er orden.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición de EDO lineal de 1.er orden (forma estándar).
+- Propiedad: el método $y=u\cdot v$ transforma la ecuación en dos separables.
+- Desarrollo: elección de $v$ (anula el término en $u$), cálculo de $u$.
+- Fórmula final de la solución general y condición de validez.
+
+</Fragment>
+
+**Definición.** Es lineal en $y$ e $y'$ cuando se puede escribir
+
+$$\frac{dy}{dx}+P(x)\,y=Q(x)$$
+
+con $P,Q$ funciones de $x$ (o constantes). Si el coeficiente de $y'$ no es 1, se divide por él.
+
+**Desarrollo (método de la cátedra).** Propongo $y=u\,v$ con $u,v$ funciones de $x$. Entonces $y'=u'v+uv'$ y reemplazando:
+
+$$u'v+uv'+P\,uv=Q\ \Rightarrow\ u'v+u\,(v'+Pv)=Q$$
+
+1. Elijo $v$ tal que $v'+Pv=0$. Es separable: $\dfrac{dv}{v}=-P\,dx\Rightarrow v=e^{-\int P\,dx}$ (basta **una** $v$, sin constante).
+2. Queda $u'v=Q\Rightarrow \dfrac{du}{dx}=Q\,e^{\int P\,dx}$, también separable: $u=\displaystyle\int Q\,e^{\int P\,dx}\,dx+C$.
+
+**Solución general.** $y=u\,v$:
+
+$$y=e^{-\int P\,dx}\left[\int Q\,e^{\int P\,dx}\,dx+C\right]$$
+
+**Condición.** Vale si la ecuación es lineal (sin productos ni potencias de $y$ e $y'$) y en un intervalo donde $P$ y $Q$ estén definidas. Con una condición inicial $y(x_0)=y_0$ se obtiene la solución particular.
+</Pregunta>
+
+<Pregunta id="u8-t03" unidad="U8" tipo="tema" titulo="Ecuación exacta y factor integrante"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13; factor integrante: no figura en las fuentes (resultado estándar, ver machetes/edo-exacta)">
+<Fragment slot="enunciado">
+
+Defina ecuación diferencial exacta, demuestre la condición necesaria que debe cumplir y desarrolle el método de resolución. ¿Qué se hace si la ecuación no es exacta?
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $P\,dx+Q\,dy=0$ exacta si el primer miembro es un diferencial total $du$.
+- Propiedad: condición $P_y=Q_x$ (qué hipótesis de continuidad se usan).
+- Desarrollo: cálculo de $u$ con $\phi(y)$ y solución $u(x,y)=C$.
+- Factor integrante (si no es exacta).
+- Gráfico: las curvas integrales son curvas de nivel de $u$.
+
+</Fragment>
+
+**Definición.** $P(x,y)\,dx+Q(x,y)\,dy=0$ es **exacta** si existe $u(x,y)$ tal que $du=u_x\,dx+u_y\,dy$ coincide con el primer miembro, es decir $P=u_x$ y $Q=u_y$.
+
+**Condición necesaria.** Si existe $u$ de clase $C^2$ con $P=u_x$, $Q=u_y$, entonces $P_y=u_{xy}$ y $Q_x=u_{yx}$, y por el teorema de Schwarz (derivadas cruzadas continuas) son iguales:
+
+$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$$
+
+Esta condición también es suficiente (con $P,Q$ continuas y con derivadas parciales continuas en la región). Es la misma condición que la independencia de la trayectoria en U5: $(P,Q)$ es un campo conservativo y $u$ es su función potencial.
+
+**Método.**
+1. Verificar $P_y=Q_x$.
+2. Integrar $P$ respecto de $x$: $u=\displaystyle\int P\,dx+\phi(y)$.
+3. Derivar respecto de $y$ e igualar a $Q$: $u_y=Q$, de donde sale $\phi'(y)$; integrar para hallar $\phi(y)$.
+4. Como $du=0$, la **solución general** es $u(x,y)=C$.
+
+**Ejemplo.** $(2xy+3)\,dx+(x^2+4y)\,dy=0$. $P_y=2x=Q_x$. $u=x^2y+3x+\phi(y)$; $u_y=x^2+\phi'=x^2+4y\Rightarrow\phi=2y^2$. Solución: $x^2y+3x+2y^2=C$.
+
+**Gráfico.** Las curvas integrales $u(x,y)=C$ son las **curvas de nivel** de la función potencial.
+
+**Si no es exacta.** Se busca un **factor integrante** $\mu$ tal que $\mu P\,dx+\mu Q\,dy=0$ sí lo sea, o sea $(\mu P)_y=(\mu Q)_x$. Si $\mu=\mu(x)$ queda $\mu'/\mu=\dfrac{P_y-Q_x}{Q}$, que sirve cuando esa expresión depende solo de $x$:
+
+$$\mu(x)=e^{\int\frac{P_y-Q_x}{Q}\,dx}$$
+
+Análogamente, si $\dfrac{Q_x-P_y}{P}$ depende solo de $y$: $\mu(y)=e^{\int\frac{Q_x-P_y}{P}\,dy}$. _(El factor integrante no figura en Monllor 08: es el resultado estándar, confirmar con la cátedra si lo toman.)_
+</Pregunta>
+
+<Pregunta id="u8-c01" unidad="U8" tipo="corta" titulo="Solución general y solución particular"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 2-3" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 2-3">
+<Fragment slot="enunciado">
+
+¿Qué diferencia hay entre la solución general y una solución particular de una EDO de 1.er orden? Dé un ejemplo.
+
+</Fragment>
+
+La **solución general** tiene una constante arbitraria $C$ (una por cada orden) y representa una **familia de curvas** (curvas integrales). Una **solución particular** es una curva de esa familia y se obtiene con una condición inicial $y(x_0)=y_0$.
+
+Ejemplo: $y'=2y$ tiene solución general $y=Ce^{2x}$; con $y(0)=4$ resulta $C=4$ y la particular es $y=4e^{2x}$.
+</Pregunta>
+
+<Pregunta id="u8-c02" unidad="U8" tipo="corta" titulo="Variables separables"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 3">
+<Fragment slot="enunciado">
+
+¿Cuándo una EDO de 1.er orden es de variables separables y cómo se obtiene la solución general? Resuelva $y'=xy$.
+
+</Fragment>
+
+Es de variables separables si se puede escribir $f(x)\,dx+g(y)\,dy=0$. La solución general sale integrando cada término respecto de su variable: $\int f(x)\,dx+\int g(y)\,dy=C$.
+
+Para $y'=xy$: $\dfrac{dy}{y}=x\,dx\Rightarrow\ln|y|=\dfrac{x^2}{2}+C_1\Rightarrow y=Ce^{x^2/2}$.
+</Pregunta>
+
+<Pregunta id="u8-c03" unidad="U8" tipo="corta" titulo="Reconocer una ecuación homogénea"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6; Modelo P2 teorico.pdf, p. 2">
+<Fragment slot="enunciado">
+
+¿Cuándo $M(x,y)\,dx+N(x,y)\,dy=0$ es una ecuación homogénea? ¿Es homogénea $y'=\dfrac{x+y}{x}$? Si lo es, ¿qué sustitución se usa?
+
+</Fragment>
+
+Es homogénea si $M$ y $N$ son funciones homogéneas **del mismo grado** (equivalentemente, $y'=f(x,y)$ con $f$ homogénea de grado cero).
+
+En $y'=\dfrac{x+y}{x}$, $f(\lambda x,\lambda y)=\dfrac{\lambda(x+y)}{\lambda x}=f(x,y)$: es de grado 0, **sí es homogénea**. Se usa $y=ux$, $y'=u'x+u$: $u'x+u=1+u\Rightarrow u'x=1\Rightarrow u=\ln|x|+C$ y $y=x(\ln|x|+C)$.
+</Pregunta>
+
+<Pregunta id="u8-c04" unidad="U8" tipo="corta" titulo="Ecuación de Bernoulli: sustitución"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 8-10" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 8-10">
+<Fragment slot="enunciado">
+
+Escriba la ecuación de Bernoulli, indique para qué valores de $n$ no se aplica el método y explique cómo se reduce a una lineal.
+
+</Fragment>
+
+La ecuación es $y'+P(x)\,y=Q(x)\,y^{n}$ con $n\neq0,1$ (si $n=0$ o $n=1$ ya es lineal).
+
+Se multiplica por $y^{-n}$ y se sustituye $z=y^{1-n}$, con $z'=(1-n)\,y^{-n}y'$. Queda una **lineal en $z$**:
+
+$$z'+(1-n)P\,z=(1-n)Q$$
+
+Se resuelve como lineal (por ejemplo con $z=u\,v$) y se vuelve a $y=z^{1/(1-n)}$.
+</Pregunta>
+
+<Pregunta id="u8-c05" unidad="U8" tipo="corta" titulo="Condición de exactitud y su vínculo con U5"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13">
+<Fragment slot="enunciado">
+
+¿Cuál es la condición para que $P\,dx+Q\,dy=0$ sea exacta? ¿Con qué concepto de campos vectoriales (U5) se relaciona? Verifíquela en $(2xy+3)\,dx+(x^2+4y)\,dy=0$.
+
+</Fragment>
+
+La condición es $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$ (con $P,Q$ continuas y con derivadas parciales continuas). Es la misma condición de independencia de la trayectoria en U5: la ecuación es exacta cuando $(P,Q)$ es un campo conservativo, y $u$ es su función potencial.
+
+Acá $P_y=2x$ y $Q_x=2x$: son iguales, **es exacta**.
+</Pregunta>
+
+<Pregunta id="u8-c06" unidad="U8" tipo="corta" titulo="Factor integrante"
+  fq="github/src/content/machetes/edo-exacta.md (no figura en Monllor 08)" fr="github/src/content/machetes/edo-exacta.md; resultado estándar, no figura en las fuentes de la cátedra">
+<Fragment slot="enunciado">
+
+¿Qué es un factor integrante y cuándo conviene buscarlo? ¿Qué expresión da $\mu(x)$?
+
+</Fragment>
+
+Un **factor integrante** es una función $\mu$ tal que $\mu P\,dx+\mu Q\,dy=0$ es exacta aunque $P\,dx+Q\,dy=0$ no lo sea ($P_y\neq Q_x$). Se busca cuando falla la condición de exactitud.
+
+Si $\dfrac{P_y-Q_x}{Q}$ depende solo de $x$, entonces $\mu(x)=e^{\int\frac{P_y-Q_x}{Q}dx}$. Si $\dfrac{Q_x-P_y}{P}$ depende solo de $y$, $\mu(y)=e^{\int\frac{Q_x-P_y}{P}dy}$.
+</Pregunta>
+
+<Pregunta id="u8-h01" unidad="U8" tipo="choice" correcta={3} titulo="Qué sustitución resuelve una homogénea"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6">
+<Fragment slot="enunciado">
+
+Para resolver una ecuación diferencial homogénea de 1.er orden se usa la sustitución:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $y=u\,v$
+2. $z=y^{1-n}$
+3. $y=u\,x$
+4. $y=e^{kx}$
+
+</Fragment>
+
+La homogénea se reduce a $y'=\varphi(y/x)$ y se sustituye $y=ux$. La 1 es el método de la lineal, la 2 es la de Bernoulli y la 4 es la prueba para la ecuación lineal de 2.º orden con coeficientes constantes (U9).
+</Pregunta>
+
+<Pregunta id="u8-h02" unidad="U8" tipo="choice" correcta={2} titulo="Condición de exactitud"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13">
+<Fragment slot="enunciado">
+
+$P(x,y)\,dx+Q(x,y)\,dy=0$ es exacta si y solo si (con derivadas continuas):
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $P=Q$
+2. $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$
+3. $\dfrac{\partial P}{\partial x}=\dfrac{\partial Q}{\partial y}$
+4. $P\,Q=1$
+
+</Fragment>
+
+La condición es $P_y=Q_x$, que viene de la igualdad de las derivadas cruzadas de la función potencial $u$ ($P=u_x$, $Q=u_y$). La opción 3 deriva respecto de la variable equivocada.
+</Pregunta>
+
+<Pregunta id="u8-h03" unidad="U8" tipo="choice" correcta={4} titulo="Solución de la lineal: elección de v"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 6-8" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 6-8">
+<Fragment slot="enunciado">
+
+En $y'+P(x)\,y=Q(x)$ con $y=uv$, la función $v$ se elige de modo que:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $u'v=0$
+2. $v'=Q$
+3. $v=Q/P$
+4. $v'+Pv=0$
+
+</Fragment>
+
+Con $y=uv$ la ecuación queda $u'v+u(v'+Pv)=Q$. Se pide $v'+Pv=0$ para anular el segundo término; resulta $v=e^{-\int P\,dx}$ y después $u'v=Q$.
+</Pregunta>
+
+<Pregunta id="u8-h04" unidad="U8" tipo="choice" correcta={1} titulo="Bernoulli: ecuación resultante"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 8-10" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 8-10">
+<Fragment slot="enunciado">
+
+En $y'+y=x\,y^2$, la sustitución $z=1/y$ conduce a:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $z'-z=-x$
+2. $z'+z=x$
+3. $z'+z=x\,z^2$
+4. $z'-z=x$
+
+</Fragment>
+
+Acá $n=2$, $z=y^{1-n}=y^{-1}$ y $z'=-y^{-2}y'$. Dividiendo por $y^2$: $y^{-2}y'+y^{-1}=x$, o sea $-z'+z=x$, es decir $z'-z=-x$. Coincide con $z'+(1-n)P\,z=(1-n)Q$ con $P=1$, $Q=x$.
+</Pregunta>
+
+<Pregunta id="u8-h05" unidad="U8" tipo="choice" correcta={3} titulo="Solución general de una EDO de primer orden"
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 2-3" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 2-3">
+<Fragment slot="enunciado">
+
+La solución general de una EDO de 1.er orden, geométricamente, es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Una única curva que pasa por todos los puntos.
+2. Un punto del plano.
+3. Una familia de curvas con una constante arbitraria.
+4. Una familia de curvas con dos constantes arbitrarias.
+
+</Fragment>
+
+Una constante por cada orden: para primer orden hay una sola constante $C$ y las curvas integrales forman una familia uniparamétrica. Con una condición inicial se elige una curva (solución particular).
+</Pregunta>

@@ -5,4 +5,308 @@ orden: 9
 ---
 import Pregunta from '../../components/Pregunta.astro';
 
-{/* Sin preguntas todavía: ver el formato en u4.mdx. */}
+{/* Fuentes: Monllor 09 (pp. según src/content/teoria/u09.md), Rocha-Giordano 15, notas de Gabi (Links e Info.md). Notación: raíces k1,k2; y = y_h + y_p; coeficientes de y_p con A, B, D. */}
+
+<Pregunta id="u9-t01" unidad="U9" tipo="tema" aparecio="Lista de temas del parcial real (según Gabi)" titulo="EDO de 2.º orden con raíces iguales: por qué aparece x·eᵏˣ"
+  fq="Links e Info.md (EDO de segundo grado con raíces iguales)" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 5-12; teoria/Teorico-practico Rocha-Giordano/15_Ecuaciones Diferenciales de Segundo Orden.pdf, p. 1">
+<Fragment slot="enunciado">
+
+Desarrolle la solución general de la ecuación $y''+py'+qy=0$ ($p,q$ constantes) cuando la ecuación característica tiene raíces reales iguales. ¿Por qué aparece la solución $x\,e^{kx}$?
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: ecuación homogénea con coeficientes constantes y ecuación característica.
+- Propiedad: superposición y necesidad de dos soluciones linealmente independientes (Wronskiano).
+- Desarrollo: caso $p^2-4q=0$, comprobación de $x\,e^{kx}$ y $W\neq0$.
+- Resultado: $y_h=(C_1+C_2x)e^{kx}$.
+
+</Fragment>
+
+**Planteo.** Se prueba $y=e^{kx}$. Como $y'=ke^{kx}$ e $y''=k^2e^{kx}$:
+
+$$e^{kx}\,(k^2+pk+q)=0\ \Rightarrow\ k^2+pk+q=0\quad\text{(ecuación característica)}$$
+
+**Raíces iguales.** Si $p^2-4q=0$, $k_1=k_2=k=-p/2$. Con esto solo tenemos **una** solución, $y_1=e^{kx}$, y para la solución general de una ecuación de 2.º orden hacen falta **dos soluciones linealmente independientes**. Falta $y_2$.
+
+**Por qué $y_2=x\,e^{kx}$.** Con $p=-2k$ y $q=k^2$ la ecuación es $y''-2ky'+k^2y=0$. Se prueba $y_2=x\,e^{kx}$:
+
+$$y_2'=(1+kx)e^{kx},\qquad y_2''=(2k+k^2x)e^{kx}$$
+
+$$y_2''-2ky_2'+k^2y_2=e^{kx}\big[(2k+k^2x)-2k(1+kx)+k^2x\big]=e^{kx}\,[\,0\,]=0$$
+
+Es solución. Es independiente de $y_1$ porque su Wronskiano no se anula:
+
+$$W(y_1,y_2)=\begin{vmatrix}e^{kx}&xe^{kx}\\ ke^{kx}&(1+kx)e^{kx}\end{vmatrix}=e^{2kx}(1+kx)-kx\,e^{2kx}=e^{2kx}\neq0$$
+
+_(Idea detrás: al buscar $y=u(x)\,e^{kx}$ la ecuación se reduce a $u''=0$, o sea $u=C_1+C_2x$.)_
+
+**Solución general.**
+
+$$y_h=C_1e^{kx}+C_2\,x\,e^{kx}=(C_1+C_2x)\,e^{kx}$$
+
+Con condiciones iniciales $y(x_0)=y_0$, $y'(x_0)=y_1$ se arma un sistema $2\times2$ en $C_1,C_2$.
+
+**Ejemplo.** $y''-2y'+y=0$: $k=1$ doble, $y_h=(C_1+C_2x)e^{x}$.
+</Pregunta>
+
+<Pregunta id="u9-t02" unidad="U9" tipo="tema" titulo="Estructura de la solución general: y = y_h + y_p"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 2-4, 13" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 2-4, 13; 15_Ecuaciones Diferenciales de Segundo Orden.pdf, p. 1">
+<Fragment slot="enunciado">
+
+Para la ecuación lineal de 2.º orden $y''+a_1y'+a_2y=f(x)$, enuncie y justifique la estructura de la solución general. Defina el Wronskiano y explique su rol en la independencia lineal.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: ecuación lineal, homogénea auxiliar, $y_h$ e $y_p$.
+- Propiedades: superposición; Wronskiano y soluciones linealmente independientes.
+- Desarrollo: demostración de que $y_h+y_p$ es solución.
+- Resultado: $y=y_h+y_p$ con $y_h=C_1y_1+C_2y_2$.
+
+</Fragment>
+
+**Definiciones.** La ecuación es **lineal** (primer grado en $y,y',y''$) y es **homogénea** si $f\equiv0$. La **homogénea auxiliar** es $y''+a_1y'+a_2y=0$.
+
+**Superposición.** Si $y_1,y_2$ resuelven la homogénea, $C_1y_1+C_2y_2$ también (la ecuación es lineal: la derivada de una suma es la suma de las derivadas).
+
+**Wronskiano.**
+
+$$W(y_1,y_2)=\begin{vmatrix}y_1&y_2\\y_1'&y_2'\end{vmatrix}=y_1y_2'-y_2y_1'$$
+
+- Si $y_1,y_2$ son linealmente dependientes (una es múltiplo de la otra), $W=0$.
+- Si son soluciones linealmente independientes de la homogénea, $W\neq0$ en todo punto.
+- La solución general de la homogénea es $y_h=C_1y_1+C_2y_2$ con $y_1,y_2$ **linealmente independientes** (para orden $n$, $n$ soluciones LI).
+
+Ejemplo: $y_1=e^x$, $y_2=e^{2x}$: $W=e^x\cdot2e^{2x}-e^{2x}e^x=e^{3x}\neq0$.
+
+**Estructura.** La solución general de la no homogénea es
+
+$$y=y_h+y_p$$
+
+con $y_h$ solución general de la homogénea auxiliar e $y_p$ **una** solución particular cualquiera de la no homogénea.
+
+**Justificación.** Si se reemplaza $y_h+y_p$ en el primer miembro, los términos de $y_h$ dan $0$ y los de $y_p$ dan $f(x)$: es solución. Contiene las dos constantes arbitrarias de $y_h$, que es lo que corresponde a una ecuación de 2.º orden (con condiciones iniciales se obtiene la particular).
+
+**Uso.** Primero $y_h$, después $y_p$, se suman y recién ahí se aplican las condiciones iniciales (a la solución completa).
+</Pregunta>
+
+<Pregunta id="u9-t03" unidad="U9" tipo="tema" titulo="Coeficientes indeterminados y caso de resonancia"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 14-19" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 14, 18-19">
+<Fragment slot="enunciado">
+
+Desarrolle el método de los coeficientes indeterminados para hallar $y_p$ de $y''+py'+qy=f(x)$. Indique para qué $f(x)$ vale y qué pasa cuando hay coincidencia con la solución de la homogénea.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición del método y condiciones de uso (coeficientes constantes; tipos de $f$).
+- Propiedad: tabla de formas de $y_p$ (polinomio, exponencial, seno/coseno, productos y sumas).
+- Desarrollo: caso de resonancia (multiplicar por $x$ o $x^2$) y pasos.
+- Ejemplo resuelto.
+
+</Fragment>
+
+**Definición y condiciones.** Se propone $y_p$ con la **misma forma** que $f(x)$, con coeficientes a determinar reemplazando en la ecuación. Solo vale si los coeficientes son **constantes** y $f$ es polinomio, exponencial, seno/coseno, o productos y sumas de esos. Para otras $f$ (por ejemplo $1/\cos x$) se usa variación de parámetros.
+
+**Forma de $y_p$.**
+
+| $f(x)$ | Se propone $y_p$ |
+|---|---|
+| Polinomio de grado $n$ | polinomio **completo** del mismo grado: $A_nx^n+\dots+A_1x+A_0$ |
+| $Ce^{ax}$ | $Ae^{ax}$ |
+| $C\cos bx$, $C\sin bx$ o combinación | $A\cos bx+B\sin bx$ (**siempre ambos**) |
+| Producto (ej. $xe^{2x}$, $e^{x}\sin2x$) | producto de las formas con polinomios completos: $(Ax+B)e^{2x}$; $e^x(A\cos2x+B\sin2x)$ |
+| Suma de términos | suma de las formas, cada una con sus coeficientes |
+
+**Resonancia.** Si un término propuesto **ya es solución de la homogénea** (es decir, $a$ o $a\pm bi$ es raíz de la ecuación característica), no puede ser solución de la no homogénea (daría $0$ y no $f$). Se **multiplica $y_p$ por $x$** (raíz simple) **o por $x^2$** (raíz doble).
+
+**Pasos.**
+1. Hallar $y_h$.
+2. Proponer $y_p$ con la forma de $f$; si hay coincidencia con $y_h$, multiplicar por $x$ o $x^2$.
+3. Derivar, reemplazar e igualar coeficientes.
+4. $y=y_h+y_p$ y aplicar condiciones iniciales a **la solución completa**.
+
+**Ejemplos.**
+- $y''-3y'+2y=4x$: $y_p=Ax+B$. Reemplazando: $-3A+2Ax+2B=4x\Rightarrow A=2,\ B=3$, $y_p=2x+3$.
+- Resonancia: $y''-y=e^{x}$. $k=\pm1$, entonces $e^x$ está en $y_h$. Se propone $y_p=Axe^x$ y resulta $y_p=\tfrac12\,x\,e^x$.
+</Pregunta>
+
+<Pregunta id="u9-c01" unidad="U9" tipo="corta" titulo="Ecuación característica: los tres casos"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 5-12" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 5-12">
+<Fragment slot="enunciado">
+
+Para $y''+py'+qy=0$, ¿cómo es $y_h$ según las raíces de la ecuación característica $k^2+pk+q=0$?
+
+</Fragment>
+
+- Reales y distintas ($p^2-4q>0$): $y_h=C_1e^{k_1x}+C_2e^{k_2x}$.
+- Reales e iguales ($p^2-4q=0$): $y_h=(C_1+C_2x)\,e^{kx}$.
+- Complejas conjugadas $k=\alpha\pm\beta i$ ($p^2-4q<0$): $y_h=e^{\alpha x}\,(C_1\cos\beta x+C_2\sin\beta x)$, que sale de la fórmula de Euler $e^{i\beta x}=\cos\beta x+i\sin\beta x$.
+
+Ejemplo: $y''+2y'+5y=0$, $k=-1\pm2i$, $y_h=e^{-x}(C_1\cos2x+C_2\sin2x)$.
+</Pregunta>
+
+<Pregunta id="u9-c02" unidad="U9" tipo="corta" titulo="Wronskiano e independencia lineal"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 3-4" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 3-4">
+<Fragment slot="enunciado">
+
+Defina el Wronskiano de dos funciones. ¿Qué indica que sea distinto de cero? Calcúlelo para $e^x$ y $e^{2x}$.
+
+</Fragment>
+
+$W(y_1,y_2)=\begin{vmatrix}y_1&y_2\\y_1'&y_2'\end{vmatrix}=y_1y_2'-y_2y_1'$. Si $y_1,y_2$ son soluciones de la homogénea y $W\neq0$, son **linealmente independientes** y forman la solución general $C_1y_1+C_2y_2$. Si son dependientes (una múltiplo de la otra), $W=0$.
+
+Para $e^x$ y $e^{2x}$: $W=e^x\cdot2e^{2x}-e^{2x}\cdot e^x=e^{3x}\neq0$: son independientes.
+</Pregunta>
+
+<Pregunta id="u9-c03" unidad="U9" tipo="corta" titulo="Principio de superposición"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 3">
+<Fragment slot="enunciado">
+
+Enuncie el principio de superposición para $y''+a_1y'+a_2y=0$. ¿Vale para la no homogénea?
+
+</Fragment>
+
+Si $y_1,y_2$ son soluciones de la homogénea, cualquier combinación $C_1y_1+C_2y_2$ también lo es (la ecuación es lineal y homogénea). No vale tal cual para la no homogénea: la suma de dos soluciones de $y''+a_1y'+a_2y=f$ da $2f$, no $f$. Lo que sí vale es $y=y_h+y_p$.
+</Pregunta>
+
+<Pregunta id="u9-c04" unidad="U9" tipo="corta" titulo="Forma de y_p según f(x)"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 14-19" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 14-19">
+<Fragment slot="enunciado">
+
+¿Qué forma de $y_p$ se propone para $f(x)=xe^{2x}$, $f(x)=e^x\sin2x$ y $f(x)=3x^2$? (Sin resonancia.)
+
+</Fragment>
+
+- $f=xe^{2x}$: $y_p=(Ax+B)\,e^{2x}$ (polinomio completo por la exponencial).
+- $f=e^x\sin2x$: $y_p=e^x\,(A\cos2x+B\sin2x)$ (siempre ambos, seno y coseno).
+- $f=3x^2$: $y_p=Ax^2+Bx+D$ (polinomio completo del mismo grado).
+</Pregunta>
+
+<Pregunta id="u9-c05" unidad="U9" tipo="corta" titulo="Resonancia: cuándo se multiplica por x"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 18-19" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 18-19">
+<Fragment slot="enunciado">
+
+En $y''-y=e^{x}$, ¿qué $y_p$ se propone y por qué? Hállelo.
+
+</Fragment>
+
+La ecuación característica es $k^2-1=0$, $k=\pm1$, y $y_h=C_1e^x+C_2e^{-x}$. Como $e^x$ **ya es solución de la homogénea**, $Ae^x$ daría $0$. Se multiplica por $x$ (raíz simple): $y_p=Axe^x$.
+
+$y_p'=A(1+x)e^x$, $y_p''=A(2+x)e^x$, entonces $y_p''-y_p=2Ae^x=e^x\Rightarrow A=\tfrac12$ y $y_p=\tfrac12\,xe^x$.
+</Pregunta>
+
+<Pregunta id="u9-c06" unidad="U9" tipo="corta" titulo="Variación de parámetros: fórmulas"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 20-22" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 20-22">
+<Fragment slot="enunciado">
+
+Plantee la variación de parámetros para $y''+a_1y'+a_2y=f(x)$: forma de $y_p$, sistema que se impone y fórmulas de $u'$ y $v'$. ¿Cuándo se usa?
+
+</Fragment>
+
+Se busca $y_p=u(x)\,y_1+v(x)\,y_2$, con $y_1,y_2$ soluciones LI de la homogénea. Se imponen
+
+$$u'y_1+v'y_2=0,\qquad u'y_1'+v'y_2'=f(x)$$
+
+Es un sistema con determinante $W(y_1,y_2)\neq0$ (solución única), y por Cramer:
+
+$$u'=-\frac{y_2\,f(x)}{W(y_1,y_2)},\qquad v'=\frac{y_1\,f(x)}{W(y_1,y_2)}$$
+
+Se integra (sin constantes: alcanza **una** solución particular) y se arma $y_p=u\,y_1+v\,y_2$. Se usa cuando $f$ no es del tipo de coeficientes indeterminados (ej. $1/\cos x$), y vale para cualquier $f$ continua si se pueden integrar $u'$ y $v'$.
+</Pregunta>
+
+<Pregunta id="u9-h01" unidad="U9" tipo="choice" correcta={2} titulo="Raíces iguales"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 5-12" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 5-12">
+<Fragment slot="enunciado">
+
+Si la ecuación característica de $y''+py'+qy=0$ tiene la raíz doble $k$, la solución general es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $y=C\,e^{kx}$
+2. $y=(C_1+C_2x)\,e^{kx}$
+3. $y=C_1e^{kx}+C_2e^{-kx}$
+4. $y=e^{kx}(C_1\cos kx+C_2\sin kx)$
+
+</Fragment>
+
+Con raíz doble hace falta una segunda solución independiente de $e^{kx}$: es $x\,e^{kx}$ (su Wronskiano con $e^{kx}$ es $e^{2kx}\neq0$). La 1 tiene una sola constante, la 3 supone raíces $k$ y $-k$ y la 4 es el caso complejo.
+</Pregunta>
+
+<Pregunta id="u9-h02" unidad="U9" tipo="choice" correcta={4} titulo="Estructura de la solución"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 13" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 13">
+<Fragment slot="enunciado">
+
+La solución general de $y''+a_1y'+a_2y=f(x)$ con $f\not\equiv0$ es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $y=y_p$
+2. $y=y_h\cdot y_p$
+3. $y=y_h$
+4. $y=y_h+y_p$
+
+</Fragment>
+
+$y_h$ es la solución general de la homogénea auxiliar (aporta las dos constantes) e $y_p$ una solución particular de la no homogénea. Las condiciones iniciales se aplican a la suma.
+</Pregunta>
+
+<Pregunta id="u9-h03" unidad="U9" tipo="choice" correcta={1} titulo="Forma de y_p para f = cos 3x"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 14-19" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 14-19">
+<Fragment slot="enunciado">
+
+Para $y''+y=\cos 3x$ (sin resonancia), la forma correcta de $y_p$ es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $A\cos3x+B\sin3x$
+2. $A\cos3x$
+3. $Ax\cos3x$
+4. $(Ax+B)\cos3x$
+
+</Fragment>
+
+Con seno o coseno siempre se proponen **ambos**, porque al derivar uno aparece el otro. Acá $\pm3i$ no es raíz de $k^2+1=0$ (raíces $\pm i$), así que no hay resonancia y no se multiplica por $x$.
+</Pregunta>
+
+<Pregunta id="u9-h04" unidad="U9" tipo="choice" correcta={3} titulo="Wronskiano"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 3-4" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 3-4">
+<Fragment slot="enunciado">
+
+Si dos soluciones $y_1,y_2$ de la homogénea de 2.º orden tienen $W(y_1,y_2)\neq0$, entonces:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Son linealmente dependientes.
+2. Una es múltiplo de la otra.
+3. Son linealmente independientes y $C_1y_1+C_2y_2$ es la solución general.
+4. Solo sirven para la ecuación no homogénea.
+
+</Fragment>
+
+$W\neq0$ equivale a independencia lineal (si fueran dependientes, $W=0$). Dos soluciones LI de una homogénea de 2.º orden generan la solución general.
+</Pregunta>
+
+<Pregunta id="u9-h05" unidad="U9" tipo="choice" correcta={2} titulo="Cuándo usar variación de parámetros"
+  fq="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 14, 20-22" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 14, 20-22">
+<Fragment slot="enunciado">
+
+¿En cuál de estas ecuaciones no se puede usar coeficientes indeterminados y sí variación de parámetros?
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $y''+y=\sin x$
+2. $y''+y=\dfrac{1}{\cos x}$
+3. $y''-3y'+2y=4x$
+4. $y''-y=e^{x}$
+
+</Fragment>
+
+Los coeficientes indeterminados requieren $f$ de tipo polinomio, exponencial, seno/coseno o productos y sumas de esos. $1/\cos x$ no lo es, y ahí se usa variación de parámetros: $y_p=\cos x\ln|\cos x|+x\sin x$. Las otras tres tienen $f$ de los tipos admitidos (la 1 y la 4 con resonancia).
+</Pregunta>

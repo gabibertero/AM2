@@ -5,4 +5,198 @@ orden: 10
 ---
 import Pregunta from '../../components/Pregunta.astro';
 
-{/* Sin preguntas todavía: ver el formato en u4.mdx. */}
+{/* Unidad tentativa: no apareció en parciales ni en el Modelo P2 teórico (Gabi: "lo de Fourier no nos tomó"). Todas son preguntas de práctica. Fuente: Monllor 11 (pp. según src/content/teoria/u10.md). No se usan los ejemplos de armónicas de Monllor 11 p.11 (incorrectos, ver TASKS.md). */}
+
+<Pregunta id="u10-t01" unidad="U10" tipo="tema" titulo="Cuerda vibrante: separación de variables"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3-6" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3-6">
+<Fragment slot="enunciado">
+
+Plantee el problema de la cuerda vibrante de longitud $l$ con extremos fijos y desarrolle su resolución por separación de variables.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: ecuación de ondas, condiciones de contorno e iniciales.
+- Propiedad: linealidad y homogeneidad (se pueden sumar soluciones).
+- Desarrollo: $u=X(x)T(t)$, dos EDO, valores propios $\lambda_n=n\pi/l$.
+- Solución en serie y coeficientes (serie seno de Fourier).
+
+</Fragment>
+
+**Planteo.** $\dfrac{\partial^2u}{\partial t^2}=c^2\dfrac{\partial^2u}{\partial x^2}$, con $u(x,t)$ la posición transversal del punto $x$ en el instante $t$.
+- Contorno: $u(0,t)=0$, $u(l,t)=0$.
+- Iniciales: $u(x,0)=f(x)$ (forma), $\dfrac{\partial u}{\partial t}(x,0)=\varphi(x)$ (velocidad).
+
+**Separación de variables.** Se busca $u=X(x)\,T(t)$. Reemplazando: $\dfrac{T''}{c^2T}=\dfrac{X''}{X}=-\lambda^2$ (cada miembro depende de una variable distinta, por lo tanto ambos son constantes). Resultan dos EDO de 2.º orden con coeficientes constantes (U9):
+
+$$X''+\lambda^2X=0,\qquad T''+c^2\lambda^2T=0$$
+
+$$X=A\cos\lambda x+B\sin\lambda x,\qquad T=C\cos c\lambda t+D\sin c\lambda t$$
+
+**Valores propios.** $X(0)=0\Rightarrow A=0$. $X(l)=0$ con $B\neq0$ (si no, $u\equiv0$) exige $\sin\lambda l=0$, o sea $\lambda_n=\dfrac{n\pi}{l},\ n=1,2,3,\dots$
+
+**Solución.** Por linealidad y homogeneidad se suman todas las soluciones:
+
+$$u(x,t)=\sum_{n=1}^{\infty}\left(C_n\cos\frac{cn\pi}{l}t+D_n\sin\frac{cn\pi}{l}t\right)\sin\frac{n\pi}{l}x$$
+
+Las condiciones iniciales dan los coeficientes (serie seno de Fourier en $[0,l]$):
+
+$$C_n=\frac2l\int_0^l f(x)\sin\frac{n\pi x}{l}\,dx,\qquad D_n=\frac{2}{cn\pi}\int_0^l \varphi(x)\sin\frac{n\pi x}{l}\,dx$$
+
+**Interpretación.** Cada término es un **modo normal** de vibración, con frecuencia proporcional a $n$.
+</Pregunta>
+
+<Pregunta id="u10-t02" unidad="U10" tipo="tema" titulo="Ecuación del calor en un vástago"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 7-10" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 7-10">
+<Fragment slot="enunciado">
+
+Plantee la ecuación del calor para un vástago de longitud $l$ con extremos a temperatura 0 y desarrolle su solución por separación de variables.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: ecuación del calor y condiciones del problema.
+- Propiedad: se parece a la cuerda pero $T$ cumple una EDO de 1.er orden.
+- Desarrollo: $u=X(x)T(t)$, valores propios, solución en serie.
+- Interpretación del decaimiento exponencial.
+
+</Fragment>
+
+**Planteo.** $\dfrac{\partial u}{\partial t}=c^2\dfrac{\partial^2u}{\partial x^2}$ (vástago homogéneo, superficie lateral que no disipa calor, temperatura uniforme en cada sección). Condiciones: $u(0,t)=u(l,t)=0$ y $u(x,0)=\varphi(x)$.
+
+**Separación de variables.** Con $u=X(x)T(t)$: $\dfrac{T'}{c^2T}=\dfrac{X''}{X}=-\lambda^2$. Entonces
+
+$$X''+\lambda^2X=0\ \ (\lambda_n=n\pi/l),\qquad T'+c^2\lambda^2T=0\ \Rightarrow\ T=Ce^{-c^2\lambda^2t}$$
+
+($T$ cumple una EDO de **1.er orden**, a diferencia de la cuerda).
+
+**Solución.**
+
+$$u(x,t)=\sum_{n=1}^{\infty}D_n\,e^{-\frac{c^2n^2\pi^2}{l^2}t}\,\sin\frac{n\pi}{l}x,\qquad D_n=\frac2l\int_0^l\varphi(x)\sin\frac{n\pi x}{l}\,dx$$
+
+**Interpretación.** Cada modo decae exponencialmente en el tiempo (los modos altos más rápido): la temperatura tiende a 0.
+</Pregunta>
+
+<Pregunta id="u10-c01" unidad="U10" tipo="corta" titulo="EDO vs EDP: qué cambia en la solución general"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 2">
+<Fragment slot="enunciado">
+
+¿Qué es una EDP y en qué se diferencia, en su solución general, de una EDO? Dé un ejemplo.
+
+</Fragment>
+
+Una EDP contiene una función de **varias** variables independientes y algunas de sus derivadas parciales. La solución general de una EDO tiene **constantes arbitrarias**; la de una EDP tiene **funciones arbitrarias** (y no siempre se puede obtener).
+
+Ejemplo: $\dfrac{\partial z}{\partial x}=0$ tiene solución $z=\varphi(y)$, con $\varphi$ arbitraria. En la práctica se buscan soluciones que cumplan condiciones de contorno e iniciales.
+</Pregunta>
+
+<Pregunta id="u10-c02" unidad="U10" tipo="corta" titulo="Condiciones de contorno e iniciales"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 2-3" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 2-3">
+<Fragment slot="enunciado">
+
+En la cuerda vibrante de longitud $l$ con extremos fijos, ¿cuáles son las condiciones de contorno y las iniciales?
+
+</Fragment>
+
+Contorno (en la frontera): $u(0,t)=0$ y $u(l,t)=0$. Iniciales (en $t=0$): $u(x,0)=f(x)$, la forma inicial, y $\dfrac{\partial u}{\partial t}(x,0)=\varphi(x)$, la velocidad inicial.
+</Pregunta>
+
+<Pregunta id="u10-c03" unidad="U10" tipo="corta" titulo="Clasificación de EDP lineales de 2.º orden"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3, 7, 11 (tipos por nombre); parciales/2do-parcial/Recuperatorio P2 (v2).pdf, p. 58-59 (criterio B²-4AC, resumen de alumno)" fr="Recuperatorio P2 (v2).pdf, p. 58-59 (resumen de alumno, apoyo no oficial); Monllor 11, p. 3, 7, 11">
+<Fragment slot="enunciado">
+
+Clasifique $A\,u_{xx}+B\,u_{xy}+C\,u_{yy}+D=0$ según $B^2-4AC$ y dé la ecuación típica de cada tipo.
+
+</Fragment>
+
+- $B^2-4AC<0$: **elíptica**, Laplace $u_{xx}+u_{yy}=0$ (estado estacionario).
+- $B^2-4AC=0$: **parabólica**, calor $u_t=c^2u_{xx}$ (difusión).
+- $B^2-4AC>0$: **hiperbólica**, ondas $u_{tt}=c^2u_{xx}$ (vibraciones).
+
+_(El criterio con $B^2-4AC$ es del resumen de alumno; Monllor clasifica por nombre sin dar el discriminante. Confirmar con la cátedra.)_
+</Pregunta>
+
+<Pregunta id="u10-c04" unidad="U10" tipo="corta" titulo="Función armónica y ecuación de Laplace"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 11" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 11 (ejemplo propio: x²−y², no los de Monllor)">
+<Fragment slot="enunciado">
+
+¿Qué es la ecuación de Laplace y qué es una función armónica? Verifique que $u=x^2-y^2$ es armónica.
+
+</Fragment>
+
+La ecuación de Laplace es $\nabla^2u=u_{xx}+u_{yy}\,(+u_{zz})=0$; es el **estado estacionario del calor** ($\partial u/\partial t=0$). Sus soluciones son las **funciones armónicas**.
+
+Para $u=x^2-y^2$: $u_{xx}=2$, $u_{yy}=-2$, $\nabla^2u=0$. Es armónica.
+</Pregunta>
+
+<Pregunta id="u10-c05" unidad="U10" tipo="corta" titulo="Problema de Dirichlet en el círculo"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 11-14" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 11-14">
+<Fragment slot="enunciado">
+
+¿En qué consiste el problema de Dirichlet para un círculo de radio $R$ y cómo es la forma de la solución?
+
+</Fragment>
+
+Consiste en hallar la función armónica en la región dados sus valores en la frontera: $u(R,\theta)=f(\theta)$. En polares ($r^2u_{rr}+ru_r+u_{\theta\theta}=0$) se separa $u=\mathcal R(r)\,\Theta(\theta)$ y, pidiendo solución periódica y acotada, $\lambda=n$ entero:
+
+$$u(r,\theta)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\big(a_n\cos n\theta+b_n\sin n\theta\big)\,r^n$$
+
+con $a_n,b_n$ determinados por el desarrollo de Fourier de $f$ en $[-\pi,\pi]$.
+</Pregunta>
+
+<Pregunta id="u10-h01" unidad="U10" tipo="choice" correcta={2} titulo="Tipo de la ecuación de ondas"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3; Recuperatorio P2 (v2).pdf, p. 58-59">
+<Fragment slot="enunciado">
+
+La ecuación de ondas $u_{tt}=c^2u_{xx}$ es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Elíptica
+2. Hiperbólica
+3. Parabólica
+4. Ordinaria
+
+</Fragment>
+
+Es hiperbólica ($B^2-4AC=4c^2>0$ con $A=-c^2$, $B=0$, $C=1$). La elíptica es Laplace y la parabólica es el calor.
+</Pregunta>
+
+<Pregunta id="u10-h02" unidad="U10" tipo="choice" correcta={1} titulo="Valores propios de la cuerda"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3-6" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3-6">
+<Fragment slot="enunciado">
+
+En la cuerda de longitud $l$ con $X(0)=X(l)=0$, los valores propios de $X''+\lambda^2X=0$ son:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $\lambda_n=\dfrac{n\pi}{l},\ n=1,2,3,\dots$
+2. $\lambda_n=\dfrac{l}{n\pi}$
+3. $\lambda_n=n\,l$
+4. $\lambda_n=\dfrac{2n\pi}{l}$ solamente para $n$ par
+
+</Fragment>
+
+$X(0)=0$ da $A=0$ y $X(l)=0$ con $B\neq0$ exige $\sin\lambda l=0$, o sea $\lambda l=n\pi$.
+</Pregunta>
+
+<Pregunta id="u10-h03" unidad="U10" tipo="choice" correcta={3} titulo="Ecuación de Laplace y el calor"
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 11" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 11">
+<Fragment slot="enunciado">
+
+La ecuación de Laplace $\nabla^2u=0$ se obtiene de la ecuación del calor cuando:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $c=0$
+2. $u=0$ en los extremos
+3. $\partial u/\partial t=0$ (estado estacionario)
+4. $l\to\infty$
+
+</Fragment>
+
+Laplace es el estado estacionario del calor: si $u$ no depende de $t$, $u_t=0$ y queda $c^2\nabla^2u=0$.
+</Pregunta>

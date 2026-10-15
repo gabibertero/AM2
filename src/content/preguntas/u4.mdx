@@ -5,51 +5,212 @@ orden: 4
 ---
 import Pregunta from '../../components/Pregunta.astro';
 
-{/* Ejemplos de formato (borrador: true). El redactor los reemplaza.
-    Props: id (único: u4-t01, u4-c01, u4-h01), unidad, tipo (tema|corta|choice), titulo, fq / fr ("archivo, p. N"),
-    aparecio ("Modelo P2 · T1"; sin esto = pregunta de práctica), correcta (solo choice, número de opción desde 1), borrador.
+{/* Props: id (único: u4-t01, u4-c01, u4-h01), unidad, tipo (tema|corta|choice), titulo, fq / fr ("archivo, p. N"),
+    aparecio ("Modelo P2 · P3"; sin esto = pregunta de práctica), correcta (solo choice, número de opción desde 1).
     Slots: enunciado (siempre), guia (tema), opciones (choice: lista numerada), y el cuerpo = respuesta modelo / por qué. */}
 
-<Pregunta id="u4-t01" unidad="U4" tipo="tema" borrador titulo="Cambio de variables en integrales dobles"
-  fq="(pendiente)" fr="(pendiente)">
+<Pregunta id="u4-t01" unidad="U4" tipo="tema" titulo="Cambio de variables en integrales múltiples y Jacobiano"
+  aparecio="Modelo P2 · P3"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 23-26">
 <Fragment slot="enunciado">
 
-Desarrollar el cambio de variables en integrales dobles: enunciado, rol del jacobiano y un ejemplo con coordenadas polares.
+Desarrollar el cambio de variables en integrales dobles: qué se agrega al integrando, qué es el Jacobiano y cuándo vale la fórmula. Aplicarlo a coordenadas polares.
 
 </Fragment>
 <Fragment slot="guia">
 
-- Definición de la transformación $T(u,v)=(x(u,v),y(u,v))$ y condiciones.
-- Propiedad: fórmula con el valor absoluto del jacobiano.
-- Desarrollo: jacobiano en polares.
-- Gráfico: región en $(x,y)$ y en $(u,v)$.
+- Definición: transformación $x=g_1(u,v),\ y=g_2(u,v)$ y Jacobiano como determinante.
+- Propiedades: condiciones (continuidad, derivadas continuas, correspondencia biunívoca) y valor absoluto.
+- Desarrollo: fórmula de cambio de variables e interpretación geométrica del factor $|J|$; polares como caso particular.
+- Gráfico: dominio $E$ en el plano $uv$, dominio $D$ en el plano $xy$ y un rectángulo $\Delta u\times\Delta v$ transformado en un paralelogramo.
 
 </Fragment>
 
-Si $T$ es biyectiva y de clase $C^1$ entre $R'$ y $R$, con jacobiano no nulo:
+**Definición.** Si $x=g_1(u,v),\ y=g_2(u,v)$ transforman un dominio $E$ del plano $uv$ en un dominio $D$ del plano $xy$, el **Jacobiano** de la transformación es
 
-$$\iint_R f(x,y)\,dA=\iint_{R'} f\big(x(u,v),y(u,v)\big)\,\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\,du\,dv$$
+$$J\!\left(\frac{x,y}{u,v}\right)=\begin{vmatrix}\dfrac{\partial x}{\partial u}&\dfrac{\partial y}{\partial u}\\[2mm]\dfrac{\partial x}{\partial v}&\dfrac{\partial y}{\partial v}\end{vmatrix}=\frac{\partial x}{\partial u}\frac{\partial y}{\partial v}-\frac{\partial x}{\partial v}\frac{\partial y}{\partial u}$$
 
-En polares $x=r\cos\theta,\ y=r\sin\theta$ y el jacobiano vale $r$, de ahí $dA=r\,dr\,d\theta$.
+**Propiedades / condiciones.**
+- $g_1,g_2$ continuas con derivadas parciales de primer orden continuas.
+- A cada punto $(x,y)$ le corresponde un solo $(u,v)$ y viceversa (correspondencia biunívoca).
+- El Jacobiano se toma **en valor absoluto**.
+
+**Fórmula.** Además de reescribir $f$ en las nuevas variables, el factor que hay que agregar al integrando es el **Jacobiano en valor absoluto**:
+
+$$\iint_D f(x,y)\,dx\,dy=\iint_E f\big[g_1(u,v),g_2(u,v)\big]\;\Big|J\Big(\frac{x,y}{u,v}\Big)\Big|\;du\,dv$$
+
+**Desarrollo (idea).** Un rectángulo $\Delta u\times\Delta v$ se transforma aproximadamente en un paralelogramo de lados $\vec T_u\,\Delta u$ y $\vec T_v\,\Delta v$, cuyo área es $|\vec T_u\times\vec T_v|\,\Delta u\,\Delta v=|J|\,\Delta u\,\Delta v$. Se reemplaza el área de cada elemento por esa aproximación y se pasa al límite: $|J|$ es el factor local de cambio de área.
+
+**Caso polares.** $x=r\cos\theta,\ y=r\sin\theta$ da $|J|=r$, entonces $dx\,dy=r\,dr\,d\theta$:
+
+$$\iint_D f(x,y)\,dx\,dy=\iint_{D'} f(r\cos\theta,r\sin\theta)\;r\,dr\,d\theta$$
+
+**Gráfico.** Dos planos lado a lado: a la izquierda $E$ en $(u,v)$ con un rectángulo chico $\Delta u\times\Delta v$; a la derecha $D$ en $(x,y)$ con el paralelogramo curvo imagen, de lados $\vec T_u\Delta u$ y $\vec T_v\Delta v$. En polares, el rectángulo $\Delta r\times\Delta\theta$ pasa a ser un sector anular de área $\approx r\,\Delta r\,\Delta\theta$.
 </Pregunta>
 
-<Pregunta id="u4-c01" unidad="U4" tipo="corta" borrador titulo="Jacobiano de las coordenadas polares"
-  fq="(pendiente)" fr="(pendiente)">
+<Pregunta id="u4-t02" unidad="U4" tipo="tema" titulo="Integral doble: definición, dominio regular y cálculo"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 3-13" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 3-13">
 <Fragment slot="enunciado">
 
-¿Cuánto vale el jacobiano de la transformación a coordenadas polares y qué representa?
+Defina la integral doble de una función de dos variables, indique cómo se calcula sobre un dominio regular y enuncie sus propiedades.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: suma doble de Riemann y límite.
+- Propiedades: linealidad, aditividad, monotonía, $f\equiv1$ da el área; condición de continuidad.
+- Desarrollo: integrales iteradas en un rectángulo y en un dominio regular (límites variables).
+- Gráfico: dominio regular entre $y=\varphi_1(x)$ e $y=\varphi_2(x)$.
 
 </Fragment>
 
-Vale $r$:
+**Definición.** Sea $f(x,y)$ definida en $R=[a,b]\times[c,d]$. Se divide $R$ en subrectángulos de área $\Delta A_{ij}$, se elige un punto $(x_{ij},y_{ij})$ en cada uno y se forma la suma doble de Riemann. La integral doble es el límite cuando el área del mayor subrectángulo tiende a 0:
 
-$$\frac{\partial(x,y)}{\partial(r,\theta)}=\begin{vmatrix}\cos\theta&-r\sin\theta\\ \sin\theta&r\cos\theta\end{vmatrix}=r$$
+$$\iint_R f(x,y)\,dA=\lim_{\Delta A_{\max}\to 0}\ \sum_{j=1}^{m}\sum_{i=1}^{n} f(x_{ij},y_{ij})\,\Delta A_{ij}$$
 
-Representa el factor local de cambio de área al pasar de $(r,\theta)$ a $(x,y)$.
+Si $f\ge0$ la integral es el volumen bajo la superficie $z=f(x,y)$ sobre $R$.
+
+**Propiedades.**
+- Para calcularla con integrales iteradas alcanza con que $f$ sea **continua**; el resultado no depende del orden.
+- Linealidad y **aditividad** respecto del dominio ($D=D_1\cup D_2$ sin superposición).
+- Si $f_1\le f_2$ en $D$, entonces $\iint_D f_1\le\iint_D f_2$.
+- Si $f\equiv1$ da el **área** de $D$: $A_D=\iint_D dx\,dy$.
+
+**Desarrollo.** En un rectángulo: $\iint_R f\,dA=\int_c^d\big[\int_a^b f\,dx\big]dy=\int_a^b\big[\int_c^d f\,dy\big]dx$ (primero la integral interior con la otra variable constante).
+
+Para un dominio $D$ cualquiera se lo encierra en un rectángulo y se define $g=f$ en $D$, $g=0$ fuera. Un dominio es **regular en la dirección del eje $x$** si toda recta paralela a ese eje por un punto interior corta a la frontera en solo dos puntos (idem para $y$). Si es regular en $y$:
+
+$$\iint_D f\,dA=\int_{x_1}^{x_2}\!\int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y)\,dy\,dx$$
+
+y análogamente integrando primero en $x$. Si el dominio no es regular se lo divide en dominios regulares y se suma (aditividad). Es imprescindible dibujar el dominio para elegir el orden y los límites.
+
+**Gráfico.** Región $D$ en el plano $xy$ entre $x=x_1$ y $x=x_2$, con la curva inferior $y=\varphi_1(x)$ y la superior $y=\varphi_2(x)$, y una recta vertical que la corta en dos puntos.
 </Pregunta>
 
-<Pregunta id="u4-h01" unidad="U4" tipo="choice" correcta={2} borrador titulo="Elemento de volumen en cilíndricas"
-  fq="(pendiente)" fr="(pendiente)">
+<Pregunta id="u4-t03" unidad="U4" tipo="tema" titulo="Integral triple y coordenadas cilíndricas y esféricas"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 27-38" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 27-38">
+<Fragment slot="enunciado">
+
+Defina la integral triple y desarrolle su cálculo en coordenadas cilíndricas y esféricas, indicando el Jacobiano de cada una.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: integral triple como límite de sumas; qué da con $f\equiv1$ y con una densidad.
+- Propiedades: cuándo conviene cada sistema (simetría de eje o de punto) y el Jacobiano en valor absoluto.
+- Desarrollo: ecuaciones de cambio, Jacobiano y fórmula de la integral en cilíndricas y en esféricas.
+- Gráfico: las coordenadas $(r,\theta,z)$ y $(r,\theta,\varphi)$ de un punto.
+
+</Fragment>
+
+**Definición.** Es la extensión a tres variables: suma triple de Riemann sobre subparalelepípedos de volumen $\Delta V_{ijk}$ y límite cuando el mayor tiende a 0, $\iiint_E f\,dV$. Si $f\equiv1$ da el **volumen**; si $f$ es una densidad, la **masa**.
+
+**Propiedades.** Valen las de la doble: $f$ continua para usar integrales iteradas, linealidad, aditividad. Hay que graficar el cuerpo para plantear los límites.
+
+**Cilíndricas.** $x=r\cos\theta,\ y=r\sin\theta,\ z=z$ (polares más la altura), $|J|=r$:
+
+$$\iiint_V f\,dx\,dy\,dz=\iiint_{V'} g(r,\theta,z)\;r\,dr\,d\theta\,dz$$
+
+Conviene con simetría respecto de un eje (cilindros, paraboloides, conos). También se transforman las superficies: $x^2+y^2=a^2\to r=a$, $z=x^2+y^2\to z=r^2$.
+
+**Esféricas** (notación de la cátedra: $r$ distancia al origen, $\theta$ ángulo en el plano $xy$ desde el eje $x$, $\varphi$ ángulo desde el eje $z$):
+
+$$x=r\sin\varphi\cos\theta,\quad y=r\sin\varphi\sin\theta,\quad z=r\cos\varphi,\qquad 0\le\theta\le2\pi,\ 0\le\varphi\le\pi$$
+
+Como $\sin\varphi\ge0$, el Jacobiano en valor absoluto es $r^2\sin\varphi$:
+
+$$\iiint_V f\,dx\,dy\,dz=\iiint_{V'} g(r,\theta,\varphi)\;r^2\sin\varphi\;dr\,d\theta\,d\varphi$$
+
+Conviene con simetría respecto de un punto (esferas, conos con vértice en el origen).
+
+**Ejemplos.** Volumen entre $z=x^2+y^2$ y $z=4$ en cilíndricas: $\int_0^{2\pi}\!\int_0^2\!\int_{r^2}^4 r\,dz\,dr\,d\theta=8\pi$. Volumen de una esfera de radio $R$: $\int_0^{2\pi}\!\int_0^{\pi}\!\int_0^R r^2\sin\varphi\,dr\,d\varphi\,d\theta=\tfrac43\pi R^3$.
+
+**Gráfico.** Ejes $x,y,z$; un punto $P$ con su proyección en el plano $xy$. En cilíndricas: $r$ es la distancia de la proyección al origen, $\theta$ el ángulo desde $x$ y $z$ la altura. En esféricas: $r=|OP|$, $\theta$ como antes y $\varphi$ el ángulo entre $OP$ y el eje $z$.
+</Pregunta>
+
+<Pregunta id="u4-c01" unidad="U4" tipo="corta" titulo="Factor del cambio de variables"
+  aparecio="Modelo P2 · P3"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 23-25">
+<Fragment slot="enunciado">
+
+En el cálculo de una integral múltiple, cuando se hace un cambio de variables, además de redefinir la función en términos de las nuevas variables, ¿qué factor es necesario agregar al integrando?
+
+</Fragment>
+
+El **Jacobiano de la transformación, en valor absoluto**: $\left|J\!\left(\frac{x,y}{u,v}\right)\right|$. Representa el factor de escala de áreas (o de volúmenes en triples). En polares y cilíndricas vale $r$; en esféricas, $r^2\sin\varphi$.
+</Pregunta>
+
+<Pregunta id="u4-c02" unidad="U4" tipo="corta" titulo="Jacobiano de las coordenadas polares"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 19-22, 26" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 19-22, 26">
+<Fragment slot="enunciado">
+
+¿Cuánto vale el jacobiano de la transformación a coordenadas polares y qué se debe reescribir además de la función?
+
+</Fragment>
+
+Con $x=r\cos\theta,\ y=r\sin\theta$:
+
+$$\left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|=\begin{vmatrix}\cos\theta&\sin\theta\\ -r\sin\theta&r\cos\theta\end{vmatrix}=r$$
+
+Entonces $dx\,dy=r\,dr\,d\theta$. Hay que reescribir también el **dominio**: por ejemplo $x^2+y^2=a^2\Rightarrow r=a$. El factor $r$ no se puede olvidar.
+</Pregunta>
+
+<Pregunta id="u4-c03" unidad="U4" tipo="corta" titulo="Dominio regular"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 8-12" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 8-9, 12">
+<Fragment slot="enunciado">
+
+¿Cuándo un dominio plano es regular en la dirección del eje $x$ y qué se hace si no lo es?
+
+</Fragment>
+
+Es regular en la dirección del eje $x$ si toda recta paralela a ese eje que pasa por un punto interior corta a la frontera en solo dos puntos (idem para $y$). Si lo es en ambas direcciones se dice simplemente regular. Si no lo es, se lo **divide** en dominios regulares y se suman las integrales (propiedad aditiva).
+</Pregunta>
+
+<Pregunta id="u4-c04" unidad="U4" tipo="corta" titulo="Volumen entre dos superficies"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 11, 13" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 11, 13">
+<Fragment slot="enunciado">
+
+Un cuerpo está limitado por $z=\psi_1(x,y)$ (abajo) y $z=\psi_2(x,y)$ (arriba). ¿Cómo se calcula su volumen?
+
+</Fragment>
+
+Se proyecta el cuerpo sobre el plano $xy$ obteniendo el dominio $D$ y se integra la diferencia de alturas:
+
+$$V=\iint_D\big[\psi_2(x,y)-\psi_1(x,y)\big]\,dx\,dy$$
+
+Es el caso de la triple con $f\equiv1$: $V=\iiint_V dx\,dy\,dz$.
+</Pregunta>
+
+<Pregunta id="u4-c05" unidad="U4" tipo="corta" titulo="Masa y centro de gravedad de una lámina"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 14, 31-32" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 14, 31-32">
+<Fragment slot="enunciado">
+
+Para una lámina plana $D$ con densidad superficial $\mu(x,y)$, escriba la masa, los momentos estáticos y las coordenadas del centro de gravedad.
+
+</Fragment>
+
+$$M=\iint_D\mu\,dA,\qquad M_x=\iint_D y\,\mu\,dA,\qquad M_y=\iint_D x\,\mu\,dA$$
+
+$$x_c=\frac{M_y}{M},\qquad y_c=\frac{M_x}{M}$$
+
+Si $\mu\equiv1$ se obtiene el centro geométrico. En el cuerpo (triple) se reemplaza $dA$ por $dV$ y los momentos son respecto de planos coordenados.
+</Pregunta>
+
+<Pregunta id="u4-c06" unidad="U4" tipo="corta" titulo="Área de una superficie"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 15-17" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 15-17">
+<Fragment slot="enunciado">
+
+Escriba la fórmula del área de una superficie $z=f(x,y)$ sobre un dominio $D$ e indique qué debe cumplir $f$.
+
+</Fragment>
+
+$$A_S=\iint_D\sqrt{1+\left(\frac{\partial z}{\partial x}\right)^2+\left(\frac{\partial z}{\partial y}\right)^2}\;dx\,dy$$
+
+$f$ debe ser continua y tener derivadas parciales continuas en $D$. Ejemplo: el plano $z=x+y$ sobre $[0,1]\times[0,1]$ tiene área $\sqrt3$.
+</Pregunta>
+
+<Pregunta id="u4-h01" unidad="U4" tipo="choice" correcta={2} titulo="Elemento de volumen en cilíndricas"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 35-36" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 35-36">
 <Fragment slot="enunciado">
 
 En coordenadas cilíndricas, el elemento de volumen $dV$ es:
@@ -64,5 +225,81 @@ En coordenadas cilíndricas, el elemento de volumen $dV$ es:
 
 </Fragment>
 
-El jacobiano de las cilíndricas es $r$ (el de $z$ no cambia), así que $dV=r\,dr\,d\theta\,dz$. La opción 4 recuerda a las esféricas, que usan $\rho$ y $d\rho\,d\varphi\,d\theta$.
+El Jacobiano de las cilíndricas es $r$ (la coordenada $z$ no cambia), así que $dV=r\,dr\,d\theta\,dz$. La opción 4 es el factor de las esféricas.
+</Pregunta>
+
+<Pregunta id="u4-h02" unidad="U4" tipo="choice" correcta={3} titulo="Jacobiano de las esféricas"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 37-38" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 37-38">
+<Fragment slot="enunciado">
+
+Con la notación de la cátedra ($r$ distancia al origen, $\theta$ en el plano $xy$, $\varphi$ desde el eje $z$), el Jacobiano en valor absoluto de las coordenadas esféricas es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $r$
+2. $r^2$
+3. $r^2\sin\varphi$
+4. $r\sin\varphi$
+
+</Fragment>
+
+Es $r^2\sin\varphi$. Se toma en valor absoluto: como $0\le\varphi\le\pi$, $\sin\varphi\ge0$ (el determinante con el orden $(r,\theta,\varphi)$ da $-r^2\sin\varphi$).
+</Pregunta>
+
+<Pregunta id="u4-h03" unidad="U4" tipo="choice" correcta={4} titulo="Cambio de variables: condiciones"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 23, 25" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 23, 25">
+<Fragment slot="enunciado">
+
+¿Cuál de estas condiciones NO forma parte de las exigidas a la transformación $x=g_1(u,v),\ y=g_2(u,v)$ en el cambio de variables según los apuntes?
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $g_1,g_2$ continuas
+2. Derivadas parciales de primer orden continuas
+3. Correspondencia biunívoca entre $(x,y)$ y $(u,v)$
+4. $g_1$ y $g_2$ deben ser lineales
+
+</Fragment>
+
+No se pide linealidad: polares, por ejemplo, no es lineal. Se piden funciones continuas con derivadas de primer orden continuas y correspondencia biunívoca; el Jacobiano se usa en valor absoluto.
+</Pregunta>
+
+<Pregunta id="u4-h04" unidad="U4" tipo="choice" correcta={1} titulo="Integral doble con f idénticamente 1"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 11, 13" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 11, 13">
+<Fragment slot="enunciado">
+
+Si $f\equiv1$ en $D$, $\iint_D f\,dA$ es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. El área de $D$
+2. El volumen de $D$
+3. La masa de $D$ con densidad $\mu=0$
+4. Siempre cero
+
+</Fragment>
+
+Con $f\equiv1$ la doble da el **área** del dominio; la triple con $f\equiv1$ da el volumen.
+</Pregunta>
+
+<Pregunta id="u4-h05" unidad="U4" tipo="choice" correcta={2} titulo="Cuándo conviene polares"
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 19-22, 26" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 19-22, 26">
+<Fragment slot="enunciado">
+
+¿En cuál de estos casos conviene pasar a coordenadas polares en una integral doble?
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. El dominio es un rectángulo con lados paralelos a los ejes
+2. El dominio es un círculo, un sector o un anillo, o aparece $x^2+y^2$
+3. El dominio es un triángulo de vértices $(0,0)$, $(1,0)$, $(1,1)$
+4. La función es un polinomio de grado 1
+
+</Fragment>
+
+Polares conviene con círculos, sectores, anillos o cuando aparece $x^2+y^2$. Hay que reescribir el dominio ($x^2+y^2=a^2\Rightarrow r=a$) y agregar el factor $r$.
 </Pregunta>

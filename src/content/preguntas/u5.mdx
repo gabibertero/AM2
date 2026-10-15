@@ -5,4 +5,285 @@ orden: 5
 ---
 import Pregunta from '../../components/Pregunta.astro';
 
-{/* Sin preguntas todavía: ver el formato en u4.mdx. */}
+{/* Formato: ver u4.mdx. Convención de cátedra: sentido positivo = antihorario. */}
+
+<Pregunta id="u5-t01" unidad="U5" tipo="tema" titulo="Teorema de Green"
+  aparecio="Modelo P2 · P1"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 1-2" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 8-9">
+<Fragment slot="enunciado">
+
+Desarrolle el Teorema de Green.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: enunciado con curva cerrada simple, positivamente orientada, y el campo $\vec F=P\,\vec i+Q\,\vec j$.
+- Propiedades: hipótesis (derivadas parciales continuas en $D$) y qué pasa con el sentido horario.
+- Desarrollo: demostración separando $P\,\vec i$ y $Q\,\vec j$ para un dominio entre dos curvas.
+- Gráfico: región $D$ entre $y=f_1(x)$ e $y=f_2(x)$ con la frontera $L$ orientada antihoraria.
+
+</Fragment>
+
+**Enunciado.** Sea $L$ una trayectoria **cerrada simple, positivamente orientada (antihoraria), diferenciable a trozos** en el plano $xy$ y $D$ el dominio que limita. Si $\vec F=P\,\vec i+Q\,\vec j$ tiene **derivadas parciales continuas en $D$**, entonces
+
+$$\oint_L \big[P\,dx+Q\,dy\big]=\iint_D\left[\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right]dx\,dy$$
+
+**Propiedades / condiciones.**
+- $L$ cerrada, simple (sin autointersecciones), suave a trozos y recorrida en sentido antihorario.
+- $P,Q$ con derivadas parciales continuas en $D$ y en su borde.
+- Si se recorre en sentido **horario** cambia el signo: $\oint=\iint[\partial P/\partial y-\partial Q/\partial x]\,dx\,dy$.
+- Relaciona la circulación de $\vec F$ por el borde con la "rotación" del campo adentro de la región; el integrando es la componente en $\vec k$ del rotor.
+
+**Demostración (idea).** Se prueba por separado para $\vec F=P\,\vec i$ y para $\vec F=Q\,\vec j$ y se suman.
+
+*Para $P\,\vec i$*: $D$ está entre las curvas $y=f_1(x)$ (abajo) e $y=f_2(x)$ (arriba), $a\le x\le b$. Al recorrer el borde antihorario, $\oint P\,dx=\int_a^b P(x,f_1(x))\,dx-\int_a^b P(x,f_2(x))\,dx=-\int_a^b\!\!\int_{f_1(x)}^{f_2(x)}\frac{\partial P}{\partial y}\,dy\,dx=-\iint_D\frac{\partial P}{\partial y}\,dx\,dy$.
+
+*Para $Q\,\vec j$*: $D$ está entre $x=g_1(y)$ y $x=g_2(y)$, y el mismo razonamiento da $\oint Q\,dy=+\iint_D\frac{\partial Q}{\partial x}\,dx\,dy$.
+
+Sumando ambos resultados se obtiene la fórmula de Green.
+
+**Ejemplo.** $\oint_L -y\,dx+x\,dy$ con $L:\ x^2+y^2=a^2$ antihoraria: $Q_x-P_y=1-(-1)=2$, entonces $\oint=2\pi a^2$ (igual que por parametrización). Con $Q=x,\ P=-y$ se recupera el área $A=\tfrac12\oint x\,dy-y\,dx$.
+
+**Gráfico.** Región $D$ en el plano $xy$ limitada por abajo por $y=f_1(x)$ y por arriba por $y=f_2(x)$, entre $x=a$ y $x=b$; la curva $L$ con flechas en sentido antihorario (abajo hacia la derecha, arriba hacia la izquierda).
+</Pregunta>
+
+<Pregunta id="u5-t02" unidad="U5" tipo="tema" titulo="Integral curvilínea de un campo vectorial (trabajo)"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 2-4" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 2-4, 14; teoria/Teorico-practico Rocha-Giordano/13_Integrales curvilíneas.pdf, p. 1">
+<Fragment slot="enunciado">
+
+Defina la integral curvilínea de un campo vectorial a lo largo de una curva, indique de qué depende y cómo se calcula en el plano y en el espacio.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: límite de la suma $\sum\vec F_i\cdot\Delta\vec s_i$ y significado físico.
+- Propiedades: depende de la curva y del sentido; aditividad por tramos.
+- Desarrollo: reducción a una integral simple con $y=f(x)$ y con parametrización; caso en el espacio.
+- Gráfico: curva $L$ de $A$ a $B$ con los desplazamientos $\Delta\vec s_i$ y los vectores $\vec F_i$.
+
+</Fragment>
+
+**Definición.** Sea $\vec F$ una fuerza que varía de punto a punto y $L$ una curva de $A$ a $B$. Se divide $L$ en subarcos con desplazamientos $\Delta\vec s_i=\Delta x_i\,\vec i+\Delta y_i\,\vec j$ y se suma $\vec F_i\cdot\Delta\vec s_i$. El límite (cuando el subarco más largo tiende a 0) es la integral curvilínea y mide el **trabajo** de $\vec F$ a lo largo de $L$:
+
+$$\int_L \vec F\cdot d\vec s=\int_L P(x,y)\,dx+Q(x,y)\,dy$$
+
+**Propiedades.**
+- $\vec F$ continua sobre la curva para que el límite exista.
+- En general **depende de la curva** $L$ y del **sentido**: al invertir el sentido cambia el signo.
+- Aditividad: $\int_A^B=\int_A^C+\int_C^B$; una curva cerrada formada por varios tramos se integra por tramos y se suma.
+- Queda definida por el elemento de integración, la curva y el sentido.
+
+**Cálculo.**
+- $L:\ y=f(x)$, $x_1\le x\le x_2$ ($dy=f'(x)\,dx$): $\int_{x_1}^{x_2}\big[P(x,f(x))+Q(x,f(x))\,f'(x)\big]dx$.
+- $L$ paramétrica $x=f(t),\ y=g(t)$, $t_1\le t\le t_2$: $\int_{t_1}^{t_2}\big[P\,f'(t)+Q\,g'(t)\big]dt$, con $P,Q$ evaluados en $(f(t),g(t))$.
+- En el espacio, $\vec F=P\,\vec i+Q\,\vec j+R\,\vec k$ y $L:\ \vec r(t)=[f(t),g(t),h(t)]$: $\int_L P\,dx+Q\,dy+R\,dz=\int_{t_1}^{t_2}\big[P\,f'+Q\,g'+R\,h'\big]dt$.
+
+**Ejemplo.** $\int_L (x+y)\,dx+xy\,dy$ por $y=x^2$ de $(0,0)$ a $(1,1)$: con $dy=2x\,dx$ queda $\int_0^1(x+x^2+2x^4)\,dx=\tfrac{37}{30}$.
+
+**Gráfico.** Curva $L$ de $A$ a $B$ con una flecha de sentido; sobre ella, pequeños desplazamientos $\Delta\vec s_i$ tangentes y los vectores $\vec F_i$ aplicados en cada punto.
+</Pregunta>
+
+<Pregunta id="u5-t03" unidad="U5" tipo="tema" titulo="Independencia de la trayectoria, campo conservativo y función potencial"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 10-20" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 10-20">
+<Fragment slot="enunciado">
+
+Desarrolle la condición para que una integral curvilínea no dependa de la trayectoria y su relación con campo conservativo y función potencial.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: independencia de la trayectoria, campo conservativo y función potencial.
+- Propiedades: condición $P_y=Q_x$ y rol del dominio simplemente conexo; en el espacio, $\operatorname{rot}\vec F=\vec0$.
+- Desarrollo: diferencia de potencial $u(B)-u(A)$ y cómo se halla $u$.
+- Gráfico: dos caminos distintos entre $A$ y $B$ con el mismo valor.
+
+</Fragment>
+
+**Definición.** $\int_A^B P\,dx+Q\,dy$ **no depende de la trayectoria** si solo depende de los extremos $A$ y $B$; equivale a que la integral sobre cualquier curva cerrada valga 0. $\vec F$ es **conservativo** si $\vec F=\nabla u$ para alguna función escalar $u$ (**función potencial**): $P=\partial u/\partial x,\ Q=\partial u/\partial y$ (y $R=\partial u/\partial z$ en el espacio).
+
+**Propiedades.**
+- Si $P,Q$ son continuas con derivadas continuas, la condición necesaria y suficiente es $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$.
+- Es consecuencia de Green: si $Q_x-P_y=0$ la doble es 0 y la circulación cerrada también.
+- La recíproca ($P_y=Q_x\Rightarrow$ conservativo) vale **solo si el dominio es simplemente conexo**.
+- Si $\vec F$ es conservativo en el espacio: $R_y=Q_z,\ P_z=R_x,\ Q_x=P_y$, es decir $\operatorname{rot}\vec F=\vec0$.
+
+**Desarrollo.** Como $P\,dx+Q\,dy=du$ (diferencial total), 
+
+$$\int_A^B P\,dx+Q\,dy=u(B)-u(A)$$
+
+Para hallar $u$ en el plano: integrar $P$ respecto de $x$, $u=\int P\,dx+\phi(y)$; derivar respecto de $y$ e igualar a $Q$ para obtener $\phi'(y)$; integrar. En $\mathbb R^3$ se integra $P$ en $x$, $Q$ en $y$, $R$ en $z$ y se comparan las tres expresiones.
+
+**Ejemplo.** $\vec F=(2xy,\,x^2)$: $P_y=2x=Q_x$, $u=x^2y$ y $\int_{(0,0)}^{(1,2)}=u(1,2)-u(0,0)=2$.
+
+**Gráfico.** Plano con los puntos $A$ y $B$ y dos caminos distintos que los unen; ambos dan el mismo valor de la integral, $u(B)-u(A)$.
+</Pregunta>
+
+<Pregunta id="u5-c01" unidad="U5" tipo="corta" titulo="Orientación positiva y signo en Green"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 4, 8-9" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 4, 8-9">
+<Fragment slot="enunciado">
+
+¿Cuál es el sentido positivo de recorrido de una curva cerrada para la cátedra y qué cambia en la fórmula de Green si se recorre al revés?
+
+</Fragment>
+
+El sentido positivo es el **antihorario** (si no se indica sentido, se toma el antihorario). Si se recorre en sentido horario, el resultado cambia de signo: $\oint=\iint[\partial P/\partial y-\partial Q/\partial x]\,dx\,dy$.
+</Pregunta>
+
+<Pregunta id="u5-c02" unidad="U5" tipo="corta" titulo="Área por integral curvilínea"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 6-7" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 6-7">
+<Fragment slot="enunciado">
+
+¿Cómo se calcula el área de un dominio $D$ limitado por una curva cerrada $L$ usando una integral curvilínea?
+
+</Fragment>
+
+Con $L$ cerrada, simple y recorrida en sentido antihorario:
+
+$$A_D=-\oint_L y\,dx=\oint_L x\,dy=\frac12\oint_L x\,dy-y\,dx$$
+
+Se justifica con Green. Si $L$ es horaria el signo cambia. Para la circunferencia $x=a\cos t,\ y=a\sin t$ da $\pi a^2$.
+</Pregunta>
+
+<Pregunta id="u5-c03" unidad="U5" tipo="corta" titulo="Integral curvilínea de una función escalar"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 12-13" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 12-13">
+<Fragment slot="enunciado">
+
+Defina $\int_L f(x,y)\,ds$ y escriba cómo se calcula con una parametrización. ¿Qué da con $f\equiv1$?
+
+</Fragment>
+
+$\int_L f\,ds=\lim\sum f(x_i,y_i)\,\Delta s_i$, con $\Delta s_i$ la longitud del subarco. Con $x=\varphi(t),\ y=\psi(t)$:
+
+$$\int_L f\,ds=\int_{t_1}^{t_2} f\big(\varphi(t),\psi(t)\big)\sqrt{[\varphi'(t)]^2+[\psi'(t)]^2}\;dt$$
+
+Si $L:\ y=g(x)$, $ds=\sqrt{1+[g'(x)]^2}\,dx$. Geométricamente es el área de la "pared" de base $L$ y altura $f$; con $f\equiv1$ da la **longitud** de $L$.
+</Pregunta>
+
+<Pregunta id="u5-c04" unidad="U5" tipo="corta" titulo="Condición de independencia de la trayectoria"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 10-11, 15" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 10-11, 15">
+<Fragment slot="enunciado">
+
+Escriba la condición necesaria y suficiente para que $\int_A^B P\,dx+Q\,dy$ no dependa de la trayectoria y aclare cuándo vale la recíproca.
+
+</Fragment>
+
+Con $P,Q$ continuas y con derivadas continuas: $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$ en el dominio. La recíproca ($P_y=Q_x\Rightarrow$ campo conservativo) vale **solo si el dominio es simplemente conexo**.
+</Pregunta>
+
+<Pregunta id="u5-c05" unidad="U5" tipo="corta" titulo="Cómo hallar la función potencial"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 17-20" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 17-20">
+<Fragment slot="enunciado">
+
+Dado un campo plano $\vec F=P\,\vec i+Q\,\vec j$ conservativo, ¿cómo se halla su función potencial?
+
+</Fragment>
+
+Se integra $P$ respecto de $x$: $u=\int P\,dx+\phi(y)$; se deriva respecto de $y$ y se iguala a $Q$ para obtener $\phi'(y)$; se integra $\phi'$. Ejemplo: $\vec F=(2xy,x^2)$ da $u=x^2y$. En $\mathbb R^3$ se integra cada componente respecto de su variable y se comparan las tres expresiones.
+</Pregunta>
+
+<Pregunta id="u5-c06" unidad="U5" tipo="corta" titulo="Campo conservativo en el espacio"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 14-16" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 14-16">
+<Fragment slot="enunciado">
+
+¿Qué condiciones cumple un campo conservativo $\vec F=(P,Q,R)$ en el espacio?
+
+</Fragment>
+
+Si $\vec F=\nabla u$ (con $u$ de derivadas segundas continuas), entonces $R_y=Q_z,\ P_z=R_x,\ Q_x=P_y$, es decir $\operatorname{rot}\vec F=\vec0$. La recíproca vale solo en una región simplemente conexa. Ejemplo: $\vec F=(yz,xz,xy)$ tiene $\operatorname{rot}\vec F=\vec0$ y potencial $u=xyz$.
+</Pregunta>
+
+<Pregunta id="u5-h01" unidad="U5" tipo="choice" correcta={3} titulo="Fórmula de Green"
+  aparecio="Modelo P2 · P1"
+  fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 1-2" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 8-9">
+<Fragment slot="enunciado">
+
+Con $L$ cerrada simple, antihoraria, y $D$ la región que encierra, el Teorema de Green establece que $\oint_L P\,dx+Q\,dy$ es igual a:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $\iint_D\left(\dfrac{\partial P}{\partial y}-\dfrac{\partial Q}{\partial x}\right)dx\,dy$
+2. $\iint_D\left(\dfrac{\partial P}{\partial x}+\dfrac{\partial Q}{\partial y}\right)dx\,dy$
+3. $\iint_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right)dx\,dy$
+4. $\iint_D\left(\dfrac{\partial Q}{\partial y}-\dfrac{\partial P}{\partial x}\right)dx\,dy$
+
+</Fragment>
+
+Es $\iint_D(Q_x-P_y)\,dx\,dy$. La opción 1 es la fórmula para el sentido horario; la 2 es una divergencia.
+</Pregunta>
+
+<Pregunta id="u5-h02" unidad="U5" tipo="choice" correcta={2} titulo="Cambio de sentido en la integral curvilínea"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 2-4" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 2-4">
+<Fragment slot="enunciado">
+
+Si se invierte el sentido de recorrido de la curva $L$ en $\int_L P\,dx+Q\,dy$, la integral:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. No cambia
+2. Cambia de signo
+3. Se duplica
+4. Se anula
+
+</Fragment>
+
+La integral curvilínea de un campo vectorial depende del sentido: al invertirlo cambia el signo.
+</Pregunta>
+
+<Pregunta id="u5-h03" unidad="U5" tipo="choice" correcta={1} titulo="Qué mide la integral curvilínea de un campo"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 2-4" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 2-4">
+<Fragment slot="enunciado">
+
+Si $\vec F$ es una fuerza, $\int_L \vec F\cdot d\vec s$ representa:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. El trabajo de la fuerza a lo largo de $L$
+2. La longitud de $L$
+3. El flujo de $\vec F$ a través de $L$
+4. El área encerrada por $L$
+
+</Fragment>
+
+Mide el trabajo de la fuerza a lo largo de la curva. Si el campo es perpendicular a la trayectoria en todo punto, el trabajo es 0.
+</Pregunta>
+
+<Pregunta id="u5-h04" unidad="U5" tipo="choice" correcta={4} titulo="Integral entre dos puntos con potencial"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 15-20" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 15-20">
+<Fragment slot="enunciado">
+
+Si $P\,dx+Q\,dy=du$, entonces $\int_A^B P\,dx+Q\,dy$ vale:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $u(A)-u(B)$
+2. $u(A)+u(B)$
+3. $0$ siempre
+4. $u(B)-u(A)$
+
+</Fragment>
+
+Es la diferencia de potencial: $u(B)-u(A)$, sin importar el camino.
+</Pregunta>
+
+<Pregunta id="u5-h05" unidad="U5" tipo="choice" correcta={2} titulo="Integral curvilínea con f idénticamente 1"
+  fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 12-13" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 12-13">
+<Fragment slot="enunciado">
+
+La integral curvilínea de una función escalar $\int_L f\,ds$ con $f\equiv1$ da:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. El área encerrada por $L$
+2. La longitud de $L$
+3. El trabajo de un campo constante
+4. Cero
+
+</Fragment>
+
+$\Delta s_i$ es la longitud del subarco, así que con $f\equiv1$ se suman longitudes: da la longitud de $L$.
+</Pregunta>
