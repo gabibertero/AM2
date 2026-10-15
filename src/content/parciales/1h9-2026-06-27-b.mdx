@@ -16,7 +16,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
-import Pendiente from '../../components/Pendiente.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
 Universidad Tecnológica Nacional - FRC · Análisis Matemático II - Comisión 1H9 · 2° Parcial Práctico - 27/06/2026 · TEMA B
@@ -30,15 +31,106 @@ Calcular por coordenadas cilíndricas la integral: $\iiint_R y\sqrt{x^2+y^2}\,dV
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate qué tiene el integrando y qué tiene la región: ¿qué combinación de $x$ e $y$ aparece en las dos cosas? ¿Qué cuerpo forma $z=x^2+y^2$ cortado entre $z=0$ y $z=3$: se parece a una "copa", a un "tubo" o a una esfera?
+
+</Pista>
+<Pista>
+
+Como $x^2+y^2$ se repite, conviene **coordenadas cilíndricas**: $x=r\cos\theta$, $y=r\sin\theta$, $x^2+y^2=r^2$, $dV=r\,dr\,d\theta\,dz$. La superficie ya viene como $z=r^2$ (piso) y el plano $z=3$ es la tapa; hay que ver hasta dónde llega $r$. Machete: [Integral triple en cilíndricas/esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: el integrando $y\sqrt{x^2+y^2}$ se vuelve $r\sin\theta\cdot r$ y con el jacobiano queda $r^3\sin\theta$. $z$ va de $r^2$ hasta $3$, $r$ de $0$ a $\sqrt3$ y $\theta$ de $0$ a $2\pi$:
+
+$$IT=\int_0^{2\pi}\!\sin\theta\,d\theta\int_0^{\sqrt3}r^3\,dr\int_{r^2}^3dz$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar la región. **Por qué:** para saber qué superficie es el piso y cuál el techo de $z$. $z=x^2+y^2$ es un **paraboloide** de eje $z$ (una "copa" con vértice en el origen); con $0\le z\le3$ queda la región *dentro* de la copa, tapada por el plano $z=3$. **Cómo reconocerlo:** $z=x^2+y^2$ (sin raíz) es paraboloide; con raíz o cuadrado en $z$ sería cono.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1h9/ej1b.svg`} alt="Arriba, perspectiva del paraboloide z=r² con vértice en el origen, tapado por el plano z=3 (círculo de radio raíz de 3). Abajo, corte meridiano: parábola z=r² entre r=−√3 y r=√3, cerrada por la recta z=3, con la región R sombreada." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** pasar a cilíndricas. **Por qué:** la región es de revolución alrededor del eje $z$. Con $y=r\sin\theta$ y $r\ge0$ (por eso $\sqrt{r^2}=r$):
+
+$$y\sqrt{x^2+y^2}=r\sin\theta\cdot\sqrt{r^2}$$
+$$y\sqrt{x^2+y^2}=r\sin\theta\cdot r=r^2\sin\theta$$
+
+Se multiplica por el jacobiano $r$ (positivo): el integrando queda $r^3\sin\theta$.
+
+</Paso>
+<Paso>
+
+**Qué:** fijar los límites. **Por qué:** para cada $(r,\theta)$, $z$ va **desde el paraboloide hasta la tapa**: $r^2\le z\le3$. La tapa corta al paraboloide donde $3=r^2$, o sea $r=\sqrt3$ (se toma la raíz positiva), así que $0\le r\le\sqrt3$. Como el cuerpo da la vuelta entera, $0\le\theta\le2\pi$.
+
+$$IT=\int_0^{2\pi}\!\sin\theta\,d\theta\int_0^{\sqrt3}r^3\,dr\int_{r^2}^3dz$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $z$ (la más interna). **Por qué:** solo hay un $dz$:
+
+$$\int_{r^2}^3dz=3-r^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** se multiplica por $r^3$, se distribuye y se primitiva:
+
+$$\int_0^{\sqrt3}r^3(3-r^2)\,dr=\int_0^{\sqrt3}(3r^3-r^5)\,dr$$
+$$=\Big[\frac{3r^4}{4}-\frac{r^6}{6}\Big]_0^{\sqrt3}$$
+$$=\frac{3\cdot9}{4}-\frac{27}{6}$$
+$$=\frac{27}{4}-\frac92$$
+$$=\frac94$$
+
+Resumido: $\int_0^{\sqrt3} r^3(3-r^2)\,dr=\frac{9}{4}$. (Con $(\sqrt3)^4=9$ y $(\sqrt3)^6=27$.)
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** es lo que queda y vale cero: el seno es positivo para $y>0$ y negativo para $y<0$, y como el cuerpo es simétrico se cancelan.
+
+$$\int_0^{2\pi}\sin\theta\,d\theta=-\cos2\pi+\cos0=0$$
+
+$$IT=\frac94\cdot0=0$$
+
+</Paso>
+<Solucion>
+
+$$IT=0$$
+
+**Ojo con:** el $0$ viene de $\int_0^{2\pi}\sin\theta\,d\theta=0$, **no** de que la parte radial se anule: esa vale $\frac94\ne0$. Hay que mostrar el integrando $r^3\sin\theta$, los límites $r^2\le z\le3$ y la parte radial.
+
+**Cómo se evalúa** (la cátedra pide "planteo y desarrollo consistente" y todos los cálculos auxiliares; el enunciado no exige gráfico):
+
+- **Bien:** cilíndricas con integrando $r^3\sin\theta$ (jacobiano incluido), límites $0\le\theta\le2\pi$, $0\le r\le\sqrt3$, $r^2\le z\le3$, parte radial $\frac94$ y $IT=0$ justificado por $\int_0^{2\pi}\sin\theta\,d\theta=0$.
+- **A medias:** planteo y límites correctos pero con un error de cuenta, o integrando sin el jacobiano (aunque el resultado siga dando $0$ por simetría, el planteo está mal).
+- **Mal:** límites de $z$ incorrectos (por ejemplo $0\le z\le3$ sin el paraboloide) o sin planteo.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes. **1) Simetría:** el integrando $y\sqrt{x^2+y^2}$ es *impar* en $y$ y la región es simétrica respecto del plano $y=0$, así que la integral vale $0$.
+
+**2) Otro orden** (radial, que además verifica el $\frac94$): se integra primero en $r$ con $z$ fijo. Para cada $z$ entre $0$ y $3$, $r$ va de $0$ a $\sqrt z$:
+
+$$\int_0^3\!dz\int_0^{\sqrt z}r^3\,dr=\int_0^3\frac{z^2}{4}\,dz=\frac{3^3}{12}=\frac94$$
+
+Mismo número que la parte radial, y multiplicado por $\int_0^{2\pi}\sin\theta\,d\theta=0$ da $IT=0$.
+
+</Comprobacion>
 <ResolucionOficial examen="1h9-2026-06-27-b" fuente="parciales/2do-parcial/2° Parciales/2° Parcial 1H9 (B) Jun-26.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2):** resultado $IT=0$, coincide, pero el **intermedio no**: el profe escribe (lectura del manuscrito) el paréntesis de la parte radial como "$3\cdot3\sqrt3-3\cdot3\sqrt3=0$" y concluye que la integral vale $0$ porque ese paréntesis es nulo. El recálculo da $\big[\frac{3r^4}{4}-\frac{r^6}{6}\big]_0^{\sqrt3}=\frac94\neq0$; el resultado final es $0$ igual, pero por $\int_0^{2\pi}\sin\theta\,d\theta=0$. ⚠️ La resolución oficial da $0$ en la parte radial; el recálculo da $\frac94$ — el resultado final coincide; pendiente de confirmar con la cátedra si fue una errata. Registrado en `docs/revision/1h9-2026-06-27-discrepancias.md`.
+
+</div>
 </Ejercicio>
 
 <Ejercicio id="1h9-2026-06-27-b#2" numero={2} fuente="parciales/2do-parcial/2° Parciales/2° Parcial 1H9 (B) Jun-26.pdf" pagina={1} unidad="U5" tema="Integral curvilínea por definición">
@@ -50,15 +142,117 @@ Calcular por definición la integral curvilínea: $\oint_C^{+}(x-y)\,dx+(x+y)\,d
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate el verbo: te piden calcular **por definición** una integral sobre una curva cerrada formada por dos ecuaciones. Dibujá las dos curvas: ¿en qué puntos se cortan y cómo se ve la figura que encierran? ¿Qué sentido de recorrido te piden?
+
+</Pista>
+<Pista>
+
+Es una **integral curvilínea de un campo vectorial** y, como la curva cerrada se arma con dos tramos ($C_1$ y $C_2$), se calcula como $IC=\int_{C_1}+\int_{C_2}$, parametrizando cada tramo y respetando el sentido antihorario ($+$). Primero hay que hallar los cortes igualando las curvas. Machete: [Curvilínea por definición](../../machetes/curvilinea-por-definicion/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: los cortes son $(0,0)$ y $(2,2)$. $C_1$ ($y=x^2-x$) va de $x=0$ a $x=2$ con $dy=(2x-1)\,dx$; $C_2$ ($x=y^2-y$) va de $y=2$ a $y=0$ con $dx=(2y-1)\,dy$. El campo es $P=x-y$, $Q=x+y$:
+
+$$IC=\int_0^2\big[P\,dx+Q\,dy\big]_{C_1}+\int_2^0\big[P\,dx+Q\,dy\big]_{C_2}$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** hallar los cortes y dibujar. **Por qué:** los cortes son los extremos de cada tramo. Reemplazo $y=x^2-x$ en la segunda ecuación $x=y^2-y$:
+
+$$x=(x^2-x)^2-(x^2-x)$$
+$$x=x^4-2x^3+x^2-x^2+x$$
+$$0=x^4-2x^3$$
+$$0=x^3(x-2)$$
+
+Entonces $x=0$ o $x=2$, y con $y=x^2-x$: $(0,0)$ y $(2,2)$ (los dos puntos también cumplen $x=y^2-y$). **Cómo reconocerlo:** una parábola "parada" ($y=\dots x^2$) y otra "acostada" ($x=\dots y^2$) con los mismos coeficientes son simétricas respecto de la recta $y=x$: por eso los cortes están sobre esa recta. Las curvas son las mismas que en el Tema A: solo cambia el campo.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1h9/ej2.svg`} alt="Curva cerrada formada por la parábola y=x²−x (azul, de (0,0) a (2,2) pasando por (1,0)) y la parábola x=y²−y (roja, de (2,2) a (0,0) pasando por (0,1)), con la región D sombreada, los puntos de corte y el sentido antihorario marcado con flechas." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar el sentido y los tramos. **Por qué:** $+$ es antihorario: caminando, la región $D$ debe quedar a la **izquierda**. Por la parábola $y=x^2-x$ (la de abajo), con $x$ creciendo de $0$ a $2$, $D$ queda arriba, a la izquierda: ese es $C_1$ de $(0,0)$ a $(2,2)$. Para cerrar, se vuelve por $x=y^2-y$ de $(2,2)$ a $(0,0)$: $C_2$ con $y$ decreciendo de $2$ a $0$.
+
+</Paso>
+<Paso>
+
+**Qué:** $IC_1$ por definición ($x$ de $0$ a $2$). **Por qué:** se reemplaza $y=x^2-x$ y $dy=(2x-1)\,dx$ en $P\,dx+Q\,dy$ con $P=x-y$, $Q=x+y$:
+
+$$x-y=x-(x^2-x)=2x-x^2$$
+$$x+y=x+(x^2-x)=x^2$$
+$$P\,dx+Q\,dy=(2x-x^2)\,dx+x^2(2x-1)\,dx$$
+$$P\,dx+Q\,dy=(2x-x^2+2x^3-x^2)\,dx$$
+$$P\,dx+Q\,dy=(2x^3-2x^2+2x)\,dx$$
+
+$$IC_1=\int_0^2(2x^3-2x^2+2x)\,dx$$
+$$IC_1=\Big[\frac{x^4}{2}-\frac{2x^3}{3}+x^2\Big]_0^2$$
+$$IC_1=8-\frac{16}{3}+4$$
+$$IC_1=\frac{20}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** $IC_2$ por definición ($y$ de $2$ a $0$). **Por qué:** ahora la variable es $y$: $x=y^2-y$ y $dx=(2y-1)\,dy$.
+
+$$x-y=y^2-y-y=y^2-2y$$
+$$x+y=y^2-y+y=y^2$$
+$$P\,dx+Q\,dy=(y^2-2y)(2y-1)\,dy+y^2\,dy$$
+$$P\,dx+Q\,dy=(2y^3-5y^2+2y+y^2)\,dy$$
+$$P\,dx+Q\,dy=(2y^3-4y^2+2y)\,dy$$
+
+$$IC_2=\int_2^0(2y^3-4y^2+2y)\,dy$$
+$$IC_2=-\Big[\frac{y^4}{2}-\frac{4y^3}{3}+y^2\Big]_0^2$$
+$$IC_2=-\Big(8-\frac{32}{3}+4\Big)$$
+$$IC_2=-\frac43$$
+
+</Paso>
+<Paso>
+
+**Qué:** sumar los dos tramos. **Por qué:** la integral sobre la curva cerrada es la suma de los tramos:
+
+$$IC=IC_1+IC_2=\frac{20}{3}-\frac43=\frac{16}{3}$$
+
+</Paso>
+<Solucion>
+
+$$\oint_C^{+}(x-y)\,dx+(x+y)\,dy=\frac{16}{3}$$
+
+**Ojo con:** el sentido de $C_2$ ($y$ de $2$ a $0$): al revés, el tramo cambia de signo y el total da $\frac{20}{3}+\frac43=8$ en lugar de $\frac{16}{3}$. Y no te asustes de que $IC_2$ dé negativo: es normal, el campo apunta "en contra" de ese tramo.
+
+**Cómo se evalúa** (el enunciado pide "por definición"; no exige gráfico, pero sin los cortes no se puede plantear):
+
+- **Bien:** cortes $(0,0)$ y $(2,2)$, sentido antihorario con los dos tramos y sus límites ($C_1$: $x$ de $0$ a $2$; $C_2$: $y$ de $2$ a $0$), $IC_1=\frac{20}{3}$, $IC_2=-\frac43$ y $IC=\frac{16}{3}$.
+- **A medias:** planteo correcto de los dos tramos con un error de cuenta; o un tramo con el sentido invertido.
+- **Mal:** resolver solo por Green (no es "por definición"), sin cortes o con un solo tramo (curva sin cerrar).
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **teorema de Green** (curva cerrada, simple y antihoraria). Con $P=x-y$ y $Q=x+y$:
+
+$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1-(-1)=2$$
+
+Entonces $IC=2\cdotA(D)$. El área sale de $A=\oint x\,dy$, tramo por tramo:
+
+$$\int_{C_1}x\,dy=\int_0^2x(2x-1)\,dx=\frac{16}{3}-2=\frac{10}{3}$$
+$$\int_{C_2}x\,dy=\int_2^0(y^2-y)\,dy=-\Big(\frac83-2\Big)=-\frac23$$
+$$A(D)=\frac{10}{3}-\frac23=\frac83$$
+
+$$IC=2\cdot\frac83=\frac{16}{3}$$
+
+Mismo valor que por definición. (Coincide con el Tema A porque el rotor $Q_x-P_y$ vale $2$ en los dos campos y la región es la misma.)
+
+</Comprobacion>
 <ResolucionOficial examen="1h9-2026-06-27-b" fuente="parciales/2do-parcial/2° Parciales/2° Parcial 1H9 (B) Jun-26.pdf" paginas="3–4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3–4):** $IC_1=\frac{20}{3}$, $IC_2=-\frac43$, $IC=\frac{16}{3}$: coincide en los tres valores. La p. 4 es el gráfico y el cálculo de los cortes (el profe resuelve $x^4-2x^3=0$ como yo). Sin discrepancias.
+
+</div>
 </Ejercicio>
 
 <Ejercicio id="1h9-2026-06-27-b#3" numero={3} fuente="parciales/2do-parcial/2° Parciales/2° Parcial 1H9 (B) Jun-26.pdf" pagina={1} unidad="U8" tema="EDO de 1º orden (lineal)">
@@ -74,15 +268,110 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá cómo están $y$ y $y'$ en la ecuación: ¿aparecen elevadas a la primera potencia y sin multiplicarse entre sí? ¿Qué pasa con $y'$, $y$ y el resto: se puede ordenar como "$y'$ más algo por $y$ igual a algo que solo depende de $x$"?
+
+</Pista>
+<Pista>
+
+Ordenada como $y'-3x^2y=6x^2$, es una **EDO lineal** de 1.er orden: $y'+P(x)\,y=Q(x)$ con $P=-3x^2$ y $Q=6x^2$. Se resuelve con la sustitución de la cátedra $y=u\cdot v$ (eligiendo $v$ para anular un paréntesis). Machete: [EDO lineal](../../machetes/edo-lineal/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: con $y=uv$ queda $u'v+u\,(v'-3x^2v)=6x^2$. Elegí $v$ tal que $v'-3x^2v=0$, y con ese $v$ resolvé $u'v=6x^2$:
+
+$$\frac{dv}{v}=3x^2\,dx,\qquad u'=\frac{6x^2}{v}$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** ordenar y reconocer el tipo. **Por qué:** hay que dejarla en la forma $y'+P\,y=Q$.
+
+$$y'-3x^2y-6x^2=0$$
+$$y'-3x^2y=6x^2$$
+
+**Cómo reconocerlo:** $y$ e $y'$ aparecen solo a la primera potencia y multiplicados por funciones de $x$: es lineal.
 
 </Paso>
+<Paso>
+
+**Qué:** sustituir $y=u\,v$. **Por qué:** al tener dos funciones incógnitas se gana libertad para elegir una (la $v$) y simplificar. Con $y=uv$ se deriva como producto, $y'=u'v+uv'$:
+
+$$u'v+uv'-3x^2uv=6x^2$$
+$$u'v+u\,(v'-3x^2v)=6x^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** elegir $v$ anulando el paréntesis. **Por qué:** si $v'-3x^2v=0$ la ecuación se reduce a $u'v=6x^2$. Esa $v$ es separable (basta una solución particular, tomo constante de integración $0$):
+
+$$\frac{dv}{dx}=3x^2v$$
+$$\int\frac{dv}{v}=\int3x^2\,dx$$
+$$\ln v=x^3$$
+$$v=e^{x^3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver para $u$. **Por qué:** con $v=e^{x^3}$ queda $u'v=6x^2$:
+
+$$u'e^{x^3}=6x^2$$
+$$u'=6x^2e^{-x^3}$$
+$$u=\int6x^2e^{-x^3}\,dx$$
+
+Sustitución $t=-x^3$, entonces $dt=-3x^2\,dx$, o sea $6x^2\,dx=-2\,dt$:
+
+$$u=-2\int e^t\,dt$$
+$$u=-2e^{t}+C$$
+$$u=-2e^{-x^3}+C$$
+
+</Paso>
+<Paso>
+
+**Qué:** volver a $y=uv$. **Por qué:** esa es la incógnita.
+
+$$y=\big(-2e^{-x^3}+C\big)\,e^{x^3}$$
+$$y=-2e^{-x^3}e^{x^3}+C\,e^{x^3}$$
+$$y=-2+C\,e^{x^3}$$
+
+</Paso>
+<Solucion>
+
+$$y=-2+C\,e^{x^3}$$
+
+**Ojo con:** el signo de la sustitución ($dt=-3x^2dx$ introduce el signo menos) y recordar $e^{-x^3}\cdot e^{x^3}=1$. Dejar $y=(-2e^{-x^3}+C)e^{x^3}$ también está bien, pero conviene simplificar.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente):
+
+- **Bien:** reconoce la lineal, usa $y=uv$, $v=e^{x^3}$, $u=-2e^{-x^3}+C$ y escribe $y=(-2e^{-x^3}+C)\,e^{x^3}=-2+Ce^{x^3}$.
+- **A medias:** plantea bien pero se equivoca en el signo o la constante de la integral de $u$, o no vuelve a $y=uv$.
+- **Mal:** no reconoce el tipo, o no deriva $y=uv$ como producto.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes. **1) Variables separables:** como $y'=3x^2(y+2)$ (de $y'-3x^2y-6x^2=0$ sacando factor $3x^2$):
+
+$$\frac{dy}{y+2}=3x^2\,dx$$
+$$\ln|y+2|=x^3+k$$
+$$y+2=C\,e^{x^3}$$
+
+Misma familia, con $C=\pm e^k$. Machete: [Variables separables](../../machetes/edo-variables-separables/).
+
+**2) Sustituir en la EDO:** con $y=-2+Ce^{x^3}$, $y'=3x^2Ce^{x^3}$:
+
+$$y'-3x^2y-6x^2=3x^2Ce^{x^3}-3x^2(-2+Ce^{x^3})-6x^2$$
+$$=3x^2Ce^{x^3}+6x^2-3x^2Ce^{x^3}-6x^2=0$$
+
+</Comprobacion>
 <ResolucionOficial examen="1h9-2026-06-27-b" fuente="parciales/2do-parcial/2° Parciales/2° Parcial 1H9 (B) Jun-26.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5):** $y=\big(-2e^{-x^3}+C\big)e^{x^3}$, equivalente a $y=-2+Ce^{x^3}$: coincide (el profe no distribuye el producto). Sin discrepancias.
+
+</div>
 </Ejercicio>
 
 <Ejercicio id="1h9-2026-06-27-b#4" numero={4} fuente="parciales/2do-parcial/2° Parciales/2° Parcial 1H9 (B) Jun-26.pdf" pagina={1} unidad="U9" tema="EDO 2º orden">
@@ -98,15 +387,120 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Antes de nada mirá qué te piden: la **solución general** de una EDO de 2.º orden con segundo miembro. ¿Es lineal? ¿Los coeficientes son constantes? ¿Qué forma tiene el segundo miembro ($-e^x+x-1$)? Pensá en cuántas partes tiene la solución general.
+
+</Pista>
+<Pista>
+
+Es una EDO **lineal de 2.º orden de coeficientes constantes no homogénea**: la solución general es $y=y_h+y_p$. $y_h$ sale de la ecuación característica $r^2-2r+1=0$ y $y_p$ por **coeficientes indeterminados**: una parte para $-e^x$ y otra para el polinomio $x-1$. Ojo con que $e^x$ ya aparece en $y_h$. Machete: [Coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: raíz doble $r=1$, entonces $y_h=C_1e^x+C_2xe^x$. Como $e^x$ y $xe^x$ ya están en $y_h$, la parte de $e^x$ se multiplica por $x^2$:
+
+$$y_p=Ax^2e^x+Bx+D$$
+
+Derivá dos veces, reemplazá en la EDO e igualá coeficientes.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución de $y''-2y'+y=0$ y sale de la ecuación característica (se prueba $y=e^{rx}$).
+
+$$r^2-2r+1=0$$
+$$(r-1)^2=0$$
+$$r=1\ \text{(raíz doble)}$$
+
+Con raíz doble, las dos soluciones independientes son $e^x$ y $x\,e^x$:
+
+$$y_h=C_1e^x+C_2\,x\,e^x$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer la forma de $y_p$. **Por qué:** el segundo miembro es $-e^x+x-1$, suma de dos tipos; cada uno aporta su forma. Para $x-1$ (polinomio de grado 1) se propone $Bx+D$; como $r=0$ no es raíz de la característica, no hay que corregir. Para $-e^x$ correspondería $Ae^x$, pero $e^x$ y $xe^x$ ya están en $y_h$ (**resonancia**, $r=1$ doble): se multiplica por $x^2$. **Cómo reconocerlo:** si lo que propondrías ya está en $y_h$, subí la potencia de $x$ hasta que deje de estarlo (acá hasta $x^2$, por ser raíz doble).
+
+$$y_p=Ax^2e^x+Bx+D$$
+
+(uso $A$, $B$, $D$ para no chocar con $C_1$, $C_2$).
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces. **Por qué:** para reemplazar en la EDO. Para $Ax^2e^x$ se usa la regla del producto:
+
+$$y_p'=(2Ax+Ax^2)\,e^x+B$$
+$$y_p''=(2A+2Ax+2Ax+Ax^2)\,e^x$$
+$$y_p''=(2A+4Ax+Ax^2)\,e^x$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''-2y'+y$. **Por qué:** $y_p$ tiene que satisfacer la EDO completa. Se agrupa lo que tiene $e^x$ y lo que no:
+
+$$y_p''-2y_p'+y_p=(2A+4Ax+Ax^2)e^x-2(2Ax+Ax^2)e^x-2B+Ax^2e^x+Bx+D$$
+
+Parte con $e^x$:
+
+$$(2A+4Ax+Ax^2-4Ax-2Ax^2+Ax^2)\,e^x=2A\,e^x$$
+
+(los términos en $x^2$ y en $x$ se cancelan: $A-2A+A=0$ y $4A-4A=0$). Parte sin $e^x$: $Bx-2B+D$. Entonces:
+
+$$2A\,e^x+Bx-2B+D=-e^x+x-1$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes. **Por qué:** dos expresiones son iguales para todo $x$ solo si coinciden los coeficientes de $e^x$, de $x$ y el término independiente.
+
+- $e^x$: $2A=-1$, entonces $A=-\frac12$.
+- $x$: $B=1$.
+- independiente: $-2B+D=-1$, entonces $D=-1+2B=1$.
+
+$$y_p=-\frac12x^2e^x+x+1$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la solución general. **Por qué:** $y=y_h+y_p$.
+
+$$y=C_1e^{x}+C_2xe^{x}-\frac12x^2e^{x}+x+1$$
+
+</Paso>
+<Solucion>
+
+$$y=C_1e^{x}+C_2xe^{x}-\frac12x^2e^{x}+x+1$$
+
+**Ojo con:** la resonancia (si proponés $Ae^x$ o $Axe^x$ el término en $e^x$ se anula y no cierra) y los signos: el segundo miembro trae $-e^x$ y $-1$, así que $A$ y $D$ salen con el signo "dado vuelta" respecto del Tema A.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente):
+
+- **Bien:** $y_h=C_1e^x+C_2xe^x$ (raíz doble), $y_p$ con $x^2e^x$ por resonancia, $A=-\frac12$, $B=1$, $D=1$ y $y=y_h+y_p$.
+- **A medias:** $y_h$ y la forma de $y_p$ correctas, pero un error de cuenta en las derivadas o en los coeficientes; o una solución general sin $y_h$.
+- **Mal:** $y_h$ incorrecta o $y_p$ sin corregir por resonancia (no se puede determinar $A$).
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos controles independientes. **1) Cambio $y=e^xw$ para la parte con $e^x$:** como $y'=e^x(w+w')$ e $y''=e^x(w+2w'+w'')$, queda $y''-2y'+y=e^x\,w''$. Para que sea $-e^x$ hace falta $w''=-1$, o sea $w=-\frac{x^2}{2}$ (más $C_1+C_2x$, que es $y_h$): $y=-\frac12x^2e^x$, que coincide con el término hallado.
+
+**2) Sustituir la parte polinomial** $y=x+1$ (con $y'=1$, $y''=0$):
+
+$$y''-2y'+y=0-2\cdot1+(x+1)$$
+$$y''-2y'+y=x-1$$
+
+que es el $x-1$ del segundo miembro. Y $-\frac12x^2e^x$ da $-e^x$ (control 1), así que la suma da $-e^x+x-1$.
+
+</Comprobacion>
 <ResolucionOficial examen="1h9-2026-06-27-b" fuente="parciales/2do-parcial/2° Parciales/2° Parcial 1H9 (B) Jun-26.pdf" paginas="6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 6):** $y=C_1e^x+C_2xe^x-\frac12x^2e^x+x+1$: coincide. El profe llama $C$ al término independiente de $y_p$ (acá $D$, para no confundirlo con $C_1,C_2$): es solo cuestión de nombres.
+
+</div>
 </Ejercicio>
 
 **Importante:** Todos los ejercicios deben ser resueltos, o al menos 1 de ellos con planteo y desarrollo consistente. Se recomienda prolijidad, orden y escritura clara y grande. ¡Adjuntar todos los cálculos auxiliares!
