@@ -15,7 +15,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
-import Pendiente from '../../components/Pendiente.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
 Universidad Tecnológica Nacional - FRC · Análisis Matemático II - Comisión 1R7 · 2° Parcial Práctico - 11/11/2025
@@ -36,14 +37,81 @@ Recomiendo trabajar en coordenadas polares (integral doble) o cilíndricas (inte
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Leé qué te piden: un **volumen**, y el sólido está encerrado entre dos superficies que tienen $x^2+y^2$ repetido. Preguntate: ¿qué forma tiene su "sombra" sobre el plano $xy$, y cuál superficie queda arriba y cuál abajo?
+
+</Pista>
+<Pista>
+
+Es un **volumen entre dos superficies con una integral doble en polares**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$. Hay que identificar techo y piso, y hallar $D$ igualando las dos $z$ (ahí se corta una circunferencia). Machete: [Volumen en polares/cilíndricas](../../machetes/volumen-polares-cilindricas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: techo $z=6-r^2$, piso $z=r$ (el cono), $D:\ 0\le r\le2,\ 0\le\theta\le2\pi$, $dA=r\,dr\,d\theta$:
+
+$$V=\int_0^{2\pi}\!\!d\theta\int_0^2(6-r^2-r)\,r\,dr$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el sólido. **Por qué:** para decidir cuál superficie es techo y cuál piso. $z=\sqrt{x^2+y^2}$ es un cono con vértice en el origen que abre hacia arriba, y $z=6-x^2-y^2$ es un paraboloide con vértice en $z=6$ que abre hacia abajo. El paraboloide queda arriba (en el eje, $6>0$) y el cono abajo. **Cómo reconocerlo:** $z=+\sqrt{\cdot}$ es un cono (la mitad de arriba) y $z=c-x^2-y^2$ una "cúpula".
+
+<img src={`${import.meta.env.BASE_URL}figuras/1r7/ej1.svg`} alt="Arriba, perspectiva del sólido entre el cono z=r (piso) y el paraboloide z=6−r² (techo), que se cortan en la circunferencia r=2, z=2. Abajo, corte con x=0: región entre la parábola z=6−y² y la V del cono z=|y|, con los puntos de cruce en y=±2, z=2." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** hallar la intersección. **Por qué:** define hasta dónde llega la base (la sombra del sólido sobre $xy$). Igualamos las $z$ y usamos $\sqrt{x^2+y^2}=r$ (vale porque $r\ge0$):
+
+$$r=6-r^2\ \Rightarrow\ r^2+r-6=0\ \Rightarrow\ (r+3)(r-2)=0$$
+
+$r=-3$ se descarta (un radio no es negativo), así que $r=2$, y entonces $z=2$. Base: $0\le r\le2$, $0\le\theta\le2\pi$.
+
+</Paso>
+<Paso>
+
+**Qué:** plantear la integral doble en polares. **Por qué:** la base es un círculo. El volumen es la integral de (techo − piso), y el jacobiano agrega el factor $r$:
+
+$$V=\iint_D\big[(6-r^2)-r\big]\,r\,dr\,d\theta=\int_0^{2\pi}\!\!d\theta\int_0^2(6r-r^3-r^2)\,dr$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$ (primero, con $\theta$ ausente). **Por qué:** cada término es una potencia. Primitiva:
+
+$$\int_0^2(6r-r^3-r^2)\,dr=\Big[3r^2-\frac{r^4}{4}-\frac{r^3}{3}\Big]_0^2$$
+
+Evaluando en $r=2$ (en $r=0$ todo vale 0), término por término:
+
+- $3\cdot2^2=12$
+- $\dfrac{2^4}{4}=4$
+- $\dfrac{2^3}{3}=\dfrac83$
+
+$$12-4-\frac83=\frac{16}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** lo que queda no depende de $\theta$, así que sale una vuelta completa:
+
+$$V=\frac{16}{3}\cdot2\pi=\frac{32\pi}{3}$$
+
+</Paso>
+<Solucion>
+
+$$V=\frac{32\pi}{3}\ \text{u}^3\approx 33{,}5\ \text{u}^3$$
+
+**Ojo con:** olvidarse del jacobiano $r$, o restar al revés (techo − piso, no piso − techo), y no descartar la raíz negativa $r=-3$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente, por rebanadas horizontales: a altura $z$ la sección es un círculo. Para $0\le z\le2$ la limita el cono ($r=z$), con área $\pi z^2$; para $2\le z\le6$ la limita el paraboloide ($r^2=6-z$), con área $\pi(6-z)$:
+
+$$V=\int_0^2\pi z^2\,dz+\int_2^6\pi(6-z)\,dz=\frac{8\pi}{3}+8\pi=\frac{32\pi}{3}$$
+(la segunda: $\int_2^6(6-z)\,dz=\big[6z-\tfrac{z^2}{2}\big]_2^6=18-10=8$).
+
+</Comprobacion>
 <ResolucionOficial examen="1r7-2025-11-11" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R7 2025.pdf" paginas="2" />
 </Ejercicio>
 
@@ -68,14 +136,76 @@ Nota del sitio: el original dice "1º cuadrante" (no "octante"); se transcribe t
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá el enunciado: el integrando $x+y$ y las condiciones $x^2+y^2\le1$, $z\ge1-x^2$, $z\le2+y^2$. ¿Qué forma tiene la base? ¿Entre qué dos superficies queda $z$?
+
+</Pista>
+<Pista>
+
+Como aparece $x^2+y^2\le1$ y la base es un cuarto de círculo, conviene **coordenadas cilíndricas**: $x=r\cos\theta$, $y=r\sin\theta$, $dx\,dy\,dz=r\,dr\,d\theta\,dz$. $z$ va de una superficie a la otra, y el 1º cuadrante ($x,y\ge0$) fija el ángulo. Machete: [Integral triple en cilíndricas/esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $0\le\theta\le\tfrac\pi2$, $0\le r\le1$, $1-r^2\cos^2\theta\le z\le2+r^2\sin^2\theta$, y el integrando es $(r\cos\theta+r\sin\theta)\cdot r$:
+
+$$IT=\int_0^{\pi/2}\!\!d\theta\int_0^1 r^2(\cos\theta+\sin\theta)\,dr\int_{1-r^2\cos^2\theta}^{2+r^2\sin^2\theta}dz$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar la región. **Por qué:** para saber cuál superficie es techo y cuál piso. $z=1-x^2$ y $z=2+y^2$ son cilindros parabólicos (dependen de una sola variable). Como $2+y^2\ge2>1\ge1-x^2$ en la base, el techo es $2+y^2$ y el piso $1-x^2$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1r7/ej2.svg`} alt="Arriba, perspectiva de la región en el primer cuadrante: techo z=2+y², piso z=1−x² y pared cilíndrica r=1. Abajo, la base: cuarto de círculo de radio 1 con 0≤r≤1 y 0≤θ≤π/2." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar la base. **Por qué:** $x^2+y^2\le1$ es el círculo unidad, y "1º cuadrante" pide $x\ge0$, $y\ge0$. En polares: $0\le r\le1$, $0\le\theta\le\tfrac\pi2$. (No hay que agregar más condiciones: con $x\le1$ se cumple $1-x^2\ge0$, así que la región queda sobre $z\ge0$ sola.)
+
+</Paso>
+<Paso>
+
+**Qué:** pasar el integrando, el elemento de volumen y los límites de $z$ a cilíndricas. **Por qué:** $x+y=r(\cos\theta+\sin\theta)$ y el jacobiano agrega un $r$, o sea el integrando es $r^2(\cos\theta+\sin\theta)$. Los límites: $z\ge1-x^2=1-r^2\cos^2\theta$ y $z\le2+y^2=2+r^2\sin^2\theta$.
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $z$. **Por qué:** es la integral más interna y da la altura a distancia $r$ del eje. Agrupamos y usamos $\sin^2\theta+\cos^2\theta=1$:
+
+$$\int_{1-r^2\cos^2\theta}^{2+r^2\sin^2\theta}dz=2+r^2\sin^2\theta-1+r^2\cos^2\theta$$
+$$=1+r^2(\sin^2\theta+\cos^2\theta)=1+r^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** la altura no depende de $\theta$, así que el integrando separa en una parte en $r$ y otra en $\theta$:
+
+$$\int_0^1 r^2(1+r^2)\,dr=\int_0^1(r^2+r^4)\,dr=\Big[\frac{r^3}{3}+\frac{r^5}{5}\Big]_0^1=\frac13+\frac15=\frac{8}{15}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** queda $\int_0^{\pi/2}(\cos\theta+\sin\theta)\,d\theta=[\sin\theta-\cos\theta]_0^{\pi/2}=(1-0)-(0-1)=2$. Entonces:
+
+$$IT=\frac{8}{15}\cdot2=\frac{16}{15}$$
+
+</Paso>
+<Solucion>
+
+$$IT=\frac{16}{15}\approx 1{,}07$$
+
+**Ojo con:** poner el jacobiano una sola vez en el integrando ($r$ del jacobiano por $r$ de $x+y$ da $r^2$), y no olvidar el $\sin^2+\cos^2=1$ al restar los límites de $z$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente, en cartesianas y por simetría: la región y la altura $1+x^2+y^2$ no cambian si se intercambian $x$ e $y$, así que $\iiint x=\iiint y$ y $IT=2\iint_D x\,(1+x^2+y^2)\,dA$. Integrando primero en $y$ de $0$ a $\sqrt{1-x^2}$:
+
+$$\iint_D x(1+x^2+y^2)\,dA=\int_0^1x\Big[(1+x^2)\sqrt{1-x^2}+\frac{(1-x^2)^{3/2}}{3}\Big]dx$$
+
+Con $u=1-x^2$ ($x\,dx=-\tfrac12du$, $1+x^2=2-u$): el primer término da $\tfrac12\int_0^1(2-u)\sqrt u\,du=\tfrac12\Big(\tfrac43-\tfrac25\Big)=\tfrac{7}{15}$ y el segundo $\tfrac16\cdot\tfrac25=\tfrac1{15}$. Suma $\tfrac{8}{15}$, y $IT=2\cdot\tfrac{8}{15}=\tfrac{16}{15}$.
+
+</Comprobacion>
 <ResolucionOficial examen="1r7-2025-11-11" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R7 2025.pdf" paginas="3" />
 </Ejercicio>
 
@@ -97,14 +227,80 @@ Verificar el cálculo aplicando la fórmula de Green.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate qué te piden: la integral de un **campo vectorial** sobre una curva **cerrada** formada por dos parábolas. Dibujalas: ¿en qué puntos se cortan y qué región encierran? ¿Hacia dónde se recorre cada tramo para ir en sentido antihorario?
+
+</Pista>
+<Pista>
+
+Es una integral curvilínea que se hace de dos formas: **por definición** (parametrizando cada tramo) y **con el teorema de Green** para verificar. Antes hay que hallar los cortes (igualando las curvas) y respetar el sentido antihorario. Machetes: [Curvilínea por definición](../../machetes/curvilinea-por-definicion/) y [Teorema de Green](../../machetes/teorema-de-green/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $C_1$ (la de abajo, $y=x^2-1$) va de $x=-1$ a $x=1$ y $C_2$ (la de arriba) de $x=1$ a $x=-1$. Con $P=2x-y$ y $Q=2x+y$: $IC=\int_{C_1}P\,dx+Q\,dy+\int_{C_2}P\,dx+Q\,dy$. Por Green: $\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$ con $x^2-1\le y\le1-x^2$, $-1\le x\le1$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar y hallar los cortes. **Por qué:** para fijar los extremos de cada tramo y el sentido. Igualando $x^2-1=1-x^2$ queda $2x^2=2$, o sea $x=\pm1$ con $y=0$. Cortes: $(-1,0)$ y $(1,0)$. En sentido antihorario la curva de abajo se recorre de izquierda a derecha y la de arriba de derecha a izquierda (la región queda siempre a la izquierda).
+
+<img src={`${import.meta.env.BASE_URL}figuras/1r7/ej3.svg`} alt="Región D encerrada entre la parábola y=x²−1 (abajo, recorrida de izquierda a derecha) y la parábola y=−x²+1 (arriba, recorrida de derecha a izquierda), con puntos de corte (−1,0) y (1,0), y sentido antihorario." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** calcular $IC_1$ por definición, sobre $y=x^2-1$ con $dy=2x\,dx$ y $x$ de $-1$ a $1$. **Por qué:** se reemplaza la curva dentro de $P\,dx+Q\,dy$.
+
+- $P=2x-(x^2-1)=2x-x^2+1$
+- $Q\,dy=(2x+x^2-1)\cdot2x\,dx=(4x^2+2x^3-2x)\,dx$
+
+Sumando ($2x$ se cancela con $-2x$): $P\,dx+Q\,dy=(2x^3+3x^2+1)\,dx$.
+
+$$IC_1=\int_{-1}^{1}(2x^3+3x^2+1)\,dx=\Big[\frac{x^4}{2}+x^3+x\Big]_{-1}^{1}=\Big(\tfrac12+1+1\Big)-\Big(\tfrac12-1-1\Big)=4$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_2$ por definición, sobre $y=1-x^2$ con $dy=-2x\,dx$ y $x$ de $1$ a $-1$. **Por qué:** igual que antes, pero cambia el sentido.
+
+- $P=2x-(1-x^2)=2x+x^2-1$
+- $Q\,dy=(2x+1-x^2)\cdot(-2x)\,dx=(-4x^2-2x+2x^3)\,dx$
+
+Sumando: $P\,dx+Q\,dy=(2x^3-3x^2-1)\,dx$ (el $2x$ también se cancela). Y como los límites van de $1$ a $-1$:
+
+$$IC_2=\int_{1}^{-1}(2x^3-3x^2-1)\,dx=-\int_{-1}^{1}(2x^3-3x^2-1)\,dx=-\big(0-2-2\big)=4$$
+
+</Paso>
+<Paso>
+
+**Qué:** sumar los tramos. **Por qué:** la integral sobre la curva cerrada es la suma de los tramos que la forman: $IC=IC_1+IC_2=4+4=8$.
+
+</Paso>
+<Paso>
+
+**Qué (verificación con Green):** aplicar el teorema. **Por qué:** la curva es cerrada, simple, antihoraria y $P,Q$ son derivables, entonces $\oint P\,dx+Q\,dy=\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$. Acá $\tfrac{\partial Q}{\partial x}=2$ y $\tfrac{\partial P}{\partial y}=-1$, o sea el integrando es $2-(-1)=3$ (constante: es 3 veces el área de $D$):
+
+$$IC=3\int_{-1}^{1}\!dx\int_{x^2-1}^{1-x^2}dy=3\int_{-1}^{1}\big[(1-x^2)-(x^2-1)\big]dx=3\int_{-1}^{1}(2-2x^2)\,dx$$
+$$=3\Big[2x-\frac{2x^3}{3}\Big]_{-1}^{1}=3\Big(\frac43+\frac43\Big)=3\cdot\frac83=8$$
+
+</Paso>
+<Solucion>
+
+$$IC=\oint_C F\cdot dr=8\qquad\big(IC_1=4,\ IC_2=4\big)$$
+
+**Ojo con:** el sentido de recorrido: si ponés los límites de $C_2$ de $-1$ a $1$ ese tramo da $-4$ y la suma sale $0$, distinta de lo que da Green.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente, sin Green: descomponer $F\cdot dr=(2x\,dx+y\,dy)+(-y\,dx+2x\,dy)$. El primer paréntesis es el diferencial exacto de $x^2+\tfrac{y^2}{2}$, así que su integral sobre una curva cerrada es $0$. Para el segundo, directo en cada tramo:
+
+- $\oint-y\,dx=-\int_{-1}^{1}(x^2-1)\,dx-\int_{1}^{-1}(1-x^2)\,dx=\tfrac43+\tfrac43=\tfrac83$
+- $\oint2x\,dy=\int_{-1}^{1}2x\cdot2x\,dx+\int_{1}^{-1}2x\cdot(-2x)\,dx=\tfrac83+\tfrac83=\tfrac{16}{3}$
+
+Suma: $\tfrac83+\tfrac{16}{3}=8$, igual que por definición y por Green.
+
+</Comprobacion>
 <ResolucionOficial examen="1r7-2025-11-11" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R7 2025.pdf" paginas="4–5" />
 </Ejercicio>
 
@@ -123,14 +319,70 @@ Se pide desarrollo analítico como visto en clase.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá cómo está escrita: aparecen $dx$ y $dy$ sumados e igualados a cero, con una función de $x$ e $y$ multiplicando a cada uno. ¿Podría ser el diferencial total de alguna función $u(x,y)$?
+
+</Pista>
+<Pista>
+
+Una ecuación $P\,dx+Q\,dy=0$ es **exacta** si $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$; hay que verificarlo primero. Si lo es, se busca $u$ con $u_x=P$, $u_y=Q$ y la solución es $u=C$. Machete: [EDO exacta](../../machetes/edo-exacta/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $P=e^x+\ln y+\tfrac yx$, $Q=\tfrac xy+\ln x+\cos y$. Integrá $P$ en $x$ y sumá $\varphi(y)$: $u=\int P\,dx+\varphi(y)$; después $\varphi'(y)=Q-\dfrac{\partial}{\partial y}\int P\,dx$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** identificar $P$ y $Q$. **Por qué:** $P$ es lo que multiplica a $dx$ y $Q$ a $dy$: $P=e^x+\ln y+\tfrac yx$, $Q=\tfrac xy+\ln x+\cos y$. **Cómo reconocerlo:** la ecuación viene con diferenciales, no con $y'$. Los logaritmos piden $x>0$, $y>0$.
 
 </Paso>
+<Paso>
+
+**Qué:** verificar la condición de exactitud. **Por qué:** sin ella el método de $u$ no vale. Derivando ($e^x$ no depende de $y$, $\cos y$ no depende de $x$):
+
+$$\frac{\partial P}{\partial y}=\frac1y+\frac1x,\qquad \frac{\partial Q}{\partial x}=\frac1y+\frac1x$$
+
+Son iguales: **es exacta**.
+
+</Paso>
+<Paso>
+
+**Qué:** integrar $P$ respecto de $x$. **Por qué:** $u_x=P$, así que $u$ es una primitiva de $P$ en $x$; lo que no depende de $x$ queda como una función $\varphi(y)$. Con $y$ constante: $\int e^x\,dx=e^x$, $\int\ln y\,dx=x\ln y$ y $\int\tfrac yx\,dx=y\ln x$:
+
+$$u=e^x+x\ln y+y\ln x+\varphi(y)$$
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $\varphi(y)$. **Por qué:** $u$ también tiene que cumplir $u_y=Q$. Derivando respecto de $y$:
+
+$$u_y=\frac xy+\ln x+\varphi'(y)=\frac xy+\ln x+\cos y\ \Rightarrow\ \varphi'(y)=\cos y\ \Rightarrow\ \varphi(y)=\sin y$$
+
+(La constante de integración de $\varphi$ se absorbe en la $C$ final.)
+
+</Paso>
+<Paso>
+
+**Qué:** escribir la solución. **Por qué:** una EDO exacta tiene como solución general (implícita) las curvas de nivel $u(x,y)=C$.
+
+</Paso>
+<Solucion>
+
+$$e^x+x\ln y+y\ln x+\sin y=C$$
+
+**Ojo con:** al integrar $\tfrac yx$ en $x$ sale $y\ln x$ (no $\ln x$ solo), y con $\ln y$ constante en $x$ sale $x\ln y$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: derivar la solución implícitamente respecto de $x$ (con $y=y(x)$):
+
+$$\frac{d}{dx}\big[e^x+x\ln y+y\ln x+\sin y\big]=e^x+\ln y+\frac xy\,y'+y'\ln x+\frac yx+\cos y\,y'=0$$
+
+Agrupando, es $\big(e^x+\ln y+\tfrac yx\big)+\big(\tfrac xy+\ln x+\cos y\big)y'=P+Q\,y'=0$, o sea la ecuación original dividida por $dx$.
+
+</Comprobacion>
 <ResolucionOficial examen="1r7-2025-11-11" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R7 2025.pdf" paginas="6" />
 </Ejercicio>
 
@@ -147,14 +399,90 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Contá qué aparece: $y''$ e $y'$ con coeficientes que son números, y del lado derecho un coseno y una constante. ¿Qué tipo de ecuación diferencial es y qué forma tiene su solución general?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2º orden **con coeficientes constantes, no homogénea**, con lado derecho "de manual": se resuelve por **coeficientes indeterminados**, $y=y_h+y_p$. Primero $y_h$ con la ecuación característica; después se propone $y_p$ copiando la forma del lado derecho **pero mirando si alguna parte choca con una raíz de la característica**. Machete: [EDO 2º orden, coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $r^2+r=0$, $y_h=C_1+C_2e^{-x}$. La constante $1$ del lado derecho choca con la raíz $r=0$, por eso se multiplica por $x$. Proponé (con coeficientes $A$, $B$, $D$, que no chocan con $C_1$, $C_2$):
+
+$$y_p=A\sin x+B\cos x+Dx$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución con lado derecho cero y siempre forma parte de la general. Se prueba $y=e^{rx}$: $r^2+r=0\Rightarrow r(r+1)=0$, entonces $r_1=0$, $r_2=-1$ (reales y distintas):
+
+$$y_h=C_1e^{0x}+C_2e^{-x}=C_1+C_2e^{-x}$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el lado derecho es $2\cos x+1$. Para $2\cos x$ van **los dos**, seno y coseno, porque al derivar uno aparece el otro; $\pm i$ no son raíces de la característica, así que no hay choque. Para la constante $1$ correspondería proponer una constante, pero **$0$ es raíz** de la característica (la constante ya es solución de la homogénea): hay resonancia y se multiplica por $x$, o sea $Dx$. **Cómo reconocerlo:** si el término propuesto ya aparece en $y_h$, se multiplica por $x$.
+
+$$y_p=A\sin x+B\cos x+Dx$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces. **Por qué:** para poder reemplazar en la ecuación.
+
+$$y_p'=A\cos x-B\sin x+D$$
+$$y_p''=-A\sin x-B\cos x$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''+y'$, juntando términos semejantes. **Por qué:** $y_p$ tiene que cumplir la ecuación.
+
+- $\cos x$: $-B+A$
+- $\sin x$: $-A-B$
+- constante: $D$
+
+Del lado derecho: $2$ en $\cos x$, $0$ en $\sin x$ (no tiene seno) y $1$ de constante.
+
+$$(A-B)\cos x+(-A-B)\sin x+D=2\cos x+0\cdot\sin x+1$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes y resolver. **Por qué:** dos funciones iguales tienen los mismos coeficientes en $\cos x$, $\sin x$ y en la constante.
+
+- constante: $D=1$.
+- $\cos x$: $A-B=2$ (1)
+- $\sin x$: $A+B=0$ (2) (de $-A-B=0$)
+
+Sumando (1) y (2) se va $B$: $2A=2\Rightarrow A=1$. De (2): $B=-A=-1$.
+
+</Paso>
+<Paso>
+
+**Qué:** armar la general. **Por qué:** $y=y_h+y_p$, con $C_1$ y $C_2$ libres porque no hay condiciones iniciales.
+
+</Paso>
+<Solucion>
+
+$$y=C_1+C_2e^{-x}+\sin x-\cos x+x$$
+
+**Ojo con:** proponer una constante para el $1$ sin ver que $r=0$ es raíz: sin el $x$ el sistema no tiene solución (la constante queda en $-1\ne0$).
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: sustituir $y_p$ en la ecuación. Con $y_p=\sin x-\cos x+x$:
+
+- $y_p'=\cos x+\sin x+1$
+- $y_p''=-\sin x+\cos x$
+- $y_p''+y_p'=(-\sin x+\cos x)+(\cos x+\sin x+1)=2\cos x+1$
+
+$y_h$ no aporta, porque $y_h''+y_h'=0$.
+
+</Comprobacion>
 <ResolucionOficial examen="1r7-2025-11-11" fuente="parciales/2do-parcial/2° Parciales/2° PP 1R7 2025.pdf" paginas="7" />
 </Ejercicio>
 

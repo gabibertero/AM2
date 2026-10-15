@@ -16,6 +16,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
@@ -38,14 +40,102 @@ Sugiero calcular en coordenadas polares o cilíndricas.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Leé qué te piden: un **volumen**, y el cuerpo está descripto por un cilindro y dos superficies con $z$. Preguntate: ¿qué forma tiene su "sombra" sobre el plano $xy$? ¿Qué superficie lo cierra por arriba y cuál por abajo?
+
+</Pista>
+<Pista>
+
+Un cuerpo con base circular, una superficie arriba y otra abajo se resuelve como **volumen entre dos superficies con una integral doble en polares**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$. Hay que identificar techo, piso y la región $D$. Machete: [Volumen en polares/cilíndricas](../../machetes/volumen-polares-cilindricas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: techo $z=8+r^2$, piso $z=4-r^2$, $D:\ 0\le r\le2,\ 0\le\theta\le2\pi$, $dA=r\,dr\,d\theta$:
+
+$$V=\int_0^{2\pi}\!\!d\theta\int_0^2\big[(8+r^2)-(4-r^2)\big]\,r\,dr$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el cuerpo. **Por qué:** para decidir cuál superficie es techo y cuál piso. $z\ge4-x^2-y^2$ pide estar *encima* del paraboloide que abre hacia abajo (vértice en $z=4$); $z\le8+x^2+y^2$ pide estar *debajo* del que abre hacia arriba (vértice en $z=8$). La resta $(8+r^2)-(4-r^2)=4+2r^2$ es siempre positiva, así que el techo nunca cruza al piso. **Cómo reconocerlo:** un cilindro que "encierra" dos paraboloides de ejes en $z$ es un cuerpo con base circular.
+
+<img src={`${import.meta.env.BASE_URL}figuras/2s2a/ej1.svg`} alt="Arriba, perspectiva del cilindro de radio 2 entre el paraboloide z=4−x²−y² (piso, cúpula azul) y z=8+x²+y² (techo, copa roja). Abajo, corte y=0 con ejes graduados: parábola inferior de vértice (0,4), parábola superior de vértice (0,8), paredes en x=±2 y el cuerpo sombreado entre ambas." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar la región $D$. **Por qué:** el cilindro $x^2+y^2\le4$ es la proyección del cuerpo sobre el plano $xy$: el círculo $r\le2$, o sea $0\le r\le2$ y $0\le\theta\le2\pi$.
+
+</Paso>
+<Paso>
+
+**Qué:** plantear la integral doble. **Por qué:** el volumen entre dos superficies es la integral de (techo − piso) sobre $D$:
+
+$$V=\iint_D\big[(8+x^2+y^2)-(4-x^2-y^2)\big]\,dx\,dy$$
+
+</Paso>
+<Paso>
+
+**Qué:** simplificar el integrando. **Por qué:** conviene hacerlo antes de integrar. Al distribuir el signo menos sobre $(4-x^2-y^2)$ cambian todos los signos:
+
+$$8+x^2+y^2-4+x^2+y^2$$
+
+Juntando lo semejante ($8-4=4$ y $x^2+x^2=2x^2$, igual con $y$):
+
+$$V=\iint_D(2x^2+2y^2+4)\,dx\,dy$$
+
+</Paso>
+<Paso>
+
+**Qué:** pasar a polares. **Por qué:** la base es un círculo y $x^2+y^2=r^2$. Se reemplaza $dx\,dy=r\,dr\,d\theta$ (el $r$ extra es el jacobiano, siempre en valor absoluto y positivo porque $r\ge0$):
+
+$$V=\int_0^{2\pi}\!\!d\theta\int_0^2(2r^2+4)\,r\,dr=\int_0^{2\pi}\!\!d\theta\int_0^2(2r^3+4r)\,dr$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** es la integral interna, $\theta$ no interviene.
+
+$$\int_0^2(2r^3+4r)\,dr=\Big[\frac{r^4}{2}+2r^2\Big]_0^2$$
+
+Evaluando en $r=2$ (en $r=0$ vale 0):
+
+$$\frac{2^4}{2}=8,\qquad 2\cdot2^2=8,\qquad\text{total }8+8=16$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** lo que queda es una constante, que se multiplica por una vuelta completa:
+
+$$V=\int_0^{2\pi}16\,d\theta=16\cdot2\pi=32\pi$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$V=32\pi\ \text{u}^3\approx100{,}5\ \text{u}^3$$
+
+**Ojo con:** olvidarse del jacobiano $r$ al pasar a polares, o distribuir mal el signo del piso ($-(4-r^2)=-4+r^2$, no $-4-r^2$).
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico con techo y piso identificados, integral $\iint(8+r^2-4+r^2)\,r\,dr\,d\theta$ con límites $0$–$2$ y $0$–$2\pi$, cuentas correctas y $V=32\pi$.
+- **A medias:** planteo correcto (techo − piso, polares, jacobiano) pero con un error de cuenta que cambia el resultado final.
+- **Mal:** sin gráfico ni planteo, o resta mal las superficies, o omite el jacobiano.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: volumen bajo el techo menos volumen bajo el piso, cada uno por separado (ambos son positivos sobre $D$, porque $4-r^2\ge0$ para $r\le2$).
+
+$$\iint_D(8+r^2)\,dA=2\pi\int_0^2(8r+r^3)\,dr=2\pi\Big[4r^2+\frac{r^4}{4}\Big]_0^2=2\pi\cdot20=40\pi$$
+
+$$\iint_D(4-r^2)\,dA=2\pi\int_0^2(4r-r^3)\,dr=2\pi\Big[2r^2-\frac{r^4}{4}\Big]_0^2=2\pi\cdot4=8\pi$$
+
+$$V=40\pi-8\pi=32\pi$$
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (A) 2025.pdf" paginas="2" />
 </Ejercicio>
 
@@ -67,14 +157,102 @@ Recomiendo calcular en coordenadas cilíndricas.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá qué se repite: $x^2+y^2$ aparece en el cilindro y en las dos superficies, y el integrando es $xz$. Además dice "1.er octante". ¿Qué forma tiene el cuerpo que queda entre los dos paraboloides? ¿Qué te dice "octante" sobre los ángulos?
+
+</Pista>
+<Pista>
+
+Como $x^2+y^2$ aparece siempre junto, conviene **coordenadas cilíndricas**: $x=r\cos\theta$, $dV=r\,dz\,dr\,d\theta$. Hay que hallar dónde se cortan las superficies (igualando las $z$) y usar el octante para acotar $\theta$. Machete: [Integral triple en cilíndricas/esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: integrando $xz\cdot r=r\cos\theta\cdot z\cdot r$; $0\le\theta\le\frac\pi2$, $0\le r\le2$, $r^2\le z\le8-r^2$:
+
+$$IT=\int_0^{\pi/2}\!\!\cos\theta\,d\theta\int_0^2 r^2\,dr\int_{r^2}^{8-r^2}z\,dz$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el cuerpo. **Por qué:** para saber cuál paraboloide es techo. $z=8-r^2$ abre hacia abajo (vértice en 8) y $z=r^2$ hacia arriba (vértice en 0): el primero es el techo. **Cómo reconocerlo:** dos paraboloides de ejes en $z$ con signos opuestos encierran una "lenteja"; acá solo se usa la porción del primer octante.
+
+<img src={`${import.meta.env.BASE_URL}figuras/2s2a/ej2.svg`} alt="Arriba, perspectiva del cuerpo en el primer octante entre el paraboloide z=r² (piso, azul) y z=8−r² (techo, rojo), con la pared r=2. Abajo, corte meridiano con ejes graduados: parábola z=r² y parábola z=8−r² que se cortan en el punto (2,4); región sombreada entre ambas para r de 0 a 2." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** hallar la intersección. **Por qué:** define hasta dónde llega el cuerpo en $r$. Igualando las $z$:
+
+$$r^2=8-r^2\ \Rightarrow\ 2r^2=8\ \Rightarrow\ r^2=4\ \Rightarrow\ r=2\quad(z=4)$$
+
+Las superficies se cortan justo sobre el cilindro $r=2$: el cilindro del enunciado no recorta nada más, solo confirma el radio.
+
+</Paso>
+<Paso>
+
+**Qué:** fijar los límites de $\theta$. **Por qué:** "1.er octante" significa $x\ge0,\ y\ge0,\ z\ge0$. Con $x=r\cos\theta\ge0$ y $y=r\sin\theta\ge0$ (y $r\ge0$) queda $0\le\theta\le\frac\pi2$. La condición $z\ge0$ ya se cumple porque $z\ge r^2\ge0$.
+
+</Paso>
+<Paso>
+
+**Qué:** pasar el integrando y el elemento de volumen. **Por qué:** $xz=r\cos\theta\cdot z$ y el jacobiano agrega un $r$, así que el integrando es $r^2\cos\theta\,z$. Como $\cos\theta$ solo depende de $\theta$ y $r^2$ de $r$, se separan los factores (los límites de $z$ dependen de $r$, por eso $z$ va adentro):
+
+$$IT=\int_0^{\pi/2}\!\!\cos\theta\,d\theta\int_0^2 r^2\,dr\int_{r^2}^{8-r^2}z\,dz$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $z$. **Por qué:** es la más interna.
+
+$$\int_{r^2}^{8-r^2}z\,dz=\frac{(8-r^2)^2-(r^2)^2}{2}$$
+
+Desarrollando el cuadrado $(8-r^2)^2=64-16r^2+r^4$ y restando $r^4$ (se cancela):
+
+$$\frac{64-16r^2}{2}=32-8r^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** se multiplica por $r^2$ y se primitiva cada potencia:
+
+$$\int_0^2r^2(32-8r^2)\,dr=\int_0^2(32r^2-8r^4)\,dr=\Big[\frac{32r^3}{3}-\frac{8r^5}{5}\Big]_0^2$$
+
+En $r=2$: $\dfrac{32\cdot8}{3}=\dfrac{256}{3}$ y $\dfrac{8\cdot32}{5}=\dfrac{256}{5}$, entonces
+
+$$\frac{256}{3}-\frac{256}{5}=\frac{1280-768}{15}=\frac{512}{15}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** queda el factor angular:
+
+$$\int_0^{\pi/2}\cos\theta\,d\theta=\sin\tfrac\pi2-\sin0=1\ \Rightarrow\ IT=1\cdot\frac{512}{15}$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$IT=\frac{512}{15}\approx34{,}13$$
+
+**Ojo con:** el jacobiano (el $r$ extra) y los límites de $\theta$: sin el octante habría que integrar $0\le\theta\le2\pi$ y $\int\cos\theta\,d\theta$ daría 0.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** cuerpo graficado, cilíndricas con $r^2\cos\theta\,z$, límites $0\le\theta\le\frac\pi2$, $0\le r\le2$, $r^2\le z\le8-r^2$ y resultado $\frac{512}{15}$.
+- **A medias:** planteo y límites correctos pero un error de cuenta en la integral (por ejemplo al desarrollar $(8-r^2)^2$).
+- **Mal:** límites de $\theta$ o de $z$ incorrectos, sin jacobiano, o sin planteo.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: otro orden, integrando primero en $r$ con $z$ fijo. Para $0\le z\le4$ manda el piso ($r^2\le z$), o sea $0\le r\le\sqrt z$; para $4\le z\le8$ manda el techo ($r^2\le8-z$), o sea $0\le r\le\sqrt{8-z}$. Con $\int_0^R r^2\,dr=\frac{R^3}{3}$ y el factor angular $1$:
+
+$$IT=\int_0^4\frac{z\cdot z^{3/2}}{3}\,dz+\int_4^8\frac{z\,(8-z)^{3/2}}{3}\,dz=\frac{256}{21}+\frac{768}{35}=\frac{1280+2304}{105}=\frac{512}{15}$$
+
+(la primera vale $\frac13\cdot\frac27\cdot4^{7/2}=\frac{256}{21}$; en la segunda, con $w=8-z$, queda $\frac13\int_0^4(8-w)\,w^{3/2}\,dw=\frac{768}{35}$).
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (A) 2025.pdf" paginas="3" />
 </Ejercicio>
 
@@ -89,14 +267,101 @@ Determinar por: (a) Definición y (b) Fórmula de Green.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate qué te piden: la integral de un **campo vectorial** sobre una curva **cerrada** formada por dos tramos (la recta y la parábola). Dibujá las dos curvas: ¿en qué puntos se cortan y qué región encierran? ¿Por dónde hay que ir para que el recorrido sea antihorario?
+
+</Pista>
+<Pista>
+
+Es una integral curvilínea que se resuelve de dos formas: **por definición** (parametrizar cada tramo con $x$ y sumar, inciso a) y con el **teorema de Green** (inciso b). Antes hay que hallar los cortes igualando las curvas y respetar el sentido antihorario. Machetes: [Curvilínea por definición](../../machetes/curvilinea-por-definicion/) y [Teorema de Green](../../machetes/teorema-de-green/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: los cortes son $(-2,2)$ y $(1,-1)$; la parábola $C_2$ va de $x=-2$ a $x=1$ y la recta $C_1$ de $x=1$ a $x=-2$. Con $P=x-y$, $Q=x+y$: por definición $IC=\int_{C_1}+\int_{C_2}$; por Green $IC=\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$ con $x^2-2\le y\le-x$, $-2\le x\le1$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar y hallar los cortes. **Por qué:** para fijar los extremos de cada tramo. Igualando $x^2-2=-x$:
+
+$$x^2+x-2=0\ \Rightarrow\ (x+2)(x-1)=0\ \Rightarrow\ x=-2,\ x=1$$
+
+Con $y=-x$: los puntos son $(-2,2)$ y $(1,-1)$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/2s2a/ej3.svg`} alt="Región D encerrada entre la parábola y=x²−2 (abajo, recorrida de izquierda a derecha, de x=−2 a x=1) y la recta y=−x (arriba, recorrida de derecha a izquierda, de x=1 a x=−2), con puntos de corte (−2,2) y (1,−1), ejes graduados de a 1 y sentido antihorario." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** decidir el sentido de cada tramo. **Por qué:** antihorario significa dejar la región $D$ siempre a la izquierda. En $x=0$ la recta vale $0$ y la parábola $-2$: la recta queda arriba. Abajo se va de izquierda a derecha (la parábola, $x$ de $-2$ a $1$) y arriba de derecha a izquierda (la recta, $x$ de $1$ a $-2$).
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_1$ por definición (recta). **Por qué:** se reemplaza la curva dentro de $P\,dx+Q\,dy$. Con $y=-x$, $dy=-dx$:
+
+- $P\,dx=\big(x-(-x)\big)dx=2x\,dx$
+- $Q\,dy=\big(x+(-x)\big)(-dx)=0$
+
+Como el segundo término se anula y $x$ va de $1$ a $-2$:
+
+$$IC_1=\int_1^{-2}2x\,dx=\big[x^2\big]_1^{-2}=4-1=3$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_2$ por definición (parábola). **Por qué:** igual, con $y=x^2-2$, $dy=2x\,dx$ y $x$ de $-2$ a $1$.
+
+- $P\,dx=\big(x-(x^2-2)\big)dx=(-x^2+x+2)\,dx$
+- $Q\,dy=\big(x+x^2-2\big)\,2x\,dx=(2x^3+2x^2-4x)\,dx$
+
+Sumando y agrupando por potencias ($x^2$: $-1+2=1$; $x$: $1-4=-3$):
+
+$$IC_2=\int_{-2}^{1}(2x^3+x^2-3x+2)\,dx=\Big[\frac{x^4}{2}+\frac{x^3}{3}-\frac{3x^2}{2}+2x\Big]_{-2}^{1}$$
+
+En $x=1$: $\tfrac12+\tfrac13-\tfrac32+2=\tfrac43$. En $x=-2$: $8-\tfrac83-6-4=-\tfrac{14}{3}$. Restando: $\tfrac43-\big(-\tfrac{14}{3}\big)=6$.
+
+</Paso>
+<Paso>
+
+**Qué:** sumar los tramos. **Por qué:** la integral sobre la curva cerrada es la suma de los tramos que la forman: $IC=IC_1+IC_2=3+6=9$.
+
+</Paso>
+<Paso>
+
+**Qué (inciso b):** aplicar Green. **Por qué:** la curva es cerrada, simple, antihoraria y $P,Q$ son derivables, así que $\oint P\,dx+Q\,dy=\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$. Acá $\tfrac{\partial Q}{\partial x}=1$ y $\tfrac{\partial P}{\partial y}=-1$, entonces el integrando es $1-(-1)=2$:
+
+$$IC=2\int_{-2}^{1}dx\int_{x^2-2}^{-x}dy=2\int_{-2}^{1}\big(-x-x^2+2\big)\,dx=2\Big[-\frac{x^2}{2}-\frac{x^3}{3}+2x\Big]_{-2}^{1}$$
+
+En $x=1$: $-\tfrac12-\tfrac13+2=\tfrac76$. En $x=-2$: $-2+\tfrac83-4=-\tfrac{10}{3}$. Restando: $\tfrac76+\tfrac{10}{3}=\tfrac{27}{6}=\tfrac92$, y
+
+$$IC=2\cdot\frac92=9$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$IC=\oint_C F\cdot dr=9\qquad\big(IC_1=3,\ IC_2=6\big)$$
+
+**Ojo con:** el sentido de recorrido: si ponés los límites de $C_1$ de $-2$ a $1$ el signo de ese tramo se invierte y el total deja de coincidir con Green.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico con cortes y sentido, ambos tramos por definición ($IC_1=3$, $IC_2=6$, total $9$) y Green con $\iint2\,dA$ y los mismos $9$.
+- **A medias:** un solo método completo y correcto (definición o Green), o los dos planteados con un error de cuenta; o un tramo con el sentido invertido.
+- **Mal:** sin gráfico ni límites, orientación horaria sin advertirlo, o aplica Green sin cerrar la curva.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente para Green: el área de $D$ se puede calcular con la fórmula de la región entre una parábola $y=ax^2+bx+c$ y una recta que la corta en $x_1<x_2$: $\text{Área}=\dfrac{|a|\,(x_2-x_1)^3}{6}$. Acá $a=1$, $x_1=-2$, $x_2=1$:
+
+$$\text{Área}=\frac{1\cdot3^3}{6}=\frac{27}{6}=\frac92\ \Rightarrow\ IC=2\cdot\frac92=9$$
+
+que es el valor obtenido y además coincide con la suma $3+6$ por definición: dos caminos distintos, mismo número.
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (A) 2025.pdf" paginas="4–5" />
 </Ejercicio>
 
@@ -113,14 +378,82 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá cómo está escrita: aparecen $dx$ y $dy$ sumados e igualados a cero, cada uno multiplicado por una función de $x$ e $y$. ¿Podría ser el diferencial total de alguna función $u(x,y)$?
+
+</Pista>
+<Pista>
+
+Una ecuación $P\,dx+Q\,dy=0$ es **exacta** si $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$; hay que verificarlo primero. Si lo es, se busca $u$ con $u_x=P$, $u_y=Q$ y la solución es $u=C$. Machete: [EDO exacta](../../machetes/edo-exacta/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $P=2x\sin(y)-y\sin(x)$, $Q=x^2\cos(y)+\cos(x)$. Integrá $P$ en $x$ y sumá $\varphi(y)$; después $\varphi'(y)=Q-\dfrac{\partial}{\partial y}\int P\,dx$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** identificar $P$ y $Q$. **Por qué:** $P$ es lo que multiplica a $dx$ y $Q$ lo que multiplica a $dy$. **Cómo reconocerlo:** la ecuación viene con diferenciales, no con $y'$.
+
+$$P=2x\sin(y)-y\sin(x),\qquad Q=x^2\cos(y)+\cos(x)$$
 
 </Paso>
+<Paso>
+
+**Qué:** verificar la condición de exactitud. **Por qué:** sin ella el método de $u$ no vale (si no se cumpliera, se probaría un factor integrante; ver el machete). Al derivar $-y\sin x$ respecto de $y$ queda $-\sin x$:
+
+$$\frac{\partial P}{\partial y}=2x\cos(y)-\sin(x),\qquad\frac{\partial Q}{\partial x}=2x\cos(y)-\sin(x)$$
+
+Son iguales: **es exacta**.
+
+</Paso>
+<Paso>
+
+**Qué:** integrar $P$ respecto de $x$. **Por qué:** $u_x=P$, así que $u$ es una primitiva de $P$ en $x$; lo que no depende de $x$ queda como una función $\varphi(y)$. Con $y$ constante: $\int2x\sin(y)\,dx=x^2\sin(y)$ y $\int-y\sin(x)\,dx=y\cos(x)$ (la primitiva de $-\sin x$ es $\cos x$):
+
+$$u=x^2\sin(y)+y\cos(x)+\varphi(y)$$
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $\varphi(y)$. **Por qué:** $u$ también tiene que cumplir $u_y=Q$. Derivando respecto de $y$:
+
+$$u_y=x^2\cos(y)+\cos(x)+\varphi'(y)=x^2\cos(y)+\cos(x)\ \Rightarrow\ \varphi'(y)=0\ \Rightarrow\ \varphi(y)=\text{cte}$$
+
+(la constante se absorbe en la $C$ final).
+
+</Paso>
+<Paso>
+
+**Qué:** escribir la solución. **Por qué:** una EDO exacta tiene como solución general (implícita) las curvas de nivel $u(x,y)=C$.
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$x^2\sin(y)+y\cos(x)=C$$
+
+**Ojo con:** no olvidar verificar $\partial P/\partial y=\partial Q/\partial x$ antes de integrar (el enunciado pregunta "si es exacta"), y el signo de $\int-y\sin x\,dx=+y\cos x$.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** verifica la exactitud con las dos derivadas parciales, obtiene $u$ con $\varphi'(y)=0$ y escribe $x^2\sin y+y\cos x=C$.
+- **A medias:** resuelve bien pero sin verificar la exactitud, o la verifica y se equivoca en un signo de la primitiva.
+- **Mal:** no verifica ni plantea $u_x=P$, $u_y=Q$, o da una solución que no cumple la ecuación.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente (dos controles). **1)** Derivar la solución implícitamente respecto de $x$ con $y=y(x)$:
+
+$$\frac{d}{dx}\big[x^2\sin y+y\cos x\big]=2x\sin y+x^2\cos y\,y'+y'\cos x-y\sin x=0$$
+
+Agrupando: $\big(2x\sin y-y\sin x\big)+\big(x^2\cos y+\cos x\big)y'=P+Q\,y'=0$, la ecuación original dividida por $dx$.
+
+**2)** Empezar al revés, integrando $Q$ en $y$: $\int Q\,dy=x^2\sin y+y\cos x+\psi(x)$, y al derivar en $x$ da $2x\sin y-y\sin x+\psi'(x)=P$, o sea $\psi'(x)=0$: la misma $u$.
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (A) 2025.pdf" paginas="6" />
 </Ejercicio>
 
@@ -137,14 +470,101 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Contá qué aparece: $y''$, $y'$ e $y$ con coeficientes que son números, y del lado derecho una exponencial y un polinomio. ¿Qué tipo de ecuación diferencial es y qué forma tiene su solución general?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2.º orden **con coeficientes constantes, no homogénea**, con lado derecho "de manual": se resuelve por **coeficientes indeterminados**, $y=y_h+y_p$. Primero $y_h$ con la ecuación característica; después se propone $y_p$ copiando la forma del lado derecho, ojo con las raíces de la característica. Machete: [EDO 2.º orden, coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $r^2-r-6=0$, $y_h=C_1e^{3x}+C_2e^{-2x}$. Como $3$ es raíz, el término $e^{3x}$ lleva un $x$ de más; para $6x+3$ va un polinomio de grado 1 (coeficientes $A$, $B$, $D$, que no chocan con $C_1$, $C_2$):
+
+$$y_p=Axe^{3x}+Bx+D$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución con lado derecho cero y siempre forma parte de la general. Se prueba $y=e^{rx}$ y queda la característica; por la fórmula de la cuadrática:
+
+$$r^2-r-6=0\ \Rightarrow\ r=\frac{1\pm\sqrt{1+24}}{2}=\frac{1\pm5}{2}\ \Rightarrow\ r_1=3,\ r_2=-2$$
+
+Raíces reales y distintas:
+
+$$y_h=C_1e^{3x}+C_2e^{-2x}$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el lado derecho es $5e^{3x}+6x+3$. Para $e^{3x}$ correspondería $Ae^{3x}$, pero **$3$ es raíz de la característica**: $Ae^{3x}$ ya es solución de la homogénea y daría $0$. Hay **resonancia** y se multiplica por $x$: $Axe^{3x}$. Para $6x+3$ (polinomio de grado 1) va $Bx+D$; $0$ no es raíz, así que no hace falta otro $x$. **Cómo reconocerlo:** si el exponente del lado derecho coincide con una raíz, se multiplica por $x$.
+
+$$y_p=Axe^{3x}+Bx+D$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces. **Por qué:** para poder reemplazar en la ecuación (regla del producto en $Axe^{3x}$).
+
+$$y_p'=Ae^{3x}+3Axe^{3x}+B$$
+$$y_p''=3Ae^{3x}+3Ae^{3x}+9Axe^{3x}=6Ae^{3x}+9Axe^{3x}$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''-y'-6y$ y juntar términos semejantes. **Por qué:** $y_p$ tiene que cumplir la ecuación.
+
+- $e^{3x}$: $6A-A=5A$
+- $xe^{3x}$: $9A-3A-6A=0$ (se cancela siempre: es la resonancia)
+- $x$: $-6B$
+- constante: $-B-6D$
+
+$$5Ae^{3x}-6Bx+(-B-6D)=5e^{3x}+6x+3$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes y resolver. **Por qué:** dos funciones iguales tienen los mismos coeficientes en $e^{3x}$, $x$ y la constante.
+
+- $e^{3x}$: $5A=5\Rightarrow A=1$
+- $x$: $-6B=6\Rightarrow B=-1$
+- constante: $-B-6D=3$; con $B=-1$ queda $1-6D=3$, entonces $-6D=2$ y $D=-\tfrac13$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la general. **Por qué:** $y=y_h+y_p$, con $C_1$ y $C_2$ libres porque no hay condiciones iniciales.
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=C_1e^{3x}+C_2e^{-2x}+xe^{3x}-x-\frac13$$
+
+**Ojo con:** la resonancia: proponer $Ae^{3x}$ sin el $x$ lleva a $0=5e^{3x}$, sin solución.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** $y_h$ correcta, reconoce la resonancia con $e^{3x}$, propone $Axe^{3x}+Bx+D$, obtiene $A=1$, $B=-1$, $D=-\frac13$ y escribe la general.
+- **A medias:** $y_h$ y forma de $y_p$ correctas pero un error al derivar o al resolver el sistema; o no usa $x$ en la exponencial y se da cuenta tarde.
+- **Mal:** $y_h$ mal (raíces) o $y_p$ sin forma justificada, o solo da $y_p$ sin $y_h$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: sustituir $y_p=xe^{3x}-x-\frac13$ en la ecuación.
+
+- $y_p'=e^{3x}+3xe^{3x}-1$
+- $y_p''=6e^{3x}+9xe^{3x}$
+- $-6y_p=-6xe^{3x}+6x+2$
+
+$$y_p''-y_p'-6y_p=(6-1)e^{3x}+(9-3-6)xe^{3x}+6x+(1+2)=5e^{3x}+6x+3$$
+
+$y_h$ no aporta, porque $y_h''-y_h'-6y_h=0$ por construcción (raíces $3$ y $-2$).
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (A) 2025.pdf" paginas="7" />
 </Ejercicio>
 

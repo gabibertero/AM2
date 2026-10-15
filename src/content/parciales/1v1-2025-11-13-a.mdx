@@ -16,6 +16,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
@@ -37,14 +39,81 @@ Recomiendo trabajar en coordenadas polares (integral doble) o cilíndricas (inte
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Leé qué te piden: un **volumen** de un sólido del primer octante, con una pared cilíndrica y dos planos que lo cierran en $z$. Preguntate: ¿qué forma tiene la "sombra" del sólido sobre el plano $xy$? ¿Qué plano queda abajo y cuál arriba?
+
+</Pista>
+<Pista>
+
+Un sólido con base circular, un plano arriba y otro abajo se resuelve como **volumen entre dos superficies con una integral doble en polares**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$. Hay que identificar techo, piso y la región $D$. Machete: [Volumen en polares/cilíndricas](../../machetes/volumen-polares-cilindricas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: techo $z=4-x$, piso $z=x$, $D:\ 0\le r\le2,\ 0\le\theta\le\tfrac\pi2$, $dA=r\,dr\,d\theta$, $x=r\cos\theta$:
+
+$$V=\int_0^{\pi/2}\!\!d\theta\int_0^2\big(4-2r\cos\theta\big)\,r\,dr$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el sólido. **Por qué:** para decidir qué plano es techo y cuál piso. La condición $x\le z\le4-x$ dice que $z=x$ es el piso y $z=4-x$ el techo (se cumple $x\le4-x$ mientras $x\le2$). **Cómo reconocerlo:** un $z$ acotado entre dos expresiones en $x$ e $y$ es "piso $\le z\le$ techo".
+
+<img src={`${import.meta.env.BASE_URL}figuras/1v1-a/ej1.svg`} alt="Arriba, perspectiva del sólido del primer octante dentro del cilindro de radio 2, entre el plano z=x (piso) y el plano z=4−x (techo). Abajo, corte con y=0: región triangular entre las rectas z=x y z=4−x con vértices (0,0), (0,4) y (2,2)." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar la región $D$ de integración. **Por qué:** es la proyección del sólido sobre $xy$. El cilindro $x^2+y^2=4$ y el primer octante ($x\ge0$, $y\ge0$) dan un cuarto de círculo: $0\le r\le2$, $0\le\theta\le\tfrac\pi2$. En todo $D$ vale $x\le2$, así que el techo nunca queda debajo del piso (se tocan recién en $x=2$, $z=2$).
+
+</Paso>
+<Paso>
+
+**Qué:** plantear la integral doble. **Por qué:** el volumen entre dos superficies es la integral de (techo − piso) sobre $D$:
+
+$$V=\iint_D\big[(4-x)-x\big]\,dx\,dy=\iint_D(4-2x)\,dx\,dy$$
+
+</Paso>
+<Paso>
+
+**Qué:** pasar a polares. **Por qué:** la base es un cuarto de círculo. Se reemplaza $x=r\cos\theta$ y $dx\,dy=r\,dr\,d\theta$ (el $r$ es el jacobiano). Distribuyendo el $r$:
+
+$$V=\int_0^{\pi/2}\!\!d\theta\int_0^2\big(4r-2r^2\cos\theta\big)\,dr$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$, término por término. **Por qué:** la integral interna va primero y $\theta$ se trata como constante.
+
+- $\int_0^2 4r\,dr=\big[2r^2\big]_0^2=8$
+- $\int_0^2 2r^2\cos\theta\,dr=\Big[\dfrac{2r^3}{3}\Big]_0^2\cos\theta=\dfrac{16}{3}\cos\theta$
+
+Restando el segundo término: $\ \int_0^2(\dots)\,dr=8-\dfrac{16}{3}\cos\theta$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** ya queda una sola variable. La constante da una vuelta de $\tfrac\pi2$ y la primitiva del coseno es el seno:
+
+$$\int_0^{\pi/2}8\,d\theta=8\cdot\frac\pi2=4\pi$$
+$$\int_0^{\pi/2}\frac{16}{3}\cos\theta\,d\theta=\frac{16}{3}\big[\sin\theta\big]_0^{\pi/2}=\frac{16}{3}(1-0)=\frac{16}{3}$$
+
+Restando: $V=4\pi-\dfrac{16}{3}=4\Big(\pi-\dfrac43\Big)$.
+
+</Paso>
+<Solucion>
+
+$$V=4\pi-\frac{16}{3}=4\Big(\pi-\frac43\Big)\ \text{u}^3\approx 7{,}23\ \text{u}^3$$
+
+**Ojo con:** olvidarte del jacobiano $r$ al pasar a polares, o poner $\theta$ de $0$ a $2\pi$: el primer octante es solo un cuarto de círculo.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente en cartesianas: $V=\int_0^2(4-2x)\sqrt{4-x^2}\,dx$ (para cada $x$, $y$ va de $0$ a $\sqrt{4-x^2}$). Separando, $\int_0^2\sqrt{4-x^2}\,dx$ es el área de un cuarto de círculo de radio 2, o sea $\pi$, y $\int_0^2x\sqrt{4-x^2}\,dx=\big[-\tfrac13(4-x^2)^{3/2}\big]_0^2=\tfrac83$:
+
+$$V=4\cdot\pi-2\cdot\frac83=4\pi-\frac{16}{3}\approx 7{,}23$$
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (A) Nov-2025.pdf" paginas="2" />
 </Ejercicio>
 
@@ -70,14 +139,75 @@ Nota del sitio: el original dice "Siendoe" (sic).
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá el integrando y las superficies: ¿qué combinación de $x$ e $y$ se repite en el elipsoide? ¿Qué forma tiene la región del 1º octante con $y\le x$ vista desde arriba (en el plano $xy$)?
+
+</Pista>
+<Pista>
+
+Como $x^2+y^2$ aparece junto, conviene **coordenadas cilíndricas**: $x=r\cos\theta$, $y=r\sin\theta$, $dx\,dy\,dz=r\,dr\,d\theta\,dz$. Hay que despejar $z$ del elipsoide (techo) y ver qué ángulos corresponden a $0\le y\le x$. Machete: [Integral triple en cilíndricas/esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z$ va de $0$ a $2\sqrt{1-r^2}$, $0\le r\le1$, $0\le\theta\le\tfrac\pi4$, y el integrando $xz\cdot r$ pasa a $r^2\cos\theta\,z$:
+
+$$IT=\int_0^{\pi/4}\!\cos\theta\,d\theta\int_0^1 r^2\,dr\int_0^{2\sqrt{1-r^2}}z\,dz$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar la región. **Por qué:** para ver los límites. Dividiendo por $4$, $x^2+y^2+\tfrac{z^2}{4}=1$: es un elipsoide de semiejes $1$, $1$ y $2$. En el 1º octante es un "cuarto de huevo" cuya cara de arriba es $z=2\sqrt{1-x^2-y^2}$, y el plano $y=x$ lo corta por la mitad del cuarto.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1v1-a/ej2.svg`} alt="Arriba, perspectiva de la porción del elipsoide 4x²+4y²+z²=4 en el primer octante entre los planos y=0 e y=x, con base en z=0 y techo z=2 raíz de 1 menos r al cuadrado. Abajo, la base en el plano xy: sector circular de radio 1 entre θ=0 y θ=π/4." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** hallar la base y el techo. **Por qué:** con $x^2+y^2=r^2$ el elipsoide es $4r^2+z^2=4$, o sea $z=\sqrt{4-4r^2}=2\sqrt{1-r^2}$ (con $z\ge0$ por el octante). Ese techo toca $z=0$ en $r=1$: la base llega hasta $r=1$. Para el ángulo, $y\le x$ con $x,y\ge0$ significa $\tan\theta\le1$, es decir $0\le\theta\le\tfrac\pi4$. **Cómo reconocerlo:** una desigualdad entre $y$ y $x$ en el primer octante recorta un sector entre dos rectas por el origen.
+
+</Paso>
+<Paso>
+
+**Qué:** pasar el integrando y el elemento de volumen a cilíndricas. **Por qué:** $x=r\cos\theta$ y el jacobiano agrega un $r$, así que $xz\,dx\,dy\,dz=r\cos\theta\cdot z\cdot r\,dr\,d\theta\,dz=r^2\cos\theta\,z\,dr\,d\theta\,dz$. Las variables se separan:
+
+$$IT=\int_0^{\pi/4}\!\cos\theta\,d\theta\int_0^1 r^2\,dr\int_0^{2\sqrt{1-r^2}}z\,dz$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $z$. **Por qué:** es la integral más interna:
+
+$$\int_0^{2\sqrt{1-r^2}}z\,dz=\Big[\frac{z^2}{2}\Big]_0^{2\sqrt{1-r^2}}=\frac{4(1-r^2)}{2}=2(1-r^2)$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** se multiplica por $r^2$ y se primitiva cada potencia:
+
+$$\int_0^1 r^2\cdot2(1-r^2)\,dr=2\int_0^1(r^2-r^4)\,dr=2\Big[\frac{r^3}{3}-\frac{r^5}{5}\Big]_0^1=2\Big(\frac13-\frac15\Big)=2\cdot\frac{2}{15}=\frac{4}{15}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$ y juntar. **Por qué:** lo que falta es solo $\int_0^{\pi/4}\cos\theta\,d\theta=\sin\tfrac\pi4-\sin0=\tfrac{\sqrt2}{2}$. Entonces
+
+$$IT=\frac{4}{15}\cdot\frac{\sqrt2}{2}=\frac{2\sqrt2}{15}$$
+
+</Paso>
+<Solucion>
+
+$$IT=\frac{2\sqrt2}{15}\approx 0{,}189$$
+
+**Ojo con:** el jacobiano (el $r$ extra) y no confundir los límites de $z$: es $2\sqrt{1-r^2}$, no $\sqrt{1-r^2}$ (el elipsoide tiene semieje $2$ en $z$).
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: otro orden, integrando en $r$ con $z$ fijo (la parte de $\theta$ no cambia). Para cada $z$ entre $0$ y $2$, $r$ va de $0$ a $\sqrt{1-z^2/4}$ y $\int_0^R r^2\,dr=\tfrac{R^3}{3}$. Con $u=1-\tfrac{z^2}{4}$ se tiene $z\,dz=-2\,du$:
+
+$$\int_0^2z\,\frac{(1-z^2/4)^{3/2}}{3}\,dz=\frac13\cdot2\int_0^1u^{3/2}du=\frac13\cdot2\cdot\frac25=\frac{4}{15}\quad\Rightarrow\quad IT=\frac{\sqrt2}{2}\cdot\frac13\cdot\frac45=\frac{2\sqrt2}{15}$$
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (A) Nov-2025.pdf" paginas="3" />
 </Ejercicio>
 
@@ -99,14 +229,96 @@ Plantear la fórmula de Green (en coordenadas polares) sin necesidad de verifica
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate qué te piden: la integral de un **campo vectorial** sobre una curva **cerrada** formada por dos tramos, $C_1$ y $C_2$. Dibujá las dos curvas: ¿en qué puntos se cortan y qué región encierran? ¿Hacia dónde hay que recorrerlas para que sea antihorario?
+
+</Pista>
+<Pista>
+
+Es una integral curvilínea de $P\,dx+Q\,dy$ sobre una curva cerrada: se puede hacer **por definición** (parametrizando cada tramo) o con el **teorema de Green** en polares, que pide la consigna. Hay que hallar los cortes (igualando las curvas) y respetar el sentido. Machetes: [Curvilínea por definición](../../machetes/curvilinea-por-definicion/) y [Teorema de Green](../../machetes/teorema-de-green/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: cortes $(1,-1)$ y $(-1,1)$; $C_1$ va de $(1,-1)$ a $(-1,1)$ por el arco de la derecha y $C_2$ vuelve por la recta. Con $P=2xy^2$, $Q=-3xy$, Green en polares:
+
+$$IC=\iint_D\Big(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\Big)r\,dr\,d\theta,\qquad 0\le r\le\sqrt2,\ -\tfrac\pi4\le\theta\le\tfrac{3\pi}{4}$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar y hallar los cortes. **Por qué:** para fijar los extremos de cada tramo. Reemplazando $y=-x$ en $x^2+y^2=2$ queda $2x^2=2$, o sea $x=\pm1$. Cortes: $A(1,-1)$ y $B(-1,1)$. La recta pasa por el centro, así que la región $D$ es un **semicírculo**: $-\tfrac\pi4\le\theta\le\tfrac{3\pi}{4}$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1v1-a/ej3.svg`} alt="Semicírculo D de radio raíz de 2 limitado por el arco de la circunferencia x²+y²=2 (C1, de A(1,−1) a B(−1,1) pasando por la derecha, antihorario) y el diámetro y=−x (C2, de B a A). Ejes graduados de a 1." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar el sentido. **Por qué:** antihorario deja la región $D$ a la izquierda. Entonces $C_1$ es el arco de $A$ a $B$ por la derecha (ángulo creciente) y $C_2$ es el diámetro de $B$ a $A$, con $x$ de $-1$ a $1$.
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_1$ por definición. **Por qué:** se reemplaza la curva en $P\,dx+Q\,dy$. Sobre la circunferencia $y^2=2-x^2$, y además $y\,dy=-x\,dx$ (derivando $x^2+y^2=2$). Entonces:
+
+- $P\,dx=2x(2-x^2)\,dx=(4x-2x^3)\,dx$
+- $Q\,dy=-3x\,(y\,dy)=-3x(-x\,dx)=3x^2\,dx$
+
+Todo queda en función de $x$: $P\,dx+Q\,dy=(4x-2x^3+3x^2)\,dx$. **Cómo reconocerlo:** como el integrando depende solo de $x$, alcanza con ir del $x$ inicial al final ($x=1$ en $A$, $x=-1$ en $B$), aunque el arco pase por $x=\sqrt2$:
+
+$$IC_1=\int_1^{-1}(4x-2x^3+3x^2)\,dx=\Big[2x^2-\frac{x^4}{2}+x^3\Big]_1^{-1}=\frac12-\frac52=-2$$
+
+(con $x=-1$: $2-\tfrac12-1=\tfrac12$; con $x=1$: $2-\tfrac12+1=\tfrac52$).
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_2$ por definición. **Por qué:** sobre la recta $y=-x$, $dy=-dx$, con $x$ de $-1$ a $1$.
+
+- $P\,dx=2x\,x^2\,dx=2x^3\,dx$
+- $Q\,dy=-3x(-x)(-dx)=-3x^2\,dx$
+
+$$IC_2=\int_{-1}^{1}(2x^3-3x^2)\,dx=\Big[\frac{x^4}{2}-x^3\Big]_{-1}^{1}=-\frac12-\frac32=-2$$
+
+Sumando los tramos: $IC=IC_1+IC_2=-2-2=-4$.
+
+</Paso>
+<Paso>
+
+**Qué:** plantear Green en polares (lo que pide la consigna). **Por qué:** la curva es cerrada, simple, antihoraria y $P,Q$ son derivables:
+
+$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=-3y-4xy=-y(3+4x)$$
+
+Con $x=r\cos\theta$, $y=r\sin\theta$ y $dA=r\,dr\,d\theta$, el integrando es $-r\sin\theta\,(3+4r\cos\theta)\,r=-(3r^2\sin\theta+4r^3\sin\theta\cos\theta)$:
+
+$$IC=-\int_{-\pi/4}^{3\pi/4}\!\!d\theta\int_0^{\sqrt2}\big(3r^2\sin\theta+4r^3\sin\theta\cos\theta\big)\,dr$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver (aunque la consigna no lo exige). **Por qué:** sirve para controlar el resultado. En $r$ (con $\sqrt2^{\,3}=2\sqrt2$ y $\sqrt2^{\,4}=4$):
+
+$$\int_0^{\sqrt2}(\dots)\,dr=r^3\sin\theta+r^4\sin\theta\cos\theta\Big|_0^{\sqrt2}=2\sqrt2\sin\theta+4\sin\theta\cos\theta$$
+
+Entonces $IC=-\int_{-\pi/4}^{3\pi/4}\big(2\sqrt2\,\sin\theta+4\sin\theta\cos\theta\big)\,d\theta$, y por partes:
+
+- $\int 2\sqrt2\sin\theta\,d\theta=2\sqrt2\,\big[-\cos\theta\big]_{-\pi/4}^{3\pi/4}=2\sqrt2\Big(\tfrac{\sqrt2}{2}+\tfrac{\sqrt2}{2}\Big)=4$
+- $\int4\sin\theta\cos\theta\,d\theta=\big[2\sin^2\theta\big]_{-\pi/4}^{3\pi/4}=1-1=0$
+
+$$IC=-(4+0)=-4$$
+
+</Paso>
+<Solucion>
+
+$$IC=\oint_C F\cdot dr=-4\qquad\big(IC_1=-2,\ IC_2=-2\big)$$
+
+**Ojo con:** el sentido de recorrido (si invertís $C_1$ o $C_2$ cambia el signo del tramo) y no olvidar el $r$ del jacobiano en Green en polares.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente para $IC_1$: parametrización trigonométrica $x=\sqrt2\cos\theta$, $y=\sqrt2\sin\theta$, con $\theta$ de $-\tfrac\pi4$ a $\tfrac{3\pi}{4}$ (el arco completo, sin depender del truco de $x$). Ahí $\int_{-\pi/4}^{3\pi/4}\big(P\,x'+Q\,y'\big)d\theta=-2$, igual que antes. Además, definición y Green son caminos distintos que dan el mismo valor, $-2+(-2)=-4$.
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (A) Nov-2025.pdf" paginas="4–5" />
 </Ejercicio>
 
@@ -125,14 +337,70 @@ Nota del sitio: en el original falta dy.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá cómo está escrita: aparecen $\sin y$, $y\sin x$, $x\cos y$… en una suma que se anula, con una expresión acompañando a $dx$ y otra a $dy$ (en el original falta escribir $dy$). ¿Podría ser el diferencial total de alguna función $u(x,y)$?
+
+</Pista>
+<Pista>
+
+Una ecuación $P\,dx+Q\,dy=0$ es **exacta** si $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$: hay que verificarlo primero. Si lo es, se busca $u$ con $u_x=P$, $u_y=Q$ y la solución es $u=C$. Machete: [EDO exacta](../../machetes/edo-exacta/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $P=\sin y+y\sin x$, $Q=x\cos y-\cos x+3y^2-1$. Integrá $P$ en $x$ y sumá $\varphi(y)$; después $\varphi'(y)=Q-\dfrac{\partial}{\partial y}\int P\,dx$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** identificar $P$ y $Q$. **Por qué:** $P$ multiplica a $dx$ y $Q$ a $dy$. En el enunciado falta $dy$, pero el segundo paréntesis lo lleva (si no, no sería una ecuación en diferenciales). $P=\sin y+y\sin x$, $Q=x\cos y-\cos x+3y^2-1$.
 
 </Paso>
+<Paso>
+
+**Qué:** verificar la condición de exactitud. **Por qué:** sin ella el método de $u$ no vale:
+
+$$\frac{\partial P}{\partial y}=\cos y+\sin x,\qquad \frac{\partial Q}{\partial x}=\cos y+\sin x$$
+
+Son iguales: **es exacta**. (Si no lo fuera, se prueba un factor integrante: ver el machete.)
+
+</Paso>
+<Paso>
+
+**Qué:** integrar $P$ respecto de $x$. **Por qué:** $u_x=P$, así que $u$ es una primitiva de $P$ en $x$; lo que no depende de $x$ queda como una función $\varphi(y)$. Con $y$ constante, $\int\sin y\,dx=x\sin y$ y $\int y\sin x\,dx=-y\cos x$:
+
+$$u=x\sin y-y\cos x+\varphi(y)$$
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $\varphi(y)$. **Por qué:** $u$ también tiene que cumplir $u_y=Q$. Derivando respecto de $y$:
+
+$$u_y=x\cos y-\cos x+\varphi'(y)=x\cos y-\cos x+3y^2-1\ \Rightarrow\ \varphi'(y)=3y^2-1\ \Rightarrow\ \varphi(y)=y^3-y$$
+
+(La constante de integración de $\varphi$ se absorbe en la $C$ final.)
+
+</Paso>
+<Paso>
+
+**Qué:** escribir la solución. **Por qué:** una EDO exacta tiene como solución general (implícita) las curvas de nivel $u(x,y)=C$.
+
+</Paso>
+<Solucion>
+
+$$x\sin y-y\cos x+y^3-y=C$$
+
+**Ojo con:** el signo de $\int y\sin x\,dx=-y\cos x$ y no olvidar el $-y$ que sale de integrar el $-1$ de $\varphi'(y)$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: derivar la solución implícitamente respecto de $x$ (con $y=y(x)$):
+
+$$\frac{d}{dx}\Big[x\sin y-y\cos x+y^3-y\Big]=\sin y+y\sin x+\big(x\cos y-\cos x+3y^2-1\big)\,y'=0$$
+
+Es justo $P+Q\,y'=0$, o sea la ecuación original dividida por $dx$.
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (A) Nov-2025.pdf" paginas="6" />
 </Ejercicio>
 
@@ -149,14 +417,83 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Contá qué aparece: $y''$ e $y$ con coeficientes que son números, y del lado derecho un seno y un coseno. ¿Qué tipo de ecuación diferencial es y qué forma tiene su solución general? Antes de proponer nada, ¿qué funciones anulan el lado izquierdo?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2º orden **con coeficientes constantes, no homogénea**: se resuelve por **coeficientes indeterminados**, $y=y_h+y_p$. Primero $y_h$ con la ecuación característica; después se propone $y_p$ copiando la forma del lado derecho, **mirando si choca con $y_h$**. Machete: [EDO 2º orden, coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $r^2+1=0$, $r=\pm i$, $y_h=C_1\sin x+C_2\cos x$. El lado derecho tiene justo $\sin x$ y $\cos x$, que ya están en $y_h$: hay resonancia y $y_p$ lleva un factor $x$ (coeficientes $A$, $B$):
+
+$$y_p=x\big(A\sin x+B\cos x\big)$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución con lado derecho cero y siempre forma parte de la general. Se prueba $y=e^{rx}$: $r^2+1=0\Rightarrow r=\pm i$ (complejas, con parte real $0$ y parte imaginaria $1$):
+
+$$y_h=C_1\sin x+C_2\cos x$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el lado derecho es $\sin x+\cos x$, así que lo natural sería $A\sin x+B\cos x$. Pero **eso ya es solución de la homogénea** ($y_h$ lo contiene): al reemplazarlo daría $0$ y nunca $\sin x+\cos x$. Por eso se multiplica por $x$. **Cómo reconocerlo:** si la frecuencia del lado derecho coincide con una raíz de la característica ($\pm i$ acá), hay resonancia.
+
+$$y_p=x\big(A\sin x+B\cos x\big)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces (regla del producto). **Por qué:** para reemplazar en la ecuación.
+
+$$y_p'=A\sin x+B\cos x+x\big(A\cos x-B\sin x\big)$$
+$$y_p''=2A\cos x-2B\sin x-x\big(A\sin x+B\cos x\big)$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''+y$. **Por qué:** $y_p$ tiene que cumplir la ecuación. Los términos con $x$ se cancelan, porque $-x(A\sin x+B\cos x)$ de $y_p''$ y $+x(A\sin x+B\cos x)$ de $y_p$ se anulan:
+
+$$y_p''+y_p=2A\cos x-2B\sin x$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes. **Por qué:** dos funciones iguales tienen los mismos coeficientes en $\sin x$ y en $\cos x$. De $2A\cos x-2B\sin x=\sin x+\cos x$:
+
+- $\cos x$: $2A=1\Rightarrow A=\tfrac12$
+- $\sin x$: $-2B=1\Rightarrow B=-\tfrac12$
+
+Así $y_p=\dfrac{x}{2}\sin x-\dfrac{x}{2}\cos x$.
+
+</Paso>
+<Paso>
+
+**Qué:** armar la general. **Por qué:** $y=y_h+y_p$, con $C_1$ y $C_2$ libres porque no hay condiciones iniciales.
+
+</Paso>
+<Solucion>
+
+$$y=C_1\sin x+C_2\cos x+\frac{x}{2}\sin x-\frac{x}{2}\cos x$$
+
+**Ojo con:** proponer $A\sin x+B\cos x$ sin el factor $x$: al reemplazar da $0=\sin x+\cos x$, un absurdo. Cuando el lado derecho "está" en $y_h$, hay que multiplicar por $x$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: sustituir $y_p$ en la ecuación. Con $y_p=\tfrac{x}{2}(\sin x-\cos x)$:
+
+- $y_p'=\tfrac12(\sin x-\cos x)+\tfrac{x}{2}(\cos x+\sin x)$
+- $y_p''=\cos x+\sin x+\tfrac{x}{2}(-\sin x+\cos x)$
+- $y_p''+y_p=\cos x+\sin x+\tfrac{x}{2}(-\sin x+\cos x+\sin x-\cos x)=\sin x+\cos x$
+
+$y_h$ no aporta, porque $y_h''+y_h=0$.
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (A) Nov-2025.pdf" paginas="7" />
 </Ejercicio>
 

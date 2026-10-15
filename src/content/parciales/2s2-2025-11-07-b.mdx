@@ -16,6 +16,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
@@ -38,14 +40,88 @@ Sugiero trabajar en coordenadas rectangulares.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Leé qué te piden: un **volumen**, y el cuerpo está descripto por un cilindro parabólico y dos planos. Preguntate: ¿qué forma tiene su "sombra" sobre el plano $xy$? ¿Qué plano lo cierra por arriba y cuál por abajo?
+
+</Pista>
+<Pista>
+
+Un cuerpo entre dos superficies sobre una base plana se resuelve como **volumen con una integral doble**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$. Como la base está limitada por una parábola (no por un círculo), conviene **coordenadas rectangulares**, como sugiere el enunciado. Machete: [Volumen entre superficies](../../machetes/volumen-polares-cilindricas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: techo $z=y+2$, piso $z=1$ (altura $y+1$), $D:\ -1\le x\le1,\ 0\le y\le1-x^2$:
+
+$$V=\int_{-1}^{1}dx\int_0^{1-x^2}(y+1)\,dy$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el cuerpo. **Por qué:** para decidir qué plano es techo y cuál piso. El cilindro $y=1-x^2$ no depende de $z$: sus paredes son verticales. Como $y\ge0$, el plano $z=y+2$ vale al menos $2$, así que está siempre arriba de $z=1$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/2s2b/ej1.svg`} alt="Arriba, perspectiva del cuerpo bajo el plano z=y+2 (techo, rojo) y sobre el plano z=1 (piso, azul), con la pared del cilindro parabólico y=1−x². Abajo, la proyección D sobre el plano xy: la región bajo la parábola y=1−x² y sobre y=0, con vértices (−1,0), (1,0) y (0,1) y ejes graduados." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar la región $D$. **Por qué:** es la sombra del cuerpo sobre el plano $xy$. La parábola $y=1-x^2$ corta a $y=0$ en $x=\pm1$, y $y\ge0$ deja la parte de adentro: $-1\le x\le1$, $0\le y\le1-x^2$.
+
+</Paso>
+<Paso>
+
+**Qué:** calcular la altura. **Por qué:** es techo − piso: $(y+2)-1=y+1$. Entonces
+
+$$V=\iint_D(y+1)\,dA=\int_{-1}^{1}dx\int_0^{1-x^2}(y+1)\,dy$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $y$. **Por qué:** es la integral interna, $x$ se trata como constante:
+
+$$\int_0^{1-x^2}(y+1)\,dy=\Big[\frac{y^2}{2}+y\Big]_0^{1-x^2}=\frac{(1-x^2)^2}{2}+(1-x^2)$$
+
+Desarrollando $(1-x^2)^2=1-2x^2+x^4$:
+
+$$\frac{1-2x^2+x^4}{2}+1-x^2=\frac12-x^2+\frac{x^4}{2}+1-x^2=\frac32-2x^2+\frac{x^4}{2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $x$. **Por qué:** queda una sola variable.
+
+$$V=\int_{-1}^{1}\Big(\frac32-2x^2+\frac{x^4}{2}\Big)dx=\Big[\frac{3x}{2}-\frac{2x^3}{3}+\frac{x^5}{10}\Big]_{-1}^{1}$$
+
+En $x=1$: $\tfrac32-\tfrac23+\tfrac1{10}=\tfrac{45-20+3}{30}=\tfrac{28}{30}$. La primitiva es impar, así que en $x=-1$ vale $-\tfrac{28}{30}$. Restando:
+
+$$V=\frac{28}{30}+\frac{28}{30}=\frac{56}{30}=\frac{28}{15}$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$V=\frac{28}{15}\ \text{u}^3\approx1{,}87\ \text{u}^3$$
+
+**Ojo con:** la altura: es $(y+2)-1=y+1$, no $y+2$; y que los límites de $y$ dependen de $x$ (van de $0$ a $1-x^2$).
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico de $D$ y del cuerpo, altura $y+1$, límites $-1\le x\le1$, $0\le y\le1-x^2$ y $V=\frac{28}{15}$.
+- **A medias:** planteo correcto con un error de cuenta (por ejemplo al desarrollar $(1-x^2)^2$ o al evaluar en $\pm1$).
+- **Mal:** altura mal calculada, región $D$ sin justificar o límites de $y$ constantes.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: invertir el orden de integración. Para $y$ entre $0$ y $1$, $x$ va de $-\sqrt{1-y}$ a $\sqrt{1-y}$:
+
+$$V=\int_0^1(y+1)\,2\sqrt{1-y}\,dy$$
+
+Con $w=1-y$ (entonces $y+1=2-w$ y $dy=-dw$, los límites se invierten y el signo se compensa):
+
+$$V=2\int_0^1(2-w)\sqrt w\,dw=2\Big[\frac{4}{3}w^{3/2}-\frac25w^{5/2}\Big]_0^1=2\Big(\frac43-\frac25\Big)=2\cdot\frac{14}{15}=\frac{28}{15}$$
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (B) 2025.pdf" paginas="2" />
 </Ejercicio>
 
@@ -64,16 +140,93 @@ Recomiendo trabajar en coordenadas cilíndricas.
 
 </Enunciado>
 
+<Pendiente>: lectura del enunciado. $x^2+y^2+z^2\ge4$ admite también $z\le-\sqrt{4-r^2}$, región no acotada por abajo. Se tomó el cuerpo acotado: sobre el casquete superior de la esfera y bajo el paraboloide, como dibuja el profe.</Pendiente>
+
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá las expresiones: $x^2+y^2$ aparece en el cilindro, en la esfera y en el paraboloide, y el integrando es solo $z$. ¿Qué cuerpo queda dentro del cilindro, fuera de la esfera y bajo el paraboloide? ¿Quién es el piso y quién el techo?
+
+</Pista>
+<Pista>
+
+Como $x^2+y^2$ aparece siempre junto, conviene **coordenadas cilíndricas**: $x^2+y^2=r^2$, $dV=r\,dz\,dr\,d\theta$. La esfera da el piso $z=\sqrt{4-r^2}$ y el paraboloide el techo $z=r^2+2$. Machete: [Integral triple en cilíndricas/esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: integrando $z\cdot r$; $0\le\theta\le2\pi$, $0\le r\le1$, $\sqrt{4-r^2}\le z\le r^2+2$:
+
+$$IT=\int_0^{2\pi}\!\!d\theta\int_0^1 r\,dr\int_{\sqrt{4-r^2}}^{r^2+2}z\,dz$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el cuerpo. **Por qué:** para identificar piso y techo. "Dentro del cilindro" da $r\le1$; $x^2+y^2+z^2\ge4$ pide estar *fuera* de la esfera de radio 2, o sea por encima de su casquete superior $z=\sqrt{4-r^2}$; $z\le r^2+2$ pide estar *debajo* del paraboloide. El techo está siempre arriba del piso: $(r^2+2)^2-(4-r^2)=r^4+5r^2\ge0$. Se tocan solo en el vértice $(0,0,2)$. **Cómo reconocerlo:** una esfera con "$\ge$" es un hueco que se saca, y el cuerpo es lo que queda entre ese casquete y el paraboloide.
+
+<img src={`${import.meta.env.BASE_URL}figuras/2s2b/ej2.svg`} alt="Arriba, perspectiva del cuerpo dentro del cilindro r=1, sobre el casquete esférico z=√(4−r²) (piso, azul) y bajo el paraboloide z=r²+2 (techo, rojo). Abajo, corte meridiano con ejes graduados: curvas que parten juntas del punto (0,2) y llegan a (1,√3) y (1,3) sobre la recta r=1, con la región sombreada entre ellas." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar los límites. **Por qué:** $r$ llega hasta el cilindro, $r\le1$, y es una vuelta completa, $0\le\theta\le2\pi$. En $z$: de la esfera ($\sqrt{4-r^2}$, que acá vale entre $\sqrt3$ y $2$) al paraboloide ($r^2+2$, entre $2$ y $3$).
+
+</Paso>
+<Paso>
+
+**Qué:** pasar a cilíndricas. **Por qué:** el integrando $z$ no cambia y el jacobiano agrega un $r$:
+
+$$IT=\int_0^{2\pi}\!\!d\theta\int_0^1 r\,dr\int_{\sqrt{4-r^2}}^{r^2+2}z\,dz$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $z$. **Por qué:** es la más interna. Al evaluar en el piso, $\big(\sqrt{4-r^2}\big)^2=4-r^2$ (la raíz desaparece):
+
+$$\int_{\sqrt{4-r^2}}^{r^2+2}z\,dz=\frac{(r^2+2)^2-(4-r^2)}{2}$$
+
+Desarrollando $(r^2+2)^2=r^4+4r^2+4$ y restando $4-r^2$ (el $4$ se cancela, $-(-r^2)=+r^2$):
+
+$$\frac{r^4+4r^2+4-4+r^2}{2}=\frac{r^4+5r^2}{2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** se multiplica por el $r$ del jacobiano:
+
+$$\int_0^1r\cdot\frac{r^4+5r^2}{2}\,dr=\frac12\int_0^1(r^5+5r^3)\,dr=\frac12\Big[\frac{r^6}{6}+\frac{5r^4}{4}\Big]_0^1=\frac12\Big(\frac16+\frac54\Big)$$
+
+Con denominador común $12$: $\tfrac16+\tfrac54=\tfrac{2+15}{12}=\tfrac{17}{12}$, entonces el resultado es $\tfrac{17}{24}$.
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** lo que queda no depende de $\theta$, así que sale una vuelta completa:
+
+$$IT=\frac{17}{24}\cdot2\pi=\frac{17\pi}{12}$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$IT=\frac{17\pi}{12}\approx4{,}45$$
+
+**Ojo con:** el jacobiano $r$, y que al elevar al cuadrado la raíz del piso queda $4-r^2$ (no hay que dejar la raíz).
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico, cilíndricas con $z\cdot r$, límites $\sqrt{4-r^2}\le z\le r^2+2$, $0\le r\le1$, $0\le\theta\le2\pi$ y $\frac{17\pi}{12}$.
+- **A medias:** planteo correcto pero errores de álgebra al desarrollar $(r^2+2)^2-(4-r^2)$ o al integrar en $r$.
+- **Mal:** piso o techo mal identificados, sin jacobiano, o sin gráfico ni planteo.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: integrar primero en $r$, con $z$ fijo. El cuerpo cumple $r\le1$, $r^2\ge4-z^2$ (fuera de la esfera) y $r^2\ge z-2$ (bajo el paraboloide). Para $\sqrt3\le z\le2$ manda la esfera: $\sqrt{4-z^2}\le r\le1$; para $2\le z\le3$ manda el paraboloide: $\sqrt{z-2}\le r\le1$. Con $\int_a^1r\,dr=\frac{1-a^2}{2}$:
+
+$$IT=2\pi\Big[\int_{\sqrt3}^{2}z\,\frac{z^2-3}{2}\,dz+\int_2^3z\,\frac{3-z}{2}\,dz\Big]=2\pi\Big[\frac18+\frac7{12}\Big]=2\pi\cdot\frac{17}{24}=\frac{17\pi}{12}$$
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (B) 2025.pdf" paginas="3" />
 </Ejercicio>
 
@@ -97,14 +250,106 @@ Verificar el resultado mediante aplicación de la fórmula de Green.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate qué te piden: la integral de un **campo vectorial** sobre una curva **cerrada** formada por dos arcos de parábola, $C_1$ y $C_2$. Dibujá las dos curvas: ¿en qué puntos se cortan y qué región encierran? ¿Cuál queda arriba y cuál abajo, y por dónde hay que ir para que sea antihorario?
+
+</Pista>
+<Pista>
+
+Es una integral curvilínea que se resuelve **por definición** (parametrizar cada tramo con $x$ y sumar) y se verifica con el **teorema de Green**. Antes hay que hallar los cortes igualando las curvas y respetar el sentido antihorario. Machetes: [Curvilínea por definición](../../machetes/curvilinea-por-definicion/) y [Teorema de Green](../../machetes/teorema-de-green/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: los cortes son $(-2,0)$ y $(2,0)$; $C_2$ (abajo) va de $x=-2$ a $x=2$ y $C_1$ (arriba) de $x=2$ a $x=-2$. Con $P=x+y$, $Q=-(x+y)$: por definición $IC=\int_{C_1}+\int_{C_2}$; por Green $IC=\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar y hallar los cortes. **Por qué:** para fijar los extremos de cada tramo. Igualando $-x^2+4=-\frac{x^2}{2}+2$:
+
+$$2=\frac{x^2}{2}\ \Rightarrow\ x^2=4\ \Rightarrow\ x=\pm2\quad(y=0)$$
+
+Cortes: $(-2,0)$ y $(2,0)$. En $x=0$, $C_1$ vale $4$ y $C_2$ vale $2$: $C_1$ queda arriba.
+
+<img src={`${import.meta.env.BASE_URL}figuras/2s2b/ej3.svg`} alt="Región D encerrada entre la parábola C₁: y=−x²+4 (arriba, recorrida de derecha a izquierda) y la parábola C₂: y=−x²/2+2 (abajo, recorrida de izquierda a derecha), con puntos (−2,0), (2,0), (0,2) y (0,4), ejes graduados de a 1 y sentido antihorario." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** decidir el sentido de cada tramo. **Por qué:** antihorario deja la región $D$ siempre a la izquierda: abajo ($C_2$) se va de izquierda a derecha, $x$ de $-2$ a $2$; arriba ($C_1$) de derecha a izquierda, $x$ de $2$ a $-2$.
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $I_1$ por definición ($C_1$). **Por qué:** se reemplaza la curva en $P\,dx+Q\,dy$. Con $y=-x^2+4$, $dy=-2x\,dx$ y $x+y=x-x^2+4$:
+
+- $P\,dx=(x-x^2+4)\,dx$
+- $Q\,dy=-(x-x^2+4)(-2x)\,dx=2x\,(x-x^2+4)\,dx$
+
+Factor común: $(x-x^2+4)(1+2x)$. Multiplicando:
+
+$$x-x^2+4+2x^2-2x^3+8x=-2x^3+x^2+9x+4$$
+
+$$I_1=\int_2^{-2}(-2x^3+x^2+9x+4)\,dx,\qquad G(x)=-\frac{x^4}{2}+\frac{x^3}{3}+\frac{9x^2}{2}+4x$$
+
+En $x=-2$: $-8-\tfrac83+18-8=-\tfrac23$. En $x=2$: $-8+\tfrac83+18+8=\tfrac{62}{3}$. Como $x$ va de $2$ a $-2$:
+
+$$I_1=G(-2)-G(2)=-\frac23-\frac{62}{3}=-\frac{64}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $I_2$ por definición ($C_2$). **Por qué:** igual, con $y=-\frac{x^2}{2}+2$, $dy=-x\,dx$ y $x+y=x-\frac{x^2}{2}+2$. Ahora $P\,dx+Q\,dy=(x+y)\,dx-(x+y)(-x\,dx)=(x+y)(1+x)\,dx$:
+
+$$\Big(x-\frac{x^2}{2}+2\Big)(1+x)=x-\frac{x^2}{2}+2+x^2-\frac{x^3}{2}+2x=-\frac{x^3}{2}+\frac{x^2}{2}+3x+2$$
+
+Integrando de $-2$ a $2$, los términos impares ($-\frac{x^3}{2}$ y $3x$) se cancelan por simetría y los pares se duplican:
+
+$$I_2=2\int_0^2\Big(\frac{x^2}{2}+2\Big)dx=2\Big[\frac{x^3}{6}+2x\Big]_0^2=2\Big(\frac86+4\Big)=2\cdot\frac{16}{3}=\frac{32}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** sumar los tramos. **Por qué:** la integral sobre la curva cerrada es la suma de los tramos:
+
+$$IC=I_1+I_2=-\frac{64}{3}+\frac{32}{3}=-\frac{32}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué (verificación con Green):** **Por qué:** la curva es cerrada, simple, antihoraria y $P,Q$ son derivables. Acá $\tfrac{\partial Q}{\partial x}=-1$ y $\tfrac{\partial P}{\partial y}=1$, entonces el integrando es $-1-1=-2$ y la integral es $-2$ por el área de $D$:
+
+$$IC=-2\int_{-2}^{2}dx\int_{-x^2/2+2}^{-x^2+4}dy=-2\int_{-2}^{2}\Big(2-\frac{x^2}{2}\Big)dx=-2\Big[2x-\frac{x^3}{6}\Big]_{-2}^{2}$$
+
+En $x=2$: $4-\tfrac43=\tfrac83$; en $x=-2$: $-\tfrac83$. Restando, el área es $\tfrac{16}{3}$ y
+
+$$IC=-2\cdot\frac{16}{3}=-\frac{32}{3}$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$IC=\oint_C F\cdot dr=-\frac{32}{3}\qquad\big(I_1=-\tfrac{64}{3},\ I_2=\tfrac{32}{3}\big)$$
+
+**Ojo con:** el sentido: $C_1$ se recorre de $x=2$ a $x=-2$; con los límites al revés el signo de $I_1$ cambia. El resultado negativo es correcto: $Q_x-P_y=-2<0$ en toda la región.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico con cortes y sentido, $I_1=-\frac{64}{3}$ e $I_2=\frac{32}{3}$ por definición, total $-\frac{32}{3}$, y verificación con Green que da lo mismo.
+- **A medias:** un tramo bien y el otro con error de cuenta, o los dos bien pero sin la verificación con Green que pide el enunciado.
+- **Mal:** sin gráfico ni límites, sentido horario sin advertirlo, o Green con $Q_x-P_y$ mal armado.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: el área de $D$ como diferencia de áreas bajo cada parábola, hasta el eje $x$:
+
+$$\int_{-2}^{2}(4-x^2)\,dx-\int_{-2}^{2}\Big(2-\frac{x^2}{2}\Big)dx=\frac{32}{3}-\frac{16}{3}=\frac{16}{3}$$
+
+(ya que $\int_{-2}^2(4-x^2)\,dx=16-\tfrac{16}{3}$ y $\int_{-2}^2(2-\tfrac{x^2}{2})\,dx=8-\tfrac83$). Con el integrando constante $-2$ de Green, $IC=-2\cdot\tfrac{16}{3}=-\tfrac{32}{3}$, igual a la suma $I_1+I_2$ por definición.
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (B) 2025.pdf" paginas="4–5" />
 </Ejercicio>
 
@@ -121,14 +366,97 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá la ecuación: ¿es lineal en $y$? El lado derecho tiene a $y$ elevada a una potencia. ¿Qué pasa si dividís todo por $x$ para dejar $y'$ sola con su coeficiente?
+
+</Pista>
+<Pista>
+
+Dividida por $x$ queda $y'+p(x)\,y=q(x)\,y^n$: una EDO de **Bernoulli**, con $n=-2$. Se la lleva a lineal con la sustitución $z=y^{1-n}$ y se resuelve con $z=u\cdot v$. Machete: [EDO de Bernoulli](../../machetes/edo-bernoulli/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $y'-\dfrac1x\,y=x\,y^{-2}$. Multiplicando por $3y^2$ y con $z=y^3$ ($z'=3y^2y'$):
+
+$$z'-\frac3x\,z=3x$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** llevar la ecuación a la forma de Bernoulli. **Por qué:** hay que dejar $y'$ con coeficiente 1. Dividiendo por $x$ (con $x\ne0$):
+
+$$y'-\frac1x\,y=x\,y^{-2}$$
+
+**Cómo reconocerlo:** es $y'+p\,y=q\,y^n$ con $p=-\frac1x$, $q=x$ y $n=-2$ (no es lineal porque $n\ne0,1$).
 
 </Paso>
+<Paso>
+
+**Qué:** multiplicar por $(1-n)\,y^{-n}=3y^2$. **Por qué:** así el término con $y'$ queda como la derivada de $y^{3}$ y el lado derecho pierde la potencia de $y$ ($y^{-2}\cdot y^2=1$):
+
+$$3y^2y'-\frac3x\,y^3=3x$$
+
+</Paso>
+<Paso>
+
+**Qué:** sustituir $z=y^3$. **Por qué:** $z'=3y^2y'$ (regla de la cadena), con lo cual la ecuación pasa a ser **lineal** en $z$:
+
+$$z'-\frac3x\,z=3x$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver la lineal con $z=u\cdot v$. **Por qué:** es el método de la cátedra. Con $z'=u'v+uv'$:
+
+$$u'v+uv'-\frac3x\,uv=3x\ \Rightarrow\ u'v+u\Big(v'-\frac3x\,v\Big)=3x$$
+
+Se elige $v$ para que el paréntesis valga $0$:
+
+$$v'=\frac3x\,v\ \Rightarrow\ \frac{dv}{v}=3\,\frac{dx}{x}\ \Rightarrow\ \ln|v|=3\ln|x|\ \Rightarrow\ v=x^3$$
+
+(la constante de esta integración se toma $0$: basta una $v$ particular).
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $u$. **Por qué:** con el paréntesis nulo queda $u'v=3x$:
+
+$$u'x^3=3x\ \Rightarrow\ u'=3x^{-2}\ \Rightarrow\ u=-\frac3x+C$$
+
+</Paso>
+<Paso>
+
+**Qué:** volver a $y$. **Por qué:** $z=u\,v$ y $z=y^3$:
+
+$$y^3=\Big(-\frac3x+C\Big)x^3=Cx^3-3x^2$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y^3=x^3\Big(C-\frac3x\Big)=Cx^3-3x^2$$
+
+**Ojo con:** el factor $(1-n)=3$ al multiplicar y el signo de $n$: con $n=-2$ la sustitución es $z=y^{1-(-2)}=y^3$, no $y^{-1}$.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** reconoce Bernoulli con $n=-2$, sustituye $z=y^3$, obtiene la lineal $z'-\frac3xz=3x$, resuelve con $u\cdot v$ y devuelve la solución en $y$.
+- **A medias:** reconoce la sustitución correcta pero se equivoca en $v$ o $u$, o deja la solución en $z$ sin volver a $y$.
+- **Mal:** sustitución equivocada ($z=y^{-1}$, $z=y^{-2}$) o trata la ecuación como lineal en $y$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: reemplazar la solución en la ecuación lineal en $z$ y volver a la original. Con $z=Cx^3-3x^2$: $z'=3Cx^2-6x$ y
+
+$$z'-\frac3x\,z=3Cx^2-6x-3Cx^2+9x=3x\ \checkmark$$
+
+Y en la original: como $y=\dfrac{y^3}{y^2}=\dfrac{z}{y^2}$ y $3y^2y'=z'$,
+
+$$xy'-y=\frac{x\,z'}{3y^2}-\frac{z}{y^2}=\frac{x\,\big(z'-\frac3x\,z\big)}{3y^2}=\frac{x\cdot3x}{3y^2}=\frac{x^2}{y^2}\ \checkmark$$
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (B) 2025.pdf" paginas="6" />
 </Ejercicio>
 
@@ -141,14 +469,95 @@ Expresar la solución general de la siguiente EDO de 2º orden (no homogénea) p
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Contá qué aparece: $y''$ e $y'$ con coeficientes que son números (no hay término en $y$), y del lado derecho una exponencial y una constante. ¿Qué tipo de ecuación diferencial es y qué forma tiene su solución general?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2.º orden **con coeficientes constantes, no homogénea**, con lado derecho "de manual": se resuelve por **coeficientes indeterminados**, $y=y_h+y_p$. Primero $y_h$ con la ecuación característica; después se propone $y_p$ copiando el lado derecho, pero **fijate si algún término ya es solución de la homogénea**. Machete: [EDO 2.º orden, coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $r^2-2r=0$, $y_h=C_1+C_2e^{2x}$. Como $2$ y $0$ son raíces, **los dos** términos del lado derecho resuenan y llevan un $x$ de más (coeficientes $A$, $B$):
+
+$$y_p=Axe^{2x}+Bx$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución con lado derecho cero y siempre forma parte de la general. Se prueba $y=e^{rx}$ y se factoriza:
+
+$$r^2-2r=0\ \Rightarrow\ r(r-2)=0\ \Rightarrow\ r_1=0,\ r_2=2$$
+
+Reales y distintas:
+
+$$y_h=C_1e^{0x}+C_2e^{2x}=C_1+C_2e^{2x}$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el lado derecho es $2e^{2x}+2$. Para $2e^{2x}$ correspondería $Ae^{2x}$, pero $2$ es raíz: hay resonancia y va $Axe^{2x}$. Para la constante $2$ correspondería una constante $B$, pero $0$ también es raíz (la constante ya está en $y_h$ como $C_1$): hay resonancia y va $Bx$. **Cómo reconocerlo:** una constante en el lado derecho resuena cuando $r=0$ es raíz, o sea cuando falta el término en $y$.
+
+$$y_p=Axe^{2x}+Bx$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces. **Por qué:** para reemplazar en la ecuación (regla del producto en $Axe^{2x}$).
+
+$$y_p'=Ae^{2x}+2Axe^{2x}+B$$
+$$y_p''=2Ae^{2x}+2Ae^{2x}+4Axe^{2x}=4Ae^{2x}+4Axe^{2x}$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''-2y'$ y juntar términos semejantes. **Por qué:** $y_p$ tiene que cumplir la ecuación. Con $-2y_p'=-2Ae^{2x}-4Axe^{2x}-2B$:
+
+- $e^{2x}$: $4A-2A=2A$
+- $xe^{2x}$: $4A-4A=0$ (se cancela: resonancia)
+- constante: $-2B$
+
+$$2Ae^{2x}-2B=2e^{2x}+2$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes. **Por qué:** dos funciones iguales tienen los mismos coeficientes en $e^{2x}$ y en la constante.
+
+- $e^{2x}$: $2A=2\Rightarrow A=1$
+- constante: $-2B=2\Rightarrow B=-1$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la general. **Por qué:** $y=y_h+y_p$, con $C_1$ y $C_2$ libres porque no hay condiciones iniciales.
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=C_1+C_2e^{2x}+xe^{2x}-x$$
+
+**Ojo con:** las dos resonancias: proponer $Ae^{2x}+B$ lleva a $0=2e^{2x}+2$, sin solución; la constante también hay que multiplicarla por $x$ porque $0$ es raíz.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+
+- **Bien:** $y_h$ correcta, reconoce las dos resonancias, propone $Axe^{2x}+Bx$, obtiene $A=1$, $B=-1$ y escribe la general.
+- **A medias:** $y_h$ correcta y una sola resonancia detectada (por ejemplo $Axe^{2x}+B$), o un error de derivación con el resto bien.
+- **Mal:** $y_h$ mal o $y_p$ sin $x$ en ningún término, o solo $y_p$ sin $y_h$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: reducción de orden. Con $w=y'$ la ecuación es lineal de 1.er orden, $w'-2w=2e^{2x}+2$, cuya solución general es $w=C_2'e^{2x}+2xe^{2x}-1$ (se verifica derivando: $w'-2w=2e^{2x}+2$). Integrando $y=\int w\,dx$ con $\int2xe^{2x}dx=xe^{2x}-\tfrac12e^{2x}$:
+
+$$y=\tfrac12C_2'e^{2x}+xe^{2x}-\tfrac12e^{2x}-x+C_1=C_1+C_2e^{2x}+xe^{2x}-x$$
+
+(la constante $\tfrac12C_2'-\tfrac12$ se renombra $C_2$). Es la misma familia.
+
+</Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (B) 2025.pdf" paginas="7" />
 </Ejercicio>
 

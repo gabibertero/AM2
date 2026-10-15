@@ -16,6 +16,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
@@ -37,14 +39,81 @@ Recomiendo trabajar en coordenadas polares (integral doble) o cilíndricas (inte
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Leé qué te piden: un **volumen** de un sólido del primer octante, con una pared cilíndrica y dos planos que lo cierran en $z$. Preguntate: ¿qué forma tiene la "sombra" del sólido sobre el plano $xy$? ¿Qué plano queda abajo y cuál arriba?
+
+</Pista>
+<Pista>
+
+Un sólido con base circular, un plano arriba y otro abajo se resuelve como **volumen entre dos superficies con una integral doble en polares**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$. Hay que identificar techo, piso y la región $D$. Machete: [Volumen en polares/cilíndricas](../../machetes/volumen-polares-cilindricas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: techo $z=6-y$, piso $z=y$, $D:\ 0\le r\le3,\ 0\le\theta\le\tfrac\pi2$, $dA=r\,dr\,d\theta$, $y=r\sin\theta$:
+
+$$V=\int_0^{\pi/2}\!\!d\theta\int_0^3\big(6-2r\sin\theta\big)\,r\,dr$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el sólido. **Por qué:** para decidir qué plano es techo y cuál piso. La condición $y\le z\le6-y$ dice que $z=y$ es el piso y $z=6-y$ el techo (se cumple $y\le6-y$ mientras $y\le3$). **Cómo reconocerlo:** un $z$ acotado entre dos expresiones en $x$ e $y$ es "piso $\le z\le$ techo".
+
+<img src={`${import.meta.env.BASE_URL}figuras/1v1-b/ej1.svg`} alt="Arriba, perspectiva del sólido del primer octante dentro del cilindro de radio 3, entre el plano z=y (piso) y el plano z=6−y (techo). Abajo, corte con x=0: región triangular entre las rectas z=y y z=6−y con vértices (0,0), (0,6) y (3,3)." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar la región $D$ de integración. **Por qué:** es la proyección del sólido sobre $xy$. El cilindro $x^2+y^2=9$ y el primer octante ($x\ge0$, $y\ge0$) dan un cuarto de círculo: $0\le r\le3$, $0\le\theta\le\tfrac\pi2$. En todo $D$ vale $y\le3$, así que el techo nunca queda debajo del piso (se tocan recién en $y=3$, $z=3$).
+
+</Paso>
+<Paso>
+
+**Qué:** plantear la integral doble. **Por qué:** el volumen entre dos superficies es la integral de (techo − piso) sobre $D$:
+
+$$V=\iint_D\big[(6-y)-y\big]\,dx\,dy=\iint_D(6-2y)\,dx\,dy$$
+
+</Paso>
+<Paso>
+
+**Qué:** pasar a polares. **Por qué:** la base es un cuarto de círculo. Se reemplaza $y=r\sin\theta$ y $dx\,dy=r\,dr\,d\theta$ (el $r$ es el jacobiano). Distribuyendo el $r$:
+
+$$V=\int_0^{\pi/2}\!\!d\theta\int_0^3\big(6r-2r^2\sin\theta\big)\,dr$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$, término por término. **Por qué:** la integral interna va primero y $\theta$ se trata como constante.
+
+- $\int_0^3 6r\,dr=\big[3r^2\big]_0^3=27$
+- $\int_0^3 2r^2\sin\theta\,dr=\Big[\dfrac{2r^3}{3}\Big]_0^3\sin\theta=18\sin\theta$
+
+Restando el segundo término: $\ \int_0^3(\dots)\,dr=27-18\sin\theta$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** ya queda una sola variable. La primitiva del seno es $-\cos\theta$:
+
+$$\int_0^{\pi/2}27\,d\theta=27\cdot\frac\pi2=\frac{27\pi}{2}$$
+$$\int_0^{\pi/2}18\sin\theta\,d\theta=18\big[-\cos\theta\big]_0^{\pi/2}=18(0+1)=18$$
+
+Restando: $V=\dfrac{27\pi}{2}-18=18\Big(\dfrac{3\pi}{4}-1\Big)$.
+
+</Paso>
+<Solucion>
+
+$$V=\frac{27\pi}{2}-18=18\Big(\frac{3\pi}{4}-1\Big)\ \text{u}^3\approx 24{,}41\ \text{u}^3$$
+
+**Ojo con:** olvidarte del jacobiano $r$ al pasar a polares, o poner $\theta$ de $0$ a $2\pi$: el primer octante es solo un cuarto de círculo.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente en cartesianas: $V=\int_0^3(6-2y)\sqrt{9-y^2}\,dy$ (para cada $y$, $x$ va de $0$ a $\sqrt{9-y^2}$). Separando, $\int_0^3\sqrt{9-y^2}\,dy$ es el área de un cuarto de círculo de radio 3, o sea $\tfrac{9\pi}{4}$, y $\int_0^3y\sqrt{9-y^2}\,dy=\big[-\tfrac13(9-y^2)^{3/2}\big]_0^3=9$:
+
+$$V=6\cdot\frac{9\pi}{4}-2\cdot9=\frac{27\pi}{2}-18\approx 24{,}41$$
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (B) 2025.pdf" paginas="2" />
 </Ejercicio>
 
@@ -66,14 +135,75 @@ Recomiendo trabajar en coordenadas cilíndricas!
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá el integrando y las superficies: ¿qué combinación de $x$ e $y$ se repite en el elipsoide? ¿Qué forma tiene la región del 1º octante con $0\le y\le x$ vista desde arriba (en el plano $xy$)?
+
+</Pista>
+<Pista>
+
+Como $x^2+y^2$ aparece junto, conviene **coordenadas cilíndricas**: $x=r\cos\theta$, $y=r\sin\theta$, $dx\,dy\,dz=r\,dr\,d\theta\,dz$. Hay que despejar $z$ del elipsoide (techo) y ver qué ángulos corresponden a $0\le y\le x$. Machete: [Integral triple en cilíndricas/esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z$ va de $0$ a $3\sqrt{1-r^2}$, $0\le r\le1$, $0\le\theta\le\tfrac\pi4$, y el integrando $yz\cdot r$ pasa a $r^2\sin\theta\,z$:
+
+$$IT=\int_0^{\pi/4}\!\sin\theta\,d\theta\int_0^1 r^2\,dr\int_0^{3\sqrt{1-r^2}}z\,dz$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar la región. **Por qué:** para ver los límites. $x^2+y^2+\tfrac{z^2}{9}=1$ es un elipsoide de semiejes $1$, $1$ y $3$. En el 1º octante es un "cuarto de huevo" cuya cara de arriba es $z=3\sqrt{1-x^2-y^2}$, y el plano $y=x$ lo corta por la mitad del cuarto.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1v1-b/ej2.svg`} alt="Arriba, perspectiva de la porción del elipsoide x²+y²+z²/9=1 en el primer octante entre los planos y=0 e y=x, con base en z=0 y techo z=3 raíz de 1 menos r al cuadrado. Abajo, la base en el plano xy: sector circular de radio 1 entre θ=0 y θ=π/4." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** hallar la base y el techo. **Por qué:** con $x^2+y^2=r^2$ el elipsoide es $r^2+\tfrac{z^2}{9}=1$, o sea $z=3\sqrt{1-r^2}$ (con $z\ge0$ por el octante). Ese techo toca $z=0$ en $r=1$: la base llega hasta $r=1$. Para el ángulo, $0\le y\le x$ significa $\tan\theta\le1$, es decir $0\le\theta\le\tfrac\pi4$. **Cómo reconocerlo:** una desigualdad entre $y$ y $x$ en el primer octante recorta un sector entre dos rectas por el origen.
+
+</Paso>
+<Paso>
+
+**Qué:** pasar el integrando y el elemento de volumen a cilíndricas. **Por qué:** $y=r\sin\theta$ y el jacobiano agrega un $r$, así que $yz\,dx\,dy\,dz=r\sin\theta\cdot z\cdot r\,dr\,d\theta\,dz=r^2\sin\theta\,z\,dr\,d\theta\,dz$. Las variables se separan:
+
+$$IT=\int_0^{\pi/4}\!\sin\theta\,d\theta\int_0^1 r^2\,dr\int_0^{3\sqrt{1-r^2}}z\,dz$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $z$. **Por qué:** es la integral más interna:
+
+$$\int_0^{3\sqrt{1-r^2}}z\,dz=\Big[\frac{z^2}{2}\Big]_0^{3\sqrt{1-r^2}}=\frac{9(1-r^2)}{2}=\frac{9}{2}(1-r^2)$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** se multiplica por $r^2$ y se primitiva cada potencia:
+
+$$\int_0^1 r^2\cdot\frac92(1-r^2)\,dr=\frac92\int_0^1(r^2-r^4)\,dr=\frac92\Big[\frac{r^3}{3}-\frac{r^5}{5}\Big]_0^1=\frac92\Big(\frac13-\frac15\Big)=\frac92\cdot\frac{2}{15}=\frac{3}{5}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$ y juntar. **Por qué:** lo que falta es $\int_0^{\pi/4}\sin\theta\,d\theta=\big[-\cos\theta\big]_0^{\pi/4}=-\tfrac{\sqrt2}{2}+1=1-\tfrac{\sqrt2}{2}$. Entonces
+
+$$IT=\frac35\Big(1-\frac{\sqrt2}{2}\Big)=\frac{3}{5}-\frac{3\sqrt2}{10}=\frac{6-3\sqrt2}{10}$$
+
+</Paso>
+<Solucion>
+
+$$IT=\frac35\Big(1-\frac{\sqrt2}{2}\Big)=\frac{6-3\sqrt2}{10}\approx 0{,}176$$
+
+**Ojo con:** el signo al integrar el seno ($-\cos\theta$, y evaluar $-\cos\tfrac\pi4+\cos0$), y el semieje: el techo es $3\sqrt{1-r^2}$, no $\sqrt{1-r^2}$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: otro orden, integrando en $r$ con $z$ fijo (la parte de $\theta$ no cambia). Para cada $z$ entre $0$ y $3$, $r$ va de $0$ a $\sqrt{1-z^2/9}$ y $\int_0^R r^2\,dr=\tfrac{R^3}{3}$. Con $u=1-\tfrac{z^2}{9}$ se tiene $z\,dz=-\tfrac92\,du$:
+
+$$\int_0^3z\,\frac{(1-z^2/9)^{3/2}}{3}\,dz=\frac13\cdot\frac92\int_0^1u^{3/2}du=\frac13\cdot\frac92\cdot\frac25=\frac35\quad\Rightarrow\quad IT=\frac13\cdot\frac95\Big(1-\frac{\sqrt2}{2}\Big)=\frac35\Big(1-\frac{\sqrt2}{2}\Big)$$
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (B) 2025.pdf" paginas="3" />
 </Ejercicio>
 
@@ -95,14 +225,75 @@ Verificar resultado mediante la fórmula de Green (en coordenadas cartesianas).
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate qué te piden: la integral de un **campo vectorial** sobre una curva **cerrada** formada por dos tramos, $C_1$ (una elipse) y $C_2$ (el eje $x$). Dibujá las dos curvas: ¿en qué puntos se cortan y qué región encierran?
+
+</Pista>
+<Pista>
+
+Es una integral curvilínea de $P\,dx+Q\,dy$: se hace **por definición** (parametrizando cada tramo) y se **verifica con el teorema de Green** en cartesianas, como pide la consigna. Hay que hallar los cortes y respetar el sentido antihorario. Machetes: [Curvilínea por definición](../../machetes/curvilinea-por-definicion/) y [Teorema de Green](../../machetes/teorema-de-green/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: cortes $(-1,0)$ y $(1,0)$; $C_2$ va de $x=-1$ a $x=1$ y el arco superior $C_1$ de $x=1$ a $x=-1$, con $y=2\sqrt{1-x^2}$. Con $P=2x+y^2$, $Q=3xy$, Green da $IC=\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$ con $0\le y\le2\sqrt{1-x^2}$, $-1\le x\le1$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar y hallar los cortes. **Por qué:** para fijar los extremos de cada tramo. Con $y=0$ en la elipse, $x^2=1$: cortes $(-1,0)$ y $(1,0)$. La curva cerrada es el semicírculo achatado de arriba: el arco superior de la elipse y el segmento del eje $x$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/1v1-b/ej3.svg`} alt="Región D encerrada entre el arco superior de la elipse x²+y²/4=1 (C1, de (1,0) a (−1,0)) y el segmento del eje x (C2, de (−1,0) a (1,0)), con sentido antihorario. Ejes graduados de a 1." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** fijar el sentido. **Por qué:** antihorario deja la región $D$ a la izquierda. Sobre el eje $x$ se va de izquierda a derecha ($C_2$, $x$ de $-1$ a $1$), y por el arco superior se vuelve de derecha a izquierda ($C_1$, $x$ de $1$ a $-1$).
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_1$ por definición. **Por qué:** se reemplaza la curva en $P\,dx+Q\,dy$. De $x^2+\tfrac{y^2}{4}=1$, en el arco superior $y=2\sqrt{1-x^2}$ y $y^2=4(1-x^2)$, con $dy=\dfrac{-2x}{\sqrt{1-x^2}}\,dx$.
+
+- $P\,dx=\big(2x+4(1-x^2)\big)\,dx$
+- $Q\,dy=3x\cdot2\sqrt{1-x^2}\cdot\dfrac{-2x}{\sqrt{1-x^2}}\,dx=-12x^2\,dx$
+
+Sumando: $P\,dx+Q\,dy=(2x+4-16x^2)\,dx$, y con $x$ de $1$ a $-1$:
+
+$$IC_1=\int_1^{-1}(2x+4-16x^2)\,dx=\Big[x^2+4x-\frac{16x^3}{3}\Big]_1^{-1}=\frac{7}{3}-\Big(-\frac13\Big)=\frac83$$
+
+(con $x=-1$: $1-4+\tfrac{16}{3}=\tfrac73$; con $x=1$: $1+4-\tfrac{16}{3}=-\tfrac13$).
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_2$ por definición. **Por qué:** sobre $y=0$ se tiene $dy=0$, así que solo queda $P\,dx$ con $y=0$:
+
+$$IC_2=\int_{-1}^{1}2x\,dx=\big[x^2\big]_{-1}^{1}=1-1=0$$
+
+Sumando: $IC=IC_1+IC_2=\tfrac83+0=\tfrac83$.
+
+</Paso>
+<Paso>
+
+**Qué:** verificar con Green en cartesianas. **Por qué:** la curva es cerrada, simple, antihoraria y $P,Q$ son derivables:
+
+$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=3y-2y=y$$
+
+$$IC=\iint_Dy\,dx\,dy=\int_{-1}^{1}\!dx\int_0^{2\sqrt{1-x^2}}y\,dy=\int_{-1}^{1}\frac{4(1-x^2)}{2}\,dx=\int_{-1}^{1}2(1-x^2)\,dx=2\Big[x-\frac{x^3}{3}\Big]_{-1}^{1}=2\cdot\frac43=\frac83$$
+
+</Paso>
+<Solucion>
+
+$$IC=\oint_C F\cdot dr=\frac83\qquad\Big(IC_1=\tfrac83,\ IC_2=0\Big)$$
+
+**Ojo con:** el sentido de recorrido: si ponés los límites de $C_1$ de $-1$ a $1$ el signo de ese tramo se invierte (y no coincidiría con Green).
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente para $IC_1$: parametrización trigonométrica $x=\cos t$, $y=2\sin t$, con $t$ de $0$ a $\pi$ (antihorario sobre el arco superior). Reemplazando en $P\,x'+Q\,y'$ y integrando, $\int_0^{\pi}(\dots)\,dt=\tfrac83$, igual que antes. Y la suma por definición coincide con el resultado de Green: dos caminos distintos, mismo valor.
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (B) 2025.pdf" paginas="4–5" />
 </Ejercicio>
 
@@ -119,14 +310,79 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá cómo está escrita: hay $y'$, un término con $\dfrac{y}{x}$ y del otro lado una potencia de $y$ en el denominador ($\sqrt y$). ¿Es lineal en $y$? ¿Qué lo impide?
+
+</Pista>
+<Pista>
+
+Es una lineal a la que le sobra una potencia de $y$ en el segundo miembro: $y'+P(x)\,y=Q(x)\,y^n$ con $n\neq0,1$. Eso es una **EDO de Bernoulli**: se multiplica por $(1-n)y^{-n}$ y se cambia $z=y^{1-n}$ para volverla lineal. Machete: [EDO de Bernoulli](../../machetes/edo-bernoulli/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $y'-\dfrac2x\,y=4x^2\,y^{-1/2}$, o sea $n=-\tfrac12$ y $1-n=\tfrac32$. Multiplicando por $\tfrac32y^{1/2}$ y con $z=y^{3/2}$ queda una lineal en $z$:
+
+$$z'-\frac3x\,z=6x^2$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** reconocer Bernoulli. **Por qué:** escribiendo $\dfrac{4x^2}{\sqrt y}=4x^2y^{-1/2}$ queda $y'-\dfrac2xy=4x^2y^n$ con $n=-\tfrac12$. **Cómo reconocerlo:** una lineal con $y^n$ en el segundo miembro, y $n$ no es $0$ ni $1$.
 
 </Paso>
+<Paso>
+
+**Qué:** multiplicar por $(1-n)\,y^{-n}=\tfrac32y^{1/2}$. **Por qué:** así el primer término se vuelve la derivada de $z=y^{3/2}$ y el $y^{-1/2}$ del segundo miembro se cancela:
+
+$$\tfrac32y^{1/2}\,y'-\frac3x\,y^{3/2}=6x^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** hacer el cambio de variable. **Por qué:** con $z=y^{3/2}$ se tiene $z'=\tfrac32y^{1/2}y'$ (regla de la cadena), que es justo el primer término:
+
+$$z'-\frac3x\,z=6x^2$$
+
+Es una **lineal en $z$**.
+
+</Paso>
+<Paso>
+
+**Qué:** resolver la lineal con $z=u\cdot v$. **Por qué:** es el método de la cátedra. Con $z'=u'v+uv'$:
+
+$$u'v+u\Big(v'-\frac3x\,v\Big)=6x^2$$
+
+Se elige $v$ para que el paréntesis valga $0$: $v'=\dfrac3x\,v$, o sea $\dfrac{dv}{v}=\dfrac{3\,dx}{x}$, $\ln v=3\ln x$ (tomando $x>0$), entonces $v=x^3$ (la constante se elige $0$: alcanza con una $v$).
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $u$. **Por qué:** con el paréntesis en $0$ queda $u'v=6x^2$, o sea $u'x^3=6x^2$:
+
+$$u'=\frac6x\ \Rightarrow\ u=6\ln x+C$$
+
+Acá sí va la constante $C$.
+
+</Paso>
+<Paso>
+
+**Qué:** deshacer el cambio. **Por qué:** $z=u\,v=x^3\,(6\ln x+C)$ y $z=y^{3/2}$, así que la solución en $y$ es:
+
+$$y^{3/2}=x^3\,(6\ln x+C)$$
+
+</Paso>
+<Solucion>
+
+$$y^{3/2}=x^3\,(6\ln x+C)\qquad\Longleftrightarrow\qquad y=\big[x^3\,(6\ln x+C)\big]^{2/3}\quad(x>0)$$
+
+**Ojo con:** el exponente al deshacer el cambio ($y^{3/2}$, no $y$), y recordar que como $\sqrt y$ está en la ecuación hay que tener $y>0$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: derivar la lineal. Con $z=x^3(6\ln x+C)$ se tiene $z'=3x^2(6\ln x+C)+6x^2$ y entonces $z'-\tfrac3xz=6x^2$ (los términos con $\ln x$ y $C$ se cancelan). Y volviendo a $y=z^{2/3}$: $y'-\tfrac2xy=\tfrac23z^{-1/3}\big(z'-\tfrac3xz\big)=\tfrac23z^{-1/3}\cdot6x^2=\dfrac{4x^2}{\sqrt y}$, que es la ecuación original (porque $\sqrt y=z^{1/3}$).
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (B) 2025.pdf" paginas="6" />
 </Ejercicio>
 
@@ -143,14 +399,88 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Contá qué aparece: $y''$ e $y'$ con coeficientes que son números, y del lado derecho un polinomio y una exponencial. ¿Qué tipo de ecuación diferencial es y qué forma tiene su solución general? Antes de proponer nada, ¿qué funciones anulan el lado izquierdo?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2º orden **con coeficientes constantes, no homogénea**: se resuelve por **coeficientes indeterminados**, $y=y_h+y_p$. Primero $y_h$ con la ecuación característica; después se propone $y_p$ copiando la forma del lado derecho, **mirando si choca con $y_h$**. Machete: [EDO 2º orden, coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $r^2+r=0$, $y_h=C_1+C_2e^{-x}$. La constante de $y_h$ choca con el polinomio del lado derecho ($r=0$ es raíz), así que ese pedazo lleva un factor $x$; la exponencial $e^x$ no choca ($1$ no es raíz). Con coeficientes $A$, $B$, $D$:
+
+$$y_p=x(Ax+B)+De^x=Ax^2+Bx+De^x$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución con lado derecho cero y siempre forma parte de la general. Se prueba $y=e^{rx}$: $r^2+r=r(r+1)=0$, entonces $r_1=0$, $r_2=-1$ (reales y distintas):
+
+$$y_h=C_1e^{0x}+C_2e^{-x}=C_1+C_2e^{-x}$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el lado derecho es $x+e^x$. Para $x$ correspondería $Ax+B$, pero **una constante ya es solución de la homogénea** ($r=0$ es raíz): reemplazada daría $0$ y no alcanzaría para $x$. Por eso se multiplica por $x$: $x(Ax+B)$. Para $e^x$ va $De^x$, y no hay conflicto porque $1$ no es raíz. **Cómo reconocerlo:** si lo que proponés ya aparece en $y_h$, hay resonancia y se multiplica por $x$ (por la potencia mínima que lo resuelve).
+
+$$y_p=Ax^2+Bx+De^x$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces. **Por qué:** para reemplazar en la ecuación.
+
+$$y_p'=2Ax+B+De^x$$
+$$y_p''=2A+De^x$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''+y'$, juntando términos semejantes. **Por qué:** $y_p$ tiene que cumplir la ecuación:
+
+- términos en $x$: $2Ax$
+- términos constantes: $2A+B$
+- términos en $e^x$: $De^x+De^x=2De^x$
+
+$$2Ax+(2A+B)+2De^x=x+e^x$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes y resolver. **Por qué:** dos funciones iguales tienen los mismos coeficientes en $x$, en $1$ y en $e^x$ (el lado derecho no tiene término constante: es $0$).
+
+- $x$: $2A=1\Rightarrow A=\tfrac12$
+- constante: $2A+B=0\Rightarrow B=-2A=-1$
+- $e^x$: $2D=1\Rightarrow D=\tfrac12$
+
+Así $y_p=\dfrac{x^2}{2}-x+\dfrac12e^x$.
+
+</Paso>
+<Paso>
+
+**Qué:** armar la general. **Por qué:** $y=y_h+y_p$, con $C_1$ y $C_2$ libres porque no hay condiciones iniciales.
+
+</Paso>
+<Solucion>
+
+$$y=C_1+C_2e^{-x}+\frac{x^2}{2}-x+\frac12e^x$$
+
+**Ojo con:** proponer solo $Ax+B$ para el polinomio: como $r=0$ es raíz, al reemplazar sale $y_p''+y_p'=A$ y nunca aparece la $x$. Hay que multiplicar por $x$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: sustituir $y_p$ en la ecuación. Con $y_p=\tfrac{x^2}{2}-x+\tfrac12e^x$:
+
+- $y_p'=x-1+\tfrac12e^x$
+- $y_p''=1+\tfrac12e^x$
+- $y_p''+y_p'=(1-1)+x+\big(\tfrac12+\tfrac12\big)e^x=x+e^x$
+
+$y_h$ no aporta, porque $y_h''+y_h'=0$.
+
+</Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (B) 2025.pdf" paginas="7" />
 </Ejercicio>
 

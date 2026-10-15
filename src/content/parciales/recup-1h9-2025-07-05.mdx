@@ -15,7 +15,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
-import Pendiente from '../../components/Pendiente.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
 Universidad Tecnológica Nacional - FRC · Análisis Matemático II - Comisión 1H9 · Recuperatorio 2° Parcial Práctico - 5/7/2025
@@ -36,14 +37,70 @@ Se recomienda trabajar con integral doble en coordenadas polares, o con integral
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Leé qué te piden: un **volumen** entre un paraboloide y un plano. Preguntate: ¿qué forma tiene la "sombra" del sólido sobre $xy$ y cuál es el techo y cuál el piso?
+
+</Pista>
+<Pista>
+
+Es un **volumen entre dos superficies con integral doble en polares**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$ (sin olvidar el jacobiano). Hay que igualar las $z$ para hallar el radio de la base. Machete: [Volumen en polares/cilíndricas](../../machetes/volumen-polares-cilindricas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: techo $z=2$, piso $z=r^2$, $D:\ 0\le r\le\sqrt2,\ 0\le\theta\le2\pi$:
+
+$$V=\int_0^{2\pi}\!\!d\theta\int_0^{\sqrt2}(2-r^2)\,r\,dr$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el sólido. **Por qué:** para saber qué es techo y qué es piso. $z=x^2+y^2$ es un paraboloide con vértice en el origen que abre hacia arriba; el plano $z=2$ lo "tapa" por arriba. El sólido es una copa llena hasta $z=2$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/recup-1h9/ej1.svg`} alt="Arriba, perspectiva del paraboloide z=r² cortado por el plano z=2 en la circunferencia r=√2. Abajo, corte con x=0: parábola z=y² como piso y recta z=2 como techo, con los puntos y=±√2." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** hallar la intersección. **Por qué:** define el radio de la base. Igualando las $z$: $x^2+y^2=2$, que es una circunferencia de radio $r=\sqrt2$ (se descarta $r=-\sqrt2$, un radio no es negativo). Base: $0\le r\le\sqrt2$, $0\le\theta\le2\pi$.
+
+</Paso>
+<Paso>
+
+**Qué:** plantear en polares. **Por qué:** la base es un círculo, $x^2+y^2=r^2$, y el jacobiano agrega el factor $r$:
+
+$$V=\iint_D\big(2-r^2\big)\,r\,dr\,d\theta=\int_0^{2\pi}\!\!d\theta\int_0^{\sqrt2}(2r-r^3)\,dr$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** primitiva de cada potencia, con $\theta$ ausente. Evaluando en $r=\sqrt2$ (en $0$ vale $0$): $r^2=2$ y $r^4=4$.
+
+$$\int_0^{\sqrt2}(2r-r^3)\,dr=\Big[r^2-\frac{r^4}{4}\Big]_0^{\sqrt2}=2-1=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** lo que queda no depende de $\theta$:
+
+$$V=1\cdot2\pi=2\pi$$
+
+</Paso>
+<Solucion>
+
+$$V=2\pi\ \text{u}^3\approx 6{,}28\ \text{u}^3$$
+
+**Ojo con:** el jacobiano $r$, y que el radio de la base es $\sqrt2$ (no $2$): el $2$ es la altura.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente, por rebanadas horizontales: a altura $z$ la sección es un círculo de radio $\sqrt z$ (de $r^2=z$), con área $\pi z$:
+
+$$V=\int_0^2\pi z\,dz=\pi\Big[\frac{z^2}{2}\Big]_0^2=2\pi$$
+
+Otra forma: cilindro de radio $\sqrt2$ y altura $2$ ($\pi\cdot2\cdot2=4\pi$) menos el volumen bajo el paraboloide ($\int_0^{2\pi}\!\int_0^{\sqrt2}r^2\cdot r\,dr\,d\theta=2\pi\cdot1=2\pi$): $4\pi-2\pi=2\pi$.
+
+</Comprobacion>
 <ResolucionOficial examen="recup-1h9-2025-07-05" fuente="parciales/2do-parcial/2° Parciales/Recup. 2do PP 1H9.pdf" paginas="2" />
 </Ejercicio>
 
@@ -65,14 +122,77 @@ Nota del sitio: el original dice "funciones lineales" aunque una de las dos es u
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Fijate qué te piden: la integral de un **campo vectorial** sobre una curva **cerrada** formada por una recta y una parábola ("funciones lineales", dice el original, aunque una es parábola). Dibujalas: ¿dónde se cortan? ¿Qué sentido tiene que llevar cada tramo?
+
+</Pista>
+<Pista>
+
+Pide explícitamente **por definición**: parametrizar cada tramo con $x$ y calcular $\int P\,dx+Q\,dy$ en cada uno, respetando el sentido antihorario. Antes hay que hallar los cortes (igualando). Machete: [Curvilínea por definición](../../machetes/curvilinea-por-definicion/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: la recta $C_1$ va de $x=-3$ a $x=2$ y la parábola $C_2$ de $x=2$ a $x=-3$. Con $P=x^2-y$, $Q=x^2+y$: $IC=\int_{C_1}+\int_{C_2}$, usando $dy=dx$ en $C_1$ y $dy=-2x\,dx$ en $C_2$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar y hallar los cortes. **Por qué:** para fijar los extremos de cada tramo y el sentido. Igualando $x-2=-x^2+4$ queda $x^2+x-6=0$, o sea $(x+3)(x-2)=0$: $x=-3$ ($y=-5$) y $x=2$ ($y=0$). Cortes: $(-3,-5)$ y $(2,0)$. La parábola queda arriba de la recta entre ellos; en sentido antihorario la recta (abajo) va de izquierda a derecha y la parábola (arriba) de derecha a izquierda.
+
+<img src={`${import.meta.env.BASE_URL}figuras/recup-1h9/ej2.svg`} alt="Región D entre la recta y=x−2 (abajo, recorrida de izquierda a derecha) y la parábola y=−x²+4 (arriba, recorrida de derecha a izquierda), con puntos de corte (−3,−5) y (2,0) y sentido antihorario." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** calcular $IC_1$ sobre $y=x-2$, con $dy=dx$ y $x$ de $-3$ a $2$. **Por qué:** se reemplaza la curva dentro de $P\,dx+Q\,dy$.
+
+- $P=x^2-(x-2)=x^2-x+2$
+- $Q\,dy=\big(x^2+x-2\big)\,dx$
+
+Sumando se van $-x$ con $+x$ y $+2$ con $-2$: $P\,dx+Q\,dy=2x^2\,dx$.
+
+$$IC_1=\int_{-3}^{2}2x^2\,dx=\frac23\Big[x^3\Big]_{-3}^{2}=\frac23\big(8+27\big)=\frac{70}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $IC_2$ sobre $y=-x^2+4$, con $dy=-2x\,dx$ y $x$ de $2$ a $-3$. **Por qué:** igual, pero cambia el sentido.
+
+- $P=x^2-(-x^2+4)=2x^2-4$
+- $Q=x^2+(-x^2+4)=4$, entonces $Q\,dy=4\cdot(-2x)\,dx=-8x\,dx$
+
+$$P\,dx+Q\,dy=(2x^2-8x-4)\,dx$$
+
+Con los límites de $2$ a $-3$ conviene pasar a $-3$ a $2$ con un signo menos:
+
+$$IC_2=-\int_{-3}^{2}(2x^2-8x-4)\,dx=-\Big[\frac{2x^3}{3}-4x^2-4x\Big]_{-3}^{2}$$
+
+Evaluando: en $x=2$ vale $\tfrac{16}{3}-16-8=-\tfrac{56}{3}$; en $x=-3$ vale $-18-36+12=-42$. La diferencia es $-\tfrac{56}{3}+42=\tfrac{70}{3}$, entonces $IC_2=-\tfrac{70}{3}$.
+
+</Paso>
+<Paso>
+
+**Qué:** sumar los tramos. **Por qué:** la integral sobre la curva cerrada es la suma de los tramos:
+
+$$IC=\frac{70}{3}-\frac{70}{3}=0$$
+
+</Paso>
+<Solucion>
+
+$$IC=\oint_C F\cdot dr=0\qquad\Big(IC_1=\tfrac{70}{3},\ IC_2=-\tfrac{70}{3}\Big)$$
+
+**Ojo con:** que dé $0$ **no** significa que el campo sea conservativo: $\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}=2x+1\neq0$. Acá se anula porque las contribuciones de las dos mitades de $D$ se compensan.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente, con el teorema de Green (circulación antihoraria $=\iint_D(Q_x-P_y)\,dA$): $Q_x-P_y=2x+1$ y la región es $-3\le x\le2$, $x-2\le y\le4-x^2$, de altura $6-x-x^2$:
+
+$$\iint_D(2x+1)\,dA=\int_{-3}^{2}(2x+1)(6-x-x^2)\,dx=\int_{-3}^{2}(-2x^3-3x^2+11x+6)\,dx=\Big[-\frac{x^4}{2}-x^3+\frac{11x^2}{2}+6x\Big]_{-3}^{2}=18-18=0$$
+
+(se ve también con $w=x^2+x$: $(2x+1)\,dx=dw$ y $w$ vale $6$ en los dos extremos).
+
+</Comprobacion>
 <ResolucionOficial examen="recup-1h9-2025-07-05" fuente="parciales/2do-parcial/2° Parciales/Recup. 2do PP 1H9.pdf" paginas="3" />
 </Ejercicio>
 
@@ -89,14 +209,87 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá la ecuación: hay $y'$, un término lineal $2y$ y del lado derecho una potencia de $y$ ($y^{-3}$). ¿Es lineal en $y$? ¿Qué cambio de variable la convertiría en una que ya sabés resolver?
+
+</Pista>
+<Pista>
+
+Es una EDO de **Bernoulli**, $y'+P(x)y=Q(x)y^n$, con $n=-3$. Se multiplica por $y^{-n}=y^3$ para que el lado derecho quede sin $y$, se hace el cambio $z=y^{1-n}=y^4$ y queda una **lineal** en $z$, que se resuelve con $z=u\cdot v$. El enunciado pide hacerlo paso a paso, sin la fórmula general. Machete: [EDO de Bernoulli](../../machetes/edo-bernoulli/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $y^3y'+2y^4=1$; con $z=y^4$ es $z'=4y^3y'$, o sea $\tfrac{z'}{4}+2z=1$:
+
+$$z'+8z=4$$
+
+Después $z=u\cdot v$ con $v'+8v=0$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** reconocer el tipo y acomodar la ecuación. **Por qué:** $y'+2y=y^{-3}$ tiene la forma de Bernoulli con $n=-3$ (el término de la derecha es $y^n$). Multiplicamos todo por $y^3=y^{-n}$ para que el lado derecho quede constante:
+
+$$y^3y'+2y^4=1$$
 
 </Paso>
+<Paso>
+
+**Qué:** cambio de variable. **Por qué:** con $z=y^{1-n}=y^4$ resulta $z'=4y^3y'$ (regla de la cadena), o sea $y^3y'=\tfrac{z'}{4}$. Reemplazando y multiplicando por $4$:
+
+$$\frac{z'}{4}+2z=1\ \Rightarrow\ z'+8z=4$$
+
+Es una EDO **lineal** de 1er orden en $z$.
+
+</Paso>
+<Paso>
+
+**Qué:** resolver la lineal con $z=u\cdot v$. **Por qué:** así se separa en dos ecuaciones simples. Con $z'=u'v+uv'$:
+
+$$u'v+uv'+8uv=4\ \Rightarrow\ u'v+u\,(v'+8v)=4$$
+
+Se elige $v$ de modo que el paréntesis sea cero.
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $v$. **Por qué:** $v'+8v=0$ es de variables separables (basta una solución, sin constante):
+
+$$\frac{dv}{v}=-8\,dx\ \Rightarrow\ \ln v=-8x\ \Rightarrow\ v=e^{-8x}$$
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $u$. **Por qué:** queda $u'v=4$, o sea $u'e^{-8x}=4$, entonces $u'=4e^{8x}$ y se integra (el $\tfrac18$ compensa el $8$ de la regla de la cadena):
+
+$$u=\int4e^{8x}\,dx=\frac{4}{8}e^{8x}+C=\frac12e^{8x}+C$$
+
+</Paso>
+<Paso>
+
+**Qué:** volver a $y$. **Por qué:** $z=u\cdot v=y^4$. Distribuyendo $e^{-8x}$:
+
+$$y^4=\Big(\frac12e^{8x}+C\Big)e^{-8x}=\frac12+Ce^{-8x}$$
+
+</Paso>
+<Solucion>
+
+$$y^4=\frac12+Ce^{-8x}$$
+
+(equivale a $y^4=\big(\tfrac12e^{8x}+C\big)e^{-8x}$; despejar $y=\sqrt[4]{\cdot}$ es opcional.)
+
+**Ojo con:** multiplicar por $y^{-n}=y^3$ (no por $y^{-3}$) y acordarse del factor $4$ de $z'=4y^3y'$ (de ahí sale el $8$ en $z'+8z=4$).
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: sustituir en la EDO original. De $y^4=\tfrac12+Ce^{-8x}$, derivando implícitamente: $4y^3y'=-8Ce^{-8x}$, o sea $y'=-2Ce^{-8x}\,y^{-3}$. Entonces, con $2y=2y^4\,y^{-3}$:
+
+$$y'+2y=y^{-3}\big(-2Ce^{-8x}+2y^4\big)=y^{-3}\Big(-2Ce^{-8x}+1+2Ce^{-8x}\Big)=y^{-3}$$
+
+que es el lado derecho.
+
+</Comprobacion>
 <ResolucionOficial examen="recup-1h9-2025-07-05" fuente="parciales/2do-parcial/2° Parciales/Recup. 2do PP 1H9.pdf" paginas="4" />
 </Ejercicio>
 
