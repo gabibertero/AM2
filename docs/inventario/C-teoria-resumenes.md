@@ -1,5 +1,5 @@
 # inv-C: catalogo teoria AM II (2do parcial). [V]=visto, [I]=inferencia
-Base: "/Users/gabrielagustinberterojarchum/Desktop/UTN/2º Año/AM II/"
+Base: "../"
 
 ## 1. E13 vs E14 (parciales/2do-parcial/)
 - Ambos: PDF Google Docs, titulo "RP2", "RESUMEN AMI II PARCIAL 2". Escaneados/imagen con texto casi nulo (solo titulos extraibles); legibles a 954x1348 [V].
