@@ -1,0 +1,71 @@
+---
+// Generadores de ejercicios con semilla (lógica pura en scripts/lab/, UI en scripts/lab/ui.js). Sin JS solo se ve la lista de tipos.
+import IA from './IA.astro';
+import { GENERADORES } from '../scripts/lab/index.js';
+---
+<ul class="lab-lista">
+  {GENERADORES.map((g) => <li>{g.nombre}</li>)}
+</ul>
+<noscript><p class="suave">El laboratorio necesita JavaScript para generar los ejercicios.</p></noscript>
+
+<section class="lab-gen" aria-labelledby="h-gen" data-lab hidden>
+  <h2 id="h-gen">Generador de ejercicios</h2>
+  <div class="lab-ctrl">
+    <div class="lab-campo">
+      <label for="lab-tipo">Tipo de ejercicio</label>
+      <select id="lab-tipo" data-tipo></select>
+    </div>
+    <form class="lab-campo lab-sem" data-cargar novalidate>
+      <label for="lab-semilla">Semilla</label>
+      <span class="lab-sem-fila">
+        <input id="lab-semilla" type="text" inputmode="numeric" autocomplete="off" data-semilla />
+        <button type="submit">Cargar</button>
+      </span>
+    </form>
+  </div>
+  <p class="suave lab-nota">La misma semilla da siempre el mismo ejercicio: pasale el enlace a un amigo.</p>
+  <p class="lab-aviso" role="status" data-aviso></p>
+  <article class="lab-ej" data-ia-ctx>
+    <p class="eyebrow" data-titulo data-ia-tit></p>
+    <div class="lab-enun" data-enunciado data-ia-enun></div>
+    <div class="lab-acc">
+      <button type="button" class="btn-primario" data-otro>Otro ejercicio</button>
+      <button type="button" data-ver aria-expanded="false" aria-controls="lab-sol">Ver solución</button>
+    </div>
+    <IA modo="corregir" />
+    <div class="lab-sol" id="lab-sol" data-solucion data-ia-modelo hidden></div>
+  </article>
+</section>
+
+<script>
+  import { iniciarLab } from '../scripts/lab/ui.js';
+  const raiz = document.querySelector('[data-lab]');
+  if (raiz) iniciarLab(raiz);
+</script>
+
+<style>
+  .lab-lista { columns: 2 16rem; padding-left: 1.2em; margin: 0 0 1rem; }
+  .lab-ctrl { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; margin-bottom: 8px; }
+  .lab-campo { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .lab-ctrl > .lab-campo:first-child { flex: 1 1 16rem; max-width: 100%; }
+  .lab-gen select { width: 100%; }
+  .lab-campo label { font-weight: 600; font-size: .92rem; }
+  .lab-sem-fila { display: inline-flex; gap: 8px; align-items: center; }
+  .lab-gen select, .lab-gen input[type='text'] { font: inherit; padding: 8px 12px; min-height: 44px; border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); background: var(--sup); color: var(--texto); max-width: 100%; }
+  .lab-gen input[type='text'] { width: 9rem; }
+  .lab-nota { margin: 4px 0; font-size: .9rem; }
+  .lab-aviso { min-height: 1.4em; margin: 4px 0 8px; font-weight: 600; color: var(--pendiente); }
+  .lab-ej { background: var(--sup); border: 1px solid var(--borde); border-left: 5px solid var(--acento); border-radius: var(--r); box-shadow: var(--sombra); padding: 18px 20px; min-width: 0; }
+  .lab-enun { margin: 6px 0 14px; }
+  .lab-acc { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lab-sol { margin-top: 12px; padding: 14px 18px; background: var(--elaborado-fondo); border: 1px solid var(--borde); border-radius: var(--r-s); }
+  .lab-sol h3 { margin: 0 0 .6em; font-size: 1rem; }
+  .lab-sol ol { margin: 0; padding-left: 1.3em; }
+  .lab-sol li { margin: 0 0 .7em; }
+  .lab-res { margin-top: .4em; padding-top: .6em; border-top: 1px solid var(--borde); }
+  .lab-res-t { margin: 0; font-weight: 700; }
+  .lab-bloque p { margin: 0 0 .2em; }
+  .lab-tex { overflow-x: auto; overflow-y: hidden; position: relative; max-width: 100%; }
+  .lab-tex :global(.katex-display) { margin: .3em 0; }
+  @media (max-width: 720px) { .lab-ej { padding: 14px; } }
+</style>
