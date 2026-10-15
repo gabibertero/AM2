@@ -43,6 +43,10 @@ test('modo examen: pausa y salir restaura la vista normal', async ({ page }) => 
   await page.getByRole('button', { name: 'Pausar' }).click();
   await expect(page.getByRole('button', { name: 'Reanudar' })).toBeVisible();
   await page.getByRole('button', { name: 'Salir del modo examen' }).click();
+  await page.getByRole('button', { name: 'No, seguir' }).click(); // confirmación inline: cancelar mantiene el examen
+  await expect(page.locator('body')).toHaveAttribute('data-examen', 'activo');
+  await page.getByRole('button', { name: 'Salir del modo examen' }).click();
+  await page.getByRole('button', { name: 'Sí, salir' }).click();
   await expect(ej(page, 1).getByRole('button', { name: 'Ver solución completa' })).toBeVisible();
   await expect(page.locator('body')).not.toHaveAttribute('data-examen', /.*/);
 });

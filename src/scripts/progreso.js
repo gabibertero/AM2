@@ -67,6 +67,7 @@ const pedir = document.querySelector('[data-reiniciar]');
 if (pedir) {
   const panel = document.querySelector('[data-confirmar]');
   const msg = document.querySelector('[data-resultado]');
+  try { const r = sessionStorage.getItem('am2:reinicio'); if (r) { msg.textContent = r; sessionStorage.removeItem('am2:reinicio'); } } catch { /* nada */ }
   pedir.onclick = () => { panel.hidden = false; panel.querySelector('[data-si]').focus(); };
   panel.querySelector('[data-no]').onclick = () => { panel.hidden = true; pedir.focus(); };
   panel.querySelector('[data-si]').onclick = () => {
@@ -76,7 +77,8 @@ if (pedir) {
     } catch {
       msg.textContent = 'No se pudo acceder al almacenamiento del navegador.';
     }
-    panel.hidden = true;
-    msg.focus();
+    // Recarga: si no, los textareas/estado en pantalla se re-guardarían al editar.
+    try { sessionStorage.setItem('am2:reinicio', msg.textContent); } catch { /* sin aviso */ }
+    location.reload();
   };
 }

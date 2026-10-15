@@ -18,7 +18,7 @@ function iniciar(panel) {
   function ultimo() {
     try {
       const u = JSON.parse(leer(clave));
-      q('ultimo').textContent = typeof u.nota === 'number' ? `Último intento: ${fmt(u.nota)}/100 (${mmss(u.usado)}).` : '';
+      q('ultimo').textContent = typeof u.nota === 'number' ? `Último intento: ${fmt(u.nota)}/100 (${mmss(typeof u.usado === 'number' ? u.usado : 0)}).` : '';
     } catch { q('ultimo').textContent = ''; }
   }
 
@@ -37,7 +37,7 @@ function iniciar(panel) {
     if (fase === 'reposo') delete document.body.dataset.examen;
     else document.body.dataset.examen = fase === 'entregado' ? 'entregado' : 'activo';
     ejercicios.forEach((e) => (e.querySelector('[data-autocorr]').hidden = fase !== 'entregado'));
-    if (fase !== 'corriendo') q('aviso').hidden = true;
+    if (fase !== 'corriendo') { q('aviso').hidden = true; q('conf').hidden = true; }
   }
 
   function tic() {
@@ -51,18 +51,18 @@ function iniciar(panel) {
   q('abrir').onclick = () => { fase = 'listo'; pintarFase(); q('minutos').focus(); };
   q('empezar').onclick = () => {
     const min = minutosValidos(q('minutos').value);
+    q('minutos').value = min; // refleja el valor corregido
     total = restante = min * 60; fin = Date.now() + total * 1000;
     pausado = false; avisado = false;
     fase = 'corriendo'; pintarFase(); tic();
     reloj = setInterval(tic, 250);
-    q('pausa').textContent = 'Pausar'; q('pausa').setAttribute('aria-pressed', 'false');
+    q('pausa').textContent = 'Pausar';
     panel.querySelector('h2').focus();
   };
   q('pausa').onclick = () => {
     pausado = !pausado;
     if (!pausado) fin = Date.now() + restante * 1000;
     q('pausa').textContent = pausado ? 'Reanudar' : 'Pausar';
-    q('pausa').setAttribute('aria-pressed', pausado);
   };
   q('entregar').onclick = () => {
     tic(); parar(); fase = 'entregado'; pintarFase();
@@ -70,11 +70,19 @@ function iniciar(panel) {
     calcular();
     panel.querySelector('h2').focus();
   };
+  const conf = q('conf');
   q('salir').onclick = () => {
+    if (fase === 'corriendo') { conf.hidden = false; q('conf-no').focus(); return; } // un toque errado no tira el intento
+    salir();
+  };
+  q('conf-no').onclick = () => { conf.hidden = true; q('salir').focus(); };
+  q('conf-si').onclick = salir;
+  function salir() {
+    conf.hidden = true;
     parar(); notas.clear();
     ejercicios.forEach((e) => e.querySelectorAll('[data-nota]').forEach((b) => b.setAttribute('aria-pressed', 'false')));
     fase = 'reposo'; pintarFase(); ultimo(); q('abrir').focus();
-  };
+  }
 
   ejercicios.forEach((e) => {
     const botones = [...e.querySelectorAll('[data-nota]')];

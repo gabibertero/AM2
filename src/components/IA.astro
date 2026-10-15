@@ -3,18 +3,19 @@
 // Va dentro de un contenedor con data-ia-ctx que marca data-ia-tit, data-ia-enun y data-ia-modelo (respuesta modelo).
 // modo 'corregir': muestra "Tu respuesta"; escrita → corrección contra la respuesta modelo, vacía → explicación del tema.
 // modo 'explicar': solo explicación (resumen, tarjetas, choices).
-const { modo = 'corregir' } = Astro.props;
+const { modo = 'corregir', numero = '' } = Astro.props;
+const sufijo = numero !== '' ? `, ejercicio ${numero}` : '';
 const etiqueta = modo === 'corregir' ? 'Corregir con IA' : 'Explicámelo con IA';
 const ops = [['claude', 'Claude'], ['chatgpt', 'ChatGPT'], ['gemini', 'Gemini'], ['copiar', 'Solo copiar el prompt']];
 ---
 <div class="ia" data-ia={modo}>
   {modo === 'corregir' && (
     <label class="ia-mia">Tu respuesta
-      <textarea data-ia-mia rows="5" placeholder="Escribila como en el examen y pedí la corrección. Si la dejás vacía, la IA te explica el tema."></textarea>
+      <textarea data-ia-mia aria-label={`Tu respuesta${sufijo}`} rows="5" placeholder="Escribila como en el examen y pedí la corrección. Si la dejás vacía, la IA te explica el tema."></textarea>
     </label>
   )}
   <details class="ia-menu" data-ia-js hidden>
-    <summary><span aria-hidden="true">✨</span> {etiqueta} <span class="ia-flecha" aria-hidden="true">▾</span></summary>
+    <summary aria-label={`${etiqueta}${sufijo}`}><span aria-hidden="true">✨</span> {etiqueta} <span class="ia-flecha" aria-hidden="true">▾</span></summary>
     <ul class="ia-ops">
       {ops.map(([d, n]) => <li><button type="button" data-ia-ir={d}>{n}</button></li>)}
     </ul>

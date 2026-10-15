@@ -182,7 +182,7 @@ main > p { max-width: 46rem; }
   .indice a { white-space: nowrap; border: 1px solid var(--borde); }
 }
 
-.ejercicio { background: var(--sup); border: 1px solid var(--borde); border-top: 5px solid var(--uc, var(--borde-fuerte)); border-radius: var(--r); box-shadow: var(--sombra); padding: 20px 22px 18px; margin: 0 0 1.75rem; counter-reset: paso; }
+.ejercicio { background: var(--sup); border: 1px solid var(--borde); border-top: 5px solid var(--uc, var(--borde-fuerte)); border-radius: var(--r); box-shadow: var(--sombra); padding: 20px 22px 18px; margin: 0 0 1.75rem; counter-reset: paso; scroll-margin-top: 140px; }
 .ej-cab { display: flex; gap: 16px; align-items: flex-start; margin-bottom: .5rem; }
 .ej-num { font-family: var(--f-ed); font-weight: 700; font-size: 3.4rem; line-height: .9; color: var(--uc, var(--suave)); min-width: 1.1ch; }
 .ejercicio h2 { margin: 0 0 .3rem; font-size: 1.4rem; }
@@ -253,6 +253,11 @@ main > p { max-width: 46rem; }
 .examen-panel h2 { margin: 0 0 .25rem; font-size: 1.1rem; }
 .ex-fila { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ex-fila input { width: 5rem; min-height: 40px; font: inherit; padding: 0 8px; background: var(--sup2); color: var(--texto); border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); }
+.ex-salir { margin-left: auto; background: none; color: var(--suave); border: 1px solid var(--borde-fuerte); }
+.ex-conf { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-weight: 700; margin: .6rem 0 0; }
+.ex-conf[hidden] { display: none; }
+.ex-conf button { min-height: 40px; }
+.ex-conf button:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
 .ex-reloj { font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 5.5ch; }
 .ex-aviso { color: var(--e-curso); font-weight: 700; }
 .ex-nota { font-size: 1.2rem; margin: .5rem 0 0; }

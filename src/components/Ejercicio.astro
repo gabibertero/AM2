@@ -43,7 +43,7 @@ const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelt
     <button type="button" data-accion="solucion" aria-expanded="false" aria-controls={ayudas}>Ver solución completa</button>
     <button type="button" data-accion="ocultar">Ocultar todo</button>
   </div>
-  <IA modo="corregir" />
+  <IA modo="corregir" numero={numero} />
   <div class="autocorr" data-autocorr hidden role="group" aria-label={`Autocorrección del ejercicio ${numero}`}>
     <p class="autocorr-t">Autocorrección</p>
     <div class="autocorr-b">

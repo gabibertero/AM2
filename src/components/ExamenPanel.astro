@@ -10,10 +10,14 @@ const { id, minutos = 120 } = Astro.props;
     <label data-en="listo">Minutos <input type="number" data-ex="minutos" value={minutos} min="1" max="600" inputmode="numeric" /></label>
     <button type="button" data-ex="empezar" data-en="listo">Empezar</button>
     <output class="ex-reloj" data-ex="reloj" data-en="corriendo" role="timer" aria-label="Tiempo restante"></output>
-    <button type="button" data-ex="pausa" data-en="corriendo" aria-pressed="false">Pausar</button>
+    <button type="button" data-ex="pausa" data-en="corriendo">Pausar</button>
     <button type="button" data-ex="entregar" data-en="corriendo">Entregar</button>
-    <button type="button" data-ex="salir" data-en="listo corriendo entregado">Salir del modo examen</button>
+    <button type="button" class="ex-salir" data-ex="salir" data-en="listo corriendo entregado">Salir del modo examen</button>
   </div>
+  <p class="ex-conf" data-ex="conf" role="alertdialog" aria-label="Confirmar salida" hidden>¿Salir sin entregar? Se pierde este intento.
+    <button type="button" data-ex="conf-si">Sí, salir</button>
+    <button type="button" data-ex="conf-no">No, seguir</button>
+  </p>
   <p class="ex-aviso" data-ex="aviso" role="alert" hidden>Se terminó el tiempo. Podés seguir, pero ya pasó el límite.</p>
   <div data-en="entregado" aria-live="polite">
     <p class="ex-nota">Nota estimada: <strong data-ex="nota"></strong>/100 · Tiempo usado: <span data-ex="usado"></span></p>

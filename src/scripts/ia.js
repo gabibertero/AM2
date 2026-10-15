@@ -9,9 +9,12 @@ import { armarPrompt, urlDestino, DESTINOS } from './ia-prompt.js';
 function texto(el) {
   if (!el) return '';
   const c = el.cloneNode(true);
-  c.querySelectorAll('.katex').forEach((k) => {
+  // .katex-display contiene un .katex: se reemplaza el externo con $$…$$ y el interno ya no existe.
+  c.querySelectorAll('.katex-display, .katex').forEach((k) => {
+    if (!c.contains(k)) return;
     const tex = k.querySelector('annotation[encoding="application/x-tex"]')?.textContent;
-    k.replaceWith(tex ? `$${tex}$` : k.textContent);
+    const d = k.classList.contains('katex-display');
+    k.replaceWith(tex ? (d ? `$$${tex}$$` : `$${tex}$`) : k.textContent);
   });
   c.querySelectorAll('[data-ia], .sr-only, .rotulo').forEach((x) => x.remove()); // sr-only: avisos para lector de pantalla, no contenido
   // textContent pega los bloques ("voluntad.De ahí"): cortes de línea en bloques, viñetas en ítems, " | " entre celdas.
@@ -74,6 +77,7 @@ document.addEventListener('click', (e) => {
   });
   const dest = b.dataset.iaIr;
   const destino = urlDestino(dest, prompt);
+  const copiado = copiar(prompt); // primero copiar, así el portapapeles ya está listo al abrir la pestaña
   if (destino) { // antes de cualquier await: si no, el navegador lo bloquea
     const a = Object.assign(document.createElement('a'), { href: destino.url, target: '_blank', rel: 'noopener noreferrer' });
     document.body.append(a); a.click(); a.remove();
@@ -81,7 +85,7 @@ document.addEventListener('click', (e) => {
   const aviso = box.querySelector('[data-ia-aviso]');
   const tipo = box.dataset.ia === 'corregir' && mia.trim() ? 'corrección' : 'explicación';
   aviso.textContent = ''; // vaciar y reasignar: el lector vuelve a anunciar el mismo texto
-  copiar(prompt).then((ok) => requestAnimationFrame(() => {
+  copiado.then((ok) => requestAnimationFrame(() => {
     const nombre = DESTINOS[dest]?.nombre;
     aviso.textContent = !destino
       ? (ok ? 'Prompt copiado. Pegalo en la IA que quieras.' : 'No se pudo copiar: tu navegador lo bloqueó.')
