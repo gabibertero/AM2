@@ -13,6 +13,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 
 Universidad Tecnológica Nacional - Facultad Regional Córdoba · Segundo parcial práctico de Análisis Matemático II · TEMA 1. La foto no trae fecha, comisión ni puntajes.
@@ -39,14 +41,126 @@ Rótulos en el gráfico: $y=ax+b$, $y=\dfrac1x$, marca "3" sobre el eje x.
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá qué te piden: un **volumen** entre dos superficies que tienen $z$ en función de $x$ e $y$. Preguntate: ¿sobre qué región del plano $xy$ se apoya el cuerpo? ¿Qué te da la recta para dibujar esa región? ¿Cuál de las dos superficies queda arriba?
+
+</Pista>
+<Pista>
+
+Es un **volumen entre dos superficies con una integral doble en cartesianas**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$. La recta se usa para hallar el punto donde corta a la hipérbola: ese punto fija el borde izquierdo de $D$.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: recta $y=2x-1$, que corta a $y=\frac1x$ en $x=1$. La región es $D:\ 1\le x\le3,\ 0\le y\le\frac1x$ y el techo es $z=x^2y$ (piso $z=-x$):
+
+$$V=\int_1^3\!\!\int_0^{1/x}\big(x^2y+x\big)\,dy\,dx$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** hallar la ecuación de la recta $y=ax+b$ que pasa por $p_1=(0,-1)$ y $p_2=(2,3)$. **Por qué:** el gráfico no trae su ecuación y la necesitamos para ubicar el punto de corte con la hipérbola. La pendiente es el cociente de las diferencias:
+
+$$a=\frac{3-(-1)}{2-0}=\frac42=2$$
+
+En $x=0$ vale $-1$, así que $b=-1$:
+
+$$y=2x-1$$
+
+*Lectura del gráfico (pendiente de revisión):* en el gráfico no están rotulados los puntos de corte. Se leyó que el borde izquierdo de la región es la vertical que pasa por el punto donde la recta corta a la hipérbola, el borde derecho es la vertical $x=3$, abajo está el eje $x$ y arriba la hipérbola $y=\frac1x$.
 
 </Paso>
+<Paso>
+
+**Qué:** hallar donde la recta corta a la hipérbola. **Por qué:** ese punto da el borde izquierdo de $D$. Se igualan $2x-1=\frac1x$ y se multiplica todo por $x$ (con $x\neq0$):
+
+$$2x^2-x=1$$
+
+Pasando el $1$ restando queda una cuadrática, que se factoriza:
+
+$$2x^2-x-1=0\ \Rightarrow\ (2x+1)(x-1)=0$$
+
+Las raíces son $x=-\tfrac12$ y $x=1$. En el gráfico el corte sombreado está en el primer cuadrante, a la derecha del eje $y$ (la otra raíz corresponde a la rama de la hipérbola del tercer cuadrante). Entonces $x=1$, y el punto es $(1,1)$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/anterior-w-t1/ej1.svg`} alt="Arriba, el plano xy con la recta y=2x−1 por (0,−1) y (2,3), la hipérbola y=1/x, el corte en (1,1), las verticales x=1 y x=3 y la región D sombreada entre el eje x y la hipérbola. Abajo, perspectiva del sólido con techo z=x²y (rojo), piso z=−x (azul) y la pared sobre y=1/x." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Paso>
+
+**Qué:** describir la región $D$. **Por qué:** con el dibujo se lee: entre las verticales $x=1$ y $x=3$, por encima del eje $x$ ($y=0$) y por debajo de la hipérbola:
+
+$$D:\ 1\le x\le3,\quad 0\le y\le\frac1x$$
+
+</Paso>
+<Paso>
+
+**Qué:** decidir techo y piso. **Por qué:** en $D$ se tiene $x>0$ e $y\ge0$, entonces $z_2=x^2y\ge0$ y $z_1=-x<0$: $z_2$ queda arriba. De hecho
+
+$$z_2-z_1=x^2y+x=x(xy+1)>0$$
+
+**Cómo reconocerlo:** si no estás seguro de cuál es cuál, probá un punto de $D$, por ejemplo $(2,\tfrac14)$: $z_2=1$ y $z_1=-2$.
+
+</Paso>
+<Paso>
+
+**Qué:** plantear la integral. **Por qué:** el volumen es la integral de (techo − piso) sobre $D$. El orden $dy\,dx$ conviene porque en $y$ los límites son $0$ y $\frac1x$ y en $x$ son números:
+
+$$V=\int_1^3\!\!\int_0^{1/x}\big(x^2y+x\big)\,dy\,dx$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $y$ (integral interna, $x$ es constante). **Por qué:** la primitiva de $x^2y$ es $\frac{x^2y^2}{2}$ y la de $x$ es $xy$:
+
+$$\int_0^{1/x}(x^2y+x)\,dy=\Big[\frac{x^2y^2}{2}+xy\Big]_0^{1/x}$$
+
+Evaluando en $y=\frac1x$ (en $y=0$ vale 0):
+
+$$\frac{x^2}{2}\cdot\frac1{x^2}=\frac12,\qquad x\cdot\frac1x=1,\qquad\text{total }\tfrac12+1=\tfrac32$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $x$. **Por qué:** lo que quedó es una constante, que se multiplica por la longitud del intervalo $3-1=2$:
+
+$$V=\int_1^3\frac32\,dx=\frac32\cdot2=3$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$V=3\ \text{u}^3$$
+
+**Ojo con:** no hallar la recta (sin ella no sabés dónde empieza $D$), o restar al revés las superficies (piso − techo daría $-3$).
+
+**Criterio estimado — no oficial** (la consigna de corrección no está en la foto; se supone que piden gráfico, planteo y todas las cuentas):
+
+- **Bien:** recta $y=2x-1$, corte en $x=1$, región $D$ dibujada, integral $\int_1^3\!\int_0^{1/x}(x^2y+x)\,dy\,dx$ con techo y piso bien identificados y $V=3$.
+- **A medias:** planteo correcto (recta, $D$, techo − piso) pero con un error de cuenta que cambia el resultado.
+- **Mal:** sin región ni planteo, o límites inventados, o resta mal las superficies.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: cambiar el orden de integración ($dx$ primero). Con $y$ fijo, $x$ va de $1$ a $3$ mientras $y\le\frac13$; para $\frac13\le y\le1$ el borde derecho pasa a ser la hipérbola ($x=\frac1y$).
+
+Primitiva en $x$: $\int(x^2y+x)\,dx=\dfrac{x^3y}{3}+\dfrac{x^2}{2}$.
+
+**Tramo 1** ($0\le y\le\frac13$, $x$ de $1$ a $3$):
+
+$$\Big(9y+\tfrac92\Big)-\Big(\tfrac y3+\tfrac12\Big)=\frac{26}{3}y+4$$
+
+$$\int_0^{1/3}\Big(\frac{26}{3}y+4\Big)dy=\Big[\frac{13}{3}y^2+4y\Big]_0^{1/3}=\frac{13}{27}+\frac{36}{27}=\frac{49}{27}$$
+
+**Tramo 2** ($\frac13\le y\le1$, $x$ de $1$ a $\frac1y$):
+
+$$\Big(\frac{1}{3y^2}+\frac{1}{2y^2}\Big)-\Big(\frac y3+\frac12\Big)=\frac{5}{6y^2}-\frac y3-\frac12$$
+
+$$\int_{1/3}^{1}\Big(\frac{5}{6y^2}-\frac y3-\frac12\Big)dy=\Big[-\frac{5}{6y}-\frac{y^2}{6}-\frac y2\Big]_{1/3}^{1}=-\frac32-\Big(-\frac{145}{54}\Big)=\frac{32}{27}$$
+
+$$V=\frac{49}{27}+\frac{32}{27}=\frac{81}{27}=3$$
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-w-t1#2" numero={2} fuente="../fotos-clase/2026-08-28 foto 056.jpeg" pagina={1} unidad="U8" tema="EDO de 1º orden">
@@ -61,14 +175,140 @@ Resolver las siguientes ecuaciones diferenciales:
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Fijate qué hay en cada ecuación: derivadas de primer orden y la función $y$. En la **a)** ¿cómo aparece $y$ respecto de $y'$? En la **b)** ¿qué pasa con el cociente $\frac yx$ si lo reemplazás por una nueva variable? Mirá si podés agrupar cada ecuación en una forma conocida.
+
+</Pista>
+<Pista>
+
+La **a)** es una EDO **lineal** de primer orden (se escribe $y'+P(x)y=Q(x)$) y se resuelve con $y=u\cdot v$. Machete: [EDO lineal](../../machetes/edo-lineal/). La **b)** es **homogénea**: dividiendo todo por $x$ aparece sólo $\frac yx$, y se usa $y=ux$. Machete: [EDO homogénea](../../machetes/edo-homogenea/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho. **a)** $y'-\dfrac4x\,y=x^4e^x$, con $P=-\frac4x$, $Q=x^4e^x$; se busca $v$ con $v'=\frac4x\,v$. **b)** $y'=\dfrac yx+\sqrt{1-\big(\tfrac yx\big)^2}$; con $y=ux$ queda $u'x=\sqrt{1-u^2}$, que se separa en variables.
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué (a):** pasar a forma lineal. **Por qué:** para reconocer $P$ y $Q$ hay que despejar $y'$. Se divide por $dx$ y por $x$:
+
+$$x\,dy=(x^5e^x+4y)\,dx\ \Rightarrow\ x\,y'=x^5e^x+4y$$
+
+Dividiendo por $x$:
+
+$$y'=x^4e^x+\frac4x\,y$$
+
+Pasando el término en $y$ a la izquierda:
+
+$$y'-\frac4x\,y=x^4e^x$$
+
+**Cómo reconocerlo:** $y$ e $y'$ aparecen sólo a la primera potencia y sin multiplicarse entre sí.
 
 </Paso>
+<Paso>
+
+**Qué (a):** proponer $y=u\cdot v$ y reemplazar. **Por qué:** al derivar $y'=u'v+uv'$, y la ecuación queda con dos incógnitas $u$ y $v$, lo que da libertad para elegir $v$ cómodamente:
+
+$$u'v+uv'-\frac4x\,uv=x^4e^x\ \Rightarrow\ u'v+u\Big(v'-\frac4x\,v\Big)=x^4e^x$$
+
+Se elige $v$ para que el paréntesis valga cero: $v'=\frac4x\,v$. Separando variables y tomando $\int\frac{dv}{v}=\int\frac{4}{x}\,dx$ se obtiene $\ln|v|=4\ln|x|$, o sea (sin constante, alcanza una solución particular):
+
+$$v=x^4$$
+
+</Paso>
+<Paso>
+
+**Qué (a):** hallar $u$. **Por qué:** con el paréntesis nulo queda $u'v=x^4e^x$. Reemplazando $v=x^4$:
+
+$$u'x^4=x^4e^x\ \Rightarrow\ u'=e^x\ \Rightarrow\ u=e^x+C$$
+
+Entonces $y=uv$:
+
+$$y=x^4\,(e^x+C)$$
+
+</Paso>
+<Paso>
+
+**Qué (a):** usar la condición inicial $y(1)=2e$. **Por qué:** fija el valor de $C$. Reemplazando $x=1$ ($1^4=1$):
+
+$$1\cdot(e+C)=2e\ \Rightarrow\ e+C=2e\ \Rightarrow\ C=e$$
+
+$$y=x^4\,(e^x+e)$$
+
+</Paso>
+<Paso>
+
+**Qué (b):** pasar a forma homogénea. **Por qué:** se despeja $y'$ y se divide todo por $x$ (con $x>0$, ya que $x(1)=1$, es $\sqrt{x^2}=x$):
+
+$$xy'=y+\sqrt{x^2-y^2}\ \Rightarrow\ y'=\frac yx+\sqrt{1-\Big(\frac yx\Big)^2}$$
+
+**Cómo reconocerlo:** todo el lado derecho depende sólo de $\frac yx$ (si reemplazás $x\to tx$, $y\to ty$ nada cambia).
+
+</Paso>
+<Paso>
+
+**Qué (b):** cambio $y=ux$. **Por qué:** así $\frac yx=u$, y $y'=u'x+u$:
+
+$$u'x+u=u+\sqrt{1-u^2}\ \Rightarrow\ u'x=\sqrt{1-u^2}$$
+
+Se separan variables ($u'=\frac{du}{dx}$) y se integra, con $\int\frac{du}{\sqrt{1-u^2}}=\arcsin u$:
+
+$$\frac{du}{\sqrt{1-u^2}}=\frac{dx}{x}\ \Rightarrow\ \arcsin u=\ln x+C$$
+
+(se escribe $\ln x$ sin valor absoluto porque $x>0$).
+
+</Paso>
+<Paso>
+
+**Qué (b):** condición inicial $y(1)=-1$. **Por qué:** en $x=1$ es $u=\frac yx=-1$, y $\ln1=0$:
+
+$$\arcsin(-1)=0+C\ \Rightarrow\ C=-\frac\pi2$$
+
+Despejando $u$ (con $\sin(\alpha-\frac\pi2)=-\cos\alpha$):
+
+$$u=\sin\Big(\ln x-\frac\pi2\Big)=-\cos(\ln x)\ \Rightarrow\ y=-x\cos(\ln x)$$
+
+**Dominio:** la separación de variables pide $\sqrt{1-u^2}>0$ y que $\sin(\ln x)\ge0$ ($u'x=\sin(\ln x)$ tiene que ser la raíz, no negativa), o sea $1\le x\le e^{\pi}$.
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+**a)** $$y=x^4\,(e^x+e)$$
+
+**b)** $$y=-x\cos(\ln x)$$
+
+**Ojo con:** en la **a)** el error típico es el signo de $P$ (queda $-\frac4x$ al pasar $\frac4x\,y$ restando); en la **b)** perder la solución constante $u=\pm1$: acá $y=-x$ también cumple la ecuación y la condición $y(1)=-1$, así que el problema no tiene solución única y la respuesta esperada es la que sale de separar variables.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** a) forma lineal, $v=x^4$, $u=e^x+C$ y $C=e$; b) $u=\frac yx$, $\arcsin u=\ln x+C$, $C=-\frac\pi2$ y $y=-x\cos(\ln x)$.
+- **A medias:** método correcto en ambas pero un error de signo o de constante, o una de las dos resuelta sin aplicar la condición inicial.
+- **Mal:** no reconoce el tipo de ecuación o usa un método que no corresponde.
+
+</Solucion>
+<Comprobacion>
+
+**a)** Sustituir en la ecuación. Con $y=x^4e^x+ex^4$:
+
+$$y'=4x^3e^x+x^4e^x+4ex^3$$
+
+$$xy'=4x^4e^x+x^5e^x+4ex^4$$
+
+Y el lado derecho es:
+
+$$x^5e^x+4y=x^5e^x+4x^4e^x+4ex^4$$
+
+Son iguales. Condición: $y(1)=e+e=2e$.
+
+**b)** Sustituir en $xy'-y$. Con $y=-x\cos(\ln x)$, $y'=-\cos(\ln x)+\sin(\ln x)$ (la derivada de $\cos(\ln x)$ es $-\frac{\sin(\ln x)}{x}$):
+
+$$xy'-y=-x\cos(\ln x)+x\sin(\ln x)+x\cos(\ln x)=x\sin(\ln x)$$
+
+y $\sqrt{x^2-y^2}=x\sqrt{1-\cos^2(\ln x)}=x\sin(\ln x)$ si $\sin(\ln x)\ge0$ (para $1\le x\le e^\pi$). Condición: $y(1)=-1\cdot\cos0=-1$.
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-w-t1#3" numero={3} fuente="../fotos-clase/2026-08-28 foto 056.jpeg" pagina={1} unidad="U9" tema="EDO de 2º orden">
@@ -84,12 +324,108 @@ $$
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá la ecuación: $y''$, $y'$ (acá no está) e $y$ con coeficientes que son números, y del lado derecho una exponencial por un coseno. ¿Qué tipo de ecuación es y qué forma tiene su solución general?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2.º orden **con coeficientes constantes, no homogénea**, con lado derecho "de manual": $y=y_h+y_p$ con **coeficientes indeterminados**. Primero $y_h$ con la característica; después $y_p$ copia la forma del lado derecho (ojo con la resonancia). Machete: [EDO 2.º orden, coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $r^2+9=0$, $y_h=C_1\cos(3x)+C_2\sin(3x)$. El lado derecho $e^x\cos(3x)$ tiene "exponente" $1\pm3i$, que **no** es raíz ($\pm3i$), así que no hay resonancia:
+
+$$y_p=e^x\big(A\cos(3x)+B\sin(3x)\big)$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ siempre forma parte de la solución general. Se prueba $y=e^{rx}$:
+
+$$r^2+9=0\ \Rightarrow\ r^2=-9\ \Rightarrow\ r=\pm3i$$
+
+Raíces complejas $\alpha\pm\beta i$ con $\alpha=0$, $\beta=3$:
+
+$$y_h=C_1\cos(3x)+C_2\sin(3x)$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el lado derecho es $e^{x}\cos(3x)$ (exponencial por seno/coseno) y su "exponente complejo" es $1+3i$. **Cómo reconocerlo:** se compara con las raíces de la característica: $1+3i\ne\pm3i$, así que no se multiplica por $x$. Va seno **y** coseno aunque el lado derecho sólo traiga coseno, porque al derivar uno genera al otro:
+
+$$y_p=e^x\big(A\cos(3x)+B\sin(3x)\big)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces. **Por qué:** para reemplazar en la ecuación. Con la regla del producto:
+
+$$y_p'=e^x\big[(A+3B)\cos(3x)+(B-3A)\sin(3x)\big]$$
+
+Derivando de nuevo con la misma regla:
+
+$$y_p''=e^x\big[(-8A+6B)\cos(3x)+(-6A-8B)\sin(3x)\big]$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''+9y$. **Por qué:** $y_p$ tiene que cumplir la ecuación. Sumando $y_p''$ y $9y_p=e^x\big[9A\cos(3x)+9B\sin(3x)\big]$ (coeficiente de cada función, uno por línea):
+
+- coseno: $(-8A+6B)+9A=A+6B$
+- seno: $(-6A-8B)+9B=-6A+B$
+
+$$y_p''+9y_p=e^x\big[(A+6B)\cos(3x)+(-6A+B)\sin(3x)\big]=37e^x\cos(3x)$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes. **Por qué:** dos funciones iguales para todo $x$ tienen los mismos coeficientes en $\cos(3x)$ y en $\sin(3x)$:
+
+$$A+6B=37,\qquad -6A+B=0$$
+
+De la segunda, $B=6A$. Reemplazando en la primera:
+
+$$A+36A=37\ \Rightarrow\ 37A=37\ \Rightarrow\ A=1,\quad B=6$$
+
+$$y_p=e^x\big(\cos(3x)+6\sin(3x)\big)$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la solución general. **Por qué:** $y=y_h+y_p$.
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=C_1\cos(3x)+C_2\sin(3x)+e^x\big(\cos(3x)+6\sin(3x)\big)$$
+
+**Ojo con:** proponer sólo $Ae^x\cos(3x)$ (hay que incluir el seno) y los signos al derivar $\cos(3x)$ y $\sin(3x)$.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** $y_h$ con raíces $\pm3i$, $y_p$ con seno y coseno, sistema $A+6B=37$, $-6A+B=0$ y solución con $A=1$, $B=6$.
+- **A medias:** $y_h$ y la forma de $y_p$ bien, pero errores de derivación o de signo en los coeficientes.
+- **Mal:** no distingue $y_h$ de $y_p$, o propone un $y_p$ que no corresponde.
+
+</Solucion>
+<Comprobacion>
+
+Sustituir $y_p=e^x(\cos3x+6\sin3x)$ en la ecuación, derivando con números. Primera derivada (con $A=1$, $B=6$: $A+3B=19$ y $B-3A=3$):
+
+$$y_p'=e^x\big[19\cos3x+3\sin3x\big]$$
+
+Segunda derivada ($-8A+6B=28$ y $-6A-8B=-54$):
+
+$$y_p''=e^x\big[28\cos3x-54\sin3x\big]$$
+
+Sumando $9y_p=e^x[9\cos3x+54\sin3x]$:
+
+$$y_p''+9y_p=e^x[37\cos3x+0\sin3x]=37e^x\cos3x$$
+
+Cumple la ecuación.
+
+</Comprobacion>
 </Ejercicio>

@@ -13,6 +13,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 
 Universidad Tecnológica Nacional - Facultad Regional Córdoba · Segundo parcial práctico de Análisis Matemático II · TEMA 2. La foto no trae fecha, comisión ni puntajes.
@@ -37,14 +39,112 @@ Rótulo en el gráfico: $y=-\tfrac12x^2+\tfrac32x+2$.
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Te piden el **área** de una región dibujada: hay que leer el gráfico. Preguntate: ¿qué curvas la encierran y en qué puntos se cortan? ¿Cuál queda arriba y cuál abajo en cada tramo? ¿Qué parte del círculo queda adentro de la región y cuál afuera?
+
+</Pista>
+<Pista>
+
+El área de una región plana es la **integral doble de 1** sobre ella: $A=\iint_D dA=\int\big(y_{\text{techo}}-y_{\text{piso}}\big)\,dx$. Hay que averiguar los datos que no están rotulados (centro y radio del círculo, raíces de la parábola) y ver si conviene calcular la región como "área grande menos área chica".
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: parábola de raíces $-1$ y $4$, círculo $x^2+y^2=4$ (centro en el origen). La región es el área bajo la parábola entre $x=0$ y $x=4$ menos el cuarto de círculo:
+
+$$A=\int_0^4\Big(-\tfrac12x^2+\tfrac32x+2\Big)dx-\frac{\pi\cdot2^2}{4}$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** estudiar la parábola $y=-\frac12x^2+\frac32x+2$. **Por qué:** sus puntos clave aparecen en el borde de la región. Raíces (se multiplica por $-2$ para limpiar fracciones):
+
+$$-\tfrac12x^2+\tfrac32x+2=0\ \Rightarrow\ x^2-3x-4=0\ \Rightarrow\ (x-4)(x+1)=0$$
+
+Corta al eje $x$ en $x=-1$ y $x=4$. Con $x=0$ vale $2$: pasa por $(0,2)$. El vértice está en $x=\frac32$ (punto medio de las raíces) con $y=\frac{25}{8}$.
 
 </Paso>
+<Paso>
+
+**Qué:** hallar el círculo. **Por qué:** el gráfico no rotula centro ni radio. *Lectura del gráfico (pendiente de revisión):* el círculo está centrado en el origen y pasa por $(0,2)$, que es el punto donde la parábola corta al eje $y$ y donde empieza la región sombreada. Entonces el radio es $2$:
+
+$$x^2+y^2=4$$
+
+y corta al eje $x$ en $(2,0)$. En el dibujo, la región está por encima del círculo y del eje $x$, y por debajo de la parábola, con el eje $y$ como borde izquierdo (la región arranca en el punto $(0,2)$) y llega hasta el corte de la parábola con el eje, $(4,0)$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/anterior-x-t2/ej1.svg`} alt="Plano xy con la parábola y=−½x²+(3/2)x+2 (vértice (3/2, 25/8), raíces −1 y 4, pasa por (0,2)), el círculo x²+y²=4 y la región sombreada: arriba la parábola, abajo el círculo entre (0,2) y (2,0) y el eje x entre (2,0) y (4,0)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Paso>
+
+**Qué:** describir la región. **Por qué:** para $0\le x\le4$ el techo es la parábola. El piso cambia: para $0\le x\le2$ es el arco del círculo $y=\sqrt{4-x^2}$ y para $2\le x\le4$ es el eje $x$. Comprobación de que la parábola queda arriba del círculo en $[0,2]$: en $x=1$ la parábola vale $3$ y el círculo $\sqrt3\approx1{,}73$. Como el arco de círculo con $0\le x\le2$ y el eje $x$ encierran el cuarto de disco, la región es "todo lo que hay bajo la parábola en $[0,4]$" menos ese cuarto de disco.
+
+</Paso>
+<Paso>
+
+**Qué:** plantear el área. **Por qué:** es la diferencia de dos áreas conocidas, y evita partir la integral en tramos:
+
+$$A=\int_0^4\Big(-\tfrac12x^2+\tfrac32x+2\Big)dx-\int_0^2\sqrt{4-x^2}\,dx$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular el área bajo la parábola. **Por qué:** se integra término a término:
+
+$$\int_0^4\Big(-\tfrac12x^2+\tfrac32x+2\Big)dx=\Big[-\frac{x^3}{6}+\frac{3x^2}{4}+2x\Big]_0^4$$
+
+Evaluando en $x=4$ (en $0$ vale 0), uno por uno:
+
+$$-\frac{64}{6}=-\frac{32}{3},\qquad\frac{3\cdot16}{4}=12,\qquad2\cdot4=8$$
+
+$$-\frac{32}{3}+12+8=-\frac{32}{3}+20=\frac{28}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $\int_0^2\sqrt{4-x^2}\,dx$. **Por qué:** es un cuarto del área del círculo de radio $2$:
+
+$$\frac{\pi\cdot2^2}{4}=\pi$$
+
+(con $x=2\sin t$ da $\int_0^{\pi/2}4\cos^2t\,dt=4\cdot\frac\pi4=\pi$).
+
+</Paso>
+<Paso>
+
+**Qué:** restar. **Por qué:** $A=\frac{28}{3}-\pi\approx9{,}33-3{,}14$:
+
+$$A=\frac{28}{3}-\pi\approx6{,}19$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$A=\frac{28}{3}-\pi\ \text{u}^2\approx6{,}19\ \text{u}^2$$
+
+**Ojo con:** restar el círculo entero (πR² = 4π) en vez del cuarto que está dentro de $[0,4]\times[0,\infty)$, y con el radio: no está dado, sale de que el círculo pasa por $(0,2)$.
+
+**Criterio estimado — no oficial** (la consigna de corrección no está en la foto; se supone que piden planteo y todas las cuentas):
+
+- **Bien:** raíces de la parábola, círculo $x^2+y^2=4$, región como área bajo la parábola entre $0$ y $4$ menos el cuarto de círculo (o en tramos), cuentas correctas y $A=\frac{28}3-\pi$.
+- **A medias:** planteo bien pero un error de cuenta (por ejemplo en $\frac{28}{3}$), o resta el círculo completo.
+- **Mal:** sin planteo, o círculo y parábola mal identificados (otro centro o radio sin justificar).
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente para el área bajo la parábola, sin integrar de $0$ a $4$: la fórmula del segmento parabólico, $\frac{|a|\,L^3}{6}$ con $L$ la distancia entre raíces, da el área entre $-1$ y $4$ ($L=5$, $|a|=\frac12$):
+
+$$\frac{\frac12\cdot5^3}{6}=\frac{125}{12}$$
+
+A eso se le saca el tramo de $-1$ a $0$:
+
+$$\int_{-1}^0\Big(-\tfrac12x^2+\tfrac32x+2\Big)dx=\Big[-\frac{x^3}{6}+\frac{3x^2}{4}+2x\Big]_{-1}^0=0-\Big(\frac16+\frac34-2\Big)=\frac{13}{12}$$
+
+$$\frac{125}{12}-\frac{13}{12}=\frac{112}{12}=\frac{28}{3}$$
+
+Y el cuarto de círculo, por geometría: $\frac14\pi r^2=\frac14\pi\cdot4=\pi$. Entonces $A=\frac{28}{3}-\pi$.
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-x-t2#2" numero={2} fuente="../fotos-clase/2026-08-28 foto 057.jpeg" pagina={1} unidad="U8" tema="EDO de 1º orden">
@@ -59,14 +159,128 @@ Resolver las siguientes ecuaciones diferenciales:
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Fijate qué hay en cada ecuación. En la **a)** aparece $y'$ y una función de $x$ que multiplica a $y$. En la **b)**, $y'$ está igualada a un cociente de dos expresiones en $x$ e $y$. ¿Qué forma tiene cada una? Ojo con $\frac{1}{\operatorname{cosec}(x)}$: ¿a qué función conocida equivale?
+
+</Pista>
+<Pista>
+
+La **a)** es **lineal** de primer orden: $y'+P(x)y=Q(x)$, con $y=u\cdot v$. Machete: [EDO lineal](../../machetes/edo-lineal/). La **b)**, pasando a $M\,dx+N\,dy=0$, se comprueba si es **exacta**: $\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}$; si lo es, se busca $F$ con $F_x=M$, $F_y=N$ y la solución es $F=C$. Machete: [EDO exacta](../../machetes/edo-exacta/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho. **a)** $y'-\tan x\cdot y=\sin x$, con $P=-\tan x$; se busca $v$ con $v'=\tan x\cdot v$. **b)** $M=4xy^3+3y^2+1$, $N=6x^2y^2+6xy$; $F=\int M\,dx+g(y)$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué (a):** simplificar y pasar a forma lineal. **Por qué:** $\operatorname{cosec}(x)=\frac1{\sin x}$, entonces $\frac1{\operatorname{cosec}(x)}=\sin x$:
+
+$$y'=\sin x+y\tan x$$
+
+Pasando $y\tan x$ a la izquierda:
+
+$$y'-\tan x\cdot y=\sin x$$
+
+**Cómo reconocerlo:** $y$ e $y'$ aparecen a la primera potencia y sin multiplicarse entre sí.
 
 </Paso>
+<Paso>
+
+**Qué (a):** $y=u\cdot v$ y elegir $v$. **Por qué:** con $y'=u'v+uv'$ la ecuación queda $u'v+u\,(v'-\tan x\cdot v)=\sin x$, y se elige $v$ para que el paréntesis sea cero: $v'=\tan x\cdot v$. Separando variables:
+
+$$\int\frac{dv}{v}=\int\tan x\,dx\ \Rightarrow\ \ln|v|=-\ln|\cos x|$$
+
+Sin constante, $v=\dfrac1{\cos x}$.
+
+</Paso>
+<Paso>
+
+**Qué (a):** hallar $u$. **Por qué:** con el paréntesis nulo queda $u'v=\sin x$, o sea $u'\cdot\frac1{\cos x}=\sin x$:
+
+$$u'=\sin x\cos x\ \Rightarrow\ u=\frac{\sin^2x}{2}+C$$
+
+(sustituyendo $w=\sin x$, $dw=\cos x\,dx$). Entonces $y=uv$:
+
+$$y=\frac{\frac{\sin^2x}{2}+C}{\cos x}$$
+
+</Paso>
+<Paso>
+
+**Qué (b):** ordenar como $M\,dx+N\,dy=0$. **Por qué:** se multiplica $y'=\frac{dy}{dx}$ por el denominador y por $dx$ para pasar todo a un lado:
+
+$$y'=-\frac{4xy^3+3y^2+1}{6x^2y^2+6xy}\ \Rightarrow\ (6x^2y^2+6xy)\,dy=-(4xy^3+3y^2+1)\,dx$$
+
+$$(4xy^3+3y^2+1)\,dx+(6x^2y^2+6xy)\,dy=0$$
+
+con $M=4xy^3+3y^2+1$ y $N=6x^2y^2+6xy$.
+
+</Paso>
+<Paso>
+
+**Qué (b):** verificar si es exacta. **Por qué:** sin $M_y=N_x$ el método de $F$ no vale:
+
+$$M_y=12xy^2+6y,\qquad N_x=12xy^2+6y$$
+
+Son iguales: **es exacta**.
+
+</Paso>
+<Paso>
+
+**Qué (b):** integrar $M$ respecto de $x$. **Por qué:** $F_x=M$, y lo que no depende de $x$ queda como una función $g(y)$:
+
+$$F=\int(4xy^3+3y^2+1)\,dx=2x^2y^3+3xy^2+x+g(y)$$
+
+</Paso>
+<Paso>
+
+**Qué (b):** hallar $g(y)$ y usar $y(1)=1$. **Por qué:** $F$ también debe cumplir $F_y=N$:
+
+$$F_y=6x^2y^2+6xy+g'(y)=6x^2y^2+6xy\ \Rightarrow\ g'(y)=0$$
+
+Entonces $g$ es constante (se absorbe en $C$) y la solución es $2x^2y^3+3xy^2+x=C$. Reemplazando $x=1$, $y=1$:
+
+$$2+3+1=6\ \Rightarrow\ C=6$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+**a)** $$y=\frac{\dfrac{\sin^2x}{2}+C}{\cos x}$$
+
+**b)** $$2x^2y^3+3xy^2+x=6$$
+
+**Ojo con:** en la **a)** el signo de $P=-\tan x$ y que $\int\tan x\,dx=-\ln|\cos x|$; en la **b)** verificar $M_y=N_x$ antes de integrar y no perder el signo "$-$" al ordenar la ecuación.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** a) simplifica $\frac1{\operatorname{cosec}x}=\sin x$, $v=\frac1{\cos x}$, $u=\frac{\sin^2x}{2}+C$; b) ordena, verifica exactitud, obtiene $F$ con $g'=0$ y $C=6$.
+- **A medias:** método correcto pero sin verificar la exactitud, o un error de signo en $\int\tan x\,dx$, o la b) sin aplicar la condición.
+- **Mal:** no reconoce el tipo de ecuación o da una función que no cumple la ecuación.
+
+</Solucion>
+<Comprobacion>
+
+**a)** Sustituir en la ecuación. Con $y=\dfrac{\sin^2x}{2\cos x}+\dfrac{C}{\cos x}$:
+
+$$y'=\sin x+\frac{\sin^3x}{2\cos^2x}+\frac{C\sin x}{\cos^2x}$$
+
+$$y\tan x=\frac{\sin^3x}{2\cos^2x}+\frac{C\sin x}{\cos^2x}$$
+
+Restando, $y'-y\tan x=\sin x$.
+
+**b)** Derivar la solución implícitamente respecto de $x$ con $y=y(x)$:
+
+$$\frac{d}{dx}\big[2x^2y^3+3xy^2+x\big]=4xy^3+6x^2y^2y'+3y^2+6xyy'+1=0$$
+
+Agrupando:
+
+$$(4xy^3+3y^2+1)+(6x^2y^2+6xy)\,y'=M+N\,y'=0$$
+
+que es la ecuación original. Segundo control, empezando por $N$ en $y$: $\int N\,dy=2x^2y^3+3xy^2+h(x)$ y $F_x=4xy^3+3y^2+h'(x)=M$ da $h'=1$, $h=x$: la misma $F$. En $(1,1)$: $2+3+1=6$.
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-x-t2#3" numero={3} fuente="../fotos-clase/2026-08-28 foto 057.jpeg" pagina={1} unidad="U9" tema="EDO de 2º orden">
@@ -82,12 +296,101 @@ $$
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá la ecuación: $y''$, $y'$ e $y$ con coeficientes numéricos, y del lado derecho una función que no es polinomio ni exponencial pura. ¿Qué tipo de ecuación es? ¿La forma del lado derecho te deja "adivinar" una $y_p$ con coeficientes?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2.º orden con coeficientes constantes, pero $\frac{e^{2x}}{x}$ **no tiene la forma** de manual para coeficientes indeterminados. Se usa **variación de parámetros**: primero $y_h$ con la característica; después $y_p=u_1y_1+u_2y_2$ con $u_1'=-\frac{y_2f}{W}$ y $u_2'=\frac{y_1f}{W}$. Machete: [EDO 2.º orden, variación de parámetros](../../machetes/edo2-variacion-de-parametros/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $(r-2)^2=0$, raíz doble $2$, $y_1=e^{2x}$, $y_2=xe^{2x}$, wronskiano $W=e^{4x}$ y $f=\dfrac{e^{2x}}{x}$:
+
+$$u_1'=-\frac{y_2f}{W},\qquad u_2'=\frac{y_1f}{W}$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** da $y_1$ e $y_2$, necesarios para variación de parámetros. Ecuación característica:
+
+$$r^2-4r+4=0\ \Rightarrow\ (r-2)^2=0\ \Rightarrow\ r=2\ \text{(doble)}$$
+
+Con raíz doble $r$ la base es $e^{rx}$ y $xe^{rx}$:
+
+$$y_h=(C_1+C_2x)\,e^{2x},\qquad y_1=e^{2x},\ y_2=xe^{2x}$$
 
 </Paso>
+<Paso>
+
+**Qué:** elegir el método. **Por qué:** el lado derecho $f=\frac{e^{2x}}{x}$ lleva un $\frac1x$, que no aparece en la lista de formas de coeficientes indeterminados (polinomio, exponencial, seno/coseno y sus productos). **Cómo reconocerlo:** si derivar $f$ varias veces genera infinitas funciones distintas ($\frac1x,\frac1{x^2},\dots$), no sirve coeficientes indeterminados.
+
+</Paso>
+<Paso>
+
+**Qué:** calcular el wronskiano $W=y_1y_2'-y_2y_1'$. **Por qué:** aparece en el denominador de $u_1'$ y $u_2'$. Con $y_1'=2e^{2x}$ y $y_2'=e^{2x}+2xe^{2x}$:
+
+$$y_1y_2'=e^{4x}+2xe^{4x},\qquad y_2y_1'=2xe^{4x}$$
+
+Restando:
+
+$$W=e^{4x}+2xe^{4x}-2xe^{4x}=e^{4x}$$
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $u_1'$ y $u_2'$. **Por qué:** son las derivadas de los coeficientes variables ($f=\frac{e^{2x}}{x}$, $W=e^{4x}$):
+
+$$u_1'=-\frac{y_2f}{W}=-\frac{xe^{2x}\cdot\frac{e^{2x}}{x}}{e^{4x}}=-\frac{e^{4x}}{e^{4x}}=-1$$
+
+$$u_2'=\frac{y_1f}{W}=\frac{e^{2x}\cdot\frac{e^{2x}}{x}}{e^{4x}}=\frac1x$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar. **Por qué:** para obtener $u_1$ y $u_2$ (alcanza con una primitiva, sin constante). El $\frac1x$ pide $\ln|x|$:
+
+$$u_1=-x,\qquad u_2=\ln|x|$$
+
+$$y_p=u_1y_1+u_2y_2=-xe^{2x}+xe^{2x}\ln|x|$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la solución general. **Por qué:** $y=y_h+y_p$. El término $-xe^{2x}$ de $y_p$ es de la forma $C_2xe^{2x}$ y se absorbe en la constante $C_2$, que es arbitraria:
+
+$$y=(C_1+C_2x)\,e^{2x}+xe^{2x}\ln|x|$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=(C_1+C_2x)\,e^{2x}+x\,e^{2x}\ln|x|\qquad(x\neq0)$$
+
+**Ojo con:** el signo de $u_1'$ (lleva $-$) y no olvidar el wronskiano en el denominador; con raíz doble, $y_2=xe^{2x}$ y no $e^{2x}$ otra vez.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** $y_h$ con raíz doble, $W=e^{4x}$, $u_1=-x$, $u_2=\ln|x|$ y la solución general.
+- **A medias:** variación de parámetros bien planteada pero error de signo o de integración en $u_1'$ o $u_2'$, o falta $y_h$.
+- **Mal:** usa coeficientes indeterminados con una $y_p$ inventada, o no calcula $y_h$.
+
+</Solucion>
+<Comprobacion>
+
+Sustituir la parte "nueva" $y_p=xe^{2x}\ln x$ ($x>0$; la parte $(C_1+C_2x)e^{2x}$ ya es solución de la homogénea). Con $L=\ln x$:
+
+$$y_p'=e^{2x}\big[(1+2x)L+1\big]$$
+
+$$y_p''=e^{2x}\Big[(4+4x)L+4+\frac1x\Big]$$
+
+Armando $y_p''-4y_p'+4y_p$, con $e^{2x}$ como factor común: lo que multiplica a $L$ es $(4+4x)-4(1+2x)+4x=0$, y lo constante es $4-4=0$ (queda además $\frac1x$):
+
+$$y_p''-4y_p'+4y_p=e^{2x}\cdot\frac1x$$
+
+Cumple la ecuación.
+
+</Comprobacion>
 </Ejercicio>

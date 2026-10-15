@@ -13,6 +13,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 
 Universidad Tecnológica Nacional - Facultad Regional Córdoba · Segundo parcial práctico de Análisis Matemático II · TEMA 1. La foto no trae fecha, comisión ni puntajes.
@@ -37,14 +39,112 @@ Rótulo en el gráfico: $y=-x^2-2x+3$.
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Te piden el **área** de una región dibujada: hay que leer el gráfico. Preguntate: ¿qué curvas la encierran y en qué puntos se cortan? ¿Cuál queda arriba y cuál abajo en cada tramo? ¿Cambia el piso a lo largo del eje $x$?
+
+</Pista>
+<Pista>
+
+El área de una región plana es la **integral doble de 1** sobre ella: $A=\iint_D dA=\int\big(y_{\text{techo}}-y_{\text{piso}}\big)\,dx$. Hay que averiguar los datos que no están rotulados (centro y radio del círculo, raíces de la parábola) y partir la región en tramos si el piso o el techo cambian.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: parábola de raíces $-3$ y $1$, círculo $x^2+y^2=9$ (centro en el origen). Entre $x=0$ y $x=1$ el piso es la parábola; entre $x=1$ y $x=3$ el piso es el eje $x$:
+
+$$A=\int_0^1\!\Big[\sqrt{9-x^2}-(-x^2-2x+3)\Big]dx+\int_1^3\sqrt{9-x^2}\,dx$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** estudiar la parábola $y=-x^2-2x+3$. **Por qué:** sus puntos clave aparecen en el borde de la región. Raíces (se cambia el signo para factorizar):
+
+$$-x^2-2x+3=0\ \Rightarrow\ x^2+2x-3=0\ \Rightarrow\ (x+3)(x-1)=0$$
+
+Corta al eje $x$ en $x=-3$ y $x=1$. Con $x=0$ vale $3$: pasa por $(0,3)$. El vértice está en $x=-1$ (punto medio de las raíces) con $y=-1+2+3=4$.
 
 </Paso>
+<Paso>
+
+**Qué:** hallar el círculo. **Por qué:** el gráfico no rotula centro ni radio. *Lectura del gráfico (pendiente de revisión):* el círculo está centrado en el origen (el eje $y$ pasa por su centro y corta al eje $x$ en puntos simétricos), y pasa por $(0,3)$ y por $(-3,0)$, que son puntos de la parábola. Con centro en el origen y $(0,3)$ en la curva, el radio es $3$:
+
+$$x^2+y^2=9$$
+
+La parábola en $x=1$ vale $0$, y el sector sombreado empieza en ese punto sobre el eje $x$; el círculo corta al eje $x$ en $(3,0)$. En el dibujo, el borde izquierdo de la región es la rama derecha de la parábola, que baja desde $(0,3)$ hasta $(1,0)$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/anterior-x-t1/ej1.svg`} alt="Plano xy con la parábola y=−x²−2x+3 (vértice (−1,4), raíces −3 y 1, pasa por (0,3)), el círculo x²+y²=9 y la región sombreada: arriba el círculo, a la izquierda la parábola entre (0,3) y (1,0), abajo el eje x entre (1,0) y (3,0)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Paso>
+
+**Qué:** describir la región por tramos. **Por qué:** el techo es siempre el círculo $y=\sqrt{9-x^2}$ (semicírculo superior). El piso cambia: para $0\le x\le1$ la parábola está por encima del eje $x$ ($y\ge0$) y es el borde inferior; para $1\le x\le3$ la parábola ya es negativa y el piso es el eje $x$ ($y=0$). **Cómo reconocerlo:** el piso cambia donde la parábola corta al eje $x$, o sea en $x=1$.
+
+</Paso>
+<Paso>
+
+**Qué:** plantear el área. **Por qué:** es la integral de (techo − piso) en cada tramo:
+
+$$A=\int_0^1\!\Big[\sqrt{9-x^2}-(-x^2-2x+3)\Big]dx+\int_1^3\sqrt{9-x^2}\,dx$$
+
+Las dos integrales de $\sqrt{9-x^2}$ se pueden juntar en una sola de $0$ a $3$, y lo que queda restando es el área bajo la parábola entre $0$ y $1$:
+
+$$A=\int_0^3\sqrt{9-x^2}\,dx-\int_0^1(-x^2-2x+3)\,dx$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular $\int_0^3\sqrt{9-x^2}\,dx$. **Por qué:** es un cuarto del área del círculo de radio $3$, y se confirma con la sustitución $x=3\sin t$ ($dx=3\cos t\,dt$, $t$ de $0$ a $\frac\pi2$, donde $\cos t\ge0$ y entonces $\sqrt{9-9\sin^2t}=3\cos t$):
+
+$$\int_0^3\sqrt{9-x^2}\,dx=\int_0^{\pi/2}9\cos^2t\,dt=9\Big[\frac t2+\frac{\sin2t}{4}\Big]_0^{\pi/2}$$
+
+Evaluando: en $t=\frac\pi2$ vale $\frac\pi4+0$ y en $t=0$ vale $0$:
+
+$$9\cdot\frac\pi4=\frac{9\pi}{4}$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular el área bajo la parábola entre $0$ y $1$. **Por qué:** es la parte del cuarto de círculo que *no* está sombreada.
+
+$$\int_0^1(-x^2-2x+3)\,dx=\Big[-\frac{x^3}{3}-x^2+3x\Big]_0^1$$
+
+Evaluando en $x=1$ (en $0$ vale 0): $-\frac13-1+3=\frac53$.
+
+</Paso>
+<Paso>
+
+**Qué:** restar. **Por qué:** $A=\frac{9\pi}{4}-\frac53\approx7{,}07-1{,}67$:
+
+$$A=\frac{9\pi}{4}-\frac53\approx5{,}40$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$A=\frac{9\pi}{4}-\frac53\ \text{u}^2\approx5{,}40\ \text{u}^2$$
+
+**Ojo con:** tomar la parábola como piso en todo $[0,3]$ (pasado $x=1$ da negativa y restaría de más), y olvidar que el radio no está dado: sale de que el círculo pasa por $(0,3)$.
+
+**Criterio estimado — no oficial** (la consigna de corrección no está en la foto; se supone que piden planteo y todas las cuentas):
+
+- **Bien:** raíces de la parábola, círculo $x^2+y^2=9$, región en dos tramos con límites $0$–$1$ y $1$–$3$, cuentas correctas y $A=\frac{9\pi}4-\frac53$.
+- **A medias:** planteo bien pero un error de cuenta (por ejemplo en $\frac53$), o parábola como piso en todo el intervalo sin darse cuenta del cambio.
+- **Mal:** sin planteo, o círculo y parábola mal identificados (otro centro o radio sin justificar).
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: integrar en el otro orden, con $x$ en función de $y$ ($0\le y\le3$). La rama derecha de la parábola sale de $y=4-(x+1)^2$, o sea $x=-1+\sqrt{4-y}$ (en $x\ge0$). El círculo, a la derecha: $x=\sqrt{9-y^2}$.
+
+$$A=\int_0^3\Big[\sqrt{9-y^2}-\big(-1+\sqrt{4-y}\big)\Big]dy=\int_0^3\sqrt{9-y^2}\,dy+\int_0^31\,dy-\int_0^3\sqrt{4-y}\,dy$$
+
+- $\int_0^3\sqrt{9-y^2}\,dy=\frac{9\pi}{4}$ (el mismo cuarto de círculo).
+- $\int_0^31\,dy=3$.
+- $\int_0^3\sqrt{4-y}\,dy=\Big[-\tfrac23(4-y)^{3/2}\Big]_0^3=-\tfrac23+\tfrac{16}{3}=\tfrac{14}{3}$.
+
+$$A=\frac{9\pi}{4}+3-\frac{14}{3}=\frac{9\pi}{4}-\frac53$$
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-x-t1#2" numero={2} fuente="../fotos-clase/2026-08-28 foto 052.jpeg" pagina={1} unidad="U8" tema="EDO de 1º orden">
@@ -59,14 +159,124 @@ Resolver las siguientes ecuaciones diferenciales:
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá cómo están escritas. En la **a)** aparecen $dx$ y $dy$, cada uno multiplicado por una función de $x$ e $y$. En la **b)** aparece $y'$ con $y$ multiplicada por una función de $x$. ¿Qué forma tiene cada una?
+
+</Pista>
+<Pista>
+
+La **a)**, una vez ordenada como $M\,dx+N\,dy=0$, se comprueba si es **exacta**: $\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}$; si lo es, se busca $F$ con $F_x=M$, $F_y=N$ y la solución es $F=C$. Machete: [EDO exacta](../../machetes/edo-exacta/). La **b)** es **lineal** de primer orden: $y'+P(x)y=Q(x)$, con $y=u\cdot v$. Machete: [EDO lineal](../../machetes/edo-lineal/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho. **a)** $M=4xy^3+3y^2+1$, $N=6x^2y^2+6xy$; $F=\int M\,dx+g(y)$. **b)** $y'-\tan x\cdot y=\sin x$, con $P=-\tan x$; se busca $v$ con $v'=\tan x\cdot v$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué (a):** ordenar la ecuación como $M\,dx+N\,dy=0$. **Por qué:** la ecuación viene "dividida": $1=-\frac{M\,dx}{N\,dy}$. Multiplicando por $N\,dy$:
+
+$$N\,dy=-M\,dx\ \Rightarrow\ M\,dx+N\,dy=0$$
+
+con
+
+$$M=4xy^3+3y^2+1,\qquad N=6x^2y^2+6xy$$
 
 </Paso>
+<Paso>
+
+**Qué (a):** verificar si es exacta. **Por qué:** sin $M_y=N_x$ el método de $F$ no vale. Derivando ($y$ constante en $N_x$, $x$ constante en $M_y$):
+
+$$M_y=12xy^2+6y,\qquad N_x=12xy^2+6y$$
+
+Son iguales: **es exacta**.
+
+</Paso>
+<Paso>
+
+**Qué (a):** integrar $M$ respecto de $x$. **Por qué:** $F_x=M$, y lo que no depende de $x$ queda como una función $g(y)$:
+
+$$F=\int(4xy^3+3y^2+1)\,dx=2x^2y^3+3xy^2+x+g(y)$$
+
+</Paso>
+<Paso>
+
+**Qué (a):** hallar $g(y)$ y usar $y(1)=1$. **Por qué:** $F$ también debe cumplir $F_y=N$. Derivando en $y$:
+
+$$F_y=6x^2y^2+6xy+g'(y)=6x^2y^2+6xy\ \Rightarrow\ g'(y)=0$$
+
+Entonces $g$ es constante (se absorbe en $C$) y la solución es $2x^2y^3+3xy^2+x=C$. Reemplazando $x=1$, $y=1$:
+
+$$2+3+1=6\ \Rightarrow\ C=6$$
+
+</Paso>
+<Paso>
+
+**Qué (b):** pasar a forma lineal. **Por qué:** hay que ver $P$ y $Q$. Pasando $y\tan x$ a la izquierda:
+
+$$y'-\tan x\cdot y=\sin x$$
+
+**Cómo reconocerlo:** $y$ e $y'$ aparecen a la primera potencia y sin multiplicarse entre sí.
+
+</Paso>
+<Paso>
+
+**Qué (b):** $y=u\cdot v$ y elegir $v$. **Por qué:** con $y'=u'v+uv'$ la ecuación queda $u'v+u\,(v'-\tan x\cdot v)=\sin x$, y se elige $v$ para que el paréntesis sea cero: $v'=\tan x\cdot v$. Separando variables:
+
+$$\int\frac{dv}{v}=\int\tan x\,dx\ \Rightarrow\ \ln|v|=-\ln|\cos x|$$
+
+Sin constante, $v=\dfrac1{\cos x}$.
+
+</Paso>
+<Paso>
+
+**Qué (b):** hallar $u$. **Por qué:** con el paréntesis nulo queda $u'v=\sin x$, o sea $u'\cdot\frac1{\cos x}=\sin x$:
+
+$$u'=\sin x\cos x\ \Rightarrow\ u=\frac{\sin^2x}{2}+C$$
+
+(sustituyendo $w=\sin x$, $dw=\cos x\,dx$). Entonces $y=uv$:
+
+$$y=\frac{\frac{\sin^2x}{2}+C}{\cos x}$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+**a)** $$2x^2y^3+3xy^2+x=6$$
+
+**b)** $$y=\frac{\dfrac{\sin^2x}{2}+C}{\cos x}$$
+
+**Ojo con:** en la **a)** verificar $M_y=N_x$ antes de integrar (la ecuación viene escrita al revés y es fácil perder el signo "$-$" al ordenarla); en la **b)** el signo de $P=-\tan x$ y que $\int\tan x\,dx=-\ln|\cos x|$.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** a) ordena como $M\,dx+N\,dy=0$, verifica exactitud, obtiene $F$ con $g'=0$ y $C=6$; b) forma lineal, $v=\frac1{\cos x}$, $u=\frac{\sin^2x}{2}+C$ y la solución general.
+- **A medias:** método correcto pero sin verificar la exactitud, o un error de signo en $\int\tan x\,dx$, o la a) sin aplicar la condición.
+- **Mal:** no reconoce el tipo de ecuación o da una función que no cumple la ecuación.
+
+</Solucion>
+<Comprobacion>
+
+**a)** Derivar la solución implícitamente respecto de $x$ con $y=y(x)$:
+
+$$\frac{d}{dx}\big[2x^2y^3+3xy^2+x\big]=4xy^3+6x^2y^2y'+3y^2+6xyy'+1=0$$
+
+Agrupando:
+
+$$(4xy^3+3y^2+1)+(6x^2y^2+6xy)\,y'=M+N\,y'=0$$
+
+que es la ecuación original. Segundo control, empezando por $N$ en $y$: $\int N\,dy=2x^2y^3+3xy^2+h(x)$ y $F_x=4xy^3+3y^2+h'(x)=M$ da $h'=1$, $h=x$: la misma $F$. En $(1,1)$: $2+3+1=6$.
+
+**b)** Sustituir en la ecuación. Con $y=\dfrac{\sin^2x}{2\cos x}+\dfrac{C}{\cos x}$:
+
+$$y'=\sin x+\frac{\sin^3x}{2\cos^2x}+\frac{C\sin x}{\cos^2x}$$
+
+$$y\tan x=\frac{\sin^3x}{2\cos^2x}+\frac{C\sin x}{\cos^2x}$$
+
+Restando, $y'-y\tan x=\sin x$.
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-x-t1#3" numero={3} fuente="../fotos-clase/2026-08-28 foto 052.jpeg" pagina={1} unidad="U9" tema="EDO de 2º orden">
@@ -82,12 +292,101 @@ $$
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá la ecuación: $y''$, $y'$ e $y$ con coeficientes numéricos, y del lado derecho una función que no es polinomio ni exponencial pura. ¿Qué tipo de ecuación es? ¿La forma del lado derecho te deja "adivinar" una $y_p$ con coeficientes?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2.º orden con coeficientes constantes, pero $\frac{e^{-x}}{x}$ **no tiene la forma** de manual para coeficientes indeterminados. Se usa **variación de parámetros**: primero $y_h$ con la característica; después $y_p=u_1y_1+u_2y_2$ con $u_1'=-\frac{y_2f}{W}$ y $u_2'=\frac{y_1f}{W}$. Machete: [EDO 2.º orden, variación de parámetros](../../machetes/edo2-variacion-de-parametros/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: característica $(r+1)^2=0$, raíz doble $-1$, $y_1=e^{-x}$, $y_2=xe^{-x}$, wronskiano $W=e^{-2x}$ y $f=\dfrac{e^{-x}}{x}$:
+
+$$u_1'=-\frac{y_2f}{W},\qquad u_2'=\frac{y_1f}{W}$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** da $y_1$ e $y_2$, necesarios para variación de parámetros. Ecuación característica:
+
+$$r^2+2r+1=0\ \Rightarrow\ (r+1)^2=0\ \Rightarrow\ r=-1\ \text{(doble)}$$
+
+Con raíz doble $r$ la base es $e^{rx}$ y $xe^{rx}$:
+
+$$y_h=(C_1+C_2x)\,e^{-x},\qquad y_1=e^{-x},\ y_2=xe^{-x}$$
 
 </Paso>
+<Paso>
+
+**Qué:** elegir el método. **Por qué:** el lado derecho $f=\frac{e^{-x}}{x}$ lleva un $\frac1x$, que no aparece en la lista de formas de coeficientes indeterminados (polinomio, exponencial, seno/coseno y sus productos). **Cómo reconocerlo:** si derivar $f$ varias veces genera infinitas funciones distintas ($\frac1x,\frac1{x^2},\dots$), no sirve coeficientes indeterminados.
+
+</Paso>
+<Paso>
+
+**Qué:** calcular el wronskiano $W=y_1y_2'-y_2y_1'$. **Por qué:** aparece en el denominador de $u_1'$ y $u_2'$. Con $y_1'=-e^{-x}$ y $y_2'=e^{-x}-xe^{-x}$:
+
+$$y_1y_2'=e^{-2x}-xe^{-2x},\qquad y_2y_1'=-xe^{-2x}$$
+
+Restando (el segundo término tiene signo menos, y queda $+xe^{-2x}$):
+
+$$W=e^{-2x}-xe^{-2x}+xe^{-2x}=e^{-2x}$$
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $u_1'$ y $u_2'$. **Por qué:** son las derivadas de los coeficientes variables ($f=\frac{e^{-x}}{x}$, $W=e^{-2x}$):
+
+$$u_1'=-\frac{y_2f}{W}=-\frac{xe^{-x}\cdot\frac{e^{-x}}{x}}{e^{-2x}}=-\frac{e^{-2x}}{e^{-2x}}=-1$$
+
+$$u_2'=\frac{y_1f}{W}=\frac{e^{-x}\cdot\frac{e^{-x}}{x}}{e^{-2x}}=\frac1x$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar. **Por qué:** para obtener $u_1$ y $u_2$ (alcanza con una primitiva, sin constante). El $\frac1x$ pide $\ln|x|$:
+
+$$u_1=-x,\qquad u_2=\ln|x|$$
+
+$$y_p=u_1y_1+u_2y_2=-xe^{-x}+xe^{-x}\ln|x|$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la solución general. **Por qué:** $y=y_h+y_p$. El término $-xe^{-x}$ de $y_p$ es de la forma $C_2xe^{-x}$ y se absorbe en la constante $C_2$, que es arbitraria:
+
+$$y=(C_1+C_2x)\,e^{-x}+xe^{-x}\ln|x|$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=(C_1+C_2x)\,e^{-x}+x\,e^{-x}\ln|x|\qquad(x\neq0)$$
+
+**Ojo con:** el signo de $u_1'$ (lleva $-$) y no olvidar el wronskiano en el denominador; con raíz doble, $y_2=xe^{-x}$ y no $e^{-x}$ otra vez.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** $y_h$ con raíz doble, $W=e^{-2x}$, $u_1=-x$, $u_2=\ln|x|$ y la solución general.
+- **A medias:** variación de parámetros bien planteada pero error de signo o de integración en $u_1'$ o $u_2'$, o falta $y_h$.
+- **Mal:** usa coeficientes indeterminados con una $y_p$ inventada, o no calcula $y_h$.
+
+</Solucion>
+<Comprobacion>
+
+Sustituir la parte "nueva" $y_p=xe^{-x}\ln x$ ($x>0$, y la parte $(C_1+C_2x)e^{-x}$ ya es solución de la homogénea). Con $L=\ln x$:
+
+$$y_p'=e^{-x}\big[(1-x)L+1\big]$$
+
+$$y_p''=e^{-x}\Big[(x-2)L-2+\frac1x\Big]$$
+
+Armando $y_p''+2y_p'+y_p$, sacando $e^{-x}$ como factor común y agrupando lo que multiplica a $L$ (sale $(x-2)+2(1-x)+x=0$) y lo constante ($-2+2=0$):
+
+$$y_p''+2y_p'+y_p=e^{-x}\cdot\frac1x$$
+
+Cumple la ecuación.
+
+</Comprobacion>
 </Ejercicio>
