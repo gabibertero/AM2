@@ -5,7 +5,7 @@ orden: 10
 ---
 import Pregunta from '../../components/Pregunta.astro';
 
-{/* Unidad tentativa: no apareció en parciales ni en el Modelo P2 teórico (Gabi: "lo de Fourier no nos tomó"). Todas son preguntas de práctica. Fuente: Monllor 11 (pp. según src/content/teoria/u10.md). No se usan los ejemplos de armónicas de Monllor 11 p.11 (incorrectos, ver TASKS.md). */}
+{/* Unidad tentativa: no apareció en parciales ni en el Modelo P2 teórico (Gabi: "lo de Fourier no nos tomó"). Salvo u10-c06 (Dirichlet de Fourier, aparecio según Gabi, no en todos los cursos), son preguntas de práctica. Fuente: Monllor 11 (pp. según src/content/teoria/u10.md). No se usan los ejemplos de armónicas de Monllor 11 p.11 (incorrectos, ver TASKS.md). */}
 
 <Pregunta id="u10-t01" unidad="U10" tipo="tema" titulo="Cuerda vibrante: separación de variables"
   fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3-6" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3-6">
@@ -27,7 +27,9 @@ Plantee el problema de la cuerda vibrante de longitud $l$ con extremos fijos y d
 - Contorno: $u(0,t)=0$, $u(l,t)=0$.
 - Iniciales: $u(x,0)=f(x)$ (forma), $\dfrac{\partial u}{\partial t}(x,0)=\varphi(x)$ (velocidad).
 
-**Separación de variables.** Se busca $u=X(x)\,T(t)$. Reemplazando: $\dfrac{T''}{c^2T}=\dfrac{X''}{X}=-\lambda^2$ (cada miembro depende de una variable distinta, por lo tanto ambos son constantes). Resultan dos EDO de 2.º orden con coeficientes constantes (U9):
+**Separación de variables.** Se busca $u=X(x)\,T(t)$. Reemplazando: $\dfrac{T''}{c^2T}=\dfrac{X''}{X}=-\lambda^2$ (cada miembro depende de una variable distinta, por lo tanto ambos son constantes).
+
+**Por qué $-\lambda^2$.** Sea $X''=KX$ con $X(0)=X(l)=0$. Si $K=0$: $X=A+Bx$ y los dos contornos dan $A=B=0$. Si $K=\mu^2>0$: $X=Ae^{\mu x}+Be^{-\mu x}$, $X(0)=0$ da $B=-A$ y $X(l)=A(e^{\mu l}-e^{-\mu l})=0$ da $A=0$. En ambos casos $X\equiv0$ (solución trivial). Solo con $K=-\lambda^2<0$ aparece $X$ no trivial. Resultan dos EDO de 2.º orden con coeficientes constantes (U9):
 
 $$X''+\lambda^2X=0,\qquad T''+c^2\lambda^2T=0$$
 
@@ -64,7 +66,7 @@ Plantee la ecuación del calor para un vástago de longitud $l$ con extremos a t
 
 **Planteo.** $\dfrac{\partial u}{\partial t}=c^2\dfrac{\partial^2u}{\partial x^2}$ (vástago homogéneo, superficie lateral que no disipa calor, temperatura uniforme en cada sección). Condiciones: $u(0,t)=u(l,t)=0$ y $u(x,0)=\varphi(x)$.
 
-**Separación de variables.** Con $u=X(x)T(t)$: $\dfrac{T'}{c^2T}=\dfrac{X''}{X}=-\lambda^2$. Entonces
+**Separación de variables.** Con $u=X(x)T(t)$: $\dfrac{T'}{c^2T}=\dfrac{X''}{X}=-\lambda^2$. La constante es negativa por el mismo argumento que en la cuerda: con $X''=KX$, $X(0)=X(l)=0$, los casos $K=0$ ($X=A+Bx$) y $K=\mu^2>0$ ($X=Ae^{\mu x}+Be^{-\mu x}$) llevan a $X\equiv0$; solo $K=-\lambda^2<0$ da $X$ no trivial. Entonces
 
 $$X''+\lambda^2X=0\ \ (\lambda_n=n\pi/l),\qquad T'+c^2\lambda^2T=0\ \Rightarrow\ T=Ce^{-c^2\lambda^2t}$$
 
@@ -91,7 +93,7 @@ Ejemplo: $\dfrac{\partial z}{\partial x}=0$ tiene solución $z=\varphi(y)$, con 
 </Pregunta>
 
 <Pregunta id="u10-c02" unidad="U10" tipo="corta" titulo="Condiciones de contorno e iniciales"
-  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 2-3" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 2-3">
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 4, 7" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 4, 7">
 <Fragment slot="enunciado">
 
 En la cuerda vibrante de longitud $l$ con extremos fijos, ¿cuáles son las condiciones de contorno y las iniciales?
@@ -139,13 +141,13 @@ Para $u=x^2-y^2$: $u_{xx}=2$, $u_{yy}=-2$, $\nabla^2u=0$. Es armónica.
 
 Consiste en hallar la función armónica en la región dados sus valores en la frontera: $u(R,\theta)=f(\theta)$. En polares ($r^2u_{rr}+ru_r+u_{\theta\theta}=0$) se separa $u=\mathcal R(r)\,\Theta(\theta)$ y, pidiendo solución periódica y acotada, $\lambda=n$ entero:
 
-$$u(r,\theta)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\big(a_n\cos n\theta+b_n\sin n\theta\big)\,r^n$$
+$$u(r,\theta)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\big(a_n\cos n\theta+b_n\sin n\theta\big)\left(\frac rR\right)^{n}$$
 
-con $a_n,b_n$ determinados por el desarrollo de Fourier de $f$ en $[-\pi,\pi]$.
+donde $a_n,b_n$ son los coeficientes de Fourier de $f$ en $[-\pi,\pi]$: $a_n=\frac1\pi\int_{-\pi}^{\pi}f(\theta)\cos n\theta\,d\theta$, $b_n=\frac1\pi\int_{-\pi}^{\pi}f(\theta)\sin n\theta\,d\theta$. Con el factor $(r/R)^n$, en $r=R$ queda exactamente la serie de Fourier de $f$. Si se escribe $r^n$ sin dividir por $R^n$, el coeficiente que multiplica a $r^n$ es $a_n/R^n$ (no $a_n$), porque $a_nR^n$ debe dar el coeficiente de Fourier de $f$.
 </Pregunta>
 
 <Pregunta id="u10-h01" unidad="U10" tipo="choice" correcta={2} titulo="Tipo de la ecuación de ondas"
-  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3; Recuperatorio P2 (v2).pdf, p. 58-59">
+  fq="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/11-ECUACIONES DIFERENCIALES CON DERIVADAS PARCIALES 2015.pdf, p. 3; parciales/2do-parcial/Recuperatorio P2 (v2).pdf, p. 58-59">
 <Fragment slot="enunciado">
 
 La ecuación de ondas $u_{tt}=c^2u_{xx}$ es:
@@ -175,11 +177,11 @@ En la cuerda de longitud $l$ con $X(0)=X(l)=0$, los valores propios de $X''+\lam
 1. $\lambda_n=\dfrac{n\pi}{l},\ n=1,2,3,\dots$
 2. $\lambda_n=\dfrac{l}{n\pi}$
 3. $\lambda_n=n\,l$
-4. $\lambda_n=\dfrac{2n\pi}{l}$ solamente para $n$ par
+4. $\lambda_n=\dfrac{2n\pi}{l},\ n=1,2,\dots$
 
 </Fragment>
 
-$X(0)=0$ da $A=0$ y $X(l)=0$ con $B\neq0$ exige $\sin\lambda l=0$, o sea $\lambda l=n\pi$.
+$X(0)=0$ da $A=0$ y $X(l)=0$ con $B\neq0$ exige $\sin\lambda l=0$, o sea $\lambda l=n\pi$. La opción 4 deja afuera $\lambda=\pi/l$, $3\pi/l,\dots$ (y la 2 y la 3 no anulan el seno).
 </Pregunta>
 
 <Pregunta id="u10-h03" unidad="U10" tipo="choice" correcta={3} titulo="Ecuación de Laplace y el calor"
@@ -198,5 +200,21 @@ La ecuación de Laplace $\nabla^2u=0$ se obtiene de la ecuación del calor cuand
 
 </Fragment>
 
-Laplace es el estado estacionario del calor: si $u$ no depende de $t$, $u_t=0$ y queda $c^2\nabla^2u=0$.
+Laplace es el estado estacionario del calor: si $u$ no depende de $t$, $u_t=0$ y queda $c^2\nabla^2u=0$, que con $c\neq0$ es Laplace. Con $c=0$ la ecuación del calor degenera en $u_t=0$, que no es Laplace.
+</Pregunta>
+
+<Pregunta id="u10-c06" unidad="U10" tipo="corta" aparecio="Parcial teórico real (según Gabi)" titulo="Condiciones de Dirichlet para la serie de Fourier"
+  fq="Parcial teórico real (según Gabi)" fr="teoria/Apuntes Ing. Monllor/10-SERIES DE FOURIER 2015.pdf, p. 2-3">
+<Fragment slot="enunciado">
+
+¿Qué condiciones debe cumplir una función para poder desarrollarla en serie de Fourier y a qué converge la serie? _(Nota: Fourier no entró en todos los cursos. No confundir con el problema de Dirichlet de u10-c05.)_
+
+</Fragment>
+
+Una función $f(x)$ periódica de período $2\pi$ cumple las **condiciones de Dirichlet** en $(-\pi,\pi)$ si:
+1. Está **uniformemente acotada**: $|f(x)|\le M$.
+2. Tiene un **número finito de discontinuidades**, todas ordinarias (de 1.ª especie, con saltos finitos).
+3. Tiene un **número finito de extremos relativos**.
+
+Entonces la serie trigonométrica $\dfrac{a_0}{2}+\sum(a_n\cos nx+b_n\sin nx)$ **converge en todos los puntos**: en los puntos de continuidad su suma es $f(x)$ y en los de discontinuidad es la media aritmética de los límites laterales, $\dfrac{f(x^+)+f(x^-)}{2}$. Si $f$ no es periódica se la estudia en un intervalo de amplitud $2\pi$ y se la define fuera como periódica.
 </Pregunta>

@@ -20,7 +20,7 @@ Desarrollar el cambio de variables en integrales dobles: qué se agrega al integ
 <Fragment slot="guia">
 
 - Definición: transformación $x=g_1(u,v),\ y=g_2(u,v)$ y Jacobiano como determinante.
-- Propiedades: condiciones (continuidad, derivadas continuas, correspondencia biunívoca) y valor absoluto.
+- Propiedades: condiciones (continuidad, derivadas continuas, correspondencia biunívoca, $J\neq0$ en el interior) y valor absoluto.
 - Desarrollo: fórmula de cambio de variables e interpretación geométrica del factor $|J|$; polares como caso particular.
 - Gráfico: dominio $E$ en el plano $uv$, dominio $D$ en el plano $xy$ y un rectángulo $\Delta u\times\Delta v$ transformado en un paralelogramo.
 
@@ -33,6 +33,7 @@ $$J\!\left(\frac{x,y}{u,v}\right)=\begin{vmatrix}\dfrac{\partial x}{\partial u}&
 **Propiedades / condiciones.**
 - $g_1,g_2$ continuas con derivadas parciales de primer orden continuas.
 - A cada punto $(x,y)$ le corresponde un solo $(u,v)$ y viceversa (correspondencia biunívoca).
+- $J\neq0$ en el interior del dominio: es lo que justifica la biyección local (puede anularse en puntos aislados o en la frontera, como $r=0$ en polares). _(Hipótesis estándar; Monllor no la nombra.)_
 - El Jacobiano se toma **en valor absoluto**.
 
 **Fórmula.** Además de reescribir $f$ en las nuevas variables, el factor que hay que agregar al integrando es el **Jacobiano en valor absoluto**:
@@ -156,7 +157,7 @@ Entonces $dx\,dy=r\,dr\,d\theta$. Hay que reescribir también el **dominio**: po
 </Pregunta>
 
 <Pregunta id="u4-c03" unidad="U4" tipo="corta" titulo="Dominio regular"
-  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 8-12" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 8-9, 12">
+  fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 8-12" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 12">
 <Fragment slot="enunciado">
 
 ¿Cuándo un dominio plano es regular en la dirección del eje $x$ y qué se hace si no lo es?
@@ -251,19 +252,19 @@ Es $r^2\sin\varphi$. Se toma en valor absoluto: como $0\le\varphi\le\pi$, $\sin\
   fq="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 23, 25" fr="teoria/Apuntes Ing. Monllor/05-INTEGRALES MULTIPLES 2015.pdf, p. 23, 25">
 <Fragment slot="enunciado">
 
-¿Cuál de estas condiciones NO forma parte de las exigidas a la transformación $x=g_1(u,v),\ y=g_2(u,v)$ en el cambio de variables según los apuntes?
+¿Cuál de estas condiciones se exige a la transformación $x=g_1(u,v),\ y=g_2(u,v)$ en el cambio de variables según los apuntes?
 
 </Fragment>
 <Fragment slot="opciones">
 
-1. $g_1,g_2$ continuas
-2. Derivadas parciales de primer orden continuas
+1. $g_1$ y $g_2$ deben ser lineales
+2. El Jacobiano debe ser idénticamente nulo
 3. Correspondencia biunívoca entre $(x,y)$ y $(u,v)$
-4. $g_1$ y $g_2$ deben ser lineales
+4. La transformación debe conservar las áreas
 
 </Fragment>
 
-No se pide linealidad: polares, por ejemplo, no es lineal. Se piden funciones continuas con derivadas de primer orden continuas y correspondencia biunívoca; el Jacobiano se usa en valor absoluto.
+Se exige la correspondencia biunívoca. No se pide linealidad (polares, por ejemplo, no es lineal), ni que se conserven áreas (el factor $|J|$ justamente corrige el cambio de área) y un Jacobiano idénticamente nulo no serviría. Se piden funciones continuas con derivadas de primer orden continuas y correspondencia biunívoca; el Jacobiano se usa en valor absoluto.
 </Pregunta>
 
 <Pregunta id="u4-h04" unidad="U4" tipo="choice" correcta={1} titulo="Integral doble con f idénticamente 1"
@@ -276,7 +277,7 @@ Si $f\equiv1$ en $D$, $\iint_D f\,dA$ es:
 <Fragment slot="opciones">
 
 1. El área de $D$
-2. El volumen de $D$
+2. El volumen de $D$ (región plana)
 3. La masa de $D$ con densidad $\mu=0$
 4. Siempre cero
 

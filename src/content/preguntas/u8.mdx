@@ -5,7 +5,7 @@ orden: 8
 ---
 import Pregunta from '../../components/Pregunta.astro';
 
-{/* Fuentes: Monllor 08 (pp. según src/content/teoria/u08.md), Modelo P2 teórico p.2, notas de Gabi (Links e Info.md). Factor integrante: no figura en las fuentes, fórmulas estándar (machete edo-exacta). */}
+{/* Fuentes: Monllor 08 (pp. según src/content/teoria/u08.md), Modelo P2 teórico p.2, notas de Gabi (Links e Info.md). Factor integrante y existencia/unicidad: no figuran en Monllor 08 (resultados estándar, pedidos por la revisión del profe). */}
 
 <Pregunta id="u8-t01" unidad="U8" tipo="tema" aparecio="Modelo P2 teórico · pregunta 2" titulo="Solución general de la EDO homogénea de 1.er orden"
   fq="parciales/2do-parcial/Modelo P2 teorico.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6; Modelo P2 teorico.pdf, p. 2">
@@ -41,11 +41,11 @@ Si $G$ es una primitiva de $\dfrac{1}{\varphi(u)-u}$ y se vuelve a $u=y/x$, la *
 
 $$G\!\left(\frac yx\right)=\ln|x|+C$$
 
-**Observación.** Si $\varphi(u_0)=u_0$ para algún $u_0$, la recta $y=u_0x$ es una solución aparte (se pierde al dividir por $\varphi(u)-u$).
+**Observación.** Si $\varphi(u_0)=u_0$ para algún $u_0$, la recta $y=u_0x$ es una solución aparte (se pierde al dividir por $\varphi(u)-u$). Además se trabaja con $x\neq0$ (porque $\lambda=1/x$ y se divide por $x$).
 </Pregunta>
 
 <Pregunta id="u8-t02" unidad="U8" tipo="tema" aparecio="Parcial teórico real · T2 (según Gabi)" titulo="Solución general de la EDO lineal de 1.er orden (y = u·v)"
-  fq="Links e Info.md (parcial unificado, tema 2: solución general lineal)" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 6-8">
+  fq="Parcial teórico real (según Gabi)" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 6-8">
 <Fragment slot="enunciado">
 
 Desarrolle la obtención de la solución general de una ecuación diferencial lineal de 1.er orden.
@@ -77,11 +77,13 @@ $$u'v+uv'+P\,uv=Q\ \Rightarrow\ u'v+u\,(v'+Pv)=Q$$
 
 $$y=e^{-\int P\,dx}\left[\int Q\,e^{\int P\,dx}\,dx+C\right]$$
 
-**Condición.** Vale si la ecuación es lineal (sin productos ni potencias de $y$ e $y'$) y en un intervalo donde $P$ y $Q$ estén definidas. Con una condición inicial $y(x_0)=y_0$ se obtiene la solución particular.
+**Condición.** Vale si la ecuación es lineal (sin productos ni potencias de $y$ e $y'$) y en un intervalo donde $P$ y $Q$ estén definidas. Con una condición inicial $y(x_0)=y_0$ se obtiene la solución particular. Si $P$ y $Q$ son continuas en el intervalo, el problema de valores iniciales tiene **solución única** (ver u8-c07: acá $f=Q-Py$ y $\partial f/\partial y=-P$ son continuas).
+
+**Ejemplo con condición inicial.** $y'+y=x$, $y(0)=0$: $y=e^{-x}\big[\int x\,e^{x}dx+C\big]=x-1+Ce^{-x}$; $y(0)=0\Rightarrow C=1$ y $y=x-1+e^{-x}$.
 </Pregunta>
 
 <Pregunta id="u8-t03" unidad="U8" tipo="tema" titulo="Ecuación exacta y factor integrante"
-  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13; factor integrante: no figura en las fuentes (resultado estándar, ver machetes/edo-exacta)">
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 10-13" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 10-13; el factor integrante no figura en las fuentes de la cátedra (resultado estándar)">
 <Fragment slot="enunciado">
 
 Defina ecuación diferencial exacta, demuestre la condición necesaria que debe cumplir y desarrolle el método de resolución. ¿Qué se hace si la ecuación no es exacta?
@@ -90,12 +92,14 @@ Defina ecuación diferencial exacta, demuestre la condición necesaria que debe 
 <Fragment slot="guia">
 
 - Definición: $P\,dx+Q\,dy=0$ exacta si el primer miembro es un diferencial total $du$.
-- Propiedad: condición $P_y=Q_x$ (qué hipótesis de continuidad se usan).
+- Propiedad: condición $P_y=Q_x$ (qué hipótesis de continuidad se usan; suficiente en región simplemente conexa).
 - Desarrollo: cálculo de $u$ con $\phi(y)$ y solución $u(x,y)=C$.
 - Factor integrante (si no es exacta).
 - Gráfico: las curvas integrales son curvas de nivel de $u$.
 
 </Fragment>
+
+_Notación: en esta pregunta $P,Q$ son los coeficientes de $P\,dx+Q\,dy=0$ (los $M,N$ de otras notaciones), no las funciones $P(x),Q(x)$ de la lineal (u8-t02)._
 
 **Definición.** $P(x,y)\,dx+Q(x,y)\,dy=0$ es **exacta** si existe $u(x,y)$ tal que $du=u_x\,dx+u_y\,dy$ coincide con el primer miembro, es decir $P=u_x$ y $Q=u_y$.
 
@@ -103,7 +107,7 @@ Defina ecuación diferencial exacta, demuestre la condición necesaria que debe 
 
 $$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$$
 
-Esta condición también es suficiente (con $P,Q$ continuas y con derivadas parciales continuas en la región). Es la misma condición que la independencia de la trayectoria en U5: $(P,Q)$ es un campo conservativo y $u$ es su función potencial.
+La condición también es **suficiente** si $P,Q$ son continuas con derivadas parciales continuas en una **región simplemente conexa** (rectángulo, disco); en una región con agujeros puede fallar, como en U5 (contraejemplo $(-y,x)/(x^2+y^2)$). Monllor (p. 11) la presenta como necesaria y suficiente sin mencionar el dominio. Es la misma condición que la independencia de la trayectoria en U5: $(P,Q)$ es un campo conservativo y $u$ es su función potencial.
 
 **Método.**
 1. Verificar $P_y=Q_x$.
@@ -119,7 +123,7 @@ Esta condición también es suficiente (con $P,Q$ continuas y con derivadas parc
 
 $$\mu(x)=e^{\int\frac{P_y-Q_x}{Q}\,dx}$$
 
-Análogamente, si $\dfrac{Q_x-P_y}{P}$ depende solo de $y$: $\mu(y)=e^{\int\frac{Q_x-P_y}{P}\,dy}$. _(El factor integrante no figura en Monllor 08: es el resultado estándar, confirmar con la cátedra si lo toman.)_
+Análogamente, si $\dfrac{Q_x-P_y}{P}$ depende solo de $y$: $\mu(y)=e^{\int\frac{Q_x-P_y}{P}\,dy}$.{/* El factor integrante no figura en Monllor 08: resultado estándar, confirmar con la cátedra si lo toman (aviso en fr). */}
 </Pregunta>
 
 <Pregunta id="u8-c01" unidad="U8" tipo="corta" titulo="Solución general y solución particular"
@@ -132,7 +136,7 @@ Análogamente, si $\dfrac{Q_x-P_y}{P}$ depende solo de $y$: $\mu(y)=e^{\int\frac
 
 La **solución general** tiene una constante arbitraria $C$ (una por cada orden) y representa una **familia de curvas** (curvas integrales). Una **solución particular** es una curva de esa familia y se obtiene con una condición inicial $y(x_0)=y_0$.
 
-Ejemplo: $y'=2y$ tiene solución general $y=Ce^{2x}$; con $y(0)=4$ resulta $C=4$ y la particular es $y=4e^{2x}$.
+Ejemplo: $y'=2y$ tiene solución general $y=Ce^{2x}$; con $y(0)=4$ resulta $C=4$ y la particular es $y=4e^{2x}$. En una lineal, $y'+y=x$ tiene $y=x-1+Ce^{-x}$ y con $y(0)=0$ da $C=1$: $y=x-1+e^{-x}$.
 </Pregunta>
 
 <Pregunta id="u8-c02" unidad="U8" tipo="corta" titulo="Variables separables"
@@ -149,7 +153,7 @@ Para $y'=xy$: $\dfrac{dy}{y}=x\,dx\Rightarrow\ln|y|=\dfrac{x^2}{2}+C_1\Rightarro
 </Pregunta>
 
 <Pregunta id="u8-c03" unidad="U8" tipo="corta" titulo="Reconocer una ecuación homogénea"
-  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6; Modelo P2 teorico.pdf, p. 2">
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 4-6">
 <Fragment slot="enunciado">
 
 ¿Cuándo $M(x,y)\,dx+N(x,y)\,dy=0$ es una ecuación homogénea? ¿Es homogénea $y'=\dfrac{x+y}{x}$? Si lo es, ¿qué sustitución se usa?
@@ -179,20 +183,20 @@ Se resuelve como lineal (por ejemplo con $z=u\,v$) y se vuelve a $y=z^{1/(1-n)}$
 </Pregunta>
 
 <Pregunta id="u8-c05" unidad="U8" tipo="corta" titulo="Condición de exactitud y su vínculo con U5"
-  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13">
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 10-11" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 10-11">
 <Fragment slot="enunciado">
 
 ¿Cuál es la condición para que $P\,dx+Q\,dy=0$ sea exacta? ¿Con qué concepto de campos vectoriales (U5) se relaciona? Verifíquela en $(2xy+3)\,dx+(x^2+4y)\,dy=0$.
 
 </Fragment>
 
-La condición es $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$ (con $P,Q$ continuas y con derivadas parciales continuas). Es la misma condición de independencia de la trayectoria en U5: la ecuación es exacta cuando $(P,Q)$ es un campo conservativo, y $u$ es su función potencial.
+La condición es $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$ (con $P,Q$ continuas y con derivadas parciales continuas). Es necesaria siempre; es suficiente en una **región simplemente conexa** (como en U5). Es la misma condición de independencia de la trayectoria en U5: la ecuación es exacta cuando $(P,Q)$ es un campo conservativo, y $u$ es su función potencial.
 
 Acá $P_y=2x$ y $Q_x=2x$: son iguales, **es exacta**.
 </Pregunta>
 
 <Pregunta id="u8-c06" unidad="U8" tipo="corta" titulo="Factor integrante"
-  fq="github/src/content/machetes/edo-exacta.md (no figura en Monllor 08)" fr="github/src/content/machetes/edo-exacta.md; resultado estándar, no figura en las fuentes de la cátedra">
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 10-13 (ecuaciones exactas)" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 10-13; el factor integrante no figura en las fuentes de la cátedra (resultado estándar)">
 <Fragment slot="enunciado">
 
 ¿Qué es un factor integrante y cuándo conviene buscarlo? ¿Qué expresión da $\mu(x)$?
@@ -202,6 +206,19 @@ Acá $P_y=2x$ y $Q_x=2x$: son iguales, **es exacta**.
 Un **factor integrante** es una función $\mu$ tal que $\mu P\,dx+\mu Q\,dy=0$ es exacta aunque $P\,dx+Q\,dy=0$ no lo sea ($P_y\neq Q_x$). Se busca cuando falla la condición de exactitud.
 
 Si $\dfrac{P_y-Q_x}{Q}$ depende solo de $x$, entonces $\mu(x)=e^{\int\frac{P_y-Q_x}{Q}dx}$. Si $\dfrac{Q_x-P_y}{P}$ depende solo de $y$, $\mu(y)=e^{\int\frac{Q_x-P_y}{P}dy}$.
+</Pregunta>
+
+<Pregunta id="u8-c07" unidad="U8" tipo="corta" titulo="Existencia y unicidad de la solución"
+  fq="Revisión del profe (E3); no figura en Monllor 08" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 14 (soluciones singulares, tema vecino); el teorema no figura en las fuentes de la cátedra (resultado estándar)">
+<Fragment slot="enunciado">
+
+Enuncie el teorema de existencia y unicidad para $y'=f(x,y)$, $y(x_0)=y_0$. Dé un ejemplo donde falle la unicidad.
+
+</Fragment>
+
+Si $f$ y $\dfrac{\partial f}{\partial y}$ son **continuas** en un entorno (por ejemplo un rectángulo) de $(x_0,y_0)$, el problema de valores iniciales tiene una **solución única** definida en algún intervalo alrededor de $x_0$ (la existencia local sale de la continuidad de $f$; la unicidad pide además $\partial f/\partial y$).
+
+Ejemplo: $y'=\sqrt y$, $y(0)=0$. $f=\sqrt y$ es continua pero $\partial f/\partial y=\dfrac1{2\sqrt y}$ no lo es en $y=0$. Y hay dos soluciones: $y\equiv0$ e $y=x^2/4$ ($x\ge0$). Por el punto $(0,0)$ pasan dos curvas integrales.
 </Pregunta>
 
 <Pregunta id="u8-h01" unidad="U8" tipo="choice" correcta={3} titulo="Qué sustitución resuelve una homogénea"
@@ -224,10 +241,10 @@ La homogénea se reduce a $y'=\varphi(y/x)$ y se sustituye $y=ux$. La 1 es el m�
 </Pregunta>
 
 <Pregunta id="u8-h02" unidad="U8" tipo="choice" correcta={2} titulo="Condición de exactitud"
-  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 11-13">
+  fq="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 10-11" fr="teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 10-11">
 <Fragment slot="enunciado">
 
-$P(x,y)\,dx+Q(x,y)\,dy=0$ es exacta si y solo si (con derivadas continuas):
+$P(x,y)\,dx+Q(x,y)\,dy=0$, con $P,Q$ de derivadas continuas en una región simplemente conexa, es exacta si y solo si:
 
 </Fragment>
 <Fragment slot="opciones">
@@ -289,7 +306,7 @@ La solución general de una EDO de 1.er orden, geométricamente, es:
 </Fragment>
 <Fragment slot="opciones">
 
-1. Una única curva que pasa por todos los puntos.
+1. Una única curva, determinada por la condición inicial.
 2. Un punto del plano.
 3. Una familia de curvas con una constante arbitraria.
 4. Una familia de curvas con dos constantes arbitrarias.

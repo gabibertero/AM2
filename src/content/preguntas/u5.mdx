@@ -18,7 +18,7 @@ Desarrolle el Teorema de Green.
 <Fragment slot="guia">
 
 - Definición: enunciado con curva cerrada simple, positivamente orientada, y el campo $\vec F=P\,\vec i+Q\,\vec j$.
-- Propiedades: hipótesis (derivadas parciales continuas en $D$) y qué pasa con el sentido horario.
+- Propiedades: hipótesis (derivadas parciales continuas en un abierto que contiene a $D$; $D$ regular en $x$ e $y$), dominios con agujeros y qué pasa con el sentido horario.
 - Desarrollo: demostración separando $P\,\vec i$ y $Q\,\vec j$ para un dominio entre dos curvas.
 - Gráfico: región $D$ entre $y=f_1(x)$ e $y=f_2(x)$ con la frontera $L$ orientada antihoraria.
 
@@ -30,7 +30,8 @@ $$\oint_L \big[P\,dx+Q\,dy\big]=\iint_D\left[\frac{\partial Q}{\partial x}-\frac
 
 **Propiedades / condiciones.**
 - $L$ cerrada, simple (sin autointersecciones), suave a trozos y recorrida en sentido antihorario.
-- $P,Q$ con derivadas parciales continuas en $D$ y en su borde.
+- $P,Q$ con derivadas parciales continuas en un **abierto que contiene a $D$** (incluido su borde $L$).
+- Para la demostración se supone $D$ **regular en ambas direcciones** (tipo I y II). Si $D$ tiene agujeros, el borde es la suma de las curvas: la exterior antihoraria y las interiores horarias.
 - Si se recorre en sentido **horario** cambia el signo: $\oint=\iint[\partial P/\partial y-\partial Q/\partial x]\,dx\,dy$.
 - Relaciona la circulación de $\vec F$ por el borde con la "rotación" del campo adentro de la región; el integrando es la componente en $\vec k$ del rotor.
 
@@ -38,7 +39,7 @@ $$\oint_L \big[P\,dx+Q\,dy\big]=\iint_D\left[\frac{\partial Q}{\partial x}-\frac
 
 *Para $P\,\vec i$*: $D$ está entre las curvas $y=f_1(x)$ (abajo) e $y=f_2(x)$ (arriba), $a\le x\le b$. Al recorrer el borde antihorario, $\oint P\,dx=\int_a^b P(x,f_1(x))\,dx-\int_a^b P(x,f_2(x))\,dx=-\int_a^b\!\!\int_{f_1(x)}^{f_2(x)}\frac{\partial P}{\partial y}\,dy\,dx=-\iint_D\frac{\partial P}{\partial y}\,dx\,dy$.
 
-*Para $Q\,\vec j$*: $D$ está entre $x=g_1(y)$ y $x=g_2(y)$, y el mismo razonamiento da $\oint Q\,dy=+\iint_D\frac{\partial Q}{\partial x}\,dx\,dy$.
+*Para $Q\,\vec j$* (se supone $D$ regular también en la dirección de $x$): $D$ está entre $x=g_1(y)$ y $x=g_2(y)$, y el mismo razonamiento da $\oint Q\,dy=+\iint_D\frac{\partial Q}{\partial x}\,dx\,dy$.
 
 Sumando ambos resultados se obtiene la fórmula de Green.
 
@@ -68,7 +69,8 @@ Defina la integral curvilínea de un campo vectorial a lo largo de una curva, in
 $$\int_L \vec F\cdot d\vec s=\int_L P(x,y)\,dx+Q(x,y)\,dy$$
 
 **Propiedades.**
-- $\vec F$ continua sobre la curva para que el límite exista.
+- $\vec F$ continua sobre la curva para que el límite exista, y $L$ **suave a trozos**.
+- No depende de cómo se parametrice $L$, solo de la curva y del sentido de recorrido.
 - En general **depende de la curva** $L$ y del **sentido**: al invertir el sentido cambia el signo.
 - Aditividad: $\int_A^B=\int_A^C+\int_C^B$; una curva cerrada formada por varios tramos se integra por tramos y se suma.
 - Queda definida por el elemento de integración, la curva y el sentido.
@@ -93,7 +95,7 @@ Desarrolle la condición para que una integral curvilínea no dependa de la tray
 <Fragment slot="guia">
 
 - Definición: independencia de la trayectoria, campo conservativo y función potencial.
-- Propiedades: condición $P_y=Q_x$ y rol del dominio simplemente conexo; en el espacio, $\operatorname{rot}\vec F=\vec0$.
+- Propiedades: independencia $\Rightarrow P_y=Q_x$ (siempre), recíproca solo en dominio simplemente conexo, contraejemplo $(-y,x)/(x^2+y^2)$; en el espacio, $\operatorname{rot}\vec F=\vec0$.
 - Desarrollo: diferencia de potencial $u(B)-u(A)$ y cómo se halla $u$.
 - Gráfico: dos caminos distintos entre $A$ y $B$ con el mismo valor.
 
@@ -102,9 +104,9 @@ Desarrolle la condición para que una integral curvilínea no dependa de la tray
 **Definición.** $\int_A^B P\,dx+Q\,dy$ **no depende de la trayectoria** si solo depende de los extremos $A$ y $B$; equivale a que la integral sobre cualquier curva cerrada valga 0. $\vec F$ es **conservativo** si $\vec F=\nabla u$ para alguna función escalar $u$ (**función potencial**): $P=\partial u/\partial x,\ Q=\partial u/\partial y$ (y $R=\partial u/\partial z$ en el espacio).
 
 **Propiedades.**
-- Si $P,Q$ son continuas con derivadas continuas, la condición necesaria y suficiente es $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$.
-- Es consecuencia de Green: si $Q_x-P_y=0$ la doble es 0 y la circulación cerrada también.
-- La recíproca ($P_y=Q_x\Rightarrow$ conservativo) vale **solo si el dominio es simplemente conexo**.
+- Con $P,Q$ continuas y con derivadas parciales continuas: **independencia de la trayectoria $\Rightarrow$ $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$ (siempre)**. La recíproca, $P_y=Q_x\Rightarrow$ independencia, vale **solo en un dominio simplemente conexo**.
+- La recíproca se apoya en Green: si $Q_x-P_y=0$ la doble es 0 y la circulación cerrada también, pero hace falta que la región $D$ encerrada por la curva esté **contenida en el dominio** donde se cumple la condición (sin agujeros).
+- **Contraejemplo.** $\vec F=\dfrac{(-y,\,x)}{x^2+y^2}$ en $\mathbb R^2\setminus\{(0,0)\}$ (dominio no simplemente conexo): $P_y=Q_x=\dfrac{y^2-x^2}{(x^2+y^2)^2}$, pero sobre la circunferencia $x=\cos t,\ y=\sin t$ la circulación vale $\int_0^{2\pi}1\,dt=2\pi\neq0$. No es conservativo.
 - Si $\vec F$ es conservativo en el espacio: $R_y=Q_z,\ P_z=R_x,\ Q_x=P_y$, es decir $\operatorname{rot}\vec F=\vec0$.
 
 **Desarrollo.** Como $P\,dx+Q\,dy=du$ (diferencial total), 
@@ -163,11 +165,11 @@ Si $L:\ y=g(x)$, $ds=\sqrt{1+[g'(x)]^2}\,dx$. Geométricamente es el área de la
   fq="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 10-11, 15" fr="teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 10-11, 15">
 <Fragment slot="enunciado">
 
-Escriba la condición necesaria y suficiente para que $\int_A^B P\,dx+Q\,dy$ no dependa de la trayectoria y aclare cuándo vale la recíproca.
+¿Qué relación hay entre la independencia de la trayectoria de $\int_A^B P\,dx+Q\,dy$ y la igualdad $P_y=Q_x$? Aclare qué implicación vale siempre y cuándo vale la otra.
 
 </Fragment>
 
-Con $P,Q$ continuas y con derivadas continuas: $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$ en el dominio. La recíproca ($P_y=Q_x\Rightarrow$ campo conservativo) vale **solo si el dominio es simplemente conexo**.
+Con $P,Q$ continuas y con derivadas continuas: si la integral no depende de la trayectoria, entonces $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$ (**siempre**). La recíproca ($P_y=Q_x\Rightarrow$ independencia, campo conservativo) vale **solo si el dominio es simplemente conexo**. Contraejemplo: $\vec F=(-y,x)/(x^2+y^2)$ en $\mathbb R^2\setminus\{0\}$ cumple $P_y=Q_x$ y su circulación sobre la circunferencia es $2\pi$.
 </Pregunta>
 
 <Pregunta id="u5-c05" unidad="U5" tipo="corta" titulo="Cómo hallar la función potencial"

@@ -17,26 +17,32 @@ Escriba el concepto de divergencia de un campo vectorial en un punto e indique q
 </Fragment>
 <Fragment slot="guia">
 
-- Definición: $\operatorname{div}\vec F=\nabla\cdot\vec F$ y su carácter escalar.
+- Definición: límite del flujo por unidad de volumen, $\operatorname{div}\vec F=\nabla\cdot\vec F$ y su carácter escalar.
 - Propiedades: relación con la matriz Jacobiana, campo solenoidal, Laplaciano.
 - Desarrollo: interpretación con un fluido (fuente, sumidero) y vínculo con el Teorema de la Divergencia.
 - Gráfico: campo que sale de un punto (fuente) y campo que converge a un punto (sumidero).
 
 </Fragment>
 
-**Definición.** Dado $\vec F=P\,\vec i+Q\,\vec j+R\,\vec k$, la divergencia es un campo **escalar**:
+**Concepto (definición como límite).** La divergencia en un punto $P_0$ es el flujo saliente por unidad de volumen, en el límite cuando el volumen que encierra a $P_0$ tiende a cero:
+
+$$\operatorname{div}\vec F(P_0)=\lim_{V\to P_0}\frac1V\iint_{S}\vec F\cdot\vec n\,d\sigma$$
+
+con $S$ el borde de $V$ y $\vec n$ la normal exterior. Sale del Teorema de la Divergencia (valor medio de $\operatorname{div}\vec F$ sobre $V$). _(Es la forma "concepto"; el operador de abajo es su cálculo en coordenadas.)_
+
+**Cálculo.** Dado $\vec F=P\,\vec i+Q\,\vec j+R\,\vec k$, la divergencia es un campo **escalar**:
 
 $$\operatorname{div}\vec F=\nabla\cdot\vec F=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}$$
 
 **Propiedades.**
 - Equivale a la **traza de la matriz Jacobiana** (campos $\mathbb R^n\to\mathbb R^n$).
-- Si $\operatorname{div}\vec F=0$ el campo se llama **solenoidal**; ocurre cuando $\vec F=\operatorname{rot}\vec A$, porque $\operatorname{div}(\operatorname{rot}\vec A)=0$.
+- Si $\operatorname{div}\vec F=0$ el campo se llama **solenoidal**. Si $\vec F=\operatorname{rot}\vec A$ entonces $\operatorname{div}\vec F=0$, porque $\operatorname{div}(\operatorname{rot}\vec A)=0$; la recíproca vale en dominios estrellados.
 - $\operatorname{div}(\nabla u)=\nabla^2u=\Delta u$ es el **Laplaciano**; si $\Delta u=0$, $u$ es una función **armónica**.
 
 **Qué representa.** Si $\vec F$ es la velocidad de un fluido, la divergencia en un punto mide cuánto fluido **se introduce o se extrae** por unidad de volumen:
 - $\nabla\cdot\vec F>0$: **fuente** (la densidad en el punto disminuye).
 - $\nabla\cdot\vec F<0$: **sumidero** (la densidad aumenta).
-- $\nabla\cdot\vec F=0$: el fluido se mueve sin acumularse (incompresible).
+- $\nabla\cdot\vec F=0$: el fluido se mueve sin acumularse (flujo sin acumulación; es incompresible si la densidad es constante).
 
 **Relación con el flujo.** Por el Teorema de la Divergencia, $\iiint_V\operatorname{div}\vec F\,dv=\iint_S\vec F\cdot\vec n\,d\sigma$: la integral de la divergencia es el flujo neto hacia afuera.
 
@@ -47,7 +53,7 @@ $$\operatorname{div}\vec F=\nabla\cdot\vec F=\frac{\partial P}{\partial x}+\frac
 
 <Pregunta id="u6-t02" unidad="U6" tipo="tema" titulo="Rotor de un campo vectorial: definición y qué representa"
   aparecio="el 2º parcial teórico real"
-  fq="Links e Info.md" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 5-8">
+  fq="Parcial teórico real (según Gabi)" fr="teoria/Apuntes Ing. Monllor/07-INTEGRALES DE SUPERFICIE 2015.pdf, p. 5-8">
 <Fragment slot="enunciado">
 
 Defina el rotor (rotacional) de un campo vectorial e indique qué representa.
@@ -57,7 +63,7 @@ Defina el rotor (rotacional) de un campo vectorial e indique qué representa.
 
 - Definición: $\operatorname{rot}\vec F=\nabla\times\vec F$ por determinante; carácter vectorial.
 - Propiedades: campo irrotacional y su relación con campo conservativo.
-- Desarrollo: interpretación con la velocidad angular de un fluido y conexión con Green/Stokes.
+- Desarrollo: interpretación con la velocidad angular de un fluido ($\operatorname{rot}\vec v=2\vec\omega$) y conexión con Green/Stokes.
 - Gráfico: campo con giro (por ejemplo $\vec F=(-y,x,0)$).
 
 </Fragment>
@@ -71,9 +77,13 @@ $$\operatorname{rot}\vec F=\nabla\times\vec F=\begin{vmatrix}\vec i&\vec j&\vec 
 - **Todo campo conservativo ($\vec F=\nabla u$) es irrotacional**, porque $\operatorname{rot}(\nabla u)=\vec0$ (igualdad de derivadas mixtas).
 - La componente en $\vec k$, $Q_x-P_y$, es el integrando del Teorema de Green.
 
-**Qué representa.** Mide la **velocidad angular** local: si $\vec F$ es la velocidad de un fluido, el rotor da la medida del giro de una pequeña esfera del fluido alrededor de un eje. Por Stokes, la circulación a lo largo del borde es el flujo del rotor a través de una superficie apoyada en él: $\iint_S\operatorname{rot}\vec F\cdot\vec n\,d\sigma=\oint_L\vec F\cdot d\vec s$.
+**Qué representa.** Mide el **giro local** del campo: si $\vec v$ es la velocidad de un fluido y $\vec\omega$ la velocidad angular con que gira una pequeña esfera del fluido, entonces
 
-**Ejemplo.** $\vec F=(x^2y,\,yz,\,xz^2)$ tiene $\operatorname{rot}\vec F=(-y,\,-z^2,\,-x^2)$. Para $\vec F=(-y,x,0)$, $\operatorname{rot}\vec F=(0,0,2)$.
+$$\operatorname{rot}\vec v=2\,\vec\omega$$
+
+El rotor es el **doble** de la velocidad angular y su dirección es el eje de giro. ⚠️ Monllor (07, p. 5) dice que el rotor "da la medida de la velocidad angular"; la relación exacta es $2\omega$. Por Stokes, la circulación a lo largo del borde es el flujo del rotor a través de una superficie apoyada en él: $\iint_S\operatorname{rot}\vec F\cdot\vec n\,d\sigma=\oint_L\vec F\cdot d\vec s$.
+
+**Ejemplo.** $\vec F=(x^2y,\,yz,\,xz^2)$ tiene $\operatorname{rot}\vec F=(-y,\,-z^2,\,-x^2)$. Para $\vec v=(-y,x,0)$ (giro rígido antihorario con $\omega=1$), $\operatorname{rot}\vec v=(0,0,2)=2\vec\omega$ con $\vec\omega=(0,0,1)$.
 
 **Gráfico.** Campo $\vec F=(-y,x,0)$ en el plano $xy$: flechas tangentes a circunferencias centradas en el origen, en sentido antihorario; una rueda pequeña colocada en el campo giraría.
 </Pregunta>
@@ -88,21 +98,26 @@ Enuncie el Teorema de Stokes, indique sus hipótesis y la compatibilidad de orie
 <Fragment slot="guia">
 
 - Definición: enunciado con superficie orientada $S$, borde $L$ y campo $\vec F$.
-- Propiedades: hipótesis de derivadas continuas y orientaciones compatibles.
-- Desarrollo: idea de la demostración para $S:\ z=f(x,y)$ y relación con Green.
+- Propiedades: $S$ suave a trozos, $L$ simple cerrada suave a trozos, derivadas continuas y orientaciones compatibles.
+- Desarrollo: demostración para $S:\ z=f(x,y)$ desarrollando el término $P$ (regla de la cadena + Green); $Q$ y $R$ idem.
 - Gráfico: superficie $S$ con su normal $\vec n$ y el borde $L$ orientado.
 
 </Fragment>
 
-**Enunciado.** Sea $S$ una superficie **orientada** limitada por la curva cerrada $L$ y $\vec F$ un campo con **derivadas parciales continuas en una región abierta que contiene a $S$**. Entonces
+**Enunciado.** Sea $S$ una superficie **orientada, suave a trozos**, limitada por la curva **simple cerrada, suave a trozos** $L$ y $\vec F$ un campo con **derivadas parciales continuas en una región abierta que contiene a $S$**. Entonces
 
 $$\iint_S \operatorname{rot}\vec F\cdot\vec n\,d\sigma=\oint_L \vec F\cdot d\vec s=\oint_L P\,dx+Q\,dy+R\,dz$$
 
 **Propiedades / orientaciones.** La normal $\vec n$ y el sentido de $L$ deben ser compatibles: con $\vec n$ formando un ángulo agudo con el eje $z$, un observador que mira desde la punta de $\vec n$ ve el recorrido de $L$ en sentido antihorario. Si se invierte uno, se invierte el signo.
 
-**Desarrollo.** Para $S:\ z=f(x,y)$ se escribe la integral de superficie como doble sobre la proyección $D$, y la curvilínea sobre la proyección $L'$ de $L$ en el plano $xy$. Se aplica Green a esta última usando la regla de la cadena para $\partial/\partial x\,[\,\cdot\,]$ y se ve que ambos miembros coinciden.
+**Desarrollo.** Para $S:\ z=f(x,y)$ se escribe la integral de superficie como doble sobre la proyección $D$, y la curvilínea sobre la proyección $L'$ de $L$ en el plano $xy$. Se hace el término $P$ (con $\vec n\,d\sigma=(-f_x,-f_y,1)\,dx\,dy$):
 
-**Interpretación y consecuencias.** La circulación del campo por el borde es igual al flujo del rotor a través de cualquier superficie que se apoye en ese borde. Si $S$ es plana y paralela a $xy$ se obtiene Green como caso particular. Si $\operatorname{rot}\vec F=\vec0$, la integral curvilínea no depende de la forma de la curva.
+- Superficie: $\operatorname{rot}(P\,\vec i)=(0,P_z,-P_y)$, entonces $\iint_S\operatorname{rot}(P\vec i)\cdot\vec n\,d\sigma=\iint_D\big(-P_z f_y-P_y\big)\,dx\,dy$, con $P$ evaluada en $(x,y,f(x,y))$.
+- Curva: $\oint_L P\,dx=\oint_{L'}P(x,y,f(x,y))\,dx$. Por Green, $=-\iint_D\dfrac{\partial}{\partial y}\big[P(x,y,f(x,y))\big]\,dx\,dy$, y por la regla de la cadena $\dfrac{\partial}{\partial y}[P(x,y,f)]=P_y+P_z\,f_y$.
+
+Ambos miembros dan $-\iint_D(P_y+P_zf_y)\,dx\,dy$. Idem para $Q\,dy$ y $R\,dz$, y se suman.
+
+**Interpretación y consecuencias.** La circulación del campo por el borde es igual al flujo del rotor a través de cualquier superficie que se apoye en ese borde. Si $S$ es plana y paralela a $xy$ se obtiene Green como caso particular. Si $\operatorname{rot}\vec F=\vec0$ en una región **simplemente conexa**, la circulación sobre toda curva cerrada es 0 (y la integral curvilínea no depende de la trayectoria); sin simple conexión no vale.
 
 **Ejemplo.** $\vec F=(-y,x,0)$, $S$ el disco $x^2+y^2\le a^2$ en $z=0$, $\vec n=\vec k$: $\operatorname{rot}\vec F=(0,0,2)$, entonces $\iint=2\pi a^2$; por la curva, $\oint_L -y\,dx+x\,dy=2\pi a^2$.
 
@@ -122,6 +137,8 @@ Un campo con $m$ componentes de $n$ variables tiene $m\times n$ derivadas parcia
 
 $$D\vec F=\begin{bmatrix}\dfrac{\partial f_1}{\partial x_1}&\cdots&\dfrac{\partial f_1}{\partial x_n}\\ \vdots&&\vdots\\ \dfrac{\partial f_m}{\partial x_1}&\cdots&\dfrac{\partial f_m}{\partial x_n}\end{bmatrix}=\begin{bmatrix}\nabla f_1\\ \vdots\\ \nabla f_m\end{bmatrix}$$
 
+Evaluada en un punto $P_0$ es una matriz de números, $D\vec F(P_0)$. El campo es **diferenciable** en el punto si cada componente lo es (condición suficiente: parciales continuas).
+
 Si $m=1$ es el gradiente; si $n=1$ es una columna y $\vec r\,'(t)$ es tangente a la curva; si $m=n$ su determinante es el Jacobiano.
 </Pregunta>
 
@@ -134,9 +151,9 @@ Si $m=1$ es el gradiente; si $n=1$ es una columna y $\vec r\,'(t)$ es tangente a
 
 </Fragment>
 
-El dominio de una función vectorial $\vec r(t)=[f(t),g(t),h(t)]$ es el conjunto de valores de $t$ donde está definida: la **intersección de los dominios de las funciones componentes**. Se pide que cada componente esté definida (denominadores $\ne0$, raíces de índice par con argumento $\ge0$, $\ln$ con argumento $>0$). Para un campo se usa el mismo criterio con $P,Q,R$.
+Para $\vec F:\mathbb R^n\to\mathbb R^m$ el dominio es el subconjunto de $\mathbb R^n$ donde está definida: la **intersección de los dominios de las $m$ funciones componentes**. Se pide que cada componente esté definida (denominadores $\ne0$, raíces de índice par con argumento $\ge0$, $\ln$ con argumento $>0$). Para una función vectorial $\vec r(t)=[f(t),g(t),h(t)]$ ($n=1$) es un conjunto de valores de $t$; para un campo en $\mathbb R^2$ o $\mathbb R^3$ se usa el mismo criterio con $P,Q,R$.
 
-Ejemplo: $\vec F(x,y)=\left[\dfrac1{x-y},\sqrt y\right]$ tiene dominio $\{x\ne y,\ y\ge0\}$.
+Ejemplos: $\vec F(x,y)=\left[\dfrac1{x-y},\sqrt y\right]$ tiene dominio $\{x\ne y,\ y\ge0\}$. En $\mathbb R^3$: $\vec G(x,y,z)=\left[\dfrac1{x-y},\sqrt z,\ln(x+y)\right]$ tiene dominio $\{x\ne y,\ z\ge0,\ x+y>0\}$.
 </Pregunta>
 
 <Pregunta id="u6-c03" unidad="U6" tipo="corta" titulo="Gradiente"
@@ -158,7 +175,7 @@ Con el operador nabla $\nabla=\frac{\partial}{\partial x}\vec i+\frac{\partial}{
 
 </Fragment>
 
-**Irrotacional**: $\operatorname{rot}\vec F=\vec0$. Todo campo conservativo ($\vec F=\nabla u$) es irrotacional, porque $\operatorname{rot}(\nabla u)=\vec0$. **Solenoidal**: $\operatorname{div}\vec F=0$; ocurre cuando $\vec F=\operatorname{rot}\vec A$, porque $\operatorname{div}(\operatorname{rot}\vec A)=0$.
+**Irrotacional**: $\operatorname{rot}\vec F=\vec0$. Todo campo conservativo ($\vec F=\nabla u$) es irrotacional, porque $\operatorname{rot}(\nabla u)=\vec0$. **Solenoidal**: $\operatorname{div}\vec F=0$. Si $\vec F=\operatorname{rot}\vec A$ entonces es solenoidal, porque $\operatorname{div}(\operatorname{rot}\vec A)=0$ (la recíproca vale en dominios estrellados).
 </Pregunta>
 
 <Pregunta id="u6-c05" unidad="U6" tipo="corta" titulo="Flujo de un campo a través de una superficie"
@@ -282,9 +299,9 @@ Si $\vec F=\nabla u$ con $u$ de derivadas segundas continuas, entonces:
 1. $\operatorname{rot}\vec F=\vec0$
 2. $\operatorname{div}\vec F=0$ siempre
 3. $\operatorname{rot}\vec F=\nabla u$
-4. $\vec F$ es solenoidal
+4. $\operatorname{div}\vec F=\operatorname{rot}\vec F$
 
 </Fragment>
 
-$\operatorname{rot}(\nabla u)=\vec0$ por la igualdad de derivadas mixtas: todo campo conservativo es irrotacional. La divergencia de $\nabla u$ es el Laplaciano, que no es nulo en general.
+$\operatorname{rot}(\nabla u)=\vec0$ por la igualdad de derivadas mixtas: todo campo conservativo es irrotacional. La divergencia de $\nabla u$ es el Laplaciano, que no es nulo en general (la 2 y la 4 no valen siempre; en la 4 además se compara un escalar con un vector).
 </Pregunta>

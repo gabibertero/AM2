@@ -8,7 +8,7 @@ import Pregunta from '../../components/Pregunta.astro';
 {/* Fuentes: Monllor 09 (pp. según src/content/teoria/u09.md), Rocha-Giordano 15, notas de Gabi (Links e Info.md). Notación: raíces k1,k2; y = y_h + y_p; coeficientes de y_p con A, B, D. */}
 
 <Pregunta id="u9-t01" unidad="U9" tipo="tema" aparecio="Lista de temas del parcial real (según Gabi)" titulo="EDO de 2.º orden con raíces iguales: por qué aparece x·eᵏˣ"
-  fq="Links e Info.md (EDO de segundo grado con raíces iguales)" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 5-12; teoria/Teorico-practico Rocha-Giordano/15_Ecuaciones Diferenciales de Segundo Orden.pdf, p. 1">
+  fq="Parcial teórico real (según Gabi)" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 5-12; teoria/Teorico-practico Rocha-Giordano/15_Ecuaciones Diferenciales de Segundo Orden.pdf, p. 1">
 <Fragment slot="enunciado">
 
 Desarrolle la solución general de la ecuación $y''+py'+qy=0$ ($p,q$ constantes) cuando la ecuación característica tiene raíces reales iguales. ¿Por qué aparece la solución $x\,e^{kx}$?
@@ -45,7 +45,7 @@ _(Idea detrás: al buscar $y=u(x)\,e^{kx}$ la ecuación se reduce a $u''=0$, o s
 
 $$y_h=C_1e^{kx}+C_2\,x\,e^{kx}=(C_1+C_2x)\,e^{kx}$$
 
-Con condiciones iniciales $y(x_0)=y_0$, $y'(x_0)=y_1$ se arma un sistema $2\times2$ en $C_1,C_2$.
+Con condiciones iniciales $y(x_0)=y_0$, $y'(x_0)=y_1$ se arma un sistema $2\times2$ en $C_1,C_2$, con determinante $W(x_0)\neq0$: tiene solución única (existencia y unicidad del problema de Cauchy: ver u9-c07).
 
 **Ejemplo.** $y''-2y'+y=0$: $k=1$ doble, $y_h=(C_1+C_2x)e^{x}$.
 </Pregunta>
@@ -61,7 +61,7 @@ Para la ecuación lineal de 2.º orden $y''+a_1y'+a_2y=f(x)$, enuncie y justifiq
 
 - Definición: ecuación lineal, homogénea auxiliar, $y_h$ e $y_p$.
 - Propiedades: superposición; Wronskiano y soluciones linealmente independientes.
-- Desarrollo: demostración de que $y_h+y_p$ es solución.
+- Desarrollo: demostración de que $y_h+y_p$ es solución y de que toda solución es de esa forma ($y-y_p$ resuelve la homogénea).
 - Resultado: $y=y_h+y_p$ con $y_h=C_1y_1+C_2y_2$.
 
 </Fragment>
@@ -75,7 +75,8 @@ Para la ecuación lineal de 2.º orden $y''+a_1y'+a_2y=f(x)$, enuncie y justifiq
 $$W(y_1,y_2)=\begin{vmatrix}y_1&y_2\\y_1'&y_2'\end{vmatrix}=y_1y_2'-y_2y_1'$$
 
 - Si $y_1,y_2$ son linealmente dependientes (una es múltiplo de la otra), $W=0$.
-- Si son soluciones linealmente independientes de la homogénea, $W\neq0$ en todo punto.
+- Si son soluciones linealmente independientes de la homogénea, $W\neq0$ en todo punto; equivalentemente, si $W(x_0)\neq0$ en **un** punto, entonces $W\neq0$ en todo el intervalo (vale para soluciones de la homogénea).
+- ⚠️ Para funciones cualesquiera (que no son soluciones de la misma ecuación) $W=0$ **no** implica dependencia lineal; $W\neq0$ sí implica independencia.
 - La solución general de la homogénea es $y_h=C_1y_1+C_2y_2$ con $y_1,y_2$ **linealmente independientes** (para orden $n$, $n$ soluciones LI).
 
 Ejemplo: $y_1=e^x$, $y_2=e^{2x}$: $W=e^x\cdot2e^{2x}-e^{2x}e^x=e^{3x}\neq0$.
@@ -86,7 +87,11 @@ $$y=y_h+y_p$$
 
 con $y_h$ solución general de la homogénea auxiliar e $y_p$ **una** solución particular cualquiera de la no homogénea.
 
-**Justificación.** Si se reemplaza $y_h+y_p$ en el primer miembro, los términos de $y_h$ dan $0$ y los de $y_p$ dan $f(x)$: es solución. Contiene las dos constantes arbitrarias de $y_h$, que es lo que corresponde a una ecuación de 2.º orden (con condiciones iniciales se obtiene la particular).
+**Justificación.** Si se reemplaza $y_h+y_p$ en el primer miembro, los términos de $y_h$ dan $0$ y los de $y_p$ dan $f(x)$: es solución. Contiene las dos constantes arbitrarias de $y_h$, que es lo que corresponde a una ecuación de 2.º orden.
+
+**Toda solución es de esa forma.** Si $y$ es otra solución cualquiera de la no homogénea, entonces $y-y_p$ resuelve la homogénea (los términos en $f$ se restan: $f-f=0$). Por lo tanto $y-y_p=C_1y_1+C_2y_2$, es decir $y=y_h+y_p$ para ciertas $C_1,C_2$.
+
+**Condiciones iniciales.** Con $y(x_0)=y_0$, $y'(x_0)=y_1$ queda un sistema $2\times2$ en $C_1,C_2$ cuyo determinante es $W(x_0)\neq0$: tiene solución única, y por eso la solución particular del problema de valores iniciales es única (ver u9-c07).
 
 **Uso.** Primero $y_h$, después $y_p$, se suman y recién ahí se aplican las condiciones iniciales (a la solución completa).
 </Pregunta>
@@ -119,7 +124,7 @@ Desarrolle el método de los coeficientes indeterminados para hallar $y_p$ de $y
 | Producto (ej. $xe^{2x}$, $e^{x}\sin2x$) | producto de las formas con polinomios completos: $(Ax+B)e^{2x}$; $e^x(A\cos2x+B\sin2x)$ |
 | Suma de términos | suma de las formas, cada una con sus coeficientes |
 
-**Resonancia.** Si un término propuesto **ya es solución de la homogénea** (es decir, $a$ o $a\pm bi$ es raíz de la ecuación característica), no puede ser solución de la no homogénea (daría $0$ y no $f$). Se **multiplica $y_p$ por $x$** (raíz simple) **o por $x^2$** (raíz doble).
+**Resonancia.** Si un término propuesto **ya es solución de la homogénea** (es decir, $a$ o $a\pm bi$ es raíz de la ecuación característica; para un polinomio, $a=0$ es raíz, o sea $q=0$), no puede ser solución de la no homogénea (daría $0$ y no $f$). Se **multiplica $y_p$ por $x$** (raíz simple) **o por $x^2$** (raíz doble).
 
 **Pasos.**
 1. Hallar $y_h$.
@@ -130,6 +135,36 @@ Desarrolle el método de los coeficientes indeterminados para hallar $y_p$ de $y
 **Ejemplos.**
 - $y''-3y'+2y=4x$: $y_p=Ax+B$. Reemplazando: $-3A+2Ax+2B=4x\Rightarrow A=2,\ B=3$, $y_p=2x+3$.
 - Resonancia: $y''-y=e^{x}$. $k=\pm1$, entonces $e^x$ está en $y_h$. Se propone $y_p=Axe^x$ y resulta $y_p=\tfrac12\,x\,e^x$.
+- Resonancia con polinomio ($0$ es raíz, $a=0$): $y''+y'=x$. $k=0,-1$, así que las constantes ya están en $y_h$. Se multiplica por $x$: $y_p=x(Ax+B)=Ax^2+Bx$; $2A+2Ax+B=x\Rightarrow A=\tfrac12,\ B=-1$, $y_p=\tfrac12x^2-x$.
+</Pregunta>
+
+<Pregunta id="u9-t04" unidad="U9" tipo="tema" aparecio="Parcial teórico real · Tema B (según Gabi)" titulo="Solución particular de una EDO de 2.º orden"
+  fq="Parcial teórico real (según Gabi)" fr="teoria/Apuntes Ing. Monllor/09-ECUACIONES DIFERENCIALES DE ORDEN SUPERIOR2015.pdf, p. 13, 14-19">
+<Fragment slot="enunciado">
+
+Desarrolle qué es una solución particular de $y''+a_1y'+a_2y=f(x)$, cómo se obtiene y cómo se la distingue de la solución general.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $y_p$ (una solución cualquiera de la no homogénea) frente a la solución particular de un problema de valores iniciales.
+- Propiedades: $y_p$ no es única ($y_p+$ cualquier solución de la homogénea también sirve); la solución del PVI sí es única.
+- Desarrollo: $y_h$, $y_p$, suma y recién ahí condiciones iniciales.
+- Ejemplo resuelto.
+
+</Fragment>
+
+**Dos usos de "particular".**
+- $y_p$: **una** función cualquiera que verifica la ecuación completa (sin constantes). Se halla por coeficientes indeterminados o variación de parámetros (u9-t03, u9-c06).
+- **Solución particular** de la ecuación: la que sale de la general $y=y_h+y_p$ fijando $C_1,C_2$ con las condiciones iniciales $y(x_0)=y_0$, $y'(x_0)=y_1$. Es una curva de la familia con dos parámetros.
+
+**Procedimiento.** (1) $y_h$ por la ecuación característica; (2) $y_p$; (3) $y=y_h+y_p$; (4) derivar $y$ y aplicar las **dos** condiciones iniciales a la solución completa (no a $y_h$ sola); queda un sistema $2\times2$ en $C_1,C_2$ con determinante $W(x_0)\neq0$, de solución única.
+
+**Ejemplo.** $y''-y=e^x$, $y(0)=0$, $y'(0)=0$. $y_h=C_1e^x+C_2e^{-x}$, $y_p=\tfrac12xe^x$ (u9-c05), entonces $y=C_1e^x+C_2e^{-x}+\tfrac12xe^x$ e $y'=C_1e^x-C_2e^{-x}+\tfrac12e^x+\tfrac12xe^x$.
+
+$y(0)=C_1+C_2=0$ y $y'(0)=C_1-C_2+\tfrac12=0\Rightarrow C_1=-\tfrac14,\ C_2=\tfrac14$:
+
+$$y=-\tfrac14e^x+\tfrac14e^{-x}+\tfrac12xe^x$$
 </Pregunta>
 
 <Pregunta id="u9-c01" unidad="U9" tipo="corta" titulo="Ecuación característica: los tres casos"
@@ -155,7 +190,7 @@ Defina el Wronskiano de dos funciones. ¿Qué indica que sea distinto de cero? C
 
 </Fragment>
 
-$W(y_1,y_2)=\begin{vmatrix}y_1&y_2\\y_1'&y_2'\end{vmatrix}=y_1y_2'-y_2y_1'$. Si $y_1,y_2$ son soluciones de la homogénea y $W\neq0$, son **linealmente independientes** y forman la solución general $C_1y_1+C_2y_2$. Si son dependientes (una múltiplo de la otra), $W=0$.
+$W(y_1,y_2)=\begin{vmatrix}y_1&y_2\\y_1'&y_2'\end{vmatrix}=y_1y_2'-y_2y_1'$. Si $y_1,y_2$ son soluciones de la homogénea y $W\neq0$, son **linealmente independientes** y forman la solución general $C_1y_1+C_2y_2$. Si son dependientes (una múltiplo de la otra), $W=0$. Si son soluciones de la homogénea, $W\neq0$ en un punto implica $W\neq0$ en todo el intervalo. Para funciones cualesquiera, $W=0$ **no** implica dependencia.
 
 Para $e^x$ y $e^{2x}$: $W=e^x\cdot2e^{2x}-e^{2x}\cdot e^x=e^{3x}\neq0$: son independientes.
 </Pregunta>
@@ -214,6 +249,19 @@ Es un sistema con determinante $W(y_1,y_2)\neq0$ (solución única), y por Crame
 $$u'=-\frac{y_2\,f(x)}{W(y_1,y_2)},\qquad v'=\frac{y_1\,f(x)}{W(y_1,y_2)}$$
 
 Se integra (sin constantes: alcanza **una** solución particular) y se arma $y_p=u\,y_1+v\,y_2$. Se usa cuando $f$ no es del tipo de coeficientes indeterminados (ej. $1/\cos x$), y vale para cualquier $f$ continua si se pueden integrar $u'$ y $v'$.
+</Pregunta>
+
+<Pregunta id="u9-c07" unidad="U9" tipo="corta" titulo="Existencia y unicidad (lineal de 2.º orden)"
+  fq="Revisión del profe (E3); no figura en Monllor 09" fr="No figura en las fuentes de la cátedra (resultado estándar); tema vecino: Monllor 09, p. 13-14">
+<Fragment slot="enunciado">
+
+Enuncie el teorema de existencia y unicidad para el problema de Cauchy de $y''+a_1(x)y'+a_2(x)y=f(x)$.
+
+</Fragment>
+
+Si $a_1,a_2,f$ son **continuas** en un intervalo $I$ y $x_0\in I$, para cualquier par $y_0,y_1$ el problema $y(x_0)=y_0$, $y'(x_0)=y_1$ tiene **una única solución**, definida en **todo** $I$. Con coeficientes constantes y $f$ continua vale en todo $\mathbb R$.
+
+Por eso las condiciones iniciales fijan $C_1,C_2$ de manera única (u9-t02).
 </Pregunta>
 
 <Pregunta id="u9-h01" unidad="U9" tipo="choice" correcta={2} titulo="Raíces iguales"
