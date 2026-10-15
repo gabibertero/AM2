@@ -13,6 +13,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 
 Universidad Tecnológica Nacional - Facultad Regional Córdoba · Segundo parcial práctico de Análisis Matemático II · TEMA 2. La foto no trae fecha, comisión ni puntajes.
@@ -41,14 +43,110 @@ Marca "-4" sobre el eje y en el gráfico.
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá qué te piden: un **volumen** bajo una superficie $z=f(x,y)$ y sobre una región del plano. Preguntate: ¿qué forma tiene la región sombreada y dónde está respecto del eje $x$? ¿Qué te dice la marca "−4"? Y fijate en el **signo** de $z=\frac1y$ en esa región.
+
+</Pista>
+<Pista>
+
+Es un **volumen bajo una superficie con una integral doble** y la región es un círculo: conviene **coordenadas polares** (jacobiano $r$). Machete: [Volumen con polares/cilíndricas](../../machetes/volumen-polares-cilindricas/). Hay que escribir la frontera como $r=r(\theta)$ y elegir el rango de $\theta$ donde $r\ge0$.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: el círculo es $x^2+(y+2)^2=4$, o sea $r=-4\operatorname{sen}\theta$ con $\pi\le\theta\le2\pi$, y $z=\dfrac1{r\operatorname{sen}\theta}$:
+
+$$\int_\pi^{2\pi}\!\!\int_0^{-4\operatorname{sen}\theta}\frac{1}{r\operatorname{sen}\theta}\;r\,dr\,d\theta$$
+
+Esta integral da un número negativo (en $D$ es $y<0$). El volumen es su valor absoluto.
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** leer el círculo del gráfico. **Por qué:** sin centro y radio no hay límites. El círculo es tangente al eje $x$ en el origen y su punto más bajo es $(0,-4)$ (la marca "−4"):
+
+$$\text{radio}=\frac{0-(-4)}{2}=2,\qquad\text{centro}=(0,-2)$$
+
+*Lectura del gráfico (pendiente de revisión):* el enunciado no rotula centro ni radio; se leyó que el círculo toca el eje $x$ desde abajo y que "−4" marca su punto más bajo. La ecuación es:
+
+$$x^2+(y+2)^2=4$$
+
+<img src={`${import.meta.env.BASE_URL}figuras/anterior-y-t2/ej1.svg`} alt="Arriba, el plano xy con el círculo de centro (0,−2) y radio 2, tangente al eje x en el origen y con punto más bajo (0,−4), sombreado. Abajo, perspectiva de la superficie z=1/y sobre ese círculo, que queda por debajo del plano z=0 y cae sin tope hacia el origen (recortada en z=−6)." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** pasar la frontera a polares. **Por qué:** con $x=r\cos\theta$, $y=r\operatorname{sen}\theta$ se reemplaza en $x^2+y^2+4y=0$ (se desarrolla $(y+2)^2$ y se cancela el $4$):
+
+$$r^2+4r\operatorname{sen}\theta=0$$
+
+Sacando factor común $r$ (con $r>0$):
+
+$$r=-4\operatorname{sen}\theta$$
+
+**Cómo reconocerlo:** es el espejo del círculo de arriba: ahora $r\ge0$ exige $\operatorname{sen}\theta\le0$.
+
+</Paso>
+<Paso>
+
+**Qué:** fijar los límites. **Por qué:** $r$ va de $0$ hasta la curva; para que $-4\operatorname{sen}\theta\ge0$ el ángulo tiene que estar en el 3.er y 4.º cuadrante:
+
+$$0\le r\le-4\operatorname{sen}\theta,\qquad \pi\le\theta\le2\pi$$
+
+</Paso>
+<Paso>
+
+**Qué:** plantear con el jacobiano e integrar en $r$. **Por qué:** $dA=r\,dr\,d\theta$ y $z=\frac1{r\operatorname{sen}\theta}$; el $r$ cancela:
+
+$$\int_\pi^{2\pi}\!\!\int_0^{-4\operatorname{sen}\theta}\frac1{\operatorname{sen}\theta}\,dr\,d\theta$$
+
+La primitiva en $r$ es $\frac r{\operatorname{sen}\theta}$:
+
+$$\int_0^{-4\operatorname{sen}\theta}\frac1{\operatorname{sen}\theta}\,dr=\frac{-4\operatorname{sen}\theta}{\operatorname{sen}\theta}=-4$$
+
+(En el origen $z=\frac1y$ no está acotada: es una integral impropia, que converge porque en polares el integrando queda acotado.)
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$ e interpretar el signo. **Por qué:** constante por la longitud $2\pi-\pi=\pi$:
+
+$$\int_\pi^{2\pi}(-4)\,d\theta=-4\pi$$
+
+En $D$ se tiene $y<0$, o sea $z=\frac1y<0$: la superficie queda **debajo** del plano $xy$. La integral da el volumen con signo (negativo). El volumen, que es una cantidad positiva, es el valor absoluto:
+
+$$V=|-4\pi|=4\pi$$
+
+*Lectura (pendiente de revisión):* se interpretó "volumen bajo la superficie" como el volumen geométrico entre la superficie y el plano $z=0$ (positivo). Si la cátedra pidiera la integral con signo, la respuesta sería $-4\pi$.
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$\iint_D\frac1y\,dA=-4\pi,\qquad V=4\pi\ \text{u}^3$$
+
+**Ojo con:** el signo: como $y<0$, la integral sale negativa y hay que aclarar que el volumen es $4\pi$; y no tomar $\theta\in[0,\pi]$ (ahí $r=-4\operatorname{sen}\theta$ sería negativo).
+
+**Criterio estimado — no oficial** (la consigna de corrección no está en la foto):
+
+- **Bien:** círculo $x^2+(y+2)^2=4$, polares con $r=-4\operatorname{sen}\theta$, $\pi\le\theta\le2\pi$, jacobiano $r$, e interpreta el signo: $V=4\pi$ (o integral $-4\pi$ explicando que el volumen es el valor absoluto).
+- **A medias:** planteo correcto pero con un error de signo o de intervalo de $\theta$ que lleva a $-4\pi$ sin interpretar, o un error de cuenta.
+- **Mal:** región sin relación con el gráfico, o integra sin justificar límites.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **cartesianas**, primero en $x$ (para $y$ fijo, $x^2=4-(y+2)^2=-4y-y^2$, con $y$ entre $-4$ y $0$):
+
+$$\iint_D\frac1y\,dA=\int_{-4}^0\frac1y\cdot2\sqrt{-4y-y^2}\,dy$$
+
+Con $y=-s$ ($s$ de $4$ a $0$, $dy=-ds$) la integral pasa a ser la del Tema 1 con signo cambiado:
+
+$$\int_{-4}^0\frac{2\sqrt{-4y-y^2}}{y}\,dy=-\int_0^4\frac{2\sqrt{4s-s^2}}{s}\,ds=-4\pi$$
+
+(el valor $\int_0^4\frac{2\sqrt{4s-s^2}}s\,ds=4\pi$ se calcula con $s=4\operatorname{sen}^2t$: $16\int_0^{\pi/2}\cos^2t\,dt=16\cdot\frac\pi4$). Entonces la integral es $-4\pi$ y $V=4\pi$, como en polares.
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-y-t2#2" numero={2} fuente="../fotos-clase/2026-08-28 foto 054.jpeg" pagina={1} unidad="U8" tema="EDO de 1º orden">
@@ -63,14 +161,157 @@ Resolver las siguientes ecuaciones diferenciales:
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Fijate qué hay en cada ecuación. En la **b)**: ¿cómo aparece $y$ respecto de $y'$ (a qué potencia, multiplicada por qué)? En la **a)**: ¿qué pasa con el cociente $\frac yx$ si lo usás como nueva variable? Mirá si podés agrupar cada ecuación en una forma conocida.
+
+</Pista>
+<Pista>
+
+La **b)** es una EDO **lineal** de primer orden ($y'+P(x)y=Q(x)$) y se resuelve con $y=u\cdot v$. Machete: [EDO lineal](../../machetes/edo-lineal/). La **a)** es **homogénea**: dividiendo por $x$ aparece solo $\frac yx$, y se usa $y=ux$. Machete: [EDO homogénea](../../machetes/edo-homogenea/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho. **b)** $y'+\cot x\,y=\cos x$, con $P=\cot x$, $Q=\cos x$; se busca $v$ con $v'=-\cot x\,v$. **a)** $y'=\dfrac{\frac yx}{1+\sqrt{\frac yx}}$; con $y=ux$ queda $u'x=-\dfrac{u\sqrt u}{1+\sqrt u}$, que se separa en variables.
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué (a):** despejar $y'$ y pasar a forma homogénea. **Por qué:** con $y(1)=1$ se trabaja con $x>0$ e $y>0$ (así $\sqrt{xy}$ existe). Se divide por $dx$ y por $(x+\sqrt{xy})$:
+
+$$y'=\frac{y}{x+\sqrt{xy}}$$
+
+Dividiendo numerador y denominador por $x$ (con $x>0$, $\frac{\sqrt{xy}}{x}=\sqrt{\frac yx}$):
+
+$$y'=\frac{\frac yx}{1+\sqrt{\frac yx}}$$
+
+**Cómo reconocerlo:** el lado derecho depende solo de $\frac yx$ (si cambiás $x\to tx$, $y\to ty$ no cambia).
 
 </Paso>
+<Paso>
+
+**Qué (a):** cambio $y=ux$. **Por qué:** así $\frac yx=u$ e $y'=u'x+u$:
+
+$$u'x+u=\frac{u}{1+\sqrt u}$$
+
+Pasando $u$ restando:
+
+$$u'x=\frac{u}{1+\sqrt u}-u=\frac{u-u-u\sqrt u}{1+\sqrt u}=-\frac{u\sqrt u}{1+\sqrt u}$$
+
+Se separan variables ($u>0$):
+
+$$\frac{1+\sqrt u}{u\sqrt u}\,du=-\frac{dx}{x}\quad\Rightarrow\quad\Big(u^{-3/2}+u^{-1}\Big)du=-\frac{dx}{x}$$
+
+</Paso>
+<Paso>
+
+**Qué (a):** integrar. **Por qué:** $\int u^{-3/2}du=-2u^{-1/2}$ y $\int u^{-1}du=\ln u$; del lado derecho $-\ln x$ ($x>0$):
+
+$$-\frac{2}{\sqrt u}+\ln u=-\ln x+C$$
+
+Pasando $\ln x$ a la izquierda:
+
+$$\ln u+\ln x-\frac{2}{\sqrt u}=C$$
+
+Como $\ln u+\ln x=\ln(ux)=\ln y$ y $\frac1{\sqrt u}=\sqrt{\frac xy}$:
+
+$$\ln y-2\sqrt{\frac xy}=C$$
+
+</Paso>
+<Paso>
+
+**Qué (a):** condición inicial $y(1)=1$. **Por qué:** fija $C$. Con $x=1$, $y=1$ ($\ln1=0$, $\sqrt{1/1}=1$):
+
+$$0-2\cdot1=C\ \Rightarrow\ C=-2$$
+
+$$\ln y-2\sqrt{\frac xy}=-2$$
+
+La solución queda en forma implícita (no se puede despejar $y$ con funciones elementales). Se perdió $u=0$ ($y=0$) al dividir por $u$, pero no cumple $y(1)=1$.
+
+</Paso>
+<Paso>
+
+**Qué (b):** pasar a forma lineal. **Por qué:** para reconocer $P$ y $Q$ hay que dejar $y'+P(x)\,y=Q(x)$. Se pasa el término en $y$ a la izquierda:
+
+$$y'+\cot x\;y=\cos x$$
+
+**Cómo reconocerlo:** $y$ e $y'$ aparecen solo a la primera potencia y sin multiplicarse entre sí. Acá $P=\cot x=\dfrac{\cos x}{\operatorname{sen}x}$ y $Q=\cos x$.
+
+</Paso>
+<Paso>
+
+**Qué (b):** proponer $y=u\cdot v$ y reemplazar. **Por qué:** $y'=u'v+uv'$, y la ecuación queda con dos incógnitas, lo que deja libertad para elegir $v$:
+
+$$u'v+uv'+\cot x\,uv=\cos x\ \Rightarrow\ u'v+u\big(v'+\cot x\,v\big)=\cos x$$
+
+Se elige $v$ para que el paréntesis valga cero: $v'=-\cot x\,v$. Separando variables:
+
+$$\frac{dv}{v}=-\frac{\cos x}{\operatorname{sen}x}\,dx\ \Rightarrow\ \ln|v|=-\ln|\operatorname{sen}x|$$
+
+Sin constante (alcanza una solución particular):
+
+$$v=\frac1{\operatorname{sen}x}$$
+
+</Paso>
+<Paso>
+
+**Qué (b):** hallar $u$. **Por qué:** con el paréntesis nulo queda $u'v=\cos x$. Reemplazando $v$:
+
+$$\frac{u'}{\operatorname{sen}x}=\cos x\ \Rightarrow\ u'=\operatorname{sen}x\cos x$$
+
+La primitiva de $\operatorname{sen}x\cos x$ es $\frac{\operatorname{sen}^2x}{2}$ (derivando se vuelve a $\operatorname{sen}x\cos x$):
+
+$$u=\frac{\operatorname{sen}^2x}{2}+C$$
+
+Entonces $y=u\,v$:
+
+$$y=\frac1{\operatorname{sen}x}\Big(\frac{\operatorname{sen}^2x}{2}+C\Big)=\frac{\operatorname{sen}x}{2}+\frac{C}{\operatorname{sen}x}$$
+
+Vale en los intervalos donde $\operatorname{sen}x\ne0$. No hay condición inicial en este inciso.
+
+</Paso>
+
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+**b)** $$y=\frac{\operatorname{sen}x}{2}+\frac{C}{\operatorname{sen}x}$$
+
+**a)** $$\ln y-2\sqrt{\frac xy}=-2$$
+
+**Ojo con:** en la **b)** el signo de $P$ (queda $+\cot x$ al pasar $y\cot x$ sumando) y olvidar que $v=\frac1{\operatorname{sen}x}$ divide a toda la $u$; en la **a)** tratar $\sqrt{xy}$ como si se pudiera sacar de la raíz sin pedir $x,y>0$, y dejar el resultado sin usar $y(1)=1$.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** b) forma lineal, $v=\frac1{\operatorname{sen}x}$, $u=\frac{\operatorname{sen}^2x}2+C$ e $y$ resultante; a) $u=\frac yx$, separación de variables, $C=-2$ y la solución implícita.
+- **A medias:** método correcto en ambas pero un error de signo o de constante, o la a) sin aplicar la condición inicial.
+- **Mal:** no reconoce el tipo de ecuación o usa un método que no corresponde.
+
+</Solucion>
+<Comprobacion>
+
+**b)** Sustituir en la ecuación. Con $y=\frac12\operatorname{sen}x+C\,\dfrac1{\operatorname{sen}x}$:
+
+$$y'=\frac12\cos x-C\,\frac{\cos x}{\operatorname{sen}^2x}$$
+
+$$\cot x\;y=\frac12\cos x+C\,\frac{\cos x}{\operatorname{sen}^2x}$$
+
+Sumando, los términos con $C$ se cancelan: $y'+\cot x\,y=\cos x$.
+
+**a)** Derivar implícitamente $\ln y-2x^{1/2}y^{-1/2}=-2$:
+
+$$\frac{y'}{y}-x^{-1/2}y^{-1/2}+x^{1/2}y^{-3/2}\,y'=0$$
+
+Agrupando $y'$ y pasando el otro término:
+
+$$y'\Big(\frac1y+\frac{\sqrt x}{y\sqrt y}\Big)=\frac1{\sqrt{xy}}\ \Rightarrow\ y'\,\frac{\sqrt y+\sqrt x}{y\sqrt y}=\frac1{\sqrt{xy}}$$
+
+Despejando, con $\frac{y\sqrt y}{\sqrt{xy}}=\frac{y}{\sqrt x}$:
+
+$$y'=\frac{y}{\sqrt x\,(\sqrt x+\sqrt y)}=\frac{y}{x+\sqrt{xy}}$$
+
+que es la ecuación original. Condición: en $(1,1)$ da $0-2\cdot1=-2$.
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-y-t2#3" numero={3} fuente="../fotos-clase/2026-08-28 foto 054.jpeg" pagina={1} unidad="U9" tema="EDO de 2º orden">
@@ -86,12 +327,100 @@ $$
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá la ecuación: $y''$ e $y$ con coeficientes numéricos (lineal, no homogénea). Del lado derecho está $\dfrac3{\operatorname{sen}x}$. ¿Tiene la forma de un polinomio, una exponencial o un seno/coseno, que es lo que "copiaría" una solución de prueba? ¿Qué hacés si no?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2.º orden con coeficientes constantes, pero el lado derecho ($\frac3{\operatorname{sen}x}=3\csc x$) **no** permite coeficientes indeterminados: se usa **variación de parámetros**, con $y=y_h+y_p$. Primero $y_h$ con la característica. Machete: [EDO 2.º orden, variación de parámetros](../../machetes/edo2-variacion-de-parametros/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $r^2+1=0$ da $y_1=\cos x$, $y_2=\operatorname{sen}x$, con $W=1$. Se propone $y_p=u\,y_1+v\,y_2$ con
+
+$$u'=-\frac{y_2\,f}{W},\qquad v'=\frac{y_1\,f}{W},\qquad f=\frac3{\operatorname{sen}x}$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ siempre forma parte de la solución general y de ahí salen $y_1$, $y_2$:
+
+$$r^2+1=0\ \Rightarrow\ r^2=-1\ \Rightarrow\ r=\pm i$$
+
+Raíces complejas con $\alpha=0$, $\beta=1$:
+
+$$y_h=C_1\cos x+C_2\operatorname{sen}x$$
+
+**Cómo reconocerlo:** $f(x)=\dfrac3{\operatorname{sen}x}$ no es polinomio, exponencial ni seno/coseno.
 
 </Paso>
+<Paso>
+
+**Qué:** calcular el wronskiano. **Por qué:** aparece dividiendo y tiene que ser $\ne0$. Con $y_1'=-\operatorname{sen}x$ e $y_2'=\cos x$:
+
+$$W=y_1y_2'-y_2y_1'=\cos^2x+\operatorname{sen}^2x=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** plantear $u'$ y $v'$. **Por qué:** son las fórmulas de variación de parámetros, con $f=\frac3{\operatorname{sen}x}$:
+
+$$u'=-\frac{y_2\,f}{W}=-\operatorname{sen}x\cdot\frac3{\operatorname{sen}x}=-3$$
+
+$$v'=\frac{y_1\,f}{W}=\cos x\cdot\frac3{\operatorname{sen}x}=3\cot x$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar. **Por qué:** para obtener $u$ y $v$ (sin constantes). La primitiva de $\cot x=\frac{\cos x}{\operatorname{sen}x}$ es $\ln|\operatorname{sen}x|$ (la derivada de $\operatorname{sen}x$ está en el numerador):
+
+$$u=\int(-3)\,dx=-3x$$
+
+$$v=3\int\cot x\,dx=3\ln|\operatorname{sen}x|$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar $y_p$ y la solución general. **Por qué:** $y_p=u\,y_1+v\,y_2$ y $y=y_h+y_p$:
+
+$$y_p=-3x\cos x+3\operatorname{sen}x\,\ln|\operatorname{sen}x|$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=C_1\cos x+C_2\operatorname{sen}x-3x\cos x+3\operatorname{sen}x\,\ln|\operatorname{sen}x|$$
+
+**Ojo con:** el signo de $u'$ (lleva un menos), y olvidar el valor absoluto del logaritmo (la solución vale donde $\operatorname{sen}x\ne0$).
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** $y_h$ con raíces $\pm i$, $W=1$, $u'=-3$, $v'=3\cot x$, $y_p$ correcta y solución general $y_h+y_p$.
+- **A medias:** $y_h$ y fórmulas bien, pero un error de signo o de integración en $u$ o $v$.
+- **Mal:** intenta coeficientes indeterminados o no distingue $y_h$ de $y_p$.
+
+</Solucion>
+<Comprobacion>
+
+Sustituir $y_p=-3x\cos x+3\operatorname{sen}x\ln\operatorname{sen}x$ (con $\operatorname{sen}x>0$) en $y''+y$. Primera derivada:
+
+$$y_p'=-3\cos x+3x\operatorname{sen}x+3\cos x\ln\operatorname{sen}x+3\cos x$$
+
+Los términos $\mp3\cos x$ se cancelan:
+
+$$y_p'=3x\operatorname{sen}x+3\cos x\ln\operatorname{sen}x$$
+
+Segunda derivada:
+
+$$y_p''=3\operatorname{sen}x+3x\cos x-3\operatorname{sen}x\ln\operatorname{sen}x+\frac{3\cos^2x}{\operatorname{sen}x}$$
+
+Sumando $y_p$, se cancelan los términos con $x$ y con el logaritmo:
+
+$$y_p''+y_p=3\operatorname{sen}x+\frac{3\cos^2x}{\operatorname{sen}x}=\frac{3\operatorname{sen}^2x+3\cos^2x}{\operatorname{sen}x}=\frac3{\operatorname{sen}x}$$
+
+Cumple la ecuación.
+
+</Comprobacion>
 </Ejercicio>

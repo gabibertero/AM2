@@ -13,6 +13,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 
 Universidad Tecnológica Nacional - Facultad Regional Córdoba · Segundo parcial práctico de Análisis Matemático II · TEMA 1. La foto no trae fecha, comisión ni puntajes.
@@ -41,14 +43,113 @@ Marca "4" sobre el eje y en el gráfico.
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá qué te piden: un **volumen** bajo una superficie $z=f(x,y)$ y sobre una región del plano. Preguntate: ¿qué forma tiene la región sombreada? ¿Qué te dice la marca "4" del gráfico sobre su tamaño y su posición? ¿Hay alguna expresión de la integral que se simplifique si pensás en distancias al origen y ángulos?
+
+</Pista>
+<Pista>
+
+Es un **volumen bajo una superficie con una integral doble**, y la región es un círculo: conviene **coordenadas polares** (con jacobiano $r$). Machete: [Volumen con polares/cilíndricas](../../machetes/volumen-polares-cilindricas/). Hay que escribir la frontera del círculo como $r=r(\theta)$ y recorrer $\theta$ una sola vez.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: el círculo es $x^2+(y-2)^2=4$, o sea $r=4\operatorname{sen}\theta$ con $0\le\theta\le\pi$, y $z=\dfrac1y=\dfrac1{r\operatorname{sen}\theta}$:
+
+$$V=\int_0^{\pi}\!\!\int_0^{4\operatorname{sen}\theta}\frac{1}{r\operatorname{sen}\theta}\;r\,dr\,d\theta$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** leer el círculo del gráfico. **Por qué:** sin centro y radio no hay límites. El círculo es tangente al eje $x$ en el origen y su punto más alto es $(0,4)$ (la marca "4"). Entonces el diámetro vertical va de $0$ a $4$:
+
+$$\text{radio}=\frac{4-0}{2}=2,\qquad\text{centro}=(0,2)$$
+
+*Lectura del gráfico (pendiente de revisión):* el enunciado no rotula centro ni radio; se leyó que el círculo toca justo el eje $x$ y que "4" marca su punto más alto. La ecuación es:
+
+$$x^2+(y-2)^2=4$$
+
+<img src={`${import.meta.env.BASE_URL}figuras/anterior-y-t1/ej1.svg`} alt="Arriba, el plano xy con el círculo de centro (0,2) y radio 2, tangente al eje x en el origen y con punto más alto (0,4), sombreado. Abajo, perspectiva de la superficie z=1/y sobre ese círculo, que crece sin tope hacia el origen (recortada en z=6)." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** pasar la frontera a polares. **Por qué:** con $x=r\cos\theta$, $y=r\operatorname{sen}\theta$ se reemplaza en $x^2+y^2-4y=0$ (se desarrolla $(y-2)^2$ y se cancela el $4$):
+
+$$r^2-4r\operatorname{sen}\theta=0$$
+
+Sacando factor común $r$ (con $r>0$):
+
+$$r=4\operatorname{sen}\theta$$
+
+**Cómo reconocerlo:** un círculo que pasa por el origen y tiene centro sobre el eje $y$ siempre da $r=2R\operatorname{sen}\theta$.
+
+</Paso>
+<Paso>
+
+**Qué:** fijar los límites. **Por qué:** $r$ va de $0$ (el origen, que está en la frontera) hasta la curva. Y $\theta$ tiene que ser tal que $4\operatorname{sen}\theta\ge0$, ya que $r\ge0$:
+
+$$0\le r\le4\operatorname{sen}\theta,\qquad 0\le\theta\le\pi$$
+
+Para $\theta$ entre $\pi$ y $2\pi$, $\operatorname{sen}\theta<0$ y no hay puntos (el círculo está arriba del eje $x$).
+
+</Paso>
+<Paso>
+
+**Qué:** plantear la integral con el jacobiano. **Por qué:** $dA=r\,dr\,d\theta$, y la función es $z=\frac1y=\frac1{r\operatorname{sen}\theta}$:
+
+$$V=\int_0^{\pi}\!\!\int_0^{4\operatorname{sen}\theta}\frac{1}{r\operatorname{sen}\theta}\;r\,dr\,d\theta$$
+
+El $r$ del jacobiano cancela el $r$ del denominador:
+
+$$V=\int_0^{\pi}\!\!\int_0^{4\operatorname{sen}\theta}\frac{1}{\operatorname{sen}\theta}\,dr\,d\theta$$
+
+**Ojo:** en el origen $z=\frac1y$ no está acotada (integral impropia). Se justifica porque en polares el integrando queda acotado: la integral converge.
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$. **Por qué:** el integrando no depende de $r$, así que la primitiva es $\frac{r}{\operatorname{sen}\theta}$:
+
+$$\int_0^{4\operatorname{sen}\theta}\frac1{\operatorname{sen}\theta}\,dr=\frac{4\operatorname{sen}\theta-0}{\operatorname{sen}\theta}=4$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** lo que quedó es una constante por la longitud del intervalo $\pi-0$:
+
+$$V=\int_0^{\pi}4\,d\theta=4\pi$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$V=4\pi\ \text{u}^3$$
+
+**Ojo con:** tomar $0\le\theta\le2\pi$ (el círculo se recorre una sola vez con $\theta\in[0,\pi]$), olvidar el jacobiano $r$, o plantear el círculo como $r=2$ (eso es el círculo centrado en el origen, no tangente al eje $x$).
+
+**Criterio estimado — no oficial** (la consigna de corrección no está en la foto; se supone que piden gráfico, planteo y todas las cuentas):
+
+- **Bien:** círculo $x^2+(y-2)^2=4$ identificado, polares con $r=4\operatorname{sen}\theta$, $0\le\theta\le\pi$ y jacobiano $r$, integral planteada y $V=4\pi$.
+- **A medias:** región y planteo correctos, pero un error en los límites de $\theta$, en el jacobiano o de cuenta que cambia el resultado.
+- **Mal:** sin región ni límites coherentes con el gráfico, o integra en cartesianas sin llegar a un planteo válido.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **coordenadas cartesianas**, integrando primero en $x$ (para $y$ fijo, $x$ va de $-\sqrt{4y-y^2}$ a $\sqrt{4y-y^2}$, porque $x^2=4-(y-2)^2=4y-y^2$):
+
+$$V=\int_0^4\frac1y\cdot2\sqrt{4y-y^2}\,dy=2\int_0^4\sqrt{\frac{4-y}{y}}\,dy$$
+
+Sustitución $y=4\operatorname{sen}^2t$, $dy=8\operatorname{sen}t\cos t\,dt$, con $t$ de $0$ a $\frac\pi2$. Además $\sqrt{\frac{4-y}{y}}=\frac{\cos t}{\operatorname{sen}t}$:
+
+$$V=2\int_0^{\pi/2}\frac{\cos t}{\operatorname{sen}t}\cdot8\operatorname{sen}t\cos t\,dt=16\int_0^{\pi/2}\cos^2t\,dt$$
+
+Con $\int_0^{\pi/2}\cos^2t\,dt=\frac\pi4$:
+
+$$V=16\cdot\frac\pi4=4\pi$$
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-y-t1#2" numero={2} fuente="../fotos-clase/2026-08-28 foto 054.jpeg" pagina={1} unidad="U8" tema="EDO de 1º orden">
@@ -63,14 +164,157 @@ Resolver las siguientes ecuaciones diferenciales:
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Fijate qué hay en cada ecuación. En la **a)**: ¿cómo aparece $y$ respecto de $y'$ (a qué potencia, multiplicada por qué)? En la **b)**: ¿qué pasa con el cociente $\frac yx$ si lo usás como nueva variable? Mirá si podés agrupar cada ecuación en una forma conocida.
+
+</Pista>
+<Pista>
+
+La **a)** es una EDO **lineal** de primer orden ($y'+P(x)y=Q(x)$) y se resuelve con $y=u\cdot v$. Machete: [EDO lineal](../../machetes/edo-lineal/). La **b)** es **homogénea**: dividiendo por $x$ aparece solo $\frac yx$, y se usa $y=ux$. Machete: [EDO homogénea](../../machetes/edo-homogenea/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho. **a)** $y'+\cot x\,y=\cos x$, con $P=\cot x$, $Q=\cos x$; se busca $v$ con $v'=-\cot x\,v$. **b)** $y'=\dfrac{\frac yx}{1+\sqrt{\frac yx}}$; con $y=ux$ queda $u'x=-\dfrac{u\sqrt u}{1+\sqrt u}$, que se separa en variables.
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué (a):** pasar a forma lineal. **Por qué:** para reconocer $P$ y $Q$ hay que dejar $y'+P(x)\,y=Q(x)$. En el Tema 1 aparece $\frac1{\sec x}$, que es $\cos x$ (la secante es la inversa del coseno). Se pasa el término en $y$ a la izquierda:
+
+$$y'+\cot x\;y=\cos x$$
+
+**Cómo reconocerlo:** $y$ e $y'$ aparecen solo a la primera potencia y sin multiplicarse entre sí. Acá $P=\cot x=\dfrac{\cos x}{\operatorname{sen}x}$ y $Q=\cos x$.
 
 </Paso>
+<Paso>
+
+**Qué (a):** proponer $y=u\cdot v$ y reemplazar. **Por qué:** $y'=u'v+uv'$, y la ecuación queda con dos incógnitas, lo que deja libertad para elegir $v$:
+
+$$u'v+uv'+\cot x\,uv=\cos x\ \Rightarrow\ u'v+u\big(v'+\cot x\,v\big)=\cos x$$
+
+Se elige $v$ para que el paréntesis valga cero: $v'=-\cot x\,v$. Separando variables:
+
+$$\frac{dv}{v}=-\frac{\cos x}{\operatorname{sen}x}\,dx\ \Rightarrow\ \ln|v|=-\ln|\operatorname{sen}x|$$
+
+Sin constante (alcanza una solución particular):
+
+$$v=\frac1{\operatorname{sen}x}$$
+
+</Paso>
+<Paso>
+
+**Qué (a):** hallar $u$. **Por qué:** con el paréntesis nulo queda $u'v=\cos x$. Reemplazando $v$:
+
+$$\frac{u'}{\operatorname{sen}x}=\cos x\ \Rightarrow\ u'=\operatorname{sen}x\cos x$$
+
+La primitiva de $\operatorname{sen}x\cos x$ es $\frac{\operatorname{sen}^2x}{2}$ (derivando se vuelve a $\operatorname{sen}x\cos x$):
+
+$$u=\frac{\operatorname{sen}^2x}{2}+C$$
+
+Entonces $y=u\,v$:
+
+$$y=\frac1{\operatorname{sen}x}\Big(\frac{\operatorname{sen}^2x}{2}+C\Big)=\frac{\operatorname{sen}x}{2}+\frac{C}{\operatorname{sen}x}$$
+
+Vale en los intervalos donde $\operatorname{sen}x\ne0$. No hay condición inicial en este inciso.
+
+</Paso>
+<Paso>
+
+**Qué (b):** despejar $y'$ y pasar a forma homogénea. **Por qué:** con $y(1)=1$ se trabaja con $x>0$ e $y>0$ (así $\sqrt{xy}$ existe). Se divide por $dx$ y por $(x+\sqrt{xy})$:
+
+$$y'=\frac{y}{x+\sqrt{xy}}$$
+
+Dividiendo numerador y denominador por $x$ (con $x>0$, $\frac{\sqrt{xy}}{x}=\sqrt{\frac yx}$):
+
+$$y'=\frac{\frac yx}{1+\sqrt{\frac yx}}$$
+
+**Cómo reconocerlo:** el lado derecho depende solo de $\frac yx$ (si cambiás $x\to tx$, $y\to ty$ no cambia).
+
+</Paso>
+<Paso>
+
+**Qué (b):** cambio $y=ux$. **Por qué:** así $\frac yx=u$ e $y'=u'x+u$:
+
+$$u'x+u=\frac{u}{1+\sqrt u}$$
+
+Pasando $u$ restando:
+
+$$u'x=\frac{u}{1+\sqrt u}-u=\frac{u-u-u\sqrt u}{1+\sqrt u}=-\frac{u\sqrt u}{1+\sqrt u}$$
+
+Se separan variables ($u>0$):
+
+$$\frac{1+\sqrt u}{u\sqrt u}\,du=-\frac{dx}{x}\quad\Rightarrow\quad\Big(u^{-3/2}+u^{-1}\Big)du=-\frac{dx}{x}$$
+
+</Paso>
+<Paso>
+
+**Qué (b):** integrar. **Por qué:** $\int u^{-3/2}du=-2u^{-1/2}$ y $\int u^{-1}du=\ln u$; del lado derecho $-\ln x$ ($x>0$):
+
+$$-\frac{2}{\sqrt u}+\ln u=-\ln x+C$$
+
+Pasando $\ln x$ a la izquierda:
+
+$$\ln u+\ln x-\frac{2}{\sqrt u}=C$$
+
+Como $\ln u+\ln x=\ln(ux)=\ln y$ y $\frac1{\sqrt u}=\sqrt{\frac xy}$:
+
+$$\ln y-2\sqrt{\frac xy}=C$$
+
+</Paso>
+<Paso>
+
+**Qué (b):** condición inicial $y(1)=1$. **Por qué:** fija $C$. Con $x=1$, $y=1$ ($\ln1=0$, $\sqrt{1/1}=1$):
+
+$$0-2\cdot1=C\ \Rightarrow\ C=-2$$
+
+$$\ln y-2\sqrt{\frac xy}=-2$$
+
+La solución queda en forma implícita (no se puede despejar $y$ con funciones elementales). Se perdió $u=0$ ($y=0$) al dividir por $u$, pero no cumple $y(1)=1$.
+
+</Paso>
+
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+**a)** $$y=\frac{\operatorname{sen}x}{2}+\frac{C}{\operatorname{sen}x}$$
+
+**b)** $$\ln y-2\sqrt{\frac xy}=-2$$
+
+**Ojo con:** en la **a)** el signo de $P$ (queda $+\cot x$ al pasar $y\cot x$ sumando) y olvidar que $v=\frac1{\operatorname{sen}x}$ divide a toda la $u$; en la **b)** tratar $\sqrt{xy}$ como si se pudiera sacar de la raíz sin pedir $x,y>0$, y dejar el resultado sin usar $y(1)=1$.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** a) forma lineal, $v=\frac1{\operatorname{sen}x}$, $u=\frac{\operatorname{sen}^2x}2+C$ e $y$ resultante; b) $u=\frac yx$, separación de variables, $C=-2$ y la solución implícita.
+- **A medias:** método correcto en ambas pero un error de signo o de constante, o la b) sin aplicar la condición inicial.
+- **Mal:** no reconoce el tipo de ecuación o usa un método que no corresponde.
+
+</Solucion>
+<Comprobacion>
+
+**a)** Sustituir en la ecuación. Con $y=\frac12\operatorname{sen}x+C\,\dfrac1{\operatorname{sen}x}$:
+
+$$y'=\frac12\cos x-C\,\frac{\cos x}{\operatorname{sen}^2x}$$
+
+$$\cot x\;y=\frac12\cos x+C\,\frac{\cos x}{\operatorname{sen}^2x}$$
+
+Sumando, los términos con $C$ se cancelan: $y'+\cot x\,y=\cos x$.
+
+**b)** Derivar implícitamente $\ln y-2x^{1/2}y^{-1/2}=-2$:
+
+$$\frac{y'}{y}-x^{-1/2}y^{-1/2}+x^{1/2}y^{-3/2}\,y'=0$$
+
+Agrupando $y'$ y pasando el otro término:
+
+$$y'\Big(\frac1y+\frac{\sqrt x}{y\sqrt y}\Big)=\frac1{\sqrt{xy}}\ \Rightarrow\ y'\,\frac{\sqrt y+\sqrt x}{y\sqrt y}=\frac1{\sqrt{xy}}$$
+
+Despejando, con $\frac{y\sqrt y}{\sqrt{xy}}=\frac{y}{\sqrt x}$:
+
+$$y'=\frac{y}{\sqrt x\,(\sqrt x+\sqrt y)}=\frac{y}{x+\sqrt{xy}}$$
+
+que es la ecuación original. Condición: en $(1,1)$ da $0-2\cdot1=-2$.
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-y-t1#3" numero={3} fuente="../fotos-clase/2026-08-28 foto 054.jpeg" pagina={1} unidad="U9" tema="EDO de 2º orden">
@@ -86,12 +330,102 @@ $$
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá la ecuación: $y''$ e $y$ con coeficientes numéricos (lineal, no homogénea). Del lado derecho está $\dfrac3{\cos(3x)}$. ¿Tiene la forma de un polinomio, una exponencial o un seno/coseno, que es lo que "copiaría" una solución de prueba? ¿Qué hacés si no?
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2.º orden con coeficientes constantes, pero el lado derecho ($\frac3{\cos3x}=3\sec3x$) **no** es de los que permiten coeficientes indeterminados: se usa **variación de parámetros**, con $y=y_h+y_p$. Primero $y_h$ con la característica. Machete: [EDO 2.º orden, variación de parámetros](../../machetes/edo2-variacion-de-parametros/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $r^2+9=0$ da $y_1=\cos3x$, $y_2=\operatorname{sen}3x$, con $W=3$. Se propone $y_p=u\,y_1+v\,y_2$ con
+
+$$u'=-\frac{y_2\,f}{W},\qquad v'=\frac{y_1\,f}{W},\qquad f=\frac3{\cos3x}$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ siempre forma parte de la solución general y de ahí salen $y_1$, $y_2$. Se prueba $y=e^{rx}$:
+
+$$r^2+9=0\ \Rightarrow\ r^2=-9\ \Rightarrow\ r=\pm3i$$
+
+Raíces complejas $\alpha\pm\beta i$ con $\alpha=0$, $\beta=3$:
+
+$$y_h=C_1\cos(3x)+C_2\operatorname{sen}(3x)$$
+
+**Cómo reconocerlo:** la ecuación ya está en forma estándar (el coeficiente de $y''$ es $1$) y $f(x)=\dfrac3{\cos3x}$ no es polinomio, exponencial ni seno/coseno: coeficientes indeterminados no sirve.
 
 </Paso>
+<Paso>
+
+**Qué:** calcular el wronskiano. **Por qué:** aparece dividiendo en las fórmulas y tiene que ser distinto de $0$. Con $y_1=\cos3x$, $y_2=\operatorname{sen}3x$:
+
+$$y_1'=-3\operatorname{sen}3x,\qquad y_2'=3\cos3x$$
+
+$$W=y_1y_2'-y_2y_1'=3\cos^23x+3\operatorname{sen}^23x=3$$
+
+</Paso>
+<Paso>
+
+**Qué:** plantear $u'$ y $v'$. **Por qué:** $y_p=u\,y_1+v\,y_2$ y con la condición $u'y_1+v'y_2=0$ salen las fórmulas. Con $f=\frac3{\cos3x}$:
+
+$$u'=-\frac{y_2\,f}{W}=-\frac{\operatorname{sen}3x\cdot\frac3{\cos3x}}{3}=-\tan3x$$
+
+$$v'=\frac{y_1\,f}{W}=\frac{\cos3x\cdot\frac3{\cos3x}}{3}=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar $u'$ y $v'$. **Por qué:** para obtener $u$ y $v$ (sin constantes: alcanza una solución particular). La primitiva de $\tan3x$ es $-\frac13\ln|\cos3x|$ (derivando: $-\frac13\cdot\frac{-3\operatorname{sen}3x}{\cos3x}=\tan3x$):
+
+$$u=-\int\tan3x\,dx=\frac13\ln|\cos3x|$$
+
+$$v=\int1\,dx=x$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar $y_p$ y la solución general. **Por qué:** $y_p=u\,y_1+v\,y_2$ y $y=y_h+y_p$:
+
+$$y_p=\frac13\cos3x\,\ln|\cos3x|+x\operatorname{sen}3x$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=C_1\cos(3x)+C_2\operatorname{sen}(3x)+\frac13\cos(3x)\ln|\cos(3x)|+x\operatorname{sen}(3x)$$
+
+**Ojo con:** el signo de $u'$ (lleva un menos: $u'=-\frac{y_2f}{W}$), dividir por $W$ (acá $W=3$, no $1$), y olvidar el valor absoluto del logaritmo (la solución vale donde $\cos3x\ne0$).
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** $y_h$ con raíces $\pm3i$, $W=3$, $u'=-\tan3x$, $v'=1$, $y_p$ correcta y solución general $y_h+y_p$.
+- **A medias:** $y_h$, $W$ y las fórmulas bien planteadas, pero un error de signo o de integración en $u$ o $v$.
+- **Mal:** intenta coeficientes indeterminados con $y_p=A/\cos3x$ (o similar) o no distingue $y_h$ de $y_p$.
+
+</Solucion>
+<Comprobacion>
+
+Sustituir $y_p=\frac13\cos3x\ln\cos3x+x\operatorname{sen}3x$ (con $\cos3x>0$) en $y''+9y$. Primera derivada:
+
+$$y_p'=-\operatorname{sen}3x\ln\cos3x-\operatorname{sen}3x+\operatorname{sen}3x+3x\cos3x$$
+
+Los dos términos $\mp\operatorname{sen}3x$ se cancelan:
+
+$$y_p'=-\operatorname{sen}3x\ln\cos3x+3x\cos3x$$
+
+Segunda derivada:
+
+$$y_p''=-3\cos3x\ln\cos3x+\frac{3\operatorname{sen}^23x}{\cos3x}+3\cos3x-9x\operatorname{sen}3x$$
+
+Sumando $9y_p=3\cos3x\ln\cos3x+9x\operatorname{sen}3x$, se cancelan los logaritmos y los términos con $x$:
+
+$$y_p''+9y_p=\frac{3\operatorname{sen}^23x}{\cos3x}+3\cos3x=\frac{3\operatorname{sen}^23x+3\cos^23x}{\cos3x}=\frac3{\cos3x}$$
+
+Cumple la ecuación.
+
+</Comprobacion>
 </Ejercicio>

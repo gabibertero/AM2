@@ -13,6 +13,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 
 Universidad Tecnológica Nacional - Facultad Regional Córdoba · Segundo parcial práctico de Análisis Matemático II · TEMA 1. La foto no trae fecha, comisión ni puntajes.
@@ -41,14 +43,143 @@ Rótulos en el gráfico: $y=ax^2+bx+c$, $y=x+2$, $y=-2x+5$.
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá qué te piden: el **área** de una región encerrada por una parábola y dos rectas. Preguntate: ¿qué datos te faltan para dibujar la parábola? ¿Dónde se cortan las curvas que limitan la región? ¿Hay un único "techo" y un único "piso" en toda la región, o cambian en algún lado?
+
+</Pista>
+<Pista>
+
+Es un **área con una integral doble** ($A=\iint_D dA$) en cartesianas, con la región entre curvas: $\int_{x_1}^{x_2}(\text{techo}-\text{piso})\,dx$. Como el techo cambia de recta, hay que **partir la región en dos tramos** por la vertical que pasa por el punto donde se cruzan las rectas. Hay que hallar $a$, $b$ y $c$ con los tres puntos.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: la parábola es $y=x^2-x-1$. Los cortes están en $x=-1$, $x=1$ y $x=2$:
+
+$$A=\int_{-1}^{1}\big(x+2-(x^2-x-1)\big)dx+\int_{1}^{2}\big(-2x+5-(x^2-x-1)\big)dx$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** hallar la parábola $y=ax^2+bx+c$. **Por qué:** el gráfico no trae $a$, $b$, $c$ y los necesitamos para los cortes. Cada punto da una ecuación al reemplazar $x$ e $y$. Con $p_2=(0,-1)$:
+
+$$c=-1$$
+
+Con $p_1=(-1,1)$ y $p_3=(1,-1)$ (ya con $c=-1$):
+
+$$a-b-1=1\ \Rightarrow\ a-b=2$$
+
+$$a+b-1=-1\ \Rightarrow\ a+b=0$$
+
+Sumando las dos ecuaciones se va $b$:
+
+$$2a=2\ \Rightarrow\ a=1$$
+
+Y de $a+b=0$ con $a=1$:
+
+$$b=0-1=-1$$
+
+$$y=x^2-x-1$$
 
 </Paso>
+<Paso>
+
+**Qué:** hallar donde la parábola corta a cada recta. **Por qué:** esos puntos son los vértices de la región. Se igualan:
+
+- Con $y=x+2$: $x^2-x-1=x+2$, o sea $x^2-2x-3=0$, que factoriza como $(x-3)(x+1)=0$. Las raíces son $x=3$ y $x=-1$ (este último es $p_1$, con $y=1$).
+- Con $y=-2x+5$: $x^2-x-1=-2x+5$, o sea $x^2+x-6=0$, que factoriza como $(x+3)(x-2)=0$. Las raíces son $x=-3$ y $x=2$ (con $y=1$).
+
+Las rectas entre sí: $x+2=-2x+5$ da $x=1$ e $y=3$, o sea el punto $(1,3)$.
+
+*Lectura del gráfico (pendiente de revisión):* se tomó que la región sombreada es la encerrada por la parábola (abajo) y las dos rectas (arriba), con vértices $(-1,1)$, $(1,3)$ y $(2,1)$. Los otros cortes ($(3,5)\text{ y }(-3,11)$) caen fuera de la región sombreada. Los puntos de corte no están rotulados en el enunciado.
+
+<img src={`${import.meta.env.BASE_URL}figuras/anterior-z-t1/ej1.svg`} alt="Plano xy con la parábola y=x²−x−1 por (−1,1), (0,−1) y (1,−1), las rectas y=x+2 e y=−2x+5 que se cortan en (1,3), y la región sombreada entre la parábola y las rectas, partida por la vertical x=1 en dos tramos (azul y naranja), con vértices (−1,1), (1,3) y (2,1)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Paso>
+
+**Qué:** decidir techo y piso, y partir la región. **Por qué:** el piso es siempre la parábola. El techo es la recta **más baja** de las dos (la región está debajo de ambas). Se prueba un punto de cada lado de $x=1$:
+
+- $x=0$: $x+2\to2$ y $-2x+5\to5$, es menor la primera.
+- $x=1.5$: $x+2\to3.5$ y $-2x+5\to2$, es menor la segunda.
+
+$$D:\ -1\le x\le 1,\ x^2-x-1\le y\le x+2\qquad\cup\qquad 1\le x\le 2,\ x^2-x-1\le y\le -2x+5$$
+
+</Paso>
+<Paso>
+
+**Qué:** plantear el área. **Por qué:** $A=\iint_D dA$, integrando primero en $y$ (de piso a techo, da la altura de cada columna):
+
+$$A=\int_{-1}^{1}\!\!\int_{x^2-x-1}^{x+2}dy\,dx+\int_{1}^{2}\!\!\int_{x^2-x-1}^{-2x+5}dy\,dx=\int_{-1}^{1}\big(-x^2+2x+3\big)dx+\int_{1}^{2}\big(-x^2-x+6\big)dx$$
+
+</Paso>
+<Paso>
+
+**Qué:** primer tramo. **Por qué:** se integra cada potencia y se evalúa en los límites (cada valor en su línea). Primitiva:
+
+$$\int\big(-x^2+2x+3\big)dx=-\frac{x^3}{3}+x^2+3x$$
+
+$$\text{en }x=1:\ -\frac13+1+3=\frac{11}{3}$$
+
+$$\text{en }x=-1:\ \frac13+1-3=-\frac53$$
+
+$$A_1=\frac{11}{3}-\Big(-\frac53\Big)=\frac{11}{3}+\frac53=\frac{16}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** segundo tramo. **Por qué:** igual que el anterior, con la otra recta. Primitiva:
+
+$$\int\big(-x^2-x+6\big)dx=-\frac{x^3}{3}-\frac{x^2}{2}+6x$$
+
+$$\text{en }x=2:\ -\frac83-2+12=\frac{22}{3}$$
+
+$$\text{en }x=1:\ -\frac13-\frac12+6=\frac{31}{6}$$
+
+$$A_2=\frac{22}{3}-\Big(\frac{31}{6}\Big)=\frac{44}{6}-\frac{31}{6}=\frac{13}{6}$$
+
+Sumando los dos tramos (denominador común $6$):
+
+$$A=A_1+A_2=\frac{32}{6}+\frac{13}{6}=\frac{45}{6}=\frac{15}{2}$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$A=\frac{15}{2}\ \text{u}^2$$
+
+**Ojo con:** integrar todo el intervalo con una sola recta (el techo cambia en $x=1$), restar al revés (techo − piso, nunca piso − techo), o usar los cortes $x=3\text{ o }-3$ que quedan fuera de la región.
+
+**Criterio estimado — no oficial** (la consigna de corrección no está en la foto; se supone que piden gráfico, planteo y todas las cuentas):
+
+- **Bien:** parábola $y=x^2-x-1$, cortes hallados, región partida en dos tramos con techo y piso correctos, integrales planteadas y $A=\frac{15}{2}$.
+- **A medias:** parábola y región bien, pero un error de límites o de cuenta que cambia el resultado (por ejemplo, usar una sola recta).
+- **Mal:** parábola mal calculada o sin planteo coherente con el gráfico.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **área bajo las rectas menos área bajo la parábola**, sobre $[-1,2]$ (como la región es lo que queda entre ambas, resta de áreas "hasta el eje $x$").
+
+Bajo las rectas son dos trapecios, con la fórmula geométrica $\frac{(\text{base}_1+\text{base}_2)}{2}\cdot\text{ancho}$ (las alturas son los valores de la recta en los extremos del tramo):
+
+$$\int_{-1}^{1}(x+2)\,dx=\frac{1+3}{2}\cdot2=4$$
+
+$$\int_{1}^{2}(-2x+5)\,dx=\frac{3+1}{2}\cdot1=2$$
+
+Total bajo las rectas: $4+2=6$.
+
+Bajo la parábola (con signo, porque en parte es negativa):
+
+$$\int_{-1}^{2}\big(x^2-x-1\big)dx=\Big[\frac{x^3}{3}-\frac{x^2}{2}-x\Big]_{-1}^{2}$$
+
+$$\Big(\frac83-2-2\Big)-\Big(-\frac13-\frac12+1\Big)=-\frac43-\frac16=-\frac32$$
+
+El área de la región es la diferencia:
+
+$$A=6-\Big(-\frac32\Big)=6+\frac32=\frac{15}2$$
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-z-t1#2" numero={2} fuente="../fotos-clase/2026-08-28 foto 055.jpeg" pagina={1} unidad="U8" tema="EDO de 1º orden">
@@ -63,14 +194,164 @@ Resolver las siguientes ecuaciones diferenciales:
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Fijate en cada ecuación. En la **a)**: ¿qué pasa si la escribís con todo en un lado, como (algo)$\,dx+$(algo)$\,dy=0$? ¿Hay alguna relación entre esos dos "algo" cuando los derivás? En la **b)**: ¿qué término impide que sea lineal en $y$? ¿Y si dividís por una potencia de $y$?
+
+</Pista>
+<Pista>
+
+La **a)** es una EDO **exacta** ($\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}$): se busca $u(x,y)$ con $u_x=M$ y $u_y=N$. Machete: [EDO exacta](../../machetes/edo-exacta/). La **b)** es de **Bernoulli** ($y'+P\,y=Q\,y^n$): se usa $z=y^{1-n}$ y queda una lineal. Machete: [EDO de Bernoulli](../../machetes/edo-bernoulli/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho. **a)** $M=\dfrac{2x}{y^3}$, $N=-\dfrac{3x^2-y^2}{y^4}$; $u=\int M\,dx=\dfrac{x^2}{y^3}+g(y)$ y se determina $g$ con $u_y=N$. **b)** $y'+\dfrac2{3x}\,y=-\dfrac{x^2+2}{3}\,y^4$ ($n=4$); con $z=y^{-3}$ queda $z'-\dfrac2x\,z=x^2+2$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué (a):** llevar la ecuación a la forma $M\,dx+N\,dy=0$. **Por qué:** para ver si es exacta hay que reconocer $M$ y $N$. Pasando todo a un lado:
+
+$$\frac{2x}{y^3}\,dx-\frac{3x^2-y^2}{y^4}\,dy=0$$
+
+$$M=\frac{2x}{y^3},\qquad N=-\frac{3x^2-y^2}{y^4}=-\frac{3x^2}{y^4}+\frac1{y^2}$$
 
 </Paso>
+<Paso>
+
+**Qué (a):** verificar que es exacta. **Por qué:** una ecuación $M\,dx+N\,dy=0$ viene de $du=0$ para alguna $u(x,y)$ si y solo si $\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}$. Derivando:
+
+$$\frac{\partial M}{\partial y}=2x\cdot(-3)\,y^{-4}=-\frac{6x}{y^4}$$
+
+$$\frac{\partial N}{\partial x}=-\frac{6x}{y^4}$$
+
+Son iguales: es **exacta**.
+
+**Cómo reconocerlo:** no hay ni una $y$ ni una $x$ "sola" que se pueda separar, no es lineal en $y$, y el chequeo cruzado da igual.
+
+</Paso>
+<Paso>
+
+**Qué (a):** hallar la función potencial $u(x,y)$. **Por qué:** debe cumplir $u_x=M$ y $u_y=N$. Se integra $M$ en $x$ (con $y$ constante) y se agrega una función $g(y)$:
+
+$$u=\int\frac{2x}{y^3}\,dx=\frac{x^2}{y^3}+g(y)$$
+
+Se deriva en $y$ y se iguala a $N$:
+
+$$u_y=-\frac{3x^2}{y^4}+g'(y)=-\frac{3x^2}{y^4}+\frac1{y^2}$$
+
+Los términos con $x$ coinciden y queda $g'(y)=\frac1{y^2}$, entonces:
+
+$$g(y)=-\frac1y$$
+
+$$u(x,y)=\frac{x^2}{y^3}-\frac1y$$
+
+La solución general es $u(x,y)=C$.
+
+</Paso>
+<Paso>
+
+**Qué (a):** usar la condición inicial $y(2)=1$. **Por qué:** fija $C$. Con $x=2$, $y=1$:
+
+$$\frac{2^2}{1^3}-\frac11=C\ \Rightarrow\ 4-1=C\ \Rightarrow\ C=3$$
+
+$$\frac{x^2}{y^3}-\frac1y=3$$
+
+Multiplicando por $y^3$ se puede escribir $x^2-y^2=3y^3$.
+
+</Paso>
+<Paso>
+
+**Qué (b):** pasar a la forma de Bernoulli. **Por qué:** para reconocer el tipo hay que despejar $y'$ y dejar $y'+P(x)\,y=Q(x)\,y^n$. Se pasa $2xy$ y $(x^2+2)x^2y^4$ restando y se divide por $3x^2$:
+
+$$y'+\frac{2}{3x}\,y=-\frac{x^2+2}{3}\,y^4$$
+
+**Cómo reconocerlo:** es lineal salvo por el término con $y^4$: Bernoulli con $n=4$. Machete: [EDO de Bernoulli](../../machetes/edo-bernoulli/).
+
+</Paso>
+<Paso>
+
+**Qué (b):** cambio $z=y^{1-n}=y^{-3}$. **Por qué:** convierte la ecuación en una lineal en $z$. Su derivada es $z'=-3y^{-4}y'$, o sea $y^{-4}y'=-\frac{z'}3$. Se divide la ecuación por $y^4$:
+
+$$y^{-4}y'+\frac{2}{3x}\,y^{-3}=-\frac{x^2+2}{3}$$
+
+Reemplazando $y^{-4}y'=-\frac{z'}3$ e $y^{-3}=z$:
+
+$$-\frac{z'}3+\frac{2}{3x}\,z=-\frac{x^2+2}{3}$$
+
+Multiplicando todo por $-3$:
+
+$$z'-\frac2x\,z=x^2+2$$
+
+</Paso>
+<Paso>
+
+**Qué (b):** resolver la lineal con $z=u\cdot v$. **Por qué:** $z'=u'v+uv'$ y queda:
+
+$$u'v+u\Big(v'-\frac2x\,v\Big)=x^2+2$$
+
+Se elige $v$ con $v'=\frac2x\,v$: $\ln|v|=2\ln|x|$, y sin constante:
+
+$$v=x^2$$
+
+Con el paréntesis nulo queda $u'x^2=x^2+2$:
+
+$$u'=1+\frac2{x^2}\ \Rightarrow\ u=x-\frac2x+C$$
+
+(la primitiva de $2x^{-2}$ es $-2x^{-1}$).
+
+</Paso>
+<Paso>
+
+**Qué (b):** armar $z$ y volver a $y$. **Por qué:** $z=u\,v$ y $y=z^{-1/3}$:
+
+$$z=x^2\Big(x-\frac2x+C\Big)=x^3-2x+Cx^2$$
+
+$$y^{-3}=x^3-2x+Cx^2\ \Rightarrow\ y=\big(x^3+Cx^2-2x\big)^{-1/3}$$
+
+Al dividir por $y^4$ se perdió la solución $y=0$ (también cumple la ecuación). No hay condición inicial en este inciso.
+
+</Paso>
+
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+**a)** $$\frac{x^2}{y^3}-\frac1y=3\quad(\text{o }x^2-y^2=3y^3)$$
+
+**b)** $$y=\big(x^3+Cx^2-2x\big)^{-1/3}\quad(\text{y también }y=0)$$
+
+**Ojo con:** en la **a)** el signo de $N$ (al pasar $dy$ del otro lado cambia) y la constante $g(y)$; en la **b)** que el exponente del cambio es $1-n=-3$ (no $-4$) y que al volver hay que elevar a $-\frac13$.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** a) verifica exactitud, halla $u=\frac{x^2}{y^3}-\frac1y$ y $C=3$; b) reconoce Bernoulli, $z=y^{-3}$, lineal $z'-\frac2xz=x^2+2$ y vuelve a $y$.
+- **A medias:** método correcto en ambas pero un error de signo o de constante, o una sin la condición inicial / sin volver a $y$.
+- **Mal:** no reconoce el tipo de ecuación o usa un método que no corresponde.
+
+</Solucion>
+<Comprobacion>
+
+**a)** Derivar implícitamente $\frac{x^2}{y^3}-\frac1y=3$ respecto de $x$:
+
+$$\frac{2x}{y^3}-\frac{3x^2}{y^4}\,y'+\frac1{y^2}\,y'=0$$
+
+Pasando el primer término y sacando factor común $y'$:
+
+$$y'\,\frac{y^2-3x^2}{y^4}=-\frac{2x}{y^3}\ \Rightarrow\ \frac{3x^2-y^2}{y^4}\,y'=\frac{2x}{y^3}$$
+
+que es la ecuación original. Condición: en $(2,1)$, $\frac41-\frac11=3$.
+
+**b)** Con $z=x^3-2x+Cx^2$ se verifica la lineal:
+
+$$z'-\frac2x\,z=\big(3x^2-2+2Cx\big)-\big(2x^2-4+2Cx\big)=x^2+2$$
+
+Y volviendo a $y=z^{-1/3}$ en la ecuación original ($y'=-\frac13z^{-4/3}z'$), multiplicando por $z^{4/3}$:
+
+$$-x^2z'+2xz+(x^2+2)x^2=-x^2\Big(z'-\frac2x\,z-(x^2+2)\Big)=0$$
+
+porque $z'-\frac2xz=x^2+2$.
+
+</Comprobacion>
 </Ejercicio>
 
 <Ejercicio id="anterior-z-t1#3" numero={3} fuente="../fotos-clase/2026-08-28 foto 055.jpeg" pagina={1} unidad="U9" tema="EDO de 2º orden">
@@ -86,12 +367,113 @@ $$
 
 <Pista>
 
-<Pendiente>: solución no elaborada</Pendiente>
+Mirá la ecuación: $y''$, $y'$ e $y$ con coeficientes que son números, y del lado derecho una exponencial más un polinomio. ¿Qué tipo de ecuación es y qué forma tiene su solución general? Compará la exponencial del lado derecho con las que aparecen al resolver la parte homogénea.
+
+</Pista>
+<Pista>
+
+Es una EDO lineal de 2.º orden **con coeficientes constantes, no homogénea**: $y=y_h+y_p$ con **coeficientes indeterminados**. Primero $y_h$ con la característica; después $y_p$ copia la forma del lado derecho, una parte por cada sumando (ojo con la resonancia). Machete: [EDO 2.º orden, coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $r^2+3r+2=(r+1)(r+2)=0$ da $y_h=C_1e^{-x}+C_2e^{-2x}$. Como $e^{-2x}$ **ya está** en $y_h$ hay resonancia y se multiplica por $x$; el polinomio $x-1$ es de grado 1 (y $r=0$ no es raíz):
+
+$$y_p=A\,x\,e^{-2x}+Bx+D$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: solución no elaborada</Pendiente>
+**Qué:** resolver la homogénea. **Por qué:** $y_h$ siempre forma parte de la solución general. Se prueba $y=e^{rx}$:
+
+$$r^2+3r+2=0\ \Rightarrow\ (r+1)(r+2)=0\ \Rightarrow\ r=-1,\ r=-2$$
+
+Raíces reales distintas:
+
+$$y_h=C_1e^{-x}+C_2e^{-2x}$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el lado derecho es suma de $3e^{-2x}$ y del polinomio $x-1$, y se propone una parte por cada uno. **Cómo reconocerlo:** se compara con $y_h$: $e^{-2x}$ ya es solución de la homogénea (resonancia), así que se multiplica por $x$: $Axe^{-2x}$. El polinomio de grado 1 pide $Bx+D$ completo, aunque solo aparezca $x-1$ (y $r=0$ no es raíz):
+
+$$y_p=A\,x\,e^{-2x}+Bx+D$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $y_p$ dos veces. **Por qué:** para reemplazar en la ecuación. Con la regla del producto:
+
+$$y_p'=A\,e^{-2x}(1-2x)+B$$
+
+$$y_p''=A\,e^{-2x}(-4+4x)$$
+
+(derivando $e^{-2x}(1-2x)$: $-2e^{-2x}(1-2x)-2e^{-2x}=e^{-2x}(-4+4x)$).
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''+3y'+2y$, separando la parte exponencial y la polinómica. **Por qué:** $y_p$ debe cumplir la ecuación. Parte exponencial ($y''$, $3y'$ y $2y$ aportan):
+
+$$A\,e^{-2x}\big[(-4+4x)+3(1-2x)+2x\big]=A\,e^{-2x}\big[-4+4x+3-6x+2x\big]=-A\,e^{-2x}$$
+
+(el término en $x$ se anula: es la resonancia). Parte polinómica ($3y'$ aporta $3B$ y $2y$ aporta $2Bx+2D$):
+
+$$3B+2Bx+2D$$
+
+Entonces:
+
+$$-A\,e^{-2x}+2Bx+(3B+2D)=3e^{-2x}+x-1$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes. **Por qué:** dos funciones iguales para todo $x$ tienen los mismos coeficientes en cada función base:
+
+- $e^{-2x}$: $-A=3\ \Rightarrow\ A=-3$
+- $x$: $2B=1\ \Rightarrow\ B=\tfrac12$
+- constante: $3B+2D=-1$, con $B=\frac12$: $\tfrac32+2D=-1\ \Rightarrow\ 2D=-\tfrac52\ \Rightarrow\ D=-\tfrac54$
+
+$$y_p=-3x\,e^{-2x}+\frac x2-\frac54$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la solución general. **Por qué:** $y=y_h+y_p$.
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=C_1e^{-x}+C_2e^{-2x}-3x\,e^{-2x}+\frac x2-\frac54$$
+
+**Ojo con:** olvidar la resonancia (proponer $Ae^{-2x}$ da $0=3$, sin solución) y proponer solo $Bx$ sin el término constante $D$.
+
+**Criterio estimado — no oficial** (sin consigna de corrección a la vista):
+
+- **Bien:** $y_h$ con raíces $-1$ y $-2$, $y_p=Axe^{-2x}+Bx+D$ (con $x$ por la resonancia), $A=-3$, $B=\frac12$, $D=-\frac54$ y solución general.
+- **A medias:** $y_h$ y la forma de $y_p$ bien, pero errores de derivación o de signo en los coeficientes; o sin $x$ en la exponencial (si se nota que no cierra).
+- **Mal:** no distingue $y_h$ de $y_p$, o propone un $y_p$ que no corresponde.
+
+</Solucion>
+<Comprobacion>
+
+Sustituir $y_p=-3xe^{-2x}+\frac x2-\frac54$ en la ecuación, derivando con números. Con $A=-3$, $B=\frac12$:
+
+$$y_p'=-3e^{-2x}(1-2x)+\frac12=(-3+6x)e^{-2x}+\frac12$$
+
+$$y_p''=-3e^{-2x}(-4+4x)=(12-12x)e^{-2x}$$
+
+Sumando $y_p''+3y_p'+2y_p$, parte exponencial (coeficientes de $e^{-2x}$):
+
+$$(12-12x)+3(-3+6x)+2(-3x)=12-12x-9+18x-6x=3$$
+
+Parte no exponencial:
+
+$$3\cdot\frac12+2\Big(\frac x2-\frac54\Big)=\frac32+x-\frac52=x-1$$
+
+Resulta $3e^{-2x}+x-1$: cumple la ecuación.
+
+</Comprobacion>
 </Ejercicio>
