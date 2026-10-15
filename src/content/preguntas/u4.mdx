@@ -1,0 +1,68 @@
+---
+titulo: "Integrales múltiples"
+unidad: "U4"
+orden: 4
+---
+import Pregunta from '../../components/Pregunta.astro';
+
+{/* Ejemplos de formato (borrador: true). El redactor los reemplaza.
+    Props: id (único: u4-t01, u4-c01, u4-h01), unidad, tipo (tema|corta|choice), titulo, fq / fr ("archivo, p. N"),
+    aparecio ("Modelo P2 · T1"; sin esto = pregunta de práctica), correcta (solo choice, número de opción desde 1), borrador.
+    Slots: enunciado (siempre), guia (tema), opciones (choice: lista numerada), y el cuerpo = respuesta modelo / por qué. */}
+
+<Pregunta id="u4-t01" unidad="U4" tipo="tema" borrador titulo="Cambio de variables en integrales dobles"
+  fq="(pendiente)" fr="(pendiente)">
+<Fragment slot="enunciado">
+
+Desarrollar el cambio de variables en integrales dobles: enunciado, rol del jacobiano y un ejemplo con coordenadas polares.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición de la transformación $T(u,v)=(x(u,v),y(u,v))$ y condiciones.
+- Propiedad: fórmula con el valor absoluto del jacobiano.
+- Desarrollo: jacobiano en polares.
+- Gráfico: región en $(x,y)$ y en $(u,v)$.
+
+</Fragment>
+
+Si $T$ es biyectiva y de clase $C^1$ entre $R'$ y $R$, con jacobiano no nulo:
+
+$$\iint_R f(x,y)\,dA=\iint_{R'} f\big(x(u,v),y(u,v)\big)\,\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\,du\,dv$$
+
+En polares $x=r\cos\theta,\ y=r\sin\theta$ y el jacobiano vale $r$, de ahí $dA=r\,dr\,d\theta$.
+</Pregunta>
+
+<Pregunta id="u4-c01" unidad="U4" tipo="corta" borrador titulo="Jacobiano de las coordenadas polares"
+  fq="(pendiente)" fr="(pendiente)">
+<Fragment slot="enunciado">
+
+¿Cuánto vale el jacobiano de la transformación a coordenadas polares y qué representa?
+
+</Fragment>
+
+Vale $r$:
+
+$$\frac{\partial(x,y)}{\partial(r,\theta)}=\begin{vmatrix}\cos\theta&-r\sin\theta\\ \sin\theta&r\cos\theta\end{vmatrix}=r$$
+
+Representa el factor local de cambio de área al pasar de $(r,\theta)$ a $(x,y)$.
+</Pregunta>
+
+<Pregunta id="u4-h01" unidad="U4" tipo="choice" correcta={2} borrador titulo="Elemento de volumen en cilíndricas"
+  fq="(pendiente)" fr="(pendiente)">
+<Fragment slot="enunciado">
+
+En coordenadas cilíndricas, el elemento de volumen $dV$ es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $dr\,d\theta\,dz$
+2. $r\,dr\,d\theta\,dz$
+3. $r^2\,dr\,d\theta\,dz$
+4. $r^2\sin\varphi\,dr\,d\theta\,dz$
+
+</Fragment>
+
+El jacobiano de las cilíndricas es $r$ (el de $z$ no cambia), así que $dV=r\,dr\,d\theta\,dz$. La opción 4 recuerda a las esféricas, que usan $\rho$ y $d\rho\,d\varphi\,d\theta$.
+</Pregunta>

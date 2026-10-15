@@ -53,7 +53,18 @@ const machetes = defineCollection({
   }),
 });
 
+// Preguntero teórico: un MDX por unidad con varias <Pregunta> (ver components/Pregunta.astro).
+const preguntas = defineCollection({
+  loader: glob({ pattern: '*.mdx', base: './src/content/preguntas' }),
+  schema: z.object({
+    titulo: z.string(),
+    unidad: z.enum(['U4', 'U5', 'U6', 'U7', 'U8', 'U9', 'U10']),
+    orden: z.number(),
+  }),
+});
+
 export const collections = {
+  preguntas,
   anteriores,
   parciales,
   teoria: defineCollection({

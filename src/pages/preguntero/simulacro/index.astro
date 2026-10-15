@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+const archivos = (await getCollection('preguntas')).sort((a, b) => a.data.orden - b.data.orden);
+const contenidos = await Promise.all(archivos.map(async (a) => (await render(a)).Content));
+---
+<Layout titulo="Simulacro teórico">
+  <p class="meta"><a href={`${base}preguntero/`}>← Preguntero</a></p>
+  <h1>Simulacro teórico</h1>
+  <p class="lead">Formato del teórico: 2 temas (elegís 1), 4 preguntas cortas y 3 multiple choice, al azar entre todas las unidades. Al entregar se corrigen solas las choice y aparecen las respuestas modelo y la corrección con IA para el resto.</p>
+
+  <div class="sim-panel" data-js hidden>
+    <label class="sim-crono"><input type="checkbox" data-crono /> Con cronómetro</label>
+    <label class="sim-min">Minutos <input type="number" min="1" max="300" value="60" data-minutos inputmode="numeric" /></label>
+    <button type="button" class="btn-primario" data-armar>Armar simulacro</button>
+    <button type="button" class="btn-primario" data-entregar hidden>Entregar</button>
+    <span class="sim-reloj" data-reloj hidden role="timer" aria-label="Tiempo restante"></span>
+  </div>
+  <p class="meta" data-sim-info role="status"></p>
+  <p class="meta" data-nojs>Armar el simulacro necesita JavaScript. Acá abajo están todas las preguntas.</p>
+  <div class="sim-res" data-sim-res role="status" tabindex="-1" hidden></div>
+  <div data-sim-lista></div>
+
+  <div data-pool>
+    {contenidos.map((Content) => <Content />)}
+  </div>
+</Layout>
+<style is:global>
+  .sim-panel { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 1rem 0; }
+  .sim-panel label { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; min-height: 40px; }
+  .sim-panel input[type='number'] { width: 5rem; padding: 6px 8px; border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); background: var(--sup2); color: var(--texto); font: inherit; }
+  .sim-panel input[type='checkbox'] { width: 20px; height: 20px; accent-color: var(--acento); }
+  .sim-panel input:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+  .sim-reloj { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.3rem; padding: 2px 14px; border: 2px solid var(--acento); border-radius: 999px; }
+  .sim-reloj[data-fin] { border-color: var(--pendiente); color: var(--pendiente); }
+  .sim-res { margin: 1rem 0; padding: 10px 16px; border: 2px solid var(--e-ok); background: var(--e-ok-bg); border-radius: var(--r-s); font-weight: 700; }
+  .sim-grupo > h2 { margin-top: 1.6rem; font-size: 1.3rem; }
+  /* Mientras se resuelve: sin respuesta modelo ni IA (queda el campo "Tu respuesta"). */
+  [data-fase='resolviendo'] .preg-resp, [data-fase='resolviendo'] .ia-menu, [data-fase='resolviendo'] .ia-aviso { display: none; }
+</style>
+<script>import '../../../scripts/preguntero.js';</script>

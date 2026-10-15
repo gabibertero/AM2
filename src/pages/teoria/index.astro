@@ -7,6 +7,7 @@ const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.da
 <Layout titulo="Teoría">
   <h1>Teoría por unidad</h1>
   <p class="lead">Contenido elaborado para el sitio a partir de los apuntes; no es material oficial. Cada unidad indica su alcance y su estado.</p>
+  <p><a class="btn btn-primario" href={`${base}preguntero/`}>Practicá con el preguntero teórico</a></p>
   <ul class="grilla lista-tarjetas">
     {items.map((i) => (
       <li class="tarjeta tarjeta-u" data-unidad={i.data.unidad}>

@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+const archivos = (await getCollection('preguntas')).sort((a, b) => a.data.orden - b.data.orden);
+const secciones = await Promise.all(archivos.map(async (a) => ({ ...a.data, Content: (await render(a)).Content })));
+const unidades = secciones.map((s) => s.unidad);
+const tipos = [['tema', 'Temas'], ['corta', 'Cortas'], ['choice', 'Choice']];
+---
+<Layout titulo="Preguntero teórico">
+  <h1>Preguntero teórico</h1>
+  <p class="lead">Preguntas del estilo del teórico de la cátedra: tema a desarrollar, pregunta corta y multiple choice. Las respuestas son elaboradas para el sitio, no oficiales.</p>
+  <p class="meta"><a class="btn btn-primario" href={`${base}preguntero/simulacro/`}>Armar un simulacro teórico (2 temas + 4 cortas + 3 choice)</a></p>
+
+  <div class="pf" data-js hidden>
+    <div class="pf-grupo" role="group" aria-label="Filtrar por unidad">
+      <button type="button" data-filtro="unidad" data-valor="todas" aria-pressed="true">Todas</button>
+      {unidades.map((u) => <button type="button" data-filtro="unidad" data-valor={u} aria-pressed="false">{u}</button>)}
+    </div>
+    <div class="pf-grupo" role="group" aria-label="Filtrar por tipo">
+      <button type="button" data-filtro="tipo" data-valor="todas" aria-pressed="true">Todos los tipos</button>
+      {tipos.map(([t, n]) => <button type="button" data-filtro="tipo" data-valor={t} aria-pressed="false">{n}</button>)}
+    </div>
+    <div class="pf-grupo" role="group" aria-label="Filtrar por marca">
+      <button type="button" data-filtro="marca" data-valor="todas" aria-pressed="true">Todas las marcas</button>
+      <button type="button" data-filtro="marca" data-valor="repasar" aria-pressed="false">Dudosas y no sabidas</button>
+      <button type="button" data-filtro="marca" data-valor="sin" aria-pressed="false">Sin marcar</button>
+    </div>
+    <p class="meta" data-contador role="status"></p>
+  </div>
+
+  <div data-preguntero>
+    {secciones.map(({ unidad, titulo, Content }) => (
+      <section data-seccion data-unidad={unidad} aria-labelledby={`h-${unidad}`}>
+        <h2 id={`h-${unidad}`}><span class="chip chip-u chip-lg" data-unidad={unidad}>{unidad}</span> {titulo}</h2>
+        <Content />
+      </section>
+    ))}
+    <p data-vacio hidden>No hay preguntas con esos filtros.</p>
+  </div>
+</Layout>
+<style is:global>
+  .pf { display: grid; gap: 8px; margin: 1rem 0; }
+  .pf-grupo { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pf button { min-height: 40px; padding: 4px 14px; }
+  .pf button[aria-pressed='true'] { background: var(--acento); color: var(--sobre-acento); border-color: var(--acento); }
+  .pf button:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+  section[data-seccion] > h2 { margin-top: 2rem; }
+</style>
+<script>import '../../scripts/preguntero.js';</script>
