@@ -30,3 +30,13 @@ test('prompt demasiado largo: abre sin ?q y avisa que hay que pegar', () => {
   const d = urlDestino('claude', 'á'.repeat(MAX_URL));
   assert.deepEqual(d, { url: 'https://claude.ai/new', pegar: true });
 });
+
+test('promptParaDestino recorta el modelo para que Claude abra con ?q=', async () => {
+  const { promptParaDestino, urlDestino } = await import('../src/scripts/ia-prompt.js');
+  const partes = { materia: { largo: 'AM II' }, tema: 'T', enunciado: 'E', modelo: 'paso '.repeat(5000), mia: 'mi intento' };
+  const p = promptParaDestino('claude', partes);
+  assert.equal(urlDestino('claude', p).pegar, false);
+  assert.match(p, /mi intento/);
+  assert.match(p, /recortado/);
+  assert.equal(promptParaDestino('gemini', partes).length > p.length, true); // Gemini se pega: va completo
+});

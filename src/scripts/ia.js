@@ -3,7 +3,7 @@
 import { leer, guardar } from './progreso.js';
 // Materia fija de este sitio.
 const materia = { largo: 'Análisis Matemático II', facultad: 'UTN FRC', carrera: 'Ingeniería en Sistemas' };
-import { armarPrompt, urlDestino, DESTINOS } from './ia-prompt.js';
+import { promptParaDestino, urlDestino, DESTINOS } from './ia-prompt.js';
 
 // KaTeX duplica la fórmula (MathML + HTML): se reemplaza por su TeX para que el prompt quede limpio.
 function texto(el) {
@@ -68,14 +68,14 @@ document.addEventListener('click', (e) => {
   const box = b.closest('[data-ia]');
   const ctx = box.closest('[data-ia-ctx]') || box.parentElement;
   const mia = box.querySelector('[data-ia-mia]')?.value || '';
-  const prompt = armarPrompt({
+  const dest = b.dataset.iaIr;
+  const prompt = promptParaDestino(dest, {
     materia,
     tema: texto(ctx.querySelector('[data-ia-tit]')),
     enunciado: texto(ctx.querySelector('[data-ia-enun]')),
     modelo: modeloDe(ctx),
     mia: box.dataset.ia === 'corregir' ? mia : '',
   });
-  const dest = b.dataset.iaIr;
   const destino = urlDestino(dest, prompt);
   const copiado = copiar(prompt); // primero copiar, así el portapapeles ya está listo al abrir la pestaña
   if (destino) { // antes de cualquier await: si no, el navegador lo bloquea

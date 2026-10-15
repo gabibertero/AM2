@@ -12,12 +12,12 @@ const { titulo } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const nav = [
   ['Inicio', base],
-  ['Parciales oficiales', `${base}parciales/`],
-  ['Años anteriores', `${base}anteriores/`],
+  ['Parciales', `${base}parciales/`],
+  ['Anteriores', `${base}anteriores/`],
   ['Teoría', `${base}teoria/`],
   ['Preguntero', `${base}preguntero/`],
   ['Machetes', `${base}machetes/`],
-  ['Simulacros generados', `${base}generados/`],
+  ['Laboratorio', `${base}laboratorio/`],
 ];
 const actual = Astro.url.pathname;
 ---

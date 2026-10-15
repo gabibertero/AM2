@@ -4,7 +4,8 @@ import HomeHero from '../components/HomeHero.astro';
 import HomeMapa from '../components/HomeMapa.astro';
 import { getCollection } from 'astro:content';
 import { idsDeEjercicios } from '../scripts/ids.js';
-import { FECHA_PARCIAL } from '../lib/sitio.js';
+import { FECHA_PARCIAL, FECHA_RECUP } from '../lib/sitio.js';
+const dm = (f) => f.split('-').reverse().slice(0, 2).join('/');
 const base = import.meta.env.BASE_URL;
 const parciales = await getCollection('parciales');
 const cuerpos = [...parciales, ...(await getCollection('anteriores'))];
@@ -22,12 +23,13 @@ for (const p of parciales) {
 const temas = Object.fromEntries(Object.entries(cuenta).map(([u, o]) => [u, Object.entries(o).sort((a, b) => b[1] - a[1]).slice(0, 3)]));
 
 const accesos = [
-  ['📝', 'Parciales oficiales', `${nPracticos} resueltos`, 'parciales/'],
-  ['⏱️', 'Rendir como examen', 'Con reloj y nota', 'parciales/'],
-  ['❓', 'Preguntero', 'Teoría por unidad', 'preguntero/'],
-  ['🎲', 'Simulacro teórico', '2 temas + 4 cortas + 3 choice', 'preguntero/simulacro/'],
-  ['⚡', 'Machetes', 'Guías por tipo de problema', 'machetes/'],
-  ['🗂️', 'Años anteriores', 'Fotos de clase', 'anteriores/'],
+  ['M5 3h11l3 3v15H5z M8 9h8 M8 13h8 M8 17h5', 'Parciales oficiales', `${nPracticos} resueltos`, 'parciales/'],
+  ['M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M12 9v4l2.500 2 M9 2h6', 'Rendir como examen', 'Con reloj y nota', 'parciales/'],
+  ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M9.500 9.500a2.500 2.500 0 1 1 3.500 2.300c-.7.400-1 .9-1 1.700 M12 17v.5', 'Preguntero', 'Teoría por unidad', 'preguntero/'],
+  ['M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z M8 8v.01 M16 8v.01 M12 12v.01 M8 16v.01 M16 16v.01', 'Simulacro teórico', '2 temas + 4 cortas + 3 choice', 'preguntero/simulacro/'],
+  ['M13 2 4 14h7l-1 8 9-12h-7z', 'Machetes', 'Guías por tipo de problema', 'machetes/'],
+  ['M9 3h6 M10 3v6l-5 9a2 2 0 0 0 1.800 3h10.400A2 2 0 0 0 19 18l-5-9V3 M7.500 14h9', 'Laboratorio', 'Ejercicios nuevos con semilla', 'laboratorio/'],
+  ['M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'Años anteriores', 'Fotos de clase', 'anteriores/'],
 ];
 ---
 <Layout titulo="Inicio">
@@ -52,6 +54,7 @@ const accesos = [
       ) : (
         <p class="big-txt"><b class="num" data-dias>{FECHA_PARCIAL}</b> <span class="suave" data-dias-txt></span></p>
       )}
+      {FECHA_PARCIAL && <p class="suave">Parcial {dm(FECHA_PARCIAL)} · Recuperatorio {dm(FECHA_RECUP)}</p>}
     </div>
     <div class="tarjeta" data-tu-progreso data-ids={todosIds.join(',')}>
       <strong>Tu progreso</strong>
@@ -67,9 +70,9 @@ const accesos = [
 
   <h2>Accesos</h2>
   <div class="grilla accesos">
-    {accesos.map(([emo, t, d, href]) => (
+    {accesos.map(([ico, t, d, href]) => (
       <a class="tarjeta tarjeta-link" href={`${base}${href}`}>
-        <span class="emo" aria-hidden="true">{emo}</span>
+        <span class="emo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d={ico} /></svg></span>
         <strong>{t}</strong>
         <span class="suave">{d}</span>
       </a>

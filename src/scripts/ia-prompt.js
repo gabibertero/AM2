@@ -39,3 +39,16 @@ ${ctx}
 Explicámelo paso a paso y con un ejemplo, decime qué es lo que más suele tomar y qué términos no pueden faltar en la respuesta. Terminá con 2 preguntas para chequear que entendí (sin las respuestas hasta que conteste).
 Respondé en español rioplatense, directo.`;
 }
+
+// Si el prompt no entra en la URL, recorta la respuesta modelo (lo más largo) hasta que entre,
+// así Claude/ChatGPT abren con el pedido cargado en vez de vacíos.
+export function promptParaDestino(dest, partes) {
+  let prompt = armarPrompt(partes);
+  if (!DESTINOS[dest]?.q) return prompt;
+  let modelo = partes.modelo || '';
+  while (urlDestino(dest, prompt).pegar && modelo.length > 200) {
+    modelo = modelo.slice(0, Math.floor(modelo.length * 0.8));
+    prompt = armarPrompt({ ...partes, modelo: `${modelo}\n[…recortado por largo]` });
+  }
+  return prompt;
+}

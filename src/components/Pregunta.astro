@@ -45,9 +45,9 @@ const tieneGuia = Astro.slots.has('guia');
   .preg[data-estado='sabe'] { border-top-color: var(--e-ok); }
   .preg[data-estado='dudosa'] { border-top-color: var(--generado); }
   .preg[data-estado='nose'] { border-top-color: var(--pendiente); }
-  .preg-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 2px; }
+  .preg-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 0; }
   .chip-borrador { color: var(--generado); background: var(--generado-fondo); border-color: var(--generado); }
-  .preg-estado { margin-left: auto; font-size: .82rem; font-weight: 700; color: var(--suave); }
+  .preg-estado { margin-left: auto; font-size: .8125rem; font-weight: 700; color: var(--suave); }
   .preg[data-estado='sabe'] .preg-estado { color: var(--e-ok); }
   .preg[data-estado='dudosa'] .preg-estado { color: var(--generado); }
   .preg[data-estado='nose'] .preg-estado { color: var(--pendiente); }
@@ -55,9 +55,9 @@ const tieneGuia = Astro.slots.has('guia');
   .preg-enun { margin: 0 0 .6rem; padding: 4px 14px; border-left: 4px solid var(--uc, var(--borde-fuerte)); background: var(--sup2); border-radius: 0 var(--r-s) var(--r-s) 0; overflow-x: auto; position: relative; }
   .preg-enun > :first-child { margin-top: .4em; } .preg-enun > :last-child { margin-bottom: .4em; }
   .preg-guia { margin: .6rem 0; padding: 4px 14px; border: 1px dashed var(--borde-fuerte); border-radius: var(--r-s); overflow-x: auto; position: relative; }
-  .preg-guia-t { margin: .4rem 0 0; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--suave); }
+  .preg-guia-t { margin: .4rem 0 0; font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--suave); }
   .preg-guia ul { margin: .3rem 0 .5rem; padding-left: 1.2rem; }
-  .preg-fte { margin: .4rem 0 0; font-size: .82rem; color: var(--suave); overflow-wrap: anywhere; }
+  .preg-fte { margin: .4rem 0 0; font-size: .8125rem; color: var(--suave); overflow-wrap: anywhere; }
   .preg-ops { overflow-x: auto; position: relative; margin: .5rem 0; }
   .preg-ops ol { margin: 0; padding-left: 1.6rem; list-style: lower-alpha; }
   .preg-ops ol.op-lista { padding: 0; list-style: none; display: grid; gap: 8px; }
@@ -71,7 +71,7 @@ const tieneGuia = Astro.slots.has('guia');
   .preg-fb { margin: .3rem 0; font-weight: 700; }
   .preg-fb:empty { display: none; }
   .preg-resp { margin: .6rem 0 .4rem; }
-  .preg-resp > summary { cursor: pointer; font-weight: 700; min-height: 40px; display: inline-flex; align-items: center; padding: 4px 14px; border: 1px solid var(--acento); border-radius: 999px; color: var(--acento); list-style: none; }
+  .preg-resp > summary { cursor: pointer; font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; padding: 4px 14px; border: 1px solid var(--acento); border-radius: 999px; color: var(--acento); list-style: none; }
   .preg-resp > summary::-webkit-details-marker { display: none; }
   .preg-resp .s-ocultar, .preg-resp[open] .s-ver { display: none; }
   .preg-resp[open] .s-ocultar { display: inline; }
@@ -81,7 +81,7 @@ const tieneGuia = Astro.slots.has('guia');
   .resp th, .resp td { border: 1px solid var(--borde-fuerte); padding: 5px 9px; vertical-align: top; }
   .resp img { max-width: 100%; height: auto; }
   .preg-acc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: .6rem; }
-  .preg-acc button { min-height: 40px; padding: 6px 16px; }
+  .preg-acc button { min-height: 44px; padding: 6px 16px; }
   .preg-acc button[aria-pressed='true'].btn-sabe { background: var(--e-ok-bg); color: var(--e-ok); border-color: var(--e-ok); }
   .preg-acc button[aria-pressed='true'].btn-dudosa { background: var(--generado-fondo); color: var(--generado); border-color: var(--generado); }
   .preg-acc button[aria-pressed='true'].btn-nose { color: var(--pendiente); border-color: var(--pendiente); }
