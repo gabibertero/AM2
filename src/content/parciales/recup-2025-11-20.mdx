@@ -15,6 +15,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
@@ -33,14 +35,112 @@ Recordar: $\sin^2(\varphi)=\dfrac{1-\cos(2\varphi)}{2}$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Hay que integrar $x+y$ sobre una región que está entre **dos esferas** y "arriba" de un **cono**, solo en el primer octante. ¿Qué simetría tiene la región? ¿Qué le pasa a $\sqrt{x^2+y^2}$ en el cono y a $x^2+y^2+z^2$ en las esferas?
+
+</Pista>
+<Pista>
+
+Con esferas y un cono de eje $z$ conviene **coordenadas esféricas** (la consigna lo pide): $x=\rho\sin\varphi\cos\theta$, $y=\rho\sin\varphi\sin\theta$, $z=\rho\cos\varphi$, $dV=\rho^2\sin\varphi\,d\rho\,d\varphi\,d\theta$. Hay que hallar los límites de $\rho$, $\varphi$ y $\theta$. Machete: [Integral triple en cilíndricas y esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Límites: $1\le\rho\le2$ (entre las esferas), $0\le\theta\le\tfrac\pi2$ (primer octante) y $0\le\varphi\le\tfrac\pi4$ (el cono $z=\sqrt{x^2+y^2}$ es $\varphi=\tfrac\pi4$, y "sobre el cono" es $\varphi$ menor). Integrando: $(x+y)\,\rho^2\sin\varphi=\rho^3\sin^2\varphi\,(\sin\theta+\cos\theta)$:
+
+$$IT=\int_0^{\pi/4}\!\sin^2\varphi\,d\varphi\int_0^{\pi/2}\!(\sin\theta+\cos\theta)\,d\theta\int_1^2\rho^3\,d\rho$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar la región. **Por qué:** para ubicar los límites. Es el trozo de "cáscara" entre las esferas de radio 1 y 2, en el primer octante ($x,y,z\ge0$) y por encima del cono $z=\sqrt{x^2+y^2}$ (hoja superior). **Cómo reconocerlo:** una expresión como $x^2+y^2+z^2=R^2$ es $\rho=R$, y $z=\sqrt{x^2+y^2}$ es un cono que forma $45^\circ$ con el eje $z$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/recup-2025-11-20/ej1.svg`} alt="Arriba, perspectiva de la región del primer octante entre las esferas de radio 1 y 2, por encima del cono z = raíz de x²+y², con los planos x=0 e y=0 como tapas. Abajo, corte con un semiplano de ángulo fijo, con ejes graduados: sector anular entre los arcos de radio 1 y 2, limitado por el eje z y por la recta φ = π/4." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** hallar el ángulo del cono. **Por qué:** define el límite de $\varphi$ (ángulo medido desde el eje $z$). En el cono, $z=\sqrt{x^2+y^2}$:
+
+$$\rho\cos\varphi=\rho\sin\varphi\ \Rightarrow\ \tan\varphi=1\ \Rightarrow\ \varphi=\frac\pi4$$
+
+La región pide $z\ge\sqrt{x^2+y^2}$, o sea estar más cerca del eje $z$: $0\le\varphi\le\tfrac\pi4$. Primer octante: $0\le\theta\le\tfrac\pi2$.
+
+</Paso>
+<Paso>
+
+**Qué:** pasar el integrando a esféricas. **Por qué:** así queda un producto de funciones de una sola variable.
+
+$$x+y=\rho\sin\varphi\cos\theta+\rho\sin\varphi\sin\theta=\rho\sin\varphi\,(\sin\theta+\cos\theta)$$
+
+Multiplicando por el jacobiano $\rho^2\sin\varphi$ (siempre positivo en estos rangos):
+
+$$IT=\iiint\rho^3\sin^2\varphi\,(\sin\theta+\cos\theta)\,d\rho\,d\varphi\,d\theta$$
+
+Como los límites son constantes, se separa en tres integrales:
+
+$$IT=\int_0^{\pi/4}\!\sin^2\varphi\,d\varphi\cdot\int_0^{\pi/2}\!(\sin\theta+\cos\theta)\,d\theta\cdot\int_1^2\rho^3\,d\rho$$
+
+</Paso>
+<Paso>
+
+**Qué:** integral en $\rho$.
+
+$$\int_1^2\rho^3\,d\rho=\Big[\frac{\rho^4}{4}\Big]_1^2=4-\frac14=\frac{15}{4}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integral en $\theta$.
+
+$$\int_0^{\pi/2}(\sin\theta+\cos\theta)\,d\theta=\Big[-\cos\theta+\sin\theta\Big]_0^{\pi/2}$$
+
+En $\tfrac\pi2$: $-0+1=1$. En $0$: $-1+0=-1$.
+
+$$1-(-1)=2$$
+
+</Paso>
+<Paso>
+
+**Qué:** integral en $\varphi$. **Por qué:** $\sin^2\varphi$ no tiene primitiva inmediata; se usa la identidad que da el enunciado, $\sin^2\varphi=\dfrac{1-\cos(2\varphi)}{2}$.
+
+$$\int_0^{\pi/4}\sin^2\varphi\,d\varphi=\frac12\int_0^{\pi/4}\big(1-\cos2\varphi\big)\,d\varphi=\frac12\Big[\varphi-\frac{\sin2\varphi}{2}\Big]_0^{\pi/4}$$
+
+En $\tfrac\pi4$: $\sin\tfrac\pi2=1$, así que $\tfrac\pi4-\tfrac12$ (en $0$ vale $0$):
+
+$$\frac{\pi}{4}-\frac{1}{2}=\frac{\pi-2}{4}\ \Rightarrow\ \int_0^{\pi/4}\sin^2\varphi\,d\varphi=\frac12\cdot\frac{\pi-2}{4}=\frac\pi8-\frac14$$
+
+</Paso>
+<Paso>
+
+**Qué:** multiplicar los tres resultados.
+
+$$IT=\frac{15}{4}\cdot2\cdot\Big(\frac\pi8-\frac14\Big)=\frac{15(\pi-2)}{16}$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$IT=\frac{15(\pi-2)}{16}\approx 1{,}070$$
+
+**Ojo con:** olvidarse del jacobiano $\rho^2\sin\varphi$ (queda $\rho$ en vez de $\rho^3$ y se pierde un $\sin\varphi$), o poner $0\le\varphi\le\tfrac\pi2$ (eso sería el octante completo sin el cono).
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
+
+- **Bien:** dibujo con las dos esferas y el cono, límites $1\le\rho\le2$, $0\le\theta\le\tfrac\pi2$, $0\le\varphi\le\tfrac\pi4$, integrando con jacobiano $\rho^2\sin\varphi$ y resultado $\tfrac{15(\pi-2)}{16}$.
+- **A medias:** planteo correcto (esféricas, límites, jacobiano) con un error de cuenta (por ejemplo en $\int\sin^2\varphi$) que cambia el resultado.
+- **Mal:** sin jacobiano, o límites de $\varphi$ equivocados ($\tfrac\pi2$ en lugar de $\tfrac\pi4$), o no usa esféricas pese a que la consigna lo pide.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **simetría y cilíndricas**. La región es simétrica respecto de $y=x$, así que $\iiint x\,dV=\iiint y\,dV$ y $IT=2\iiint x\,dV$. En cilíndricas, $x=r\cos\theta$, $dV=r\,dz\,dr\,d\theta$, $0\le\theta\le\tfrac\pi2$. Para cada $r$, $z$ sube hasta la esfera de radio 2 ($\sqrt{4-r^2}$) y desde la esfera de radio 1 ($\sqrt{1-r^2}$) si $r\le\tfrac{1}{\sqrt2}$, o desde el cono ($z=r$) si $\tfrac{1}{\sqrt2}\le r\le\sqrt2$:
+
+$$\iiint x\,dV=\underbrace{\int_0^{\pi/2}\!\cos\theta\,d\theta}_{1}\Big[\int_0^{1/\sqrt2}\!r^2\big(\sqrt{4-r^2}-\sqrt{1-r^2}\big)dr+\int_{1/\sqrt2}^{\sqrt2}\!r^2\big(\sqrt{4-r^2}-r\big)dr\Big]=\frac{15(\pi-2)}{32}$$
+
+$$IT=2\cdot\frac{15(\pi-2)}{32}=\frac{15(\pi-2)}{16}$$
+
+</Comprobacion>
 <ResolucionOficial examen="recup-2025-11-20" fuente="parciales/2do-parcial/2° Parciales/Recuperat. 2° PP Nov-2025.pdf" paginas="2" />
 </Ejercicio>
 
@@ -62,14 +162,116 @@ Recordamos fórmula de integración por partes: $\int u\,dv=uv-\int v\,du$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Te piden un **trabajo** de un campo de fuerzas a lo largo de una curva dada con una fórmula en función de un parámetro. ¿Qué te dice la consigna sobre cómo plantear? ¿Hace falta un dibujo para decidir en qué sentido se recorre?
+
+</Pista>
+<Pista>
+
+**Integral curvilínea por definición** (la consigna lo exige): el trabajo es $\int_C P\,dx+Q\,dy$; con la curva parametrizada se reemplaza $x(\theta)$, $y(\theta)$, $dx=x'(\theta)\,d\theta$, $dy=y'(\theta)\,d\theta$. Machete: [Integral curvilínea por definición](../../machetes/curvilinea-por-definicion/).
+
+</Pista>
+<Pista>
+
+$P=x$, $Q=y+2$, $x=\theta-\sin\theta$, $y=1-\cos\theta$, $dx=(1-\cos\theta)\,d\theta$, $dy=\sin\theta\,d\theta$:
+
+$$W=\int_0^{2\pi}\Big[(\theta-\sin\theta)(1-\cos\theta)+(3-\cos\theta)\sin\theta\Big]d\theta$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar la curva y fijar el sentido. **Por qué:** el sentido del recorrido decide el signo. Un arco de cicloide es la curva que traza un punto de una rueda: nace en $(0,0)$ ($\theta=0$), sube hasta $(\pi,2)$ y vuelve a tocar el eje en $(2\pi,0)$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/recup-2025-11-20/ej2.svg`} alt="Un arco de cicloide con ejes graduados de a 1: nace en (0,0), pasa por el máximo (π, 2) y vuelve al eje en (2π, 0). Flechas indican el sentido de θ creciente, de izquierda a derecha." style={{maxWidth:'100%',height:'auto'}} />
+
+<Pendiente>: la consigna dice "recorrido antihorario", pero un arco de cicloide no es una curva cerrada. Se tomó el sentido en que crece $\theta$ (de izquierda a derecha), que es el que usa la resolución oficial.</Pendiente>
 
 </Paso>
+<Paso>
+
+**Qué:** plantear por definición. **Por qué:** el trabajo de $F=P\,i+Q\,j$ a lo largo de $C$ es la integral de línea del campo; con $P=x$ y $Q=y+2$:
+
+$$W=\int_C x\,dx+(y+2)\,dy$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar la parametrización. **Por qué:** hay que pasar $dx$ y $dy$ a $d\theta$.
+
+$$x=\theta-\sin\theta\ \Rightarrow\ dx=(1-\cos\theta)\,d\theta$$
+
+$$y=1-\cos\theta\ \Rightarrow\ dy=\sin\theta\,d\theta$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la integral. **Por qué:** todo queda en función de $\theta$, de $0$ a $2\pi$:
+
+$$W=\int_0^{2\pi}(\theta-\sin\theta)(1-\cos\theta)\,d\theta+\int_0^{2\pi}(1-\cos\theta+2)\sin\theta\,d\theta$$
+
+Desarrollando cada producto por separado:
+
+$$(\theta-\sin\theta)(1-\cos\theta)=\theta-\theta\cos\theta-\sin\theta+\sin\theta\cos\theta$$
+
+$$(3-\cos\theta)\sin\theta=3\sin\theta-\sin\theta\cos\theta$$
+
+</Paso>
+<Paso>
+
+**Qué:** sumar y simplificar. **Por qué:** $\sin\theta\cos\theta$ se cancela y $-\sin\theta+3\sin\theta=2\sin\theta$:
+
+$$\theta-\theta\cos\theta+2\sin\theta$$
+
+$$W=\int_0^{2\pi}\big(\theta-\theta\cos\theta+2\sin\theta\big)\,d\theta$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar cada término. Con $\int\theta\,d\theta$ y $\int2\sin\theta\,d\theta$ inmediatas:
+
+$$\int_0^{2\pi}\theta\,d\theta=\Big[\frac{\theta^2}{2}\Big]_0^{2\pi}=2\pi^2,\qquad\int_0^{2\pi}2\sin\theta\,d\theta=\Big[-2\cos\theta\Big]_0^{2\pi}=0$$
+
+Para $\int\theta\cos\theta\,d\theta$ se usa **partes** ($\int u\,dv=uv-\int v\,du$) con $u=\theta$, $dv=\cos\theta\,d\theta$, o sea $du=d\theta$, $v=\sin\theta$:
+
+$$\int\theta\cos\theta\,d\theta=\theta\sin\theta-\int\sin\theta\,d\theta=\theta\sin\theta+\cos\theta$$
+
+$$\int_0^{2\pi}\theta\cos\theta\,d\theta=\Big[\theta\sin\theta+\cos\theta\Big]_0^{2\pi}=(0+1)-(0+1)=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** juntar.
+
+$$W=2\pi^2-0+0=2\pi^2$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$IC=2\pi^2\ \text{(unidades de trabajo)}\approx19{,}74$$
+
+**Ojo con:** el signo del término $-\theta\cos\theta$ y olvidarse de $\sin\theta\cos\theta$ en uno de los productos (cancela con el del otro), o confundir $\int\theta\cos\theta$ con $\theta\sin\theta$ sin el $+\cos\theta$.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
+
+- **Bien:** parametrización con $dx$ y $dy$, integral $\int_0^{2\pi}(\theta-\theta\cos\theta+2\sin\theta)\,d\theta$, partes bien aplicado y $2\pi^2$.
+- **A medias:** planteo por definición correcto con un error en un desarrollo o en la integración por partes.
+- **Mal:** no usa la definición (la consigna la exige), no reemplaza $dx$, $dy$ o integra $\theta$ en un rango distinto de $[0,2\pi]$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: el campo es **conservativo**, así que el trabajo depende solo de los extremos. $P=x$, $Q=y+2$:
+
+$$\frac{\partial Q}{\partial x}=0=\frac{\partial P}{\partial y}$$
+
+Potencial $\phi=\dfrac{x^2}{2}+\dfrac{(y+2)^2}{2}$ (cumple $\phi_x=x$, $\phi_y=y+2$). Extremos: $(0,0)$ en $\theta=0$ y $(2\pi,0)$ en $\theta=2\pi$:
+
+$$\frac{(2\pi)^2}{2}+\frac{(0+2)^2}{2}-\Big(0+\frac{(0+2)^2}{2}\Big)=2\pi^2$$
+
+Es el mismo valor, sin integrar por partes.
+
+</Comprobacion>
 <ResolucionOficial examen="recup-2025-11-20" fuente="parciales/2do-parcial/2° Parciales/Recuperat. 2° PP Nov-2025.pdf" paginas="3" />
 </Ejercicio>
 
@@ -86,14 +288,96 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+La consigna ya te dice que se puede por tres caminos distintos. Para elegir uno: ¿podés escribirla como $P\,dx+Q\,dy=0$ y comparar derivadas cruzadas? ¿Qué tipo de resultado esperás (una función de $x$ e $y$ igual a una constante)?
+
+</Pista>
+<Pista>
+
+**Método elegido: EDO exacta**: si $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$, existe $u(x,y)$ con $u_x=P$, $u_y=Q$ y la solución es $u=C$. (También sale por homogénea con $u=\tfrac yx$, o por Bernoulli con $z=y^2$.) Machete: [EDO exacta](../../machetes/edo-exacta/); los otros: [homogénea](../../machetes/edo-homogenea/) y [Bernoulli](../../machetes/edo-bernoulli/).
+
+</Pista>
+<Pista>
+
+Pasando a forma diferencial: $(3x^2+2y^2)\,dx+4xy\,dy=0$, con $P=3x^2+2y^2$ y $Q=4xy$. Integrar $Q$ en $y$ (más $\varphi(x)$), derivar en $x$ e igualar a $P$:
+
+$$u=\int4xy\,dy+\varphi(x),\qquad u_x=P$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** escribir la EDO como $P\,dx+Q\,dy=0$. **Por qué:** es la forma que pide el método de exactas. Se reemplaza $y'=\tfrac{dy}{dx}$ y se multiplica por $4xy\,dx$:
+
+$$4xy\,\frac{dy}{dx}=-(3x^2+2y^2)\ \Rightarrow\ (3x^2+2y^2)\,dx+4xy\,dy=0$$
+
+$$P=3x^2+2y^2,\qquad Q=4xy$$
 
 </Paso>
+<Paso>
+
+**Qué:** verificar que es exacta. **Por qué:** es la condición para que exista $u$.
+
+$$\frac{\partial P}{\partial y}=4y=\frac{\partial Q}{\partial x}$$
+
+Son iguales: exacta.
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $u$ integrando $Q$ en $y$. **Por qué:** $u_y=Q$; la "constante" puede depender de $x$.
+
+$$u=\int4xy\,dy=2xy^2+\varphi(x)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar respecto de $x$ e igualar a $P$. **Por qué:** $u_x=P$ determina $\varphi$.
+
+$$u_x=2y^2+\varphi'(x)=3x^2+2y^2$$
+
+$$\varphi'(x)=3x^2\ \Rightarrow\ \varphi(x)=x^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** escribir la solución general. **Por qué:** las soluciones son las curvas de nivel $u=C$.
+
+$$x^3+2xy^2=C$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$x^3+2xy^2=C\qquad(C\in\mathbb R)$$
+
+(solución general implícita; los tres métodos que menciona la consigna llevan a la misma).
+
+**Ojo con:** pasar a la forma $P\,dx+Q\,dy=0$ con el signo correcto ($y'=-\tfrac{\dots}{\dots}$ cambia el signo de $P$ y $Q$ juntos, no hace falta dividir) y no olvidarse de $\varphi(x)$.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
+
+- **Bien:** una resolución completa por cualquiera de los tres métodos (exacta, homogénea o Bernoulli), con verificación de la condición que corresponda y resultado equivalente a $x^3+2xy^2=C$.
+- **A medias:** método bien elegido y planteado con un error de signo o de primitiva que cambia el resultado.
+- **Mal:** no reconoce el tipo, aplica un método sin justificar las condiciones (por ejemplo exacta sin verificar $P_y=Q_x$) o deja la sustitución sin deshacer.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente 1: **derivar implícitamente** la solución. De $x^3+2xy^2=C$:
+
+$$3x^2+2y^2+4xy\,y'=0\ \Rightarrow\ y'=-\frac{3x^2+2y^2}{4xy}$$
+
+que es la EDO original.
+
+Camino independiente 2: **Bernoulli**. Dividiendo por $4xy$, $y'+\tfrac{1}{2x}\,y=-\tfrac{3x}{4}\,y^{-1}$ ($n=-1$). Con $z=y^{2}$ queda lineal, $z'+\tfrac zx=-\tfrac{3x}{2}$, y resolviendo ($z=u\cdot v$) se obtiene
+
+$$y^2=-\frac{x^2}{2}+\frac{K}{x}$$
+
+Multiplicando por $2x$: $2xy^2=-x^3+2K$, o sea $x^3+2xy^2=2K=C$. Coincide.
+
+Camino independiente 3: **homogénea**. Con $u=\tfrac yx$ la EDO se separa en $\tfrac13\,\ln(1+2u^2)=-\ln x+c$, es decir $(1+2u^2)\,x^3=C$; al volver a $u=\tfrac yx$ da $x^3+2xy^2=C$.
+
+</Comprobacion>
 <ResolucionOficial examen="recup-2025-11-20" fuente="parciales/2do-parcial/2° Parciales/Recuperat. 2° PP Nov-2025.pdf" paginas="4–6" />
 </Ejercicio>
 
@@ -110,14 +394,117 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Es una EDO lineal de 2º orden con coeficientes constantes. El segundo miembro tiene **dos tipos** de términos distintos (uno exponencial y otro polinómico). ¿Qué te da la parte sin segundo miembro (la homogénea)? ¿Alguno de los términos del segundo miembro ya aparece en esa solución?
+
+</Pista>
+<Pista>
+
+**Coeficientes indeterminados:** $y=y_h+y_p$. $y_h$ viene de la ecuación característica. $y_p$ se propone como suma de una parte por cada término del segundo miembro; si una parte coincide con una solución de $y_h$ se multiplica por $x$ (tantas veces como la multiplicidad de la raíz). Machete: [Coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Raíz doble $r=1$: $y_h=C_1e^x+C_2xe^x$. Para $4e^x$ hay resonancia doble ($x^2$); para $2x^2+8$ se propone un polinomio completo de grado 2:
+
+$$y_p=A\,x^2e^x+B\,x^2+D\,x+E$$
+
+Se reemplaza y se compara término a término.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** hallar $y_h$. **Por qué:** resuelve $y''-2y'+y=0$. Se prueba $y=e^{rx}$:
+
+$$r^2-2r+1=0\ \Rightarrow\ (r-1)^2=0$$
+
+Raíz doble $r=1$:
+
+$$y_h=C_1e^x+C_2xe^x$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** a $4e^x$ le corresponde $Ae^x$, pero $e^x$ y $xe^x$ ya están en $y_h$ (resonancia doble), así que se multiplica por $x^2$. A $2x^2+8$ le corresponde un polinomio de grado 2 **completo** (con todas las potencias, aunque el segundo miembro no tenga término en $x$). Los coeficientes se llaman $A,B,D,E$ (la $C$ queda para $C_1,C_2$).
+
+$$y_p=A\,x^2e^x+B\,x^2+D\,x+E$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar.
+
+$$y_p'=2Axe^x+Ax^2e^x+2Bx+D$$
+
+$$y_p''=2Ae^x+4Axe^x+Ax^2e^x+2B$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''-2y'+y$ y agrupar. **Por qué:** conviene separar la parte exponencial de la polinómica.
+
+Parte exponencial: $(2Ae^x+4Axe^x+Ax^2e^x)-2(2Axe^x+Ax^2e^x)+Ax^2e^x$.
+
+- $xe^x$: $4A-4A=0$.
+- $x^2e^x$: $A-2A+A=0$.
+- Queda: $2Ae^x$.
+
+Parte polinómica: $2B-2(2Bx+D)+(Bx^2+Dx+E)$, agrupada por potencias:
+
+$$Bx^2+(D-4B)\,x+(2B-2D+E)$$
+
+La ecuación completa queda:
+
+$$2Ae^x+Bx^2+(D-4B)\,x+(2B-2D+E)=4e^x+2x^2+8$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar coeficientes de cada tipo de término.
+
+- $e^x$: $2A=4\ \Rightarrow\ A=2$
+- $x^2$: $B=2$
+- $x$: $D-4B=0\ \Rightarrow\ D=4B=8$
+- constante: $2B-2D+E=8$
+
+$$E=8-2B+2D=8-4+16=20$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar $y_p$ y la solución general ($y=y_h+y_p$).
+
+$$y_p=2x^2e^x+2x^2+8x+20$$
+
+$$y=C_1e^x+C_2xe^x+2x^2e^x+2x^2+8x+20$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=C_1e^x+C_2xe^x+2x^2e^x+2x^2+8x+20\qquad(C_1,C_2\in\mathbb R)$$
+
+**Ojo con:** olvidarse del término $Dx$ (el segundo miembro no tiene $x$ pero $y_p$ sí lo necesita: $D=8\ne0$) y de la resonancia con $e^x$ (propuesta $x^2e^x$, no $Ae^x$ ni $Axe^x$).
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
+
+- **Bien:** $y_h$ correcta, $y_p=Ax^2e^x+Bx^2+Dx+E$ con la resonancia justificada, coeficientes $A=2$, $B=2$, $D=8$, $E=20$ y $y=y_h+y_p$ completa.
+- **A medias:** $y_h$ bien y propuesta correcta, pero un error de cuenta en algún coeficiente; o una de las dos partes bien resuelta y la otra con una propuesta incompleta.
+- **Mal:** propone $Ae^x$ (sin corregir la resonancia) o un polinomio incompleto (sin $Dx$) y no lo detecta.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **superposición**, resolviendo por separado cada término del segundo miembro y reemplazando.
+
+- Para $4e^x$: $L[2x^2e^x]=2\cdot2e^x=4e^x$ (en $L[Ax^2e^x]$ solo sobrevive $2Ae^x$).
+- Para $2x^2+8$: con $q=2x^2+8x+20$, $q'=4x+8$, $q''=4$:
+
+$$q''-2q'+q=4-2(4x+8)+2x^2+8x+20=2x^2+(-8x+8x)+(4-16+20)=2x^2+8$$
+
+La suma de ambas partes da el segundo miembro $4e^x+2x^2+8$: $y_p$ es solución.
+
+</Comprobacion>
 <ResolucionOficial examen="recup-2025-11-20" fuente="parciales/2do-parcial/2° Parciales/Recuperat. 2° PP Nov-2025.pdf" paginas="7" />
 </Ejercicio>
 

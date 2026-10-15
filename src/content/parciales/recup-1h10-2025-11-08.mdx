@@ -15,6 +15,8 @@ import Ejercicio from '../../components/Ejercicio.astro';
 import Enunciado from '../../components/Enunciado.astro';
 import Pista from '../../components/Pista.astro';
 import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
 import Pendiente from '../../components/Pendiente.astro';
 import ResolucionOficial from '../../components/ResolucionOficial.astro';
 
@@ -29,14 +31,95 @@ Calcular el volumen del sólido limitado por: $\begin{cases} z^2=x^2+y^2\\ z=3 \
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Te piden un **volumen**. Fijate en las dos superficies: ¿qué figura es $z^2=x^2+y^2$ y qué la "tapa" en $z=3$? ¿Cuál queda abajo y cuál arriba? ¿Qué forma tiene la "sombra" del sólido sobre el plano $xy$?
+
+</Pista>
+<Pista>
+
+Volumen entre dos superficies (techo y piso), con una **integral doble en polares**: $V=\iint_D(z_{\text{techo}}-z_{\text{piso}})\,dA$. Hay que decidir techo, piso y la región $D$. Machete: [Volumen en polares/cilíndricas](../../machetes/volumen-polares-cilindricas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: techo $z=3$, piso $z=\sqrt{x^2+y^2}=r$, $D:\ 0\le r\le3,\ 0\le\theta\le2\pi$ (el cono llega a $z=3$ cuando $r=3$):
+
+$$V=\int_0^{2\pi}\!\!d\theta\int_0^3(3-r)\,r\,dr$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el sólido. **Por qué:** para decidir qué es techo y qué es piso. $z^2=x^2+y^2$ es un cono con dos hojas (una para $z\ge0$ y otra para $z\le0$); el plano $z=3$ está arriba del vértice, así que el sólido limitado es el de la hoja superior $z=\sqrt{x^2+y^2}$, cerrada por la tapa $z=3$. **Cómo reconocerlo:** una ecuación $z^2=x^2+y^2$ sin otra cosa es un cono de eje $z$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/recup-1h10/ej1.svg`} alt="Arriba, perspectiva del cono z = raíz de x²+y² cerrado por la tapa z = 3. Abajo, corte y=0 con ejes graduados: el cono forma una V con vértice en el origen y llega a z=3 en x=±3, con la tapa horizontal en z=3 y el sólido sombreado en medio." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** hallar la región $D$ (la "sombra" en el plano $xy$). **Por qué:** es donde el cono llega a la tapa: se reemplaza $z=3$ en el cono.
+
+$$9=x^2+y^2$$
+
+Es el círculo de radio $r=3$: $0\le r\le3$, $0\le\theta\le2\pi$.
+
+</Paso>
+<Paso>
+
+**Qué:** armar el integrando (techo − piso). **Por qué:** el volumen entre dos superficies es la integral de la diferencia de alturas. Como $r\ge0$, $\sqrt{x^2+y^2}=\sqrt{r^2}=r$ (sin valor absoluto):
+
+$$V=\iint_D\big(3-\sqrt{x^2+y^2}\big)\,dx\,dy$$
+
+</Paso>
+<Paso>
+
+**Qué:** pasar a polares. **Por qué:** la base es un círculo. Se reemplaza $dx\,dy=r\,dr\,d\theta$ (el $r$ es el jacobiano, en valor absoluto y positivo porque $r\ge0$):
+
+$$V=\int_0^{2\pi}\!\!d\theta\int_0^3(3-r)\,r\,dr=\int_0^{2\pi}\!\!d\theta\int_0^3(3r-r^2)\,dr$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$ (integral interna, $\theta$ no interviene).
+
+$$\int_0^3(3r-r^2)\,dr=\Big[\frac{3r^2}{2}-\frac{r^3}{3}\Big]_0^3$$
+
+En $r=3$ (en $r=0$ vale 0):
+
+$$\frac{3\cdot9}{2}=\frac{27}{2},\qquad\frac{3^3}{3}=9$$
+
+$$\frac{27}{2}-9=\frac92$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** lo que queda es una constante por una vuelta completa.
+
+$$V=\int_0^{2\pi}\frac92\,d\theta=\frac92\cdot2\pi=9\pi$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$V=9\pi\ \text{u}^3\approx28{,}27\ \text{u}^3$$
+
+**Ojo con:** olvidarse del jacobiano $r$ (queda $\int(3-r)\,dr$, que no es un volumen), o tomar las dos hojas del cono.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+
+- **Bien:** dibujo del cono con la tapa $z=3$ (techo y piso identificados), $D$ con $r\le3$, integral $\int_0^{2\pi}\!\int_0^3(3-r)\,r\,dr\,d\theta$ y $V=9\pi$.
+- **A medias:** planteo correcto (techo − piso, polares, jacobiano) con un error de cuenta que cambia el resultado.
+- **Mal:** sin planteo, o sin jacobiano, o resta mal las superficies (por ejemplo $r-3$) y no corrige el signo.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente, por **rebanadas horizontales**: a la altura $z$ el sólido es un círculo de radio $z$ (porque $z=r$ sobre el cono), de área $\pi z^2$:
+
+$$V=\int_0^3\pi z^2\,dz=\Big[\frac{\pi z^3}{3}\Big]_0^3=9\pi$$
+
+Coincide con la fórmula geométrica del cono: $\tfrac13\,\pi R^2h=\tfrac13\pi\cdot9\cdot3=9\pi$.
+
+</Comprobacion>
 <ResolucionOficial examen="recup-1h10-2025-11-08" fuente="parciales/2do-parcial/2° Parciales/Recup. 2° PP 1H10 Nov-2025.pdf" paginas="2" />
 </Ejercicio>
 
@@ -51,15 +134,111 @@ Siendo el dominio de integración la región limitada por: $\begin{cases} z=x^2+
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Hay que integrar una función de tres variables sobre un cuerpo. Mirá la función ($z\sqrt{x^2+y^2}$) y las superficies: ¿hay alguna simetría respecto de un eje? ¿Qué aparece repetido en la función y en el paraboloide?
+
+</Pista>
+<Pista>
+
+**Integral triple en cilíndricas** (eje $z$): $x^2+y^2=r^2$, $dV=r\,dz\,dr\,d\theta$. Hay que decidir los límites de $z$ (entre paraboloide y plano), de $r$ (la "sombra" en $xy$) y de $\theta$. Machete: [Integral triple en cilíndricas y esféricas](../../machetes/integral-triple-cilindricas-esfericas/).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $r^2\le z\le4$, $0\le r\le2$, $0\le\theta\le2\pi$, integrando $z\,r$ y jacobiano $r$:
+
+$$IT=\int_0^{2\pi}\!\!d\theta\int_0^2\!r^2\,dr\int_{r^2}^4 z\,dz$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** dibujar el cuerpo. **Por qué:** para saber qué es piso y qué es techo. $z=x^2+y^2$ es un paraboloide que abre hacia arriba (vértice en el origen); $z=4$ es un plano horizontal que lo corta. El cuerpo es el "vaso" entre los dos: arriba la tapa $z=4$, abajo el paraboloide.
+
+<img src={`${import.meta.env.BASE_URL}figuras/recup-1h10/ej2.svg`} alt="Arriba, perspectiva del paraboloide z = x²+y² cerrado por la tapa z = 4. Abajo, corte y=0 con ejes graduados: parábola de vértice en el origen que llega a z=4 en x=±2, tapa horizontal en z=4 y el sólido sombreado entre ambas." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
+<Paso>
+
+**Qué:** hallar la curva donde se cortan (condición de borde en $xy$). **Por qué:** define los límites de $r$.
+
+$$4=x^2+y^2=r^2\ \Rightarrow\ r=2$$
+
+Entonces $0\le r\le2$ y $0\le\theta\le2\pi$ (círculo completo).
+
+</Paso>
+<Paso>
+
+**Qué:** pasar a cilíndricas. **Por qué:** el cuerpo tiene eje $z$. $\sqrt{x^2+y^2}=r$ (con $r\ge0$), $z$ queda igual y $dV=r\,dz\,dr\,d\theta$ (jacobiano $r$):
+
+$$IT=\int_0^{2\pi}\!\!d\theta\int_0^2\!\!\int_{r^2}^4 z\cdot r\cdot r\,dz\,dr$$
+
+Los dos $r$ son uno de la función y otro del jacobiano: $r\cdot r=r^2$.
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $z$ (la más interna). **Por qué:** los límites en $z$ dependen de $r$.
+
+$$\int_{r^2}^4 z\,dz=\Big[\frac{z^2}{2}\Big]_{r^2}^{4}=\frac{16}{2}-\frac{r^4}{2}=8-\frac{r^4}{2}$$
+
+(en el límite inferior, $(r^2)^2=r^4$).
+
+</Paso>
+<Paso>
+
+**Qué:** multiplicar por $r^2$ y preparar la integral en $r$.
+
+$$r^2\Big(8-\frac{r^4}{2}\Big)=8r^2-\frac{r^6}{2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $r$.
+
+$$\int_0^2\Big(8r^2-\frac{r^6}{2}\Big)dr=\Big[\frac{8r^3}{3}-\frac{r^7}{14}\Big]_0^2$$
+
+Evaluando en $r=2$ (en $0$ vale $0$):
+
+$$\frac{8\cdot8}{3}=\frac{64}{3},\qquad\frac{2^7}{14}=\frac{128}{14}=\frac{64}{7}$$
+
+$$\frac{64}{3}-\frac{64}{7}=\frac{448-192}{21}=\frac{256}{21}$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar en $\theta$. **Por qué:** lo que queda es una constante por una vuelta completa.
+
+$$IT=\int_0^{2\pi}\frac{256}{21}\,d\theta=\frac{256}{21}\cdot2\pi=\frac{512\pi}{21}$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$IT=\frac{512\pi}{21}\approx76{,}60$$
+
+**Ojo con:** dividir por 2 de más al distribuir: $r^2\big(\tfrac{16}{2}-\tfrac{r^4}{2}\big)=8r^2-\tfrac{r^6}{2}$ (no $\tfrac12(8r^2-r^6)$). Ese es el error de cuenta que aparece en la resolución oficial (ver nota abajo).
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+
+- **Bien:** dibujo del paraboloide con la tapa, límites $r^2\le z\le4$, $0\le r\le2$, $0\le\theta\le2\pi$, integrando $z\,r\cdot r$ (con jacobiano) y resultado $\tfrac{512\pi}{21}$.
+- **A medias:** planteo completo y correcto (cilíndricas, límites, jacobiano) pero con un error de cuenta que cambia el valor final. Es el caso de la resolución oficial.
+- **Mal:** sin jacobiano, o con límites de $z$ invertidos o de $r$ mal hallados.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **cambiar el orden de integración** (primero $\theta$ y $r$, $z$ al final). Para cada altura $z\in[0,4]$ el cuerpo es el círculo $r\le\sqrt z$:
+
+$$IT=2\pi\int_0^4 z\Big(\int_0^{\sqrt z}r^2\,dr\Big)dz=2\pi\int_0^4 z\cdot\frac{z^{3/2}}{3}\,dz$$
+
+$$\int_0^4\frac{z^{5/2}}{3}\,dz=\frac13\cdot\frac27\,z^{7/2}\Big|_0^4=\frac{2}{21}\cdot128=\frac{256}{21}$$
+
+$$IT=2\pi\cdot\frac{256}{21}=\frac{512\pi}{21}$$
+
+</Comprobacion>
 <ResolucionOficial examen="recup-1h10-2025-11-08" fuente="parciales/2do-parcial/2° Parciales/Recup. 2° PP 1H10 Nov-2025.pdf" paginas="3" />
+
+> ⚠️ **Discrepancia:** la resolución oficial (p. 3) llega a $IT=\tfrac{64}{21}\pi$, pero el recálculo con sympy (y una suma numérica independiente) da $IT=\tfrac{512}{21}\pi$. Causa probable: al pasar de $8r^2-\tfrac{r^6}{2}$ a "$\tfrac12(8r^2-r^6)$" se perdió un factor 2 (debería ser $\tfrac12(16r^2-r^6)$), de ahí $\tfrac12\big(\tfrac{64}{3}-\tfrac{128}{7}\big)=\tfrac{32}{21}$ en vez de $\tfrac{256}{21}$. El planteo oficial es correcto; solo falla la cuenta. Pendiente de confirmar con la cátedra.
 </Ejercicio>
 
 <Ejercicio id="recup-1h10-2025-11-08#3" numero={3} fuente="parciales/2do-parcial/2° Parciales/Recup. 2° PP 1H10 Nov-2025.pdf" pagina={1} unidad="U5" tema="Integral curvilínea y Green">
@@ -75,14 +254,135 @@ Verificar el cálculo aplicando la fórmula de Green.
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Te piden dos cosas: la integral de línea del campo sobre una curva **cerrada**, y verificarla con otro método. Mirá las dos curvas: ¿qué son? ¿Dónde se cortan? ¿La curva cerrada se arma con un solo tramo o con más de uno?
+
+</Pista>
+<Pista>
+
+Dos tramos, cada uno como $y=f(x)$: se calcula **por definición** ($dy=f'(x)\,dx$, sustituyendo en $\int P\,dx+Q\,dy$) y se verifica con el **teorema de Green** ($\iint_D(Q_x-P_y)\,dA$). Para el sentido antihorario, la región queda a la izquierda. Machetes: [Integral curvilínea por definición](../../machetes/curvilinea-por-definicion/) y [Teorema de Green](../../machetes/teorema-de-green/).
+
+</Pista>
+<Pista>
+
+Puntos de corte $(0,0)$ y $(1,0)$. Antihorario: $C_1$ ($y=x^2-x$, abajo) de $x=0$ a $x=1$ y $C_2$ ($y=-2x^2+2x$, arriba) de $x=1$ a $x=0$:
+
+$$IC=\int_0^1\!\big[P+Q\,y_1'\big]dx+\int_1^0\!\big[P+Q\,y_2'\big]dx\qquad\text{y}\qquad\text{Green: }\iint_D2\,dx\,dy$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** hallar los puntos de intersección. **Por qué:** son los extremos de cada tramo. Igualo las parábolas:
+
+$$x^2-x=-2x^2+2x$$
+
+$$3x^2-3x=0\ \Rightarrow\ 3x(x-1)=0\ \Rightarrow\ x=0,\ x=1$$
+
+Ambas valen $0$ en esos $x$: los puntos son $(0,0)$ y $(1,0)$.
 
 </Paso>
+<Paso>
+
+**Qué:** dibujar y fijar el sentido. **Por qué:** el sentido antihorario (+) deja la región a la izquierda. $y=x^2-x$ abre hacia arriba (mínimo $-\tfrac14$ en $x=\tfrac12$) y $y=-2x^2+2x$ abre hacia abajo (máximo $\tfrac12$ en $x=\tfrac12$): la primera es el borde de abajo y la segunda el de arriba. Se recorre por abajo hacia la derecha ($C_1$, $x$ de $0$ a $1$) y vuelve por arriba hacia la izquierda ($C_2$, $x$ de $1$ a $0$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/recup-1h10/ej3.svg`} alt="Región entre las parábolas y = x²−x (abajo, de (0,0) a (1,0)) e y = −2x²+2x (arriba), con ejes graduados de a 0,25. La trayectoria cerrada se recorre en sentido antihorario: C1 por abajo hacia la derecha y C2 por arriba hacia la izquierda." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Paso>
+
+**Qué:** plantear la integral por definición. **Por qué:** $F=P\,i+Q\,j$ con $P=x-y$, $Q=x+y$, y en cada tramo $y$ es función de $x$:
+
+$$IC=\oint_C(x-y)\,dx+(x+y)\,dy=IC_1+IC_2$$
+
+</Paso>
+<Paso>
+
+**Qué:** tramo $C_1$. **Por qué:** $y=x^2-x$, $dy=(2x-1)\,dx$, $x:0\to1$. Los factores:
+
+$$P=x-(x^2-x)=2x-x^2,\qquad Q=x+(x^2-x)=x^2$$
+
+Integrando (sin errores de signo al distribuir):
+
+$$P+Q\,y'=2x-x^2+x^2(2x-1)=2x-x^2+2x^3-x^2=2x^3-2x^2+2x$$
+
+$$IC_1=\int_0^1(2x^3-2x^2+2x)\,dx=\Big[\frac{x^4}{2}-\frac{2x^3}{3}+x^2\Big]_0^1$$
+
+$$\frac12-\frac23+1=\frac{3-4+6}{6}\ \Rightarrow\ IC_1=\frac56$$
+
+</Paso>
+<Paso>
+
+**Qué:** tramo $C_2$. **Por qué:** $y=-2x^2+2x$, $dy=(-4x+2)\,dx$, y $x$ va de $1$ a $0$.
+
+$$P=x-(-2x^2+2x)=2x^2-x,\qquad Q=x+(-2x^2+2x)=3x-2x^2$$
+
+Producto $Q\,y'$ (por separado, para no perder términos):
+
+$$(3x-2x^2)(-4x+2)=-12x^2+6x+8x^3-4x^2=8x^3-16x^2+6x$$
+
+$$P+Q\,y'=2x^2-x+8x^3-16x^2+6x=8x^3-14x^2+5x$$
+
+Como el recorrido va de $1$ a $0$, se invierten los límites (cambia el signo):
+
+$$IC_2=\int_1^0(8x^3-14x^2+5x)\,dx=-\Big[2x^4-\frac{14x^3}{3}+\frac{5x^2}{2}\Big]_0^1$$
+
+$$2-\frac{14}{3}+\frac52=\frac{12-28+15}{6}=-\frac16\ \Rightarrow\ IC_2=\frac16$$
+
+</Paso>
+<Paso>
+
+**Qué:** sumar los tramos.
+
+$$IC=\frac56+\frac16=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** verificar con Green (lo pide la consigna). **Por qué:** la curva es cerrada, simple, antihoraria y $P,Q$ son polinomios. $\dfrac{\partial Q}{\partial x}=1$ y $\dfrac{\partial P}{\partial y}=-1$:
+
+$$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1-(-1)=2$$
+
+$$IC=\iint_D2\,dx\,dy=2\iint_D dx\,dy$$
+
+$D$: $0\le x\le1$, $x^2-x\le y\le-2x^2+2x$. La altura de $D$ es:
+
+$$(-2x^2+2x)-(x^2-x)=-3x^2+3x$$
+
+$$\iint_D dx\,dy=\int_0^1(-3x^2+3x)\,dx=\Big[-x^3+\frac{3x^2}{2}\Big]_0^1=-1+\frac32=\frac12$$
+
+$$IC=2\iint_D dx\,dy=2\cdot\frac12=1$$
+
+Coincide con la definición.
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$IC=1$$
+
+(por definición: $IC_1=\tfrac56$ y $IC_2=\tfrac16$; por Green: $2\cdot\text{Área}(D)=2\cdot\tfrac12=1$).
+
+**Ojo con:** el sentido de recorrido: por abajo de izquierda a derecha y por arriba de derecha a izquierda; si se recorre $C_2$ de $0$ a $1$ da $-\tfrac16$ y el total sale mal. Y en $C_2$, distribuir bien el producto $(3x-2x^2)(-4x+2)$.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+
+- **Bien:** dibujo con puntos de corte y sentido (+), $IC_1=\tfrac56$, $IC_2=\tfrac16$ por definición, suma $1$ y verificación con Green ($\iint2\,dA=1$).
+- **A medias:** definición correcta pero con un error de cuenta en un tramo, o solo hace una de las dos partes (definición o Green).
+- **Mal:** sentido invertido sin advertirlo, no usa $dy=f'(x)\,dx$, o aplica Green sin $Q_x-P_y$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente (ni definición completa ni Green directo): se **descompone el campo**. $F=(x-y,\,x+y)$ es la suma de $(x,\,y)$ y $(-y,\,x)$.
+
+- $(x,\,y)$ es conservativo (potencial $\tfrac{x^2+y^2}{2}$): su integral sobre una curva **cerrada** vale $0$.
+- $(-y,\,x)$ da $\oint(-y\,dx+x\,dy)=2\cdot\text{Área}$. El área sale de $\oint x\,dy$ (también por definición): $\oint x\,dy=\int_0^1x(2x-1)\,dx+\int_1^0x(-4x+2)\,dx$.
+
+$$\int_0^1(2x^2-x)\,dx=\frac23-\frac12=\frac16,\qquad\int_1^0(-4x^2+2x)\,dx=-\Big(-\frac43+1\Big)=\frac13$$
+
+$$\text{Área}=\frac16+\frac13=\frac12\ \Rightarrow\ IC=0+2\cdot\frac12=1$$
+
+</Comprobacion>
 <ResolucionOficial examen="recup-1h10-2025-11-08" fuente="parciales/2do-parcial/2° Parciales/Recup. 2° PP 1H10 Nov-2025.pdf" paginas="4–5" />
 </Ejercicio>
 
@@ -99,14 +399,99 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Mirá el signo de cada término y con qué variable aparece. ¿Se puede despejar y separar $x$ de $y$? ¿Los dos términos parecen salir de **derivar parcialmente** una misma función?
+
+</Pista>
+<Pista>
+
+Si $P\,dx+Q\,dy=0$ cumple $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$, es una **EDO exacta**: existe $u(x,y)$ con $u_x=P$, $u_y=Q$ y la solución es $u=C$. Se pide el desarrollo analítico (no la fórmula directa). Machete: [EDO exacta](../../machetes/edo-exacta/).
+
+</Pista>
+<Pista>
+
+$P=x^2+y^2-\cos x$ y $Q=2xy+\sin y$. Integrar $P$ respecto de $x$ y sumar una función $\varphi(y)$; derivar en $y$ e igualar a $Q$ para hallar $\varphi'(y)$:
+
+$$u=\int P\,dx+\varphi(y),\qquad u_y=Q$$
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** identificar $P$ y $Q$. **Por qué:** la EDO ya viene escrita como $P\,dx+Q\,dy=0$.
+
+$$P=x^2+y^2-\cos x,\qquad Q=2xy+\sin y$$
 
 </Paso>
+<Paso>
+
+**Qué:** verificar que es exacta. **Por qué:** es la condición para que exista la función potencial $u$.
+
+$$\frac{\partial P}{\partial y}=2y=\frac{\partial Q}{\partial x}$$
+
+Son iguales: es exacta.
+
+</Paso>
+<Paso>
+
+**Qué:** hallar $u$ integrando $P$ en $x$ (con $y$ constante). **Por qué:** $u_x=P$; la "constante" de integración puede depender de $y$.
+
+$$u=\int(x^2+y^2-\cos x)\,dx=\frac{x^3}{3}+xy^2-\sin x+\varphi(y)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $u$ respecto de $y$ e igualar a $Q$. **Por qué:** $u_y=Q$ determina $\varphi$.
+
+$$u_y=2xy+\varphi'(y)=2xy+\sin y$$
+
+$$\varphi'(y)=\sin y$$
+
+</Paso>
+<Paso>
+
+**Qué:** integrar $\varphi'$.
+
+$$\varphi(y)=\int\sin y\,dy=-\cos y$$
+
+(la constante se absorbe en $C$ de la solución).
+
+</Paso>
+<Paso>
+
+**Qué:** escribir la solución general. **Por qué:** las soluciones son las curvas de nivel $u=C$.
+
+$$\frac{x^3}{3}+xy^2-\sin x-\cos y=C$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$\frac{x^3}{3}+xy^2-\sin x-\cos y=C\qquad(C\in\mathbb R)$$
+
+(solución general en forma implícita).
+
+**Ojo con:** el signo de $\varphi$: $\int\sin y\,dy=-\cos y$; y no olvidar $\varphi(y)$ (no una constante) al integrar respecto de $x$.
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+
+- **Bien:** verifica la exactitud ($2y=2y$), integra $P$ con $\varphi(y)$, halla $\varphi'(y)=\sin y$, $\varphi=-\cos y$ y escribe $u=C$.
+- **A medias:** hace el procedimiento bien pero se equivoca en un signo o en una primitiva (por ejemplo $+\cos y$).
+- **Mal:** no verifica la exactitud, usa la fórmula directa (la consigna la prohíbe) o escribe una constante en lugar de $\varphi(y)$.
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **empezar por $Q$** (integrar en $y$) y llegar a lo mismo.
+
+$$u=\int(2xy+\sin y)\,dy=xy^2-\cos y+\psi(x)$$
+
+$$u_x=y^2+\psi'(x)=x^2+y^2-\cos x\ \Rightarrow\ \psi'(x)=x^2-\cos x$$
+
+$$\psi(x)=\frac{x^3}{3}-\sin x$$
+
+Queda $u=xy^2-\cos y+\dfrac{x^3}{3}-\sin x$: la misma función potencial.
+
+</Comprobacion>
 <ResolucionOficial examen="recup-1h10-2025-11-08" fuente="parciales/2do-parcial/2° Parciales/Recup. 2° PP 1H10 Nov-2025.pdf" paginas="6" />
 </Ejercicio>
 
@@ -123,14 +508,107 @@ $$
 
 <Pista>
 
-<Pendiente>: T04</Pendiente>
+Es una EDO lineal de 2º orden con coeficientes constantes y término independiente. ¿Qué te da la parte sin el $2e^x$ (la homogénea)? Fijate si el término $2e^x$ ya "está" en esa solución.
+
+</Pista>
+<Pista>
+
+**Coeficientes indeterminados:** $y=y_h+y_p$. $y_h$ sale de la ecuación característica; $y_p$ se propone parecida al término independiente, pero si coincide con una solución de $y_h$ hay que multiplicar por $x$ tantas veces como la multiplicidad de la raíz. Machete: [Coeficientes indeterminados](../../machetes/edo2-coeficientes-indeterminados/).
+
+</Pista>
+<Pista>
+
+Raíz doble $r=1$, $y_h=C_1e^x+C_2xe^x$. Como $e^x$ y $xe^x$ ya están en $y_h$, la propuesta es $y_p=A\,x^2e^x$. Derivar dos veces, reemplazar y comparar el coeficiente de $e^x$.
 
 </Pista>
 <Paso>
 
-<Pendiente>: T04</Pendiente>
+**Qué:** hallar $y_h$. **Por qué:** es la solución de $y''-2y'+y=0$; se prueba $y=e^{rx}$ y queda la ecuación característica:
+
+$$r^2-2r+1=0\ \Rightarrow\ (r-1)^2=0$$
+
+Raíz doble $r=1$, entonces:
+
+$$y_h=C_1e^x+C_2xe^x$$
 
 </Paso>
+<Paso>
+
+**Qué:** proponer $y_p$. **Por qué:** el término independiente es $2e^x$, que "pide" $Ae^x$; pero $e^x$ y $xe^x$ ya son solución de la homogénea (resonancia con raíz doble). Se multiplica por $x^2$ (multiplicidad 2):
+
+$$y_p=A\,x^2e^x$$
+
+**Cómo reconocerlo:** si la propuesta natural ya aparece en $y_h$, hay resonancia.
+
+</Paso>
+<Paso>
+
+**Qué:** derivar (regla del producto).
+
+$$y_p'=2Axe^x+Ax^2e^x$$
+
+$$y_p''=2Ae^x+2Axe^x+2Axe^x+Ax^2e^x=2Ae^x+4Axe^x+Ax^2e^x$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en $y''-2y'+y$ y agrupar por tipo de término.
+
+$$y_p''-2y_p'+y_p=\big(2Ae^x+4Axe^x+Ax^2e^x\big)-2\big(2Axe^x+Ax^2e^x\big)+Ax^2e^x$$
+
+- Términos con $xe^x$: $4A-4A=0$.
+- Términos con $x^2e^x$: $A-2A+A=0$.
+- Queda solo $2Ae^x$.
+
+$$2Ae^x=2e^x$$
+
+</Paso>
+<Paso>
+
+**Qué:** comparar coeficientes.
+
+$$2A=2\ \Rightarrow\ A=1$$
+
+$$y_p=x^2e^x$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la solución general ($y=y_h+y_p$).
+
+$$y=C_1e^x+C_2xe^x+x^2e^x$$
+
+</Paso>
+<Solucion>
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+$$y=C_1e^x+C_2xe^x+x^2e^x\qquad(C_1,C_2\in\mathbb R)$$
+
+**Ojo con:** proponer $Ae^x$ o $Axe^x$ (ya están en $y_h$; $y_p$ daría $0$ al reemplazar).
+
+**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+
+- **Bien:** $r=1$ doble, $y_h=C_1e^x+C_2xe^x$, $y_p=Ax^2e^x$ (con justificación), $A=1$ y $y=y_h+y_p$ completa.
+- **A medias:** $y_h$ correcta y $y_p$ bien propuesta, pero un error de cuenta en las derivadas o en $A$; o la solución sin $y_h$.
+- **Mal:** propone $y_p=Ae^x$ o $Axe^x$ (no corrige la resonancia).
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **variación de parámetros** con $y_1=e^x$, $y_2=xe^x$. El wronskiano es
+
+$$W=y_1y_2'-y_2y_1'=e^x(e^x+xe^x)-xe^x\cdot e^x=e^{2x}$$
+
+$$u_1'=-\frac{y_2f}{W}=-\frac{xe^x\cdot2e^x}{e^{2x}}=-2x\ \Rightarrow\ u_1=-x^2$$
+
+$$u_2'=\frac{y_1f}{W}=\frac{e^x\cdot2e^x}{e^{2x}}=2\ \Rightarrow\ u_2=2x$$
+
+$$y_p=u_1y_1+u_2y_2=-x^2e^x+2x\cdot xe^x=x^2e^x$$
+
+Es la misma $y_p$.
+
+</Comprobacion>
 <ResolucionOficial examen="recup-1h10-2025-11-08" fuente="parciales/2do-parcial/2° Parciales/Recup. 2° PP 1H10 Nov-2025.pdf" paginas="7" />
 </Ejercicio>
 
