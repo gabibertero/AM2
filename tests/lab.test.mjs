@@ -20,14 +20,34 @@ function simpson(f, a, b, n = 200) {
   for (let i = 1; i < n; i++) s += f(a + i * h) * (i % 2 ? 4 : 2);
   return (s * h) / 3;
 }
-// Residuo relativo de una EDO: ec(x, y, y', y'') evaluada con derivadas numéricas.
-function residuoMax(v, C) {
+// Residuo de una EDO: ec(x, y, y', y'') con derivadas numéricas, normalizado por la escala de la propia solución
+// (así soluciones de tamaño 1e-3 no esconden errores; el piso 1e-9 evita dividir por 0).
+function residuoMax(v, C, y = (t) => v.y(t, ...C)) {
   let peor = 0;
   for (const x of puntos(v.dom)) {
-    const [y, y1, y2] = derivadas((t) => v.y(t, ...C), x);
-    peor = Math.max(peor, Math.abs(v.ec(x, y, y1, y2)) / (1 + Math.abs(y) + Math.abs(y1) + Math.abs(y2)));
+    const [yy, y1, y2] = derivadas(y, x);
+    peor = Math.max(peor, Math.abs(v.ec(x, yy, y1, y2)) / (Math.max(Math.abs(yy), Math.abs(y1), Math.abs(y2)) + 1e-9));
   }
   return peor;
+}
+// Perturba una solución con algo que no resuelve la EDO (escalado a su tamaño): el chequeo tiene que fallar.
+const arruinar = (v, C) => {
+  const [y, y1, y2] = derivadas((t) => v.y(t, ...C), (v.dom[0] + v.dom[1]) / 2);
+  const esc = Math.max(Math.abs(y), Math.abs(y1), Math.abs(y2)) + 1e-9;
+  return (t) => v.y(t, ...C) + 0.1 * esc * (Math.sin(5 * t) + 1.5);
+};
+// F(x,y) es constante a lo largo de la curva integral y' = -M/N (RK4); devuelve null si N se anula en el camino.
+function variacionF(v, x0, y0, largo = 0.2, pasos = 100) {
+  const f = (x, y) => -v.M(x, y) / v.N(x, y);
+  let x = x0, y = y0;
+  const h = largo / pasos;
+  for (let i = 0; i < pasos; i++) {
+    if (Math.abs(v.N(x, y)) < 0.3 || Math.abs(f(x, y)) > 3) return null; // zonas empinadas: RK4 pierde precisión
+    const k1 = f(x, y), k2 = f(x + h / 2, y + (h * k1) / 2), k3 = f(x + h / 2, y + (h * k2) / 2), k4 = f(x + h, y + h * k3);
+    y += (h * (k1 + 2 * k2 + 2 * k3 + k4)) / 6; x += h;
+    if (!Number.isFinite(y) || Math.abs(y) > 50) return null;
+  }
+  return Math.abs(v.F(x, y) - v.F(x0, y0)) / (1 + Math.abs(v.F(x0, y0)));
 }
 
 test('rng: determinista, en rango y semillaValida', () => {
@@ -50,7 +70,8 @@ for (const g of GENERADORES) {
       assert.ok(e.enunciado.length > 0 && e.pasos.length >= 3 && e.resultado.tex, `semilla ${s} incompleta`);
       const todo = JSON.stringify([e.enunciado, e.pasos, e.resultado]);
       assert.ok(!/NaN|undefined|Infinity|null|\+-|--|\(\)|\{\}/.test(todo), `semilla ${s}: ${todo}`);
-      for (const p of e.pasos) assert.ok(p.tex || p.txt);
+      for (const p of e.pasos) assert.ok(p.txt && p.tex, `semilla ${s}: paso sin texto o sin fórmula`);
+      assert.ok(!/\\sin(?![a-z])/.test(todo), `semilla ${s}: usar \\operatorname{sen}, no \\sin`);
       vistos.add(e.enunciado[0].tex);
     }
     assert.ok(vistos.size >= 3, 'poca variedad de enunciados');
@@ -61,93 +82,179 @@ for (const id of ['lineal', 'bernoulli', 'homogenea2', 'nohomogenea']) {
   test(`${id}: la solución general verifica la EDO en varios puntos y constantes (${N} semillas)`, () => {
     for (const s of semillas) {
       const { verif: v } = generar(id, s);
-      for (const C of v.consts) assert.ok(residuoMax(v, C) < 1e-4, `semilla ${s}, C=${C}`);
+      for (const C of v.consts) assert.ok(residuoMax(v, C) < 1e-4, `semilla ${s}, C=${C}: ${residuoMax(v, C)}`);
     }
+  });
+  test(`${id}: control negativo, una solución mal armada SÍ falla el chequeo`, () => {
+    let fallan = 0;
+    for (const s of semillas.slice(0, 100)) {
+      const { verif: v } = generar(id, s);
+      if (residuoMax(v, v.consts[0], arruinar(v, v.consts[0])) > 1e-4) fallan++;
+    }
+    assert.ok(fallan >= 95, `solo ${fallan}/100 detectados`);
   });
 }
 
-test('control negativo: una solución mal armada SÍ falla el chequeo', () => {
-  let fallan = 0;
-  for (const s of semillas.slice(0, 100)) {
-    const { verif: v } = generar('nohomogenea', s);
-    const mal = { ...v, y: (x, ...C) => v.y(x, ...C) + 0.5 * x * x + 1 };
-    if (residuoMax(mal, v.consts[0]) > 1e-4) fallan++;
-  }
-  assert.ok(fallan >= 95, `solo ${fallan}/100 detectados`);
-});
-
-test('nohomogenea: cubre con y sin resonancia en polinomio, exponencial y trigonométrica', () => {
+test('lineal: PVI cumple la condición inicial y salen los cuatro tipos, con y sin PVI', () => {
   const vistos = new Set();
   for (const s of semillas) {
-    const e = generar('nohomogenea', s);
-    const t = e.enunciado[0].tex;
-    const forma = /\\cos|\\sin/.test(t.split('=').pop()) ? 'trig' : /e\^/.test(t.split('=').pop()) ? 'exp' : 'poli';
-    vistos.add(`${forma}-${e.verif.res}`);
+    const { verif: v } = generar('lineal', s);
+    vistos.add(`${v.tipo}-${!!v.pvi}`);
+    if (v.pvi) {
+      assert.ok(Math.abs(v.y(v.pvi.x0, v.pvi.C) - v.pvi.y0) < 1e-9, `semilla ${s}: y(x0) != y0`);
+      assert.ok(residuoMax(v, [v.pvi.C]) < 1e-4, `semilla ${s}: solución particular`);
+    }
   }
-  assert.equal(vistos.size, 6, [...vistos].join());
+  assert.equal(vistos.size, 8, [...vistos].join());
+});
+
+test('bernoulli: salen todos los n (positivos, negativos y fraccionarios) y el residuo no depende de la escala', () => {
+  const ns = new Set();
+  for (const s of semillas) ns.add(generar('bernoulli', s).verif.n);
+  assert.deepEqual([...ns].sort((a, b) => a - b), [-2, -1, -0.5, 0.5, 2, 3]);
+  // solución escalada por 1e-3 (error de las constantes enormes de antes): un error de la EDO sigue detectándose
+  const { verif: v } = generar('bernoulli', 1);
+  const chica = (t) => 1e-3 * v.y(t, ...v.consts[0]);
+  assert.ok(residuoMax(v, v.consts[0], chica) > 1e-4, 'el residuo normalizado debe delatar una y que no es solución');
+});
+
+test('nohomogenea: cubre con y sin resonancia en polinomio, exponencial y trigonométrica, y la superposición de dos términos', () => {
+  const vistos = new Set(), res = new Set();
+  for (const s of semillas) {
+    const { verif: v } = generar('nohomogenea', s);
+    if (v.partes.length === 2) { vistos.add('doble'); continue; }
+    vistos.add(`${v.partes[0].cat}-${v.partes[0].s > 0}`);
+    res.add(`${v.partes[0].cat}-${v.partes[0].s}`);
+  }
+  assert.equal(vistos.size, 7, [...vistos].join());
+  assert.ok(res.has('poli-2') && res.has('exp-2') && res.has('poli-1') && res.has('exp-1') && res.has('trig-1'), [...res].join());
 });
 
 test('homogenea2: salen raíces distintas, iguales y complejas', () => {
   const tipos = new Set();
-  for (const s of semillas) {
-    const p = generar('homogenea2', s).pasos[1].txt;
-    tipos.add(/distintas/.test(p) ? 'd' : /doble/.test(p) ? 'i' : 'c');
-  }
-  assert.equal(tipos.size, 3);
+  for (const s of semillas) tipos.add(generar('homogenea2', s).verif.tipo);
+  assert.deepEqual([...tipos].sort(), ['complejas', 'distintas', 'iguales']);
 });
 
-test(`exacta: M_y = N_x, F_x = M, F_y = N y g'(y) depende solo de y (${N} semillas)`, () => {
+test(`exacta: M_y = N_x, F_x = M, F_y = N, F constante sobre la curva integral y g'(y) solo de y (${N} semillas)`, () => {
   const h = 1e-4;
+  let curvas = 0;
+  const modos = new Set();
   for (const s of semillas) {
     const { verif: v } = generar('exacta', s);
+    modos.add(v.noExacta ? 'noexacta' : v.modo);
+    const grid = puntos(v.dom, 5);
+    const Myc = (x, y) => (v.M(x, y + h) - v.M(x, y - h)) / (2 * h), Nxc = (x, y) => (v.N(x + h, y) - v.N(x - h, y)) / (2 * h);
+    if (v.noExacta) {
+      assert.ok(!v.exactaSim);
+      assert.ok(grid.some((x) => grid.some((y) => Math.abs(Myc(x, y) - Nxc(x, y)) > 1e-3)), `semilla ${s}: parece exacta`);
+      continue;
+    }
     assert.ok(v.exactaSim && v.gpSoloY, `semilla ${s}`);
-    for (const x of puntos(v.dom, 5)) for (const y of puntos(v.dom, 5)) {
+    for (const x of grid) for (const y of grid) {
       cerca((v.F(x + h, y) - v.F(x - h, y)) / (2 * h), v.M(x, y), 1e-6, `F_x semilla ${s}`);
       cerca((v.F(x, y + h) - v.F(x, y - h)) / (2 * h), v.N(x, y), 1e-6, `F_y semilla ${s}`);
-      cerca((v.M(x, y + h) - v.M(x, y - h)) / (2 * h), (v.N(x + h, y) - v.N(x - h, y)) / (2 * h), 1e-6, `M_y=N_x semilla ${s}`);
+      cerca(Myc(x, y), Nxc(x, y), 1e-6, `M_y=N_x semilla ${s}`);
     }
-    // F es constante a lo largo de la curva integral: dF/dx + F_y·y' = 0 con y' = -M/N
-    const x = 0.7, y = 0.4;
-    if (Math.abs(v.N(x, y)) > 0.1) cerca(v.M(x, y) + v.N(x, y) * (-v.M(x, y) / v.N(x, y)), 0, 1e-9, 'curva integral');
+    for (const [x0, y0] of [[0.3, 0.4], [-0.5, 0.8], [0.6, -0.7]]) {
+      const d = variacionF(v, x0, y0);
+      if (d !== null) { curvas++; assert.ok(d < 1e-6, `semilla ${s}: F varía ${d} sobre la curva integral`); }
+    }
   }
+  assert.ok(curvas > 200, `solo ${curvas} curvas integrales verificadas`);
+  assert.deepEqual([...modos].sort(), ['mixta', 'noexacta', 'poli']);
 });
 
-test(`green: circulación por definición = doble integral numérica = respuesta, y la frontera es antihoraria (${N} semillas)`, () => {
+test('exacta: control negativo, un F equivocado SÍ falla F_x = M y F constante en la curva', () => {
+  let fallan = 0, total = 0;
+  for (const s of semillas.slice(0, 100)) {
+    const { verif: v } = generar('exacta', s);
+    if (v.noExacta) continue;
+    total++;
+    const mal = { ...v, F: (x, y) => v.F(x, y) + x * y * y };
+    const h = 1e-4;
+    const fx = Math.abs((mal.F(0.4 + h, 0.5) - mal.F(0.4 - h, 0.5)) / (2 * h) - v.M(0.4, 0.5));
+    if (fx > 1e-3) fallan++;
+  }
+  assert.ok(fallan >= total - 2, `solo ${fallan}/${total} detectados`);
+});
+
+const linea = (v, t) => simpson((u) => { const [x, y] = t.r(u), [dx, dy] = t.dr(u); return v.P(x, y) * dx + v.Q(x, y) * dy; }, t.t0, t.t1, 200);
+
+test(`green: circulación por definición = doble integral numérica = respuesta, tramos exactos, y la frontera es antihoraria (${N} semillas)`, () => {
   const h = 1e-4;
+  const modos = new Set();
   for (const s of semillas) {
     const { verif: v } = generar('green', s);
-    // por definición: suma de integrales de línea ∫ P dx + Q dy sobre cada tramo
-    let linea = 0, area2 = 0;
-    for (const t of v.borde) {
-      linea += simpson((u) => { const [x, y] = t.r(u), [dx, dy] = t.dr(u); return v.P(x, y) * dx + v.Q(x, y) * dy; }, t.t0, t.t1, 200);
+    modos.add(v.defn);
+    let total = 0, area2 = 0;
+    v.borde.forEach((t, i) => {
+      const lt = linea(v, t);
+      total += lt;
       area2 += simpson((u) => { const [x, y] = t.r(u), [dx, dy] = t.dr(u); return x * dy - y * dx; }, t.t0, t.t1, 200);
-    }
+      if (v.defn) cerca(lt, v.tramos[i], 1e-6, `tramo ${i + 1} semilla ${s}`);
+    });
     assert.ok(area2 > 0, `semilla ${s}: frontera horaria`);
-    // doble integral de Q_x - P_y por diferencias finitas
+    if (v.defn) assert.equal(v.tramos.length, v.borde.length);
     const { x0, x1, y1, y2 } = v.region;
     const dbl = simpson((x) => simpson((y) => (v.Q(x + h, y) - v.Q(x - h, y)) / (2 * h) - (v.P(x, y + h) - v.P(x, y - h)) / (2 * h), y1(x), y2(x), 40), x0, x1, 60);
-    cerca(linea, v.valor, 1e-6, `línea semilla ${s}`);
+    cerca(total, v.valor, 1e-6, `línea semilla ${s}`);
     cerca(dbl, v.valor, 1e-5, `doble semilla ${s}`);
+    if (v.defn) cerca(v.tramos.reduce((a, b) => a + b, 0), v.valor, 1e-9, `suma de tramos semilla ${s}`);
   }
+  assert.equal(modos.size, 2);
 });
 
-test(`polares: coincide con la integral doble cartesiana numérica, disco y anillo (${N} semillas)`, () => {
+test('green: control negativo, un valor mal calculado SÍ se detecta', () => {
+  let fallan = 0;
+  for (const s of semillas.slice(0, 100)) {
+    const { verif: v } = generar('green', s);
+    const lineaTot = v.borde.reduce((a, t) => a + linea(v, t), 0);
+    if (Math.abs(lineaTot - (v.valor + 1)) > 1e-6 * (1 + Math.abs(v.valor))) fallan++;
+  }
+  assert.equal(fallan, 100);
+});
+
+// Integral doble cartesiana (columnas con Simpson + punto medio) sobre disco/anillo, entera, mitad superior o primer cuadrante.
+function cartesiana(v) {
+  const n = 500, a = v.sector === 'cuarto' ? 0 : -v.r2, w = (v.r2 - a) / n;
+  let tot = 0, abs = 0;
+  for (let i = 0; i < n; i++) {
+    const x = a + (i + 0.5) * w;
+    const s2 = Math.sqrt(Math.max(0, v.r2 * v.r2 - x * x));
+    const t = x * x < v.r1 * v.r1 ? Math.sqrt(v.r1 * v.r1 - x * x) : null;
+    let tramos = t === null ? [[-s2, s2]] : [[-s2, -t], [t, s2]];
+    if (v.sector !== 'full') tramos = tramos.map(([p, q]) => [Math.max(p, 0), q]).filter(([p, q]) => q > p);
+    for (const [p, q] of tramos) {
+      tot += simpson((y) => v.f(x, y), p, q, 40) * w;
+      abs += simpson((y) => Math.abs(v.f(x, y)), p, q, 40) * w;
+    }
+  }
+  return { tot, abs };
+}
+
+test(`polares: coincide con la integral doble cartesiana numérica (disco, anillo, mitad, cuadrante) (${N} semillas)`, () => {
   const tipos = new Set();
+  let peor = 0;
   for (const s of semillas) {
     const { verif: v } = generar('polares', s);
-    tipos.add(v.r1 > 0 ? 'anillo' : 'disco');
-    const n = 400;
-    let tot = 0, abs = 0;
-    for (let i = 0; i < n; i++) {
-      const x = -v.r2 + ((i + 0.5) * 2 * v.r2) / n;
-      const s2 = Math.sqrt(Math.max(0, v.r2 * v.r2 - x * x));
-      const t = x * x < v.r1 * v.r1 ? Math.sqrt(v.r1 * v.r1 - x * x) : null;
-      const col = (a, b) => simpson((y) => v.f(x, y), a, b, 40);
-      const w = (2 * v.r2) / n;
-      tot += (t === null ? col(-s2, s2) : col(-s2, -t) + col(t, s2)) * w;
-      abs += (t === null ? simpson((y) => Math.abs(v.f(x, y)), -s2, s2, 40) : 0) * w;
-    }
-    cerca(tot, v.valor, 2e-3 * (1 + abs), `semilla ${s}`);
+    tipos.add(`${v.r1 > 0 ? 'anillo' : 'disco'}-${v.sector}`);
+    const { tot, abs } = cartesiana(v);
+    // tolerancia lineal: 2e-3 de la escala (1 + ∬|f|); antes se multiplicaba dos veces y no detectaba nada
+    const err = Math.abs(tot - v.valor) / (1 + abs);
+    peor = Math.max(peor, err);
+    assert.ok(err <= 2e-3, `semilla ${s} (${v.tipo}): ${tot} vs ${v.valor}`);
   }
-  assert.equal(tipos.size, 2);
+  assert.equal(tipos.size, 6, [...tipos].join());
+  assert.ok(peor > 0, 'el chequeo no puede ser tautológico');
+});
+
+test('polares: control negativo, un valor erróneo (2% de la escala) SÍ se detecta', () => {
+  let fallan = 0;
+  for (const s of semillas.slice(0, 100)) {
+    const { verif: v } = generar('polares', s);
+    const { tot, abs } = cartesiana(v);
+    if (Math.abs(tot - (v.valor + 0.02 * (1 + abs))) / (1 + abs) > 2e-3) fallan++;
+  }
+  assert.equal(fallan, 100);
 });

@@ -70,3 +70,13 @@ export const p2Eval = (p, x, y) => p.reduce((s, [c, i, j]) => s + fVal(c) * x **
 export const p2SubsY = (p, uy) => p.reduce((s, [c, i, j]) => uAdd(s, uMul([...Array(i).fill(fr(0)), c], uPot(uy, j))), [fr(0)]);
 // Sustituye x e y por constantes -> fracción.
 export const p2Const = (p, x, y) => p.reduce((s, [c, i, j]) => fSum(s, fMul(c, fr(x ** i * y ** j))), fr(0));
+
+// --- Utilidades de TeX y de polinomios univariados (derivada, composición) ---
+export const SEN = '\\operatorname{sen}'; // notación de la cátedra
+export const unir = (a, b) => (!b ? a : !a ? b : b.startsWith('-') ? a + b : `${a}+${b}`);
+export const parN = (n) => (n < 0 ? `\\left(${n}\\right)` : `${n}`); // número entre paréntesis si es negativo
+export const prod = (c, v) => `${parN(c)}\\cdot ${parN(v)}`;
+export const uDer = (u) => (u.length < 2 ? [fr(0)] : uLimpio(u.slice(1).map((c, k) => fMul(c, fr(k + 1)))));
+// P(x(t), y(t)) con x(t), y(t) polinomios en t.
+export const p2Comp = (p, ux, uy) => p.reduce((s, [c, i, j]) => uAdd(s, uMul([c], uMul(uPot(ux, i), uPot(uy, j)))), [fr(0)]);
+export const uEvalF = (u, a) => u.reduce((s, c, k) => fSum(s, fMul(c, fr(a.n ** k, a.d ** k))), fr(0));

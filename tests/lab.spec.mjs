@@ -10,7 +10,7 @@ for (const [nombre, viewport] of Object.entries(vistas)) {
     test('laboratorio: carga, KaTeX, semilla reproducible, otro, solución e IA', async ({ page }) => {
       const problemas = [];
       page.on('pageerror', (e) => problemas.push(e.message));
-      page.on('console', (m) => m.type() === 'error' && problemas.push(m.text()));
+      page.on('console', (m) => ['error', 'warning'].includes(m.type()) && problemas.push(m.text())); // incluye los warn de KaTeX
       await page.goto('laboratorio/?tipo=lineal&semilla=123');
       await expect(page.locator('nav a[href$="/laboratorio/"]')).toHaveAttribute('aria-current', 'page');
       const enun = page.locator('[data-enunciado]');
@@ -53,7 +53,7 @@ for (const [nombre, viewport] of Object.entries(vistas)) {
     test('laboratorio: "otro" cambia el ejercicio y cada generador entra en pantalla', async ({ page }) => {
       const problemas = [];
       page.on('pageerror', (e) => problemas.push(e.message));
-      page.on('console', (m) => m.type() === 'error' && problemas.push(m.text()));
+      page.on('console', (m) => ['error', 'warning'].includes(m.type()) && problemas.push(m.text())); // incluye los warn de KaTeX
       await page.goto('laboratorio/?tipo=polares&semilla=5');
       const ids = await page.locator('#lab-tipo option').evaluateAll((os) => os.map((o) => o.value));
       expect(ids.length).toBe(7);
@@ -73,6 +73,23 @@ for (const [nombre, viewport] of Object.entries(vistas)) {
         cambio = (await page.locator('[data-enunciado]').innerText()) !== a;
       }
       expect(cambio).toBe(true);
+      expect(problemas).toEqual([]);
+    });
+
+    test('laboratorio: varias semillas por generador, sin errores de KaTeX ni scroll horizontal con la solución abierta', async ({ page }) => {
+      const problemas = [];
+      page.on('pageerror', (e) => problemas.push(e.message));
+      page.on('console', (m) => ['error', 'warning'].includes(m.type()) && problemas.push(m.text()));
+      for (const id of ['lineal', 'bernoulli', 'homogenea2', 'nohomogenea', 'exacta', 'green', 'polares']) {
+        for (const semilla of [3, 17, 101, 4242, 90001]) {
+          await page.goto(`laboratorio/?tipo=${id}&semilla=${semilla}`);
+          await page.locator('[data-ver]').click();
+          await expect(page.locator('[data-solucion] li').first()).toBeVisible();
+          expect(await page.locator('.katex-error').count(), `${id} ${semilla}`).toBe(0);
+          expect(await page.locator('[data-solucion] li').count()).toBeGreaterThanOrEqual(4);
+          await sinScrollH(page);
+        }
+      }
       expect(problemas).toEqual([]);
     });
   });

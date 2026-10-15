@@ -32,11 +32,18 @@ export function iniciarLab(raiz) {
 
   for (const g of GENERADORES) selTipo.append(Object.assign(el('option', '', g.nombre), { value: g.id }));
 
+  let ultimo = { tipo, semilla }; // último ejercicio que se generó bien
   function mostrar() {
+    let e;
+    try { e = generar(tipo, semilla); } catch (err) {
+      ({ tipo, semilla } = ultimo); // si falla, los controles vuelven al ejercicio que se está viendo
+      selTipo.value = tipo; inSemilla.value = semilla;
+      aviso.textContent = 'No se pudo generar este ejercicio. Probá con otro.';
+      return;
+    }
+    ultimo = { tipo, semilla };
     selTipo.value = tipo;
     inSemilla.value = semilla;
-    let e;
-    try { e = generar(tipo, semilla); } catch (err) { aviso.textContent = 'No se pudo generar este ejercicio. Probá con otro.'; return; }
     aviso.textContent = '';
     $('[data-titulo]').textContent = e.nombre;
     const enun = $('[data-enunciado]');
