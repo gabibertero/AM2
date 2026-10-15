@@ -3,6 +3,7 @@
 const P = 'am2:v1:';
 const leer = (k) => { try { return localStorage.getItem(P + k); } catch { return null; } };
 const guardar = (k, v) => { try { localStorage.setItem(P + k, v); } catch { /* sin persistencia */ } };
+export { leer, guardar };
 
 function iniciarEjercicio(ej) {
   const id = ej.dataset.id;

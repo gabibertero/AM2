@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import { idsDeEjercicios } from '../../scripts/ids.js';
+import ExamenPanel from '../../components/ExamenPanel.astro';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -24,6 +25,7 @@ const d = entry.data;
     <p class="meta">Fuente: {d.fuente} (foto de clase; sin resolución oficial)</p>
     <span class="barra" aria-hidden="true" data-barra data-ids={idsDeEjercicios(entry.body).join(',')}></span>
   </div>
+  <ExamenPanel id={entry.id} />
   <div class="examen-grid">
     <nav class="indice" aria-label="Ejercicios del examen" data-indice><p class="indice-t">Ejercicios</p><ol></ol></nav>
     <div class="examen-cont"><Content /></div>

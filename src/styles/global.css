@@ -247,3 +247,21 @@ main > p { max-width: 46rem; }
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   .tarjeta-link:hover, .examen-card:hover, .tarjeta-u:hover { transform: none; }
 }
+
+/* Modo examen (src/scripts/examen.js) y autocorrección. Sin JS el panel queda oculto y todo se ve. */
+.examen-panel { margin: 1rem 0; }
+.examen-panel h2 { margin: 0 0 .25rem; font-size: 1.1rem; }
+.ex-fila { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ex-fila input { width: 5rem; min-height: 40px; font: inherit; padding: 0 8px; background: var(--sup2); color: var(--texto); border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); }
+.ex-reloj { font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 5.5ch; }
+.ex-aviso { color: var(--e-curso); font-weight: 700; }
+.ex-nota { font-size: 1.2rem; margin: .5rem 0 0; }
+.examen-panel[data-fase='corriendo'] { position: sticky; top: 58px; z-index: 15; }
+.autocorr { margin: .85rem 0 0; padding-top: .75rem; border-top: 1px dashed var(--borde); }
+.autocorr-t { margin: 0 0 .5rem; font-weight: 700; }
+.autocorr-b { display: flex; flex-wrap: wrap; gap: 8px; }
+.autocorr-b button[aria-pressed='true'] { background: var(--e-ok-bg); color: var(--e-ok); box-shadow: inset 0 0 0 2px var(--e-ok); }
+.autocorr-b button:focus-visible, .ex-fila button:focus-visible, .ex-fila input:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+/* Durante el examen: sin pistas, pasos, soluciones, estado ni IA. Al entregar vuelven todas y queda la IA. */
+body[data-examen] .acciones, body[data-examen] .estado, body[data-examen='activo'] .ia, body[data-examen='activo'] [data-pista], body[data-examen='activo'] [data-paso], body[data-examen='activo'] [data-solucion] { display: none !important; }
+body[data-examen='entregado'] .ejercicio .capa[data-pista], body[data-examen='entregado'] .ejercicio .capa[data-paso], body[data-examen='entregado'] .ejercicio .capa[data-solucion] { display: block !important; }

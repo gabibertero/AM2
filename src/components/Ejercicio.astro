@@ -9,19 +9,20 @@ interface Props {
   machete?: string;
 }
 const { id, numero, fuente, pagina, unidad, tema, machete } = Astro.props;
+import IA from './IA.astro';
 const archivo = fuente.split('/').pop();
 const ayudas = `ayudas-${id.replace(/\W/g, '-')}`;
 const base = import.meta.env.BASE_URL;
 const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelto', 'Resuelto']];
 ---
-<section class="ejercicio" id={`ej-${numero}`} data-ejercicio data-id={id} data-unidad={unidad}>
+<section class="ejercicio" id={`ej-${numero}`} data-ejercicio data-id={id} data-unidad={unidad} data-ia-ctx>
   <header class="ej-cab">
     <span class="ej-num" aria-hidden="true">{numero}</span>
     <div>
       <h2>Ejercicio {numero}</h2>
       <p class="meta">
         <span class="chip chip-u" data-unidad={unidad}>{unidad}</span>
-        <span class="chip">{tema}</span>
+        <span class="chip" data-ia-tit>{tema}</span>
         <span class="ej-fuente">{archivo}, p.{pagina}</span>
         {machete && <a class="chip chip-link" href={`${base}machetes/`}>Machete: {machete}</a>}
       </p>
@@ -41,5 +42,14 @@ const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelt
     <button type="button" data-accion="paso" aria-expanded="false" aria-controls={ayudas}>Siguiente paso</button>
     <button type="button" data-accion="solucion" aria-expanded="false" aria-controls={ayudas}>Ver solución completa</button>
     <button type="button" data-accion="ocultar">Ocultar todo</button>
+  </div>
+  <IA modo="corregir" />
+  <div class="autocorr" data-autocorr hidden role="group" aria-label={`Autocorrección del ejercicio ${numero}`}>
+    <p class="autocorr-t">Autocorrección</p>
+    <div class="autocorr-b">
+      <button type="button" data-nota="1" aria-pressed="false">Bien</button>
+      <button type="button" data-nota="0.5" aria-pressed="false">A medias</button>
+      <button type="button" data-nota="0" aria-pressed="false">Mal</button>
+    </div>
   </div>
 </section>
