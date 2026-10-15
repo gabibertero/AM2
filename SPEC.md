@@ -9,7 +9,7 @@
   - U6 y U10 se cubren con Monllor y se marcan "alcance tentativo — no apareció en parciales prácticos".
   - U7 (Computación numérica) no tiene material: va como "pendiente, sin material".
 - Formato teórico según `../Links e Info.md` (nota de un compañero): 2 temas para elegir uno y desarrollar, 4 preguntas cortas y 3 de opción múltiple.
-- PENDIENTE: Gabi tiene que contar cómo le tomaron el 1º parcial (formato, consignas, proporción teoría/práctica, criterios, tiempo). Hay que pedírselo antes de cerrar la teoría y cualquier sección de formato o evaluación.
+- 1º parcial teórico (Gabi, 2026-10-15): gradiente (propiedades, desarrollo, gráfico), diferencial total, máximos relativos con Taylor → hessiano. Estilo: definición + propiedades + desarrollo + gráfico.
 
 ## Fuentes (inventario completo en `docs/inventario/`)
 Base: `../` (carpeta de la materia). Nunca modificar el material original.
