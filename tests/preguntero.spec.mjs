@@ -16,15 +16,16 @@ for (const [nombre, viewport] of Object.entries(vistas)) {
       expect(await arts.count()).toBeGreaterThanOrEqual(3);
 
       await page.locator('[data-filtro="tipo"][data-valor="choice"]').click();
-      await expect(page.locator('[data-pregunta][data-tipo="corta"]')).toBeHidden();
+      await expect(page.locator('[data-pregunta][data-tipo="corta"]:visible')).toHaveCount(0);
       await expect(page.locator('[data-pregunta][data-tipo="choice"]').first()).toBeVisible();
-      await page.locator('[data-filtro="unidad"][data-valor="U5"]').click(); // U5 sin preguntas
+      await page.locator('[data-filtro="unidad"][data-valor="U7"]').click(); // U7 sin preguntas
       await expect(page.locator('[data-vacio]')).toBeVisible();
       await page.locator('[data-filtro="unidad"][data-valor="todas"]').click();
 
       // choice: marca correcta/incorrecta y abre el por qué
       const ch = page.locator('[data-pregunta][data-tipo="choice"]').first();
-      await ch.locator('.op').nth(0).click();
+      const correcta = Number(await ch.getAttribute('data-correcta'));
+      await ch.locator('.op').nth(correcta === 1 ? 1 : 0).click();
       await expect(ch.locator('[data-fb]')).toContainText('Incorrecta');
       await expect(ch.locator('.op[data-res="ok"]')).toHaveCount(1);
       await ch.locator('.op').nth(Number(await ch.getAttribute('data-correcta')) - 1).click();

@@ -1,90 +1,91 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HomeHero from '../components/HomeHero.astro';
+import HomeMapa from '../components/HomeMapa.astro';
 import { getCollection } from 'astro:content';
 import { idsDeEjercicios } from '../scripts/ids.js';
+import { FECHA_PARCIAL } from '../lib/sitio.js';
 const base = import.meta.env.BASE_URL;
-const cuerpos = [...(await getCollection('parciales')), ...(await getCollection('anteriores'))];
-const todosIds = cuerpos.flatMap((e) => idsDeEjercicios(e.body)).join(',');
-const alcance = [['U4', 'confirmado'], ['U5', 'confirmado'], ['U6', 'tentativo'], ['U7', 'sin material'], ['U8', 'confirmado'], ['U9', 'confirmado'], ['U10', 'tentativo']];
-const secciones = [
-  ['📝', 'Parciales oficiales', 'parciales/', 'Exámenes reales de 2025–2026, ejercicio por ejercicio.'],
-  ['🗂️', 'Años anteriores', 'anteriores/', 'Fotos de clase, sin fecha ni resolución oficial.'],
-  ['📚', 'Teoría', 'teoria/', 'Resumen por unidad, con alcance y estado.'],
-  ['⚡', 'Machetes', 'machetes/', 'Guías de bolsillo por tipo de problema.'],
+const parciales = await getCollection('parciales');
+const cuerpos = [...parciales, ...(await getCollection('anteriores'))];
+const todosIds = cuerpos.flatMap((e) => idsDeEjercicios(e.body));
+const nPracticos = parciales.filter((p) => p.data.tipo !== 'teórico').length;
+
+// Temas que aparecieron en los parciales oficiales, por unidad (los 3 más frecuentes).
+const cuenta = {};
+for (const p of parciales) {
+  for (const m of p.body.matchAll(/<Ejercicio\b[^>]*?unidad="(U\d+)"[^>]*?tema="([^"]+)"/g)) {
+    const o = (cuenta[m[1]] ??= {});
+    o[m[2]] = (o[m[2]] ?? 0) + 1;
+  }
+}
+const temas = Object.fromEntries(Object.entries(cuenta).map(([u, o]) => [u, Object.entries(o).sort((a, b) => b[1] - a[1]).slice(0, 3)]));
+
+const accesos = [
+  ['📝', 'Parciales oficiales', `${nPracticos} resueltos`, 'parciales/'],
+  ['⏱️', 'Rendir como examen', 'Con reloj y nota', 'parciales/'],
+  ['❓', 'Preguntero', 'Teoría por unidad', 'preguntero/'],
+  ['🎲', 'Simulacro teórico', '2 temas + 4 cortas + 3 choice', 'preguntero/simulacro/'],
+  ['⚡', 'Machetes', 'Guías por tipo de problema', 'machetes/'],
+  ['🗂️', 'Años anteriores', 'Fotos de clase', 'anteriores/'],
 ];
 ---
 <Layout titulo="Inicio">
   <section class="hero">
-    <p class="eyebrow">UTN FRC · Ingeniería en Sistemas</p>
-    <h1>Análisis Matemático II · 2º parcial</h1>
-    <p class="lead">
-      Un sitio de estudio para preparar el segundo parcial de Análisis Matemático II (UTN FRC, Ingeniería en Sistemas).
-      Está pensado para practicar con exámenes reales, de a poco, sin que te espoileen la solución antes de tiempo.
-    </p>
-    <p class="hero-acc">
-      <a class="btn btn-primario" href={`${base}parciales/`}>Empezar a practicar</a>
-      <a class="btn" href={`${base}machetes/`}>Ver machetes</a>
-    </p>
+    <div class="hero-txt">
+      <p class="eyebrow">UTN FRC · Ingeniería en Sistemas</p>
+      <h1>Análisis Matemático II</h1>
+      <p class="lead">Preparate para el 2º parcial con exámenes reales, ejercicio por ejercicio, con pistas de a poco y sin spoilers.</p>
+      <p class="hero-acc">
+        <a class="btn btn-primario" href={`${base}parciales/`}>Empezar a practicar</a>
+        <a class="btn" href={`${base}machetes/`}>Ver machetes</a>
+      </p>
+    </div>
+    <HomeHero />
   </section>
 
-  <div class="grilla grilla-sec">
-    {secciones.map(([emo, t, href, d]) => (
+  <section class="estado-home" aria-label="Tu estado">
+    <div class="tarjeta" data-cuenta data-fecha={FECHA_PARCIAL ?? ''}>
+      <strong>2º parcial</strong>
+      {FECHA_PARCIAL === null ? (
+        <p class="big-txt">Fecha a confirmar</p>
+      ) : (
+        <p class="big-txt"><b class="num" data-dias>{FECHA_PARCIAL}</b> <span class="suave" data-dias-txt></span></p>
+      )}
+    </div>
+    <div class="tarjeta" data-tu-progreso data-ids={todosIds.join(',')}>
+      <strong>Tu progreso</strong>
+      <p class="big-txt"><b class="num" data-n>0</b> <span class="suave">de <span data-t>{todosIds.length}</span> ejercicios</span></p>
+      <span class="barra" aria-hidden="true" data-barra data-ids={todosIds.join(',')}></span>
+    </div>
+    <div class="tarjeta">
+      <strong>Seguir donde dejaste</strong>
+      <p class="suave" data-seguir-vacio>Cuando empieces un ejercicio, lo retomás desde acá.</p>
+      <a class="btn btn-primario" data-seguir hidden href={base}><span data-seguir-t></span>&nbsp;→</a>
+    </div>
+  </section>
+
+  <h2>Accesos</h2>
+  <div class="grilla accesos">
+    {accesos.map(([emo, t, d, href]) => (
       <a class="tarjeta tarjeta-link" href={`${base}${href}`}>
         <span class="emo" aria-hidden="true">{emo}</span>
         <strong>{t}</strong>
         <span class="suave">{d}</span>
       </a>
     ))}
-    <div class="tarjeta tp" data-tu-progreso data-ids={todosIds}>
-      <span class="emo" aria-hidden="true">🎯</span>
-      <strong>Tu progreso</strong>
-      <span class="tp-num"><b data-n>0</b> / <span data-t>{todosIds.split(',').length}</span> ejercicios resueltos</span>
-      <span class="barra" aria-hidden="true"></span>
-    </div>
   </div>
 
-  <h2>Para quién es</h2>
-  <p>Para Gabi y sus compañeros que cursan o rinden el 2º parcial. La prioridad es la parte práctica (alrededor del 75 %); la teoría acompaña (25 %).</p>
-
-  <h2>Qué material incluye</h2>
-  <ul>
-    <li>11 parciales y recuperatorios oficiales prácticos de 2025–2026, cada uno con sus ejercicios en el orden original.</li>
-    <li>Un modelo teórico oficial.</li>
-    <li>8 exámenes de años anteriores (fotos de clase, sin fecha), en la sección <a href={`${base}anteriores/`}>Años anteriores</a>, separados de los oficiales.</li>
-    <li>Pistas, pasos y soluciones elaboradas para el sitio, más machetes por tipo de problema (se van completando por etapas).</li>
-  </ul>
-  <p><strong>Estado:</strong> los 12 exámenes están transcriptos y verificados contra el escaneo, con el original (datos personales tapados) y la resolución oficial del profe. El <a href={`${base}parciales/1r3-2025-11-14/`}>1R3 (14/11/2025)</a> ya tiene la solución paso a paso; los demás se van completando. Los <a href={`${base}machetes/`}>machetes</a> por tipo de problema están listos.</p>
-
-  <h2>Alcance</h2>
-  <p class="chips">
-    {alcance.map(([u, e]) => <span class="chip chip-u chip-lg" data-unidad={u}>{u}<small>{e}</small></span>)}
-  </p>
-  <ul>
-    <li>Programa 2025, unidades U4 a U10. Fourier (U11) queda fuera.</li>
-    <li>Los parciales prácticos reales solo tocan U4, U5, U8 y U9.</li>
-    <li>U6 y U10: alcance tentativo, no aparecieron en parciales prácticos.</li>
-    <li>U7 (Computación numérica): pendiente, sin material.</li>
-  </ul>
+  <h2>Mapa de la materia</h2>
+  <p class="suave sec-nota">Unidades U4 a U10 (programa 2025; Fourier queda fuera). Los números cuentan cuántas veces apareció cada tema en los parciales prácticos.</p>
+  <HomeMapa temas={temas} />
 
   <h2>Cómo distinguir lo oficial de lo demás</h2>
   <div class="leyenda">
     <div class="capa oficial"><p class="rotulo">Oficial</p>Enunciados tal cual el examen y resolución del profe (escaneo). Acento azul.</div>
     <div class="capa elaborado"><p class="rotulo">Elaborado para el sitio — no oficial</p>Pistas, pasos, soluciones y comprobaciones escritas para estudiar. Acento verde.</div>
-    <div class="capa generado"><p class="rotulo">Simulacro generado — no oficial</p>Ejercicios inventados; solo existen si Gabi los pide. Borde punteado ámbar.</div>
+    <div class="capa generado"><p class="rotulo">Simulacro generado — no oficial</p>Ejercicios inventados por el sitio. Borde punteado ámbar.</div>
   </div>
-
-  <h2>Cómo empezar</h2>
-  <ol>
-    <li>Entrá a <a href={`${base}parciales/`}>Parciales oficiales</a> y elegí un examen.</li>
-    <li>Intentá cada ejercicio por tu cuenta, en papel.</li>
-    <li>Marcá el estado del ejercicio: pendiente, en curso o resuelto.</li>
-  </ol>
-
-  <h2>Cómo usar las soluciones progresivas</h2>
-  <p>
-    Cada ejercicio esconde su ayuda. "Ver pista" muestra una pista por vez, "Siguiente paso" muestra el desarrollo de a un paso,
-    "Ver solución completa" lo muestra todo y "Ocultar todo" vuelve a esconderlo. Probá siempre con la pista más chica primero.
-  </p>
 
   <h2>Dónde se guarda tu progreso</h2>
   <p>
@@ -98,4 +99,7 @@ const secciones = [
     <button type="button" data-no>Cancelar</button>
   </div>
   <p role="status" tabindex="-1" data-resultado></p>
+  <script>
+    import '../scripts/home.js';
+  </script>
 </Layout>

@@ -26,6 +26,11 @@ const actual = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f2ec" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#16151a" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Sitio de estudio para el 2º parcial de Análisis Matemático II (UTN FRC): parciales reales, pistas, machetes y preguntero." />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
     <title>{titulo} · AM II</title>
   </head>
   <body>
@@ -50,6 +55,7 @@ const actual = Astro.url.pathname;
       import '../scripts/progreso.js';
       import '../ui.js';
       import '../scripts/ia.js';
+      import '../scripts/ultimo.js';
       import '../scripts/examen.js';
     </script>
   </body>

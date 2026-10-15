@@ -1,0 +1,36 @@
+---
+// Figura del hero: región D del plano, su borde orientado y un campo vectorial (Green / integrales de línea). Decorativa.
+---
+<div class="hero-fig">
+  <svg class="hero-svg" viewBox="0 0 320 260" role="img" aria-label="Dibujo decorativo: una región del plano con su borde orientado y vectores de un campo">
+    <defs>
+      <marker id="hf-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="context-stroke" /></marker>
+    </defs>
+    <g class="hf-ejes" fill="none" stroke-width="1.5"><path d="M16 228 H304" marker-end="url(#hf-p)" /><path d="M40 244 V16" marker-end="url(#hf-p)" /></g>
+    <path class="hf-region" d="M92 150 C84 92 140 52 196 66 C256 80 276 140 238 188 C204 230 108 214 92 150 Z" />
+    <path class="hf-borde" d="M92 150 C84 92 140 52 196 66 C256 80 276 140 238 188 C204 230 108 214 92 150 Z" fill="none" stroke-width="3.5" pathLength="100" />
+    <g class="hf-flechas" fill="none" stroke-width="3" stroke-linecap="round">
+      <path class="hf-v hf-v1" d="M60 84 l26 -14" marker-end="url(#hf-p)" />
+      <path class="hf-v hf-v2" d="M270 66 l22 14" marker-end="url(#hf-p)" />
+      <path class="hf-v hf-v3" d="M284 176 l-14 26" marker-end="url(#hf-p)" />
+      <path class="hf-v hf-v4" d="M80 214 l-26 -8" marker-end="url(#hf-p)" />
+    </g>
+    <text class="hf-txt" x="156" y="146" font-size="30" text-anchor="middle">D</text>
+    <text class="hf-txt" x="256" y="40" font-size="20" font-style="italic">∮</text>
+  </svg>
+</div>
+<style>
+  .hero-svg { width: 100%; height: auto; display: block; }
+  .hf-ejes { stroke: var(--borde-fuerte); }
+  .hf-region { fill: color-mix(in srgb, var(--acento) 14%, var(--sup)); }
+  .hf-borde { stroke: var(--acento); stroke-dasharray: 100; }
+  .hf-flechas { stroke: var(--elaborado); }
+  .hf-txt { fill: var(--texto); font-family: var(--f-ed); font-weight: 700; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hf-borde { stroke-dasharray: 8 6; animation: hf-corre 3.2s linear infinite; }
+    .hf-v { animation: hf-late 3.6s ease-in-out infinite; }
+    .hf-v2 { animation-delay: -.9s; } .hf-v3 { animation-delay: -1.8s; } .hf-v4 { animation-delay: -2.7s; }
+  }
+  @keyframes hf-corre { to { stroke-dashoffset: -28; } }
+  @keyframes hf-late { 50% { opacity: .45; } }
+</style>
