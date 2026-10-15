@@ -20,7 +20,7 @@ export function suma(terminos) {
     const c = fr(c0);
     if (c.n === 0) continue;
     const a = fr(Math.abs(c.n), c.d);
-    const m = cuerpo === '' ? texF(a) : a.n === 1 && a.d === 1 ? cuerpo : texF(a) + cuerpo;
+    const m = cuerpo === '' ? texF(a) : a.n === 1 && a.d === 1 ? cuerpo : texF(a) + (/^(\d|\(|\\left\()/.test(cuerpo) ? '\\cdot ' : '') + cuerpo;
     s += (c.n < 0 ? '-' : s ? '+' : '') + m;
   }
   return s || '0';

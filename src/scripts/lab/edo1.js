@@ -68,7 +68,7 @@ function lineal(rng) {
       yPasos = [
         { txt: 'Vuelvo a y = u·v:', tex: `y=\\left(${suma([[t, ex(s)]])}+C\\right)${ex(-k)}` },
         { txt: 'Distribuyo la exponencial en cada término:', tex: `y=${suma([[t, ex(s)]])}\\,${ex(-k)}+C\\,${ex(-k)}` },
-        { txt: `Al multiplicar exponenciales se suman los exponentes (${s} − ${k} = ${b}):`, tex: `y=${suma([[t, ex(b)]])}+C\\,${ex(-k)}` },
+        { txt: `Al multiplicar exponenciales se suman los exponentes (${s} − ${parN(k)} = ${b}):`, tex: `y=${suma([[t, ex(b)]])}+C\\,${ex(-k)}` },
       ];
       res = (Cc) => `y=${suma([[t, ex(b)], cte(Cc, ex(-k))])}`;
       y = (x, C) => t * Math.exp(b * x) + C * Math.exp(-k * x);
@@ -181,7 +181,7 @@ function bernoulli(rng) {
       { txt: 'Hago el cambio z = y^{1−n}. Por la regla de la cadena, z′ = (1−n)·y^{−n}·y′ (porque (1−n) − 1 = −n):', tex: `z=${ym},\\qquad z'=${mt}\\,${ymn}y'` },
       { txt: 'Despejo el término que aparece en la ecuación, y^{−n}·y′:', tex: `${ymn}y'=${suma([[invm, "z'"]])}` },
       { txt: 'Reemplazo en la ecuación (y^{1−n} es z):', tex: `${suma([[invm, "z'"], [k, 'z']])}=${a}` },
-      { txt: `Multiplico toda la ecuación por ${mt} para que z′ quede sin coeficiente (${mt}·${texF(invm)} = 1):`, tex: `${mt}\\left(${suma([[invm, "z'"], [k, 'z']])}\\right)=${mt}\\cdot ${parN(a)}` },
+      { txt: `Multiplico toda la ecuación por ${mt} para que z′ quede sin coeficiente (${mt}·${invm.n < 0 ? `\\left(${texF(invm)}\\right)` : texF(invm)} = 1):`, tex: `${mt}\\left(${suma([[invm, "z'"], [k, 'z']])}\\right)=${mt}\\cdot ${parN(a)}` },
       { txt: `Queda una lineal en z, con P = ${c} y Q = ${d}:`, tex: `${zz(c)}=${d}` },
       { txt: 'La resuelvo con z = u·v (z′ = u′v + uv′). Reemplazo y saco u factor común:', tex: `u'v+u\\left(${suma([[1, "v'"], [c, 'v']])}\\right)=${d}` },
       { txt: 'Elijo v con el paréntesis en 0 y separo variables:', tex: `${suma([[1, "v'"], [c, 'v']])}=0\\;\\Rightarrow\\;\\frac{dv}{v}=${suma([[-c, '\\,dx']])}` },

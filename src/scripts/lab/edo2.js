@@ -251,10 +251,10 @@ function nohomogenea(rng) {
   if (doble) {
     const [p1, p2] = partes;
     pasosYp = [
-      { txt: 'f tiene dos términos distintos. Como la ecuación es lineal, vale la superposición: busco y_p = y_p₁ + y_p₂, donde y_p₁ resuelve la ecuación con el primer término de f y y_p₂ con el segundo (cada una con su propia forma y sus propios coeficientes A, B, D).', tex: `L[y]=y''${b < 0 ? '' : '+'}${suma([[b, "y'"], [c, 'y']])}=f_1+f_2` },
-      { txt: 'Parte 1: busco y_p₁ para el primer término de f.', tex: `y''${b < 0 ? '' : '+'}${suma([[b, "y'"], [c, 'y']])}=${p1.fTex}` },
+      { txt: 'f tiene dos términos distintos. Como la ecuación es lineal, vale la superposición: busco y_p = y_p₁ + y_p₂, donde y_p₁ resuelve la ecuación con el primer término de f y y_p₂ con el segundo (cada una con su propia forma y sus propios coeficientes A, B, D).', tex: `L[y]=${ec2(b, c)}=f_1+f_2` },
+      { txt: 'Parte 1: busco y_p₁ para el primer término de f.', tex: `${ec2(b, c)}=${p1.fTex}` },
       ...p1.pasos,
-      { txt: 'Parte 2: busco y_p₂ para el segundo término de f.', tex: `y''${b < 0 ? '' : '+'}${suma([[b, "y'"], [c, 'y']])}=${p2.fTex}` },
+      { txt: 'Parte 2: busco y_p₂ para el segundo término de f.', tex: `${ec2(b, c)}=${p2.fTex}` },
       ...p2.pasos,
       { txt: 'Sumo las dos soluciones particulares (superposición):', tex: `y_p=y_{p_1}+y_{p_2}=${ypTex}` },
     ];

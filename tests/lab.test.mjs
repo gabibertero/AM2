@@ -3,6 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { generar, GENERADORES } from '../src/scripts/lab/index.js';
+import { suma } from '../src/scripts/lab/mate.js';
 import { crearRng, semillaValida } from '../src/scripts/lab/rng.js';
 
 const N = 300;
@@ -70,6 +71,9 @@ for (const g of GENERADORES) {
       assert.ok(e.enunciado.length > 0 && e.pasos.length >= 3 && e.resultado.tex, `semilla ${s} incompleta`);
       const todo = JSON.stringify([e.enunciado, e.pasos, e.resultado]);
       assert.ok(!/NaN|undefined|Infinity|null|\+-|--|\(\)|\{\}/.test(todo), `semilla ${s}: ${todo}`);
+      // Signos/productos mal pegados al evaluar (en TeX y en el texto explicativo).
+      const MAL = /\+\s*[-−]|[-−]\s*[-−]|(?:·|\\cdot)\s*[-−]|\d\\left\(\s*[-−]?\d+(?:\.\d+)?\s*\\right\)|\d\(|\d\s+\d/;
+      for (const t of [...e.enunciado, ...e.pasos, e.resultado].flatMap((o) => [o.tex, o.txt])) assert.ok(!t || !MAL.test(t), `semilla ${s}: producto/signo mal armado en "${t}"`);
       for (const p of e.pasos) assert.ok(p.txt && p.tex, `semilla ${s}: paso sin texto o sin fórmula`);
       assert.ok(!/\\sin(?![a-z])/.test(todo), `semilla ${s}: usar \\operatorname{sen}, no \\sin`);
       vistos.add(e.enunciado[0].tex);
@@ -257,4 +261,12 @@ test('polares: control negativo, un valor erróneo (2% de la escala) SÍ se dete
     if (Math.abs(tot - (v.valor + 0.02 * (1 + abs))) / (1 + abs) > 2e-3) fallan++;
   }
   assert.equal(fallan, 100);
+});
+
+test('suma: coeficiente por cuerpo que empieza con dígito o paréntesis lleva \\cdot (no 3·2 -> 32)', () => {
+  assert.equal(suma([[3, '2']]), '3\\cdot 2');
+  assert.equal(suma([[3, '2^{2}'], [-4, '']]), '3\\cdot 2^{2}-4');
+  assert.equal(suma([[3, '\\left(-2\\right)']]), '3\\cdot \\left(-2\\right)');
+  assert.equal(suma([[3, 'x'], [-1, 'y'], [5, '']]), '3x-y+5'); // sin falsos positivos
+  assert.equal(suma([[12, 'x^{2}']]), '12x^{2}');
 });
