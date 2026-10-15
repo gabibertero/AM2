@@ -1,285 +1,335 @@
 <div align="center">
 
-<img src="docs/capturas/inicio-desktop.png" alt="Inicio del sitio AM II" width="100%">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/banner-oscuro.svg">
+  <img alt="AM II · 2º parcial" src="docs/readme/banner-claro.svg" width="100%">
+</picture>
 
-# ∫ AM II · 2º parcial
+**Practicá el 2º parcial de Análisis Matemático II (UTN FRC) con los exámenes reales: pistas de a poco, resolución verificada y modo examen con nota.**
 
-### Practicá el segundo parcial de **Análisis Matemático II** (UTN FRC) con los exámenes reales, de a poco y sin spoilers.
+[![Abrir el sitio](https://img.shields.io/badge/▶_ABRIR_EL_SITIO-1d4fd8?style=for-the-badge&labelColor=1d4fd8)](https://gabibertero.github.io/AM2/)
 
-[![Abrir el sitio](https://img.shields.io/badge/▶_ABRIR_EL_SITIO-1d1b18?style=for-the-badge)](https://gabibertero.github.io/AM2/)
-
-![Alcance](https://img.shields.io/badge/alcance-U4_a_U10-3b82c4?style=flat-square)
-![Parciales](https://img.shields.io/badge/parciales_oficiales-11_%2B_modelo-b0477f?style=flat-square)
+![Unidades](https://img.shields.io/badge/unidades-U4_a_U10-3b82c4?style=flat-square)
+![Parciales](https://img.shields.io/badge/parciales_resueltos-11-b0477f?style=flat-square)
+![Anteriores](https://img.shields.io/badge/años_anteriores-8-c2671f?style=flat-square)
+![Preguntas](https://img.shields.io/badge/preguntero-84_preguntas-7a5cc7?style=flat-square)
+![Tests E2E](https://img.shields.io/badge/E2E-38_✓-14876b?style=flat-square)
+![Tests unitarios](https://img.shields.io/badge/unitarios-41_✓-14876b?style=flat-square)
+![sympy](https://img.shields.io/badge/verificado_con-sympy-3b82c4?style=flat-square)
 ![Celular](https://img.shields.io/badge/funciona_en-celular-c2671f?style=flat-square)
-![Sin cuentas](https://img.shields.io/badge/sin-cuentas-14876b?style=flat-square)
-![Progreso](https://img.shields.io/badge/progreso-local-7a5cc7?style=flat-square)
-![Astro](https://img.shields.io/badge/Astro-7-ff5d01?style=flat-square&logo=astro&logoColor=white)
-![KaTeX](https://img.shields.io/badge/KaTeX-0.19-555?style=flat-square)
+[![Hecho con Claude](https://img.shields.io/badge/Hecho%20con-Claude-D97757?logo=claude&logoColor=white&style=flat-square)](https://claude.com/claude-code)
 
-[📝 Parciales oficiales](https://gabibertero.github.io/AM2/parciales/) &nbsp;·&nbsp; [📖 Teoría](https://gabibertero.github.io/AM2/teoria/) &nbsp;·&nbsp; [🧰 Machetes](https://gabibertero.github.io/AM2/machetes/) &nbsp;·&nbsp; [🧪 Simulacros generados](https://gabibertero.github.io/AM2/generados/)
+[Parciales](https://gabibertero.github.io/AM2/parciales/) · [Anteriores](https://gabibertero.github.io/AM2/anteriores/) · [Teoría](https://gabibertero.github.io/AM2/teoria/) · [Preguntero](https://gabibertero.github.io/AM2/preguntero/) · [Machetes](https://gabibertero.github.io/AM2/machetes/) · [Laboratorio](https://gabibertero.github.io/AM2/laboratorio/)
 
 </div>
 
----
-
-## 🎯 ¿Qué es?
-
-Un sitio estático para preparar el 2º parcial de AM II con **exámenes reales**. Cada ejercicio muestra el enunciado oficial y esconde las ayudas: primero una **pista**, después los **pasos de a uno**, al final la **solución** y su **comprobación**. Así te enterás de lo justo, cuando lo necesitás.
-
-Además de los parciales hay machetes por tipo de problema y teoría por unidad. Todo en español, con la matemática renderizada con KaTeX.
-
-### 👥 ¿Para quién?
-
-Para Gabi y sus compañeros que cursan o rinden el 2º parcial. La prioridad es la **parte práctica (~75 %)**; la teoría acompaña (~25 %).
-
-### 📐 Alcance (programa 2025)
-
-| Unidad | Tema | Nota |
-|:---:|---|---|
-| **U4** | Integrales múltiples | aparece en parciales |
-| **U5** | Integrales curvilíneas, Green, potencial | aparece en parciales |
-| **U6** | Funciones vectoriales | tentativo, no apareció en parciales prácticos |
-| **U7** | Computación numérica | sin material por ahora |
-| **U8** | EDO de 1º orden | aparece en parciales |
-| **U9** | EDO de orden superior | aparece en parciales |
-| **U10** | EDP | tentativo, no apareció en parciales prácticos |
-
-Fourier (U11) queda fuera.
-
----
-
-## 🗺️ Secciones del sitio
-
-| | Sección | Qué encontrás |
-|:---:|---|---|
-| 📝 | [**Parciales oficiales**](https://gabibertero.github.io/AM2/parciales/) | 11 parciales y recuperatorios 2025–2026 + el modelo teórico, cada uno en su pestaña y en el orden original: enunciado transcripto, escaneo original (con datos personales tapados) y resolución oficial escaneada del profe |
-| 📖 | [**Teoría**](https://gabibertero.github.io/AM2/teoria/) | Resúmenes por unidad |
-| 🧰 | [**Machetes**](https://gabibertero.github.io/AM2/machetes/) | Qué hacer según el tipo de problema |
-| 🧪 | [**Simulacros generados**](https://gabibertero.github.io/AM2/generados/) | Exámenes armados con IA, **no oficiales**. Quedan vacíos hasta que se pidan |
-
-En cada ejercicio marcás tu estado: **pendiente**, **en curso** o **resuelto**, y se guarda en tu navegador.
-
----
-
-## 🧭 Cómo estudiar con el sitio
-
-```
-1. Machete       → mirá qué tipo de problema es y qué método usa
-2. Teoría        → repasá la unidad si algo no cierra
-3. Parcial       → elegí un examen y resolvelo en papel, sin mirar ayudas
-4. Pista         → si te trabás, pedí UNA pista y volvé a intentar
-5. Pasos         → destapá de a un paso, no la solución entera
-6. Comprobación  → verificá tu resultado y marcá el ejercicio como resuelto
-7. Repetí        → con los ejercicios en "en curso" o "pendiente"
-```
-
----
-
-## 🎨 Las tres capas
-
-Siempre sabés qué es oficial y qué no:
-
-| Capa | Qué es | Color |
-|---|---|:---:|
-| 🟦 **Oficial** | Enunciado tal cual, escaneo y resolución del profe | azul |
-| 🟩 **Elaborado para el sitio** | Pistas, pasos, solución, comprobación, machetes y teoría. **No oficial** | verde |
-| 🟧 **Simulacro generado** | Examen inventado. **No oficial**, solo si se pide | ámbar punteado |
-
----
-
-## 📸 Capturas
-
-<p align="center">
-  <img src="docs/capturas/examen-desktop.png" alt="Un ejercicio con su enunciado oficial y una pista revelada" width="62%">
-  &nbsp;
-  <img src="docs/capturas/examen-celular.png" alt="El mismo ejercicio en celular" width="22%">
-</p>
-
-<p align="center">
-  <img src="docs/capturas/parciales-desktop.png" alt="Lista de parciales oficiales" width="62%">
-  &nbsp;
-  <img src="docs/capturas/inicio-celular.png" alt="Inicio en celular" width="22%">
-</p>
-
----
-
-## 🚧 Estado del proyecto
-
-| Parte | Estado |
-|---|:---:|
-| Base y navegación | ✅ listo |
-| Parciales transcriptos | 🚧 en construcción |
-| Soluciones elaboradas | 🚧 en construcción |
-| Machetes | 🚧 en construcción |
-| Teoría | 🚧 en construcción |
-
-Lo que todavía no está transcripto o revisado se marca como **pendiente de revisión**.
-
----
-
-## 🛠️ Para quien quiera tocar el código
-
-Stack: **Astro 7** + MDX + **KaTeX** (se renderiza al construir), JavaScript vanilla, Playwright para los tests y GitHub Pages con Actions. Requiere **Node ≥ 22.12** (probado con v26). Todos los comandos se corren desde la carpeta del proyecto (la que tiene `package.json`).
-
-<details>
-<summary><b>💻 Correr en tu compu</b></summary>
-
 <br>
 
-```bash
-npm install
-npm run dev
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/mockup-oscuro.png">
+  <img alt="Inicio del sitio en desktop y en celular" src="docs/readme/mockup-claro.png" width="100%">
+</picture>
 
-Abrí <http://localhost:4321/AM2/>. Tenés que ver la página de Inicio con el menú (Inicio · Parciales oficiales · Teoría · Machetes · Simulacros generados).
+> [!NOTE]
+> Es material de estudio **no oficial**. Los enunciados y las resoluciones manuscritas son de la cátedra; las pistas, pasos, comprobaciones, criterios y la teoría están elaborados para el sitio y pueden tener errores. Contrastá siempre con tu cátedra.
 
-Para probar la versión construida:
+<details>
+<summary><b>📑 Contenido</b></summary>
 
-```bash
-npm run build
-npm run preview
-```
+- [Qué tiene](#qué-tiene)
+- [Cómo usarlo](#cómo-usarlo)
+- [Temas](#temas)
+- [Privacidad](#privacidad)
+- [Cómo está hecho](#cómo-está-hecho)
+- [Para desarrollar](#para-desarrollar)
+- [Roadmap](#roadmap)
+- [FAQ](#faq)
+- [Hecho con Claude](#hecho-con-claude)
+- [Créditos y licencia](#créditos-y-licencia)
 
 </details>
 
-<details>
-<summary><b>🧪 Tests</b></summary>
-
-<br>
-
-La primera vez hay que bajar el navegador de pruebas:
-
-```bash
-npx playwright install chromium
-```
-
-Después:
-
-```bash
-npm run check          # ids de ejercicio únicos y con archivo + página de origen
-npm run build          # el build también falla si el chequeo de ids falla
-npx playwright test    # construye, sirve el sitio y prueba el progreso y la navegación
-npm run test:py        # recalcula el 1R3 con sympy (una vez: python3 -m pip install --user sympy)
-```
-
-Resultado esperado: todo en verde, sin errores.
-
-Para regenerar las capturas del README (después de `npm run build`): `npm run capturas`.
-
-</details>
-
-<details>
-<summary><b>🚀 Publicar gratis en GitHub Pages</b></summary>
-
-<br>
-
-1. Creá en GitHub un repositorio público llamado `AM2`.
-2. Subí el proyecto:
-   ```bash
-   git add .
-   git commit -m "Sitio AM II"
-   git branch -M main
-   git remote add origin https://github.com/gabibertero/AM2.git
-   git push -u origin main
-   ```
-3. En GitHub: **Settings → Pages → Source: GitHub Actions**.
-4. El workflow `.github/workflows/deploy.yml` construye y publica solo. Seguilo en la pestaña **Actions**. El sitio queda en <https://gabibertero.github.io/AM2/>.
-
-Cada `push` a `main` vuelve a publicar. Si cambiás el nombre del repo o el usuario, actualizá `site` y `base` en `astro.config.mjs`.
-
-</details>
-
-<details>
-<summary><b>🔄 Actualizar el sitio</b></summary>
-
-<br>
-
-Editá o agregá archivos y después:
-
-```bash
-git add .
-git commit -m "Describí el cambio"
-git push
-```
-
-GitHub Pages se vuelve a publicar solo. El progreso de cada persona no se toca.
-
-</details>
-
-<details>
-<summary><b>💾 Progreso</b></summary>
-
-<br>
-
-Se guarda **en el navegador de cada persona** (`localStorage`), con claves que empiezan con `am2:v1:`. No hay cuentas ni servidor, así que **no pasa de un dispositivo a otro**.
-
-Para empezar de cero: botón **"Reiniciar progreso"** en Inicio (pide confirmación en la página y borra solo las claves `am2:v1:`), o borrar los datos del sitio desde el navegador.
-
-</details>
-
-<details>
-<summary><b>📁 Estructura del proyecto</b></summary>
-
-<br>
-
-```
-.
-├── src/
-│   ├── content/
-│   │   ├── parciales/   un .mdx por examen
-│   │   ├── teoria/
-│   │   └── machetes/
-│   ├── components/      Ejercicio, Enunciado, Pista, Paso, Solucion, Comprobacion…
-│   ├── layouts/
-│   ├── pages/
-│   ├── scripts/         progreso (JS vanilla)
-│   └── styles/
-├── scripts/             check-ids.mjs, capturas.mjs
-├── tests/               Playwright
-├── docs/                ids.md, inventario/, capturas/
-├── .github/workflows/   deploy.yml
-├── SPEC.md              especificación
-└── TASKS.md             tareas
-```
-
-Cada ejercicio tiene un id fijo `<comisión>-<fecha>#<n>` (ej. `1r3-2025-11-14#1`) del que depende el progreso guardado: no se cambia. La lista está en `docs/ids.md`.
-
-</details>
-
-<details>
-<summary><b>🔒 Fidelidad y privacidad</b></summary>
-
-<br>
-
-- Los enunciados oficiales van **tal cual** aparecen: redacción, símbolos, numeración y orden. Lo ilegible se marca *pendiente de revisión*, nunca se reconstruye a ojo.
-- Cada ejercicio indica su **fuente: archivo + página**.
-- Si un recálculo no coincide con la resolución del profe, se marca; el original no se corrige.
-- El repo es público: en los escaneos publicados van **tapados el nombre, la firma y el legajo**.
-- Lo oficial y lo elaborado para el sitio nunca se mezclan (ver las tres capas).
-
-</details>
-
----
-
-## 🤝 Contributors
+## Qué tiene
 
 <table>
 <tr>
-<td align="center"><a href="https://claude.ai"><img src="https://img.shields.io/badge/Claude-D97757?style=for-the-badge&logo=claude&logoColor=white" alt="Claude"><br><sub><b>Claude</b></sub></a><br><sub>alias Claudio 🤖</sub></td>
+<td valign="top" width="33%">📝 <b>11 parciales oficiales</b><br><sub>pistas, pasos, comprobación, criterio estimado y resolución oficial escaneada</sub></td>
+<td valign="top" width="33%">🗂️ <b>8 años anteriores</b><br><sub>resueltos y verificados</sub></td>
+<td valign="top" width="33%">⏱️ <b>Modo examen</b><br><sub>cronómetro, solo enunciados y autocalificación</sub></td>
+</tr>
+<tr>
+<td valign="top" width="33%">🤖 <b>Corrección con IA</b><br><sub>Claude, ChatGPT o Gemini con el prompt armado</sub></td>
+<td valign="top" width="33%">❓ <b>Preguntero U4–U10</b><br><sub>84 preguntas, simulacro 2 temas + 4 cortas + 3 choice</sub></td>
+<td valign="top" width="33%">📖 <b>Teoría U4–U10</b><br><sub>con figuras, estilo de cátedra</sub></td>
+</tr>
+<tr>
+<td valign="top" width="33%">🧰 <b>12 machetes</b><br><sub>qué hacer según el tipo de problema</sub></td>
+<td valign="top" width="33%">🧪 <b>Laboratorio</b><br><sub>7 generadores con semilla</sub></td>
+<td valign="top" width="33%">🏠 <b>Home</b><br><sub>cuenta regresiva al 2º parcial (31/10), progreso y "seguir donde dejaste"</sub></td>
 </tr>
 </table>
 
-¿Encontraste algo mal o tenés una idea? Abrí un [issue](https://github.com/gabibertero/AM2/issues) y contá en qué parcial y ejercicio está.
+<details>
+<summary><b>⏱️ Modo examen</b> (GIF)</summary>
 
----
+<br>
+
+Empezás, resolvés en papel con el reloj corriendo, entregás y te autocalificás ejercicio por ejercicio con el criterio Bien / A medias / Mal. La nota se guarda en tu navegador.
+
+<img src="docs/readme/modo-examen.gif" alt="Modo examen: empezar, entregar y nota estimada" width="100%">
+
+</details>
+
+<details>
+<summary><b>🧪 Laboratorio</b> (GIF)</summary>
+
+<br>
+
+Ejercicios nuevos de EDO de 1º y 2º orden, exactas, Bernoulli, Green y polares. La misma semilla da siempre el mismo ejercicio, así que podés pasarle el enlace a un amigo. Cada uno trae solución paso a paso.
+
+<img src="docs/readme/laboratorio.gif" alt="Laboratorio: ejercicio generado y su solución" width="100%">
+
+</details>
+
+<details>
+<summary><b>📝 Un parcial resuelto</b></summary>
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/parcial-oscuro.png">
+  <img alt="Un parcial con enunciado, pista y pasos" src="docs/readme/parcial-claro.png" width="100%">
+</picture>
+
+</details>
+
+<details>
+<summary><b>❓ Preguntero</b></summary>
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/preguntero-oscuro.png">
+  <img alt="Preguntero teórico" src="docs/readme/preguntero-claro.png" width="100%">
+</picture>
+
+</details>
+
+<details>
+<summary><b>📖 Teoría</b></summary>
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/teoria-oscuro.png">
+  <img alt="Página de teoría con figuras" src="docs/readme/teoria-claro.png" width="100%">
+</picture>
+
+</details>
+
+<details>
+<summary><b>📱 En el celular</b></summary>
+
+<br>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/parcial-cel-oscuro.png">
+    <img alt="Parcial en celular" src="docs/readme/parcial-cel-claro.png" width="30%">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/preguntero-cel-oscuro.png">
+    <img alt="Preguntero en celular" src="docs/readme/preguntero-cel-claro.png" width="30%">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/home-cel-oscuro.png">
+    <img alt="Inicio en celular" src="docs/readme/home-cel-claro.png" width="30%">
+  </picture>
+</p>
+
+Diseñado para 390 px sin scroll horizontal, con tema claro y oscuro.
+
+</details>
+
+## Cómo usarlo
+
+```text
+1. Machete        → identificá el tipo de problema y su método
+2. Teoría         → repasá la unidad si algo no cierra
+3. Parcial        → resolvelo en papel, sin ayudas
+4. Pista → Pasos  → pedí UNA pista, después destapá los pasos de a uno
+5. Comprobación   → verificá tu resultado y marcá el estado del ejercicio
+6. Modo examen    → la semana previa, un parcial entero con reloj
+7. Preguntero     → simulacro de teoría (2 temas + 4 cortas + 3 choice)
+```
+
+> [!TIP]
+> Si no sabés cómo arrancar, andá al **Laboratorio**: generás ejercicios con semilla hasta que el método te salga solo.
+
+> [!NOTE]
+> Tu progreso se guarda **solo en tu navegador** (`localStorage`). Si cambiás de dispositivo o borrás los datos del sitio, empezás de cero.
+
+## Temas
+
+| Unidad | Tema | Práctica | Teoría |
+|:---:|---|:---:|:---:|
+| **U4** | Integrales múltiples | ✅ | ✅ |
+| **U5** | Integrales curvilíneas, Green, potencial | ✅ | ✅ |
+| **U6** | Funciones vectoriales | alcance tentativo | ✅ |
+| **U7** | Computación numérica | sin material | sin material |
+| **U8** | EDO de 1º orden | ✅ | ✅ |
+| **U9** | EDO de orden superior | ✅ | ✅ |
+| **U10** | EDP | alcance tentativo | ✅ |
+
+Fourier (U11) queda fuera. Programa 2025.
+
+## Privacidad
+
+- Los escaneos de la cátedra se publican **con los datos personales tapados**.
+- No hay cuentas, servidor ni analítica: el progreso y las notas del modo examen viven en `localStorage` con el prefijo `am2:v1:`.
+- La corrección con IA **no envía nada sola**: arma un prompt que copiás o abrís en la herramienta que elijas.
+
+## Cómo está hecho
+
+![Astro](https://img.shields.io/badge/Astro-7-ff5d01?style=flat-square&logo=astro&logoColor=white)
+![MDX](https://img.shields.io/badge/MDX-contenido-f9ac00?style=flat-square&logo=mdx&logoColor=white)
+![KaTeX](https://img.shields.io/badge/KaTeX-0.19-555?style=flat-square)
+![Playwright](https://img.shields.io/badge/Playwright-E2E-2ead33?style=flat-square&logo=playwright&logoColor=white)
+![sympy](https://img.shields.io/badge/sympy-verificación-3b82c4?style=flat-square&logo=python&logoColor=white)
+![Pages](https://img.shields.io/badge/GitHub_Pages-deploy-222?style=flat-square&logo=github&logoColor=white)
+
+```mermaid
+flowchart TD
+  A[Material de la cátedra<br/>parciales, teoría] --> B[Inventario<br/>docs/inventario]
+  B --> C[Resolución<br/>pistas, pasos, figuras]
+  C --> D{{Verificación<br/>tests/check_*.py con sympy}}
+  D --> E[MDX en src/content]
+  E --> F[Astro + KaTeX<br/>sitio estático]
+  F --> G[Playwright + node --test]
+  G --> H[GitHub Pages]
+```
+
+Sin framework de frontend: JavaScript vanilla, las fórmulas se renderizan al construir y el sitio funciona sin JS para leer el contenido.
+
+<details>
+<summary><b>🌳 Árbol de carpetas</b></summary>
+
+```text
+.
+├── src/
+│   ├── content/      parciales, anteriores, teoria, machetes, preguntas (MDX/MD)
+│   ├── pages/        rutas de Astro
+│   ├── components/   piezas reutilizables (ejercicio, pregunta, panel de examen)
+│   ├── scripts/      examen, preguntero, progreso, IA y laboratorio (lab/)
+│   └── styles/
+├── tests/            *.spec.mjs (Playwright) · *.test.mjs (node --test) · check_*.py (sympy)
+├── scripts/          chequeo de ids, escaneos y capturas
+├── docs/             inventario, estándar de soluciones, capturas y recursos del README
+├── figuras/          gráficos generados con matplotlib
+├── public/           favicon y escaneos con datos tapados
+└── .github/          deploy a Pages y plantillas de issues
+```
+
+</details>
+
+## Para desarrollar
+
+**Requisitos:** Node ≥ 22.12 (el deploy usa 24). Para los chequeos de sympy: Python 3 con `sympy`.
+
+```bash
+npm install
+npm run dev            # http://localhost:4321/AM2/
+npm run build          # chequea ids y construye
+npm run preview        # sirve el build
+
+npx playwright install chromium   # una sola vez
+npm test               # 38 tests E2E (celular, sin JS, modo examen, laboratorio...)
+npm run test:unit      # 41 tests de lógica pura
+python3 tests/check_1r3.py        # un check con sympy (hay uno por examen resuelto)
+```
+
+<details>
+<summary><b>➕ Cómo agregar un examen</b></summary>
+
+1. Copiá un archivo de `src/content/parciales/` (o `anteriores/`) y completá el frontmatter: fecha, tipo, unidades y fuente.
+2. Transcribí el enunciado tal cual y agregá el escaneo (con los datos personales tapados) a `public/`.
+3. Escribí pistas, pasos, solución y criterio; cada ejercicio con un `id` único (`npm run check` lo valida).
+4. Sumá `tests/check_<id>.py` que recalcule el resultado con sympy.
+5. `npm run build && npm test`.
+
+</details>
+
+## Roadmap
+
+- [x] Parciales oficiales resueltos y verificados con sympy (11)
+- [x] Exámenes de años anteriores resueltos (8)
+- [x] Modo examen con cronómetro y autocalificación
+- [x] Corrección con IA (Claude, ChatGPT, Gemini)
+- [x] Preguntero U4–U10 y simulacro 2 + 4 + 3
+- [x] Teoría U4–U10 con figuras
+- [x] Laboratorio con 7 generadores con semilla
+- [x] Home con cuenta regresiva, progreso y "seguir donde dejaste"
+- [ ] Material de U7 (computación numérica), hoy sin fuentes
+- [ ] Revisar las lecturas de gráficos marcadas como pendientes en algunos años anteriores
+- [ ] Más generadores en el laboratorio (integrales triples, Stokes)
+
+## FAQ
+
+<details>
+<summary><b>¿Es oficial?</b></summary>
+
+No. Es un proyecto de estudio hecho por estudiantes. Los enunciados y las resoluciones escaneadas son de la cátedra; el resto está elaborado para el sitio.
+
+</details>
+
+<details>
+<summary><b>¿Se guarda mi progreso?</b></summary>
+
+Sí, pero solo en tu navegador. No hay cuentas ni servidor, así que no se sincroniza entre dispositivos.
+
+</details>
+
+<details>
+<summary><b>¿Qué hago si encuentro un error en un ejercicio?</b></summary>
+
+Abrí un [issue](https://github.com/gabibertero/AM2/issues/new/choose) con el formulario "Error en un ejercicio" indicando el examen y el ejercicio. Ver [CONTRIBUTING.md](CONTRIBUTING.md).
+
+</details>
+
+<details>
+<summary><b>¿Por qué a veces mi resultado difiere del de la resolución oficial?</b></summary>
+
+En unos pocos casos sympy no coincide con la resolución del profe; esos casos están anotados en cada ejercicio en lugar de corregir el original.
+
+</details>
+
+## Hecho con Claude
+
+Este proyecto se construyó con [Claude Code](https://claude.com/claude-code), con revisión y criterio final de Gabi. Claude hizo:
+
+- **Diseño:** paleta, tipografía, tema claro/oscuro, favicon, Home y auditoría estética con capturas en desktop y 390 px.
+- **Código:** modo examen, corrección con IA, preguntero, progreso local y laboratorio con semilla.
+- **Contenido:** transcripción, resolución de los parciales y años anteriores, teoría, machetes y preguntas.
+- **Verificación:** un script de sympy por examen resuelto, auditorías didácticas y code review.
+- **Tests:** Playwright (E2E, celular, sin JS) y `node --test`.
+
+Agentes que intervinieron: `resolvedor`, `web`, `disenador`, `estetica`, `profe`, `verificador`, `redactor`, `graficos`, `tester`, `readme` y `ecc:code-reviewer`. Auditorías de `profe`: parciales 91–95, preguntero 96, teoría 93.
+
+Los commits llevan `Co-Authored-By: Claude`, por eso Claude figura en Contributors.
+
+## Créditos y licencia
+
+- Enunciados y resoluciones: cátedra de Análisis Matemático II, UTN FRC.
+- Sitio, contenido elaborado y código: Gabi, con Claude.
+- Cambios y errores: ver [CHANGELOG.md](CHANGELOG.md) y [CONTRIBUTING.md](CONTRIBUTING.md).
+- Licencia: pendiente de definir. Mientras tanto, el material de la cátedra pertenece a sus autores.
 
 <div align="center">
-
-⚠️ Hecho con IA a partir de material de cátedra: parciales, resoluciones del profe y apuntes.<br>
-Por estudiantes, para estudiantes. Puede tener errores: usalo como **complemento** de las clases.
 
 <br>
 
 ### Made by Claudio 🧉
+
+<sub>Por estudiantes, para estudiantes. Hecho con [Claude Code](https://claude.com/claude-code).</sub>
 
 </div>

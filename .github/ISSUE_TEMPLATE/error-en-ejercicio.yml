@@ -1,0 +1,32 @@
+name: Error en un ejercicio
+description: Un enunciado, una pista, un paso o un resultado está mal.
+labels: [contenido]
+body:
+  - type: input
+    id: examen
+    attributes:
+      label: Examen
+      description: Por ejemplo 1r3-2025-11-14 o anterior-w-t1.
+    validations:
+      required: true
+  - type: input
+    id: ejercicio
+    attributes:
+      label: Ejercicio y página
+      description: Número de ejercicio y URL de la página o archivo de src/content/.
+    validations:
+      required: true
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Qué está mal
+      options: [Enunciado (transcripción), Pista, Paso, Solución o resultado, Comprobación, Criterio de corrección, Otro]
+    validations:
+      required: true
+  - type: textarea
+    id: detalle
+    attributes:
+      label: Qué ves y qué esperabas
+      description: Si podés, tu cuenta o el resultado de la resolución oficial.
+    validations:
+      required: true

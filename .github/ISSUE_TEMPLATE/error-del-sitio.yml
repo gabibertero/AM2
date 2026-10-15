@@ -1,0 +1,26 @@
+name: Error del sitio
+description: Algo no anda o se ve mal (celular, tema oscuro, modo examen, laboratorio...).
+labels: [sitio]
+body:
+  - type: input
+    id: pagina
+    attributes:
+      label: Página
+      description: URL donde pasa.
+    validations:
+      required: true
+  - type: input
+    id: entorno
+    attributes:
+      label: Dispositivo y navegador
+      placeholder: Por ejemplo, celular 390 px, Safari, tema oscuro.
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Qué pasó y cómo reproducirlo
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Qué esperabas que pasara
