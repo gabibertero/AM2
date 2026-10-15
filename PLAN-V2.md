@@ -17,7 +17,7 @@ Cada etapa = 1 sesión (o 1 ejecución programada), con un commit al cerrar su a
 
 ## Etapas
 
-### E1 · Contenido: resolver los parciales oficiales — PRIORIDAD 1
+### E1 ✅ · Contenido: resolver los parciales oficiales — PRIORIDAD 1
 - 10 parciales prácticos oficiales sin resolver → **resolvedor** en 4 tandas de ≤3 (parciales repartidos, sin pisar archivos).
   - Tanda 1: 1R7, 1V1-A, 1V1-B · Tanda 2: 2S2-A, 2S2-B, recup 2025-11-20 · Tanda 3: 1H9-A, 1H9-B, recup 1H10 · Tanda 4: recup 1H9 2025-07-05.
 - Cada uno: pasos con su porqué, `tests/check_<id>.py` con asserts sympy, figuras con matplotlib, criterios Bien / A medias / Mal, resolución oficial al lado.
@@ -25,28 +25,28 @@ Cada etapa = 1 sesión (o 1 ejecución programada), con un commit al cerrar su a
 - Auditoría: **profe** sobre 1 por tanda (≥90) + todos los `check_*.py` en verde + `npm run build`.
 - Commit al cerrar cada tanda.
 
-### E2 · Modo examen + corrección con IA — PRIORIDAD 1
+### E2 ✅ · Modo examen + corrección con IA — PRIORIDAD 1
 - **web**: modo examen por parcial (cronómetro, solo enunciados, después autocorrección por criterios y la nota). Se reusan los componentes de la plantilla de la skill (`IA.astro`, `Pregunta.astro`), adaptados.
 - Botón "Corregir con IA" (Claude · ChatGPT · Gemini) en cada ejercicio y pregunta, con el enunciado y la resolución en el prompt.
 - Progreso: se mantiene `am2:v1:` (no se borra nada de lo guardado).
 - Auditoría: **ecc:code-reviewer** + **tester** (desktop y 390 px, sin JS, localStorage roto).
 
-### E3 · Teoría: preguntero con el formato real — PRIORIDAD 2
+### E3 ✅ · Teoría: preguntero con el formato real — PRIORIDAD 2
 - **resolvedor/redactor**: preguntero U4–U10 en 3 modos: tema a desarrollar (con guía de qué tiene que tener: definición, propiedades, desarrollo, gráfico), pregunta corta, multiple choice.
 - Fuentes: Modelo P2 teórico, temas de la nota de Links, Monllor 05–11.
 - Simulacro teórico armado con el formato 2 + 4 + 3.
 - Cerrar el borrador de teoría U4–U10 (T08) con el estilo de la cátedra. U6/U10 siguen como tentativos y U7 sin material.
 - Auditoría: **profe** (muestra) + **verificador** (fórmulas).
 
-### E4 · Home v2 y estética — PRIORIDAD 2
+### E4 ✅ · Home v2 y estética — PRIORIDAD 2
 - **disenador**: Home con cuenta regresiva al parcial, mapa por unidad (U4–U10, con lo que entra en la práctica marcado), progreso global, "seguir donde dejaste", accesos al modo examen y al preguntero. Revisar el favicon y el tema claro/oscuro.
 - **estetica** ≥90 (máx. 2 vueltas) · capturas del Home (desktop y 390 px, claro y oscuro) para que Gabi las vea.
 
-### E5 · Laboratorio — PRIORIDAD 3 (si da el tiempo antes del parcial)
+### E5 ✅ · Laboratorio — PRIORIDAD 3 (si da el tiempo antes del parcial)
 - **web**: generadores con semilla para EDO lineal, Bernoulli, exacta, 2º orden con coeficientes constantes (raíces distintas, iguales y complejas), Green, integrales dobles y triples con cambio de coordenadas. Pasos en notación de la cátedra.
 - Lógica pura testeada con `node --test` y muchas semillas. Auditoría: **profe** (notación) + **ecc:code-reviewer** + **estetica**.
 
-### E6 · Anteriores + revisión + publicar
+### E6 ✅ · Anteriores + revisión + publicar
 - **resolvedor**: los 8 exámenes de años anteriores (2–3 tandas), si da el tiempo.
 - Revisión: **ecc:code-reviewer** + **tester** (suite completa + online) + **estetica** (sitio entero).
 - **readme** rehace el README (badge y sección "Hecho con Claude"), push a `main` y verificación online (todo 200).
@@ -68,5 +68,8 @@ Cada etapa = 1 sesión (o 1 ejecución programada), con un commit al cerrar su a
 - Modelos: sonnet para construir, haiku para verificar. Nada de Opus.
 
 ## Pendientes para Gabi
-- Fecha exacta del 2º parcial (para la cuenta regresiva y el calendario).
-- ¿Push automático o lo revisás antes?
+- ~~Fecha del parcial~~: 31/10, recuperatorio 7/11 (cargadas).
+- ~~Push~~: autorizado por Gabi.
+- Confirmar con la cátedra: 1H10 ej 2 (profe 64π/21, recálculo 512π/21); 1H9 B1 (errata en la parte radial); 2S2-B ej 2 (casquete superior) y ej 3 (lectura de C₁); lecturas de gráfico de W y X.
+- Licencia del repo (README dice "pendiente").
+- Settings de GitHub: descripción, topics y social preview (docs/readme/social.png).
