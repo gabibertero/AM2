@@ -1,10 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { INSTANCIAS, instanciaDeUnidad } from '../../lib/sitio.js';
 const base = import.meta.env.BASE_URL;
 const archivos = (await getCollection('preguntas')).sort((a, b) => a.data.orden - b.data.orden);
 const secciones = await Promise.all(archivos.map(async (a) => ({ ...a.data, Content: (await render(a)).Content })));
 const unidades = secciones.map((s) => s.unidad);
+const instancias = INSTANCIAS.map(({ i, nombre, rango }) => ({ i, nombre, rango, hay: secciones.some((s) => instanciaDeUnidad(s.unidad) === i) }));
 const tipos = [['tema', 'Temas'], ['corta', 'Cortas'], ['choice', 'Choice']];
 ---
 <Layout titulo="Preguntero teórico">
@@ -13,6 +15,10 @@ const tipos = [['tema', 'Temas'], ['corta', 'Cortas'], ['choice', 'Choice']];
   <p class="meta"><a class="btn btn-primario" href={`${base}preguntero/simulacro/`}>Armar un simulacro teórico (2 temas + 4 cortas + 3 choice)</a></p>
 
   <div class="pf" data-js hidden>
+    <div class="pf-grupo" role="group" aria-label="Filtrar por instancia">
+      <button type="button" data-filtro="instancia" data-valor="todas" aria-pressed="true">Toda la materia</button>
+      {instancias.map(({ i, nombre, rango }) => <button type="button" data-filtro="instancia" data-valor={i} aria-pressed="false">{nombre} ({rango})</button>)}
+    </div>
     <div class="pf-grupo" role="group" aria-label="Filtrar por unidad">
       <button type="button" data-filtro="unidad" data-valor="todas" aria-pressed="true">Todas</button>
       {unidades.map((u) => <button type="button" data-filtro="unidad" data-valor={u} aria-pressed="false">{u}</button>)}
@@ -31,12 +37,12 @@ const tipos = [['tema', 'Temas'], ['corta', 'Cortas'], ['choice', 'Choice']];
 
   <div data-preguntero>
     {secciones.map(({ unidad, titulo, Content }) => (
-      <section data-seccion data-unidad={unidad} aria-labelledby={`h-${unidad}`}>
+      <section data-seccion data-unidad={unidad} data-instancia={instanciaDeUnidad(unidad)} aria-labelledby={`h-${unidad}`}>
         <h2 id={`h-${unidad}`}><span class="chip chip-u chip-lg" data-unidad={unidad}>{unidad}</span> {titulo}</h2>
         <Content />
       </section>
     ))}
-    <p data-vacio hidden>No hay preguntas con esos filtros.</p>
+    <p data-vacio hidden>No hay preguntas con esos filtros. Si elegiste el 1º parcial: todavía no hay preguntas cargadas (próximamente).</p>
   </div>
 </Layout>
 <style is:global>

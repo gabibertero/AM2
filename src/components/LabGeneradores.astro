@@ -1,11 +1,16 @@
 ---
 // Generadores de ejercicios con semilla (lógica pura en scripts/lab/, UI en scripts/lab/ui.js). Sin JS solo se ve la lista de tipos.
 import IA from './IA.astro';
+import InstanciaSec from './InstanciaSec.astro';
 import { GENERADORES } from '../scripts/lab/index.js';
+import { INSTANCIAS } from '../lib/sitio.js';
+// Cada generador declara `instancia` (por defecto p2: los actuales son de U4–U10).
 ---
-<ul class="lab-lista">
-  {GENERADORES.map((g) => <li>{g.nombre}</li>)}
-</ul>
+{INSTANCIAS.map(({ i }) => { const gs = GENERADORES.filter((g) => (g.instancia ?? 'p2') === i); return (
+  <InstanciaSec i={i} vacio={!gs.length} nivel={2}>
+    <ul class="lab-lista">{gs.map((g) => <li>{g.nombre}</li>)}</ul>
+  </InstanciaSec>
+); })}
 <noscript><p class="suave">El laboratorio necesita JavaScript para generar los ejercicios.</p></noscript>
 
 <section class="lab-gen" aria-labelledby="h-gen" data-lab hidden>

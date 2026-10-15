@@ -1,15 +1,19 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import InstanciaSec from '../../components/InstanciaSec.astro';
 import { idsDeEjercicios } from '../../scripts/ids.js';
+import { INSTANCIAS, instanciaDeUnidades } from '../../lib/sitio.js';
 const base = import.meta.env.BASE_URL;
 const examenes = (await getCollection('anteriores')).sort((a, b) => a.data.orden - b.data.orden);
 ---
 <Layout titulo="Años anteriores">
   <h1>Parciales de años anteriores (fotos de clase)</h1>
   <p class="lead">Ocho exámenes (X, Y, Z, W × Tema 1 y 2) que salen de fotos tomadas en clase. No traen fecha ni resolución. Están separados de los <a href={`${base}parciales/`}>parciales oficiales</a> con fecha.</p>
+  {INSTANCIAS.map(({ i }) => { const lista = examenes.filter((e) => instanciaDeUnidades(e.data.unidades) === i); return (
+  <InstanciaSec i={i} vacio={!lista.length}>
   <ul class="grilla lista-tarjetas">
-    {examenes.map((e) => (
+    {lista.map((e) => (
       <li class="tarjeta examen-card">
         <div class="ec-top"><span class="chip">sin fecha</span><span class="chip">foto de clase</span></div>
         <a class="ec-titulo" href={`${base}anteriores/${e.id}/`}>{e.data.titulo}</a>
@@ -19,4 +23,6 @@ const examenes = (await getCollection('anteriores')).sort((a, b) => a.data.orden
       </li>
     ))}
   </ul>
+  </InstanciaSec>
+  ); })}
 </Layout>

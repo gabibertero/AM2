@@ -1,30 +1,33 @@
 ---
-// Mapa del 2º parcial: una tarjeta por unidad (U4–U10) con lo que cayó en los parciales prácticos y accesos.
-import { UNIDADES, CAE } from '../lib/sitio.js';
-const { temas } = Astro.props; // { U4: [[tema, veces], ...], ... } calculado en el index desde los parciales
+// Mapa de una instancia: una tarjeta por unidad con lo que cayó en los parciales prácticos y accesos.
+// Las unidades con cae='proximamente' (sin contenido todavía) no linkean a nada.
+import { UNIDADES, CAE, instanciaDeUnidad } from '../lib/sitio.js';
+const { temas, instancia } = Astro.props; // { U4: [[tema, veces], ...], ... } calculado en el index desde los parciales
 const base = import.meta.env.BASE_URL;
 ---
 <ol class="mapa">
-  {UNIDADES.map(({ u, titulo, cae, slug }) => (
+  {UNIDADES.filter((x) => instanciaDeUnidad(x.u) === instancia).map(({ u, titulo, cae, slug }) => (
     <li class="mapa-u" data-unidad={u} data-cae={cae}>
       <header>
         <span class="mapa-n">{u}</span>
         <span class="mapa-cae">{CAE[cae]}</span>
       </header>
       <h3>{titulo}</h3>
-      {temas[u]?.length > 0 ? (
+      {cae === 'proximamente' ? (
+        <p class="suave mapa-vacio">Próximamente: estamos preparando el material.</p>
+      ) : temas[u]?.length > 0 ? (
         <ul class="mapa-temas">
           {temas[u].map(([t, n]) => <li>{t}<span class="suave"> · {n}×</span></li>)}
         </ul>
       ) : (
         <p class="suave mapa-vacio">{cae === 'sin-material' ? 'Pendiente: todavía no hay material.' : 'No apareció en parciales prácticos.'}</p>
       )}
-      <nav class="mapa-acc" aria-label={`Accesos de ${u}`}>
+      {cae !== 'proximamente' && <nav class="mapa-acc" aria-label={`Accesos de ${u}`}>
         <a href={`${base}teoria/${slug}/`}>Teoría</a>
         {cae === 'practico' && <a href={`${base}parciales/`}>Ejercicios</a>}
         {cae === 'practico' && <a href={`${base}machetes/`}>Machetes</a>}
         <a href={`${base}preguntero/#h-${u}`}>Preguntero</a>
-      </nav>
+      </nav>}
     </li>
   ))}
 </ol>

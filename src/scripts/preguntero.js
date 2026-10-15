@@ -40,7 +40,7 @@ function mostrarResultado(art, res) {
 // ---- Preguntero: filtros, marcas, corrección inmediata de choice ----
 const lista = $$('[data-preguntero] [data-pregunta]');
 if (lista.length) {
-  const filtros = { unidad: 'todas', tipo: 'todas', marca: 'todas' };
+  const filtros = { instancia: 'todas', unidad: 'todas', tipo: 'todas', marca: 'todas' };
   const marcaDe = (art) => { const m = leer('preg:' + art.dataset.id); return MARCAS[m] ? m : ''; };
 
   const pintarMarca = (art) => {
@@ -54,7 +54,8 @@ if (lista.length) {
     let visibles = 0;
     lista.forEach((art) => {
       const m = marcaDe(art);
-      const ok = (filtros.unidad === 'todas' || art.dataset.unidad === filtros.unidad)
+      const ok = (filtros.instancia === 'todas' || art.closest('[data-seccion]')?.dataset.instancia === filtros.instancia)
+        && (filtros.unidad === 'todas' || art.dataset.unidad === filtros.unidad)
         && (filtros.tipo === 'todas' || art.dataset.tipo === filtros.tipo)
         && (filtros.marca === 'todas' || (filtros.marca === 'repasar' ? m === 'dudosa' || m === 'nose' : !m));
       art.hidden = !ok;
@@ -91,6 +92,8 @@ if (lista.length) {
 const lSim = $('[data-sim-lista]');
 if (lSim) {
   const pool = $$('[data-pool] [data-pregunta]');
+  const selInst = $('[data-instancia-sel]');
+  const delPool = () => pool.filter((a) => !selInst || selInst.value === 'todas' || a.closest('[data-instancia]')?.dataset.instancia === selInst.value);
   $('[data-pool]').hidden = true;
   const reloj = $('[data-reloj]'), res = $('[data-sim-res]'), info = $('[data-sim-info]');
   const bArmar = $('[data-armar]'), bEntregar = $('[data-entregar]');
@@ -104,7 +107,7 @@ if (lSim) {
     lSim.replaceChildren(); lSim.dataset.fase = 'resolviendo';
     const param = Number(new URLSearchParams(location.search).get('semilla')); // ?semilla=N repite un simulacro
     const semilla = Number.isInteger(param) && param > 0 ? param : 1 + Math.floor(Math.random() * 2 ** 31);
-    const sel = armarSimulacro(pool.map((a) => ({ id: a.dataset.id, tipo: a.dataset.tipo })), rngSemilla(semilla), FORMATO);
+    const sel = armarSimulacro(delPool().map((a) => ({ id: a.dataset.id, tipo: a.dataset.tipo })), rngSemilla(semilla), FORMATO);
     const porId = new Map(pool.map((a) => [a.dataset.id, a]));
     let k = 0;
     for (const tipo of Object.keys(FORMATO)) {
@@ -127,7 +130,7 @@ if (lSim) {
       });
       lSim.append(sec);
     }
-    info.textContent = `Simulacro armado (semilla ${semilla}). ${pool.length ? 'Respondé y entregá.' : 'Todavía no hay preguntas cargadas.'}`;
+    info.textContent = `Simulacro armado (semilla ${semilla}). ${delPool().length ? 'Respondé y entregá.' : 'Todavía no hay preguntas cargadas.'}`;
     bEntregar.hidden = !lSim.children.length;
     if (document.querySelector('[data-crono]').checked) {
       const min = minutosValidos($('[data-minutos]').value);

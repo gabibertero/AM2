@@ -4,7 +4,7 @@ import HomeHero from '../components/HomeHero.astro';
 import HomeMapa from '../components/HomeMapa.astro';
 import { getCollection } from 'astro:content';
 import { idsDeEjercicios } from '../scripts/ids.js';
-import { FECHA_PARCIAL, FECHA_RECUP } from '../lib/sitio.js';
+import { FECHA_PARCIAL, FECHA_RECUP, FECHA_FINAL, INSTANCIAS } from '../lib/sitio.js';
 const dm = (f) => f.split('-').reverse().slice(0, 2).join('/');
 const base = import.meta.env.BASE_URL;
 const parciales = await getCollection('parciales');
@@ -37,7 +37,7 @@ const accesos = [
     <div class="hero-txt">
       <p class="eyebrow">UTN FRC · Ingeniería en Sistemas</p>
       <h1>Análisis Matemático II</h1>
-      <p class="lead">Preparate para el 2º parcial con exámenes reales, ejercicio por ejercicio, con pistas de a poco y sin spoilers.</p>
+      <p class="lead">Preparate para los dos parciales y el final con exámenes reales, ejercicio por ejercicio, con pistas de a poco y sin spoilers.</p>
       <p class="hero-acc">
         <a class="btn btn-primario" href={`${base}parciales/`}>Empezar a practicar</a>
         <a class="btn" href={`${base}machetes/`}>Ver machetes</a>
@@ -55,6 +55,7 @@ const accesos = [
         <p class="big-txt"><b class="num" data-dias>{FECHA_PARCIAL}</b> <span class="suave" data-dias-txt></span></p>
       )}
       {FECHA_PARCIAL && <p class="suave">Parcial {dm(FECHA_PARCIAL)} · Recuperatorio {dm(FECHA_RECUP)}</p>}
+      <p class="suave" data-final>Final: {FECHA_FINAL ? dm(FECHA_FINAL) : 'diciembre, fecha a confirmar'}</p>
     </div>
     <div class="tarjeta" data-tu-progreso data-ids={todosIds.join(',')}>
       <strong>Tu progreso</strong>
@@ -80,8 +81,13 @@ const accesos = [
   </div>
 
   <h2>Mapa de la materia</h2>
-  <p class="suave sec-nota">Unidades U4 a U10 (programa 2025; Fourier queda fuera). Los números cuentan cuántas veces apareció cada tema en los parciales prácticos.</p>
-  <HomeMapa temas={temas} />
+  <p class="suave sec-nota">Dos instancias: 1º parcial (U1 a U3) y 2º parcial (U4 a U10; programa 2025, Fourier queda fuera). Los números cuentan cuántas veces apareció cada tema en los parciales prácticos.</p>
+  {INSTANCIAS.map(({ i, nombre, rango }) => (
+    <section class="inst-home" data-instancia={i} aria-labelledby={`mapa-${i}`}>
+      <h3 id={`mapa-${i}`}>{nombre} <span class="suave">· {rango}</span></h3>
+      <HomeMapa temas={temas} instancia={i} />
+    </section>
+  ))}
 
   <h2>Cómo distinguir lo oficial de lo demás</h2>
   <div class="leyenda">
@@ -102,6 +108,7 @@ const accesos = [
     <button type="button" data-no>Cancelar</button>
   </div>
   <p role="status" tabindex="-1" data-resultado></p>
+  <style>.inst-home { margin-top: var(--s-24); } .inst-home > h3 { margin-bottom: var(--s-12); font-size: 1.25rem; }</style>
   <script>
     import '../scripts/home.js';
   </script>

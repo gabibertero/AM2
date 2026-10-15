@@ -2,6 +2,9 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { UNIDADES_MACHETES } from './unidades-machetes';
+import { UNIDADES } from './lib/sitio.js';
+
+const TODAS_U = UNIDADES.map((x) => x.u) as [string, ...string[]];
 
 const parciales = defineCollection({
   loader: glob({ pattern: '*.mdx', base: './src/content/parciales' }),
@@ -58,7 +61,7 @@ const preguntas = defineCollection({
   loader: glob({ pattern: '*.mdx', base: './src/content/preguntas' }),
   schema: z.object({
     titulo: z.string(),
-    unidad: z.enum(['U4', 'U5', 'U6', 'U7', 'U8', 'U9', 'U10']),
+    unidad: z.enum(TODAS_U),
     orden: z.number(),
   }),
 });
@@ -70,7 +73,7 @@ export const collections = {
   teoria: defineCollection({
     loader: glob({ pattern: '*.md', base: './src/content/teoria' }),
     schema: z.object({
-      unidad: z.enum(['U4', 'U5', 'U6', 'U7', 'U8', 'U9', 'U10']),
+      unidad: z.enum(TODAS_U),
       titulo: z.string(),
       orden: z.number(),
       estado: z.enum(['borrador', 'revisado']),

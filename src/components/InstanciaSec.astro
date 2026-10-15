@@ -1,0 +1,17 @@
+---
+// Bloque de una instancia (1º o 2º parcial) en los índices. `vacio` → "Próximamente" en vez del contenido.
+import { INSTANCIAS } from '../lib/sitio.js';
+const { i, vacio = false, nivel = 2 } = Astro.props;
+const { nombre, rango } = INSTANCIAS.find((x) => x.i === i);
+const H = `h${nivel}`;
+---
+<section class="inst" data-instancia={i} aria-labelledby={`inst-${i}`}>
+  <H id={`inst-${i}`}>{nombre} <span class="suave inst-rango">· {rango}</span></H>
+  {vacio ? <p class="suave inst-vacio" data-proximamente>Próximamente.</p> : <slot />}
+</section>
+<style>
+  .inst { margin-top: var(--s-32); }
+  .inst > :global(h2), .inst > :global(h3) { margin-bottom: var(--s-12); }
+  .inst-rango { font-weight: 500; font-size: .85em; }
+  .inst-vacio { margin: 0; padding: var(--s-16); border: 1px dashed var(--borde-fuerte); border-radius: var(--r); }
+</style>

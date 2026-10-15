@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import InstanciaSec from '../../components/InstanciaSec.astro';
+import { INSTANCIAS, instanciaDeUnidad } from '../../lib/sitio.js';
 const base = import.meta.env.BASE_URL;
 const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.data.orden);
 ---
@@ -8,8 +10,10 @@ const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.da
   <h1>Teoría por unidad</h1>
   <p class="lead">Contenido elaborado para el sitio a partir de los apuntes; no es material oficial. Cada unidad indica su alcance y su estado.</p>
   <p><a class="btn btn-primario" href={`${base}preguntero/`}>Practicá con el preguntero teórico</a></p>
+  {INSTANCIAS.map(({ i: inst }) => { const lista = items.filter((x) => instanciaDeUnidad(x.data.unidad) === inst); return (
+  <InstanciaSec i={inst} vacio={!lista.length}>
   <ul class="grilla lista-tarjetas llena">
-    {items.map((i) => (
+    {lista.map((i) => (
       <li class="tarjeta tarjeta-u" data-unidad={i.data.unidad}>
         <a class="ec-titulo" href={`${base}teoria/${i.id}/`}><span class="chip chip-u chip-lg" data-unidad={i.data.unidad}>{i.data.unidad}</span><span class="ec-t">{i.data.titulo}</span></a>
         <p class="meta">
@@ -19,4 +23,6 @@ const items = (await getCollection('teoria')).sort((a, b) => a.data.orden - b.da
       </li>
     ))}
   </ul>
+  </InstanciaSec>
+  ); })}
 </Layout>

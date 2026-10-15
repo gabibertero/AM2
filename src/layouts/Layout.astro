@@ -28,7 +28,7 @@ const actual = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f5f2ec" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#16151a" media="(prefers-color-scheme: dark)" />
-    <meta name="description" content="Sitio de estudio para el 2º parcial de Análisis Matemático II (UTN FRC): parciales reales, pistas, machetes y preguntero." />
+    <meta name="description" content="Sitio de estudio de toda la materia Análisis Matemático II (UTN FRC): 1º parcial, 2º parcial y final, con parciales reales, pistas, machetes y preguntero." />
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
     <title>{titulo} · AM II</title>
@@ -37,7 +37,7 @@ const actual = Astro.url.pathname;
     <a class="saltar" href="#contenido">Saltar al contenido</a>
     <header class="sitio">
       <div class="sitio-in">
-        <a class="marca" href={base}><span aria-hidden="true">∬</span> AM II <span class="marca-sub">· 2º parcial</span></a>
+        <a class="marca" href={base}><span aria-hidden="true">∬</span> AM II</a>
         <nav aria-label="Principal">
           <ul>
             {nav.map(([texto, href]) => (
@@ -49,7 +49,7 @@ const actual = Astro.url.pathname;
     </header>
     <main id="contenido"><slot /></main>
     <footer class="pie">
-      <p>AM II · 2º parcial · UTN FRC. Material de estudio no oficial. <a href="https://github.com/gabibertero/AM2">Código en GitHub</a></p>
+      <p>Análisis Matemático II · UTN FRC. Material de estudio no oficial. <a href="https://github.com/gabibertero/AM2">Código en GitHub</a></p>
     </footer>
     <script>
       import '../scripts/progreso.js';

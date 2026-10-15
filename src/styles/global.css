@@ -13,7 +13,7 @@
   --e-pend: #5f5a52; --e-pend-bg: #ebe7df;
   --e-curso: #8a4b00; --e-curso-bg: #fff0cf;
   --e-ok: #0f6b45; --e-ok-bg: #dff3e7;
-  --u4: var(--acento); --u5: var(--acento); --u6: var(--acento); --u7: var(--acento); --u8: var(--acento); --u9: var(--acento); --u10: var(--acento); /* un solo acento para unidades */
+  --u1: var(--acento); --u2: var(--acento); --u3: var(--acento); --u4: var(--acento); --u5: var(--acento); --u6: var(--acento); --u7: var(--acento); --u8: var(--acento); --u9: var(--acento); --u10: var(--acento); /* un solo acento para unidades */
   --f-ui: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --f-ed: 'STIX Two Text', Georgia, 'Times New Roman', serif;
   --r: 14px; --r-s: 10px;
@@ -35,6 +35,7 @@
     --e-ok: #6fd6a2; --e-ok-bg: #173324;
   }
 }
+[data-unidad='U1'] { --uc: var(--u1); } [data-unidad='U2'] { --uc: var(--u2); } [data-unidad='U3'] { --uc: var(--u3); }
 [data-unidad='U4'] { --uc: var(--u4); } [data-unidad='U5'] { --uc: var(--u5); } [data-unidad='U6'] { --uc: var(--u6); }
 [data-unidad='U7'] { --uc: var(--u7); } [data-unidad='U8'] { --uc: var(--u8); } [data-unidad='U9'] { --uc: var(--u9); }
 [data-unidad='U10'] { --uc: var(--u10); }

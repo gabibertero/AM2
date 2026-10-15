@@ -30,7 +30,13 @@ export function iniciarLab(raiz) {
   let tipo = GENERADORES.some((g) => g.id === q.get('tipo')) ? q.get('tipo') : GENERADORES[0].id;
   let semilla = semillaValida(q.get('semilla')) ?? azar(0);
 
-  for (const g of GENERADORES) selTipo.append(Object.assign(el('option', '', g.nombre), { value: g.id }));
+  for (const [i, nombre] of [['p1', '1º parcial (U1–U3)'], ['p2', '2º parcial (U4–U10)']]) {
+    const gs = GENERADORES.filter((g) => (g.instancia ?? 'p2') === i);
+    if (!gs.length) continue;
+    const og = Object.assign(document.createElement('optgroup'), { label: nombre });
+    for (const g of gs) og.append(Object.assign(el('option', '', g.nombre), { value: g.id }));
+    selTipo.append(og);
+  }
 
   let ultimo = { tipo, semilla }; // último ejercicio que se generó bien
   function mostrar() {

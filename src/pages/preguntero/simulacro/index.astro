@@ -1,9 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
+import { INSTANCIAS, instanciaDeUnidad } from '../../../lib/sitio.js';
 const base = import.meta.env.BASE_URL;
 const archivos = (await getCollection('preguntas')).sort((a, b) => a.data.orden - b.data.orden);
-const contenidos = await Promise.all(archivos.map(async (a) => (await render(a)).Content));
+const contenidos = await Promise.all(archivos.map(async (a) => ({ Content: (await render(a)).Content, instancia: instanciaDeUnidad(a.data.unidad) })));
 ---
 <Layout titulo="Simulacro teórico">
   <p class="meta"><a href={`${base}preguntero/`}>← Preguntero</a></p>
@@ -11,6 +12,10 @@ const contenidos = await Promise.all(archivos.map(async (a) => (await render(a))
   <p class="lead">Formato del teórico: 2 temas (elegís 1), 4 preguntas cortas y 3 multiple choice, al azar entre todas las unidades. Al entregar se corrigen solas las choice y aparecen las respuestas modelo y la corrección con IA para el resto.</p>
 
   <div class="sim-panel" data-js hidden>
+    <label class="sim-min">Instancia <select data-instancia-sel>
+      <option value="todas">Toda la materia</option>
+      {INSTANCIAS.map(({ i, nombre, rango }) => <option value={i}>{nombre} ({rango})</option>)}
+    </select></label>
     <label class="sim-crono"><input type="checkbox" data-crono /> Con cronómetro</label>
     <label class="sim-min">Minutos <input type="number" min="1" max="300" value="60" data-minutos inputmode="numeric" /></label>
     <button type="button" class="btn-primario" data-armar>Armar simulacro</button>
@@ -23,13 +28,14 @@ const contenidos = await Promise.all(archivos.map(async (a) => (await render(a))
   <div data-sim-lista></div>
 
   <div data-pool>
-    {contenidos.map((Content) => <Content />)}
+    {contenidos.map(({ Content, instancia }) => <div data-instancia={instancia}><Content /></div>)}
   </div>
 </Layout>
 <style is:global>
   .sim-panel { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-12); margin: var(--s-16) 0; }
   .sim-panel label { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; min-height: 44px; }
   .sim-panel input[type='number'] { width: 5rem; min-height: 44px; padding: 0 var(--s-8); border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); background: var(--sup2); color: var(--texto); font: inherit; }
+  .sim-panel select { min-height: 44px; padding: 0 var(--s-8); border: 1px solid var(--borde-fuerte); border-radius: var(--r-s); background: var(--sup2); color: var(--texto); font: inherit; }
   .sim-crono { padding-inline: var(--s-8); }
   .sim-panel input[type='checkbox'] { width: 24px; height: 24px; accent-color: var(--acento); }
   .sim-panel input:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }

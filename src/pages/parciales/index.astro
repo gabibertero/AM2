@@ -1,16 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import InstanciaSec from '../../components/InstanciaSec.astro';
 import { idsDeEjercicios } from '../../scripts/ids.js';
+import { INSTANCIAS, instanciaDeUnidades } from '../../lib/sitio.js';
 const corto = (v, alt) => (/^no figura/i.test(v) ? alt : v);
 const base = import.meta.env.BASE_URL;
 const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden - b.data.orden);
 ---
 <Layout titulo="Parciales oficiales">
   <h1>Parciales oficiales</h1>
-  <p class="lead">Exámenes reales de 2025–2026, con sus ejercicios en el orden original.</p>
+  <p class="lead">Exámenes reales de 2025–2026, separados por instancia, con sus ejercicios en el orden original.</p>
+  {INSTANCIAS.map(({ i }) => { const lista = examenes.filter((e) => instanciaDeUnidades(e.data.unidades) === i); return (
+  <InstanciaSec i={i} vacio={!lista.length}>
   <ul class="grilla lista-tarjetas">
-    {examenes.map((e) => (
+    {lista.map((e) => (
       <li class="tarjeta examen-card">
         <div class="ec-top">
           <span class="chip chip-fuerte">{corto(e.data.comision, 'sin comisión')}{e.data.tema && ` · Tema ${e.data.tema}`}</span>
@@ -24,5 +28,7 @@ const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden 
       </li>
     ))}
   </ul>
+  </InstanciaSec>
+  ); })}
   <p class="meta">¿Buscás más práctica? Mirá los <a href={`${base}anteriores/`}>exámenes de años anteriores</a>.</p>
 </Layout>
