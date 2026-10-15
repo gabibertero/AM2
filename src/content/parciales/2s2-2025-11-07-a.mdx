@@ -112,17 +112,18 @@ $$V=\int_0^{2\pi}16\,d\theta=16\cdot2\pi=32\pi$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$V=32\pi\ \text{u}^3\approx100{,}5\ \text{u}^3$$
 
 **Ojo con:** olvidarse del jacobiano $r$ al pasar a polares, o distribuir mal el signo del piso ($-(4-r^2)=-4+r^2$, no $-4-r^2$).
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo, con todos los cálculos auxiliares):
 
 - **Bien:** gráfico con techo y piso identificados, integral $\iint(8+r^2-4+r^2)\,r\,dr\,d\theta$ con límites $0$–$2$ y $0$–$2\pi$, cuentas correctas y $V=32\pi$.
 - **A medias:** planteo correcto (techo − piso, polares, jacobiano) pero con un error de cuenta que cambia el resultado final.
 - **Mal:** sin gráfico ni planteo, o resta mal las superficies, o omite el jacobiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -231,17 +232,18 @@ $$\int_0^{\pi/2}\cos\theta\,d\theta=\sin\tfrac\pi2-\sin0=1\ \Rightarrow\ IT=1\cd
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$IT=\frac{512}{15}\approx34{,}13$$
 
 **Ojo con:** el jacobiano (el $r$ extra) y los límites de $\theta$: sin el octante habría que integrar $0\le\theta\le2\pi$ y $\int\cos\theta\,d\theta$ daría 0.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo, con todos los cálculos auxiliares):
 
 - **Bien:** cuerpo graficado, cilíndricas con $r^2\cos\theta\,z$, límites $0\le\theta\le\frac\pi2$, $0\le r\le2$, $r^2\le z\le8-r^2$ y resultado $\frac{512}{15}$.
 - **A medias:** planteo y límites correctos pero un error de cuenta en la integral (por ejemplo al desarrollar $(8-r^2)^2$).
 - **Mal:** límites de $\theta$ o de $z$ incorrectos, sin jacobiano, o sin planteo.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -319,7 +321,12 @@ Sumando y agrupando por potencias ($x^2$: $-1+2=1$; $x$: $1-4=-3$):
 
 $$IC_2=\int_{-2}^{1}(2x^3+x^2-3x+2)\,dx=\Big[\frac{x^4}{2}+\frac{x^3}{3}-\frac{3x^2}{2}+2x\Big]_{-2}^{1}$$
 
-En $x=1$: $\tfrac12+\tfrac13-\tfrac32+2=\tfrac43$. En $x=-2$: $8-\tfrac83-6-4=-\tfrac{14}{3}$. Restando: $\tfrac43-\big(-\tfrac{14}{3}\big)=6$.
+Se evalúa en el límite superior y en el inferior:
+
+- En $x=1$: $\tfrac12-\tfrac32=-1$ y $-1+2=1$, así que $1+\tfrac13=\tfrac43$.
+- En $x=-2$: $\tfrac{(-2)^4}{2}=8$, $\tfrac{(-2)^3}{3}=-\tfrac83$, $-\tfrac{3(-2)^2}{2}=-6$ y $2(-2)=-4$. Los enteros dan $8-6-4=-2$ y entonces $-2-\tfrac83=-\tfrac{14}{3}$.
+
+Restando: $\tfrac43-\big(-\tfrac{14}{3}\big)=\tfrac{18}{3}=6$.
 
 </Paso>
 <Paso>
@@ -333,33 +340,42 @@ En $x=1$: $\tfrac12+\tfrac13-\tfrac32+2=\tfrac43$. En $x=-2$: $8-\tfrac83-6-4=-\
 
 $$IC=2\int_{-2}^{1}dx\int_{x^2-2}^{-x}dy=2\int_{-2}^{1}\big(-x-x^2+2\big)\,dx=2\Big[-\frac{x^2}{2}-\frac{x^3}{3}+2x\Big]_{-2}^{1}$$
 
-En $x=1$: $-\tfrac12-\tfrac13+2=\tfrac76$. En $x=-2$: $-2+\tfrac83-4=-\tfrac{10}{3}$. Restando: $\tfrac76+\tfrac{10}{3}=\tfrac{27}{6}=\tfrac92$, y
+Se evalúa en el límite superior y en el inferior:
+
+- En $x=1$: $-\tfrac12-\tfrac13+2=-\tfrac56+2=\tfrac76$.
+- En $x=-2$: $-\tfrac{(-2)^2}{2}=-2$, $-\tfrac{(-2)^3}{3}=\tfrac83$ y $2(-2)=-4$. Los enteros dan $-2-4=-6$ y entonces $-6+\tfrac83=-\tfrac{10}{3}$.
+
+Restando: $\tfrac76-\big(-\tfrac{10}{3}\big)=\tfrac76+\tfrac{20}{6}=\tfrac{27}{6}=\tfrac92$, y
 
 $$IC=2\cdot\frac92=9$$
 
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$IC=\oint_C F\cdot dr=9\qquad\big(IC_1=3,\ IC_2=6\big)$$
 
 **Ojo con:** el sentido de recorrido: si ponés los límites de $C_1$ de $-2$ a $1$ el signo de ese tramo se invierte y el total deja de coincidir con Green.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo, con todos los cálculos auxiliares):
 
 - **Bien:** gráfico con cortes y sentido, ambos tramos por definición ($IC_1=3$, $IC_2=6$, total $9$) y Green con $\iint2\,dA$ y los mismos $9$.
 - **A medias:** un solo método completo y correcto (definición o Green), o los dos planteados con un error de cuenta; o un tramo con el sentido invertido.
 - **Mal:** sin gráfico ni límites, orientación horaria sin advertirlo, o aplica Green sin cerrar la curva.
 
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
-Camino independiente para Green: el área de $D$ se puede calcular con la fórmula de la región entre una parábola $y=ax^2+bx+c$ y una recta que la corta en $x_1<x_2$: $\text{Área}=\dfrac{|a|\,(x_2-x_1)^3}{6}$. Acá $a=1$, $x_1=-2$, $x_2=1$:
+Camino independiente para Green: como el integrando es $2$, $IC=2\cdot\text{Área}(D)$, y el área es $\int_{-2}^{1}(-x-x^2+2)\,dx$ (recta menos parábola). Se separa en dos integrales, con primitivas distintas a las del Paso:
 
-$$\text{Área}=\frac{1\cdot3^3}{6}=\frac{27}{6}=\frac92\ \Rightarrow\ IC=2\cdot\frac92=9$$
+- $\int_{-2}^{1}(2-x^2)\,dx=\Big[2x-\tfrac{x^3}{3}\Big]_{-2}^{1}=\Big(2-\tfrac13\Big)-\Big(-4+\tfrac83\Big)=\tfrac53-\Big(-\tfrac43\Big)=3$
+- $\int_{-2}^{1}(-x)\,dx=\Big[-\tfrac{x^2}{2}\Big]_{-2}^{1}=-\tfrac12-(-2)=\tfrac32$
 
-que es el valor obtenido y además coincide con la suma $3+6$ por definición: dos caminos distintos, mismo número.
+$$\text{Área}=3+\frac32=\frac92\ \Rightarrow\ IC=2\cdot\frac92=9$$
+
+Eso verifica el lado de Green. Y la suma por definición, $IC_1+IC_2=3+6=9$, da el mismo número: dos caminos distintos, mismo resultado.
 
 </Comprobacion>
 <ResolucionOficial examen="2s2-2025-11-07-a" fuente="parciales/2do-parcial/2° Parciales/2° PP 2S2 (A) 2025.pdf" paginas="4–5" />
@@ -378,7 +394,7 @@ $$
 
 <Pista>
 
-Mirá cómo está escrita: aparecen $dx$ y $dy$ sumados e igualados a cero, cada uno multiplicado por una función de $x$ e $y$. ¿Podría ser el diferencial total de alguna función $u(x,y)$?
+Mirá cómo está escrita: aparecen $dx$ y $dy$ sumados e igualados a cero, cada uno multiplicado por una función de $x$ e $y$. ¿Qué relación hay entre lo que multiplica a $dx$ y lo que multiplica a $dy$ cuando derivás cada uno respecto de la *otra* variable?
 
 </Pista>
 <Pista>
@@ -430,17 +446,18 @@ $$u_y=x^2\cos(y)+\cos(x)+\varphi'(y)=x^2\cos(y)+\cos(x)\ \Rightarrow\ \varphi'(y
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$x^2\sin(y)+y\cos(x)=C$$
 
 **Ojo con:** no olvidar verificar $\partial P/\partial y=\partial Q/\partial x$ antes de integrar (el enunciado pregunta "si es exacta"), y el signo de $\int-y\sin x\,dx=+y\cos x$.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo, con todos los cálculos auxiliares):
 
 - **Bien:** verifica la exactitud con las dos derivadas parciales, obtiene $u$ con $\varphi'(y)=0$ y escribe $x^2\sin y+y\cos x=C$.
 - **A medias:** resuelve bien pero sin verificar la exactitud, o la verifica y se equivoca en un signo de la primitiva.
 - **Mal:** no verifica ni plantea $u_x=P$, $u_y=Q$, o da una solución que no cumple la ecuación.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -539,17 +556,18 @@ $$5Ae^{3x}-6Bx+(-B-6D)=5e^{3x}+6x+3$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$y=C_1e^{3x}+C_2e^{-2x}+xe^{3x}-x-\frac13$$
 
 **Ojo con:** la resonancia: proponer $Ae^{3x}$ sin el $x$ lleva a $0=5e^{3x}$, sin solución.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo, con todos los cálculos auxiliares):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo, con todos los cálculos auxiliares):
 
 - **Bien:** $y_h$ correcta, reconoce la resonancia con $e^{3x}$, propone $Axe^{3x}+Bx+D$, obtiene $A=1$, $B=-1$, $D=-\frac13$ y escribe la general.
 - **A medias:** $y_h$ y forma de $y_p$ correctas pero un error al derivar o al resolver el sistema; o no usa $x$ en la exponencial y se da cuenta tarde.
 - **Mal:** $y_h$ mal (raíces) o $y_p$ sin forma justificada, o solo da $y_p$ sin $y_h$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>

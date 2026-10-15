@@ -106,6 +106,14 @@ $$V=4\pi-\frac{16}{3}=4\Big(\pi-\frac43\Big)\ \text{u}^3\approx 7{,}23\ \text{u}
 
 **Ojo con:** olvidarte del jacobiano $r$ al pasar a polares, o poner $\theta$ de $0$ a $2\pi$: el primer octante es solo un cuarto de círculo.
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** techo $z=4-x$, piso $z=x$, $D$ cuarto de círculo ($0\le r\le2$, $0\le\theta\le\frac\pi2$), integral $\int_0^{\pi/2}\!\int_0^2(4-2r\cos\theta)\,r\,dr\,d\theta$ con jacobiano y $V=4\pi-\frac{16}{3}$.
+- **A medias:** planteo correcto con un error de cuenta que cambia el resultado.
+- **Mal:** sin planteo, $\theta$ de $0$ a $2\pi$ (ignora el 1º octante), sin jacobiano, o techo y piso invertidos.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
@@ -158,7 +166,7 @@ $$IT=\int_0^{\pi/4}\!\cos\theta\,d\theta\int_0^1 r^2\,dr\int_0^{2\sqrt{1-r^2}}z\
 
 **Qué:** dibujar la región. **Por qué:** para ver los límites. Dividiendo por $4$, $x^2+y^2+\tfrac{z^2}{4}=1$: es un elipsoide de semiejes $1$, $1$ y $2$. En el 1º octante es un "cuarto de huevo" cuya cara de arriba es $z=2\sqrt{1-x^2-y^2}$, y el plano $y=x$ lo corta por la mitad del cuarto.
 
-<img src={`${import.meta.env.BASE_URL}figuras/1v1-a/ej2.svg`} alt="Arriba, perspectiva de la porción del elipsoide 4x²+4y²+z²=4 en el primer octante entre los planos y=0 e y=x, con base en z=0 y techo z=2 raíz de 1 menos r al cuadrado. Abajo, la base en el plano xy: sector circular de radio 1 entre θ=0 y θ=π/4." style={{maxWidth:'100%',height:'auto'}} />
+<img src={`${import.meta.env.BASE_URL}figuras/1v1-a/ej2.svg`} alt="Arriba, perspectiva de la porción del elipsoide 4x²+4y²+z²=4 en el primer octante entre los planos y=0 e y=x, con base en z=0 y techo z=2 raíz de 1 menos r al cuadrado. Abajo a la izquierda, la base en el plano xy: sector circular de radio 1 entre θ=0 y θ=π/4; abajo a la derecha, corte r–z: el techo z=2√(1−r²) de (0,2) a (1,0), con ejes graduados." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
 <Paso>
@@ -199,6 +207,14 @@ $$IT=\frac{4}{15}\cdot\frac{\sqrt2}{2}=\frac{2\sqrt2}{15}$$
 $$IT=\frac{2\sqrt2}{15}\approx 0{,}189$$
 
 **Ojo con:** el jacobiano (el $r$ extra) y no confundir los límites de $z$: es $2\sqrt{1-r^2}$, no $\sqrt{1-r^2}$ (el elipsoide tiene semieje $2$ en $z$).
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** cilíndricas con integrando $r^2\cos\theta\,z$, $0\le z\le2\sqrt{1-r^2}$, $0\le r\le1$, $0\le\theta\le\frac\pi4$ y $IT=\frac{2\sqrt2}{15}$.
+- **A medias:** planteo y límites correctos pero un error de cuenta (por ejemplo en $\int r^2(1-r^2)\,dr$).
+- **Mal:** sin jacobiano, techo $\sqrt{1-r^2}$ en vez de $2\sqrt{1-r^2}$ (ignora el semieje), o ángulos mal (por ejemplo $0\le\theta\le\frac\pi2$).
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -313,6 +329,14 @@ $$IC=\oint_C F\cdot dr=-4\qquad\big(IC_1=-2,\ IC_2=-2\big)$$
 
 **Ojo con:** el sentido de recorrido (si invertís $C_1$ o $C_2$ cambia el signo del tramo) y no olvidar el $r$ del jacobiano en Green en polares.
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico con cortes $(1,-1)$ y $(-1,1)$ y sentido antihorario, $IC_1=-2$ (arco de la circunferencia), $IC_2=-2$ (recta, $x$ de $-1$ a $1$), $IC=-4$, y Green planteado en polares con el jacobiano $r$ y $-\frac\pi4\le\theta\le\frac{3\pi}4$, $0\le r\le\sqrt2$ (el enunciado no pide verificar).
+- **A medias:** los dos tramos bien planteados con un error de cuenta, o un tramo con el sentido invertido, o falta el planteo de Green.
+- **Mal:** sin gráfico ni límites, recorrido horario sin advertirlo, o Green en polares sin el jacobiano $r$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
@@ -390,6 +414,14 @@ $$u_y=x\cos y-\cos x+\varphi'(y)=x\cos y-\cos x+3y^2-1\ \Rightarrow\ \varphi'(y)
 $$x\sin y-y\cos x+y^3-y=C$$
 
 **Ojo con:** el signo de $\int y\sin x\,dx=-y\cos x$ y no olvidar el $-y$ que sale de integrar el $-1$ de $\varphi'(y)$.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** verifica la exactitud ($\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}=\cos y+\sin x$), integra $P$ en $x$, obtiene $\varphi'(y)=3y^2-1$ y escribe $x\sin y-y\cos x+y^3-y=C$.
+- **A medias:** resuelve bien pero sin verificar la exactitud, o se equivoca en el signo de $\int y\sin x\,dx$ o se olvida el $-y$ de $\varphi$.
+- **Mal:** no reconoce el tipo, o no determina $\varphi(y)$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -481,6 +513,14 @@ Así $y_p=\dfrac{x}{2}\sin x-\dfrac{x}{2}\cos x$.
 $$y=C_1\sin x+C_2\cos x+\frac{x}{2}\sin x-\frac{x}{2}\cos x$$
 
 **Ojo con:** proponer $A\sin x+B\cos x$ sin el factor $x$: al reemplazar da $0=\sin x+\cos x$, un absurdo. Cuando el lado derecho "está" en $y_h$, hay que multiplicar por $x$.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** $y_h=C_1\sin x+C_2\cos x$ ($r=\pm i$), reconoce la resonancia y propone $y_p=x\,(A\sin x+B\cos x)$, obtiene $A=\frac12$, $B=-\frac12$ y escribe la general.
+- **A medias:** $y_h$ y la forma de $y_p$ correctas pero un error de cuenta al derivar o resolver el sistema; o una solución general sin $y_h$.
+- **Mal:** propone $A\sin x+B\cos x$ sin el factor $x$ (queda $0=\sin x+\cos x$) y no se da cuenta, o $y_h$ incorrecta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>

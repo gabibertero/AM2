@@ -91,6 +91,14 @@ $$V=2\pi\ \text{u}^3\approx 6{,}28\ \text{u}^3$$
 
 **Ojo con:** el jacobiano $r$, y que el radio de la base es $\sqrt2$ (no $2$): el $2$ es la altura.
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** dibujo con techo $z=2$ y piso $z=r^2$, radio de la base $\sqrt2$ (de $r^2=2$), integral $\int_0^{2\pi}\!\int_0^{\sqrt2}(2-r^2)\,r\,dr\,d\theta$ con jacobiano y $V=2\pi$.
+- **A medias:** planteo correcto (techo − piso, polares, jacobiano) con un error de cuenta que cambia el resultado.
+- **Mal:** sin planteo, sin jacobiano, radio $2$ en vez de $\sqrt2$, o techo y piso invertidos.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
@@ -182,6 +190,14 @@ $$IC=\frac{70}{3}-\frac{70}{3}=0$$
 $$IC=\oint_C F\cdot dr=0\qquad\Big(IC_1=\tfrac{70}{3},\ IC_2=-\tfrac{70}{3}\Big)$$
 
 **Ojo con:** que dé $0$ **no** significa que el campo sea conservativo: $\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}=2x+1\neq0$. Acá se anula porque las contribuciones de las dos mitades de $D$ se compensan.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** cortes $x=-3$ y $x=2$, sentido antihorario, $IC_1=\frac{70}{3}$ (recta, $x$ de $-3$ a $2$), $IC_2=-\frac{70}{3}$ (parábola, $x$ de $2$ a $-3$) y $IC=0$, con la suma justificada.
+- **A medias:** planteo correcto de los dos tramos con un error de cuenta; o un tramo con el sentido invertido.
+- **Mal:** resolver solo por Green (el enunciado pide \"por definición\"), sin cortes o con un solo tramo (curva sin cerrar).
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -279,6 +295,14 @@ $$y^4=\frac12+Ce^{-8x}$$
 (equivale a $y^4=\big(\tfrac12e^{8x}+C\big)e^{-8x}$; despejar $y=\sqrt[4]{\cdot}$ es opcional.)
 
 **Ojo con:** multiplicar por $y^{-n}=y^3$ (no por $y^{-3}$) y acordarse del factor $4$ de $z'=4y^3y'$ (de ahí sale el $8$ en $z'+8z=4$).
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** reconoce Bernoulli ($n=-3$), multiplica por $y^3$, sustituye $z=y^4$ y obtiene $z'+8z=4$, la resuelve con $u\cdot v$ ($v=e^{-8x}$, $u=\frac12e^{8x}+C$) y escribe $y^4=\frac12+Ce^{-8x}$, sin aplicar la fórmula general.
+- **A medias:** plantea bien pero olvida el factor $4$ de $z'=4y^3y'$, o se equivoca en $u$ o $v$, o deja la solución en $z$.
+- **Mal:** aplica la fórmula general (el enunciado pide el desarrollo paso a paso), o no reconoce el tipo.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>

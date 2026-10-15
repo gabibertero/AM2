@@ -104,11 +104,11 @@ $$IT=0$$
 
 **Ojo con:** que dé $0$ no te dispensa de plantear bien: hay que mostrar el integrando $r^3\cos\theta$, los límites $r\le z\le4$ y el $256/5$ de la parte radial. Un resultado "0" sin planteo no sirve.
 
-**Cómo se evalúa** (la cátedra pide "planteo y desarrollo consistente" y todos los cálculos auxiliares; el enunciado no exige gráfico):
+**Criterio estimado — no oficial** (la consigna pide "planteo y desarrollo consistente" y todos los cálculos auxiliares; el enunciado no exige gráfico):
 
 - **Bien:** cilíndricas con integrando $r^3\cos\theta$ (jacobiano incluido), límites $0\le\theta\le2\pi$, $0\le r\le4$, $r\le z\le4$, cálculo de la parte radial ($\frac{256}{5}$) y $IT=0$ justificado por $\int_0^{2\pi}\cos\theta\,d\theta=0$.
-- **A medias:** planteo y límites correctos pero con un error de cuenta, o integrando sin el jacobiano (aunque el resultado siga dando $0$ por simetría, el planteo está mal).
-- **Mal:** límites de $z$ incorrectos (por ejemplo $0\le z\le4$ sin el cono) o sin planteo.
+- **A medias:** planteo y límites correctos pero con un error de cuenta.
+- **Mal:** límites de $z$ incorrectos (por ejemplo $0\le z\le4$ sin el cono), integrando sin el jacobiano (aunque el resultado siga dando $0$ por simetría, el planteo está mal) o sin planteo.
 
 *Solución elaborada — no oficial, verificada con sympy.*
 
@@ -224,7 +224,7 @@ $$\oint_C^{+}(x-y)\,dx-(y-x)\,dy=\frac{16}{3}$$
 
 **Ojo con:** el sentido de $C_2$: si recorrés $y$ de $0$ a $2$ (al revés) el tramo cambia de signo y el total da $0$ en lugar de $\frac{16}{3}$.
 
-**Cómo se evalúa** (el enunciado pide "por definición"; no exige gráfico, pero sin los cortes no se puede plantear):
+**Criterio estimado — no oficial** (el enunciado pide "por definición"; no exige gráfico, pero sin los cortes no se puede plantear):
 
 - **Bien:** cortes $(0,0)$ y $(2,2)$, sentido antihorario con los dos tramos y sus límites ($C_1$: $x$ de $0$ a $2$; $C_2$: $y$ de $2$ a $0$), $IC_1=\frac83$, $IC_2=\frac83$ y $IC=\frac{16}{3}$.
 - **A medias:** planteo correcto de los dos tramos con un error de cuenta; o un tramo con el sentido invertido.
@@ -348,7 +348,7 @@ $$\ln|y|+\frac{2y}{x}=C$$
 
 **Ojo con:** al dividir por $u$ se pierde la solución $y=0$ (que verifica la EDO: $0-0-0=0$). El profe no la menciona; conviene anotarla aparte. Y no te olvides de volver a $y$: dejar la respuesta en $u$ es dejar el ejercicio a medias.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente):
 
 - **Bien:** reconoce la homogénea, sustituye $y=ux$, $y'=u'x+u$, separa variables, integra y vuelve a $x,y$: $\ln|y|+\frac{2y}{x}=C$.
 - **A medias:** plantea bien y llega a la ecuación separada, pero se equivoca al integrar o no vuelve a las variables originales.
@@ -480,7 +480,7 @@ $$y=C_1e^{x}+C_2xe^{x}+\frac12x^2e^{x}-x-2$$
 
 **Ojo con:** la resonancia: si proponés $Ae^x$ o $Axe^x$ en vez de $Ax^2e^x$, el término $e^x$ se anula al reemplazar y no hay forma de que $2A=1$ cierre.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente):
 
 - **Bien:** $y_h=C_1e^x+C_2xe^x$ (raíz doble), $y_p$ con $x^2e^x$ por resonancia, $A=\frac12$, $B=-1$, $D=-2$ y $y=y_h+y_p$.
 - **A medias:** $y_h$ y la forma de $y_p$ correctas, pero un error de cuenta en las derivadas o en los coeficientes; o una solución general sin $y_h$.

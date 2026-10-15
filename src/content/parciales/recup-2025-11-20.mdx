@@ -119,17 +119,18 @@ $$IT=\frac{15}{4}\cdot2\cdot\Big(\frac\pi8-\frac14\Big)=\frac{15(\pi-2)}{16}$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$IT=\frac{15(\pi-2)}{16}\approx 1{,}070$$
 
 **Ojo con:** olvidarse del jacobiano $\rho^2\sin\varphi$ (queda $\rho$ en vez de $\rho^3$ y se pierde un $\sin\varphi$), o poner $0\le\varphi\le\tfrac\pi2$ (eso sería el octante completo sin el cono).
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
 
 - **Bien:** dibujo con las dos esferas y el cono, límites $1\le\rho\le2$, $0\le\theta\le\tfrac\pi2$, $0\le\varphi\le\tfrac\pi4$, integrando con jacobiano $\rho^2\sin\varphi$ y resultado $\tfrac{15(\pi-2)}{16}$.
 - **A medias:** planteo correcto (esféricas, límites, jacobiano) con un error de cuenta (por ejemplo en $\int\sin^2\varphi$) que cambia el resultado.
 - **Mal:** sin jacobiano, o límites de $\varphi$ equivocados ($\tfrac\pi2$ en lugar de $\tfrac\pi4$), o no usa esféricas pese a que la consigna lo pide.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -246,17 +247,18 @@ $$W=2\pi^2-0+0=2\pi^2$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$IC=2\pi^2\ \text{(unidades de trabajo)}\approx19{,}74$$
 
 **Ojo con:** el signo del término $-\theta\cos\theta$ y olvidarse de $\sin\theta\cos\theta$ en uno de los productos (cancela con el del otro), o confundir $\int\theta\cos\theta$ con $\theta\sin\theta$ sin el $+\cos\theta$.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
 
 - **Bien:** parametrización con $dx$ y $dy$, integral $\int_0^{2\pi}(\theta-\theta\cos\theta+2\sin\theta)\,d\theta$, partes bien aplicado y $2\pi^2$.
 - **A medias:** planteo por definición correcto con un error en un desarrollo o en la integración por partes.
 - **Mal:** no usa la definición (la consigna la exige), no reemplaza $dx$, $dy$ o integra $\theta$ en un rango distinto de $[0,2\pi]$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -346,7 +348,6 @@ $$x^3+2xy^2=C$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$x^3+2xy^2=C\qquad(C\in\mathbb R)$$
 
@@ -354,11 +355,13 @@ $$x^3+2xy^2=C\qquad(C\in\mathbb R)$$
 
 **Ojo con:** pasar a la forma $P\,dx+Q\,dy=0$ con el signo correcto ($y'=-\tfrac{\dots}{\dots}$ cambia el signo de $P$ y $Q$ juntos, no hace falta dividir) y no olvidarse de $\varphi(x)$.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
 
 - **Bien:** una resolución completa por cualquiera de los tres métodos (exacta, homogénea o Bernoulli), con verificación de la condición que corresponda y resultado equivalente a $x^3+2xy^2=C$.
 - **A medias:** método bien elegido y planteado con un error de signo o de primitiva que cambia el resultado.
 - **Mal:** no reconoce el tipo, aplica un método sin justificar las condiciones (por ejemplo exacta sin verificar $P_y=Q_x$) o deja la sustitución sin deshacer.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -480,17 +483,18 @@ $$y=C_1e^x+C_2xe^x+2x^2e^x+2x^2+8x+20$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$y=C_1e^x+C_2xe^x+2x^2e^x+2x^2+8x+20\qquad(C_1,C_2\in\mathbb R)$$
 
 **Ojo con:** olvidarse del término $Dx$ (el segundo miembro no tiene $x$ pero $y_p$ sí lo necesita: $D=8\ne0$) y de la resonancia con $e^x$ (propuesta $x^2e^x$, no $Ae^x$ ni $Axe^x$).
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 1 ejercicio así):
 
 - **Bien:** $y_h$ correcta, $y_p=Ax^2e^x+Bx^2+Dx+E$ con la resonancia justificada, coeficientes $A=2$, $B=2$, $D=8$, $E=20$ y $y=y_h+y_p$ completa.
 - **A medias:** $y_h$ bien y propuesta correcta, pero un error de cuenta en algún coeficiente; o una de las dos partes bien resuelta y la otra con una propuesta incompleta.
 - **Mal:** propone $Ae^x$ (sin corregir la resonancia) o un polinomio incompleto (sin $Dx$) y no lo detecta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>

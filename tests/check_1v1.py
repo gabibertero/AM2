@@ -91,7 +91,7 @@ a1 = I(6*r, (r, 0, 3)); b1 = I(2*r**2*sp.sin(th), (r, 0, 3)); assert a1 == 27; e
 assert I(27, (th, 0, pi/2)) == 27*pi/2 and I(18*sp.sin(th), (th, 0, pi/2)) == 18
 VB1 = I(I((6 - 2*r*sp.sin(th))*r, (r, 0, 3)), (th, 0, pi/2)); eq(VB1, 27*pi/2 - 18); eq(VB1, 18*(3*pi/4 - 1))
 eq(2*I(I((3 - r*sp.sin(th))*r, (r, 0, 3)), (th, 0, pi/2)), VB1)                                    # forma del profe: 2∬(3−y)
-eq(I(I(r, (z, r*sp.sin(th), 6 - r*sp.sin(th))), (r, 0, 3)).subs(th, th), I(I(r, (z, r*sp.sin(th), 6 - r*sp.sin(th))), (r, 0, 3)))
+eq(I(I(r, (z, r*sp.sin(th), 6 - r*sp.sin(th))), (r, 0, 3)), 27 - 18*sp.sin(th))                  # integral interna en r, forma triple
 eq(I(I(I(r, (z, r*sp.sin(th), 6 - r*sp.sin(th))), (r, 0, 3)), (th, 0, pi/2)), VB1)
 assert sp.solve(sp.Eq(y, 6 - y), y) == [3]
 carte = I((6 - 2*y)*sp.sqrt(9 - y**2), (y, 0, 3)); eq(carte, VB1)
@@ -105,7 +105,7 @@ eq(I(sp.sin(th), (th, 0, pi/4)), 1 - s2/2)
 ITB = I(I(I(r**2*sp.sin(th)*z, (z, 0, 3*sp.sqrt(1 - r**2))), (r, 0, 1)), (th, 0, pi/4)); eq(ITB, R(3, 5)*(1 - s2/2)); eq(ITB, (6 - 3*s2)/10)
 eq(ITB, -R(3, 5)*(s2/2 - 1))
 assert I(z*(1 - z**2/9)**R(3, 2), (z, 0, 3)) == R(9, 5); eq(R(1, 3)*R(9, 5)*(1 - s2/2), ITB); assert abs(float(ITB) - 0.1757) < 1e-3
-en(MB, r"\frac{9}{2}(1-r^2)", r"\frac{3}{5}", r"1-\frac{\sqrt2}{2}", r"IT=\frac35\Big(1-\frac{\sqrt2}{2}\Big)=\frac{6-3\sqrt2}{10}\approx 0{,}176", r"\frac13\cdot\frac95\Big(1-\frac{\sqrt2}{2}\Big)")
+en(MB, r"\frac{9}{2}(1-r^2)", r"\frac{3}{5}", r"1-\frac{\sqrt2}{2}", r"IT=\frac35\Big(1-\frac{\sqrt2}{2}\Big)=\frac{6-3\sqrt2}{10}\approx 0{,}176", r"\frac13-\frac15=\frac{5}{15}-\frac{3}{15}=\frac{2}{15}")
 
 # --- Ej 3
 P, Q = 2*x + y**2, 3*x*y
@@ -120,7 +120,8 @@ inn = I(y, (y, 0, ye)); eq(inn, 2*(1 - x**2)); GB_ = I(inn, (x, -1, 1)); assert 
 xt, yt = sp.cos(t), 2*sp.sin(t)                                                                     # comprobación: C1 con t
 gt = sp.simplify(P.subs({x: xt, y: yt})*sp.diff(xt, t) + Q.subs({x: xt, y: yt})*sp.diff(yt, t))
 assert sp.simplify(I(gt, (t, 0, pi)) - R(8, 3)) == 0
-en(MB, r"IC_2=0", r"(2x+4-16x^2)", r"2\cdot\frac43=\frac83", r"\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=3y-2y=y", r"2(1-x^2)", r"\frac{7}{3}-\Big(-\frac13\Big)=\frac83")
+en(MB, r"IC_2=0", r"(2x+4-16x^2)", r"2\cdot\frac43=\frac83", r"\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=3y-2y=y", r"2(1-x^2)", r"\frac73-\Big(-\frac13\Big)=\frac83",
+   r"P\,x'+Q\,y'=-2\sin t\cos t-4\sin^3t+12\sin t\cos^2t", r"-4\cdot\tfrac43=-\tfrac{16}{3}", r"12\Big[-\tfrac{\cos^3t}{3}\Big]_0^\pi=12\cdot\tfrac23=8")
 
 # --- Ej 4: Bernoulli
 n = -R(1, 2); assert 1 - n == R(3, 2)
@@ -133,7 +134,7 @@ Yn = (X**3*(6*sp.log(X) + 5))**R(2, 3)                                          
 chk = sp.diff(Yn, X) - 2*Yn/X - 4*X**2/sp.sqrt(Yn); assert abs(float(chk.subs(X, 2))) < 1e-12 and abs(float(chk.subs(X, 3.7))) < 1e-12
 eq(sp.diff(Yn, X) - 2*Yn/X, R(2, 3)*(X**3*(6*sp.log(X) + 5))**(-R(1, 3))*(sp.diff(Zs.subs(C1, 5), X) - 3*Zs.subs(C1, 5)/X))
 fz2 = sp.Function("w"); dsB = sp.dsolve(sp.Eq(fz2(X).diff(X) - 2*fz2(X)/X, 4*X**2/sp.sqrt(fz2(X))), hint="Bernoulli")   # dsolve independiente
-assert dsB is not None
+assert sp.simplify(dsB[0].rhs.subs(C1, 5) - Yn) == 0                                                   # dsolve da la misma familia (C=5)
 en(MB, r"n=-\tfrac12", r"\tfrac32y^{1/2}", r"z'-\frac3x\,z=6x^2", r"v=x^3", r"u=6\ln x+C", r"y^{3/2}=x^3\,(6\ln x+C)",
    r"y=\big[x^3\,(6\ln x+C)\big]^{2/3}")
 

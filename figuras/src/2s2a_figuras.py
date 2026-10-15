@@ -7,7 +7,7 @@ from pathlib import Path
 out = Path(__file__).resolve().parents[2] / "public/figuras/2s2a"
 plt.rcParams.update({"font.size": 12, "svg.fonttype": "none"})
 def save(fig, n): fig.tight_layout(); fig.savefig(out / f"{n}.svg", format="svg", metadata={"Date": None}); plt.close(fig)
-def leyenda3d(a, hs): a.legend(handles=hs, loc="upper center", bbox_to_anchor=(.5, -.02), fontsize=11, frameon=False)
+def leyenda3d(a, hs): a.legend(handles=hs, loc="upper center", bbox_to_anchor=(.5, -.02), fontsize=12, frameon=False)
 
 # ---- Ej 1
 fig = plt.figure(figsize=(7.8, 11.5), facecolor="white")
@@ -57,5 +57,5 @@ a.annotate("", xy=(-.5, .5), xytext=(.1, -.1), arrowprops=dict(arrowstyle="-|>",
 a.plot([-2, 1], [2, -1], "ko"); a.text(-2.5, 2.2, "(−2, 2)"); a.text(1.1, -1.35, "(1, −1)"); a.plot([0], [-2], "k.")
 a.text(-.7, -.9, "D", fontsize=16); a.text(-2.4, -2.3, "sentido antihorario (+)")
 a.set_xlim(-3, 2); a.set_ylim(-3, 3); a.set_xticks(range(-3, 3)); a.set_yticks(range(-3, 4)); a.set_aspect("equal"); a.grid(alpha=.3); a.axhline(0, c="k", lw=.6); a.axvline(0, c="k", lw=.6)
-a.set_xlabel("x"); a.set_ylabel("y"); a.legend(fontsize=11, loc="upper center", bbox_to_anchor=(.5, -.13), frameon=False)
+a.set_xlabel("x"); a.set_ylabel("y"); a.legend(fontsize=12, loc="upper center", bbox_to_anchor=(.5, -.13), frameon=False)
 save(fig, "ej3")

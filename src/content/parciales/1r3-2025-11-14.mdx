@@ -108,6 +108,14 @@ $$V=\frac{32\pi}{3}\ \text{u}^3\approx 33{,}5\ \text{u}^3$$
 
 **Ojo con:** olvidarse del jacobiano $r$ al pasar a polares, o restar mal el hueco (el piso es la semiesfera, no el plano $z=0$).
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico (cilindro, techo $z=y+4$ y piso en la semiesfera), integral $\int_0^{2\pi}\!\int_0^2\big(r\sin\theta+4-\sqrt{4-r^2}\big)\,r\,dr\,d\theta$ con jacobiano y $V=\frac{32\pi}{3}$.
+- **A medias:** planteo correcto (techo − piso, polares, jacobiano) con un error de cuenta que cambia el resultado, por ejemplo en $\int r\sqrt{4-r^2}\,dr$.
+- **Mal:** sin gráfico ni planteo, o toma el plano $z=0$ como piso (no resta el hueco de la esfera), o omite el jacobiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
@@ -200,6 +208,14 @@ $$IT=\frac{256\pi}{15}\approx 53{,}6$$
 
 **Ojo con:** el jacobiano: si te olvidás el $r$ extra el integrando queda $r$ y no $r^2$, y el resultado cambia.
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico, cilíndricas con integrando $r\cdot r$ (el $r$ de la función y el del jacobiano), intersección $r=2$, límites $r^2-3\le z\le5-r^2$, $0\le r\le2$, $0\le\theta\le2\pi$ y $IT=\frac{256\pi}{15}$.
+- **A medias:** planteo y límites correctos pero un error de cuenta en la integral (por ejemplo al desarrollar $r^2(8-2r^2)$).
+- **Mal:** sin gráfico ni planteo, intersección mal calculada, techo y piso invertidos o integrando sin el jacobiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
@@ -291,6 +307,14 @@ $$IC=\oint_C F\cdot dr=\frac{22}{5}\qquad\Big(IC_1=4,\ IC_2=\tfrac25\Big)$$
 
 **Ojo con:** el sentido de recorrido: si ponés los límites de $C_1$ de $-1$ a $1$ el signo de ese tramo se invierte.
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico con cortes $(-1,1)$ y $(1,1)$ y sentido antihorario, $IC_1=4$ ($x$ de $1$ a $-1$ por el arco superior), $IC_2=\frac25$ ($x$ de $-1$ a $1$ por la parábola), $IC=\frac{22}{5}$, y Green en cartesianas planteado con $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=3y$ y límites $x^2\le y\le\sqrt{2-x^2}$, $-1\le x\le1$ (el enunciado no pide el número final).
+- **A medias:** definición correcta con un error de cuenta en un tramo, o un tramo con el sentido invertido, o falta el planteo de Green.
+- **Mal:** sin gráfico ni cortes, recorrido horario sin advertirlo, o aplica Green sin cerrar la curva.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
@@ -370,6 +394,14 @@ $$u_y=-2x^2\sin(2y)+\varphi'(y)=12y-2x^2\sin(2y)\ \Rightarrow\ \varphi'(y)=12y\ 
 $$x^2\cos(2y)-\frac{1}{3}e^{3x}+6y^2=C$$
 
 **Ojo con:** el $\tfrac13$ al integrar $e^{3x}$ y el factor 2 al derivar $\cos(2y)$.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** verifica la exactitud ($\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}=-4x\sin 2y$), integra $P$ en $x$ y suma $\varphi(y)$, obtiene $\varphi'(y)=12y$ y escribe $x^2\cos(2y)-\frac13e^{3x}+6y^2=C$.
+- **A medias:** resuelve bien pero sin verificar la exactitud, o la verifica y se equivoca en el $\frac13$ de $\int e^{3x}dx$ o en el factor $2$ al derivar $\cos(2y)$.
+- **Mal:** no reconoce el tipo, o no integra con la función $\varphi(y)$ (queda $u$ sin determinar).
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -468,6 +500,14 @@ Sumando (1) y (2) se va $B$: $-8D=-4\Rightarrow D=\tfrac12$. De (2): $B=-D=-\tfr
 $$y=C_1+C_2e^{-2x}+2e^{2x}-\frac{1}{2}\sin(2x)+\frac{1}{2}\cos(2x)$$
 
 **Ojo con:** proponer solo $D\cos(2x)$ porque el lado derecho solo tiene coseno: hace falta el seno también.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** $y_h=C_1+C_2e^{-2x}$, $y_p=Ae^{2x}+B\sin(2x)+D\cos(2x)$ (con seno y coseno aunque el lado derecho solo tenga coseno), $A=2$, $B=-\frac12$, $D=\frac12$ y $y=y_h+y_p$.
+- **A medias:** $y_h$ y la forma de $y_p$ correctas, pero un error de cuenta en las derivadas o en el sistema; o una solución general sin $y_h$.
+- **Mal:** $y_h$ incorrecta, o $y_p$ con solo $D\cos(2x)$ (el sistema no tiene solución) sin darse cuenta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>

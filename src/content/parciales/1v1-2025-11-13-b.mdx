@@ -95,7 +95,11 @@ Restando el segundo término: $\ \int_0^3(\dots)\,dr=27-18\sin\theta$
 **Qué:** integrar en $\theta$. **Por qué:** ya queda una sola variable. La primitiva del seno es $-\cos\theta$:
 
 $$\int_0^{\pi/2}27\,d\theta=27\cdot\frac\pi2=\frac{27\pi}{2}$$
-$$\int_0^{\pi/2}18\sin\theta\,d\theta=18\big[-\cos\theta\big]_0^{\pi/2}=18(0+1)=18$$
+$$\int_0^{\pi/2}18\sin\theta\,d\theta=18\big[-\cos\theta\big]_0^{\pi/2}$$
+
+Se evalúa en los límites (el signo menos pasa a cada coseno):
+
+$$18\Big(-\cos\frac\pi2+\cos0\Big)=18(0+1)=18$$
 
 Restando: $V=\dfrac{27\pi}{2}-18=18\Big(\dfrac{3\pi}{4}-1\Big)$.
 
@@ -105,6 +109,14 @@ Restando: $V=\dfrac{27\pi}{2}-18=18\Big(\dfrac{3\pi}{4}-1\Big)$.
 $$V=\frac{27\pi}{2}-18=18\Big(\frac{3\pi}{4}-1\Big)\ \text{u}^3\approx 24{,}41\ \text{u}^3$$
 
 **Ojo con:** olvidarte del jacobiano $r$ al pasar a polares, o poner $\theta$ de $0$ a $2\pi$: el primer octante es solo un cuarto de círculo.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** techo $z=6-y$, piso $z=y$, $D$ cuarto de círculo ($0\le r\le3$, $0\le\theta\le\frac\pi2$), integral $\int_0^{\pi/2}\!\int_0^3(6-2r\sin\theta)\,r\,dr\,d\theta$ con jacobiano y $V=\frac{27\pi}{2}-18$.
+- **A medias:** planteo correcto con un error de cuenta que cambia el resultado.
+- **Mal:** sin planteo, $\theta$ de $0$ a $2\pi$ (ignora el 1º octante), sin jacobiano, o techo y piso invertidos.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -154,7 +166,7 @@ $$IT=\int_0^{\pi/4}\!\sin\theta\,d\theta\int_0^1 r^2\,dr\int_0^{3\sqrt{1-r^2}}z\
 
 **Qué:** dibujar la región. **Por qué:** para ver los límites. $x^2+y^2+\tfrac{z^2}{9}=1$ es un elipsoide de semiejes $1$, $1$ y $3$. En el 1º octante es un "cuarto de huevo" cuya cara de arriba es $z=3\sqrt{1-x^2-y^2}$, y el plano $y=x$ lo corta por la mitad del cuarto.
 
-<img src={`${import.meta.env.BASE_URL}figuras/1v1-b/ej2.svg`} alt="Arriba, perspectiva de la porción del elipsoide x²+y²+z²/9=1 en el primer octante entre los planos y=0 e y=x, con base en z=0 y techo z=3 raíz de 1 menos r al cuadrado. Abajo, la base en el plano xy: sector circular de radio 1 entre θ=0 y θ=π/4." style={{maxWidth:'100%',height:'auto'}} />
+<img src={`${import.meta.env.BASE_URL}figuras/1v1-b/ej2.svg`} alt="Arriba, perspectiva de la porción del elipsoide x²+y²+z²/9=1 en el primer octante entre los planos y=0 e y=x, con base en z=0 y techo z=3 raíz de 1 menos r al cuadrado. Abajo a la izquierda, la base en el plano xy: sector circular de radio 1 entre θ=0 y θ=π/4; abajo a la derecha, corte r–z: el techo z=3√(1−r²) de (0,3) a (1,0), con ejes graduados." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
 <Paso>
@@ -180,7 +192,13 @@ $$\int_0^{3\sqrt{1-r^2}}z\,dz=\Big[\frac{z^2}{2}\Big]_0^{3\sqrt{1-r^2}}=\frac{9(
 
 **Qué:** integrar en $r$. **Por qué:** se multiplica por $r^2$ y se primitiva cada potencia:
 
-$$\int_0^1 r^2\cdot\frac92(1-r^2)\,dr=\frac92\int_0^1(r^2-r^4)\,dr=\frac92\Big[\frac{r^3}{3}-\frac{r^5}{5}\Big]_0^1=\frac92\Big(\frac13-\frac15\Big)=\frac92\cdot\frac{2}{15}=\frac{3}{5}$$
+$$\int_0^1 r^2\cdot\frac92(1-r^2)\,dr=\frac92\int_0^1(r^2-r^4)\,dr=\frac92\Big[\frac{r^3}{3}-\frac{r^5}{5}\Big]_0^1$$
+
+Se evalúa en $r=1$ (en $r=0$ vale $0$) y se resta con denominador común:
+
+$$\frac13-\frac15=\frac{5}{15}-\frac{3}{15}=\frac{2}{15}$$
+
+$$\frac92\cdot\frac{2}{15}=\frac{18}{30}=\frac{3}{5}$$
 
 </Paso>
 <Paso>
@@ -196,12 +214,24 @@ $$IT=\frac35\Big(1-\frac{\sqrt2}{2}\Big)=\frac{6-3\sqrt2}{10}\approx 0{,}176$$
 
 **Ojo con:** el signo al integrar el seno ($-\cos\theta$, y evaluar $-\cos\tfrac\pi4+\cos0$), y el semieje: el techo es $3\sqrt{1-r^2}$, no $\sqrt{1-r^2}$.
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** cilíndricas con integrando $r^2\sin\theta\,z$, $0\le z\le3\sqrt{1-r^2}$, $0\le r\le1$, $0\le\theta\le\frac\pi4$ y $IT=\frac35\big(1-\frac{\sqrt2}{2}\big)$.
+- **A medias:** planteo y límites correctos pero un error de cuenta (por ejemplo en el signo al integrar el seno).
+- **Mal:** sin jacobiano, techo $\sqrt{1-r^2}$ en vez de $3\sqrt{1-r^2}$ (ignora el semieje), o ángulos mal.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
-Camino independiente: otro orden, integrando en $r$ con $z$ fijo (la parte de $\theta$ no cambia). Para cada $z$ entre $0$ y $3$, $r$ va de $0$ a $\sqrt{1-z^2/9}$ y $\int_0^R r^2\,dr=\tfrac{R^3}{3}$. Con $u=1-\tfrac{z^2}{9}$ se tiene $z\,dz=-\tfrac92\,du$:
+Camino independiente solo para la parte $(r,z)$: otro orden, integrando en $r$ con $z$ fijo (la parte de $\theta$, $1-\tfrac{\sqrt2}{2}$, se reutiliza porque no cambia). Para cada $z$ entre $0$ y $3$, $r$ va de $0$ a $\sqrt{1-z^2/9}$ y $\int_0^R r^2\,dr=\tfrac{R^3}{3}$. Con $u=1-\tfrac{z^2}{9}$ se tiene $z\,dz=-\tfrac92\,du$:
 
-$$\int_0^3z\,\frac{(1-z^2/9)^{3/2}}{3}\,dz=\frac13\cdot\frac92\int_0^1u^{3/2}du=\frac13\cdot\frac92\cdot\frac25=\frac35\quad\Rightarrow\quad IT=\frac13\cdot\frac95\Big(1-\frac{\sqrt2}{2}\Big)=\frac35\Big(1-\frac{\sqrt2}{2}\Big)$$
+$$\int_0^3z\,\frac{(1-z^2/9)^{3/2}}{3}\,dz=\frac13\cdot\frac92\int_0^1u^{3/2}du=\frac13\cdot\frac92\cdot\frac25=\frac35$$
+
+Es decir, la parte $(r,z)$ da $\tfrac35$ por los dos órdenes. Multiplicada por la parte de $\theta$:
+
+$$IT=\frac35\Big(1-\frac{\sqrt2}{2}\Big)$$
 
 </Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (B) 2025.pdf" paginas="3" />
@@ -259,16 +289,22 @@ Planteo casi hecho: cortes $(-1,0)$ y $(1,0)$; $C_2$ va de $x=-1$ a $x=1$ y el a
 
 Sumando: $P\,dx+Q\,dy=(2x+4-16x^2)\,dx$, y con $x$ de $1$ a $-1$:
 
-$$IC_1=\int_1^{-1}(2x+4-16x^2)\,dx=\Big[x^2+4x-\frac{16x^3}{3}\Big]_1^{-1}=\frac{7}{3}-\Big(-\frac13\Big)=\frac83$$
+$$IC_1=\int_1^{-1}(2x+4-16x^2)\,dx=\Big[x^2+4x-\frac{16x^3}{3}\Big]_1^{-1}$$
 
-(con $x=-1$: $1-4+\tfrac{16}{3}=\tfrac73$; con $x=1$: $1+4-\tfrac{16}{3}=-\tfrac13$).
+Se evalúa en el límite superior ($x=-1$) y en el inferior ($x=1$):
+
+- con $x=-1$: $1-4+\tfrac{16}{3}=-3+\tfrac{16}{3}=\tfrac73$
+- con $x=1$: $1+4-\tfrac{16}{3}=5-\tfrac{16}{3}=-\tfrac13$
+
+$$IC_1=\frac73-\Big(-\frac13\Big)=\frac83$$
 
 </Paso>
 <Paso>
 
 **Qué:** calcular $IC_2$ por definición. **Por qué:** sobre $y=0$ se tiene $dy=0$, así que solo queda $P\,dx$ con $y=0$:
 
-$$IC_2=\int_{-1}^{1}2x\,dx=\big[x^2\big]_{-1}^{1}=1-1=0$$
+$$IC_2=\int_{-1}^{1}2x\,dx=\big[x^2\big]_{-1}^{1}$$
+$$=1^2-(-1)^2=1-1=0$$
 
 Sumando: $IC=IC_1+IC_2=\tfrac83+0=\tfrac83$.
 
@@ -279,7 +315,15 @@ Sumando: $IC=IC_1+IC_2=\tfrac83+0=\tfrac83$.
 
 $$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=3y-2y=y$$
 
-$$IC=\iint_Dy\,dx\,dy=\int_{-1}^{1}\!dx\int_0^{2\sqrt{1-x^2}}y\,dy=\int_{-1}^{1}\frac{4(1-x^2)}{2}\,dx=\int_{-1}^{1}2(1-x^2)\,dx=2\Big[x-\frac{x^3}{3}\Big]_{-1}^{1}=2\cdot\frac43=\frac83$$
+$$IC=\iint_Dy\,dx\,dy=\int_{-1}^{1}\!dx\int_0^{2\sqrt{1-x^2}}y\,dy=\int_{-1}^{1}\frac{4(1-x^2)}{2}\,dx$$
+
+$$=\int_{-1}^{1}2(1-x^2)\,dx=2\Big[x-\frac{x^3}{3}\Big]_{-1}^{1}$$
+
+Se evalúa en $x=1$ y en $x=-1$:
+
+$$\Big(1-\frac13\Big)-\Big(-1+\frac13\Big)=\frac23-\Big(-\frac23\Big)=\frac43$$
+
+$$IC=2\cdot\frac43=\frac83$$
 
 </Paso>
 <Solucion>
@@ -288,10 +332,28 @@ $$IC=\oint_C F\cdot dr=\frac83\qquad\Big(IC_1=\tfrac83,\ IC_2=0\Big)$$
 
 **Ojo con:** el sentido de recorrido: si ponés los límites de $C_1$ de $-1$ a $1$ el signo de ese tramo se invierte (y no coincidiría con Green).
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico con cortes $(-1,0)$ y $(1,0)$ y sentido antihorario, $IC_1=\frac83$ ($x$ de $1$ a $-1$ por el arco superior), $IC_2=0$, $IC=\frac83$, y Green en cartesianas con $\iint y\,dA=\frac83$.
+- **A medias:** un solo método completo y correcto (definición o Green), o los dos con un error de cuenta; o un tramo con el sentido invertido.
+- **Mal:** sin gráfico ni límites, orientación horaria sin advertirlo, o aplica Green sin cerrar la curva.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
-Camino independiente para $IC_1$: parametrización trigonométrica $x=\cos t$, $y=2\sin t$, con $t$ de $0$ a $\pi$ (antihorario sobre el arco superior). Reemplazando en $P\,x'+Q\,y'$ y integrando, $\int_0^{\pi}(\dots)\,dt=\tfrac83$, igual que antes. Y la suma por definición coincide con el resultado de Green: dos caminos distintos, mismo valor.
+Camino independiente para $IC_1$: parametrización trigonométrica $x=\cos t$, $y=2\sin t$, con $t$ de $0$ a $\pi$ (antihorario sobre el arco superior). Con $x'=-\sin t$, $y'=2\cos t$, $P=2\cos t+4\sin^2t$ y $Q=3\cos t\cdot2\sin t=6\sin t\cos t$, el integrando es
+
+$$P\,x'+Q\,y'=-2\sin t\cos t-4\sin^3t+12\sin t\cos^2t$$
+
+y se integra término por término entre $0$ y $\pi$:
+
+- $\int_0^\pi-2\sin t\cos t\,dt=\big[-\sin^2t\big]_0^\pi=0$
+- $\int_0^\pi-4\sin^3t\,dt=-4\cdot\tfrac43=-\tfrac{16}{3}$ (porque $\int_0^\pi\sin^3t\,dt=\big[-\cos t+\tfrac{\cos^3t}{3}\big]_0^\pi=\tfrac23+\tfrac23=\tfrac43$)
+- $\int_0^\pi12\sin t\cos^2t\,dt=12\Big[-\tfrac{\cos^3t}{3}\Big]_0^\pi=12\cdot\tfrac23=8$
+
+Suma: $0-\tfrac{16}{3}+8=\tfrac{8}{3}$, igual que antes. Y la suma por definición coincide con el resultado de Green: dos caminos distintos, mismo valor.
 
 </Comprobacion>
 <ResolucionOficial examen="1v1-2025-11-13-b" fuente="parciales/2do-parcial/2° Parciales/2° PP 1V1 (B) 2025.pdf" paginas="4–5" />
@@ -376,6 +438,14 @@ $$y^{3/2}=x^3\,(6\ln x+C)$$
 $$y^{3/2}=x^3\,(6\ln x+C)\qquad\Longleftrightarrow\qquad y=\big[x^3\,(6\ln x+C)\big]^{2/3}\quad(x>0)$$
 
 **Ojo con:** el exponente al deshacer el cambio ($y^{3/2}$, no $y$), y recordar que como $\sqrt y$ está en la ecuación hay que tener $y>0$.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** reconoce Bernoulli con $n=-\frac12$, sustituye $z=y^{3/2}$, obtiene la lineal $z'-\frac3xz=6x^2$, la resuelve con $u\cdot v$ ($v=x^3$, $u=6\ln x+C$) y devuelve $y^{3/2}=x^3(6\ln x+C)$.
+- **A medias:** reconoce la sustitución correcta pero se equivoca en $v$ o en $u$, o deja la solución en $z$ sin volver a $y$.
+- **Mal:** no reconoce Bernoulli, o multiplica por una potencia equivocada y no llega a una lineal.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -468,6 +538,14 @@ Así $y_p=\dfrac{x^2}{2}-x+\dfrac12e^x$.
 $$y=C_1+C_2e^{-x}+\frac{x^2}{2}-x+\frac12e^x$$
 
 **Ojo con:** proponer solo $Ax+B$ para el polinomio: como $r=0$ es raíz, al reemplazar sale $y_p''+y_p'=A$ y nunca aparece la $x$. Hay que multiplicar por $x$.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** $y_h=C_1+C_2e^{-x}$, reconoce que $r=0$ es raíz y propone $y_p=Ax^2+Bx+De^x$, obtiene $A=\frac12$, $B=-1$, $D=\frac12$ y escribe la general.
+- **A medias:** $y_h$ correcta pero un error de derivación o de coeficientes; o una solución general sin $y_h$.
+- **Mal:** propone $Ax+B$ sin el factor $x$ (nunca aparece el $x$ del lado derecho) o $y_h$ incorrecta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>

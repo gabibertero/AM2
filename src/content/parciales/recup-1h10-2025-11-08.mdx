@@ -98,17 +98,18 @@ $$V=\int_0^{2\pi}\frac92\,d\theta=\frac92\cdot2\pi=9\pi$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$V=9\pi\ \text{u}^3\approx28{,}27\ \text{u}^3$$
 
 **Ojo con:** olvidarse del jacobiano $r$ (queda $\int(3-r)\,dr$, que no es un volumen), o tomar las dos hojas del cono.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
 
 - **Bien:** dibujo del cono con la tapa $z=3$ (techo y piso identificados), $D$ con $r\le3$, integral $\int_0^{2\pi}\!\int_0^3(3-r)\,r\,dr\,d\theta$ y $V=9\pi$.
 - **A medias:** planteo correcto (techo − piso, polares, jacobiano) con un error de cuenta que cambia el resultado.
 - **Mal:** sin planteo, o sin jacobiano, o resta mal las superficies (por ejemplo $r-3$) y no corrige el signo.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -212,17 +213,18 @@ $$IT=\int_0^{2\pi}\frac{256}{21}\,d\theta=\frac{256}{21}\cdot2\pi=\frac{512\pi}{
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$IT=\frac{512\pi}{21}\approx76{,}60$$
 
 **Ojo con:** dividir por 2 de más al distribuir: $r^2\big(\tfrac{16}{2}-\tfrac{r^4}{2}\big)=8r^2-\tfrac{r^6}{2}$ (no $\tfrac12(8r^2-r^6)$). Ese es el error de cuenta que aparece en la resolución oficial (ver nota abajo).
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
 
 - **Bien:** dibujo del paraboloide con la tapa, límites $r^2\le z\le4$, $0\le r\le2$, $0\le\theta\le2\pi$, integrando $z\,r\cdot r$ (con jacobiano) y resultado $\tfrac{512\pi}{21}$.
 - **A medias:** planteo completo y correcto (cilíndricas, límites, jacobiano) pero con un error de cuenta que cambia el valor final. Es el caso de la resolución oficial.
 - **Mal:** sin jacobiano, o con límites de $z$ invertidos o de $r$ mal hallados.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -356,7 +358,6 @@ Coincide con la definición.
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$IC=1$$
 
@@ -364,11 +365,13 @@ $$IC=1$$
 
 **Ojo con:** el sentido de recorrido: por abajo de izquierda a derecha y por arriba de derecha a izquierda; si se recorre $C_2$ de $0$ a $1$ da $-\tfrac16$ y el total sale mal. Y en $C_2$, distribuir bien el producto $(3x-2x^2)(-4x+2)$.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
 
 - **Bien:** dibujo con puntos de corte y sentido (+), $IC_1=\tfrac56$, $IC_2=\tfrac16$ por definición, suma $1$ y verificación con Green ($\iint2\,dA=1$).
 - **A medias:** definición correcta pero con un error de cuenta en un tramo, o solo hace una de las dos partes (definición o Green).
 - **Mal:** sentido invertido sin advertirlo, no usa $dy=f'(x)\,dx$, o aplica Green sin $Q_x-P_y$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -464,7 +467,6 @@ $$\frac{x^3}{3}+xy^2-\sin x-\cos y=C$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$\frac{x^3}{3}+xy^2-\sin x-\cos y=C\qquad(C\in\mathbb R)$$
 
@@ -472,11 +474,13 @@ $$\frac{x^3}{3}+xy^2-\sin x-\cos y=C\qquad(C\in\mathbb R)$$
 
 **Ojo con:** el signo de $\varphi$: $\int\sin y\,dy=-\cos y$; y no olvidar $\varphi(y)$ (no una constante) al integrar respecto de $x$.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
 
 - **Bien:** verifica la exactitud ($2y=2y$), integra $P$ con $\varphi(y)$, halla $\varphi'(y)=\sin y$, $\varphi=-\cos y$ y escribe $u=C$.
 - **A medias:** hace el procedimiento bien pero se equivoca en un signo o en una primitiva (por ejemplo $+\cos y$).
 - **Mal:** no verifica la exactitud, usa la fórmula directa (la consigna la prohíbe) o escribe una constante en lugar de $\varphi(y)$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -581,17 +585,18 @@ $$y=C_1e^x+C_2xe^x+x^2e^x$$
 </Paso>
 <Solucion>
 
-*Solución elaborada — no oficial, verificada con sympy.*
 
 $$y=C_1e^x+C_2xe^x+x^2e^x\qquad(C_1,C_2\in\mathbb R)$$
 
 **Ojo con:** proponer $Ae^x$ o $Axe^x$ (ya están en $y_h$; $y_p$ daría $0$ al reemplazar).
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares; del examen alcanza con resolver 2 ejercicios así):
 
 - **Bien:** $r=1$ doble, $y_h=C_1e^x+C_2xe^x$, $y_p=Ax^2e^x$ (con justificación), $A=1$ y $y=y_h+y_p$ completa.
 - **A medias:** $y_h$ correcta y $y_p$ bien propuesta, pero un error de cuenta en las derivadas o en $A$; o la solución sin $y_h$.
 - **Mal:** propone $y_p=Ae^x$ o $Axe^x$ (no corrige la resonancia).
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>

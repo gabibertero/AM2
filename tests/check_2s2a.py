@@ -51,9 +51,13 @@ Hg = sp.diff(Q, x) - sp.diff(P, y)
 area = I(-x - yc, (x, -2, 1)); assert area == R(9, 2)
 H = I(I(Hg, (y, yc, -x)), (x, -2, 1)); assert H == 9
 Hx = sp.integrate(-x - x**2 + 2, x); assert [Hx.subs(x, 1), Hx.subs(x, -2)] == [R(7, 6), -R(10, 3)]
-assert R(3**3, 6) == R(9, 2)                                                             # fórmula |a|(x2-x1)³/6
+p1 = I(2 - x**2, x); p2 = I(-x, x)                                                       # comprobación: área en dos integrales
+assert p1.subs(x, 1) - p1.subs(x, -2) == 3 and p2.subs(x, 1) - p2.subs(x, -2) == R(3, 2) and 3 + R(3, 2) == R(9, 2)
+assert (R(5, 3), -R(4, 3)) == (p1.subs(x, 1), p1.subs(x, -2)) and (-R(1, 2), -2) == (p2.subs(x, 1), p2.subs(x, -2))
+assert 8 - 6 - 4 == -2 and -2 - R(8, 3) == -R(14, 3) and R(1, 2) - R(3, 2) + 2 + R(1, 3) == R(4, 3) and R(4, 3) + R(14, 3) == 6   # líneas aparte de Ej3
+assert R(7, 6) - R(-10, 3) == R(27, 6) and -R(5, 6) + 2 == R(7, 6) and -6 + R(8, 3) == -R(10, 3)
 en_mdx(r"IC=\oint_C F\cdot dr=9\qquad\big(IC_1=3,\ IC_2=6\big)", r"\big[x^2\big]_1^{-2}=4-1=3", r"(2x^3+x^2-3x+2)\,dx",
-       r"\tfrac43-\big(-\tfrac{14}{3}\big)=6", r"\tfrac76+\tfrac{10}{3}=\tfrac{27}{6}=\tfrac92", r"\text{Área}=\frac{1\cdot3^3}{6}=\frac{27}{6}=\frac92",
+       r"\tfrac43-\big(-\tfrac{14}{3}\big)=\tfrac{18}{3}=6", r"\tfrac76+\tfrac{20}{6}=\tfrac{27}{6}=\tfrac92", r"\text{Área}=3+\frac32=\frac92", r"\tfrac53-\Big(-\tfrac43\Big)=3", r"-\tfrac12-(-2)=\tfrac32",
        r"(x+2)(x-1)=0", r"-x-x^2+2")
 
 # --- Ej 4: exacta ---

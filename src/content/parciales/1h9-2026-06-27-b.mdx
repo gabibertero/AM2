@@ -105,11 +105,11 @@ $$IT=0$$
 
 **Ojo con:** el $0$ viene de $\int_0^{2\pi}\sin\theta\,d\theta=0$, **no** de que la parte radial se anule: esa vale $\frac94\ne0$. Hay que mostrar el integrando $r^3\sin\theta$, los límites $r^2\le z\le3$ y la parte radial.
 
-**Cómo se evalúa** (la cátedra pide "planteo y desarrollo consistente" y todos los cálculos auxiliares; el enunciado no exige gráfico):
+**Criterio estimado — no oficial** (la consigna pide "planteo y desarrollo consistente" y todos los cálculos auxiliares; el enunciado no exige gráfico):
 
 - **Bien:** cilíndricas con integrando $r^3\sin\theta$ (jacobiano incluido), límites $0\le\theta\le2\pi$, $0\le r\le\sqrt3$, $r^2\le z\le3$, parte radial $\frac94$ y $IT=0$ justificado por $\int_0^{2\pi}\sin\theta\,d\theta=0$.
-- **A medias:** planteo y límites correctos pero con un error de cuenta, o integrando sin el jacobiano (aunque el resultado siga dando $0$ por simetría, el planteo está mal).
-- **Mal:** límites de $z$ incorrectos (por ejemplo $0\le z\le3$ sin el paraboloide) o sin planteo.
+- **A medias:** planteo y límites correctos pero con un error de cuenta.
+- **Mal:** límites de $z$ incorrectos (por ejemplo $0\le z\le3$ sin el paraboloide), integrando sin el jacobiano (aunque el resultado siga dando $0$ por simetría, el planteo está mal) o sin planteo.
 
 *Solución elaborada — no oficial, verificada con sympy.*
 
@@ -221,7 +221,7 @@ $$\oint_C^{+}(x-y)\,dx+(x+y)\,dy=\frac{16}{3}$$
 
 **Ojo con:** el sentido de $C_2$ ($y$ de $2$ a $0$): al revés, el tramo cambia de signo y el total da $\frac{20}{3}+\frac43=8$ en lugar de $\frac{16}{3}$. Y no te asustes de que $IC_2$ dé negativo: es normal, el campo apunta "en contra" de ese tramo.
 
-**Cómo se evalúa** (el enunciado pide "por definición"; no exige gráfico, pero sin los cortes no se puede plantear):
+**Criterio estimado — no oficial** (el enunciado pide "por definición"; no exige gráfico, pero sin los cortes no se puede plantear):
 
 - **Bien:** cortes $(0,0)$ y $(2,2)$, sentido antihorario con los dos tramos y sus límites ($C_1$: $x$ de $0$ a $2$; $C_2$: $y$ de $2$ a $0$), $IC_1=\frac{20}{3}$, $IC_2=-\frac43$ y $IC=\frac{16}{3}$.
 - **A medias:** planteo correcto de los dos tramos con un error de cuenta; o un tramo con el sentido invertido.
@@ -341,7 +341,7 @@ $$y=-2+C\,e^{x^3}$$
 
 **Ojo con:** el signo de la sustitución ($dt=-3x^2dx$ introduce el signo menos) y recordar $e^{-x^3}\cdot e^{x^3}=1$. Dejar $y=(-2e^{-x^3}+C)e^{x^3}$ también está bien, pero conviene simplificar.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente):
 
 - **Bien:** reconoce la lineal, usa $y=uv$, $v=e^{x^3}$, $u=-2e^{-x^3}+C$ y escribe $y=(-2e^{-x^3}+C)\,e^{x^3}=-2+Ce^{x^3}$.
 - **A medias:** plantea bien pero se equivoca en el signo o la constante de la integral de $u$, o no vuelve a $y=uv$.
@@ -474,7 +474,7 @@ $$y=C_1e^{x}+C_2xe^{x}-\frac12x^2e^{x}+x+1$$
 
 **Ojo con:** la resonancia (si proponés $Ae^x$ o $Axe^x$ el término en $e^x$ se anula y no cierra) y los signos: el segundo miembro trae $-e^x$ y $-1$, así que $A$ y $D$ salen con el signo "dado vuelta" respecto del Tema A.
 
-**Cómo se evalúa** (la cátedra pide planteo y desarrollo consistente):
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente):
 
 - **Bien:** $y_h=C_1e^x+C_2xe^x$ (raíz doble), $y_p$ con $x^2e^x$ por resonancia, $A=-\frac12$, $B=1$, $D=1$ y $y=y_h+y_p$.
 - **A medias:** $y_h$ y la forma de $y_p$ correctas, pero un error de cuenta en las derivadas o en los coeficientes; o una solución general sin $y_h$.

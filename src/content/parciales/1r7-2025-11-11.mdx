@@ -103,6 +103,14 @@ $$V=\frac{32\pi}{3}\ \text{u}^3\approx 33{,}5\ \text{u}^3$$
 
 **Ojo con:** olvidarse del jacobiano $r$, o restar al revés (techo − piso, no piso − techo), y no descartar la raíz negativa $r=-3$.
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico (cono de piso, paraboloide de techo), intersección $r=2$ (descarta $r=-3$), integral $\int_0^{2\pi}\!\int_0^2(6-r^2-r)\,r\,dr\,d\theta$ con jacobiano y $V=\frac{32\pi}{3}$.
+- **A medias:** planteo correcto (techo − piso, polares, jacobiano) con un error de cuenta que cambia el resultado.
+- **Mal:** sin gráfico ni planteo, intersección mal (por ejemplo $r=3$), techo y piso invertidos o sin jacobiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
@@ -195,6 +203,14 @@ $$IT=\frac{8}{15}\cdot2=\frac{16}{15}$$
 $$IT=\frac{16}{15}\approx 1{,}07$$
 
 **Ojo con:** poner el jacobiano una sola vez en el integrando ($r$ del jacobiano por $r$ de $x+y$ da $r^2$), y no olvidar el $\sin^2+\cos^2=1$ al restar los límites de $z$.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** cilíndricas con integrando $r^2(\cos\theta+\sin\theta)$, $0\le r\le1$, $0\le\theta\le\frac\pi2$ (1º cuadrante), $1-r^2\cos^2\theta\le z\le2+r^2\sin^2\theta$ (altura $1+r^2$) y $IT=\frac{16}{15}$.
+- **A medias:** planteo y límites correctos pero un error de cuenta (por ejemplo al restar los límites de $z$ o en la integral de $r^2+r^4$).
+- **Mal:** integrando sin el jacobiano o con un solo $r$ de más, $\theta$ de $0$ a $2\pi$ (ignora el 1º cuadrante) o límites de $z$ sin restar.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -290,6 +306,14 @@ $$IC=\oint_C F\cdot dr=8\qquad\big(IC_1=4,\ IC_2=4\big)$$
 
 **Ojo con:** el sentido de recorrido: si ponés los límites de $C_2$ de $-1$ a $1$ ese tramo da $-4$ y la suma sale $0$, distinta de lo que da Green.
 
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** gráfico con cortes $(-1,0)$ y $(1,0)$ y sentido antihorario, $IC_1=4$ (parábola $y=x^2-1$, $x$ de $-1$ a $1$), $IC_2=4$ (parábola $y=1-x^2$, $x$ de $1$ a $-1$), $IC=8$, y Green con $\iint3\,dA=8$.
+- **A medias:** un solo método completo y correcto (definición o Green), o los dos planteados con un error de cuenta; o un tramo con el sentido invertido.
+- **Mal:** sin gráfico ni límites, orientación horaria sin advertirlo, o aplica Green sin cerrar la curva.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
 </Solucion>
 <Comprobacion>
 
@@ -372,6 +396,14 @@ $$u_y=\frac xy+\ln x+\varphi'(y)=\frac xy+\ln x+\cos y\ \Rightarrow\ \varphi'(y)
 $$e^x+x\ln y+y\ln x+\sin y=C$$
 
 **Ojo con:** al integrar $\tfrac yx$ en $x$ sale $y\ln x$ (no $\ln x$ solo), y con $\ln y$ constante en $x$ sale $x\ln y$.
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** verifica la exactitud ($\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}=\frac1y+\frac1x$), integra $P$ en $x$ ($e^x+x\ln y+y\ln x$), obtiene $\varphi'(y)=\cos y$ y escribe $e^x+x\ln y+y\ln x+\sin y=C$.
+- **A medias:** resuelve bien pero sin verificar la exactitud, o se equivoca en una primitiva (por ejemplo $\int\frac yx\,dx=\ln x$ sin el $y$).
+- **Mal:** no reconoce el tipo, o no determina $\varphi(y)$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
@@ -470,6 +502,14 @@ Sumando (1) y (2) se va $B$: $2A=2\Rightarrow A=1$. De (2): $B=-A=-1$.
 $$y=C_1+C_2e^{-x}+\sin x-\cos x+x$$
 
 **Ojo con:** proponer una constante para el $1$ sin ver que $r=0$ es raíz: sin el $x$ el sistema no tiene solución (la constante queda en $-1\ne0$).
+
+**Criterio estimado — no oficial** (la consigna pide planteo y desarrollo consistente, con todos los cálculos auxiliares):
+
+- **Bien:** $y_h=C_1+C_2e^{-x}$, reconoce que $r=0$ es raíz y propone $y_p=A\sin x+B\cos x+Dx$, obtiene $A=1$, $B=-1$, $D=1$ y escribe la general.
+- **A medias:** $y_h$ y la forma de $y_p$ correctas pero un error de cuenta; o una solución general sin $y_h$.
+- **Mal:** propone una constante para el $1$ (sin el factor $x$) y no advierte que el sistema no tiene solución, o $y_h$ incorrecta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
 
 </Solucion>
 <Comprobacion>
