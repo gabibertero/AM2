@@ -22,7 +22,7 @@ const d = entry.data;
   <div class="examen-cab tarjeta">
     <h1>{d.titulo}</h1>
     <p class="meta">{d.fecha ?? 'sin fecha'} · {d.tipo} · Tema {d.tema} · Unidades: {d.unidades.map((u) => <span class="chip chip-u" data-unidad={u}>{u}</span>)}</p>
-    <p class="meta">Fuente: {d.fuente} (foto de clase; sin resolución oficial)</p>
+    <p class="meta">Fuente: {d.fuente.split('/').pop()} (foto de clase; sin resolución oficial)</p>
     <span class="barra" aria-hidden="true" data-barra data-ids={idsDeEjercicios(entry.body).join(',')}></span>
   </div>
   <ExamenPanel id={entry.id} />

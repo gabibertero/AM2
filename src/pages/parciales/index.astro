@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { idsDeEjercicios } from '../../scripts/ids.js';
+const corto = (v, alt) => (/^no figura/i.test(v) ? alt : v);
 const base = import.meta.env.BASE_URL;
 const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden - b.data.orden);
 ---
@@ -12,11 +13,11 @@ const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden 
     {examenes.map((e) => (
       <li class="tarjeta examen-card">
         <div class="ec-top">
-          <span class="chip chip-fuerte">{e.data.comision}</span>
+          <span class="chip chip-fuerte">{corto(e.data.comision, 'sin comisión')}{e.data.tema && ` · Tema ${e.data.tema}`}</span>
           {e.body.includes('<Solucion') && <span class="chip chip-ok">✔ Con solución</span>}
         </div>
         <a class="ec-titulo" href={`${base}parciales/${e.id}/`}>{e.data.titulo}</a>
-        <p class="meta">{e.data.fecha} · {e.data.tipo}</p>
+        <p class="meta">{corto(e.data.fecha, 'sin fecha')} · {e.data.tipo}</p>
         <p class="chips">{e.data.unidades.map((u) => <span class="chip chip-u" data-unidad={u}>{u}</span>)}</p>
         <span class="barra" aria-hidden="true" data-barra data-ids={idsDeEjercicios(e.body).join(',')}></span>
         <span class="progreso" data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span>

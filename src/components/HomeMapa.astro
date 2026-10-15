@@ -29,14 +29,16 @@ const base = import.meta.env.BASE_URL;
   ))}
 </ol>
 <style>
-  .mapa { max-width: none; list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+  .mapa { max-width: none; list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  @media (min-width: 824px) { .mapa-u:last-child:nth-child(3n+1) { grid-column: 1 / -1; } }
+  @media (min-width: 560px) and (max-width: 823px) { .mapa-u:last-child:nth-child(2n+1) { grid-column: 1 / -1; } }
   .mapa-u { background: var(--sup); border: 1px solid var(--borde); border-top: 4px solid var(--uc); border-radius: var(--r); padding: var(--s-24); box-shadow: var(--sombra); display: flex; flex-direction: column; gap: 8px; }
   .mapa-u header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
   .mapa-n { font-family: var(--f-ed); font-weight: 700; font-size: 1.75rem; line-height: 1; color: var(--uc); }
-  .mapa-cae { font-size: .8125rem; font-weight: 600; color: var(--suave); border: 1px solid var(--borde); border-radius: 999px; padding: 0 var(--s-12); background: var(--sup2); }
+  .mapa-cae { font-size: .8125rem; font-weight: 600; color: var(--suave); border: 1px solid var(--borde); border-radius: 999px; padding: 0 var(--s-12); background: var(--sup2); white-space: nowrap; }
   [data-cae='practico'] .mapa-cae { color: var(--e-ok); background: var(--e-ok-bg); border-color: color-mix(in srgb, var(--e-ok) 40%, var(--sup)); }
   [data-cae='tentativo'] .mapa-cae { color: var(--e-curso); background: var(--e-curso-bg); border-color: color-mix(in srgb, var(--e-curso) 40%, var(--sup)); }
-  .mapa-u h3 { margin: 0; font-size: 1.125rem; }
+  .mapa-u h3 { margin: 0; font-size: 1.125rem; white-space: nowrap; }
   .mapa-temas { margin: 0; padding-left: 16px; font-size: .9375rem; flex: 1; }
   .mapa-vacio { margin: 0; font-size: .9375rem; flex: 1; }
   .mapa-acc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 var(--s-8); margin-top: auto; padding-top: var(--s-8); border-top: 1px dashed var(--borde); }

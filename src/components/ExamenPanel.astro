@@ -20,7 +20,8 @@ const { id, minutos = 120 } = Astro.props;
   </p>
   <p class="ex-aviso" data-ex="aviso" role="alert" hidden>Se terminó el tiempo. Podés seguir, pero ya pasó el límite.</p>
   <div data-en="entregado" aria-live="polite">
-    <p class="ex-nota">Nota estimada: <strong data-ex="nota"></strong>/100 · Tiempo usado: <span data-ex="usado"></span></p>
+    <p class="ex-nota"><span class="ex-nota-l">Nota estimada</span><strong data-ex="nota"></strong><span class="ex-nota-t">/100</span></p>
+    <p class="meta">Tiempo usado: <span class="ex-usado" data-ex="usado"></span></p>
     <p class="meta" data-ex="detalle"></p>
     <p class="meta">Estimación de estudio: Bien cuenta 100 %, A medias 50 %, Mal 0 %, con el mismo peso por ejercicio.</p>
   </div>
