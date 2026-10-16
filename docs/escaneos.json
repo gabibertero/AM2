@@ -494,5 +494,845 @@
     "cajas": []
    }
   }
+ },
+ "p1-1h10-2023-10-rec": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": true,
+    "cajas": [
+     [
+      0.27,
+      0.133,
+      0.56,
+      0.165,
+      "Nombre"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1h10-2024-b": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.26,
+      0.098,
+      0.58,
+      0.14,
+      "Nombre"
+     ],
+     [
+      0.49,
+      0.143,
+      0.62,
+      0.158,
+      "Rubrica"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1h10-2025-09": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1h9-2023-05": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.27,
+      0.145,
+      0.6,
+      0.185,
+      "Nombre"
+     ],
+     [
+      0.75,
+      0.15,
+      0.93,
+      0.185,
+      "Legajo tachado"
+     ],
+     [
+      0.72,
+      0.055,
+      0.94,
+      0.115,
+      "Nota"
+     ],
+     [
+      0.07,
+      0.262,
+      0.19,
+      0.3,
+      "Puntaje"
+     ],
+     [
+      0.08,
+      0.365,
+      0.143,
+      0.4,
+      "Puntaje"
+     ],
+     [
+      0.09,
+      0.515,
+      0.145,
+      0.545,
+      "Puntaje"
+     ],
+     [
+      0.07,
+      0.652,
+      0.138,
+      0.685,
+      "Puntaje"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1h9-2023-07-rec": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.26,
+      0.14,
+      0.58,
+      0.18,
+      "Nombre"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1h9-2024-05": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.25,
+      0.095,
+      0.58,
+      0.138,
+      "Nombre"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1h9-2025-05-g1": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": [
+     [
+      0.86,
+      0.935,
+      0.96,
+      0.98,
+      "Iniciales/firma"
+     ]
+    ]
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": [
+     [
+      0.0,
+      0.875,
+      0.05,
+      0.97,
+      "Marca manuscrita"
+     ]
+    ]
+   }
+  }
+ },
+ "p1-1h9-2025-05-g2": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.27,
+      0.133,
+      0.57,
+      0.18,
+      "Nombre"
+     ],
+     [
+      0.77,
+      0.53,
+      0.93,
+      0.715,
+      "Firma"
+     ],
+     [
+      0.84,
+      0.86,
+      0.95,
+      0.92,
+      "Garabato/firma"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": [
+     [
+      0.05,
+      0.925,
+      0.135,
+      0.968,
+      "Garabato/firma"
+     ],
+     [
+      0.385,
+      0.895,
+      0.435,
+      0.935,
+      "Garabato/firma"
+     ]
+    ]
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1h9-2025-07-rec": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.285,
+      0.113,
+      0.59,
+      0.158,
+      "Nombre"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1r3-2023-09-a": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Sep-23.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": true,
+    "cajas": [
+     [
+      0.255,
+      0.12,
+      0.585,
+      0.165,
+      "Nombre"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "7": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "8": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "9": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1r3-2023-09-b": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": true,
+    "cajas": [
+     [
+      0.27,
+      0.133,
+      0.6,
+      0.172,
+      "Nombre"
+     ],
+     [
+      0.5,
+      0.172,
+      0.6,
+      0.188,
+      "Rubrica"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "7": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "8": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1r3-2024-10-a": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.265,
+      0.125,
+      0.58,
+      0.168,
+      "Nombre"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "7": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1r3-2024-10-b": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.28,
+      0.13,
+      0.63,
+      0.172,
+      "Nombre"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "7": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1r7-2025-10": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.75,
+      0.845,
+      1.0,
+      0.985,
+      "Firma y apellido"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-1v1-2022-09-b": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": true,
+    "cajas": [
+     [
+      0.25,
+      0.135,
+      0.57,
+      0.178,
+      "Nombre"
+     ],
+     [
+      0.76,
+      0.15,
+      0.84,
+      0.178,
+      "Legajo tachado"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-2s2-2022-07": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.255,
+      0.14,
+      0.56,
+      0.178,
+      "Nombre"
+     ],
+     [
+      0.77,
+      0.145,
+      0.85,
+      0.17,
+      "Legajo"
+     ],
+     [
+      0.665,
+      0.165,
+      0.92,
+      0.248,
+      "Nota"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "7": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "8": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-2s2-2023-07": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.25,
+      0.155,
+      0.535,
+      0.19,
+      "Nombre"
+     ],
+     [
+      0.755,
+      0.15,
+      0.86,
+      0.18,
+      "Legajo"
+     ],
+     [
+      0.755,
+      0.055,
+      0.93,
+      0.115,
+      "Nota"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-2s2-2024-06-b": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "2": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "6": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "7": {
+    "limpiar_fondo": false,
+    "cajas": []
+   }
+  }
+ },
+ "p1-2s2-2025-06-b": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 (B) Jun-25.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": []
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
+ },
+ "p1-todas-2025-11-rec": {
+  "fuente": "parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf",
+  "paginas": {
+   "1": {
+    "limpiar_fondo": false,
+    "cajas": [
+     [
+      0.245,
+      0.138,
+      0.51,
+      0.172,
+      "Nombre"
+     ]
+    ]
+   },
+   "2": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "3": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "4": {
+    "limpiar_fondo": true,
+    "cajas": []
+   },
+   "5": {
+    "limpiar_fondo": true,
+    "cajas": []
+   }
+  }
  }
 }

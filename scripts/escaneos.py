@@ -34,6 +34,8 @@ def main(ids):
             for x0, y0, x1, y1, _motivo in cfg.get("cajas", []):
                 b = [x0 * im.width, y0 * im.height, x1 * im.width, y1 * im.height]
                 d.rectangle(b, fill="#9a9a9a")
+                if b[2] - b[0] < 200:
+                    continue  # caja angosta: sin rotulo para no pisar el enunciado
                 f = ImageFont.load_default(size=max(10, min(16, int((b[3] - b[1]) / 3))))
                 d.text((b[0] + 6, b[1] + 4), "dato personal oculto", fill="#333333", font=f)
             if cfg.get("crop"):
