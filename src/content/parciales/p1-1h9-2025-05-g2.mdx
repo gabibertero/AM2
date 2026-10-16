@@ -1,0 +1,362 @@
+---
+id: "p1-1h9-2025-05-g2"
+titulo: "1° Parcial Práctico — Comisión 1H9 (Grupo 2)"
+comision: "1H9"
+fecha: "10/05/2025"
+tipo: "práctico"
+tema: "Grupo 2"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–5"
+orden: 33
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1H9 · 1° Parcial Práctico – 10/05/2025 · Grupo 2
+
+<Ejercicio id="p1-1h9-2025-05-g2#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-1h9-2025-05-g2" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\dfrac{\log(x^2-y^2-1)-\sqrt{1-\frac{x^2}{9}-\frac{y^2}{4}}}{\arcsin(y)}$$
+
+</Enunciado>
+
+<Pista>
+
+Fijate qué funciones "delicadas" aparecen: un logaritmo, una raíz, un arcoseno, y todo dividido por el arcoseno. Para cada una, ¿qué valores del interior no se pueden usar? Y del cociente, ¿qué valor del denominador está prohibido?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: una condición por cada función, y el dominio es la intersección de todas. Logaritmo: argumento $>0$; raíz: radicando $\ge0$; arcoseno: argumento entre $-1$ y $1$; denominador: $\arcsin(y)\neq0$. Después se identifica cada región (hipérbola, elipse, franja) y se sombrea lo común.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$x^2-y^2-1>0,\qquad 1-\frac{x^2}{9}-\frac{y^2}{4}\ge0,\qquad -1\le y\le1,\qquad \arcsin(y)\neq0$$
+
+Falta ver para qué $y$ vale cero el arcoseno, y si la hipérbola y la elipse llegan a cortarse dentro de la franja $|y|\le1$.
+
+</Pista>
+<Paso>
+
+**Qué:** una condición por función. **Por qué:** el logaritmo pide argumento estrictamente positivo (el borde se excluye); la raíz admite $0$ (el borde se incluye); $\arcsin$ solo está definido en $[-1;1]$ (los extremos se incluyen); y el denominador no puede ser $0$.
+
+</Paso>
+<Paso>
+
+**Qué:** pasar (1) y (2) a regiones. **Por qué:**
+
+$$x^2-y^2>1\qquad\text{y}\qquad\frac{x^2}{9}+\frac{y^2}{4}\le1$$
+
+La primera es lo que queda "afuera" de la hipérbola $x^2-y^2=1$ (vértices $(\pm1;0)$, asíntotas $y=\pm x$), con el borde **excluido**. La segunda es el interior de la elipse de semiejes $3$ (en $x$) y $2$ (en $y$), con el borde **incluido**.
+
+</Paso>
+<Paso>
+
+**Qué:** la condición del arcoseno y del denominador. **Por qué:** $\arcsin(y)$ existe solo si $-1\le y\le1$ (franja horizontal, bordes incluidos). Además $\arcsin(y)=0$ únicamente para $y=0$ (el seno vale $0$ en $0$), así que se excluye el eje $x$:
+
+$$-1\le y\le1,\qquad y\neq0$$
+
+</Paso>
+<Paso>
+
+**Qué:** ver si la hipérbola y la elipse se cortan dentro de la franja. **Por qué:** si no se cortan ahí, la región es simple de dibujar. De la hipérbola $x^2=1+y^2$; en la elipse:
+
+$$\frac{1+y^2}{9}+\frac{y^2}{4}=1$$
+
+Multiplicando por $36$:
+
+$$4(1+y^2)+9y^2=36$$
+
+$$13y^2=32\ \Rightarrow\ y^2=\frac{32}{13}\approx2{,}46>1$$
+
+Como $|y|\le1$, **no se cortan** en la franja: en ella la rama derecha de la hipérbola queda siempre a la izquierda del arco derecho de la elipse (en $y=1$ pasa de $x=\sqrt2\approx1{,}41$ a $x=3\sqrt{3/4}\approx2{,}60$).
+
+</Paso>
+<Paso>
+
+**Qué:** intersecar y dibujar. **Por qué:** quedan dos "lóbulos" (derecho e izquierdo), cada uno cortado en dos por el eje $x$ excluido: **cuatro trozos**. A la derecha, para cada $y$ con $0<|y|\le1$: $\sqrt{1+y^2}<x\le3\sqrt{1-\tfrac{y^2}{4}}$. El borde de la elipse y las rectas $y=\pm1$ van llenos; la hipérbola y el eje $x$, punteados.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-05-g2/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Elipse de semiejes 3 y 2 en línea llena, hipérbola x²−y²=1 punteada, rectas y=1 e y=−1 llenas y el eje x punteado. Sombreados cuatro trozos: dos a la derecha de la hipérbola y dentro de la elipse (arriba y abajo del eje x) y sus simétricos a la izquierda, siempre entre y=−1 e y=1." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ x^2-y^2>1\ \ \wedge\ \ \frac{x^2}{9}+\frac{y^2}{4}\le1\ \ \wedge\ \ -1\le y\le1\ \ \wedge\ \ y\neq0\Big\}$$
+
+**Ojo con:** el eje $x$: $y=0$ cumple las otras tres condiciones pero anula el denominador ($\arcsin0=0$), hay que excluirlo; y los bordes distintos: hipérbola excluida, elipse e $y=\pm1$ incluidas.
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"):
+
+- **Bien:** las cuatro condiciones, cada borde con su signo correcto, gráfico consolidado (con el eje $x$ excluido) y conjunto escrito.
+- **A medias:** condiciones correctas pero con un borde mal marcado, o olvida el eje $x$ ($y\neq0$) o el gráfico consolidado.
+- **Mal:** falta alguna condición entera (la franja $|y|\le1$, por ejemplo), o confunde interior con exterior, o no hay gráfico.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar la función en puntos de prueba.**
+
+- $(2;\,0{,}5)$: $\log(4-0{,}25-1)=\log2{,}75$ existe; $\sqrt{1-\frac49-\frac{0{,}25}{4}}$ existe; $\arcsin0{,}5=\frac\pi6\neq0$. **Está en $D$.**
+- $(2;\,1)$: sobre la recta $y=1$: $\log(2)$ existe, $\sqrt{\cdot}$ existe, $\arcsin1=\frac\pi2\neq0$. **Está** (borde incluido).
+- $(2;\,0)$: $\arcsin0=0$, división por cero. **No está.**
+- $(2;\,1{,}2)$: $\arcsin1{,}2$ no existe. **No está.**
+- $(0{,}5;\,0{,}5)$: $x^2-y^2-1<0$, logaritmo de un negativo. **No está.**
+- $(3{,}2;\,0{,}5)$: fuera de la elipse, raíz de un negativo. **No está.**
+
+Todo coincide con el dibujo.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-05-g2" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** coincide. Plantea cuatro condiciones ($x^2-y^2>1$, elipse $\le1$, $-1\le y\le1$ por "seno y coseno toman valores entre $-1$ y $1$", e $y\neq0$ "excluir eje x"), grafica cada una por separado y el gráfico consolidado, y escribe el mismo conjunto analítico. No dice que la hipérbola y la elipse no se cortan en la franja; es un detalle que acá se justifica.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2025-05-g2#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1h9-2025-05-g2" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" pagina="1">
+
+Dada la función: $z=\mathrm{Ln}\left(\frac{x^2+2}{y^2}\right)$
+
+a. Determinar el valor de la derivada direccional en el punto: $P(1,-2)$. En la dirección del segmento PQ siendo $Q(4,-6)$
+
+b. Dar expresión del Gradiente en dicho punto P, graficarlo y determinar su módulo y dirección/sentido (ángulo $\theta$ respecto al semieje $x^+$). Indicar en el gráfico las direcciones de crecimiento máximo, mínimo y nulos!
+
+</Enunciado>
+
+<Pista>
+
+Hay dos pedidos sobre la misma función y el mismo punto: cuánto cambia $z$ al avanzar hacia un punto $Q$ dado, y cuál es la dirección en que $z$ crece más rápido. ¿Qué información de la función en $P$ sirve para los dos? ¿Cómo se obtiene una dirección a partir de dos puntos?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19). Plan: parciales en $P$; la dirección es el vector $\overrightarrow{PQ}$ **normalizado** (versor); $\dfrac{\partial z}{\partial s}=\nabla z\cdot s^\circ$. Gradiente $\nabla z=z'_x\,i+z'_y\,j$; su módulo es el máximo de la derivada direccional y su ángulo la dirección de máximo crecimiento. El logaritmo de un cociente conviene separarlo antes de derivar.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z=\ln(x^2+2)-\ln(y^2)$, entonces $z'_x=\dfrac{2x}{x^2+2}$ y $z'_y=-\dfrac{2}{y}$. Dirección: $\overrightarrow{PQ}=Q-P$ y $s^\circ=\dfrac{\overrightarrow{PQ}}{\|\overrightarrow{PQ}\|}$. Máximo en $\theta=\arctan\dfrac{z'_y}{z'_x}$, mínimo a $180^\circ$, nulos a $\pm90^\circ$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar. **Por qué:** $\ln\frac AB=\ln A-\ln B$ evita la regla del cociente. Además $\ln(y^2)=2\ln|y|$, y su derivada es $\frac2y$ también para $y<0$ (nuestro $P$ tiene $y=-2$).
+
+$$z=\ln(x^2+2)-\ln(y^2)$$
+
+$$z'_x=\frac{2x}{x^2+2}\qquad z'_y=-\frac{2y}{y^2}=-\frac2y$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(1;-2)$. **Por qué:** son los números que usan las dos fórmulas.
+
+$$z'_x(P)=\frac{2\cdot1}{1^2+2}=\frac23\qquad z'_y(P)=-\frac{2}{-2}=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el versor de $\overrightarrow{PQ}$. **Por qué:** la fórmula pide un vector de módulo $1$ (versor).
+
+$$\overrightarrow{PQ}=Q-P=(4-1;\,-6-(-2))=(3;-4)$$
+
+$$\|\overrightarrow{PQ}\|=\sqrt{3^2+(-4)^2}=\sqrt{25}=5$$
+
+$$s^\circ=\left(\frac35;-\frac45\right)\qquad\text{o sea }\cos\alpha=\frac35,\ \sin\alpha=-\frac45\ (\alpha\approx-53{,}1^\circ)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivada direccional. **Por qué:** producto escalar del gradiente con el versor.
+
+$$\frac{\partial z}{\partial s}\Big|_P=z'_x\cos\alpha+z'_y\sin\alpha=\frac23\cdot\frac35+1\cdot\left(-\frac45\right)$$
+
+$$\frac23\cdot\frac35=\frac25\qquad\text{y}\qquad\frac25-\frac45=-\frac25$$
+
+$$\frac{\partial z}{\partial s}\Big|_P=-\frac25=-0{,}4$$
+
+Negativa: yendo de $P$ hacia $Q$, la función **decrece**.
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, módulo y ángulo (inciso b). **Por qué:** junta las dos parciales.
+
+$$\nabla z(P)=\frac23\,i+1\,j$$
+
+$$\|\nabla z\|=\sqrt{\left(\frac23\right)^2+1^2}=\sqrt{\frac49+1}=\sqrt{\frac{13}{9}}=\frac{\sqrt{13}}{3}\approx1{,}20$$
+
+Las dos componentes son positivas: 1.er cuadrante, así que $\arctan$ da directamente el ángulo:
+
+$$\theta=\arctan\frac{z'_y}{z'_x}=\arctan\frac{1}{2/3}=\arctan\frac32\approx56{,}3^\circ$$
+
+</Paso>
+<Paso>
+
+**Qué:** direcciones de máximo, mínimo y nulas. **Por qué:** $\frac{\partial z}{\partial s}=\|\nabla z\|\cos\omega$, con $\omega$ el ángulo entre $s$ y $\nabla z$.
+
+- Máximo ($\omega=0^\circ$): $\theta_{\text{máx}}\approx56{,}3^\circ$, valor $\frac{\sqrt{13}}{3}$.
+- Mínimo ($\omega=180^\circ$): $\theta_{\text{mín}}\approx56{,}3^\circ+180^\circ=236{,}3^\circ$, valor $-\frac{\sqrt{13}}{3}$.
+- Nulas ($\omega=\pm90^\circ$): $146{,}3^\circ$ y $326{,}3^\circ$, tangentes a la curva de nivel que pasa por $P$ (la de $z=\ln\frac34$).
+
+En el gráfico también se dibuja la dirección $s$ de $\overrightarrow{PQ}$: forma un ángulo de unos $109{,}4^\circ$ con el gradiente (por eso $\cos\omega<0$ y la derivada es negativa).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-05-g2/ej2.svg`} alt="Plano xy con ejes graduados de 1 en 1. Curvas de nivel de z=Ln((x²+2)/y²) en gris, con la que pasa por P(1;−2) resaltada. Desde P salen el gradiente (2/3; 1) en rojo a 56,3°, la dirección de mínimo en azul a 236,3°, las nulas en verde a 146,3° y 326,3°, y en violeta la dirección hacia Q(4;−6)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=-\frac25,\qquad \nabla z(P)=\frac23\,i+j,\qquad \|\nabla z\|=\frac{\sqrt{13}}{3},\qquad \theta=\arctan\frac32\approx56{,}3^\circ$$
+
+**Ojo con:** usar $\overrightarrow{PQ}=(3;-4)$ **sin normalizar** (daría $-2$, cinco veces más grande), o mezclar el signo de $y$ al derivar $\ln y^2$ ($z'_y=-2/y$ vale $+1$ en $y=-2$).
+
+**Criterio estimado — no oficial** (la consigna pide valor, expresión, módulo, ángulo y gráfico con máximo, mínimo y nulos):
+
+- **Bien:** parciales correctas, versor de $\overrightarrow{PQ}$, $-\frac25$; gradiente con módulo $\frac{\sqrt{13}}{3}$ y $\theta\approx56{,}3^\circ$ (la resolución oficial dice que el valor numérico del ángulo "no sería necesario"); gráfico con las cuatro direcciones.
+- **A medias:** cálculo bien pero gráfico sin marcar mínimo o nulas, o error de cuenta en un paso con planteo correcto.
+- **Mal:** vector sin normalizar, parciales mal derivadas o sin gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+**1) Límite por definición.** Sobre la recta $P+t\,s^\circ$: $x=1+\frac35t$, $y=-2-\frac45t$,
+
+$$g(t)=\ln\frac{\left(1+\frac35t\right)^2+2}{\left(-2-\frac45t\right)^2}$$
+
+y la derivada direccional es $\displaystyle\lim_{t\to0}\frac{g(t)-g(0)}{t}=g'(0)=-\frac25$ (calculado con sympy, es el mismo número).
+
+**2) Con el ángulo entre vectores.** $\cos\omega=\dfrac{\nabla z\cdot s^\circ}{\|\nabla z\|}=\dfrac{-2/5}{\sqrt{13}/3}\approx-0{,}333$, o sea $\omega\approx109{,}4^\circ$; $\|\nabla z\|\cos\omega=-\frac25$.
+
+**3) Dirección nula.** Un versor perpendicular al gradiente, $\left(-\frac{3}{\sqrt{13}};\frac{2}{\sqrt{13}}\right)$, da por el mismo límite $0$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-05-g2" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" paginas="3–4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (pp. 3–4, resolución manuscrita atribuida al profesor):** coincide: $z'_x=\frac{2x}{x^2+2}\to\frac23$, $z'_y=-\frac2y\to1$, $\overrightarrow{PQ}=(3;-4)$, $\|\overrightarrow{PQ}\|=5$, $\cos\alpha=\frac35$, $\sin\alpha=-\frac45$, $\frac{\partial z}{\partial s}=-\frac25$ ($-0{,}4$), $\nabla z=\frac23\,i+j$, $\|\nabla z\|=\frac{\sqrt{13}}{3}\ (\approx1{,}2)$ y $\hat\theta_{\text{máx}}=\arctan\frac32\approx56{,}3^\circ$ ("no sería necesario calcular"). Deriva el logaritmo como cociente (regla de la cadena sobre $\frac{x^2+2}{y^2}$); da lo mismo.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2025-05-g2#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1h9-2025-05-g2" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" pagina="1">
+
+Determinar los puntos críticos de la función $z=\frac23x^3-18x-\frac43y^3+16y$
+
+Categorizar los extremos locales en máximos o minimos e indicar asimismo si hay puntos de ensilladura.
+
+No es necesario calcular las cotas (imágenes) de estos puntos.
+
+</Enunciado>
+
+<Pista>
+
+Te piden primero los **candidatos** a máximo, mínimo o silla, y después decidir qué es cada uno. ¿Qué condición cumplen las derivadas parciales en esos candidatos? ¿Qué herramienta te dice si el candidato es un máximo, un mínimo o ninguno de los dos?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28). Plan: $z'_x=0,\ z'_y=0$; derivadas segundas; $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$ en cada punto crítico. Si $H<0$: silla. Si $H>0$: el signo de $z''_{xx}$ da mínimo (+) o máximo (−). Si $H=0$ el criterio no decide.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=2x^2-18$ y $z'_y=-4y^2+16$ dependen **cada una de una sola variable**: se resuelven por separado y después se combinan todas las posibilidades. Segundas: $z''_{xx}=4x$, $z''_{yy}=-8y$, $z''_{xy}=0$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar e igualar a cero. **Por qué:** condición necesaria de extremo relativo. Cada ecuación tiene una sola variable:
+
+$$z'_x=2x^2-18=0\ \Rightarrow\ x^2=9\ \Rightarrow\ x=\pm3$$
+
+$$z'_y=-4y^2+16=0\ \Rightarrow\ y^2=4\ \Rightarrow\ y=\pm2$$
+
+</Paso>
+<Paso>
+
+**Qué:** combinar. **Por qué:** como las ecuaciones son independientes, cada $x$ se combina con cada $y$: $2\times2=4$ puntos críticos.
+
+$$(3;2),\quad(-3;-2),\quad(3;-2),\quad(-3;2)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** son los datos del criterio.
+
+$$z''_{xx}=4x\qquad z''_{yy}=-8y\qquad z''_{xy}=0$$
+
+$$H(x;y)=4x\cdot(-8y)-0^2=-32\,xy$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar $H$ y clasificar. **Por qué:** $H<0$ es silla; $H>0$ obliga a mirar el signo de $z''_{xx}$.
+
+$$H(3;2)=-32\cdot6=-192<0\ \Rightarrow\ \text{silla}$$
+
+$$H(-3;-2)=-32\cdot6=-192<0\ \Rightarrow\ \text{silla}$$
+
+$$H(3;-2)=-32\cdot(-6)=192>0,\qquad z''_{xx}(3;-2)=4\cdot3=12>0\ \Rightarrow\ \text{mínimo}$$
+
+$$H(-3;2)=-32\cdot(-6)=192>0,\qquad z''_{xx}(-3;2)=4\cdot(-3)=-12<0\ \Rightarrow\ \text{máximo}$$
+
+(No se piden las cotas; para ubicarte, el mínimo está en $z=-\frac{172}{3}$ y el máximo en $z=\frac{172}{3}$.)
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-05-g2/ej3.svg`} alt="Arriba, superficie z=2/3x³−18x−4/3y³+16y en perspectiva con cuatro puntos marcados: máximo en (−3;2), mínimo en (3;−2) y sillas en (3;2) y (−3;−2). Abajo, curvas de nivel con ejes graduados y los cuatro puntos rotulados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Puntos críticos: }(3;2),\ (-3;-2),\ (3;-2),\ (-3;2)$$
+
+$$(3;-2):\ \text{mínimo local}\quad(-3;2):\ \text{máximo local}\quad(3;2)\text{ y }(-3;-2):\ \text{ensilladura}$$
+
+**Ojo con:** quedarse con dos puntos (los que "salen a la vista", $(3;2)$ y $(-3;-2)$) en vez de las **cuatro** combinaciones, y decidir mínimo/máximo con el signo de $H$ en vez del de $z''_{xx}$.
+
+**Criterio estimado — no oficial** (la consigna pide puntos críticos y clasificación sin cotas):
+
+- **Bien:** los 4 puntos críticos, $H=-32xy$ evaluado en cada uno y clasificación justificada con $z''_{xx}$.
+- **A medias:** pierde un punto, o clasifica correctamente sin justificar mínimo vs. máximo.
+- **Mal:** no resuelve el sistema o clasifica sin hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Otro camino, sin hessiano. Como $z=g(x)+h(y)$ con $g(x)=\frac23x^3-18x$ y $h(y)=-\frac43y^3+16y$, cada variable se estudia por separado con la derivada segunda de una variable:
+
+- $g''(x)=4x$: mínimo de $g$ en $x=3$ ($12>0$), máximo en $x=-3$ ($-12<0$).
+- $h''(y)=-8y$: máximo de $h$ en $y=2$ ($-16<0$), mínimo en $y=-2$ ($16>0$).
+
+Un punto es mínimo de $z$ si lo es en ambas variables: $(3;-2)$. Es máximo si lo es en ambas: $(-3;2)$. Si en una variable es mínimo y en la otra máximo: silla, como $(3;2)$ y $(-3;-2)$. Coincide con el hessiano.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-05-g2" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (2) May-25.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide: $z'_x=0\to(x+3)(x-3)=0$, $z'_y=0\to(y+2)(y-2)=0$, cuatro puntos críticos, $H(x;y)=-32xy$ con $H_1(3;2)=H_2(-3;-2)=-192$ (sillas) y $H_3(3;-2)=H_4(-3;2)=192$ (extremos), y $z''_{xx}(3;-2)=12>0\Rightarrow$ mínimo, $z''_{xx}(-3;2)=-12<0\Rightarrow$ máximo. Sin discrepancias.
+
+</div>
+</Ejercicio>

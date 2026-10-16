@@ -1,0 +1,389 @@
+---
+id: "p1-1h9-2025-05-g1"
+titulo: "1° Parcial Práctico — Comisión 1H9 (Grupo 1)"
+comision: "1H9"
+fecha: "10/05/2025"
+tipo: "práctico"
+tema: "Grupo 1"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–5"
+orden: 32
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1H9 · 1° Parcial Práctico – 10/05/2025 · Grupo 1
+
+<Ejercicio id="p1-1h9-2025-05-g1#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-1h9-2025-05-g1" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\dfrac{\ln\!\left(1-\frac{x^2}{4}-y^2\right)+\sqrt{x^2-y^2-1}}{\sqrt{2xy}}$$
+
+</Enunciado>
+
+<Pista>
+
+Mirá qué operaciones aparecen en la fórmula: un logaritmo, una raíz y un cociente cuyo denominador también es una raíz. Preguntate para cada una: ¿qué valores del interior "rompen" la cuenta? ¿Y qué le pasa a un cociente cuando el denominador vale cero?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: hay que plantear una desigualdad por cada operación (logaritmo: argumento positivo; raíz par: radicando $\ge0$; denominador: distinto de cero) y quedarse con los puntos que cumplen **todas a la vez**. Después se reconoce cada desigualdad como región del plano (elipse, hipérbola, cuadrantes) y se dibuja la intersección.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$1-\frac{x^2}{4}-y^2>0,\qquad x^2-y^2-1\ge0,\qquad 2xy>0$$
+
+La tercera sale de pedir $\sqrt{2xy}\neq0$ y a la vez $2xy\ge0$. Falta pasar cada una a "interior/exterior de..." y buscar dónde se cortan elipse e hipérbola.
+
+</Pista>
+<Paso>
+
+**Qué:** listar una condición por cada operación. **Por qué:** $\ln A$ existe solo si $A>0$; $\sqrt B$ existe si $B\ge0$; un cociente exige denominador $\ne0$. El denominador es $\sqrt{2xy}$, así que hace falta $2xy\ge0$ **y** $2xy\neq0$, o sea $2xy>0$. **Cómo reconocerlo:** el logaritmo y el denominador piden desigualdad **estricta**; la raíz del numerador admite el igual.
+
+$$\text{(1) }1-\frac{x^2}{4}-y^2>0\qquad\text{(2) }x^2-y^2-1\ge0\qquad\text{(3) }2xy>0$$
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (1). **Por qué:** pasando $\frac{x^2}{4}+y^2$ al otro miembro queda
+
+$$\frac{x^2}{4}+y^2<1$$
+
+Es el **interior de la elipse** de semiejes $2$ (en $x$) y $1$ (en $y$). El borde **no** pertenece (el logaritmo de $0$ no existe), por eso se dibuja punteado.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (2). **Por qué:** pasando el $1$ al otro miembro queda
+
+$$x^2-y^2\ge1$$
+
+Es la hipérbola $x^2-y^2=1$ (vértices $(\pm1;0)$, asíntotas $y=\pm x$) y la región "de afuera" de las dos ramas, es decir, la que contiene al foco de cada rama. **Cómo comprobarlo:** el origen no cumple ($0-0\ge1$ es falso) y $(2;0)$ sí ($4\ge1$). El borde **sí** pertenece (raíz de $0$ vale $0$): línea llena.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (3). **Por qué:** $2xy>0$ equivale a $xy>0$, que pide $x$ e $y$ del **mismo signo**:
+
+$$(x>0\ \wedge\ y>0)\ \ \vee\ \ (x<0\ \wedge\ y<0)$$
+
+Son el 1.er y el 3.er cuadrante **sin los ejes** (en un eje $xy=0$ y el denominador se anula).
+
+</Paso>
+<Paso>
+
+**Qué:** hallar dónde se cortan la hipérbola y la elipse. **Por qué:** esos puntos son los vértices de la región y conviene rotularlos. De la hipérbola $x^2=1+y^2$; reemplazando en la elipse:
+
+$$\frac{1+y^2}{4}+y^2=1$$
+
+Multiplicando por $4$:
+
+$$1+y^2+4y^2=4$$
+
+$$5y^2=3\ \Rightarrow\ y^2=\frac35,\qquad x^2=1+\frac35=\frac85$$
+
+Los puntos de corte son $\left(\pm\sqrt{\tfrac85};\pm\sqrt{\tfrac35}\right)$ con el mismo signo en $x$ e $y$ (los que están en 1.º y 3.º cuadrante); aproximadamente $(\pm1{,}26;\pm0{,}77)$.
+
+</Paso>
+<Paso>
+
+**Qué:** intersecar las tres regiones y dibujar. **Por qué:** el dominio es lo que cumple las tres a la vez. Dentro de la elipse y a la derecha de la rama derecha de la hipérbola queda un trozo "en forma de lente"; como además $xy>0$, solo sirve la parte con $y>0$ (1.er cuadrante). Del lado izquierdo, dentro de la elipse y a la izquierda de la rama izquierda, sirve solo la parte con $y<0$ (3.er cuadrante): es el trozo simétrico. Los segmentos sobre el eje $x$ quedan fuera ($y=0$ está excluido), incluidos los vértices $(\pm1;0)$ aunque estén sobre la hipérbola.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-05-g1/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Elipse punteada de semiejes 2 y 1, hipérbola x²−y²=1 en línea llena con ramas en x=±1, y ejes punteados. Sombreadas dos piezas: en el primer cuadrante entre la rama derecha y el arco de elipse, con y>0; y su simétrica en el tercer cuadrante. Puntos de corte rotulados (±√(8/5); ±√(3/5))." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ \frac{x^2}{4}+y^2<1\ \ \wedge\ \ x^2-y^2\ge1\ \ \wedge\ \ x\,y>0\Big\}$$
+
+**Ojo con:** poner "$\le$" en la elipse (el logaritmo de $0$ no existe) y olvidar que $xy>0$ es **estricto** (si lo dejás en $\ge$ entra el eje $x$ y dividís por cero).
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"):
+
+- **Bien:** las tres condiciones con su desigualdad estricta o no según corresponda, gráfico consolidado con la región sombreada y bordes bien marcados (incluido/excluido), y el conjunto escrito analíticamente.
+- **A medias:** condiciones correctas pero con un borde mal marcado ($\le$ en vez de $<$, o ejes incluidos), o falta el gráfico consolidado o la expresión analítica.
+- **Mal:** falta una condición entera (por ejemplo $xy>0$), o se confunde interior con exterior, o no hay gráfico.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar la fórmula en puntos de prueba** y ver si da un real.
+
+- $(1{,}5;\,0{,}3)$: $\ln(1-0{,}5625-0{,}09)=\ln0{,}3475$ existe, $\sqrt{2{,}25-0{,}09-1}=\sqrt{1{,}16}$ existe, $\sqrt{2\cdot1{,}5\cdot0{,}3}=\sqrt{0{,}9}\neq0$. Da $z\approx0{,}0209$: **está en $D$**.
+- $(1{,}5;\,-0{,}3)$: $xy<0$, el denominador sería $\sqrt{-0{,}9}$: **no está**.
+- $(1;\,0)$: sobre la hipérbola pero $xy=0$, denominador $0$: **no está**.
+- $(0{,}5;\,0{,}2)$: $x^2-y^2-1<0$, raíz de un negativo: **no está**.
+- $(2{,}5;\,0{,}3)$: fuera de la elipse ($\frac{6{,}25}{4}>1$), $\ln$ de un negativo: **no está**.
+
+Los cinco puntos coinciden con la región dibujada.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-05-g1" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** coincide. Plantea las mismas tres condiciones, dibuja elipse punteada, hipérbola llena y los dos cuadrantes, y llega a $\frac{x^2}{4}+y^2<1\ \wedge\ x^2-y^2\ge1\ \wedge\ x\cdot y>0$. Detalle: el profe no rotula los puntos de corte; acá se agregaron.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2025-05-g1#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1h9-2025-05-g1" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" pagina="1">
+
+Dada la función: $z=\sin^3(x-y)$
+
+a. Determinar el valor de la derivada direccional en el punto: $P\left(\pi,\frac{\pi}{4}\right)$. En la dirección de la recta tangente a la parabola: $y=-x^3+2x$ en $x=1$.
+
+b. Dar expresión del Gradiente en dicho punto P, graficarlo y determinar su módulo y dirección/sentido (ángulo $\theta$ respecto al semieje $x^+$). Indicar en el gráfico las direcciones de crecimiento máximo, mínimo y nulos!
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas distintas sobre la misma función y el mismo punto: cuánto cambia $z$ al moverte en **una dirección dada** (que sale de una curva), y qué dirección es la "más empinada". ¿Qué datos de la función en $P$ necesitás en los dos casos? ¿Cómo se convierte "la recta tangente a una curva" en una dirección?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19). Plan: (1) derivadas parciales en $P$; (2) pendiente de la tangente a la parábola → ángulo $\alpha$ → versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\dfrac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; (4) el gradiente es $\nabla z=z'_x\,i+z'_y\,j$, su módulo es el valor máximo de la derivada direccional y su ángulo es la dirección de máximo crecimiento.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=3\sin^2(x-y)\cos(x-y)$, $z'_y=-3\sin^2(x-y)\cos(x-y)$, evaluadas en $x-y=\pi-\frac\pi4=\frac{3\pi}{4}$. Pendiente: $y'(x)=-3x^2+2$ en $x=1$, y $\tan\alpha=y'(1)$. Después $\theta_{\text{máx}}$ sale de $\tan\theta=\dfrac{z'_y}{z'_x}$ **mirando en qué cuadrante cae** el gradiente; el mínimo está a $180^\circ$ del máximo y los nulos a $\pm90^\circ$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar parcialmente. **Por qué:** hay una potencia de un seno: regla de la cadena (derivo la potencia, después el seno, después el interior $x-y$, cuya derivada respecto de $x$ es $1$ y respecto de $y$ es $-1$).
+
+$$z'_x=3\sin^2(x-y)\cos(x-y)\cdot1$$
+
+$$z'_y=3\sin^2(x-y)\cos(x-y)\cdot(-1)$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P$. **Por qué:** en $P$ el interior vale $x-y=\pi-\frac\pi4=\frac{3\pi}{4}$ ($135^\circ$, segundo cuadrante: seno positivo, coseno negativo):
+
+$$\sin\frac{3\pi}{4}=\frac{\sqrt2}{2},\qquad \cos\frac{3\pi}{4}=-\frac{\sqrt2}{2},\qquad \sin^2\frac{3\pi}{4}=\frac12$$
+
+Entonces:
+
+$$z'_x(P)=3\cdot\frac12\cdot\left(-\frac{\sqrt2}{2}\right)=-\frac{3\sqrt2}{4}$$
+
+$$z'_y(P)=-3\cdot\frac12\cdot\left(-\frac{\sqrt2}{2}\right)=\frac{3\sqrt2}{4}$$
+
+</Paso>
+<Paso>
+
+**Qué:** hallar la dirección $s$. **Por qué:** la derivada direccional necesita un **versor** (vector de módulo 1) y la consigna da la dirección por la pendiente de la tangente a la parábola en $x=1$ (el punto de la parábola es otro, solo se usa su pendiente):
+
+$$y'(x)=-3x^2+2\ \Rightarrow\ y'(1)=-3+2=-1=\tan\alpha$$
+
+Hay dos ángulos con tangente $-1$ y son **sentidos opuestos** de la misma recta: $\alpha=\frac{3\pi}{4}$ ($135^\circ$) o $\alpha=\frac{7\pi}{4}$ ($315^\circ$). El enunciado no fija el sentido; se toma $\alpha=\frac{3\pi}{4}$ (lo mismo hace la resolución oficial) y se aclara qué pasa con el otro.
+
+$$s^\circ=(\cos\alpha;\sin\alpha)=\left(-\frac{\sqrt2}{2};\frac{\sqrt2}{2}\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular la derivada direccional. **Por qué:** es el producto escalar del gradiente con el versor.
+
+$$\frac{\partial z}{\partial s}\Big|_P=z'_x\cos\alpha+z'_y\sin\alpha=\left(-\frac{3\sqrt2}{4}\right)\left(-\frac{\sqrt2}{2}\right)+\frac{3\sqrt2}{4}\cdot\frac{\sqrt2}{2}$$
+
+Cada producto usa $\sqrt2\cdot\sqrt2=2$:
+
+$$\frac{3\cdot2}{8}=\frac34\qquad\text{y}\qquad\frac{3\cdot2}{8}=\frac34$$
+
+$$\frac{\partial z}{\partial s}\Big|_P=\frac34+\frac34=\frac32$$
+
+Con el sentido opuesto ($\alpha=\frac{7\pi}{4}$) los dos signos cambian y da $-\frac32$.
+
+</Paso>
+<Paso>
+
+**Qué:** expresión cartesiana, módulo y dirección del gradiente (inciso b). **Por qué:** el gradiente junta las dos derivadas parciales en un vector.
+
+$$\nabla z(P)=-\frac{3\sqrt2}{4}\,i+\frac{3\sqrt2}{4}\,j$$
+
+Módulo, con cada cuadrado en una línea:
+
+$$\left(\frac{3\sqrt2}{4}\right)^2=\frac{9\cdot2}{16}=\frac98$$
+
+$$\|\nabla z\|=\sqrt{\frac98+\frac98}=\sqrt{\frac94}=\frac32$$
+
+Dirección: $\tan\theta=\dfrac{z'_y}{z'_x}=\dfrac{3\sqrt2/4}{-3\sqrt2/4}=-1$. **Cuidado con el cuadrante:** $z'_x<0$ y $z'_y>0$ ponen el vector en el 2.º cuadrante, así que $\theta=\frac{3\pi}{4}$ ($135^\circ$) y **no** $-45^\circ$, que es lo que devuelve $\arctan(-1)$ en la calculadora.
+
+</Paso>
+<Paso>
+
+**Qué:** direcciones de crecimiento máximo, mínimo y nulo. **Por qué:** la derivada direccional es $\|\nabla z\|\cos\omega$, con $\omega$ el ángulo entre $s$ y $\nabla z$.
+
+- Máximo ($\omega=0^\circ$): sentido del gradiente, $\theta_{\text{máx}}=135^\circ$, valor máximo $\frac32$.
+- Mínimo ($\omega=180^\circ$): $\theta_{\text{mín}}=135^\circ+180^\circ=315^\circ$, valor $-\frac32$.
+- Nulos ($\omega=\pm90^\circ$): $\theta=135^\circ-90^\circ=45^\circ$ y $135^\circ+90^\circ=225^\circ$, tangentes a la curva de nivel por $P$ (la recta $y=x-\frac{3\pi}{4}$).
+
+Fijate que la dirección $s$ pedida **coincide con la del máximo**: por eso la derivada direccional dio justo $\|\nabla z\|$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-05-g1/ej2.svg`} alt="Plano xy con ejes graduados de 1 en 1. Rectas grises paralelas de pendiente 1 (curvas de nivel x−y=constante). Desde P(π; π/4) salen en rojo el gradiente hacia arriba a la izquierda a 135°, en azul la dirección de mínimo a 315°, y en verde las direcciones nulas a 45° y 225° sobre la curva de nivel que pasa por P." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=\frac32\ \ (\alpha=135^\circ),\qquad \nabla z(P)=-\frac{3\sqrt2}{4}\,i+\frac{3\sqrt2}{4}\,j,\qquad \|\nabla z\|=\frac32,\qquad \theta=\frac{3\pi}{4}=135^\circ$$
+
+**Ojo con:** (1) usar $\arctan$ sin mirar el cuadrante; (2) dejar la pendiente $-1$ como "vector $(1;-1)$" sin normalizar (la fórmula pide **versor**); (3) olvidar que la recta tangente da dos sentidos y el signo de la respuesta depende de cuál elijas.
+
+**Criterio estimado — no oficial** (la consigna pide valor, expresión, módulo, ángulo y que el gráfico marque máximo, mínimo y nulos):
+
+- **Bien:** parciales en $P$ correctas, ángulo $\alpha$ obtenido de $y'(1)$, versor, $\frac{\partial z}{\partial s}=\frac32$ (o $-\frac32$ aclarando el sentido), gradiente con módulo y $\theta=135^\circ$ bien ubicado, y gráfico con $\nabla z$ y las direcciones de máximo, mínimo y nulas.
+- **A medias:** todo el cálculo bien pero el gráfico no marca las cuatro direcciones, o el ángulo del gradiente sin corregir de cuadrante.
+- **Mal:** usa un vector sin normalizar, confunde pendiente con ángulo, o no calcula el gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes, ahora **por definición**.
+
+**1) Límite por definición.** Sobre la recta $P+t\,s^\circ$ la función es una sola variable:
+
+$$g(t)=\sin^3\!\left(\frac{3\pi}{4}-\sqrt2\,t\right)$$
+
+porque $x-y=\left(\pi-\frac{\sqrt2}{2}t\right)-\left(\frac\pi4+\frac{\sqrt2}{2}t\right)$. La derivada direccional es $\displaystyle\lim_{t\to0}\frac{g(t)-g(0)}{t}=g'(0)$:
+
+$$g'(0)=3\sin^2\frac{3\pi}{4}\cos\frac{3\pi}{4}\cdot(-\sqrt2)=3\cdot\frac12\cdot\left(-\frac{\sqrt2}{2}\right)\cdot(-\sqrt2)=\frac32$$
+
+**2) Dirección nula.** Con $\alpha=45^\circ$ resulta $x-y=\frac{3\pi}{4}$ constante a lo largo de la recta, así que $g$ es constante y el límite vale $0$, como debe ser en una dirección tangente a la curva de nivel.
+
+**3) Gradiente por módulo.** Como $s^\circ=\nabla z/\|\nabla z\|$, la derivada direccional vale $\|\nabla z\|=\frac32$, igual que en el cálculo directo.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-05-g1" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" paginas="3–4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (pp. 3–4, resolución manuscrita atribuida al profesor):** coincide en todo: $z'_x(P)=-\frac34\sqrt2$, $z'_y(P)=\frac34\sqrt2$, $\alpha_x=\arctan(-1)$ con dos opciones ($\frac{3\pi}{4}$ o $\frac{7\pi}{4}$, "es aceptable considerar cualquiera"), toma $\frac{3\pi}{4}$ y obtiene $\frac{\partial z}{\partial s}=\frac32$, $\|\nabla z\|=\frac32$ y $\hat\theta_{\text{máx}}=\arctan(-1)=\frac{3\pi}{4}$ ($135^\circ$). Observación: con $\alpha=\frac{7\pi}{4}$ el valor sería $-\frac32$; el profe lo acepta como opción pero solo desarrolla el primero.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2025-05-g1#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1h9-2025-05-g1" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" pagina="1">
+
+Determinar los puntos críticos de la función $z=x^2+\frac{y^2}{2}+x^2y$
+
+Categorizar los extremos locales en máximos o minimos e indicar asimismo si hay puntos de ensilladura. No es necesario calcular las cotas (imágenes) de estos puntos.
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un mínimo o algo parecido (los candidatos), y después **qué es** cada candidato. ¿Qué tiene en común la pendiente de la superficie en un máximo, un mínimo o una "silla"? ¿Y cómo se distinguen entre sí?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28). Plan: (1) puntos críticos: resolver $z'_x=0,\ z'_y=0$; (2) derivadas segundas $z''_{xx},z''_{yy},z''_{xy}$; (3) $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$ en cada punto; (4) si $H<0$ silla; si $H>0$, el signo de $z''_{xx}$ dice mínimo (+) o máximo (−).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=2x+2xy=2x(1+y)$ y $z'_y=y+x^2$. El producto $2x(1+y)$ es cero si $x=0$ **o** si $y=-1$: son dos casos que hay que seguir por separado en la segunda ecuación. Las segundas son $z''_{xx}=2+2y$, $z''_{xy}=2x$, $z''_{yy}=1$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar una vez. **Por qué:** en un extremo relativo de una función derivable las dos derivadas parciales son cero (condición necesaria).
+
+$$z'_x=2x+2xy=2x(1+y)\qquad z'_y=y+x^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver el sistema $z'_x=0,\ z'_y=0$. **Por qué:** de la primera, un producto es cero cuando algún factor lo es. Hay que **no perder el caso $x=0$** (no se puede dividir por $x$).
+
+- Caso $x=0$: en $y+x^2=0$ queda $y=0$. Punto $(0;0)$.
+- Caso $y=-1$: en $y+x^2=0$ queda $-1+x^2=0$, entonces $x^2=1$ y $x=\pm1$. Puntos $(1;-1)$ y $(-1;-1)$.
+
+Hay **tres puntos críticos**: $(0;0)$, $(1;-1)$ y $(-1;-1)$.
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas. **Por qué:** el hessiano usa las cuatro (las cruzadas coinciden, Schwarz).
+
+$$z''_{xx}=2+2y\qquad z''_{xy}=2x\qquad z''_{yy}=1$$
+
+$$H(x;y)=z''_{xx}\,z''_{yy}-(z''_{xy})^2=(2+2y)\cdot1-(2x)^2=2+2y-4x^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar $H$ en cada punto. **Por qué:** su signo es el criterio de la cátedra.
+
+$$H(0;0)=2+0-0=2>0$$
+
+$$H(1;-1)=2-2-4=-4<0$$
+
+$$H(-1;-1)=2-2-4=-4<0$$
+
+</Paso>
+<Paso>
+
+**Qué:** clasificar. **Por qué:** $H<0$ implica **punto de ensilladura** (la función sube en unas direcciones y baja en otras). Con $H>0$ hay extremo y el signo de $z''_{xx}$ decide: $z''_{xx}(0;0)=2>0$, entonces **mínimo relativo**. (Mirar $z''_{yy}=1>0$ da lo mismo: si $H>0$ ambas tienen el mismo signo.) No se piden las cotas $z$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-05-g1/ej3.svg`} alt="Arriba, superficie z=x²+y²/2+x²y en perspectiva con tres puntos marcados: un mínimo en el origen y dos sillas en (1;−1) y (−1;−1). Abajo, curvas de nivel en el plano xy con ejes graduados de 1 en 1 y los mismos tres puntos rotulados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Puntos críticos: }(0;0),\ (1;-1),\ (-1;-1)$$
+
+$$(0;0):\ \text{mínimo relativo}\qquad (1;-1)\text{ y }(-1;-1):\ \text{puntos de ensilladura}$$
+
+**Ojo con:** simplificar $x(1+y)=0$ dividiendo por $x$ (se pierde $(0;0)$), y con $z''_{xx}(\pm1;-1)=0$: en las sillas la segunda parcial es nula y eso **no** es un caso dudoso, porque lo que decide es $H=-4<0$.
+
+**Criterio estimado — no oficial** (la consigna pide puntos críticos y clasificación, sin cotas):
+
+- **Bien:** sistema resuelto sin perder ningún punto, $H$ correcto, clasificación con justificación (signo de $H$ y de $z''_{xx}$).
+- **A medias:** pierde un punto crítico, o clasifica bien sin mostrar $H$ en cada punto.
+- **Mal:** no resuelve el sistema, o clasifica sin usar el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Sin hessiano, mirando la función cerca de cada punto.
+
+- **Origen.** Reescribiendo $z=x^2(1+y)+\frac{y^2}{2}$: para $y>-1$ el primer sumando es $\ge0$ y el segundo también, y ambos son $0$ solo en $(0;0)$. Entonces $z>0=z(0;0)$ en un entorno: mínimo.
+- **$(1;-1)$** ($z=\frac12$). Sobre la recta $x=1$: $z(1;y)=\frac12+\frac{(y+1)^2}{2}\ge\frac12$, la función **sube** al alejarse. Sobre la recta que sale de $(1;-1)$ con $x=1+h,\ y=-1-h$: $z=(1+h)^2\left(\frac12-h\right)=\frac12-\frac32h^2-h^3<\frac12$ para $h$ chico, la función **baja**. Sube en una dirección y baja en otra: silla.
+- **$(-1;-1)$:** como $z$ solo depende de $x^2$, es el simétrico del anterior: silla.
+
+Coincide con el hessiano.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-05-g1" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide: $z'_x=0\to x+xy=0$, $z'_y=0\to y=-x^2$, tres puntos críticos $PC_1(0;0)$, $PC_2(1;-1)$, $PC_3(-1;-1)$; $H(x;y)=2+2y-4x^2$ con $H_1=2>0$, $H_2=H_3=-4<0$. Para distinguir mínimo de máximo usa $z''_{yy}=1>0$ (equivalente a mirar $z''_{xx}$ cuando $H>0$): mínimo en $(0;0)$ y sillas en los otros dos.
+
+</div>
+</Ejercicio>

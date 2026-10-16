@@ -18,10 +18,11 @@ for (const [nombre, viewport] of Object.entries({ desktop: { width: 1280, height
       await sinScrollH(page);
     });
 
-    test('índices agrupados por instancia (p1 vacío, p2 con contenido)', async ({ page }) => {
+    test('índices agrupados por instancia (p1 y p2)', async ({ page }) => {
       for (const ruta of ['parciales/', 'anteriores/', 'machetes/', 'teoria/', 'laboratorio/']) {
         await page.goto(ruta);
-        await expect(page.locator('section.inst[data-instancia="p1"] [data-proximamente]'), ruta).toBeVisible();
+        // p1 se va llenando por etapas: alcanza con que su bloque exista (con contenido o "Próximamente")
+        await expect(page.locator('section.inst[data-instancia="p1"]'), ruta).toBeVisible();
         await expect(page.locator('section.inst[data-instancia="p2"] a, section.inst[data-instancia="p2"] li').first(), ruta).toBeVisible();
         await sinScrollH(page);
       }

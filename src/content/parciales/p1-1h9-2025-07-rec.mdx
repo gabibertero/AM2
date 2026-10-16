@@ -1,0 +1,380 @@
+---
+id: "p1-1h9-2025-07-rec"
+titulo: "Recuperatorio 1° Parcial Práctico — Comisión 1H9"
+comision: "1H9"
+fecha: "5/7/2025"
+tipo: "recuperatorio"
+fuente: "parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–4"
+orden: 31
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1H9 · Recuperatorio 1° Parcial Práctico – 5/7/2025
+
+> **Importante:** Todos los ejercicios deben ser resueltos, o al menos 1 de ellos planteado sin necesidad de llegar al resultado final. No se permite el uso de tabla de derivadas. Se solicita prolijidad, orden y escritura grande y legible, adjuntando todos los cálculos auxiliares para poder controlar y evaluar los procedimientos.
+
+<Ejercicio id="p1-1h9-2025-07-rec#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-1h9-2025-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\dfrac{\arccos\left(y/x^3\right)}{\sqrt[4]{36-4x^2-9y^2}}$$
+
+</Enunciado>
+
+<Pista>
+
+Fijate qué hay en la fórmula: un arcocoseno cuyo argumento es una fracción, y un cociente con una raíz en el denominador. ¿Qué valores puede tomar el interior de un arcocoseno? ¿Qué le pasa a una fracción si el denominador es cero? ¿Y a una raíz si el radicando es negativo o cero estando en el denominador?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: (i) $\arccos(u)$ existe solo para $-1\le u\le1$; (ii) la fracción $\frac{y}{x^3}$ pide $x\neq0$; (iii) la raíz cuarta en el denominador pide radicando **estrictamente positivo**. El dominio es la intersección de las tres. Ojo con cómo se despeja $y$ de $-1\le\frac{y}{x^3}\le1$ cuando $x$ puede ser negativo.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$-1\le\frac{y}{x^3}\le1,\qquad x\neq0,\qquad 36-4x^2-9y^2>0$$
+
+Para la primera, pensá en el **valor absoluto**: $\left|\frac{y}{x^3}\right|\le1$ equivale a $|y|\le|x|^3$. La tercera se divide por $36$ para reconocer una elipse.
+
+</Pista>
+<Paso>
+
+**Qué:** condición del arcocoseno. **Por qué:** $\arccos$ solo está definido en $[-1;1]$ y la fracción además necesita $x\neq0$.
+
+$$-1\le\frac{y}{x^3}\le1,\qquad x\neq0$$
+
+</Paso>
+<Paso>
+
+**Qué:** despejar $y$ **sin equivocarse con el signo de $x^3$**. **Por qué:** multiplicar una desigualdad por un número negativo invierte el sentido. Mejor usar valor absoluto, que no depende del signo:
+
+$$\left|\frac{y}{x^3}\right|\le1\ \Longleftrightarrow\ |y|\le|x|^3$$
+
+- Si $x>0$: $-x^3\le y\le x^3$.
+- Si $x<0$: ahora $x^3<0$ y la desigualdad se invierte, queda $x^3\le y\le-x^3$, es decir $|y|\le|x|^3$ también.
+
+La región es simétrica respecto del origen: $(x;y)\to(-x;-y)$ no cambia $\frac{y}{x^3}$.
+
+</Paso>
+<Paso>
+
+**Qué:** condición de la raíz. **Por qué:** una raíz de índice par necesita radicando $\ge0$, pero está en el denominador, así que además no puede valer $0$: estrictamente positivo.
+
+$$36-4x^2-9y^2>0\ \Rightarrow\ 4x^2+9y^2<36$$
+
+Dividiendo por $36$:
+
+$$\frac{x^2}{9}+\frac{y^2}{4}<1$$
+
+Es el interior de la elipse de semiejes $3$ (en $x$) y $2$ (en $y$), borde **excluido**.
+
+</Paso>
+<Paso>
+
+**Qué:** ver dónde las curvas $y=\pm x^3$ cortan a la elipse. **Por qué:** ahí cambia el borde de la región. Con $y=x^3$:
+
+$$\frac{x^2}{9}+\frac{x^6}{4}=1$$
+
+No tiene solución simple; numéricamente $x\approx1{,}22$, $y\approx\pm1{,}83$. Para $|x|>1{,}22$ las cúbicas quedan fuera de la elipse y el borde del dominio es la propia elipse.
+
+</Paso>
+<Paso>
+
+**Qué:** intersecar y dibujar. **Por qué:** quedan **dos lóbulos**: uno con $x>0$ (entre $y=-x^3$ e $y=x^3$) y su simétrico con $x<0$ (entre $y=x^3$ e $y=-x^3$). Se tocan solo en el origen, que **no** pertenece al dominio (ahí $x=0$). Las cúbicas van llenas (borde incluido); la elipse y el eje $y$, punteados.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-07-rec/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Elipse punteada de semiejes 3 y 2, curvas y=x³ (roja) e y=−x³ (verde) llenas, eje y punteado y el origen como círculo vacío. Sombreados dos lóbulos simétricos: uno a la derecha entre las dos cúbicas y dentro de la elipse, y otro a la izquierda. Puntos de corte aproximados (±1,22; ±1,83)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ |y|\le|x|^3\ \ \wedge\ \ \frac{x^2}{9}+\frac{y^2}{4}<1\ \ \wedge\ \ x\neq0\Big\}$$
+
+**Ojo con:** despejar $y$ de $-1\le\frac{y}{x^3}\le1$ como $-x^3\le y\le x^3$ **sin distinguir el signo de $x$**: eso solo vale para $x>0$ y deja afuera el lóbulo de la izquierda.
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"; la nota del recuperatorio exige adjuntar los cálculos auxiliares):
+
+- **Bien:** las tres condiciones, borde de la elipse excluido, $x\neq0$, gráfico consolidado y conjunto escrito. Queda **pendiente de confirmar con la cátedra** si el lóbulo $x<0$ es exigido, porque la resolución manuscrita solo muestra el de $x>0$ (ver contraste abajo).
+- **A medias:** condiciones correctas pero un borde mal marcado, o falta el gráfico consolidado o la expresión analítica.
+- **Mal:** falta una condición (por ejemplo la raíz) o confunde interior con exterior.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar la función en puntos de prueba.**
+
+- $(1;\,0{,}5)$: $\frac{y}{x^3}=0{,}5\in[-1;1]$; $36-4-2{,}25=29{,}75>0$. **Está en $D$.**
+- $\left(-\tfrac12;\,0{,}01\right)$: $x^3=-\frac18$, $\frac{y}{x^3}=-0{,}08\in[-1;1]$; radicando $36-1-0{,}0009>0$. **Está en $D$** (lóbulo izquierdo).
+- $(1;\,2)$: $\frac{y}{x^3}=2$, $\arccos2$ no existe. **No está.**
+- $(0;\,1)$: $x=0$, división por cero. **No está.**
+- $(3;\,0)$: sobre la elipse, el radicando vale $0$ y la raíz está en el denominador. **No está.**
+
+Sirven para ver que el lóbulo de la izquierda también es parte del dominio: el punto $\left(-\tfrac12;\,0{,}01\right)$ **no** cumple $-x^3\le y\le x^3$ (con $x<0$ sería $\frac18\le0{,}01\le-\frac18$, falso) y sin embargo la fórmula da un número real.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** el planteo coincide ($-1\le\frac{y}{x^3}\le1$, $x\neq0$, $\frac{x^2}{9}+\frac{y^2}{4}<1$), pero hay una diferencia en el conjunto final. ⚠️ La resolución oficial escribe $-x^3\le y\le x^3\ \wedge\ \frac{x^2}{9}+\frac{y^2}{4}<1\ \wedge\ x\neq0$, que solo describe el lóbulo $x>0$ (para $x<0$ esa doble desigualdad es vacía), y el gráfico verde también muestra solo el lado derecho; el recálculo da además el lóbulo $x<0$ (se puede comprobar con $\left(-\tfrac12;0{,}01\right)$). Pendiente de confirmar con la cátedra. Registrado en `docs/revision/p1-1h9-2025-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2025-07-rec#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1h9-2025-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" pagina="1">
+
+Dada la función: $z=\dfrac{y^2-x^3}{xy}$
+
+a. Determinar el valor de la derivada direccional en el punto: $P(1,-1)$. En la dirección de la recta tangente a la funcion $y=-x^2+5x+1$ en $x=3$
+
+b. Dar expresión cartesiana del gradiente en el punto $P(1,-1)$, graficarlo y determinar el valor máximo de la derivada direccional y dirección/sentido de máximo crecimiento de la funcion (ángulo $\theta$ respecto al semieje $x^+$).
+
+c. Indicar en el gráfico las direcciones de crecimiento máximo, mínimo y nulos de la función.
+
+</Enunciado>
+
+<Pista>
+
+Hay dos pedidos sobre la misma función y el mismo punto: el cambio de $z$ en una dirección que da una curva, y la dirección de mayor crecimiento. ¿Qué datos de $z$ en $P$ hacen falta? ¿Cómo se pasa de "recta tangente a una curva" a una dirección? ¿Se te ocurre una forma de escribir $z$ que haga más fácil derivar?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; el recuperatorio prohíbe tabla de derivadas, hay que justificar cada derivada). Plan: parciales en $P$; pendiente de la tangente → ángulo $\alpha$ → versor $s^\circ$; $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; $\nabla z=z'_x\,i+z'_y\,j$, cuyo módulo es el valor máximo y cuyo ángulo es la dirección de máximo crecimiento.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: separando la fracción, $z=\dfrac{y}{x}-\dfrac{x^2}{y}$, entonces $z'_x=-\dfrac{y}{x^2}-\dfrac{2x}{y}$ y $z'_y=\dfrac1x+\dfrac{x^2}{y^2}$. Pendiente: $y'(x)=-2x+5$ y se evalúa en $x=3$. Máximo en $\theta=\arctan\dfrac{z'_y}{z'_x}$ (mirá el cuadrante), mínimo a $180^\circ$, nulos a $\pm90^\circ$.
+
+</Pista>
+<Paso>
+
+**Qué:** simplificar antes de derivar. **Por qué:** dividir cada término del numerador por $xy$ evita la regla del cociente.
+
+$$z=\frac{y^2}{xy}-\frac{x^3}{xy}=\frac{y}{x}-\frac{x^2}{y}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar. **Por qué:** potencias de $x$ o de $y$ con el otro como constante.
+
+$$z'_x=-\frac{y}{x^2}-\frac{2x}{y}\qquad z'_y=\frac{1}{x}+\frac{x^2}{y^2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(1;-1)$. **Por qué:** son los números que usan las fórmulas.
+
+$$z'_x(P)=-\frac{-1}{1}-\frac{2\cdot1}{-1}=1+2=3$$
+
+$$z'_y(P)=\frac11+\frac{1}{1}=2$$
+
+</Paso>
+<Paso>
+
+**Qué:** la dirección $s$. **Por qué:** se usa solo la **pendiente** de la tangente a la parábola en $x=3$ (el punto de la parábola es otro, no es $P$):
+
+$$y'(x)=-2x+5\ \Rightarrow\ y'(3)=-6+5=-1=\tan\alpha$$
+
+Ángulos con tangente $-1$: $\alpha=-45^\circ$ ($315^\circ$) o $135^\circ$, sentidos opuestos de la misma recta. Se toma $\alpha=-45^\circ$ (como la resolución oficial):
+
+$$s^\circ=(\cos\alpha;\sin\alpha)=\left(\frac{\sqrt2}{2};-\frac{\sqrt2}{2}\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivada direccional.
+
+$$\frac{\partial z}{\partial s}\Big|_P=3\cos(-45^\circ)+2\sin(-45^\circ)=3\cdot\frac{\sqrt2}{2}+2\cdot\left(-\frac{\sqrt2}{2}\right)$$
+
+$$3\cdot\frac{\sqrt2}{2}-2\cdot\frac{\sqrt2}{2}=\frac{\sqrt2}{2}\approx0{,}707$$
+
+Con el sentido opuesto ($\alpha=135^\circ$) da $-\frac{\sqrt2}{2}$.
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente y valor máximo (inciso b). **Por qué:** el módulo del gradiente es el máximo de la derivada direccional.
+
+$$\nabla z(P)=3\,i+2\,j$$
+
+$$\|\nabla z\|=\sqrt{3^2+2^2}=\sqrt{9+4}=\sqrt{13}\approx3{,}61$$
+
+Las dos componentes son positivas (1.er cuadrante), entonces $\arctan$ da directo el ángulo:
+
+$$\theta_{\text{máx}}=\arctan\frac23\approx33{,}7^\circ$$
+
+</Paso>
+<Paso>
+
+**Qué:** mínimo y nulos (inciso c). **Por qué:** $\frac{\partial z}{\partial s}=\|\nabla z\|\cos\omega$, con $\omega$ el ángulo entre $s$ y $\nabla z$.
+
+- Máximo: $\theta_{\text{máx}}\approx33{,}7^\circ$, valor $\sqrt{13}$.
+- Mínimo: $33{,}7^\circ+180^\circ=213{,}7^\circ$, valor $-\sqrt{13}$.
+- Nulos: $33{,}7^\circ\pm90^\circ$, o sea $123{,}7^\circ$ y $303{,}7^\circ$, tangentes a la curva de nivel por $P$. Como $z(P)=0$, esa curva es $y^2=x^3$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-07-rec/ej2.svg`} alt="Plano xy con ejes graduados de 1 en 1. Curvas de nivel de z=(y²−x³)/(xy) en gris, con la de z=0 (y²=x³, una cúspide) en verde pasando por P(1;−1). Desde P salen el gradiente (3;2) en rojo a 33,7°, el mínimo en azul a 213,7°, las direcciones nulas en verde a 123,7° y 303,7° y en violeta la dirección s a −45°." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=\frac{\sqrt2}{2}\ (\alpha=-45^\circ),\qquad \nabla z(P)=3\,i+2\,j,\qquad \text{valor máximo}=\sqrt{13},\qquad \theta_{\text{máx}}=\arctan\frac23\approx33{,}7^\circ$$
+
+**Ojo con:** (1) evaluar la pendiente en $x=1$ (la del punto $P$) en vez de $x=3$ (la que pide el enunciado); (2) no normalizar el vector dirección; (3) con el cociente $\frac{y^2-x^3}{xy}$ sin simplificar, equivocarse en la regla del cociente.
+
+**Criterio estimado — no oficial** (el recuperatorio pide todos los cálculos auxiliares y gráfico con máximo, mínimo y nulos):
+
+- **Bien:** parciales correctas con su desarrollo, $\alpha$ de $y'(3)$, versor, $\frac{\sqrt2}{2}$, gradiente $3i+2j$, valor máximo $\sqrt{13}$, $\theta_{\text{máx}}$ y gráfico con las cuatro direcciones.
+- **A medias:** cálculo correcto pero gráfico incompleto, o un error de cuenta con planteo correcto.
+- **Mal:** versor sin normalizar, pendiente evaluada en el punto equivocado, o sin gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+**1) Límite por definición.** Sobre $P+t\,s^\circ$: $x=1+\frac{\sqrt2}{2}t$, $y=-1-\frac{\sqrt2}{2}t$. Se arma $g(t)=z(x(t);y(t))$ y la derivada direccional es $\displaystyle\lim_{t\to0}\frac{g(t)-g(0)}{t}=\frac{\sqrt2}{2}$ (con sympy, el mismo valor); en el sentido contrario, $-\frac{\sqrt2}{2}$.
+
+**2) Con el ángulo entre vectores.** $s$ está a $-45^\circ$ y el gradiente a $33{,}7^\circ$: $\omega=78{,}7^\circ$, y $\|\nabla z\|\cos\omega=\sqrt{13}\cdot0{,}196\approx0{,}707$.
+
+**3) Dirección nula.** Un versor perpendicular al gradiente, $\left(-\frac{2}{\sqrt{13}};\frac{3}{\sqrt{13}}\right)$, da por el mismo límite $0$.
+
+**4) Curva de nivel.** $z(P)=\frac{1-1}{-1}=0$ y $y^2=x^3$ pasa por $P$; su tangente en $P$ tiene pendiente $-\frac32$ (de $2y\,y'=3x^2$), perpendicular al gradiente $(3;2)$: $3\cdot1+2\cdot\left(-\frac32\right)=0$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** coincide en todo: $z'_x(P)=3$, $z'_y(P)=2$ (por regla del cociente: $\frac{-2x^3y-y^3}{x^2y^2}$ y $\frac{xy^2+x^4}{x^2y^2}$), $\alpha_x=-45^\circ$, $\frac{\partial z}{\partial s}=\frac{\sqrt2}{2}\ (\approx0{,}707)$, $\nabla z=3i+2j$, $\|\nabla z\|=\sqrt{13}$, $\hat\theta_{\text{máx}}=\arctan\frac23$, y gráfico con $\nabla z$, máximo, mínimo y las dos direcciones nulas. Una lectura dudosa del manuscrito: en $y'(3)=-6+5$ el resultado parece "$=1$" pero el trazo del signo se confunde con la llave; es $-1$, coherente con $\tan\alpha=-1$ y $\alpha=-45^\circ$ que el profe escribe a continuación.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2025-07-rec#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1h9-2025-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" pagina="1">
+
+Determinar los puntos críticos de la función: $z=x^3+y^3+\frac{48}{y}+\frac3x$
+
+Categorizarlos en extremos y/o puntos de ensilladura sin omitir ningún calculo auxiliar, determinando si los extremos corresponden a minimos y/o máximos: justificar dicha clasificación.
+
+</Enunciado>
+
+<Pista>
+
+Te piden los **candidatos** y después decidir qué es cada uno, **justificando**. Fijate que la función tiene $x$ e $y$ en el denominador: ¿qué valores quedan prohibidos? ¿Qué cumplen las derivadas parciales en un candidato?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28). Plan: $z'_x=0,\ z'_y=0$ (cada una tiene una sola variable); segundas; $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$ en cada punto. $H<0$: silla; $H>0$: el signo de $z''_{xx}$ da mínimo (+) o máximo (−).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=3x^2-\dfrac{3}{x^2}$ y $z'_y=3y^2-\dfrac{48}{y^2}$. Multiplicando cada ecuación por el denominador queda $x^4=1$ y $y^4=16$. Segundas: $z''_{xx}=6x+\dfrac{6}{x^3}$, $z''_{yy}=6y+\dfrac{96}{y^3}$, $z''_{xy}=0$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar (sin tabla: la derivada de $\frac3x=3x^{-1}$ es $-3x^{-2}$, y la de $\frac{48}{y}=48y^{-1}$ es $-48y^{-2}$). **Por qué:** condición necesaria de extremo.
+
+$$z'_x=3x^2-\frac{3}{x^2}\qquad z'_y=3y^2-\frac{48}{y^2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver cada ecuación. **Por qué:** $x\neq0$ e $y\neq0$ (dominio), así que se puede multiplicar por $x^2$ y por $y^2$.
+
+$$3x^2-\frac{3}{x^2}=0\ \Rightarrow\ x^4-1=0\ \Rightarrow\ (x^2+1)(x^2-1)=0$$
+
+Como $x^2+1>0$ siempre, queda $x^2=1$, es decir $x=\pm1$.
+
+$$3y^2-\frac{48}{y^2}=0\ \Rightarrow\ y^4-16=0\ \Rightarrow\ (y^2+4)(y^2-4)=0$$
+
+Queda $y^2=4$: $y=\pm2$. Cuatro puntos críticos: $(1;2),\ (-1;-2),\ (1;-2),\ (-1;2)$.
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** $z'_x$ depende solo de $x$ y $z'_y$ solo de $y$, entonces $z''_{xy}=0$.
+
+$$z''_{xx}=6x+\frac{6}{x^3}\qquad z''_{yy}=6y+\frac{96}{y^3}\qquad z''_{xy}=0$$
+
+$$H(x;y)=z''_{xx}\cdot z''_{yy}$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en cada punto. **Por qué:** se necesita cada factor por separado.
+
+| Punto | $z''_{xx}$ | $z''_{yy}$ | $H$ |
+|---|---|---|---|
+| $(1;2)$ | $6+6=12$ | $12+12=24$ | $288$ |
+| $(-1;-2)$ | $-6-6=-12$ | $-12-12=-24$ | $288$ |
+| $(1;-2)$ | $12$ | $-12-12=-24$ | $-288$ |
+| $(-1;2)$ | $-12$ | $12+12=24$ | $-288$ |
+
+</Paso>
+<Paso>
+
+**Qué:** clasificar y justificar. **Por qué:** criterio de la cátedra.
+
+- $H(1;2)=288>0$ y $z''_{xx}(1;2)=12>0$: **mínimo relativo**.
+- $H(-1;-2)=288>0$ y $z''_{xx}(-1;-2)=-12<0$: **máximo relativo**.
+- $H(1;-2)=-288<0$ y $H(-1;2)=-288<0$: **puntos de ensilladura**.
+
+(No se piden las cotas; son $z(1;2)=36$, $z(-1;-2)=-36$, y $-28$ y $28$ en las sillas.)
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2025-07-rec/ej3.svg`} alt="Plano xy con ejes graduados de 1 en 1 y los ejes punteados (donde z no está definida). Curvas de nivel z=28, 40 y 60 en naranja y z=−28, −40 y −60 en azul. Puntos rotulados: mínimo en (1;2), máximo en (−1;−2), sillas en (1;−2) y (−1;2), donde las curvas de nivel de ±28 se cruzan." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Puntos críticos: }(1;2),\ (-1;-2),\ (1;-2),\ (-1;2)$$
+
+$$(1;2):\ \text{mínimo}\quad(-1;-2):\ \text{máximo}\quad(1;-2)\text{ y }(-1;2):\ \text{ensilladura}$$
+
+**Ojo con:** perder las soluciones negativas ($x^4=1$ tiene $x=-1$ también) y no justificar mínimo vs. máximo con el signo de $z''_{xx}$ (la consigna lo pide explícitamente).
+
+**Criterio estimado — no oficial** (la consigna pide "sin omitir ningún cálculo auxiliar" y justificar la clasificación):
+
+- **Bien:** los 4 puntos, derivadas segundas, $H$ en cada uno y clasificación justificada.
+- **A medias:** clasifica bien pero omite cálculos auxiliares (por ejemplo, $H$ en algún punto) o no justifica mínimo vs. máximo; o pierde un punto.
+- **Mal:** no resuelve el sistema o no usa el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Otro camino, sin hessiano: $z=g(x)+h(y)$ con $g(x)=x^3+\frac3x$ y $h(y)=y^3+\frac{48}{y}$. Cada variable por separado:
+
+- $g''(x)=6x+\frac{6}{x^3}$: en $x=1$ vale $12>0$ (mínimo de $g$) y en $x=-1$ vale $-12<0$ (máximo).
+- $h''(y)=6y+\frac{96}{y^3}$: en $y=2$ vale $24>0$ (mínimo) y en $y=-2$ vale $-24<0$ (máximo).
+
+Mínimo en ambas variables: $(1;2)$, mínimo de $z$. Máximo en ambas: $(-1;-2)$. Mezcla: $(1;-2)$ y $(-1;2)$, silla. Además, evaluando $z$ en un entorno chico (comprobado con sympy) las diferencias $z-z(P)$ tienen un solo signo en el mínimo y en el máximo y dos signos en las sillas.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2025-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H9 Jul-25.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** coincide: $x^4-1=0$ y $y^4-16=0$ con $x=\pm1$, $y=\pm2$ (4 puntos críticos), $H(x;y)=\left(6x+\frac{6}{x^3}\right)\left(6y+\frac{96}{y^3}\right)$, clasificación por signos ($H_1>0$ y $H_2=(-)(-)>0$ extremos; $H_3,H_4<0$ sillas) y $z''_{xx}(1;2)=12>0\Rightarrow$ mínimo, $z''_{xx}(-1;-2)=-12<0\Rightarrow$ máximo. Sin discrepancias.
+
+</div>
+</Ejercicio>
