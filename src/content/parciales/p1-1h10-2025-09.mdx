@@ -1,0 +1,523 @@
+---
+id: "p1-1h10-2025-09"
+titulo: "1° Parcial Práctico — Comisión 1H10 (27/09/2025)"
+comision: "1H10"
+fecha: "27/09/2025"
+tipo: "práctico"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–5"
+orden: 103
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import Pendiente from '../../components/Pendiente.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II · Comisión 1H10 · 1° Parcial Práctico - 27/09/2025
+
+Importante (consigna de corrección de la cátedra): todos los ejercicios deben ser resueltos, o al menos con planteos y desarrollos avanzados. No se permite el uso de tabla de derivadas. Se solicita prolijidad, orden y escritura grande y legible, adjuntando todos los cálculos auxiliares para poder controlar y evaluar los procedimientos.
+
+<Ejercicio id="p1-1h10-2025-09#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina={1} unidad="U1" tema="Dominio (módulos, logaritmos, raíz)">
+<Enunciado examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\frac{\ln|4-x^2-4y^2|-\log|xy|}{\sqrt{x^2-y^2-1}}$$
+
+</Enunciado>
+
+<Pendiente>: el escaneo de esta página está desenfocado y las barras de módulo se leen con dificultad. Se tomó la lectura con módulo dentro del $\ln$ y del $\log$ (es la que da un ejercicio con sentido: sin módulos, el $\ln$ pediría un argumento positivo). Además, **la resolución oficial de este ejercicio no existe**: en el PDF el ejercicio 1 quedó sin resolver. Lo que sigue es una resolución elaborada para el sitio.</Pendiente>
+
+<Pista>
+
+Mirá cada parte de la función por separado: el $\ln$ de un módulo, el $\log$ de otro módulo, y un cociente cuyo denominador es una raíz. ¿Qué le puede pasar a cada una para que la cuenta no se pueda hacer? Fijate especialmente qué cambia por el hecho de que haya módulos.
+
+</Pista>
+<Pista>
+
+El dominio es la **intersección de las condiciones de existencia** de cada pieza. Cada condición es una curva (hipérbola, elipse, ejes) y una desigualdad o una exclusión; hay que dibujarlas y decidir en cada borde si entra o no. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $\ln|A|$ existe si $A\ne0$; $\log|B|$ existe si $B\ne0$; el denominador $\sqrt{C}$ pide $C>0$ (raíz y además no puede ser 0):
+
+$$x^2-y^2-1\gt0\qquad 4-x^2-4y^2\ne0\qquad xy\ne0$$
+
+</Pista>
+<Paso>
+
+**Qué:** escribir las condiciones de existencia. **Por qué:** una función dada por una fórmula está definida donde se puede hacer toda la cuenta. Acá hay tres restricciones: el $\ln|4-x^2-4y^2|$, el $\log|xy|$ y la raíz en el denominador. **Cómo reconocerlo:** módulo dentro de un logaritmo significa que el argumento puede ser negativo; solo importa que **no valga 0**.
+
+$$4-x^2-4y^2\ne0\qquad xy\ne0\qquad x^2-y^2-1\gt0$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver la raíz del denominador. **Por qué:** la raíz cuadrada pide radicando $\ge0$, pero como está dividiendo no puede ser 0: queda $\gt0$.
+
+$$x^2-y^2-1\gt0\ \Rightarrow\ x^2-y^2\gt1$$
+
+La frontera $x^2-y^2=1$ es una hipérbola de eje horizontal con vértices $(\pm1,0)$. Para saber qué lado es, se prueba un punto: en $(0,0)$ da $0\gt1$ (falso), en $(2,0)$ da $4\gt1$ (verdadero). Entonces vale la región que **encierra a las dos ramas por fuera**: $|x|\gt\sqrt{1+y^2}$. El borde queda excluido (desigualdad estricta).
+
+</Paso>
+<Paso>
+
+**Qué:** el $\ln|4-x^2-4y^2|$. **Por qué:** el módulo hace que el argumento pueda ser positivo o negativo; el logaritmo solo falla cuando el argumento es 0.
+
+$$4-x^2-4y^2\ne0\ \Rightarrow\ x^2+4y^2\ne4\ \Rightarrow\ \frac{x^2}{4}+y^2\ne1$$
+
+Es la elipse de semiejes $2$ (en $x$) y $1$ (en $y$): **se excluyen sus puntos**, no una región.
+
+</Paso>
+<Paso>
+
+**Qué:** el $\log|xy|$. **Por qué:** mismo razonamiento, el argumento $|xy|$ no puede ser 0.
+
+$$xy\ne0\ \Rightarrow\ x\ne0\ \wedge\ y\ne0$$
+
+Los dos ejes quedan excluidos. Pero $x\ne0$ ya está incluido en la condición de la hipérbola (allí $x^2\gt1+y^2\ge1$), así que lo único nuevo es $y\ne0$: se saca el eje $x$ de la región.
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y dibujar. **Por qué:** el dominio es la zona de la hipérbola menos la elipse y menos el eje $x$. La elipse y la hipérbola se cruzan donde $x^2=1+y^2$ y $x^2+4y^2=4$ a la vez:
+
+$$1+y^2+4y^2=4\ \Rightarrow\ y^2=\frac35,\qquad x^2=\frac85$$
+
+Esto es, los cuatro puntos $(\pm1{,}26;\ \pm0{,}77)$. Solo los arcos de la elipse con $|y|\lt\sqrt{3/5}$ caen dentro de la región (dos arcos chicos cerca de $(\pm2,0)$); el resto de la elipse está fuera del dominio de todas formas.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2025-09/ej1.svg`} alt="Plano xy con ejes graduados de a 1. Zona celeste: los dos lados de la hipérbola x²−y²=1 (a la derecha de la rama derecha y a la izquierda de la rama izquierda), con vértices en (1,0) y (−1,0). Sobre la zona se marcan en rojo, con trazo discontinuo, el eje x y el arco de la elipse x²+4y²=4 cerca de (2,0) y (−2,0), porque esos puntos están excluidos. Los bordes de la hipérbola están discontinuos: no se incluyen." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\mathrm{Dom}\,z=\big\{(x,y)\in\mathbb R^2\ /\ x^2-y^2\gt1\ \wedge\ x^2+4y^2\ne4\ \wedge\ y\ne0\big\}$$
+
+Gráficamente: las dos zonas exteriores de la hipérbola $x^2-y^2=1$ (borde excluido), sin el eje $x$ y sin los arcos de la elipse $x^2+4y^2=4$ que quedan dentro.
+
+**Ojo con:** con módulo en el $\ln$ **no** se pide argumento positivo (acá $4-x^2-4y^2$ es negativo en casi toda la región y no pasa nada); solo se excluye el cero. Y no olvidar el eje $x$ que viene del $\log|xy|$.
+
+**Criterio estimado — no oficial** (consigna: determinar *gráfica y analíticamente*; el escaneo no trae resolución):
+
+- **Bien:** las tres condiciones bien planteadas, gráfico con la hipérbola, la elipse y los ejes con borde incluido/excluido, y dominio escrito en forma analítica.
+- **A medias:** analítico correcto sin gráfico, o gráfico con la hipérbola pero olvidando la elipse o el eje $x$.
+- **Mal:** exigir argumento positivo en los módulos, o ignorar la raíz del denominador.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Probar un punto de cada zona con la fórmula original:
+
+- $(3,1)$: $x^2-y^2-1=7\gt0$, $4-9-4=-9\ne0$ (negativo, pero con módulo se puede), $xy=3\ne0$: **está en el dominio**.
+- $(3,0)$: $xy=0$, el $\log|0|$ no existe: **fuera** (eje $x$).
+- $(1{,}5;\ 0{,}5)$: $x^2-y^2-1=1\gt0$ y $4-2{,}25-1=0{,}75\ne0$: **en el dominio**.
+- $(\sqrt3,\ \tfrac12)$: $x^2-y^2-1=\tfrac74\gt0$ pero $4-3-1=0$: el $\ln|0|$ no existe, **fuera** (arco de la elipse).
+- $(1,\ \tfrac12)$: $x^2-y^2-1=-\tfrac14\lt0$: la raíz no existe, **fuera**.
+
+</Comprobacion>
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2025-09#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina={1} unidad="U2" tema="Diferencial total y error porcentual">
+<Enunciado examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina="1">
+
+Calcular por método diferencial la cantidad de material necesaria para construir un paralelepípedo recto hueco cuyas medidas internas de sus lados son: $(x,y,z)=(3,2,1)$ siendo los espesores de sus caras el 1% de las medidas anteriores respectivamente. Calcular además el error %
+
+</Enunciado>
+
+<Pista>
+
+El "material" es lo que hay entre el volumen de adentro y el de afuera: una cáscara muy finita. ¿Es una cantidad grande o chica respecto del volumen interno? ¿Qué herramienta del curso sirve para estimar una variación chica de una función?
+
+</Pista>
+<Pista>
+
+Método: el **diferencial total** $dV=V_x\,dx+V_y\,dy+V_z\,dz$ aproxima el material, tomando como $dx,dy,dz$ los espesores. El error porcentual es $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $V=xyz$ en $(3,2,1)$, con $dx=0{,}03$, $dy=0{,}02$, $dz=0{,}01$:
+
+$$dV=yz\,dx+xz\,dy+xy\,dz$$
+
+</Pista>
+<Paso>
+
+**Qué:** definir la función. **Por qué:** el volumen de un paralelepípedo recto es $V=xyz$, y las medidas dadas son las internas, así que $V(3,2,1)=6$. El material es la diferencia entre el volumen exterior y este, que se aproxima con $dV$ porque los espesores son muy chicos frente a las medidas.
+
+</Paso>
+<Paso>
+
+**Qué:** traducir los espesores a diferenciales. **Por qué:** "el 1% de cada medida" es el aumento de cada arista:
+
+$$dx=\frac{1}{100}\cdot3=0{,}03,\qquad dy=\frac1{100}\cdot2=0{,}02,\qquad dz=\frac1{100}\cdot1=0{,}01$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular las derivadas parciales en el punto. **Por qué:** son los coeficientes del diferencial.
+
+$$V_x=yz=2\cdot1=2,\qquad V_y=xz=3\cdot1=3,\qquad V_z=xy=3\cdot2=6$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar y evaluar $dV$. **Por qué:** cada término es "cuánto aporta cada arista". Término por término:
+
+$$2\cdot0{,}03=0{,}06,\qquad 3\cdot0{,}02=0{,}06,\qquad 6\cdot0{,}01=0{,}06$$
+
+$$dV=0{,}06+0{,}06+0{,}06=0{,}18$$
+
+</Paso>
+<Paso>
+
+**Qué:** el error porcentual. **Por qué:** compara el material con el volumen interno.
+
+$$E\%=\frac{dV}{V}\cdot100=\frac{0{,}18}{6}\cdot100=3\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=0{,}18\ \text{m}^3,\qquad E\%=3\%$$
+
+**Ojo con:** el enunciado no da unidades (la resolución oficial usa metros, de ahí m³). Y cada espesor se cuenta una vez por dirección, como hace la cátedra: no se duplica por tener dos caras.
+
+**Criterio estimado — no oficial** (consigna: método diferencial y error %):
+
+- **Bien:** $V=xyz$, diferencial total con las tres derivadas parciales, espesores $0{,}03;\ 0{,}02;\ 0{,}01$, $dV=0{,}18$ y $E\%=3\%$.
+- **A medias:** planteo correcto con un error de cuenta, o $dV$ bien pero sin el error %.
+- **Mal:** calcular el volumen exterior menos el interior sin usar diferencial (la consigna pide el método diferencial), o confundir los espesores con el 1% del volumen.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Comparar con el incremento exacto $\Delta V=(3+0{,}03)(2+0{,}02)(1+0{,}01)-3\cdot2\cdot1$:
+
+$$3{,}03\cdot2{,}02=6{,}1206,\qquad 6{,}1206\cdot1{,}01=6{,}181806$$
+
+$$\Delta V=6{,}181806-6=0{,}181806$$
+
+El diferencial ($0{,}18$) y el incremento real ($0{,}181806$) coinciden hasta la tercera cifra; la diferencia $0{,}001806$ es el infinitésimo de orden superior (los productos de dos espesores). El error real es $0{,}181806/6\cdot100\approx3{,}03\%$, consistente con el $3\%$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" paginas="2" />
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2025-09#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina="1">
+
+Dada la función: $z=x^3\cdot y\cdot e^{xy^2}$ Calcular en el punto: $P(1,1)$ la derivada direccional para $\alpha_x=60^\circ$.
+Calcular asimismo el gradiente de la función en P, dar su expresión cartesiana y graficar en el sistema de coordenadas. Determinar el valor máximo de la derivada dirección y el ángulo de máximo crecimiento de la función. Indicar en el grafico la dirección/sentido de máximo, mínimo y crecimientos nulos de la función.
+
+</Enunciado>
+
+<Pista>
+
+Pedís cuánto cambia $z$ al moverte desde $P$ en una dirección dada, y además el "vector" que resume cómo crece $z$ en todas las direcciones. ¿Qué dos derivadas parciales necesitás en $P$ para ambas cosas?
+
+</Pista>
+<Pista>
+
+Método: **derivada direccional** $\dfrac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$ y **gradiente** $\nabla z=z'_x\,\vec i+z'_y\,\vec j$. El máximo de la direccional es $\|\nabla z\|$, en la dirección de $\nabla z$; el crecimiento es nulo en las direcciones perpendiculares. Teoría: Rocha-Giordano, *Derivada Direccional* (8_Derivada Direccional.pdf, pp. 1–2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: las dos parciales salen con regla del producto (y regla de la cadena para el exponente) y se evalúan en $(1,1)$:
+
+$$z'_x=3x^2y\,e^{xy^2}+x^3y\cdot y^2e^{xy^2}\qquad z'_y=x^3e^{xy^2}+x^3y\cdot2xy\,e^{xy^2}$$
+
+</Pista>
+<Paso>
+
+**Qué:** derivar respecto de $x$. **Por qué:** $z$ es un producto de $x^3$, $y$ y $e^{xy^2}$; con $y$ constante, la derivada del exponente $xy^2$ en $x$ es $y^2$.
+
+$$z'_x=3x^2y\,e^{xy^2}+x^3y\cdot y^2\,e^{xy^2}=3x^2y\,e^{xy^2}+x^3y^3\,e^{xy^2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(1,1)$ (ahí $e^{xy^2}=e^1=e$). **Por qué:** el gradiente y la direccional son valores en $P$.
+
+$$z'_x(P)=3e+e=4e$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar respecto de $y$ y evaluar. **Por qué:** ahora $x$ es constante y la derivada del exponente $xy^2$ en $y$ es $2xy$.
+
+$$z'_y=x^3\,e^{xy^2}+x^3y\cdot2xy\,e^{xy^2}=x^3\,e^{xy^2}+2x^4y^2\,e^{xy^2}$$
+
+$$z'_y(P)=e+2e=3e$$
+
+</Paso>
+<Paso>
+
+**Qué:** la derivada direccional para $\alpha_x=60^\circ$. **Por qué:** $\alpha_x$ es el ángulo que forma la dirección con el semieje $x^+$, así que el versor es $(\cos60^\circ,\sin60^\circ)=(\tfrac12,\tfrac{\sqrt3}2)$.
+
+$$\frac{\partial z}{\partial s}=4e\cdot\frac12+3e\cdot\frac{\sqrt3}2=2e+\frac32\sqrt3\,e$$
+
+$$\frac{\partial z}{\partial s}=e\Big(2+\tfrac32\sqrt3\Big)\approx12{,}5$$
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, valor máximo y ángulo. **Por qué:** el gradiente junta las dos parciales; su módulo es la mayor pendiente posible y su ángulo la dirección donde se alcanza.
+
+$$\nabla z(P)=4e\,\vec i+3e\,\vec j$$
+
+$$\|\nabla z\|=\sqrt{(4e)^2+(3e)^2}=\sqrt{25e^2}=5e\approx13{,}6$$
+
+$$\theta=\operatorname{arctg}\frac{3e}{4e}=\operatorname{arctg}\frac34\approx37^\circ$$
+
+(Primer cuadrante: ambas componentes positivas, no hay que sumar $180^\circ$.)
+
+</Paso>
+<Paso>
+
+**Qué:** indicar las direcciones en el gráfico. **Por qué:** lo pide la consigna. Máximo crecimiento: el sentido de $\nabla z$ ($\theta\approx37^\circ$). Mínimo: el opuesto, $-\nabla z$ ($\approx217^\circ$). Crecimiento nulo: las dos direcciones perpendiculares a $\nabla z$ ($\approx127^\circ$ y $\approx307^\circ$), tangentes a la curva de nivel que pasa por $P$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2025-09/ej3.svg`} alt="Plano xy graduado de a 1 con el punto P(1,1). Flecha roja: el gradiente (4e, 3e), dibujado a escala 1/4, con ángulo θ≈37° respecto del eje x positivo, es la dirección de máximo crecimiento. Flecha azul opuesta: mínimo crecimiento. Recta verde discontinua perpendicular al gradiente: las dos direcciones de crecimiento nulo, tangentes a la curva de nivel punteada. Flecha violeta: la dirección S a 60° para la derivada direccional pedida." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=e\Big(2+\tfrac32\sqrt3\Big)\approx12{,}5,\qquad \nabla z(P)=4e\,\vec i+3e\,\vec j$$
+
+$$\Big(\tfrac{\partial z}{\partial s}\Big)_{\max}=\|\nabla z\|=5e\approx13{,}6,\qquad \theta_{\max}\approx37^\circ$$
+
+**Ojo con:** el ángulo del máximo se mide desde el semieje $x^+$ y depende del cuadrante del gradiente; y la derivada direccional pedida (a $60^\circ$) no es el máximo: siempre $\partial z/\partial s\le\|\nabla z\|$.
+
+**Criterio estimado — no oficial** (consigna: calcular, graficar, indicar direcciones en el gráfico):
+
+- **Bien:** $z'_x=4e$, $z'_y=3e$, direccional con el versor de $60^\circ$, $\nabla z$, $5e$, $\theta\approx37^\circ$ y gráfico con $\nabla z$ y direcciones de máximo, mínimo y nulos indicadas.
+- **A medias:** cálculos correctos pero gráfico sin las direcciones nulas o de mínimo; o un error de cuenta en una parcial que arrastra el resto.
+- **Mal:** usar los $60^\circ$ sin pasar por el versor (por ejemplo, sin $\cos$ y $\sin$), o no graficar el gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes del cálculo con $\cos$ y $\sin$:
+
+1. **Gradiente · versor:** $\nabla z\cdot\vec s_0=(4e,3e)\cdot(\tfrac12,\tfrac{\sqrt3}2)=2e+\tfrac{3\sqrt3}2e\approx12{,}50$.
+2. **Cociente incremental numérico** (sin derivar): con $h=10^{-4}$, $\dfrac{z(1+h\cos60^\circ,\ 1+h\sin60^\circ)-z(1,1)}{h}\approx12{,}50$.
+
+Y el chequeo de consistencia: $12{,}5\le\|\nabla z\|=13{,}6$. Las direcciones nulas cumplen $\nabla z\cdot(-3,4)/5=\tfrac{-12e+12e}5=0$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" paginas="3" />
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2025-09#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina="1">
+
+Determinar los puntos críticos de la función: $z=x^3+3y^2-3x-9y+y^3$ Categorizarlos en Extremos (Máximos y/o Mínimos) y Puntos de ensilladura. No es necesario determinar las coordenadas completas.
+
+</Enunciado>
+
+<Pista>
+
+Un punto crítico es donde la función "se aplana". ¿Qué tiene que valer en ese punto cada derivada parcial de primer orden? Una vez que los tengas, ¿qué herramienta te dice si es cima, valle o silla?
+
+</Pista>
+<Pista>
+
+Método: **puntos críticos** con $z'_x=0$ y $z'_y=0$; después el **hessiano** $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$: si $H\gt0$ hay extremo (el signo de $z''_{xx}$ dice si es mínimo $\gt0$ o máximo $\lt0$), si $H\lt0$ hay silla, si $H=0$ no se puede concluir. Teoría: Rocha-Giordano, *Extremos Relativos* (10_Extremos.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: el sistema se separa porque cada ecuación tiene una sola variable:
+
+$$z'_x=3x^2-3=0\qquad z'_y=6y-9+3y^2=0$$
+
+</Pista>
+<Paso>
+
+**Qué:** derivar e igualar a cero. **Por qué:** es la condición necesaria de extremo relativo.
+
+$$z'_x=3x^2-3=0\qquad z'_y=6y-9+3y^2=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver cada ecuación. **Por qué:** cada una depende de una sola variable, así que se resuelven por separado y se combinan todas las posibilidades.
+
+$$3x^2-3=0\ \Rightarrow\ x^2=1\ \Rightarrow\ x=\pm1$$
+
+$$3y^2+6y-9=0\ \Rightarrow\ y^2+2y-3=0\ \Rightarrow\ (y+3)(y-1)=0\ \Rightarrow\ y=-3\ \text{o}\ y=1$$
+
+Dos valores de $x$ y dos de $y$ dan 4 puntos críticos: $(1,1)$, $(1,-3)$, $(-1,1)$, $(-1,-3)$.
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** la clasificación depende de $H$ en cada punto. La derivada cruzada vale 0 (cada parcial primera depende de una sola variable).
+
+$$z''_{xx}=6x,\qquad z''_{yy}=6y+6,\qquad z''_{xy}=0$$
+
+$$H(x,y)=6x\,(6y+6)-0^2=36x\,(y+1)$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar $H$ en cada punto y clasificar. **Por qué:** el signo de $H$ separa extremo de silla, y donde es extremo se mira $z''_{xx}$.
+
+- $(1,1)$: $H=36\cdot1\cdot2=72\gt0$ y $z''_{xx}=6\gt0$: **mínimo**.
+- $(1,-3)$: $H=36\cdot1\cdot(-2)=-72\lt0$: **silla**.
+- $(-1,1)$: $H=36\cdot(-1)\cdot2=-72\lt0$: **silla**.
+- $(-1,-3)$: $H=36\cdot(-1)\cdot(-2)=72\gt0$ y $z''_{xx}=-6\lt0$: **máximo**.
+
+</Paso>
+<Paso>
+
+**Qué:** completar la coordenada $z$ (la teoría lo pide aunque el enunciado lo deje opcional). **Por qué:** da el punto del espacio y permite graficar.
+
+$$z(1,1)=1+3-3-9+1=-7,\qquad z(1,-3)=1+27-3+27-27=25$$
+
+$$z(-1,1)=-1+3+3-9+1=-3,\qquad z(-1,-3)=-1+27+3+27-27=29$$
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2025-09/ej4.svg`} alt="Arriba, la superficie z=x³+3y²−3x−9y+y³ en perspectiva con ejes graduados, con los cuatro puntos críticos marcados. Abajo, el mapa de curvas de nivel en el plano xy con ejes graduados de a 1: mínimo en (1,1), máximo en (−1,−3), ensilladuras en (1,−3) y (−1,1), cada uno rotulado." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Mín. en }(1,1)\ [z=-7],\quad \text{Máx. en }(-1,-3)\ [z=29],\quad \text{sillas en }(1,-3)\text{ y }(-1,1)$$
+
+**Ojo con:** olvidar combinar los valores de $x$ e $y$ (son $2\cdot2=4$ puntos, no 2) y confundir el signo de $z''_{xx}$: $H\gt0$ con $z''_{xx}\lt0$ es **máximo**, no mínimo.
+
+**Criterio estimado — no oficial** (consigna: críticos y categorización):
+
+- **Bien:** los 4 puntos críticos, $H=36x(y+1)$, clasificación correcta de los 4 con el signo de $z''_{xx}$ donde $H\gt0$.
+- **A medias:** hallar los 4 puntos y clasificar mal alguno, o clasificar sin explicitar $z''_{xx}$ (cuándo es mín. o máx.).
+- **Mal:** quedarse con 2 puntos críticos, o no usar el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+La función se separa: $z=\varphi(x)+\psi(y)$ con $\varphi=x^3-3x$ y $\psi=y^3+3y^2-9y$. Una suma de funciones de una variable tiene extremo donde cada una lo tiene:
+
+- $\varphi''=6x$: $\varphi''(1)=6\gt0$ (mín. en $x=1$) y $\varphi''(-1)=-6\lt0$ (máx. en $x=-1$).
+- $\psi''=6y+6$: $\psi''(1)=12\gt0$ (mín. en $y=1$) y $\psi''(-3)=-12\lt0$ (máx. en $y=-3$).
+
+Combinando: $(1,1)$ mín-mín = **mínimo**; $(-1,-3)$ máx-máx = **máximo**; los mixtos $(1,-3)$ y $(-1,1)$ (mín. en una variable, máx. en la otra) = **sillas**. Coincide con el hessiano.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" paginas="4" />
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2025-09#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina={1} unidad="U3" tema="Extremos ligados (Lagrange)">
+<Enunciado examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" pagina="1">
+
+Determinar por el método de Lagrange la mínima distancia al origen de coordenadas del plano: $x+3y+6z=49$
+
+</Enunciado>
+
+<Pista>
+
+Querés el punto del plano más cercano al origen. ¿Qué cantidad querés hacer mínima y qué condición tienen que cumplir los puntos candidatos?
+
+</Pista>
+<Pista>
+
+Método: **extremos ligados con multiplicador de Lagrange $\lambda$**. Función a optimizar: el cuadrado de la distancia (tiene el mismo mínimo y evita la raíz); condición: el plano. Se arma $F=f-\lambda g$ y se anulan sus cuatro derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$F(x,y,z,\lambda)=x^2+y^2+z^2-\lambda\,(x+3y+6z-49)$$
+
+y el sistema $F'_x=F'_y=F'_z=F'_\lambda=0$.
+
+</Pista>
+<Paso>
+
+**Qué:** elegir la función y la condición. **Por qué:** la distancia al origen es $d=\sqrt{x^2+y^2+z^2}$; como la raíz es creciente, $d$ y $d^2$ tienen el mínimo en el mismo punto y $f=x^2+y^2+z^2$ se deriva más fácil. La condición es $g(x,y,z)=x+3y+6z-49=0$.
+
+</Paso>
+<Paso>
+
+**Qué:** armar la función de Lagrange. **Por qué:** convierte el problema ligado en uno libre con una variable más ($\lambda$). Con la notación de la cátedra:
+
+$$F(x,y,z,\lambda)=x^2+y^2+z^2-\lambda\,(x+3y+6z-49)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar e igualar a cero.
+
+$$F'_x=2x-\lambda=0,\quad F'_y=2y-3\lambda=0,\quad F'_z=2z-6\lambda=0,\quad F'_\lambda=-(x+3y+6z-49)=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** despejar $x,y,z$ en función de $\lambda$ y relacionarlas. **Por qué:** las tres primeras ecuaciones dan todo en función de una sola incógnita.
+
+$$x=\frac\lambda2,\qquad y=\frac{3\lambda}2=3x,\qquad z=3\lambda=6x$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición. **Por qué:** es la cuarta ecuación y deja una sola incógnita.
+
+$$x+3(3x)+6(6x)=49$$
+
+$$x+9x+36x=49\ \Rightarrow\ 46x=49\ \Rightarrow\ x=\frac{49}{46}$$
+
+$$y=3x=\frac{147}{46},\qquad z=6x=\frac{294}{46}=\frac{147}{23},\qquad \lambda=2x=\frac{49}{23}$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular la distancia mínima. **Por qué:** es lo que pide el enunciado. Como $(x,y,z)=x\,(1,3,6)$:
+
+$$d=\sqrt{x^2+y^2+z^2}=x\sqrt{1+9+36}=\frac{49}{46}\sqrt{46}=\frac{49}{\sqrt{46}}\approx7{,}2246$$
+
+**Por qué es un mínimo:** en un plano hay puntos tan lejos del origen como se quiera (no hay máximo), y Lagrange da un único candidato; por lo tanto es el mínimo.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2025-09/ej5.svg`} alt="Perspectiva del plano x+3y+6z=49 en el primer octante (triángulo celeste con cortes en 49 sobre x, 49/3 sobre y y 49/6 sobre z) y un segmento rojo desde el origen hasta el punto Q=(49/46)(1,3,6), el más cercano, perpendicular al plano." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$d_{\min}=\frac{49}{\sqrt{46}}\approx7{,}2246\ \text{u},\qquad\text{en }Q=\Big(\tfrac{49}{46},\tfrac{147}{46},\tfrac{147}{23}\Big),\ \lambda=\tfrac{49}{23}$$
+
+**Ojo con:** pedir el mínimo de $d$ y derivar la raíz (se puede, pero ensucia las cuentas); y dar $d^2$ como respuesta: lo pedido es la distancia.
+
+**Criterio estimado — no oficial** (consigna: *por el método de Lagrange*):
+
+- **Bien:** $F=x^2+y^2+z^2-\lambda(\cdot)$, sistema de 4 ecuaciones, $x=49/46$, $y=3x$, $z=6x$ y $d=49/\sqrt{46}\approx7{,}22$.
+- **A medias:** planteo y sistema correctos con un error de cuenta al final, o entregar $d^2$ en lugar de $d$.
+- **Mal:** resolver por otro método (por ejemplo, fórmula punto-plano) sin plantear Lagrange, o plantear mal la condición.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes:
+
+1. **Geometría:** distancia del origen al plano $x+3y+6z-49=0$: $\dfrac{|-49|}{\sqrt{1^2+3^2+6^2}}=\dfrac{49}{\sqrt{46}}$. Coincide. Además el punto hallado está en la dirección de la normal $(1,3,6)$, como corresponde.
+2. **Sustitución:** despejando $x=49-3y-6z$, $D^2(y,z)=(49-3y-6z)^2+y^2+z^2$ es una función de dos variables con único punto crítico $(y,z)=(\tfrac{147}{46},\tfrac{147}{23})$, donde $D^2_{yy}=20\gt0$ y el hessiano es $>0$: es mínimo, y vale $\tfrac{49^2}{46}$, o sea $d=\tfrac{49}{\sqrt{46}}$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" paginas="5" />
+</Ejercicio>

@@ -1,0 +1,514 @@
+---
+id: "p1-1r7-2025-10"
+titulo: "1° Parcial Práctico — Comisión 1R7 (7/10/2025)"
+comision: "1R7"
+fecha: "7/10/2025"
+tipo: "práctico"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–6"
+orden: 102
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import Pendiente from '../../components/Pendiente.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II · Comisión 1R7 · 1° Parcial Práctico - 7/10/2025
+
+Importante (consigna de corrección de la cátedra): para alcanzar la aprobación, todos los ejercicios deben ser resueltos, o al menos 1 de ellos con planteo y desarrollo avanzado. No se permite el uso de tabla de derivadas. Se solicita prolijidad, orden y escritura grande y legible, adjuntado todos los cálculos auxiliares para poder controlar y evaluar los procedimientos.
+
+<Ejercicio id="p1-1r7-2025-10#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina={1} unidad="U1" tema="Dominio (raíz, logaritmos, cociente)">
+<Enunciado examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\frac{\sqrt{36-9x^2-4y^2}-\ln(x^2-y^2+1)}{\ln(x\cdot y)}$$
+
+</Enunciado>
+
+<Pista>
+
+Recorré la función pieza por pieza: una raíz, un logaritmo en el numerador y otro logaritmo en el denominador. ¿Qué le exige cada una a su argumento? Y como un logaritmo está dividiendo, ¿hay algún valor del logaritmo que también esté prohibido?
+
+</Pista>
+<Pista>
+
+El dominio es la **intersección de las condiciones de existencia**: raíz con radicando $\ge0$, logaritmos con argumento $\gt0$, y denominador distinto de 0. Cada condición es una curva (elipse, hipérbolas, ejes) y hay que decidir en cada borde si entra o no. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $36-9x^2-4y^2\ge0$; $x^2-y^2+1\gt0$; $xy\gt0$ y además $\ln(xy)\ne0$, o sea $xy\ne1$.
+
+</Pista>
+<Paso>
+
+**Qué:** la raíz del numerador. **Por qué:** la raíz cuadrada pide radicando mayor o igual a 0 (el cero sí se admite: $\sqrt0=0$, y está en el numerador).
+
+$$36-9x^2-4y^2\ge0\ \Rightarrow\ 9x^2+4y^2\le36\ \Rightarrow\ \frac{x^2}{4}+\frac{y^2}{9}\le1$$
+
+Es el interior de una elipse de semiejes $2$ (en $x$) y $3$ (en $y$), **con borde incluido**.
+
+</Paso>
+<Paso>
+
+**Qué:** el $\ln(x^2-y^2+1)$ del numerador. **Por qué:** el logaritmo pide argumento estrictamente positivo.
+
+$$x^2-y^2+1\gt0\ \Rightarrow\ y^2-x^2\lt1$$
+
+La frontera $y^2-x^2=1$ es una hipérbola de eje vertical con vértices $(0,\pm1)$. En $(0,0)$ da $0\lt1$ (verdadero): vale la zona **entre las dos ramas**, con borde excluido.
+
+</Paso>
+<Paso>
+
+**Qué:** el denominador $\ln(xy)$. **Por qué:** necesita dos cosas: que exista y que no sea 0. Existe si el argumento es positivo, y vale 0 cuando el argumento es 1.
+
+$$xy\gt0\qquad\text{y}\qquad xy\ne1$$
+
+$xy\gt0$ significa $x$ e $y$ del mismo signo: **1.er y 3.er cuadrante**, sin los ejes. Y $xy=1$ es la hipérbola $y=\frac1x$, que se **saca** de la región.
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y dibujar. **Por qué:** el dominio es lo que cumple todo a la vez. Los bordes de interés se cortan en $y^2=\frac{45}{13}$ (elipse con la hipérbola $y^2-x^2=1$, aproximadamente en $(\pm1{,}57;\ \pm1{,}86)$); la curva $xy=1$ atraviesa la región dentro de la elipse (pasa por $(1,1)$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r7-2025-10/ej1.svg`} alt="Plano xy con ejes graduados de a 1. Elipse x²/4+y²/9=1 con trazo continuo (borde incluido), vértices (±2,0) y (0,±3). En el primer y tercer cuadrante se sombrea la zona dentro de la elipse que queda entre las ramas de la hipérbola y²−x²=1 (trazo discontinuo, excluida), sin los ejes (discontinuos) y sin la hipérbola xy=1 dibujada en rojo discontinuo, que atraviesa la zona." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\mathrm{Dom}\,z=\Big\{(x,y)\in\mathbb R^2\ /\ \frac{x^2}{4}+\frac{y^2}{9}\le1\ \wedge\ y^2-x^2\lt1\ \wedge\ xy\gt0\ \wedge\ xy\ne1\Big\}$$
+
+**Ojo con:** el $\ln(xy)$ en el denominador prohíbe además $xy=1$ (los logaritmos que se anulan), algo que se olvida seguido; y la elipse **sí** incluye el borde (raíz con $\ge$) mientras las hipérbolas no.
+
+**Criterio estimado — no oficial** (consigna: determinar gráfica y analíticamente; en el gráfico final del escaneo no se distingue la curva $xy=1$):
+
+- **Bien:** las cuatro condiciones, gráfico con elipse (borde incluido), hipérbola $y^2-x^2=1$, 1.er y 3.er cuadrante y $xy\ne1$.
+- **A medias:** dominio analítico correcto con gráfico incompleto, u omitir $xy\ne1$ (error clásico de denominador con logaritmo).
+- **Mal:** ignorar la condición de $xy\gt0$ (cuadrantes) o pedir $\gt0$ en la raíz y $\ge0$ en los logaritmos al revés.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Puntos de prueba con la fórmula original:
+
+- $(1,\tfrac12)$: $\tfrac14+\tfrac1{36}\lt1$ (dentro de la elipse), $x^2-y^2+1=1{,}75\gt0$, $xy=\tfrac12\gt0$ y $\ne1$: **en el dominio**.
+- $(1,1)$: $xy=1$, el denominador $\ln1=0$: **fuera**.
+- $(1,-1)$: $xy\lt0$, $\ln(xy)$ no existe: **fuera**.
+- $(\tfrac12,\tfrac{21}{10})$: dentro de la elipse pero $y^2-x^2=4{,}16\ge1$: **fuera**.
+- $(2,\tfrac12)$: $36-36-1\lt0$, fuera de la elipse: **fuera**.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" paginas="2" />
+</Ejercicio>
+
+<Ejercicio id="p1-1r7-2025-10#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina={1} unidad="U2" tema="Diferencial total y error porcentual">
+<Enunciado examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina="1">
+
+Calcular por método diferencial la cantidad de material necesaria para construir un tanque cilíndrico de base elíptica: $\frac{x^2}{4}+\frac{y^2}{9}=1$ y altura: $h=10$ siendo los espesores tanto lateral como de la base y tapa el 2% de sus respectivas medidas (medidas en metros)
+Calcular asimismo el error %
+Volumen del cilindro elíptico recto: $V=\pi abh$ siendo a y b los semiejes en "x" e "y"
+
+</Enunciado>
+
+<Pista>
+
+El material del tanque es una cáscara fina alrededor del volumen interno. ¿Qué medidas del tanque podés leer de la ecuación de la base? ¿Cuántas variables tiene el volumen?
+
+</Pista>
+<Pista>
+
+Método: **diferencial total** $dV=V'_a\,da+V'_b\,db+V'_h\,dh$ con los espesores como incrementos, y $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: de la elipse $a=2$, $b=3$; $h=10$. Espesores $2\%$ de cada medida: $da=0{,}04$, $db=0{,}06$, $dh=0{,}2$.
+
+$$dV=\pi\,(bh\,da+ah\,db+ab\,dh)$$
+
+</Pista>
+<Paso>
+
+**Qué:** leer los semiejes. **Por qué:** la ecuación $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$ da los semiejes directamente: $a=2$, $b=3$, con $h=10$.
+
+$$V=\pi abh=\pi\cdot2\cdot3\cdot10$$
+
+$$V=60\pi\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** los incrementos. **Por qué:** cada espesor es el 2% de su medida.
+
+$$da=0{,}02\cdot2=0{,}04,\qquad db=0{,}02\cdot3=0{,}06,\qquad dh=0{,}02\cdot10=0{,}2$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales en el punto. **Por qué:** son los coeficientes del diferencial.
+
+$$V'_a=\pi bh=30\pi,\qquad V'_b=\pi ah=20\pi,\qquad V'_h=\pi ab=6\pi$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar y evaluar $dV$. **Por qué:** cada término aporta lo mismo, como se ve término por término:
+
+$$30\pi\cdot0{,}04=1{,}2\pi,\qquad 20\pi\cdot0{,}06=1{,}2\pi,\qquad 6\pi\cdot0{,}2=1{,}2\pi$$
+
+$$dV=1{,}2\pi+1{,}2\pi+1{,}2\pi=3{,}6\pi\approx11{,}3\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** el error porcentual. **Por qué:** compara el material con el volumen interno.
+
+$$E\%=\frac{dV}{V}\cdot100=\frac{3{,}6\pi}{60\pi}\cdot100=6\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=3{,}6\pi\ \text{m}^3\approx11{,}3\ \text{m}^3,\qquad E\%=6\%$$
+
+**Ojo con:** los semiejes son $a=2$ y $b=3$ (no $4$ y $9$, que son los denominadores). Y la cátedra cuenta cada espesor una sola vez: el 2% de $h$ ($0{,}2$) cubre base y tapa juntas, no se duplica.
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** $a=2$, $b=3$, $V=60\pi$, diferencial con las tres parciales, $dV=3{,}6\pi$ y $E\%=6\%$.
+- **A medias:** planteo correcto con error de cuenta, o confundir $a,b$ con $4,9$ en las parciales.
+- **Mal:** no usar el método diferencial, o tomar el 2% del volumen.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Contra el incremento exacto con $a=2{,}04$, $b=3{,}06$, $h=10{,}2$:
+
+$$V_{\text{ext}}=\pi\cdot2{,}04\cdot3{,}06\cdot10{,}2=63{,}67248\pi,\qquad \Delta V=63{,}67248\pi-60\pi=3{,}67248\pi\approx11{,}54$$
+
+El diferencial $3{,}6\pi\approx11{,}31$ aproxima el incremento exacto con $2\%$ de diferencia (error real del orden de $6{,}12\%$ frente a $6\%$); la diferencia son los términos de orden superior.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" paginas="3" />
+</Ejercicio>
+
+<Ejercicio id="p1-1r7-2025-10#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina="1">
+
+Dada la función: $z=2\sqrt6\cos^2(3x-2y)$ calcular en el punto: $P(\frac{\pi}{3},\frac{\pi}{3})$ y en la dirección y sentido creciente de la recta tangente a la función: $y=\ln(x^2)$ en $x=2$
+Calcular asimismo el gradiente de la función en P, dando su expresión cartesiana, graficar en el sistema de coordenadas. Determinar el valor máximo de la derivada direccional y el ángulo de máximo crecimiento de la función. Indicar en el grafico la dirección/sentido de máximo, mínimo y crecimientos nulos de la función.
+
+</Enunciado>
+
+<Pista>
+
+Hay dos cosas distintas: la función $z$ y la curva $y=\ln(x^2)$. ¿Para qué te sirve la curva? ¿Qué dato de ella define la dirección en la que te movés desde $P$?
+
+</Pista>
+<Pista>
+
+Método: la dirección es la de la **recta tangente** a $y=\ln(x^2)$ en $x=2$ (su pendiente da el ángulo $\alpha_x$, en sentido de $x$ creciente). Con ella, $\dfrac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; el gradiente da el máximo $\|\nabla z\|$ y su ángulo. Teoría: Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2 (ejercicio 8 es del mismo tipo).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $y'=\dfrac2x$, en $x=2$ vale $1=\operatorname{tg}\alpha_x$. Parciales con regla de la cadena ($u=3x-2y$):
+
+$$z'_x=2\sqrt6\cdot2\cos u\,(-\sin u)\cdot3\qquad z'_y=2\sqrt6\cdot2\cos u\,(-\sin u)\cdot(-2)$$
+
+</Pista>
+<Paso>
+
+**Qué:** hallar la dirección. **Por qué:** la pendiente de la tangente es la derivada de la curva. Como $y=\ln(x^2)$, $y'=\frac{2x}{x^2}=\frac2x$, y en $x=2$:
+
+$$y'(2)=1=\operatorname{tg}\alpha_x\ \Rightarrow\ \alpha_x=\frac\pi4$$
+
+"Sentido creciente" es el de $x$ creciente: el versor es $(\cos\frac\pi4,\sin\frac\pi4)=(\tfrac{\sqrt2}2,\tfrac{\sqrt2}2)$. El punto $x=2$ solo sirve para este dato; $P$ es otro punto.
+
+</Paso>
+<Paso>
+
+**Qué:** el argumento en $P$. **Por qué:** simplifica todo lo que sigue.
+
+$$3\cdot\frac\pi3-2\cdot\frac\pi3=\frac\pi3\ \Rightarrow\ \cos\frac\pi3=\frac12,\quad\sin\frac\pi3=\frac{\sqrt3}2$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivada respecto de $x$ y valor en $P$.
+
+$$z'_x=-12\sqrt6\cos(3x-2y)\sin(3x-2y)$$
+
+$$z'_x(P)=-12\sqrt6\cdot\frac12\cdot\frac{\sqrt3}2=-3\sqrt{18}=-3\cdot3\sqrt2=-9\sqrt2$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivada respecto de $y$ y valor en $P$. **Por qué:** la regla de la cadena trae el $-2$ de la derivada del argumento, que cancela el signo del $-\sin$.
+
+$$z'_y=8\sqrt6\cos(3x-2y)\sin(3x-2y)$$
+
+$$z'_y(P)=8\sqrt6\cdot\frac12\cdot\frac{\sqrt3}2=2\sqrt{18}=2\cdot3\sqrt2=6\sqrt2$$
+
+</Paso>
+<Paso>
+
+**Qué:** la derivada direccional. **Por qué:** combina las parciales con el versor.
+
+$$\frac{\partial z}{\partial s}=-9\sqrt2\cdot\frac{\sqrt2}2+6\sqrt2\cdot\frac{\sqrt2}2=-9+6$$
+
+$$\frac{\partial z}{\partial s}=-3$$
+
+Es negativa: yendo en esa dirección la función **decrece**.
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, máximo y ángulo. **Por qué:** el máximo de la direccional es $\|\nabla z\|$ y se da en el sentido de $\nabla z$.
+
+$$\nabla z(P)=-9\sqrt2\,\vec i+6\sqrt2\,\vec j$$
+
+$$\|\nabla z\|=\sqrt{81\cdot2+36\cdot2}=\sqrt{234}\approx15{,}3$$
+
+El vector está en el **2.º cuadrante** ($x$ negativa, $y$ positiva). La arcotangente da $\operatorname{arctg}\frac{6\sqrt2}{-9\sqrt2}=\operatorname{arctg}(-\frac23)=-33{,}69^\circ$, que corresponde al 4.º cuadrante; hay que sumar $180^\circ$:
+
+$$\theta=-33{,}69^\circ+180^\circ=146{,}31^\circ$$
+
+</Paso>
+<Paso>
+
+**Qué:** direcciones en el gráfico. **Por qué:** lo pide la consigna. Máximo: sentido de $\nabla z$ ($146{,}31^\circ$). Mínimo: el opuesto ($326{,}31^\circ$). Nulo: perpendiculares ($56{,}31^\circ$ y $236{,}31^\circ$), la recta tangente a la curva de nivel por $P$. En este ejercicio las curvas de nivel son rectas $3x-2y=\text{cte}$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r7-2025-10/ej3.svg`} alt="Plano xy con ejes graduados en múltiplos de π/3 y el punto P(π/3, π/3). Flecha roja: gradiente (−9√2, 6√2) dibujado a escala 1/10, apuntando hacia arriba a la izquierda (146,31°), máximo crecimiento. Flecha azul opuesta: mínimo. Recta verde discontinua perpendicular: crecimiento nulo. Flecha violeta a 45°: la dirección S de la tangente, con derivada direccional −3." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}=-3,\qquad \nabla z(P)=-9\sqrt2\,\vec i+6\sqrt2\,\vec j$$
+
+$$\Big(\tfrac{\partial z}{\partial s}\Big)_{\max}=\|\nabla z\|=\sqrt{234}\approx15{,}3,\qquad\theta_{\max}=146{,}31^\circ$$
+
+**Ojo con:** el ángulo del gradiente: $\operatorname{arctg}$ devuelve $-33{,}69^\circ$ y hay que llevarlo al 2.º cuadrante sumando $180^\circ$; y usar el punto $x=2$ de la curva solo para la pendiente, no para evaluar $z$.
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** $\alpha_x=\pi/4$, parciales $-9\sqrt2$ y $6\sqrt2$, direccional $-3$, gradiente, $\sqrt{234}$, $146{,}31^\circ$ y gráfico con máximo, mínimo y nulos.
+- **A medias:** todo bien pero ángulo en el cuadrante equivocado ($-33{,}69^\circ$), o gráfico sin las direcciones nulas.
+- **Mal:** evaluar las parciales en $x=2$ en lugar de $P$, o usar una dirección que no sea la de la tangente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Reescribiendo con $\cos^2u=\frac{1+\cos2u}2$: $z=\sqrt6\,(1+\cos(6x-4y))$. Derivando así (sin producto):
+
+$$z'_x=-6\sqrt6\sin(6x-4y),\qquad z'_y=4\sqrt6\sin(6x-4y)$$
+
+En $P$: $6x-4y=\frac{2\pi}3$ y $\sin\frac{2\pi}3=\frac{\sqrt3}2$, entonces $z'_x=-6\sqrt6\cdot\frac{\sqrt3}2=-9\sqrt2$ y $z'_y=4\sqrt6\cdot\frac{\sqrt3}2=6\sqrt2$. Coincide. Además un cociente incremental numérico con $h=10^{-8}$ en la dirección de $45^\circ$ da $-3{,}000$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" paginas="4" />
+</Ejercicio>
+
+<Ejercicio id="p1-1r7-2025-10#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina="1">
+
+Determinar los puntos críticos de la función: $z=x^3-12xy+8y^3-3$
+Categorizarlos en extremos (Máximos y/o Mínimos) y puntos de ensilladura. No omitir cálculos auxiliares. No es necesario determinar las coordenadas completas.
+
+</Enunciado>
+
+<Pista>
+
+¿Qué condición cumplen las derivadas parciales en un punto donde la superficie tiene cima, valle o silla? Después, ¿cómo decidís cuál de las tres es?
+
+</Pista>
+<Pista>
+
+Método: **puntos críticos** ($z'_x=0$, $z'_y=0$) y **hessiano** $H=z''_{xx}z''_{yy}-(z''_{xy})^2$: $H\gt0$ extremo (signo de $z''_{xx}$), $H\lt0$ silla, $H=0$ inconcluso. Teoría: Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: el sistema es $3x^2-12y=0$ y $-12x+24y^2=0$; de la segunda $x=2y^2$, que se sustituye en la primera.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar e igualar a cero. **Por qué:** condición necesaria.
+
+$$z'_x=3x^2-12y=0\ \Rightarrow\ x^2=4y$$
+
+$$z'_y=-12x+24y^2=0\ \Rightarrow\ x=2y^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver el sistema por sustitución. **Por qué:** una ecuación despeja $x$ en función de $y$.
+
+$$(2y^2)^2=4y\ \Rightarrow\ 4y^4-4y=0\ \Rightarrow\ 4y\,(y^3-1)=0$$
+
+$$y=0\ \Rightarrow\ x=0\qquad\text{o}\qquad y^3=1\ \Rightarrow\ y=1\ \Rightarrow\ x=2$$
+
+Puntos críticos: $(0,0)$ y $(2,1)$. (La otra raíz de $y^3-1$ es compleja y no cuenta.)
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** clasifican cada punto.
+
+$$z''_{xx}=6x,\qquad z''_{yy}=48y,\qquad z''_{xy}=-12$$
+
+$$H(x,y)=6x\cdot48y-(-12)^2=288xy-144$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar y clasificar.
+
+$$H(0,0)=-144\lt0\ \Rightarrow\ \text{silla}$$
+
+$$H(2,1)=432\gt0\ \text{y}\ z''_{xx}(2)=12\gt0\ \Rightarrow\ \text{mínimo}$$
+
+Y el valor de $z$ (opcional, pero la teoría lo pide): $z(2,1)=8-24+8-3=-11$, $z(0,0)=-3$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r7-2025-10/ej4.svg`} alt="Arriba, la superficie z=x³−12xy+8y³−3 en perspectiva con ejes graduados y los dos puntos críticos marcados. Abajo, curvas de nivel en el plano xy con ejes graduados de a 1: mínimo en (2,1), punto silla en (0,0)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$(0,0)\ \text{punto silla}\ [z=-3],\qquad (2,1)\ \text{mínimo relativo}\ [z=-11]$$
+
+**Ojo con:** buscar más puntos críticos de la cuenta: $y^3=1$ tiene una sola raíz real. Y con $H\gt0$ el signo de $z''_{xx}$ (o de $z''_{yy}$) decide: acá ambos son positivos.
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** los dos puntos críticos, $H=288xy-144$ y clasificación correcta con justificación.
+- **A medias:** puntos bien y una clasificación errada, o clasificar sin explicitar $z''_{xx}$.
+- **Mal:** hallar solo uno de los puntos o no usar el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Chequeo por entorno, sin hessiano:
+
+- En $(0,0)$: $z(\varepsilon,\varepsilon)-z(0,0)=9\varepsilon^3-12\varepsilon^2\lt0$ (para $\varepsilon$ chico) y $z(\varepsilon,-\varepsilon)-z(0,0)=-7\varepsilon^3+12\varepsilon^2\gt0$: la función sube en una dirección y baja en otra, así que es **silla**.
+- En $(2,1)$: los 8 puntos vecinos a distancia $0{,}1$ (por ejemplo $(2{,}1;\,1)$ o $(1{,}9;\,0{,}9)$) dan $z\gt-11$: es **mínimo local**.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" paginas="5" />
+</Ejercicio>
+
+<Ejercicio id="p1-1r7-2025-10#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina={1} unidad="U3" tema="Lagrange: caja de volumen máximo">
+<Enunciado examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" pagina="1">
+
+Determinar por el método de Lagrange, el volumen del paralelepípedo recto de máxima capacidad que tienen 3 de sus caras en los planos coordenados y un vértice en el plano: $x+\frac{3}{2}y+3z=9$
+En lo posible, realizar un gráfico representativo de la situación.
+$V=x.y.x$
+
+</Enunciado>
+
+<Pendiente>: el enunciado dice "$V=x.y.x$"; por el contexto (volumen de una caja de aristas $x,y,z$) se leyó $V=xyz$, que es lo que usa la resolución oficial.</Pendiente>
+
+<Pista>
+
+La caja tiene tres caras sobre los planos coordenados y el vértice opuesto al origen "toca" un plano. ¿Qué tres medidas definen la caja y qué ecuación liga a esas medidas?
+
+</Pista>
+<Pista>
+
+Método: **Lagrange** con $V=xyz$ a maximizar y el plano como condición: $F=V-\lambda\,g$ y se anulan las cuatro derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$F(x,y,z,\lambda)=xyz-\lambda\Big(x+\tfrac32y+3z-9\Big)$$
+
+</Pista>
+<Paso>
+
+**Qué:** modelar. **Por qué:** con tres caras en los planos coordenados, la caja va del origen al vértice $(x,y,z)$, y sus aristas miden $x$, $y$, $z$. Ese vértice debe estar en el plano: $g=x+\frac32y+3z-9=0$.
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $F$ e igualar a cero.
+
+$$F'_x=yz-\lambda=0,\qquad F'_y=xz-\tfrac32\lambda=0,\qquad F'_z=xy-3\lambda=0$$
+
+$$F'_\lambda=-\Big(x+\tfrac32y+3z-9\Big)=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** eliminar $\lambda$. **Por qué:** las tres primeras dan $\lambda$ de tres formas, que se igualan.
+
+$$\lambda=yz,\qquad \lambda=\tfrac23xz,\qquad \lambda=\tfrac13xy$$
+
+De $yz=\frac23xz$, dividiendo por $z\ne0$ (si fuera 0 el volumen sería 0): $y=\tfrac23x$.
+De $yz=\frac13xy$, dividiendo por $y\ne0$: $z=\tfrac13x$.
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición. **Por qué:** deja una sola incógnita.
+
+$$x+\tfrac32\cdot\tfrac23x+3\cdot\tfrac13x=9$$
+
+$$x+x+x=9\ \Rightarrow\ 3x=9\ \Rightarrow\ x=3$$
+
+$$y=\tfrac23x=2,\qquad z=\tfrac13x=1,\qquad \lambda=yz=2$$
+
+</Paso>
+<Paso>
+
+**Qué:** el volumen. **Por qué:** es lo que pide el enunciado.
+
+$$V=xyz=3\cdot2\cdot1=6\ \text{m}^3$$
+
+**Por qué es un máximo:** sobre el plano (en el primer octante) el volumen vale 0 en las caras y es positivo adentro, así que el único punto crítico interior es el máximo.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r7-2025-10/ej5.svg`} alt="Perspectiva del plano x+3y/2+3z=9 en el primer octante (cortes 9, 6 y 3) con una caja roja apoyada en los planos coordenados y su vértice libre (3,2,1) sobre el plano." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$V_{\max}=xyz=3\cdot2\cdot1=6\ \text{m}^3,\qquad(x,y,z)=(3,2,1),\ \lambda=2$$
+
+**Ojo con:** dividir por una variable sin avisar que no es 0, y dar solo el punto sin el volumen que pide el enunciado.
+
+**Criterio estimado — no oficial** (consigna: Lagrange y, "en lo posible", un gráfico):
+
+- **Bien:** $F=xyz-\lambda(\cdot)$, sistema, $x=3$, $y=2$, $z=1$, $V=6$ y gráfico de la situación.
+- **A medias:** resultado correcto sin gráfico (es "en lo posible"), o error de cuenta final con planteo correcto.
+- **Mal:** no plantear la condición del plano, o resolver sin Lagrange cuando la consigna lo exige.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes de Lagrange:
+
+1. **Sustitución:** $z=\frac{9-x-\frac32y}{3}$ da $V(x,y)=\dfrac{xy\,(9-x-\frac32y)}{3}$. Sus parciales se anulan en $(3,2)$ y allí $V_{xx}=-\frac43$, $V_{yy}=-3$, $V_{xy}=-1$, con $H=\frac43\cdot3-1=3\gt0$ y $V_{xx}\lt0$: **máximo**, $V=6$.
+2. **Media geométrica:** los tres sumandos $x$, $\frac32y$, $3z$ suman 9 y su producto es $\frac92xyz$; con suma fija, el producto es máximo cuando los tres son iguales: $x=\frac32y=3z=3$, o sea $(3,2,1)$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r7-2025-10" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R7 Oct-25.pdf" paginas="6" />
+</Ejercicio>

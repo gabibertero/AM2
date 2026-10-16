@@ -1,0 +1,444 @@
+---
+id: "p1-todas-2025-11-rec"
+titulo: "Recuperatorio 1° Parcial Práctico — todas las comisiones (20/11/2025)"
+comision: "todas"
+fecha: "20/11/2025"
+tipo: "recuperatorio"
+fuente: "parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–5"
+orden: 101
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import Pendiente from '../../components/Pendiente.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II · Recuperatorio 1° Parcial Práctico - 20/11/2025 · Comisión: (todas)
+
+Importante (consigna de corrección de la cátedra): todos los ejercicios deben ser resueltos, o al menos 1 de ellos con planteo y desarrollo consistente. No se permite el uso de calculadora ni tabla de derivadas/integrales. Se solicita prolijidad, orden y escritura legible, adjuntado todos los cálculos auxiliares, fundamental para poder controlar y evaluar los procedimientos.
+
+<Ejercicio id="p1-todas-2025-11-rec#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" pagina={1} unidad="U1" tema="Dominio (gráfico con referencias)">
+<Enunciado examen="p1-todas-2025-11-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" pagina="1">
+
+Graficar el dominio de definición de la sig. función:
+
+$$f(x,y)=\frac{\mathrm{Ln}(x^2-y^2+1)+\sqrt{9-x^2-y^2}}{xy\sqrt{y^2-x^2+4}}$$
+
+Importante: el gráfico debe ser claro y con referencias.
+
+</Enunciado>
+
+<Pista>
+
+Mirá cada pieza: un logaritmo y una raíz arriba; abajo un producto $xy$ por una raíz. ¿Qué le exige cada una? Fijate que el denominador es un producto: ¿cuándo vale 0?
+
+</Pista>
+<Pista>
+
+El dominio es la **intersección de las condiciones de existencia**: logaritmo con argumento $\gt0$, raíz del numerador con radicando $\ge0$, y el denominador **distinto de 0** (raíz con radicando $\gt0$, y $x\ne0$, $y\ne0$). Como la consigna enfatiza el gráfico, cada curva se rotula y se marcan cortes. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$x^2-y^2+1\gt0\qquad 9-x^2-y^2\ge0\qquad y^2-x^2+4\gt0\qquad x\ne0,\ y\ne0$$
+
+</Pista>
+<Paso>
+
+**Qué:** el logaritmo del numerador. **Por qué:** el $\ln$ pide argumento positivo.
+
+$$x^2-y^2+1\gt0\ \Rightarrow\ y^2-x^2\lt1$$
+
+Frontera: hipérbola $y^2-x^2=1$ de eje vertical (vértices $(0,\pm1)$). En $(0,0)$ vale $0\lt1$: la región es la que contiene al origen, **entre las dos ramas**, borde excluido.
+
+</Paso>
+<Paso>
+
+**Qué:** la raíz del numerador. **Por qué:** la raíz cuadrada pide radicando $\ge0$, y está en el numerador, así que el cero sí se admite.
+
+$$9-x^2-y^2\ge0\ \Rightarrow\ x^2+y^2\le9$$
+
+Disco de radio 3 **con su borde** (circunferencia incluida).
+
+</Paso>
+<Paso>
+
+**Qué:** la raíz del denominador. **Por qué:** pide radicando $\gt0$ (no puede ser 0 porque divide).
+
+$$y^2-x^2+4\gt0\ \Rightarrow\ x^2-y^2\lt4$$
+
+Frontera: hipérbola $x^2-y^2=4$ de eje horizontal (vértices $(\pm2,0)$). El origen cumple ($0\lt4$): vale la zona **entre las dos ramas**, borde excluido.
+
+</Paso>
+<Paso>
+
+**Qué:** el factor $xy$ del denominador. **Por qué:** un producto vale 0 si algún factor es 0, y el denominador no puede anularse.
+
+$$xy\ne0\ \Rightarrow\ x\ne0\ \wedge\ y\ne0$$
+
+Se **excluyen los dos ejes** coordenados.
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar, ubicar los cortes y dibujar. **Por qué:** el dominio es lo que cumple todo. Los puntos de referencia salen de resolver los pares de curvas:
+
+$$\text{circunferencia y }y^2-x^2=1:\ x^2=4,\ y^2=5\ \Rightarrow\ (\pm2,\pm\sqrt5)$$
+
+$$\text{circunferencia y }x^2-y^2=4:\ x^2=\tfrac{13}2,\ y^2=\tfrac52\ \Rightarrow\ (\pm2{,}55;\ \pm1{,}58)$$
+
+El resultado es una región con forma de "moño" dentro del disco, partida por los ejes en cuatro trozos.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-todas-2025-11-rec/ej1.svg`} alt="Plano xy con ejes graduados de a 1 de −4 a 4. Circunferencia de radio 3 con trazo continuo (borde incluido). Hipérbolas y²−x²=1 y x²−y²=4 con trazo discontinuo (excluidas). Ejes coordenados discontinuos (excluidos). Zona celeste: dentro del disco, entre las ramas de las dos hipérbolas, en forma de moño dividida en cuatro trozos por los ejes. Se rotulan (0,1), (2,0), (0,3), (3,0) y las curvas." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\mathrm{Dom}\,f=\big\{(x,y)\in\mathbb R^2\ /\ x^2-y^2+1\gt0\ \wedge\ x^2+y^2\le9\ \wedge\ y^2-x^2+4\gt0\ \wedge\ x\ne0\ \wedge\ y\ne0\big\}$$
+
+**Ojo con:** el borde de la circunferencia **sí** entra (la raíz del numerador admite 0) y los de las hipérbolas y los ejes **no**; y que el denominador exige $xy\ne0$ además de la raíz.
+
+**Criterio estimado — no oficial** (la consigna dice *graficar* y "el gráfico debe ser claro y con referencias"; por eso el gráfico es la parte central):
+
+- **Bien:** las cinco condiciones y un gráfico claro con circunferencia, ambas hipérbolas y los ejes rotulados, cortes marcados y bordes incluido/excluido distinguidos.
+- **A medias:** condiciones correctas con gráfico sin referencias, o sin distinguir bordes, o sin excluir los ejes.
+- **Mal:** sin gráfico (no se cumple la consigna), o confundir la región de las hipérbolas (tomar las zonas exteriores).
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Puntos de prueba con la fórmula original:
+
+- $(1,1)$: $1-1+1\gt0$, $2\le9$, $1-1+4\gt0$, $xy=1\ne0$: **en el dominio**.
+- $(-1,-2)$: $1-4+1=-2\lt0$: el logaritmo no existe, **fuera**.
+- $(3,0)$: $y=0$, el denominador vale 0: **fuera** (aunque esté sobre la circunferencia).
+- $(2{,}9;\ 0{,}5)$: $x^2+y^2=8{,}66\le9$ pero $y^2-x^2+4=-4{,}16\lt0$: **fuera**.
+- $(\sqrt5,\ 2)$: en el disco ($9\le9$, borde) pero $y^2-x^2=-1\lt1$ y $x^2-y^2=1\lt4$: **en el dominio** (el punto de borde del disco entra).
+
+</Comprobacion>
+<Pendiente>: la resolución oficial (p. 2) usa una captura de GeoGebra donde la circunferencia aparece **discontinua** ($x^2+y^2\lt9$), mientras que su desarrollo escrito dice $x^2+y^2\le9$. El gráfico de este sitio sigue el desarrollo escrito (borde incluido). La captura tampoco muestra los ejes excluidos. Registrado en `docs/revision/p1-todas-2025-11-rec-discrepancias.md`.</Pendiente>
+<ResolucionOficial examen="p1-todas-2025-11-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" paginas="2" />
+</Ejercicio>
+
+<Ejercicio id="p1-todas-2025-11-rec#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" pagina={1} unidad="U2" tema="Diferencial total (tiro oblicuo)">
+<Enunciado examen="p1-todas-2025-11-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" pagina="1">
+
+Calcular por el método diferencial cuánto variará la altura máxima (H) y el alcance (R) de un proyectil lanzado en tiro oblicuo con una velocidad inicial: $v_0=50\frac ms$ y un ángulo de elevación: $\theta=45^\circ$, si los dispositivos utilizados para estas mediciones tienen una tolerancia de:
+
+$$\begin{cases}dv_0=\pm1\%\\ d\theta=\pm3^\circ\end{cases}$$
+
+Formular y calcular los errores porcentuales: $E\%=\frac{dz}{z}.100$
+
+Fórmulas:
+
+$$\begin{cases}H=\dfrac{v_0^2\sin^2(\theta)}{2g}\\[2mm] R=\dfrac{v_0^2\sin(2\theta)}{g}\end{cases}$$
+
+Considerar $g=10\frac m{s^2}$
+
+</Enunciado>
+
+<Pista>
+
+Hay dos funciones, $H$ y $R$, cada una de dos variables ($v_0$ y $\theta$) con errores en ambas. ¿Qué herramienta del curso te da la variación aproximada de una función de varias variables? Y una pregunta de unidades: ¿en qué unidad hay que expresar el ángulo para derivar?
+
+</Pista>
+<Pista>
+
+Método: **diferencial total** de cada función, $dH=H'_{v_0}\,dv_0+H'_\theta\,d\theta$ y $dR=R'_{v_0}\,dv_0+R'_\theta\,d\theta$, con $d\theta$ **en radianes**; después $E\%=\dfrac{dz}{z}\cdot100$ para cada una. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $dv_0=1\%\cdot50=0{,}5$ y $d\theta=3^\circ=\frac\pi{60}$ rad.
+
+$$dH=\frac{v_0\sin^2\theta}{g}\,dv_0+\frac{v_0^2\sin\theta\cos\theta}{g}\,d\theta\qquad dR=\frac{2v_0\sin2\theta}{g}\,dv_0+\frac{2v_0^2\cos2\theta}{g}\,d\theta$$
+
+</Pista>
+<Paso>
+
+**Qué:** valores de partida. **Por qué:** hacen falta para el error porcentual. Con $\sin45^\circ=\cos45^\circ=\frac{\sqrt2}2$ (así $\sin^2=\frac12$) y $\sin90^\circ=1$:
+
+$$H=\frac{50^2\cdot\frac12}{2\cdot10}=\frac{1250}{20}=\frac{125}2=62{,}5\ \text{m}$$
+
+$$R=\frac{50^2\cdot1}{10}=250\ \text{m}$$
+
+</Paso>
+<Paso>
+
+**Qué:** los diferenciales de las variables. **Por qué:** la tolerancia $\pm1\%$ es relativa y $\pm3^\circ$ es absoluta; para derivar, $\theta$ va en radianes ($180^\circ=\pi$).
+
+$$dv_0=\frac1{100}\cdot50=\frac12\ \text{m/s},\qquad d\theta=3^\circ=\frac{3\pi}{180}=\frac\pi{60}\ \text{rad}$$
+
+Para el error máximo se toman ambos con el mismo signo ($+$).
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales de $H$ en el punto. **Por qué:** son los coeficientes de $dH$.
+
+$$H'_{v_0}=\frac{2v_0\sin^2\theta}{2g}=\frac{50\cdot\frac12}{10}=\frac52$$
+
+$$H'_\theta=\frac{2v_0^2\sin\theta\cos\theta}{2g}=\frac{2500\cdot\frac12}{10}=125$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar $dH$ término por término. **Por qué:** se ve el aporte de cada medida (cuidado en el primero con multiplicar por $dv_0=\frac12$).
+
+$$H'_{v_0}\,dv_0=\frac52\cdot\frac12=\frac54,\qquad H'_\theta\,d\theta=125\cdot\frac\pi{60}=\frac{25\pi}{12}$$
+
+$$dH=\frac54+\frac{25\pi}{12}\approx1{,}25+6{,}54=7{,}79\ \text{m}$$
+
+</Paso>
+<Paso>
+
+**Qué:** parciales y diferencial de $R$. **Por qué:** mismo procedimiento. Acá $\cos(2\theta)=\cos90^\circ=0$ y el término del ángulo desaparece.
+
+$$R'_{v_0}=\frac{2v_0\sin2\theta}{g}=\frac{2\cdot50\cdot1}{10}=10,\qquad R'_\theta=\frac{2v_0^2\cos2\theta}{g}=0$$
+
+$$dR=10\cdot\frac12+0\cdot\frac\pi{60}=5\ \text{m}$$
+
+</Paso>
+<Paso>
+
+**Qué:** los errores porcentuales. **Por qué:** comparan cada variación con su valor.
+
+$$E\%(H)=\frac{dH}{H}\cdot100=\frac{\frac54+\frac{25\pi}{12}}{\frac{125}2}\cdot100\approx12{,}5\%$$
+
+$$E\%(R)=\frac{dR}{R}\cdot100=\frac5{250}\cdot100=2\%$$
+
+</Paso>
+<Solucion>
+
+$$dH=\frac54+\frac{25\pi}{12}\approx7{,}8\ \text{m},\quad E\%(H)\approx12{,}5\%\qquad dR=5\ \text{m},\quad E\%(R)=2\%$$
+
+**Ojo con:** el ángulo en **radianes** ($3^\circ=\pi/60$, no 3), y multiplicar cada parcial por su diferencial (en $H$, el primer término es $\frac52\cdot\frac12$, no $\frac52$). Además, $\theta=45^\circ$ es justo donde $R$ es máximo respecto del ángulo: por eso $R'_\theta=0$ y el diferencial no ve el error del ángulo (el incremento real sí lo sentiría, ver comprobación).
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** diferencial total de $H$ y de $R$ con $d\theta$ en radianes, $dH\approx7{,}8$, $dR=5$ y los dos errores porcentuales.
+- **A medias:** planteo correcto con un error de cuenta (por ejemplo el factor $dv_0=\frac12$), o ángulo en grados sin pasar a radianes pero con planteo correcto.
+- **Mal:** no usar diferencial, o resolver solo una de las dos funciones.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Contra el incremento exacto, con $v_0=50{,}5$ y $\theta=48^\circ$:
+
+$$\Delta H=H(50{,}5;\,48^\circ)-H(50;\,45^\circ)\approx7{,}92\ \text{m}$$
+
+El diferencial $7{,}79$ queda muy cerca (a $1{,}6\%$); un valor como $9$ quedaría lejos del real. Para $R$: $\Delta R\approx3{,}63$ m frente a $dR=5$: la diferencia es esperable porque en $\theta=45^\circ$ el término de primer orden en el ángulo es nulo y pesan los de segundo orden, de signo negativo ($R$ tiene un máximo en $45^\circ$).
+
+</Comprobacion>
+<Pendiente>: diferencia con la resolución oficial. El escaneo (p. 3) obtiene $dH=\frac52+\frac{125\pi}{60}\approx9$ m y $E\%(H)\approx14{,}4\%$; el recálculo da $dH=\frac54+\frac{25\pi}{12}\approx7{,}8$ m y $E\%(H)\approx12{,}5\%$. ⚠️ La resolución oficial da $\frac52$ en el primer término; el recálculo da $\frac54$ — pendiente de confirmar con la cátedra. Causa probable: al evaluar $H'_{v_0}\,dv_0=\frac52\cdot\frac12$ se perdió el factor $dv_0=\frac12$ (el segundo término $\frac{125\pi}{60}$ y todo $R$ coinciden). Registrado en `docs/revision/p1-todas-2025-11-rec-discrepancias.md`. No se corrigió el original.</Pendiente>
+<ResolucionOficial examen="p1-todas-2025-11-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" paginas="3" />
+</Ejercicio>
+
+<Ejercicio id="p1-todas-2025-11-rec#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" pagina={1} unidad="U2" tema="Direccional nula y gradiente">
+<Enunciado examen="p1-todas-2025-11-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" pagina="1">
+
+Dada la función $f(x,y)=Ln(\sqrt{5x^2-4y^2})$ determinar en que dirección (ángulo-s) en el punto $P(4,5)$ la derivada direccional es nula.
+Además, dar la expresión cartesiana del vector gradiente, graficarlo (lo más proporcional posible), y calcular el valor máximo de la derivada direccional en el punto P.
+
+</Enunciado>
+
+<Pendiente>: en $P(4,5)$ el radicando vale $5\cdot16-4\cdot25=-20\lt0$, así que, estrictamente, $P$ **no pertenece al dominio** de $f$ (la raíz no es real). La resolución oficial deriva igual, de manera formal, usando $f=\frac12\ln(5x^2-4y^2)$; las derivadas parciales resultan las de $\frac12\ln|5x^2-4y^2|$, que sí está definida en $P$. Se sigue esa lectura formal (es la única con la que el ejercicio tiene respuesta) y se deja anotado. Registrado en `docs/revision/p1-todas-2025-11-rec-discrepancias.md`.</Pendiente>
+
+<Pista>
+
+La derivada direccional es "cuánto cambia $f$" al moverte en cierta dirección. Si querés que ese cambio sea cero, ¿en qué relación tiene que estar la dirección con el gradiente? Antes de derivar, ¿se puede simplificar la función?
+
+</Pista>
+<Pista>
+
+Método: simplificar con propiedades del logaritmo ($\ln\sqrt u=\frac12\ln u$), derivar y plantear $\dfrac{\partial f}{\partial s}=f'_x\cos\alpha+f'_y\sin\alpha=0$; la dirección nula es perpendicular al gradiente. El gradiente es $\nabla f=f'_x\vec i+f'_y\vec j$ y su módulo es el máximo de la direccional. Teoría: Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2 (el ejercicio 7 es de este tipo).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $f=\frac12\ln(5x^2-4y^2)$, entonces
+
+$$f'_x=\frac12\cdot\frac{10x}{5x^2-4y^2},\qquad f'_y=\frac12\cdot\frac{-8y}{5x^2-4y^2}$$
+
+</Pista>
+<Paso>
+
+**Qué:** simplificar. **Por qué:** una raíz dentro de un $\ln$ se baja como exponente $\frac12$, y se deriva mucho más fácil.
+
+$$f=\ln\big((5x^2-4y^2)^{1/2}\big)=\frac12\ln(5x^2-4y^2)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales. **Por qué:** regla de la cadena: la derivada de $\ln u$ es $\frac{u'}{u}$.
+
+$$f'_x=\frac12\cdot\frac{10x}{5x^2-4y^2}=\frac{5x}{5x^2-4y^2},\qquad f'_y=\frac12\cdot\frac{-8y}{5x^2-4y^2}=\frac{-4y}{5x^2-4y^2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(4,5)$. **Por qué:** el denominador común vale $5\cdot16-4\cdot25=80-100=-20$.
+
+$$f'_x(P)=\frac{5\cdot4}{-20}=-1,\qquad f'_y(P)=\frac{-4\cdot5}{-20}=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** plantear derivada direccional nula. **Por qué:** es lo que pide la primera parte.
+
+$$\frac{\partial f}{\partial s}=-1\cdot\cos\alpha+1\cdot\sin\alpha=0\ \Rightarrow\ \sin\alpha=\cos\alpha\ \Rightarrow\ \operatorname{tg}\alpha=1$$
+
+$$\alpha=45^\circ\quad\text{o}\quad\alpha=45^\circ+180^\circ=225^\circ$$
+
+Son las dos direcciones (una y su opuesta) perpendiculares al gradiente.
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, valor máximo y ángulo. **Por qué:** el módulo del gradiente es el máximo de la direccional.
+
+$$\nabla f(P)=-\vec i+\vec j,\qquad \|\nabla f\|=\sqrt{(-1)^2+1^2}=\sqrt2$$
+
+El gradiente está en el 2.º cuadrante: $\operatorname{arctg}\frac{1}{-1}=-45^\circ$ es del 4.º, se suma $180^\circ$: $\theta=135^\circ$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-todas-2025-11-rec/ej3.svg`} alt="Plano xy con ejes graduados de a 1 y el punto P(4,5). Flecha roja: el gradiente (−1, 1) en escala 1:1, hacia arriba a la izquierda a 135°, máximo crecimiento. Flecha azul opuesta: mínimo. Recta verde discontinua perpendicular, a 45° y 225°: derivada direccional nula." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\alpha=45^\circ\ \text{y}\ \alpha=225^\circ\ \text{(derivada direccional nula)}$$
+
+$$\nabla f(P)=-\vec i+\vec j,\qquad \Big(\tfrac{\partial f}{\partial s}\Big)_{\max}=\|\nabla f\|=\sqrt2\ \ (\theta=135^\circ)$$
+
+**Ojo con:** dar solo $45^\circ$ (hay dos direcciones nulas, opuestas), y notar que $P$ no está estrictamente en el dominio (ver nota arriba).
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** derivadas $-1$ y $1$, $\alpha=45^\circ$ y $225^\circ$, $\nabla f=-\vec i+\vec j$, $\sqrt2$ y gráfico proporcional del gradiente.
+- **A medias:** una sola de las dos direcciones nulas, o gráfico sin proporción, o error de cuenta en un signo.
+- **Mal:** igualar el gradiente a cero (no es lo que se pide) o no simplificar/derivar la raíz del logaritmo.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Con la versión definida en $P$, $g(x,y)=\frac12\ln|5x^2-4y^2|$:
+
+- **Gradiente · versor:** $\nabla f\cdot(\cos45^\circ,\sin45^\circ)=(-1)\frac{\sqrt2}2+1\cdot\frac{\sqrt2}2=0$ y lo mismo con $225^\circ$: ambas direcciones son nulas.
+- **Cociente incremental numérico** de $g$ con $h=10^{-6}$ en $45^\circ$: $\approx0$.
+- **Perpendicularidad:** el vector $(1,1)$ de las direcciones nulas cumple $(-1,1)\cdot(1,1)=0$, y el máximo se da en $(-1,1)/\sqrt2$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-todas-2025-11-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" paginas="4" />
+</Ejercicio>
+
+<Ejercicio id="p1-todas-2025-11-rec#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" pagina={1} unidad="U3" tema="Lagrange: caja y superficie total">
+<Enunciado examen="p1-todas-2025-11-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" pagina="1">
+
+Determinar la superficie total de un paralelepípedo recto de máximo volumen con 3 de sus caras en los planos cartesianos y un vértice en el plano: $6x+3y+2z=18$
+
+</Enunciado>
+
+<Pista>
+
+Te piden una superficie, pero el dato que optimiza es el volumen. ¿Qué dos pasos hay? Primero ¿qué caja es la de volumen máximo? Después ¿cómo se calcula la superficie de esa caja?
+
+</Pista>
+<Pista>
+
+Método: **Lagrange** para el volumen $V=xyz$ con el plano como condición, $F=V-\lambda\,g$; con las dimensiones de la caja óptima se calcula la superficie total $S=2(xy+yz+xz)$. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$F(x,y,z,\lambda)=xyz-\lambda\,(6x+3y+2z-18)$$
+
+</Pista>
+<Paso>
+
+**Qué:** modelar. **Por qué:** con tres caras sobre los planos coordenados, la caja va del origen al vértice $(x,y,z)$ del plano, con aristas $x,y,z$ y volumen $V=xyz$ que se maximiza.
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $F$ e igualar a cero.
+
+$$F'_x=yz-6\lambda=0,\quad F'_y=xz-3\lambda=0,\quad F'_z=xy-2\lambda=0,\quad F'_\lambda=-(6x+3y+2z-18)=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** eliminar $\lambda$. **Por qué:** las tres primeras dan $\lambda$ de tres formas que se igualan.
+
+$$\lambda=\frac{yz}6=\frac{xz}3=\frac{xy}2$$
+
+De $\frac{yz}{6}=\frac{xz}{3}$, dividiendo por $z\ne0$: $y=2x$. De $\frac{yz}6=\frac{xy}2$, dividiendo por $y\ne0$: $z=3x$.
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en el plano.
+
+$$6x+3(2x)+2(3x)=18$$
+
+$$6x+6x+6x=18\ \Rightarrow\ 18x=18\ \Rightarrow\ x=1$$
+
+$$y=2x=2,\qquad z=3x=3,\qquad V=1\cdot2\cdot3=6\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** la superficie total. **Por qué:** es lo que pide el enunciado; la caja tiene 6 caras (3 pares iguales), incluidas las tres apoyadas en los planos coordenados.
+
+$$S=2xy+2yz+2xz=2(xy+yz+xz)$$
+
+$$xy=2,\qquad yz=6,\qquad xz=3$$
+
+$$S=2(2+6+3)=2\cdot11=22\ \text{m}^2$$
+
+**Por qué es máximo:** el volumen es 0 en las caras del octante y positivo adentro; el único punto crítico interior es el máximo.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-todas-2025-11-rec/ej4.svg`} alt="Perspectiva del plano 6x+3y+2z=18 en el primer octante (cortes 3, 6 y 9 sobre los ejes) con una caja roja apoyada en los planos coordenados y su vértice libre (1,2,3) sobre el plano." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$(x,y,z)=(1,2,3),\quad V_{\max}=6\ \text{m}^3,\qquad S=22\ \text{m}^2$$
+
+**Ojo con:** responder el volumen cuando piden la superficie, y contar solo 3 caras de la caja (la superficie total son las 6).
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** $F=xyz-\lambda(\cdot)$, sistema, $(1,2,3)$ y $S=2(xy+yz+xz)=22$.
+- **A medias:** dimensiones correctas pero superficie mal calculada (por ejemplo, contando 3 caras: $11$).
+- **Mal:** no maximizar el volumen (optimizar la superficie), o no usar Lagrange.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes:
+
+1. **Sustitución:** $z=\frac{18-6x-3y}2$ da $V(x,y)=\dfrac{xy\,(18-6x-3y)}2$. En $(1,2)$: $V_x=\frac{18y-12xy-3y^2}2=0$ y $V_y=\frac{18x-6x^2-6xy}2=0$; además $V_{xx}=-12$, $V_{yy}=-3$, $V_{xy}=-3$, con $H=36-9=27\gt0$ y $V_{xx}\lt0$: **máximo**, $V=6$.
+2. **Media geométrica:** los sumandos $6x$, $3y$, $2z$ suman 18 y su producto es $36\,xyz$; con suma fija el producto es máximo con los tres iguales: $6x=3y=2z=6$, o sea $(1,2,3)$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-todas-2025-11-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial Nov-25.pdf" paginas="5" />
+</Ejercicio>
