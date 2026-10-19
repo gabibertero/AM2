@@ -130,7 +130,8 @@ a.chip, button.chip { min-height: 44px; }
 .emo { display: block; width: 28px; height: 28px; color: var(--acento); }
 .emo svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .tarjeta-link strong { font-family: var(--f-ed); font-size: 1.25rem; }
-.ec-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-4); }
+.ec-top .chip-fuerte { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.ec-top { display: flex; flex-wrap: nowrap; align-items: flex-start; justify-content: space-between; gap: var(--s-4); }
 .ec-titulo { display: inline-block; padding-block: var(--s-12); font-family: var(--f-ed); font-weight: 700; font-size: 1.15rem; line-height: 1.3; color: var(--texto); text-decoration: none; }
 .ec-titulo::after { content: ''; position: absolute; inset: 0; border-radius: var(--r); } /* tarjeta entera clickeable */
 .ec-titulo:hover { text-decoration: underline; }
@@ -205,7 +206,8 @@ main > p { max-width: 46rem; }
 .examen-cab h1 { margin: 0 0 .3em; font-size: clamp(1.6rem, 4vw, 2.2rem); }
 .examen-cab .meta { margin-bottom: .4rem; }
 .examen-grid { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 28px; align-items: start; }
-.examen-cont { min-width: 0; max-width: 48rem; }
+.examen-cont { min-width: 0; max-width: 42rem; }
+.examen-cont > blockquote { margin: var(--s-16) 0; padding: 0 0 0 var(--s-16); border-left: 4px solid var(--borde-fuerte); }
 .indice { position: sticky; top: 76px; background: var(--sup); border: 1px solid var(--borde); border-radius: var(--r); padding: var(--s-16); }
 .indice-t { margin: 0 0 8px; font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--suave); }
 .indice ol, .toc ol { list-style: none; margin: 0; padding: 0; }
@@ -253,8 +255,7 @@ main > p { max-width: 46rem; }
 [data-paso] + [data-paso] { margin-top: 12px !important; }
 
 /* Lectura: machetes y teoría */
-.lectura { max-width: none; padding: var(--s-24); }
-.lectura > *:not(.capa):not(.caja):not(table):not(figure) { max-width: 72ch; }
+.lectura { max-width: calc(64ch + 2 * var(--s-24)); padding: var(--s-24); } /* tarjeta al ancho del texto: ~75 caracteres por línea */
 .lectura h2 { font-size: 1.4rem; margin-top: 2rem; padding-top: .9rem; border-top: 1px solid var(--borde); }
 .lectura > .rotulo + h2 { border-top: 0; margin-top: .5rem; }
 .lectura h3 { font-size: 1.15rem; }
@@ -283,17 +284,23 @@ main > p { max-width: 46rem; }
   .ej-num { font-size: 2.6rem; }
   .lectura { padding: var(--s-16); }
 }
+@media (max-width: 640px) {
+  .lectura :is(ol, ul) { padding-left: 1.25em; }
+  .toc a { display: flex; align-items: center; min-height: 44px; }
+}
 
 /* Figuras SVG en celular: tamaño legible con scroll horizontal dentro del recuadro, con aviso, degradé y enlace al SVG */
 .fig-full { display: none; }
 @media (max-width: 640px) {
-  .ejercicio .capa, .lectura :is(p, figure):has(> img[src*='.svg']) { overflow-x: auto; }
+  :is(.ejercicio .capa, .lectura :is(p, figure)):has(> img[src*='.svg']), .ejercicio p:has(> img[src*='.svg']) { overflow-x: auto; }
   .ejercicio img[src*='.svg'], .lectura img[src*='.svg'] { max-width: none !important; width: 560px; min-width: 560px; }
-  .ejercicio .capa:has(img[src*='.svg']), .lectura :is(p, figure):has(> img[src*='.svg']) {
+  :is(.ejercicio .capa, .ejercicio p, .lectura :is(p, figure)):has(> img[src*='.svg']) {
     background: linear-gradient(to left, var(--cap-bg, var(--sup)), var(--cap-bg, var(--sup))) 100% 0 / 24px 100% no-repeat local,
       linear-gradient(to left, rgb(0 0 0 / .22), transparent) 100% 0 / 24px 100% no-repeat scroll, var(--cap-bg, var(--sup));
   }
-  .ejercicio .capa:has(img[src*='.svg'])::before, .lectura :is(p, figure):has(> img[src*='.svg'])::before { content: '← Deslizá para ver la figura completa →'; display: block; position: sticky; left: 0; width: max-content; max-width: 100%; margin-bottom: var(--s-8); font-size: .8125rem; font-weight: 600; color: var(--suave); }
+  :is(.ejercicio p, .lectura :is(p, figure)):has(> img[src*='.svg'])::before { content: '← Deslizá para ver la figura completa →'; display: block; position: sticky; left: 0; width: max-content; max-width: 100%; margin-bottom: var(--s-8); font-size: .8125rem; font-weight: 600; color: var(--suave); }
+  /* en capas el ::before de los pasos es el contador: el aviso va en el rótulo */
+  .ejercicio .capa:has(> img[src*='.svg']) > .rotulo::after { content: '← Deslizá para ver la figura completa →'; display: block; position: sticky; left: 0; width: max-content; max-width: 100%; margin-top: var(--s-4); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--suave); }
   .fig-full { display: inline-flex; align-items: center; min-height: 44px; position: sticky; left: 0; font-weight: 600; font-size: .9rem; }
 }
 
@@ -346,3 +353,10 @@ main > p { max-width: 46rem; }
 /* Durante el examen: sin pistas, pasos, soluciones, estado ni IA. Al entregar vuelven todas y queda la IA. */
 body[data-examen] .acciones, body[data-examen] .estado, body[data-examen='activo'] .ia, body[data-examen='activo'] [data-pista], body[data-examen='activo'] [data-paso], body[data-examen='activo'] [data-solucion] { display: none !important; }
 body[data-examen='entregado'] .ejercicio .capa[data-pista], body[data-examen='entregado'] .ejercicio .capa[data-paso], body[data-examen='entregado'] .ejercicio .capa[data-solucion] { display: block !important; }
+
+/* Aviso de discrepancia con el original: ámbar, distinto del enunciado oficial */
+.aviso-disc { margin: var(--s-16) 0 0; padding: var(--s-12) var(--s-16); border: 1px solid color-mix(in srgb, var(--generado) 40%, var(--sup)); border-left: 5px solid var(--generado); border-radius: var(--r-s); background: var(--generado-fondo); color: var(--texto); }
+.aviso-disc::before { content: 'Aviso · discrepancia con el original'; display: block; margin-bottom: var(--s-8); font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--generado); }
+.aviso-disc > :last-child { margin-bottom: 0; }
+.scan { max-height: 480px; overflow-y: auto; margin-top: var(--s-8); border-radius: var(--r-s); }
+.scan img { margin-top: 0 !important; }

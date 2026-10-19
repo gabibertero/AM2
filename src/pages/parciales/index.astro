@@ -4,7 +4,8 @@ import Layout from '../../layouts/Layout.astro';
 import InstanciaSec from '../../components/InstanciaSec.astro';
 import { idsDeEjercicios } from '../../scripts/ids.js';
 import { INSTANCIAS, instanciaDeUnidades } from '../../lib/sitio.js';
-const corto = (v, alt) => (/^no figura/i.test(v) ? alt : v);
+const corto = (v, alt) => (/^(no figura|xx)/i.test(v) ? alt : v);
+const tema = (t, c = '') => t.replace(/^tema\s+/i, '').replace(new RegExp(`^${c}\\s+`, 'i'), '');
 const base = import.meta.env.BASE_URL;
 const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden - b.data.orden);
 ---
@@ -17,7 +18,7 @@ const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden 
     {lista.map((e) => (
       <li class="tarjeta examen-card">
         <div class="ec-top">
-          <span class="chip chip-fuerte">{corto(e.data.comision, 'sin comisión')}{e.data.tema && ` · Tema ${e.data.tema}`}</span>
+          <span class="chip chip-fuerte">{corto(e.data.comision, 'sin comisión')}{e.data.tema && ` · ${tema(e.data.tema, e.data.comision)}`}</span>
           {e.body.includes('<Solucion') && <span class="chip chip-ok">✔ Con solución</span>}
         </div>
         <a class="ec-titulo" href={`${base}parciales/${e.id}/`}>{e.data.titulo}</a>

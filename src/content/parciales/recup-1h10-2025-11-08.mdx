@@ -240,7 +240,11 @@ $$IT=2\pi\cdot\frac{256}{21}=\frac{512\pi}{21}$$
 </Comprobacion>
 <ResolucionOficial examen="recup-1h10-2025-11-08" fuente="parciales/2do-parcial/2° Parciales/Recup. 2° PP 1H10 Nov-2025.pdf" paginas="3" />
 
-> ⚠️ **Discrepancia:** la resolución oficial (p. 3) llega a $IT=\tfrac{64}{21}\pi$, pero el recálculo con sympy (y una suma numérica independiente) da $IT=\tfrac{512}{21}\pi$. Causa probable: al pasar de $8r^2-\tfrac{r^6}{2}$ a "$\tfrac12(8r^2-r^6)$" se perdió un factor 2 (debería ser $\tfrac12(16r^2-r^6)$), de ahí $\tfrac12\big(\tfrac{64}{3}-\tfrac{128}{7}\big)=\tfrac{32}{21}$ en vez de $\tfrac{256}{21}$. El planteo oficial es correcto; solo falla la cuenta. Pendiente de confirmar con la cátedra.
+<div class="aviso-disc">
+
+**Discrepancia:** la resolución oficial (p. 3) llega a $IT=\tfrac{64}{21}\pi$, pero el recálculo con sympy (y una suma numérica independiente) da $IT=\tfrac{512}{21}\pi$. Causa probable: al pasar de $8r^2-\tfrac{r^6}{2}$ a "$\tfrac12(8r^2-r^6)$" se perdió un factor 2 (debería ser $\tfrac12(16r^2-r^6)$), de ahí $\tfrac12\big(\tfrac{64}{3}-\tfrac{128}{7}\big)=\tfrac{32}{21}$ en vez de $\tfrac{256}{21}$. El planteo oficial es correcto; solo falla la cuenta. Pendiente de confirmar con la cátedra.
+
+</div>
 </Ejercicio>
 
 <Ejercicio id="recup-1h10-2025-11-08#3" numero={3} fuente="parciales/2do-parcial/2° Parciales/Recup. 2° PP 1H10 Nov-2025.pdf" pagina={1} unidad="U5" tema="Integral curvilínea y Green">
