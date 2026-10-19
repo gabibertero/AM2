@@ -33,9 +33,10 @@ const base = import.meta.env.BASE_URL;
 </ol>
 <style>
   .mapa { max-width: none; list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  @media (min-width: 1100px) { .mapa:has(> :nth-child(7)) { grid-template-columns: repeat(4, 1fr); } } /* 7 unidades: 4+3, sin huérfana */
   .mapa-u { background: var(--sup); border: 1px solid var(--borde); border-top: 4px solid var(--uc); border-radius: var(--r); padding: var(--s-24); box-shadow: var(--sombra); display: flex; flex-direction: column; gap: 8px; }
-  .mapa-u header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-  .mapa-n { font-family: var(--f-ed); font-weight: 700; font-size: 1.75rem; line-height: 1; color: var(--uc); }
+  .mapa-u header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-8); }
+  .mapa-n { white-space: nowrap; font-family: var(--f-ed); font-weight: 700; font-size: 1.75rem; line-height: 1; color: var(--uc); }
   .mapa-cae { font-size: .8125rem; font-weight: 600; color: var(--suave); border: 1px solid var(--borde); border-radius: 999px; padding: 0 var(--s-12); background: var(--sup2); white-space: nowrap; }
   [data-cae='practico'] .mapa-cae { color: var(--e-ok); background: var(--e-ok-bg); border-color: color-mix(in srgb, var(--e-ok) 40%, var(--sup)); }
   [data-cae='tentativo'] .mapa-cae { color: var(--e-curso); background: var(--e-curso-bg); border-color: color-mix(in srgb, var(--e-curso) 40%, var(--sup)); }

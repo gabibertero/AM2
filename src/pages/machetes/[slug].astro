@@ -16,7 +16,7 @@ const d = entry.data;
 ---
 <Layout titulo={d.titulo}>
   <p class="meta"><a href={`${base}machetes/`}>← Machetes</a> · <span class="chip chip-u" data-unidad={d.unidad}>{d.unidad}</span></p>
-  <h1>{d.titulo}</h1>
+  <h1 class="cab-lectura">{d.titulo}</h1>
   {toc.length > 0 && (
     <nav class="toc" aria-label="En esta página"><p class="indice-t">En esta página</p>
       <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>

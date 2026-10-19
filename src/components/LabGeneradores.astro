@@ -55,8 +55,8 @@ import { INSTANCIAS } from '../lib/sitio.js';
 <style>
   .lab-tipos { margin-top: var(--s-32); }
   .lab-tipos > summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
-  .lab-lista { columns: 2 16rem; padding-left: 1.2em; margin: 0 0 1rem; }
-  .lab-ctrl { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; margin-bottom: 8px; }
+  .lab-lista { columns: 2 16rem; padding-left: var(--s-24); margin: 0 0 var(--s-16); }
+  .lab-ctrl { display: flex; flex-wrap: wrap; gap: var(--s-12) var(--s-24); align-items: end; margin-bottom: 8px; }
   .lab-campo { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
   .lab-ctrl > .lab-campo:first-child { flex: 1 1 16rem; max-width: 100%; }
   .lab-gen select { width: 100%; }
@@ -66,18 +66,18 @@ import { INSTANCIAS } from '../lib/sitio.js';
   .lab-gen input[type='text'] { width: 9rem; }
   .lab-nota { margin: 4px 0; font-size: .9rem; }
   .lab-aviso { min-height: 1.4em; margin: 4px 0 8px; font-weight: 600; color: var(--pendiente); }
-  .lab-ej { background: var(--sup); border: 1px solid var(--borde); border-left: 5px solid var(--acento); border-radius: var(--r); box-shadow: var(--sombra); padding: 18px 20px; min-width: 0; }
-  .lab-enun { margin: 6px 0 14px; }
+  .lab-ej { background: var(--sup); border: 1px solid var(--borde); border-left: 5px solid var(--acento); border-radius: var(--r); box-shadow: var(--sombra); padding: var(--s-16) var(--s-24); min-width: 0; }
+  .lab-enun { margin: var(--s-8) 0 var(--s-16); }
   .lab-acc { display: flex; flex-wrap: wrap; gap: 8px; }
-  .lab-sol { margin-top: 12px; padding: 14px 18px; background: var(--elaborado-fondo); border: 1px solid var(--borde); border-radius: var(--r-s); }
+  .lab-sol { margin-top: 12px; padding: var(--s-16); background: var(--elaborado-fondo); border: 1px solid var(--borde); border-radius: var(--r-s); }
   .lab-sol h3 { margin: 0 0 .6em; font-size: 1rem; }
-  .lab-sol ol { margin: 0; padding-left: 1.3em; }
-  .lab-sol li { margin: 0 0 .7em; }
+  .lab-sol ol { margin: 0; padding-left: var(--s-24); }
+  .lab-sol li { margin: 0 0 var(--s-12); }
   .lab-res { margin-top: .4em; padding-top: .6em; border-top: 1px solid var(--borde); }
   .lab-res-t { margin: 0; font-weight: 700; }
-  .lab-sol :global(.lab-graf) { display: block; width: 100%; max-width: 340px; height: auto; margin: 6px auto 0; background: var(--sup); border: 1px solid var(--borde); border-radius: var(--r-s); }
+  .lab-sol :global(.lab-graf) { display: block; width: 100%; max-width: 340px; height: auto; margin: var(--s-8) auto 0; background: var(--sup); border: 1px solid var(--borde); border-radius: var(--r-s); }
   .lab-bloque p { margin: 0 0 .2em; }
   .lab-tex { overflow-x: auto; overflow-y: hidden; position: relative; max-width: 100%; }
   .lab-tex :global(.katex-display) { margin: .3em 0; }
-  @media (max-width: 720px) { .lab-ej { padding: 14px; } }
+  @media (max-width: 720px) { .lab-ej { padding: var(--s-16); } }
 </style>
