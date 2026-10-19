@@ -1,0 +1,679 @@
+---
+id: "p1-1r3-2024-10-b"
+titulo: "1° Parcial Práctico — Comisión 1R3 (B, 4/10/2024)"
+comision: "1R3"
+fecha: "4/10/2024"
+tipo: "práctico"
+tema: "B"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–7"
+orden: 131
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1R3 (B) · 1° Parcial Práctico – 4/10/2024
+
+**Importante:** Todos los ejercicios deben ser resueltos, o al menos 2 de ellos planteados sin necesidad de llegar al resultado final. No se permite el uso de tabla de derivadas ni obviamente teléfono móvil. Se solicita prolijidad, orden y escritura grande y legible. Adjuntar todos los cálculos auxiliares, fundamental para poder controlar y evaluar los procedimientos.
+
+<Ejercicio id="p1-1r3-2024-10-b#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\dfrac{\log\left(1-\frac{x^2}{9}+\frac{y^2}{4}\right)-\arcsen\left(\frac{x}{5}\right)}{\sqrt{x^2+y^2-1}}$$
+
+</Enunciado>
+
+<Pista>
+
+Mirá las operaciones: un logaritmo, un arco seno y, abajo, una raíz que además divide. Para cada una preguntate qué valores del interior la "rompen", y qué pasa con un cociente si el denominador vale cero.
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: una desigualdad por operación (logaritmo: argumento $\gt0$; $\arcsin$: argumento entre $-1$ y $1$; raíz en el denominador: radicando $\gt0$), y se queda uno con lo que cumple **todas a la vez**. Cada una es una región del plano (hipérbola, franja vertical, circunferencia). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$1-\frac{x^2}{9}+\frac{y^2}{4}>0,\qquad -1\le\frac x5\le1,\qquad x^2+y^2-1>0$$
+
+La primera, pasando términos, se reconoce como una hipérbola con eje en $x$. Falta decidir qué lado de la hipérbola es y dibujar las tres juntas.
+
+</Pista>
+<Paso>
+
+**Qué:** una condición por cada operación. **Por qué:** $\log A$ pide $A>0$; $\arcsin B$ pide $-1\le B\le1$; la raíz del denominador pide radicando $>0$ (no puede ser $0$ porque divide). **Cómo reconocerlo:** log y denominador, estrictas; el $\arcsin$ admite los extremos.
+
+$$\text{(a) }1-\frac{x^2}{9}+\frac{y^2}{4}>0\qquad\text{(b) }-1\le\frac x5\le1\qquad\text{(c) }x^2+y^2-1>0$$
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (a). **Por qué:** pasando $\frac{x^2}{9}$ al otro miembro y reordenando:
+
+$$\frac{x^2}{9}-\frac{y^2}{4}<1$$
+
+La curva $\frac{x^2}{9}-\frac{y^2}{4}=1$ es una hipérbola de eje horizontal (vértices $(\pm3;0)$, asíntotas $y=\pm\frac23x$). La desigualdad "$<1$" es la zona **entre las dos ramas**, la que contiene al origen ($0<1$ es cierto). Borde excluido: punteado.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (b). **Por qué:** multiplicando por $5$:
+
+$$-5\le x\le5$$
+
+Es la **franja vertical** entre las rectas $x=-5$ y $x=5$, que **sí** pertenecen ($\arcsin(\pm1)$ existe): línea llena.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (c). **Por qué:**
+
+$$x^2+y^2>1$$
+
+Es el **exterior de la circunferencia** de radio $1$. El borde no pertenece. Como los vértices de la hipérbola están en $x=\pm3$, esta circunferencia queda completamente dentro de la zona entre ramas: es un "agujero" en el centro.
+
+</Paso>
+<Paso>
+
+**Qué:** intersecar y dibujar. **Por qué:** el dominio es lo que cumple las tres: entre las ramas de la hipérbola, dentro de la franja $|x|\le5$ y fuera del disco de radio $1$. La región es **no acotada** hacia arriba y abajo (entre las ramas hay lugar para $y$ tan grande como se quiera). En $x=5$ la hipérbola está en $y=\pm\frac83$, y a partir de ahí las ramas quedan fuera de la franja.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-b/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Hipérbola x²/9−y²/4=1 punteada con vértices en (±3;0), rectas llenas x=5 y x=−5, circunferencia de radio 1 punteada. Sombreada la zona entre las dos ramas de la hipérbola dentro de la franja entre x=−5 y x=5, excepto el disco de radio 1 del centro." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ \frac{x^2}{9}-\frac{y^2}{4}<1\ \ \wedge\ \ |x|\le5\ \ \wedge\ \ x^2+y^2>1\Big\}$$
+
+**Ojo con:** elegir mal el lado de la hipérbola (probá el origen), poner "$<5$" en la franja (el $\arcsin$ de $1$ sí existe) y olvidar el agujero de la circunferencia de radio $1$.
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"):
+
+- **Bien:** las tres condiciones con sus bordes bien (incluidos/excluidos), gráfico con la región correcta y el conjunto escrito analíticamente.
+- **A medias:** condiciones correctas pero un borde mal marcado, o falta el gráfico consolidado o la expresión analítica.
+- **Mal:** falta una condición entera (por ejemplo $|x|\le5$) o se elige el lado equivocado de la hipérbola.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar en puntos de prueba**.
+
+- $(0;\,2)$: $1-0+1=2>0$, $\arcsin0=0$ y $\sqrt{4-1}$ existen. **Está.**
+- $(5;\,3)$: $1-\frac{25}{9}+\frac94=\frac{17}{36}>0$ existe el log, $\arcsin1=\frac\pi2$ existe y $34>1$. **Está** (borde de la franja incluido).
+- $(4;\,0)$: $1-\frac{16}{9}<0$, el log no existe. **No está.**
+- $(6;\,0)$: además de caer fuera de las ramas, $\arcsin\frac65$ no existe. **No está.**
+- $(0;\,0{,}5)$: $x^2+y^2=0{,}25<1$, raíz de un negativo. **No está.**
+
+Los cinco puntos coinciden con la región dibujada.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** coincide. Plantea (a) hipérbola de eje horizontal con $\frac{x^2}{9}-\frac{y^2}{4}<1$, (b) $-5\le x\le5$ y (c) circunferencia de radio $1$ con $x^2+y^2>1$; dibuja la zona entre ramas con la franja y el agujero central, y escribe $D=\{\frac{x^2}{9}-\frac{y^2}{4}<1\ \wedge\ |x|\le5\ \wedge\ x^2+y^2>1\}$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-b#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina={1} unidad="U2" tema="Diferencial y error porcentual">
+<Enunciado examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina="1">
+
+Sea una pirámide recta cuya base es un triángulo equilátero de lado $l=20\ cm$ y altura $h=30\ cm$. Calcular por método diferencial la máxima variación de su volumen si el error de medición fue: $dl=dh=2\%$ máximo.
+
+Calcular también el Error (%).
+
+Volumen de la pirámide recta (base equilátera): $V=\frac{\sqrt3}{12}l^2h$
+
+</Enunciado>
+
+<Pista>
+
+Las medidas tienen un error de medición chico y te piden cuánto puede equivocarse, como máximo, el volumen. ¿De cuántas variables depende $V$? ¿Qué te da el error de cada una?
+
+</Pista>
+<Pista>
+
+Es **diferencial total**: $dV=V'_l\,dl+V'_h\,dh$ con $dl$ y $dh$ los errores máximos (todos con el mismo signo, porque se pide la **máxima** variación), y $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $V'_l=\dfrac{\sqrt3}{6}\,l\,h$ y $V'_h=\dfrac{\sqrt3}{12}\,l^2$, evaluadas en $(20;30)$. Los errores: $dl=2\%\cdot20$ y $dh=2\%\cdot30$ (en cm).
+
+</Pista>
+<Paso>
+
+**Qué:** volumen inicial. **Por qué:** hace falta para el error porcentual.
+
+$$V=\frac{\sqrt3}{12}\cdot20^2\cdot30=\frac{\sqrt3}{12}\cdot12000=1000\sqrt3\ \text{cm}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** los errores de medición. **Por qué:** el 2% se aplica a cada medida; se toman positivos porque se busca el error **máximo**.
+
+$$dl=2\%\cdot20=0{,}4\ \text{cm}\qquad dh=2\%\cdot30=0{,}6\ \text{cm}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales. **Por qué:** $V=\frac{\sqrt3}{12}l^2h$ (derivo $l^2$ y dejo $h$ constante, o al revés).
+
+$$\frac{\partial V}{\partial l}=\frac{\sqrt3}{6}\,l\,h=\frac{\sqrt3}{6}\cdot600=100\sqrt3$$
+
+$$\frac{\partial V}{\partial h}=\frac{\sqrt3}{12}\,l^2=\frac{\sqrt3}{12}\cdot400=\frac{100\sqrt3}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el diferencial. **Por qué:** suma de los aportes de cada medida.
+
+$$100\sqrt3\cdot0{,}4=40\sqrt3\qquad\frac{100\sqrt3}{3}\cdot0{,}6=20\sqrt3$$
+
+$$dV=40\sqrt3+20\sqrt3=60\sqrt3\approx103{,}92\ \text{cm}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** error porcentual.
+
+$$E\%=\frac{dV}{V}\cdot100=\frac{60\sqrt3}{1000\sqrt3}\cdot100=6\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=60\sqrt3\ \text{cm}^3\approx103{,}92\ \text{cm}^3,\qquad E\%=6\%$$
+
+**Ojo con:** que $l$ está al cuadrado (su derivada lleva el factor $2$), y que el $\sqrt3$ se simplifica en el cociente $\frac{dV}{V}$ (no hace falta aproximarlo).
+
+**Criterio estimado — no oficial** (la consigna pide la máxima variación y el error %):
+
+- **Bien:** las dos derivadas, los errores $dl$ y $dh$ en cm, $dV$ y $E\%=6\%$.
+- **A medias:** planteo correcto con un error de cuenta (por ejemplo falta el factor $2$ de $l^2$), o falta $E\%$.
+- **Mal:** no usa diferencial total, o calcula con los 2% sin pasarlos a cm.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Error relativo directo.** Como $V$ es proporcional a $l^2h$, los errores relativos se suman con la potencia como multiplicador:
+
+$$\frac{dV}{V}=2\,\frac{dl}{l}+\frac{dh}{h}=2\cdot2\%+2\%=6\%$$
+
+**2) Variación exacta.** Con $l=20{,}4$ y $h=30{,}6$: $V_{\text{nuevo}}=\frac{\sqrt3}{12}\cdot20{,}4^2\cdot30{,}6=1061{,}208\sqrt3$, entonces $\Delta V=61{,}208\sqrt3\approx106{,}0\ \text{cm}^3$: levemente mayor que $dV$ (aproximación de primer orden).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** coincide: $V=1000\sqrt3\ \text{cm}^3$, $dl=0{,}4$, $dh=0{,}6$, $\frac{\partial V}{\partial l}=\frac{2\sqrt3}{12}lh$, $\frac{\partial V}{\partial h}=\frac{\sqrt3}{12}l^2$, $dV=60\sqrt3\ (\simeq103{,}92\ \text{cm}^3)$ y $E\%=6\%$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-b#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina={1} unidad="U2" tema="Funciones implícitas (sistema)">
+<Enunciado examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina="1">
+
+Dada el sistema de funciones implícitas: $\begin{cases}x^3y+y^2z+xz^2=0\\x^2y-xyz-xz^2=0\end{cases}$ y siendo: $\begin{cases}y=f_1(x)\\z=f_2(x)\end{cases}$
+
+Determinar solo: $\dfrac{\partial y}{\partial x}$ expresando el resultado en su mínima expresión.
+
+</Enunciado>
+
+<Pista>
+
+Hay dos ecuaciones y tres letras ($x$, $y$, $z$). El enunciado dice que $y$ y $z$ dependen de $x$. ¿Qué querés encontrar, respecto de qué variable, y de cuál de las dos dependientes?
+
+</Pista>
+<Pista>
+
+Es un **sistema implícito de 2 ecuaciones con 3 variables**, variable independiente $x$. Cociente de jacobianos de la cátedra, con $y$ y $z$ abajo:
+
+$$\frac{\partial y}{\partial x}=-\frac{J(f,g\,/\,x,z)}{J(f,g\,/\,y,z)}$$
+
+Teoría: Rocha-Giordano, *Derivación de Funciones Implícitas* (7_Derivadas Func Implícitas.pdf, p. 2, "tercer caso").
+
+</Pista>
+<Pista>
+
+Planteo casi hecho, con $f=x^3y+y^2z+xz^2$ y $g=x^2y-xyz-xz^2$: seis derivadas parciales; el determinante de arriba lleva las columnas $x$ y $z$, el de abajo las columnas $y$ y $z$. Después se resuelven y se saca factor común.
+
+</Pista>
+<Paso>
+
+**Qué:** escribir la fórmula. **Por qué:** derivando las dos ecuaciones respecto de $x$ queda un sistema lineal en $y'$ y $z'$; Cramer da el cociente. **Cómo reconocerlo:** se pide una sola derivada de un sistema con $y=f_1(x)$ y $z=f_2(x)$.
+
+$$\frac{\partial y}{\partial x}=-\frac{\Delta_{yx}}{\Delta_{ppal}}=-\frac{\begin{vmatrix}f'_x&f'_z\\g'_x&g'_z\end{vmatrix}}{\begin{vmatrix}f'_y&f'_z\\g'_y&g'_z\end{vmatrix}}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales de $f$ y de $g$.
+
+$$f'_x=3x^2y+z^2\qquad f'_y=x^3+2yz\qquad f'_z=y^2+2xz$$
+
+$$g'_x=2xy-yz-z^2\qquad g'_y=x^2-xz\qquad g'_z=-xy-2xz$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en el cociente. **Por qué:** este es el planteo que el parcial valora más.
+
+$$\frac{\partial y}{\partial x}=-\frac{(3x^2y+z^2)(-xy-2xz)-(y^2+2xz)(2xy-yz-z^2)}{(x^3+2yz)(-xy-2xz)-(y^2+2xz)(x^2-xz)}$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver el numerador. **Por qué:** hay que desarrollar los dos productos y agrupar.
+
+$$(3x^2y+z^2)(-xy-2xz)=-3x^3y^2-6x^3yz-xyz^2-2xz^3$$
+
+$$(y^2+2xz)(2xy-yz-z^2)=2xy^3-y^3z-y^2z^2+4x^2yz-2xyz^2-2xz^3$$
+
+Restando el segundo al primero:
+
+$$-3x^3y^2-6x^3yz-4x^2yz-2xy^3+xyz^2+y^3z+y^2z^2$$
+
+Sacando factor común $-y$:
+
+$$-y\left(3x^3y+6x^3z+4x^2z+2xy^2-xz^2-y^2z-yz^2\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver el denominador.
+
+$$(x^3+2yz)(-xy-2xz)=-x^4y-2x^4z-2xy^2z-4xyz^2$$
+
+$$(y^2+2xz)(x^2-xz)=x^2y^2-xy^2z+2x^3z-2x^2z^2$$
+
+Restando y agrupando:
+
+$$-x^4y-2x^4z-2x^3z-x^2y^2-xy^2z-4xyz^2+2x^2z^2$$
+
+Sacando factor común $-x$:
+
+$$-x\left(x^3y+2x^3z+2x^2z+xy^2+y^2z+4yz^2-2xz^2\right)$$
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial y}{\partial x}=-\frac{y\left(3x^3y+6x^3z+4x^2z+2xy^2-xz^2-y^2z-yz^2\right)}{x\left(x^3y+2x^3z+2x^2z+xy^2+y^2z+4yz^2-2xz^2\right)}$$
+
+**Ojo con:** el signo menos del cociente, el orden de las columnas (arriba $x$ y $z$; abajo $y$ y $z$) y que al sacar factor común $-y$ arriba y $-x$ abajo esos dos signos se cancelan entre sí: el signo $-$ de adelante es el que queda.
+
+**Criterio estimado — no oficial** (el parcial dice que "lo más importante es el planteo y cálculo de las derivadas y resolver ambos determinantes"):
+
+- **Bien:** cociente de jacobianos bien planteado, las seis derivadas correctas y los dos determinantes resueltos.
+- **A medias:** planteo y derivadas bien, sin resolver o simplificar los determinantes, o un error de signo en una derivada.
+- **Mal:** no trata a $y$, $z$ como funciones de $x$, o usa el cociente de jacobianos equivocado.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Derivar las ecuaciones y despejar.** Derivando $f=0$ y $g=0$ respecto de $x$: $f'_x+f'_y\,y'+f'_z\,z'=0$ y $g'_x+g'_y\,y'+g'_z\,z'=0$. Despejando $y'$ (eliminando $z'$) sale el mismo cociente.
+
+**2) Valor numérico sobre la curva.** Un punto de la curva es $z=1$, $x\approx-0{,}5249$, $y\approx-0{,}6558$ (cumple las dos ecuaciones). Calculando $(x;y)$ para $z=1\pm10^{-4}$ y dividiendo $\Delta y$ por $\Delta x$ se obtiene el mismo valor que la fórmula evaluada en ese punto (coinciden hasta la quinta cifra).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** el planteo coincide: $\frac{\partial y}{\partial x}=\frac{\Delta yx}{\Delta ppal}=-\frac{J(f,g/x,z)}{J(f,g/y,z)}$, con las seis derivadas y los dos determinantes correctamente armados; deja el resultado en esa forma ("lo más importante es el planteo y cálculo de las derivadas y resolver ambos determinantes"). El desarrollo y las factorizaciones de arriba no figuran en el escaneo; se agregaron acá.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-b#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina="1">
+
+Dada la función: $z=x^3-x^2y+xy^2-12$
+
+a. Determinar el valor de la derivada direccional en el punto: $P(1,2)$, en la dirección/sentido del segmento orientado $PQ$, siendo $Q(4,6)$
+
+b. Dar expresión cartesiana del Gradiente en el punto P, graficarlo y determinar su módulo y dirección/sentido (ángulo $\theta$ respecto al semieje $x^+$). Indicar sobre el gráfico dirección/sentido de máximo, mínimo y nulos crecimientos de la función.
+
+c. Plantear y desarrollar la fórmula que permite calcular/verificar el valor de la derivada direccional mediante propiedad del gradiente.
+
+</Enunciado>
+
+<Pista>
+
+Te piden tres cosas sobre la misma función y el mismo punto: cuánto cambia $z$ al moverte hacia $Q$, cuál es la dirección más empinada y cómo se relacionan. ¿Cómo convertís "ir de $P$ a $Q$" en una dirección de módulo $1$? ¿Qué propiedad une esa dirección con el gradiente?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Plan: (1) derivadas parciales en $P$; (2) versor del segmento $\overrightarrow{PQ}$ (vector dividido por su módulo); (3) $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; (4) $\nabla z$, módulo y ángulo; (5) propiedad: $\frac{\partial z}{\partial s}=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega$.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=3x^2-2xy+y^2$ y $z'_y=-x^2+2xy$; $\overrightarrow{PQ}=Q-P=(3;4)$, de módulo $5$, así que $\cos\alpha=\frac35$ y $\sin\alpha=\frac45$. Para el ángulo del gradiente $\tan\theta=\frac{z'_y}{z'_x}$ mirando el cuadrante. En (c), $\omega=\theta-\alpha$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar parcialmente.
+
+$$z'_x=3x^2-2xy+y^2\qquad z'_y=-x^2+2xy$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(1;2)$.
+
+$$z'_x(P)=3-4+4=3$$
+
+$$z'_y(P)=-1+4=3$$
+
+</Paso>
+<Paso>
+
+**Qué:** versor de la dirección $\overrightarrow{PQ}$. **Por qué:** la derivada direccional pide un vector de módulo $1$; el vector $PQ$ es solo un "número de dirección".
+
+$$\overrightarrow{PQ}=Q-P=(4-1;\,6-2)=(3;4)$$
+
+$$\|\overrightarrow{PQ}\|=\sqrt{3^2+4^2}=5\qquad\cos\alpha=\frac35,\quad\sin\alpha=\frac45$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivada direccional (inciso a).
+
+$$\frac{\partial z}{\partial s}\Big|_P=3\cdot\frac35+3\cdot\frac45=\frac95+\frac{12}{5}=\frac{21}{5}=4{,}2$$
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, módulo y ángulo (inciso b).
+
+$$\nabla z(P)=3\,i+3\,j$$
+
+$$\|\nabla z\|=\sqrt{3^2+3^2}=\sqrt{18}=3\sqrt2\approx4{,}24$$
+
+$$\tan\theta=\frac33=1\ \Rightarrow\ \theta=45^\circ$$
+
+Ambas componentes son positivas (1.er cuadrante), así que $45^\circ$ es correcto.
+
+</Paso>
+<Paso>
+
+**Qué:** direcciones de crecimiento máximo, mínimo y nulo. **Por qué:** $\frac{\partial z}{\partial s}=\|\nabla z\|\cos\omega$.
+
+- Máximo ($\omega=0^\circ$): $\theta_{\text{máx}}=45^\circ$, valor $3\sqrt2$.
+- Mínimo ($\omega=180^\circ$): $\theta_{\text{mín}}=225^\circ$, valor $-3\sqrt2$.
+- Nulos ($\omega=\pm90^\circ$): $135^\circ$ y $315^\circ$, tangentes a la curva de nivel por $P$.
+
+</Paso>
+<Paso>
+
+**Qué:** la propiedad del gradiente (inciso c). **Por qué:** la consigna pide plantearla y desarrollarla. El ángulo de $s$ es $\alpha=\arctan\frac43\approx53{,}13^\circ$ y el del gradiente $\theta=45^\circ$:
+
+$$\omega=\theta-\alpha=45^\circ-53{,}13^\circ=-8{,}13^\circ$$
+
+Su coseno exacto sale de $\cos\omega=\cos\theta\cos\alpha+\sin\theta\sin\alpha$:
+
+$$\cos\omega=\frac{\sqrt2}{2}\cdot\frac35+\frac{\sqrt2}{2}\cdot\frac45=\frac{7\sqrt2}{10}\approx0{,}990$$
+
+Entonces:
+
+$$\frac{\partial z}{\partial s}\Big|_P=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega=3\sqrt2\cdot\frac{7\sqrt2}{10}=\frac{42}{10}=\frac{21}{5}$$
+
+Coincide con el inciso (a). Se ve además que $s$ está casi alineado con el gradiente, por eso la derivada direccional ($4{,}2$) es casi el máximo ($4{,}24$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-b/ej4.svg`} alt="Plano xy con ejes graduados de 1 en 1. Desde P(1;2) sale en rojo el gradiente a 45 grados (dibujado a escala 1/2), en azul la dirección de mínimo a 225 grados, en verde las direcciones nulas a 135 y 315 grados, y en violeta la dirección S del segmento PQ a unos 53 grados, muy cerca del gradiente." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=\frac{21}{5}=4{,}2,\qquad \nabla z(P)=3\,i+3\,j,\qquad \|\nabla z\|=3\sqrt2\approx4{,}24,\qquad \theta=45^\circ$$
+
+**Ojo con:** usar el vector $(3;4)$ sin dividir por su módulo $5$ (daría $21$ en vez de $4{,}2$) y, en (c), el ángulo entre $\nabla z$ y $s$ es $\omega=\theta-\alpha$, no $\theta$ ni $\alpha$ solos.
+
+**Criterio estimado — no oficial** (la consigna pide valor, expresión cartesiana, módulo, ángulo, gráfico con máximo/mínimo/nulos y la fórmula de (c)):
+
+- **Bien:** parciales en $P$ correctas, versor de $PQ$, $\frac{\partial z}{\partial s}=\frac{21}{5}$, gradiente con módulo y $\theta=45^\circ$, gráfico con las cuatro direcciones, y (c) desarrollado como $\|\nabla z\|\cos\omega$.
+- **A medias:** cálculo correcto pero el gráfico no marca las cuatro direcciones, o (c) solo enunciado.
+- **Mal:** vector sin normalizar, o no calcula el gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Por definición.** Sobre la recta $P+t\,s^\circ$ la función es de una variable, $g(t)=z\left(1+\frac35t;\,2+\frac45t\right)$, y $\frac{\partial z}{\partial s}=\lim_{t\to0}\frac{g(t)-g(0)}{t}$. Calculado el límite da $\frac{21}{5}$.
+
+**2) Dirección nula.** Con $s^\circ=\frac{1}{\sqrt2}(-1;1)$ (a $135^\circ$, perpendicular al gradiente) el producto escalar es $3\cdot(-1)+3\cdot1=0$: la derivada direccional vale $0$, como debe ser sobre la curva de nivel.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide en a y b: $z'_x(P)=3-4+4=3$, $z'_y(P)=-1+4=3$, $\overrightarrow{PQ}=(3;4)$ con $\|\overrightarrow{PQ}\|=5$, $\cos\alpha_x=\frac35$, $\sin\alpha_x=\frac45$, $\frac{\partial z}{\partial s}\big|_P=\frac95+\frac{12}{5}=\frac{21}{5}\ (0{,}42\to4{,}2)$, $\nabla z\big|_P=3\,i+3\,j$, $\|\nabla z\|=\sqrt{18}=3\sqrt2$, y el gráfico marca $\theta=45^\circ$, $\theta_{\text{máx}}$, $\theta_{\text{mín}}$ y los dos nulos $\theta_0$. **El inciso c no se resuelve aparte en el escaneo**: la resolución de arriba es la elaborada para el sitio.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-b#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina="1">
+
+Determinar los puntos críticos de la función: $z=2x^4+y^2-x^2-2y$
+
+Categorizarlos en Extremos (Máximos y/o Mínimos) o Puntos de ensilladura de haberlos.
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un mínimo o una silla, y después **qué es** cada candidato. ¿Qué tienen en común las pendientes de la superficie en esos puntos? ¿Cómo se distinguen?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1). Plan: (1) $z'_x=0$, $z'_y=0$; (2) segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo, con el signo de $z''_{xx}$ para saber cuál.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=8x^3-2x=2x(4x^2-1)$ y $z'_y=2y-2$. Un producto es cero si algún factor lo es: **no dividas por $x$**. Las segundas son $z''_{xx}=24x^2-2$, $z''_{yy}=2$, $z''_{xy}=0$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar una vez. **Por qué:** en un extremo relativo ambas parciales se anulan.
+
+$$z'_x=8x^3-2x=2x\,(4x^2-1)\qquad z'_y=2y-2$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver el sistema. **Por qué:** de $z'_y=0$ sale $y=1$. De $z'_x=0$ hay dos casos (un producto es cero si algún factor lo es):
+
+- $x=0$. Punto $(0;1)$.
+- $4x^2-1=0$, entonces $x^2=\frac14$ y $x=\pm\frac12$. Puntos $\left(\frac12;1\right)$ y $\left(-\frac12;1\right)$.
+
+Hay **tres puntos críticos**.
+
+</Paso>
+<Paso>
+
+**Qué:** hessiano. **Por qué:** es el criterio de la cátedra.
+
+$$z''_{xx}=24x^2-2\qquad z''_{yy}=2\qquad z''_{xy}=0$$
+
+$$H(x;y)=z''_{xx}\,z''_{yy}-(z''_{xy})^2=(24x^2-2)\cdot2=48x^2-4$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar y clasificar.
+
+$$H(0;1)=-4<0\ \Rightarrow\ \text{ensilladura}$$
+
+$$H\!\left(\tfrac12;1\right)=48\cdot\tfrac14-4=12-4=8>0\ \Rightarrow\ \text{extremo}$$
+
+$$H\!\left(-\tfrac12;1\right)=12-4=8>0\ \Rightarrow\ \text{extremo}$$
+
+Con $H>0$ decide el signo de $z''_{xx}$:
+
+$$z''_{xx}\!\left(\pm\tfrac12;1\right)=24\cdot\tfrac14-2=4>0\ \Rightarrow\ \text{mínimos}$$
+
+Las cotas valen $z(0;1)=-1$ y $z\left(\pm\frac12;1\right)=-\frac98$ (control, no se piden).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-b/ej5.svg`} alt="Arriba, superficie z=2x⁴+y²−x²−2y en perspectiva con tres puntos marcados: una silla en (0;1) y dos mínimos en (±1/2;1). Abajo, curvas de nivel en el plano xy con ejes graduados de 1 en 1 y los tres puntos rotulados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Puntos críticos: }(0;1),\ \left(\tfrac12;1\right),\ \left(-\tfrac12;1\right)$$
+
+$$(0;1):\ \text{punto de ensilladura}\qquad \left(\pm\tfrac12;1\right):\ \text{mínimos relativos}$$
+
+**Ojo con:** dividir $2x(4x^2-1)=0$ por $x$ (se pierde $(0;1)$) y olvidar que $x^2=\frac14$ tiene **dos** raíces.
+
+**Criterio estimado — no oficial** (la consigna pide puntos críticos y su categoría):
+
+- **Bien:** los tres puntos, $H$ bien, clasificación justificada con $H$ y $z''_{xx}$.
+- **A medias:** pierde un punto, o clasifica sin mostrar $H$ en cada punto.
+- **Mal:** no resuelve el sistema o no usa el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+**Separación de variables.** $z=g(x)+h(y)$ con $g(x)=2x^4-x^2$ y $h(y)=(y-1)^2-1$, así que cada variable se analiza sola.
+
+- $h$ tiene mínimo en $y=1$ (parábola abierta hacia arriba).
+- $g'(x)=8x^3-2x=0$ en $x=0,\pm\frac12$ y $g''(x)=24x^2-2$: $g''(0)=-2<0$ (máximo de $g$) y $g''\left(\pm\frac12\right)=4>0$ (mínimos de $g$).
+
+Un máximo en $x$ combinado con un mínimo en $y$ es una **silla**; mínimo con mínimo es **mínimo**. Coincide con el hessiano.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" paginas="6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 6, resolución manuscrita atribuida al profesor):** coincide: $z'_x=8x^3-2x$, $z'_y=2y-2$, $y=1$, $x=0$ y $x=\pm\frac12$, "son 3 ptos. críticos"; $H(x,y)=(24x^2-2)\cdot2=48x^2-4$, $H_1(0,1)=-4<0$ ensilladura, $H_2=H_3=8>0$ extremos locales y, como $z''_{yy}=2>0$, "ambos extremos son mínimos".
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-b#6" numero={6} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina={1} unidad="U3" tema="Extremos ligados (Lagrange)">
+<Enunciado examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" pagina="1">
+
+Mediante el método de Lagrange, determinar la Mínima Distancia de la recta: $x+2y=5$ al punto de coordenadas: $P(-1;-2)$
+
+</Enunciado>
+
+<Pista>
+
+Querés el punto de la recta que está **más cerca** de $P$. ¿Qué cantidad hay que hacer mínima y qué tiene que cumplir el punto elegido?
+
+</Pista>
+<Pista>
+
+Es **extremo condicionado (Lagrange)**: función principal la distancia de $(x;y)$ a $P$ (conviene minimizar su **cuadrado**, que tiene el mismo mínimo y se deriva sin raíz) y condición $x+2y-5=0$. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $F(x,y,\lambda)=(x+1)^2+(y+2)^2-\lambda(x+2y-5)$; las tres derivadas parciales igualadas a cero dan $2(x+1)=\lambda$, $2(y+2)=2\lambda$ y la condición. Se iguala $\lambda$ en las dos primeras y se reemplaza en la recta.
+
+</Pista>
+<Paso>
+
+**Qué:** plantear. **Por qué:** minimizar $d$ equivale a minimizar $d^2$ (la raíz es creciente), y evita derivar una raíz.
+
+$$F(x,y,\lambda)=(x+1)^2+(y+2)^2-\lambda\,(x+2y-5)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales igualadas a cero.
+
+$$F'_x=2(x+1)-\lambda=0\ \Rightarrow\ \lambda=2(x+1)$$
+
+$$F'_y=2(y+2)-2\lambda=0\ \Rightarrow\ \lambda=y+2$$
+
+$$F'_\lambda=-(x+2y-5)=0\quad(\#)$$
+
+</Paso>
+<Paso>
+
+**Qué:** igualar los $\lambda$ y reemplazar en la condición.
+
+$$2(x+1)=y+2\ \Rightarrow\ 2x+2=y+2\ \Rightarrow\ y=2x$$
+
+En $(\#)$:
+
+$$x+2(2x)-5=0\ \Rightarrow\ 5x=5\ \Rightarrow\ x=1,\quad y=2$$
+
+El punto de la recta más cercano es $Q(1;2)$ (cumple $1+2\cdot2=5$), con $\lambda=4$.
+
+</Paso>
+<Paso>
+
+**Qué:** calcular la distancia y justificar que es mínima. **Por qué:** sobre una recta la distancia a un punto no tiene máximo (crece sin límite), así que el único punto crítico es el mínimo.
+
+$$d=\sqrt{(1+1)^2+(2+2)^2}=\sqrt{4+16}=\sqrt{20}=2\sqrt5\approx4{,}47$$
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-b/ej6.svg`} alt="Plano xy con ejes graduados de 1 en 1. Recta x+2y=5 en negro, punto P(−1;−2) en violeta, punto Q(1;2) sobre la recta en verde y el segmento PQ en rojo, perpendicular a la recta, con longitud 2√5." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$Q(1;2),\qquad d_{\min}=2\sqrt5\approx4{,}47$$
+
+**Ojo con:** que lo que se minimiza es la distancia (o su cuadrado), no la función de la recta; y que la respuesta pedida es la **distancia**, no solo el punto $Q$.
+
+**Criterio estimado — no oficial** (la consigna pide la mínima distancia por Lagrange):
+
+- **Bien:** función principal y condición correctas, sistema resuelto, $Q$ y $d=2\sqrt5$.
+- **A medias:** planteo y sistema bien pero falta la distancia final (se queda en $Q$), o un error algebraico que cambia $Q$.
+- **Mal:** no usa Lagrange (por ejemplo solo aplica la fórmula punto-recta) o minimiza una función incorrecta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Fórmula punto-recta.** La distancia de $P(-1;-2)$ a $x+2y-5=0$ es
+
+$$d=\frac{|1\cdot(-1)+2\cdot(-2)-5|}{\sqrt{1^2+2^2}}=\frac{10}{\sqrt5}=2\sqrt5$$
+
+**2) Perpendicularidad.** La recta tiene dirección $(2;-1)$ y $\overrightarrow{PQ}=(2;4)$; su producto escalar es $2\cdot2+4\cdot(-1)=0$: $PQ$ es perpendicular a la recta, como corresponde a la distancia mínima.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Oct-24.pdf" paginas="7" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 7, resolución manuscrita atribuida al profesor):** coincide: $\lambda=2(x+1)=y+2$, $y=2x$, $x=1$, $y=2$, $Q(1,2)\in$ recta, $d=\sqrt{(1+1)^2+(2+2)^2}=\sqrt{20}=2\sqrt5\ (\simeq4{,}47)$. Detalle de notación: el profe escribe $F$ con la raíz $\sqrt{(x+1)^2+(y+2)^2}$ pero deriva el radicando (equivale a minimizar $d^2$, como se hizo acá); el resultado no cambia.
+
+</div>
+</Ejercicio>

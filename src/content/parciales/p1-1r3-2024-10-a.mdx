@@ -1,0 +1,732 @@
+---
+id: "p1-1r3-2024-10-a"
+titulo: "1° Parcial Práctico — Comisión 1R3 (A, 4/10/2024)"
+comision: "1R3"
+fecha: "4/10/2024"
+tipo: "práctico"
+tema: "A"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–7"
+orden: 130
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1R3 (A) · 1° Parcial Práctico – 4/10/2024
+
+**Importante:** Todos los ejercicios deben ser resueltos, o al menos 2 de ellos planteados sin necesidad de llegar al resultado final. No se permite el uso de tabla de derivadas ni obviamente teléfono móvil. Se solicita prolijidad, orden y escritura grande y legible. Adjuntar todos los cálculos auxiliares, fundamental para poder controlar y evaluar los procedimientos.
+
+<Ejercicio id="p1-1r3-2024-10-a#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\dfrac{\log(4-x^2-y^2)-\arccos(y+x)}{\sqrt{x^2+\frac{y^2}{4}-1}}$$
+
+</Enunciado>
+
+<Pista>
+
+Fijate qué operaciones hay en la fórmula: un logaritmo, un arco coseno y, abajo, una raíz que además divide. Para cada una preguntate: ¿qué valores del interior la "rompen"? ¿Y qué pasa si el denominador vale cero?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: una desigualdad por cada operación (logaritmo: argumento $\gt0$; $\arccos$: argumento entre $-1$ y $1$; raíz en el denominador: radicando $\gt0$) y se queda uno con lo que cumple **todas a la vez**. Cada una es una región del plano (circunferencia, franja entre rectas, elipse). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$4-x^2-y^2>0,\qquad -1\le y+x\le1,\qquad x^2+\frac{y^2}{4}-1>0$$
+
+Falta pasar cada una a "interior/exterior de..." y dibujar las tres juntas.
+
+</Pista>
+<Paso>
+
+**Qué:** escribir una condición por cada operación. **Por qué:** $\log A$ existe solo si $A>0$; $\arccos B$ solo si $-1\le B\le1$; y como la raíz está en el denominador, hace falta radicando $\ge0$ **y** raíz $\neq0$, o sea radicando $>0$. **Cómo reconocerlo:** el logaritmo y el denominador piden desigualdad **estricta**; el $\arccos$ admite los extremos.
+
+$$\text{(a) }4-x^2-y^2>0\qquad\text{(b) }-1\le y+x\le1\qquad\text{(c) }x^2+\frac{y^2}{4}-1>0$$
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (a). **Por qué:** pasando $x^2+y^2$ al otro miembro queda
+
+$$x^2+y^2<4$$
+
+Es el **interior de la circunferencia** de radio $2$ centrada en el origen. El borde no pertenece (logaritmo de $0$), así que va punteado.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (b). **Por qué:** restando $x$ a los tres miembros:
+
+$$-1-x\le y\le1-x$$
+
+Son los puntos que quedan **entre** las rectas paralelas $y=-1-x$ e $y=1-x$ (pendiente $-1$). Las dos rectas **sí** pertenecen (el $\arccos$ de $\pm1$ existe): línea llena.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (c). **Por qué:** pasando el $1$ al otro miembro queda
+
+$$x^2+\frac{y^2}{4}>1$$
+
+Es el **exterior de la elipse** $x^2+\frac{y^2}{4}=1$, de semieje $1$ en $x$ y semieje $2$ en $y$ (vértices $(\pm1;0)$ y $(0;\pm2)$). El borde **no** pertenece (raíz $=0$ en el denominador): punteado. **Cómo comprobarlo:** el origen no cumple ($0>1$ es falso), un punto lejano como $(0;3)$ sí.
+
+</Paso>
+<Paso>
+
+**Qué:** ubicar dónde se cortan la elipse y las rectas. **Por qué:** son los vértices de las dos piezas del dominio y conviene rotularlos. En la recta $y=1-x$:
+
+$$x^2+\frac{(1-x)^2}{4}=1$$
+
+Multiplicando por $4$:
+
+$$4x^2+1-2x+x^2=4$$
+
+$$5x^2-2x-3=0\ \Rightarrow\ (5x+3)(x-1)=0$$
+
+Sale $x=1$ (punto $(1;0)$) y $x=-\frac35$ (punto $\left(-\frac35;\frac85\right)$). En la recta $y=-1-x$, por simetría, salen $(-1;0)$ y $\left(\frac35;-\frac85\right)$. Estos cuatro puntos están dentro de la circunferencia (por ejemplo $\frac{9}{25}+\frac{64}{25}=\frac{73}{25}<4$).
+
+</Paso>
+<Paso>
+
+**Qué:** intersecar y dibujar. **Por qué:** la franja (b) atraviesa el centro de la elipse; la parte de la franja que queda **dentro** de la elipse no sirve por (c). Lo que sobra son dos trozos dentro de la circunferencia: uno arriba a la izquierda (entre la elipse, la recta $y=1-x$ y la circunferencia) y otro abajo a la derecha, simétrico. Los puntos $(0;\pm2)$ donde la elipse toca a la circunferencia quedan fuera de la franja ($|y+x|=2>1$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-a/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Circunferencia de radio 2 punteada, elipse x²+y²/4=1 punteada con vértices en (±1;0) y (0;±2), y dos rectas llenas y=1−x e y=−1−x. Sombreadas dos piezas: arriba a la izquierda entre la recta y=1−x, la elipse y la circunferencia, y abajo a la derecha entre la recta y=−1−x, la elipse y la circunferencia. Puntos rotulados (1;0), (−1;0), (−3/5;8/5) y (3/5;−8/5)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ x^2+y^2<4\ \ \wedge\ \ -1-x\le y\le1-x\ \ \wedge\ \ x^2+\frac{y^2}{4}>1\Big\}$$
+
+**Ojo con:** poner "$\ge$" en la elipse o "$\le$" en la circunferencia (los bordes de $\log$ y de la raíz del denominador **no** entran), y no olvidar que las rectas **sí** entran.
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente" y el parcial dice que adjuntes los cálculos auxiliares):
+
+- **Bien:** las tres condiciones con su desigualdad estricta o no según corresponda, gráfico con las tres curvas y la región sombreada con bordes bien marcados (incluido/excluido), y el conjunto escrito analíticamente.
+- **A medias:** condiciones correctas pero un borde mal marcado, o falta el gráfico consolidado o la expresión analítica.
+- **Mal:** falta una condición entera (por ejemplo la franja del $\arccos$) o se confunde interior con exterior.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar la fórmula en puntos de prueba** y ver si da un real.
+
+- $(-1;\,1)$: $\log(4-1-1)=\log2$ existe, $\arccos(0)=\frac\pi2$ existe, y la raíz es $\sqrt{1+\frac14-1}=\frac12\neq0$. **Está en $D$.**
+- $(0;\,0)$: dentro de la elipse, el radicando es $-1$. **No está.**
+- $(1;\,1)$: $y+x=2$, y el $\arccos$ de $2$ no existe. **No está.**
+- $(2;\,-1)$: $y+x=1$ sirve, pero $4-4-1=-1$ y el logaritmo de un negativo no existe. **No está.**
+- $(1;\,0)$: sobre la elipse, el denominador vale $0$. **No está.**
+
+Los cinco puntos coinciden con la región dibujada.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** coincide. Plantea las tres condiciones (a), (b), (c), dibuja circunferencia de radio $2$, las dos rectas y la elipse con $a_x=1$, $b_y=2$, sombrea las dos piezas y escribe $D=\{x^2+y^2<4\ \wedge\ -1-x\le y\le1-x\ \wedge\ x^2+\frac{y^2}{4}>1\}$. El profe no rotula los cuatro puntos de corte; acá se agregaron.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-a#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina={1} unidad="U2" tema="Diferencial y error porcentual">
+<Enunciado examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina="1">
+
+Una pirámide recta de base rectangular tiene las siguientes medidas: lado A (base) = 2 m, lado B (base) = 3 m, altura H = 5 m.
+
+Calcular por método diferencial, cuánto variará su volumen si los lados de su base aumentan 2% c/u y su altura disminuye 30 cm. Calcular también el Error (%).
+
+Volumen de la pirámide recta: $V=\frac{A.B.H}{3}$
+
+</Enunciado>
+
+<Pista>
+
+El enunciado habla de medidas que **cambian un poquito** y pregunta cuánto cambia una cantidad que depende de ellas (el volumen). ¿De cuántas variables depende $V$? ¿Qué te dice cada dato: aumenta, disminuye, en porcentaje, en centímetros?
+
+</Pista>
+<Pista>
+
+Es **diferencial total**: $dV=V'_A\,dA+V'_B\,dB+V'_H\,dH$, con los incrementos como datos (los que **bajan** llevan signo negativo y todos en las mismas unidades), y $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $V'_A=\dfrac{B\,H}{3}$, $V'_B=\dfrac{A\,H}{3}$, $V'_H=\dfrac{A\,B}{3}$ evaluadas en $(2;3;5)$. Incrementos en metros: $dA=2\%\cdot2$, $dB=2\%\cdot3$ y $dH=-30\ \text{cm}=-0{,}3\ \text{m}$.
+
+</Pista>
+<Paso>
+
+**Qué:** calcular el volumen inicial. **Por qué:** hace falta para el error porcentual.
+
+$$V=\frac{A\,B\,H}{3}=\frac{2\cdot3\cdot5}{3}=10\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** pasar los datos a incrementos en metros. **Por qué:** el diferencial mezcla las tres variables y todas tienen que estar en la misma unidad. Los lados **aumentan** (positivo); la altura **disminuye** (negativo).
+
+$$dA=2\%\cdot2=0{,}04\ \text{m}\qquad dB=2\%\cdot3=0{,}06\ \text{m}$$
+
+$$dH=-30\ \text{cm}=-0{,}3\ \text{m}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales de $V$ en $(2;3;5)$. **Por qué:** cada una dice cuánto vale "un metro más" de esa medida en volumen.
+
+$$\frac{\partial V}{\partial A}=\frac{B\,H}{3}=\frac{3\cdot5}{3}=5$$
+
+$$\frac{\partial V}{\partial B}=\frac{A\,H}{3}=\frac{2\cdot5}{3}=\frac{10}{3}$$
+
+$$\frac{\partial V}{\partial H}=\frac{A\,B}{3}=\frac{2\cdot3}{3}=2$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el diferencial. **Por qué:** es la suma de los tres aportes (cada derivada por su incremento).
+
+$$dV=5\cdot0{,}04+\frac{10}{3}\cdot0{,}06+2\cdot(-0{,}3)$$
+
+Cada término por separado:
+
+$$5\cdot0{,}04=0{,}2\qquad\frac{10}{3}\cdot0{,}06=0{,}2\qquad2\cdot(-0{,}3)=-0{,}6$$
+
+$$dV=0{,}2+0{,}2-0{,}6=-0{,}2\ \text{m}^3$$
+
+El signo negativo dice que el volumen **disminuye**: la baja de la altura (-0,6) pesa más que el aumento de los lados (+0,4).
+
+</Paso>
+<Paso>
+
+**Qué:** error porcentual. **Por qué:** compara el cambio con el volumen original.
+
+$$E\%=\frac{dV}{V}\cdot100=\frac{-0{,}2}{10}\cdot100=-2\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=-0{,}2\ \text{m}^3\ \ (\text{el volumen disminuye}),\qquad E\%=-2\%$$
+
+**Ojo con:** pasar los 30 cm a **metros** ($0{,}3$, no $0{,}03$) y respetar el signo de $dH$; con el signo cambiado el resultado da $+1{,}0$.
+
+**Criterio estimado — no oficial** (el parcial dice que alcanza con planteos bien hechos; la consigna pide dos resultados: variación y error %):
+
+- **Bien:** las tres derivadas parciales, incrementos en la misma unidad y con su signo, $dV$ y $E\%$ calculados.
+- **A medias:** planteo del diferencial correcto pero un error de unidad o de signo en un incremento (se arrastra al resultado), o falta $E\%$.
+- **Mal:** no usa diferencial total (por ejemplo solo reemplaza valores nuevos en $V$), o deriva mal.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Variación exacta.** Con las medidas nuevas $2{,}04$, $3{,}06$ y $4{,}7$ m:
+
+$$V_{\text{nuevo}}=\frac{2{,}04\cdot3{,}06\cdot4{,}7}{3}\approx9{,}7798\ \text{m}^3\qquad\Delta V=9{,}7798-10\approx-0{,}2202\ \text{m}^3$$
+
+Está muy cerca de $dV=-0{,}2$ (el diferencial es una aproximación de primer orden).
+
+**2) Diferencial logarítmico.** Como $V$ es un producto, el error relativo es la suma de los errores relativos:
+
+$$\frac{dV}{V}=\frac{dA}{A}+\frac{dB}{B}+\frac{dH}{H}=0{,}02+0{,}02-0{,}06=-0{,}02=-2\%$$
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** el planteo coincide (mismas derivadas $5$, $\frac{10}{3}$ y $2$; mismos $dA=0{,}04$ y $dB=0{,}06$ y $dH=-0{,}3\ \text{m}$), pero **el resultado numérico no**.
+
+⚠️ La resolución oficial da $dV=0{,}34\ \text{m}^3$ y $E\%=3{,}4\%$; el recálculo da $dV=-0{,}2\ \text{m}^3$ y $E\%=-2\%$ — pendiente de confirmar con la cátedra. Causa probable: en la cuenta el profe escribe el aporte de la altura como $2\cdot3\cdot\frac{3}{100}$ (usa $dH=-0{,}03$ m, es decir 3 cm) aunque unas líneas antes planteó $dH=-0{,}3$ m (30 cm); con $dH=-0{,}03$ da $\frac{60+60-18}{300}=0{,}34$. Además el escaneo marca "$(+)$" y escribe "$0{,}34\ \text{m}$" sin el cubo (errata de unidades).
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-a#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina={1} unidad="U2" tema="Funciones implícitas (sistema)">
+<Enunciado examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina="1">
+
+Dada el sistema de funciones implícitas: $\begin{cases}x^2+xy^3-yz^4=0\\2x-2xy^2+3yz^2=0\end{cases}$ y siendo: $\begin{cases}y=f_1(x)\\z=f_2(x)\end{cases}$
+
+Determinar solo: $\dfrac{\partial z}{\partial x}$ expresando el resultado en su mínima expresión.
+
+</Enunciado>
+
+<Pista>
+
+Hay dos ecuaciones y tres letras ($x$, $y$, $z$). ¿Cuántas pueden quedar como "libres"? El enunciado dice que $y$ y $z$ dependen de $x$: ¿qué querés encontrar entonces y respecto de qué variable?
+
+</Pista>
+<Pista>
+
+Es un **sistema implícito de 2 ecuaciones con 3 variables**: la variable independiente es $x$. Se usa el cociente de jacobianos de la cátedra, con el determinante de las derivadas de $f$ y $g$ respecto de $y$ y $z$ abajo:
+
+$$\frac{\partial z}{\partial x}=-\frac{J(f,g\,/\,y,x)}{J(f,g\,/\,y,z)}$$
+
+Teoría: Rocha-Giordano, *Derivación de Funciones Implícitas* (7_Derivadas Func Implícitas.pdf, p. 2, "tercer caso").
+
+</Pista>
+<Pista>
+
+Planteo casi hecho, con $f=x^2+xy^3-yz^4$ y $g=2x-2xy^2+3yz^2$: hacen falta las seis derivadas $f'_x,f'_y,f'_z,g'_x,g'_y,g'_z$; con ellas se arman un determinante de $2\times2$ arriba (columnas $y$ y $x$) y otro abajo (columnas $y$ y $z$). Después se resuelven y se saca factor común.
+
+</Pista>
+<Paso>
+
+**Qué:** escribir la fórmula. **Por qué:** derivando las dos ecuaciones respecto de $x$ (con $y$ y $z$ funciones de $x$) queda un sistema lineal en $y'$ y $z'$; resolverlo por Cramer da el cociente de determinantes. **Cómo reconocerlo:** "determinar solo $\frac{\partial z}{\partial x}$" con $y=f_1(x)$, $z=f_2(x)$.
+
+$$\frac{\partial z}{\partial x}=-\frac{\Delta_{zx}}{\Delta_{ppal}}=-\frac{\begin{vmatrix}f'_y&f'_x\\g'_y&g'_x\end{vmatrix}}{\begin{vmatrix}f'_y&f'_z\\g'_y&g'_z\end{vmatrix}}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales de $f$. **Por qué:** son los datos de la primera fila de cada determinante.
+
+$$f'_x=2x+y^3\qquad f'_y=3xy^2-z^4\qquad f'_z=-4yz^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales de $g$. **Por qué:** son la segunda fila.
+
+$$g'_x=2-2y^2\qquad g'_y=-4xy+3z^2\qquad g'_z=6yz$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en el cociente. **Por qué:** este es el planteo que el parcial dice que es lo más importante.
+
+$$\frac{\partial z}{\partial x}=-\frac{(3xy^2-z^4)(2-2y^2)-(2x+y^3)(-4xy+3z^2)}{(3xy^2-z^4)\,6yz-(-4yz^3)(-4xy+3z^2)}$$
+
+</Paso>
+<Paso>
+
+**Qué:** llevar el denominador a su mínima expresión. **Por qué:** sale factor común y la consigna lo pide. Distribuyendo cada término:
+
+$$(3xy^2-z^4)\,6yz=18xy^3z-6yz^5$$
+
+$$-(-4yz^3)(-4xy+3z^2)=4yz^3(-4xy+3z^2)=-16xy^2z^3+12yz^5$$
+
+Sumando y agrupando:
+
+$$18xy^3z-16xy^2z^3+6yz^5=2yz\left(9xy^2-8xyz^2+3z^4\right)$$
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial x}=-\frac{(3xy^2-z^4)(2-2y^2)-(2x+y^3)(-4xy+3z^2)}{2yz\left(9xy^2-8xyz^2+3z^4\right)}$$
+
+**Ojo con:** el signo menos delante del cociente, el orden de las columnas en el numerador ($y$ primero, $x$ después) y no mezclar $g'_y=-4xy+3z^2$ (derivada de $-2xy^2$ respecto de $y$ es $-4xy$) con $-2xy+3z^2$.
+
+**Criterio estimado — no oficial** (el parcial dice que "lo más importante es el planteo inicial, el cálculo de las derivadas y resolver los determinantes"):
+
+- **Bien:** planteo del cociente de jacobianos correcto, las seis derivadas correctas y los dos determinantes resueltos (mínima expresión).
+- **A medias:** planteo y derivadas bien pero sin resolver/simplificar los determinantes, o un error de signo en una derivada.
+- **Mal:** deriva sin tratar $y$, $z$ como funciones de $x$, o usa un cociente de jacobianos equivocado.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Derivar las ecuaciones y despejar.** Derivando $f=0$ y $g=0$ respecto de $x$ queda el sistema lineal en $y'$ y $z'$:
+
+$$f'_x+f'_y\,y'+f'_z\,z'=0\qquad g'_x+g'_y\,y'+g'_z\,z'=0$$
+
+Despejando $z'$ (eliminando $y'$) da exactamente el mismo cociente.
+
+**2) Valor numérico sobre la curva.** El punto $(8;\,2;\,2\sqrt2)$ cumple las dos ecuaciones: $64+64-2\cdot64=0$ en la primera y $16-64+48=0$ en la segunda. Ahí las derivadas valen $f'_y=32$, $f'_x=24$, $f'_z=-128\sqrt2$, $g'_y=-40$, $g'_x=-6$, $g'_z=24\sqrt2$, y la fórmula da
+
+$$\frac{\partial z}{\partial x}=\frac{3\sqrt2}{34}\approx0{,}1248$$
+
+Calculando $z$ en dos puntos de la curva muy cercanos ($x=8\pm10^{-4}$) y dividiendo la diferencia por el paso, sale $0{,}1248$: coincide.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** el planteo coincide: $\frac{\partial z}{\partial x}=\frac{\Delta zx}{\Delta ppal}=-\frac{J(f,g/y,x)}{J(f,g/y,z)}$ y las derivadas, y deja el resultado sin simplificar ("puede quedar así"; "lo más importante es el planteo inicial, el cálculo de las derivadas y resolver los determinantes").
+
+⚠️ Errata de transcripción en el escaneo: en el determinante de abajo el profe escribe $g'_y=-2xy+3z^2$; la derivada correcta, y la que usa en el de arriba, es $-4xy+3z^2$. No cambia el planteo (se anota en `docs/revision/p1-1r3-2024-10-a-discrepancias.md`). La simplificación del denominador a $2yz(9xy^2-8xyz^2+3z^4)$ no figura en el escaneo; se agregó acá.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-a#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina="1">
+
+Dada la función: $z=2x^2y^3-3x^4y+10$
+
+a. Determinar el valor de la derivada direccional en el punto: $P(1,2)$. En la dirección/sentido que forma un ángulo $\alpha=-\frac{\pi}{4}$ respecto al semieje $x^+$.
+
+b. Dar expresión cartesiana del Gradiente en dicho punto P, graficarlo y determinar su módulo y dirección/sentido (ángulo $\theta$ respecto al semieje $x^+$). Indicar sobre el gráfico dirección/sentido de máximo, mínimo y nulos crecimientos de la función.
+
+c. Plantear y desarrollar la fórmula que permite calcular/verificar el valor de la derivada direccional mediante propiedad del gradiente.
+
+</Enunciado>
+
+<Pista>
+
+Te piden tres cosas sobre la misma función y el mismo punto: cuánto cambia $z$ al moverte en **una dirección dada**, cuál es la dirección "más empinada", y cómo se relacionan las dos. ¿Qué datos de la función en $P$ necesitás para las dos primeras? ¿Cuál es la "propiedad" que une la dirección del movimiento con la del gradiente?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Plan: (1) derivadas parciales en $P$; (2) versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\dfrac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; (4) $\nabla z=z'_x\,i+z'_y\,j$, módulo y ángulo; (5) la propiedad del gradiente: $\dfrac{\partial z}{\partial s}=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega$, con $\omega$ el ángulo entre $\nabla z$ y $s$.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=4xy^3-12x^3y$ y $z'_y=6x^2y^2-3x^4$ en $P(1;2)$. Para $\alpha=-\frac\pi4$ el versor tiene $\cos\alpha=\frac{\sqrt2}{2}$ y $\sin\alpha=-\frac{\sqrt2}{2}$. Para el ángulo del gradiente $\tan\theta=\dfrac{z'_y}{z'_x}$ y **mirá el cuadrante**; el mínimo está a $180^\circ$ del máximo y los nulos a $\pm90^\circ$. En (c), $\omega=\theta-\alpha$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar parcialmente. **Por qué:** el gradiente y la direccional usan las dos derivadas en $P$ (cada término se deriva en una sola variable, la otra es constante).
+
+$$z'_x=4xy^3-12x^3y\qquad z'_y=6x^2y^2-3x^4$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(1;2)$.
+
+$$z'_x(P)=4\cdot1\cdot8-12\cdot1\cdot2=32-24=8$$
+
+$$z'_y(P)=6\cdot1\cdot4-3\cdot1=24-3=21$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el versor de la dirección $s$. **Por qué:** la derivada direccional necesita un vector de módulo $1$; con el ángulo $\alpha$ medido desde $x^+$ ya sale unitario. $\alpha=-\frac\pi4$ es $-45^\circ$ (4.º cuadrante: coseno positivo, seno negativo).
+
+$$s^\circ=(\cos\alpha;\sin\alpha)=\left(\frac{\sqrt2}{2};-\frac{\sqrt2}{2}\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular la derivada direccional (inciso a). **Por qué:** es el producto escalar del gradiente con el versor.
+
+$$\frac{\partial z}{\partial s}\Big|_P=z'_x\cos\alpha+z'_y\sin\alpha=8\cdot\frac{\sqrt2}{2}+21\cdot\left(-\frac{\sqrt2}{2}\right)$$
+
+Cada producto:
+
+$$8\cdot\frac{\sqrt2}{2}=4\sqrt2\qquad21\cdot\left(-\frac{\sqrt2}{2}\right)=-\frac{21\sqrt2}{2}$$
+
+$$\frac{\partial z}{\partial s}\Big|_P=4\sqrt2-\frac{21\sqrt2}{2}=-\frac{13\sqrt2}{2}\approx-9{,}19$$
+
+</Paso>
+<Paso>
+
+**Qué:** expresión cartesiana, módulo y ángulo del gradiente (inciso b). **Por qué:** el gradiente junta las dos derivadas parciales en un vector.
+
+$$\nabla z(P)=8\,i+21\,j$$
+
+Módulo, con cada cuadrado en una línea:
+
+$$8^2=64\qquad21^2=441$$
+
+$$\|\nabla z\|=\sqrt{64+441}=\sqrt{505}\approx22{,}47$$
+
+Dirección: $\tan\theta=\dfrac{21}{8}$ con ambas componentes positivas (1.er cuadrante), así que no hay que corregir el ángulo de la calculadora:
+
+$$\theta=\arctan\frac{21}{8}\approx69{,}15^\circ$$
+
+</Paso>
+<Paso>
+
+**Qué:** direcciones de crecimiento máximo, mínimo y nulo. **Por qué:** $\frac{\partial z}{\partial s}=\|\nabla z\|\cos\omega$, con $\omega$ el ángulo entre $s$ y $\nabla z$.
+
+- Máximo ($\omega=0^\circ$): $\theta_{\text{máx}}\approx69{,}15^\circ$, valor $\sqrt{505}$.
+- Mínimo ($\omega=180^\circ$): $\theta_{\text{mín}}=69{,}15^\circ+180^\circ\approx249{,}15^\circ$, valor $-\sqrt{505}$.
+- Nulos ($\omega=\pm90^\circ$): $69{,}15^\circ-90^\circ\approx-20{,}85^\circ$ y $69{,}15^\circ+90^\circ\approx159{,}15^\circ$ (es decir $339{,}15^\circ$ y $159{,}15^\circ$), tangentes a la curva de nivel por $P$.
+
+</Paso>
+<Paso>
+
+**Qué:** la fórmula con la propiedad del gradiente (inciso c). **Por qué:** la consigna pide plantearla y desarrollarla, no solo usar el producto escalar. El ángulo entre $\nabla z$ y $s$ es:
+
+$$\omega=\theta-\alpha=69{,}15^\circ-(-45^\circ)=114{,}15^\circ$$
+
+Su coseno, sin calculadora, sale de las componentes ($\cos\omega=\cos\theta\cos\alpha+\sin\theta\sin\alpha$ con $\cos\theta=\frac{8}{\sqrt{505}}$ y $\sin\theta=\frac{21}{\sqrt{505}}$):
+
+$$\cos\omega=\frac{8}{\sqrt{505}}\cdot\frac{\sqrt2}{2}+\frac{21}{\sqrt{505}}\cdot\left(-\frac{\sqrt2}{2}\right)=-\frac{13\sqrt2}{2\sqrt{505}}\approx-0{,}409$$
+
+Entonces:
+
+$$\frac{\partial z}{\partial s}\Big|_P=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega=\sqrt{505}\cdot\left(-\frac{13\sqrt2}{2\sqrt{505}}\right)=-\frac{13\sqrt2}{2}$$
+
+Coincide con el inciso (a).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-a/ej4.svg`} alt="Plano xy con ejes graduados de 1 en 1. Desde P(1;2) sale en rojo el gradiente hacia arriba y a la derecha a unos 69 grados (dibujado a escala 1/5), en azul la dirección de mínimo a 249 grados, en verde las direcciones nulas a 159 y 339 grados, y en violeta la dirección S de −45 grados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=-\frac{13\sqrt2}{2}\approx-9{,}19,\qquad \nabla z(P)=8\,i+21\,j,\qquad \|\nabla z\|=\sqrt{505}\approx22{,}47,\qquad \theta=\arctan\frac{21}{8}\approx69{,}15^\circ$$
+
+**Ojo con:** (1) el signo del seno para $\alpha=-45^\circ$; (2) el gradiente apunta a $69{,}15^\circ$, no a $-45^\circ$: la dirección $s$ pedida **no** es la de máximo, por eso la direccional es negativa y de módulo menor que $\|\nabla z\|$; (3) en (c) el ángulo es $\omega=\theta-\alpha$, no $\alpha$ solo.
+
+**Criterio estimado — no oficial** (la consigna pide valor, expresión cartesiana, módulo, ángulo, gráfico con máximo/mínimo/nulos y la fórmula de (c)):
+
+- **Bien:** parciales en $P$ correctas, versor, $\frac{\partial z}{\partial s}=-\frac{13\sqrt2}{2}$, gradiente con módulo y $\theta\approx69{,}15^\circ$, gráfico con $\nabla z$ y las cuatro direcciones, y (c) planteado como $\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega$ y verificado.
+- **A medias:** todo el cálculo bien pero el gráfico no marca las cuatro direcciones, o (c) solo enunciado sin desarrollar.
+- **Mal:** usa un vector sin normalizar, confunde seno y coseno, o no calcula el gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Cociente incremental.** Se mide $\dfrac{z(P+t\,s^\circ)-z(P)}{t}$ con $t$ chico: con $t=10^{-6}$ da $-9{,}1924$, y $-\frac{13\sqrt2}{2}=-9{,}1924$; coincide.
+
+**2) Dirección nula.** Con $s^\circ$ perpendicular al gradiente, por ejemplo $\frac{1}{\sqrt{505}}(-21;8)$, el producto escalar es $8\cdot(-21)+21\cdot8=0$: la derivada direccional vale $0$, como debe ser sobre la curva de nivel.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide en a y b: $z'_x=4xy^3-12x^3y$, $z'_y=6x^2y^2-3x^4$, $\frac{\partial z}{\partial s}\big|_P=8\frac{\sqrt2}{2}+21\left(-\frac{\sqrt2}{2}\right)=-\frac{13}{2}\sqrt2$, $\nabla z\big|_P=8\,i+21\,j$, $\|\nabla z\|=\sqrt{505}\ (\simeq22{,}47)$ ("valor máx. de la deriv. direcc. en P") y $\theta_{\text{máx}}=\arctan\frac{21}{8}\simeq69{,}15^\circ$ ("dirección de máx. crecimiento"). Dibuja el gradiente con sus componentes y marca $\theta_{\text{máx}}$, $\theta_{\text{mín}}$ y los dos nulos $\theta_0$.
+
+**Inciso c: el escaneo no lo resuelve aparte** (la hoja termina en b). La resolución de c que figura arriba es la elaborada para el sitio.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-a#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina="1">
+
+Determinar los puntos críticos de la función: $z=x^3+y^2-3xy+5$
+
+Categorizarlos en Extremos (Máximos y/o Mínimos) o Puntos de ensilladura de haberlos.
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un mínimo o algo parecido, y después **qué es** cada candidato. ¿Qué tienen en común las pendientes de la superficie en esos puntos? ¿Cómo se distinguen entre sí?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1). Plan: (1) puntos críticos: resolver $z'_x=0,\ z'_y=0$; (2) derivadas segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo, y el signo de $z''_{xx}$ dice mínimo (+) o máximo (−).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=3x^2-3y$ y $z'_y=2y-3x$. De la primera sale $y=x^2$; reemplazando en la segunda queda una ecuación en $x$ que se **factoriza** (no se divide por $x$). Las segundas son $z''_{xx}=6x$, $z''_{yy}=2$, $z''_{xy}=-3$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar una vez e igualar a cero. **Por qué:** en un extremo relativo las dos derivadas parciales se anulan (condición necesaria).
+
+$$z'_x=3x^2-3y=0\ \Rightarrow\ y=x^2$$
+
+$$z'_y=2y-3x=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver el sistema. **Por qué:** se reemplaza $y=x^2$ en la segunda y se **factoriza**, para no perder el caso $x=0$.
+
+$$2x^2-3x=0\ \Rightarrow\ x\,(2x-3)=0$$
+
+- $x=0$: $y=0^2=0$. Punto $(0;0)$.
+- $x=\frac32$: $y=\left(\frac32\right)^2=\frac94$. Punto $\left(\frac32;\frac94\right)$.
+
+Hay **dos puntos críticos**.
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** el criterio de la cátedra usa $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$.
+
+$$z''_{xx}=6x\qquad z''_{yy}=2\qquad z''_{xy}=-3$$
+
+$$H(x;y)=z''_{xx}\,z''_{yy}-(z''_{xy})^2=6x\cdot2-(-3)^2=12x-9$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar $H$ en cada punto y clasificar. **Por qué:** $H<0$ implica **punto de ensilladura**; $H>0$ implica extremo y el signo de $z''_{xx}$ decide.
+
+$$H(0;0)=-9<0\ \Rightarrow\ \text{ensilladura}$$
+
+$$H\!\left(\tfrac32;\tfrac94\right)=12\cdot\tfrac32-9=18-9=9>0\ \Rightarrow\ \text{extremo}$$
+
+$$z''_{xx}\!\left(\tfrac32;\tfrac94\right)=6\cdot\tfrac32=9>0\ \Rightarrow\ \text{mínimo relativo}$$
+
+(Mirar $z''_{yy}=2>0$ da lo mismo, como hace el profe: con $H>0$ las dos segundas tienen el mismo signo.) Las cotas $z(0;0)=5$ y $z\left(\frac32;\frac94\right)=\frac{53}{16}$ no se piden pero sirven de control.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-a/ej5.svg`} alt="Arriba, superficie z=x³+y²−3xy+5 en perspectiva con dos puntos marcados: una silla en el origen y un mínimo en (3/2;9/4). Abajo, curvas de nivel en el plano xy con ejes graduados de 1 en 1 y los dos puntos rotulados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Puntos críticos: }(0;0),\ \left(\tfrac32;\tfrac94\right)$$
+
+$$(0;0):\ \text{punto de ensilladura}\qquad \left(\tfrac32;\tfrac94\right):\ \text{mínimo relativo}$$
+
+**Ojo con:** simplificar $2x^2-3x=0$ dividiendo por $x$ (se pierde $(0;0)$), y concluir que "$H>0$ es un mínimo" sin mirar el signo de $z''_{xx}$ (con $H>0$ y $z''_{xx}<0$ sería un máximo).
+
+**Criterio estimado — no oficial** (la consigna pide puntos críticos y su categoría):
+
+- **Bien:** sistema resuelto sin perder ningún punto, $H$ correcto, clasificación justificada (signo de $H$ y de $z''_{xx}$).
+- **A medias:** pierde un punto crítico, o clasifica bien sin mostrar $H$ en cada punto.
+- **Mal:** no resuelve el sistema, o clasifica sin usar el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Sin hessiano, **completando cuadrados** en $y$: $z=\left(y-\frac{3x}{2}\right)^2+x^3-\frac94x^2+5$.
+
+- El primer sumando es $\ge0$ y vale $0$ justo cuando $y=\frac{3x}{2}$. Entonces mirando solo la curva $y=\frac{3x}{2}$ queda $g(x)=x^3-\frac94x^2+5$.
+- $g'(x)=3x^2-\frac92x=0$ da $x=0$ y $x=\frac32$ (con $y=0$ y $y=\frac94$: los mismos puntos).
+- $g''(x)=6x-\frac92$: $g''(0)=-\frac92<0$ (en la dirección de la curva baja) mientras que en $y$ siempre sube: **silla**. $g''\left(\frac32\right)=\frac92>0$ y en $y$ también sube: **mínimo**.
+
+Coincide con el hessiano.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" paginas="6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 6, resolución manuscrita atribuida al profesor):** coincide: $z'_x=0\to y=x^2$, $2x^2-3x=0\to x(2x-3)=0$, "hay solo 2 ptos. críticos" $PC_1(0,0)$ y $PC_2\left(\frac32,\frac94\right)$; $H(x,y)=12x-9$, $H_1=-9<0$ ensilladura, $H_2=9>0$ extremo local y, como $z''_{yy}=2>0$, mínimo en $\left(\frac32,\frac94\right)$. Erratas de copia sin efecto: el profe transcribe la función con "$-5$" en vez de "$+5$" (no interviene en las derivadas) y tacha un "12·3/2" intermedio.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2024-10-a#6" numero={6} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina={1} unidad="U3" tema="Extremos ligados (Lagrange)">
+<Enunciado examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" pagina="1">
+
+Determinar las dimensiones del paralelepípedo recto de Volumen Máximo, que tiene sus 3 caras en los planos coordenados y un vértice en el plano: $x+\frac{y}{3}+\frac{z}{4}=1$
+
+Indicar además cual es esa máxima capacidad (volumen)
+
+</Enunciado>
+
+<Pista>
+
+Hay una cantidad que querés hacer lo más grande posible (el volumen de la caja) y una restricción que ata las medidas (un vértice tiene que estar en el plano). ¿Qué dimensiones tiene la caja si un vértice está en el origen y el opuesto en $(x;y;z)$?
+
+</Pista>
+<Pista>
+
+Es **extremo condicionado (Lagrange)**: función principal $V=xyz$ y condición $g(x,y,z)=x+\frac y3+\frac z4-1=0$. Se arma $F(x,y,z,\lambda)=xyz-\lambda\,g$ y se anulan las **cuatro** derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $F'_x=yz-\lambda=0$, $F'_y=xz-\frac\lambda3=0$, $F'_z=xy-\frac\lambda4=0$ y $F'_\lambda=0$ devuelve la condición. De las tres primeras, igualando los $\lambda$ despejados ($\lambda=yz=3xz=4xy$), sale $y$ y $z$ en función de $x$. Después se reemplaza en el plano.
+
+</Pista>
+<Paso>
+
+**Qué:** plantear el modelo. **Por qué:** la caja tiene tres caras sobre los planos coordenados, o sea un vértice en el origen; el vértice opuesto $(x;y;z)$ está en el plano, y sus dimensiones son $x$, $y$, $z$ (los tres positivos). Hay que maximizar $V=xyz$ sujeto a $g=0$.
+
+$$F(x,y,z,\lambda)=xyz-\lambda\left(x+\frac y3+\frac z4-1\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $F$ respecto de las cuatro variables e igualar a cero.
+
+$$F'_x=yz-\lambda=0\qquad F'_y=xz-\frac\lambda3=0\qquad F'_z=xy-\frac\lambda4=0$$
+
+$$F'_\lambda=-\left(x+\frac y3+\frac z4-1\right)=0\quad(\#)$$
+
+</Paso>
+<Paso>
+
+**Qué:** despejar $\lambda$ de las tres primeras e igualar. **Por qué:** así desaparece $\lambda$.
+
+$$\lambda=yz=3xz=4xy$$
+
+De $yz=3xz$, dividiendo por $z$ (positivo):
+
+$$y=3x$$
+
+De $yz=4xy$, dividiendo por $y$ (positivo):
+
+$$z=4x$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición $(\#)$. **Por qué:** queda una sola incógnita.
+
+$$x+\frac{3x}{3}+\frac{4x}{4}=1$$
+
+$$x+x+x=1\ \Rightarrow\ 3x=1\ \Rightarrow\ x=\frac13$$
+
+$$y=3x=1\qquad z=4x=\frac43$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular el volumen y justificar que es máximo. **Por qué:** la consigna pide la "máxima capacidad". El volumen es
+
+$$V_{\text{máx}}=\frac13\cdot1\cdot\frac43=\frac49\approx0{,}44$$
+
+Es máximo y no mínimo porque el volumen se anula en el borde del triángulo (si $x$, $y$ o $z$ valen $0$), el triángulo es cerrado y acotado, y en el interior hay un único punto crítico con $V>0$. (Las otras soluciones del sistema, como $x=1,\ y=z=0$, tienen $V=0$ y se descartan.)
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-a/ej6.svg`} alt="Perspectiva 3D del plano x+y/3+z/4=1 como triángulo celeste con vértices en (1;0;0), (0;3;0) y (0;0;4), y la caja de volumen máximo en rojo con un vértice en el origen y el opuesto sobre el plano en (1/3;1;4/3)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$x=\frac13,\qquad y=1,\qquad z=\frac43,\qquad V_{\text{máx}}=\frac49\ \text{u}^3$$
+
+**Ojo con:** olvidar la cuarta ecuación (la condición) y quedarse con $y=3x$, $z=4x$ sin cerrar; y confundir "máxima capacidad" con las dimensiones (hay que dar las tres medidas **y** el volumen).
+
+**Criterio estimado — no oficial** (la consigna pide dimensiones y volumen máximo):
+
+- **Bien:** $F$ bien armada, sistema resuelto, las tres dimensiones y $V=\frac49$.
+- **A medias:** planteo y derivadas bien pero un error algebraico que da dimensiones distintas, o dimensiones sin el volumen.
+- **Mal:** maximiza sin la condición, o usa una función principal incorrecta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Desigualdad entre medias (AM–GM).** Los tres números $x$, $\frac y3$, $\frac z4$ son positivos y suman $1$; su producto es máximo cuando son iguales:
+
+$$x\cdot\frac y3\cdot\frac z4\le\left(\frac13\right)^3\ \Rightarrow\ xyz\le\frac{12}{27}=\frac49$$
+
+La igualdad se da con $x=\frac y3=\frac z4=\frac13$, o sea el mismo punto.
+
+**2) Sin multiplicadores.** Despejando $z=4\left(1-x-\frac y3\right)$ queda $V(x,y)=4xy\left(1-x-\frac y3\right)$ y sus dos derivadas se anulan en $\left(\frac13;1\right)$, con $V=\frac49$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" paginas="7" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 7, resolución manuscrita atribuida al profesor):** coincide: $F(x,y,z,\lambda)=xyz-\lambda(x+\frac y3+\frac z4-1)$, $\lambda=yz=3xz=4xy$, $y=3x$ y $z=4x$, y reemplazando en la condición $x=\frac13$, $y=1$, $z=\frac43$ y $\text{Vol}(\text{máx})=xyz=\frac49\,u^3\ (0{,}44)$. Observación: el profe no justifica que el punto es máximo; acá se agregó.
+
+</div>
+</Ejercicio>

@@ -1,0 +1,515 @@
+---
+id: "p1-1h9-2024-05"
+titulo: "1° Parcial Práctico — Comisión 1H9 (11/05/2024)"
+comision: "1H9"
+fecha: "11/05/2024"
+tipo: "práctico"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–6"
+orden: 132
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1H9 · 1° Parcial Práctico – 11/05/2024
+
+<Ejercicio id="p1-1h9-2024-05#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\sqrt{\dfrac{\frac{x^2}{9}+\frac{y^2}{4}-a^2}{a^2-x^2+\frac{y^2}{4}}}\qquad(a:\ \text{numero real})$$
+
+</Enunciado>
+
+<Pista>
+
+Mirá la estructura: una raíz cuadrada cuyo interior es un **cociente**. ¿Cuándo existe la raíz de un número? ¿Cuándo es no negativo un cociente? ¿Y qué pasa si el denominador vale cero? Además hay una letra $a$ que no es variable: ¿cómo cambia el dibujo si cambia $a$?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones con parámetro**: radicando $\ge0$ y denominador $\ne0$. Un cociente es $\ge0$ cuando numerador y denominador tienen el **mismo signo** (o el numerador es $0$). Hay que estudiar dos casos, y cada desigualdad es una cónica (elipse, hipérbola) con semiejes en función de $a$. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho, con $N=\frac{x^2}{9}+\frac{y^2}{4}-a^2$ y $D=a^2-x^2+\frac{y^2}{4}$:
+
+$$\big(N\ge0\ \wedge\ D>0\big)\ \ \vee\ \ \big(N\le0\ \wedge\ D<0\big)$$
+
+Cada una se lleva a la forma canónica dividiendo por $a^2$: $N\ge0$ queda $\frac{x^2}{(3a)^2}+\frac{y^2}{(2a)^2}\ge1$ y $D>0$ queda $\frac{x^2}{a^2}-\frac{y^2}{(2a)^2}<1$.
+
+</Pista>
+<Paso>
+
+**Qué:** traducir "$\sqrt{\ }$ de un cociente" a condiciones. **Por qué:** la raíz pide radicando $\ge0$ y el cociente pide denominador $\ne0$. Un cociente $\frac{N}{D}$ es $\ge0$ en dos situaciones: $N$ y $D$ con el mismo signo estricto, o $N=0$ (con $D\neq0$). Agrupando el caso $N=0$ en cualquiera de los dos:
+
+$$\big(N\ge0\ \wedge\ D>0\big)\ \ \vee\ \ \big(N\le0\ \wedge\ D<0\big)$$
+
+**Cómo reconocerlo:** la hipótesis "$a$ es un número real" significa que hay que dar el resultado **en función de $a$** (con $a\ne0$; el caso $a=0$ se ve al final).
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar $N\ge0$. **Por qué:** pasando $a^2$ al otro miembro y dividiendo por $a^2$ (positivo):
+
+$$\frac{x^2}{9}+\frac{y^2}{4}-a^2\ge0\ \Rightarrow\ \frac{x^2}{(3a)^2}+\frac{y^2}{(2a)^2}\ge1$$
+
+La curva $N=0$ es una **elipse** de semieje $3|a|$ en $x$ y $2|a|$ en $y$. $N\ge0$ es el **exterior** (con el borde), y $N\le0$ el **interior** (con el borde). Como solo aparece $a^2$, tomar $a$ negativo da lo mismo que $|a|$.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar $D>0$ y $D<0$. **Por qué:** pasando $x^2$ y dividiendo por $a^2$:
+
+$$a^2-x^2+\frac{y^2}{4}>0\ \Rightarrow\ x^2-\frac{y^2}{4}<a^2\ \Rightarrow\ \frac{x^2}{a^2}-\frac{y^2}{(2a)^2}<1$$
+
+La curva $D=0$ es una **hipérbola** de eje horizontal con vértices $(\pm a;0)$ y asíntotas $y=\pm2x$. $D>0$ es la zona **entre las dos ramas** (contiene al origen: $D(0;0)=a^2>0$) y $D<0$ es la zona **de adentro de las ramas** (la que contiene a los focos). El borde de la hipérbola **no** pertenece (divide por cero).
+
+</Paso>
+<Paso>
+
+**Qué:** dónde se cortan la elipse y la hipérbola. **Por qué:** son los puntos donde se unen las piezas del dominio. De la hipérbola $x^2=a^2+\frac{y^2}{4}$; reemplazando en la elipse $\frac{x^2}{9}+\frac{y^2}{4}=a^2$:
+
+$$\frac{a^2+\frac{y^2}{4}}{9}+\frac{y^2}{4}=a^2$$
+
+Multiplicando por $36$:
+
+$$4a^2+y^2+9y^2=36a^2$$
+
+$$10y^2=32a^2\ \Rightarrow\ y^2=\frac{16a^2}{5},\qquad x^2=a^2+\frac{4a^2}{5}=\frac{9a^2}{5}$$
+
+Son cuatro puntos $\left(\pm\frac{3a}{\sqrt5};\pm\frac{4a}{\sqrt5}\right)$, uno en cada cuadrante.
+
+</Paso>
+<Paso>
+
+**Qué:** armar las dos piezas del dominio. **Por qué:** cada caso es una intersección.
+
+- **Caso 1** ($N\ge0\ \wedge\ D>0$): exterior de la elipse (con borde) **y** entre las ramas. Son dos trozos **no acotados**, uno arriba y otro abajo (en forma de pajarita hacia afuera), que empiezan en la elipse y siguen hacia $y\to\pm\infty$.
+- **Caso 2** ($N\le0\ \wedge\ D<0$): interior de la elipse (con borde) **y** dentro de las ramas. Son dos "lentes" acotados, uno a la derecha (entre la rama y el vértice $(3a;0)$ de la elipse) y otro a la izquierda.
+
+El borde de la elipse pertenece (ahí $N=0$ y el cociente vale $0$, siempre que $D\neq0$); el de la hipérbola no. Eso se marca: elipse llena, hipérbola punteada. El **gráfico consolidado** es la unión de las cuatro piezas; abajo, con $a=1$ (semiejes $3$ y $2$, vértices $\pm1$); para otro $a$ todo se escala por $|a|$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2024-05/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1, con a=1. Elipse llena de semiejes 3 y 2 (vértices (±3;0) y (0;±2)), hipérbola punteada x²−y²/4=1 con vértices (±1;0). Sombreadas cuatro piezas: dos laterales dentro de la elipse y fuera de las ramas (entre el vértice de la hipérbola y el de la elipse) y dos no acotadas, una arriba y otra abajo, fuera de la elipse y entre las ramas. Puntos de corte rotulados (±3a/√5; ±4a/√5)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Paso>
+
+**Qué:** el caso $a=0$ (aparte). **Por qué:** al dividir por $a^2$ se supuso $a\ne0$. Con $a=0$ el numerador es $N=\frac{x^2}{9}+\frac{y^2}{4}\ge0$ (cero solo en el origen) y $D=\frac{y^2}{4}-x^2$. El cociente es $\ge0$ solo con $D>0$, o sea $|y|>2|x|$; el origen da $\frac00$ y queda afuera. Es el "interior" de las asíntotas $y=\pm2x$ que contiene al eje $y$.
+
+</Paso>
+<Solucion>
+
+$$\begin{aligned}D=\Big\{(x;y)\in\mathbb{R}^2:\ &\Big[\tfrac{x^2}{9}+\tfrac{y^2}{4}\ge a^2\ \wedge\ x^2-\tfrac{y^2}{4}<a^2\Big]\\ \vee\ &\Big[\tfrac{x^2}{9}+\tfrac{y^2}{4}\le a^2\ \wedge\ x^2-\tfrac{y^2}{4}>a^2\Big]\Big\}\end{aligned}\qquad(a\neq0)$$
+
+Equivalente, con el cociente (denominador no nulo):
+
+$$\frac{\frac{x^2}{9}+\frac{y^2}{4}-a^2}{a^2-x^2+\frac{y^2}{4}}\ge0$$
+
+Para $a=0$: $D=\{|y|>2|x|\}$.
+
+**Ojo con:** incluir el borde de la hipérbola (el denominador se anula) y quedarse con un solo caso del cociente (el de signos negativos es igual de válido); y dibujar solo las dos piezas de arriba/abajo, que es lo más típico de olvidar.
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"; el profe pide el "gráfico consolidado" con $a$, $2a$ y $3a$ marcados):
+
+- **Bien:** los dos casos del cociente, las dos cónicas con sus semiejes en función de $a$, el gráfico consolidado con las cuatro piezas y los bordes bien (elipse incluida, hipérbola excluida) y el conjunto analítico.
+- **A medias:** un solo caso (dos piezas de las cuatro), o bordes mal marcados, o falta el gráfico consolidado o la expresión analítica.
+- **Mal:** trata $a$ como variable, no distingue los signos del cociente, o confunde interior con exterior.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar el radicando en puntos de prueba** con $a=1$ ($N=\frac{x^2}{9}+\frac{y^2}{4}-1$, $D=1-x^2+\frac{y^2}{4}$).
+
+- $(2;\,0)$: $N=-\frac59$ y $D=-3$; el cociente es $\frac{5}{27}\ge0$. **Está** (lente de la derecha).
+- $(0;\,3)$: $N=\frac54$ y $D=\frac{13}{4}$; el cociente es $\frac{5}{13}\ge0$. **Está** (pieza de arriba).
+- $(0;\,0)$: $N=-1$ y $D=1$; el cociente es $-1$. **No está.**
+- $(2;\,2)$: $N=\frac49$ y $D=-2$; el cociente es $-\frac29$. **No está.**
+- $(1;\,0)$: $D=0$ (sobre la hipérbola). **No está.**
+- $(3;\,0)$: $N=0$ y $D=-8$; el cociente es $0$. **Está** (borde de la elipse incluido).
+
+Los seis puntos coinciden con el gráfico consolidado.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" paginas="2–3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (pp. 2–3, resolución manuscrita atribuida al profesor):** coincide. Plantea "$\frac{N}{D}\ge0$" en dos casos, (a) $N\ge0\ \wedge\ D>0$ con "exterior a elipse $\cap$ interior a hipérbola" y (b) $N\le0\ \wedge\ D<0$ con "interior de elipse $\cap$ exterior de hipérbola" (los marca con $\wedge$ intersección y $\vee$ unión), pasa a la forma canónica $\frac{x^2}{(3a)^2}+\frac{y^2}{(2a)^2}\ge1$ y $\frac{x^2}{a^2}-\frac{y^2}{(2a)^2}<1$, dibuja cada caso y en p. 3 el "gráfico consolidado" con $a$, $2a$ y $3a$ marcados, y escribe $D=\{(x,y)\in\mathbb{R}^2:\frac{N}{D}\ge0\}$. Detalle: el profe no rotula los cuatro puntos de corte ni trata $a=0$; acá se agregaron.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2024-05#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" pagina={1} unidad="U2" tema="Diferencial (material de una pieza)">
+<Enunciado examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" pagina="1">
+
+Estimar por el método diferencial la cantidad de material necesaria para construir una pieza cilíndrica hueca, de 8 cm de diámetro y 10 cm de altura, siendo 2 mm el espesor de su pared lateral, 5 mm del fondo y 1 mm de su tapa.
+
+Formula del volumen del cilindro: $V=Sup.base\ x\ altura=\pi r^2h$
+
+</Enunciado>
+
+<Pista>
+
+El material de una pieza hueca es el volumen del "cuerpo" completo menos el del hueco: una capa fina alrededor. Si el espesor es chico comparado con la pieza, ¿se te ocurre cómo aproximar esa capa sin calcular dos volúmenes enteros? ¿Qué papel juega cada espesor?
+
+</Pista>
+<Pista>
+
+Es **diferencial total**: el material es aproximadamente $dV=V'_r\,dr+V'_h\,dh$, tomando como incrementos los espesores. El radio crece por la pared lateral; la altura crece por la **suma** del fondo y la tapa. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $V'_r=2\pi rh$ y $V'_h=\pi r^2$ evaluadas con $r=4$ cm (el diámetro es $8$) y $h=10$ cm; incrementos $dr=2\ \text{mm}$ y $dh=1\ \text{mm}+5\ \text{mm}$, **todo en cm**.
+
+</Pista>
+<Paso>
+
+**Qué:** fijar la lectura del enunciado. **Por qué:** las medidas $8$ cm de diámetro y $10$ cm de altura se toman como las del **hueco interior** y los espesores como las "capas" que se agregan (lectura de la resolución oficial); entonces el material es el volumen agregado.
+
+$$r=4\ \text{cm}\qquad h=10\ \text{cm}$$
+
+$$V=\pi r^2h=\pi\cdot4^2\cdot10=160\pi\ \text{cm}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** pasar los espesores a incrementos en cm. **Por qué:** el radio aumenta solo por la pared lateral; la altura aumenta por el fondo **y** por la tapa.
+
+$$dr=2\ \text{mm}=0{,}2\ \text{cm}$$
+
+$$dh=0{,}1+0{,}5=0{,}6\ \text{cm}$$
+
+(tapa $1$ mm $=0{,}1$ cm y fondo $5$ mm $=0{,}5$ cm).
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales. **Por qué:** cada una dice cuánto volumen suma "un centímetro más" de radio o de altura.
+
+$$\frac{\partial V}{\partial r}=2\pi rh=2\pi\cdot4\cdot10=80\pi$$
+
+$$\frac{\partial V}{\partial h}=\pi r^2=\pi\cdot4^2=16\pi$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el diferencial.
+
+$$dV=80\pi\cdot0{,}2+16\pi\cdot0{,}6$$
+
+$$80\pi\cdot0{,}2=16\pi\qquad16\pi\cdot0{,}6=9{,}6\pi$$
+
+$$dV=16\pi+9{,}6\pi=25{,}6\pi\ \text{cm}^3\approx80{,}4\ \text{cm}^3$$
+
+</Paso>
+<Solucion>
+
+$$dV=25{,}6\,\pi\ \text{cm}^3\approx80{,}4\ \text{cm}^3\quad\text{(material aproximado)}$$
+
+**Ojo con:** pasar los milímetros a **centímetros**, y sumar fondo y tapa para $dh$ (no usar solo uno); y no confundir el volumen $V=160\pi$ (el hueco) con el material pedido, que es $dV$.
+
+**Criterio estimado — no oficial** (la consigna pide estimar el material por el método diferencial):
+
+- **Bien:** derivadas parciales, $dr=0{,}2$ y $dh=0{,}6$ en cm (con fondo y tapa sumados), y $dV=25{,}6\pi$.
+- **A medias:** planteo correcto con un error de unidad o de interpretación en $dh$ (solo fondo o solo tapa), que arrastra al resultado.
+- **Mal:** no usa diferencial, o entrega el volumen del cilindro $160\pi$ como respuesta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Volumen exacto de la pieza.** El cilindro exterior tiene radio $4{,}2$ y altura $10{,}6$ (suma de fondo y tapa), y se le resta el hueco:
+
+$$\Delta V=\pi\left(4{,}2^2\cdot10{,}6-160\right)=\pi\,(186{,}984-160)=26{,}984\,\pi\ \text{cm}^3$$
+
+Es parecido a $25{,}6\pi$ (el diferencial subestima unos 5%, normal en una aproximación de primer orden con espesores no tan chicos).
+
+**2) Por capas.** Pared lateral $\pi(4{,}2^2-4^2)\cdot10=16{,}4\pi$; fondo $\pi\cdot4{,}2^2\cdot0{,}5=8{,}82\pi$; tapa $\pi\cdot4{,}2^2\cdot0{,}1=1{,}764\pi$. Suman $26{,}984\pi$, el mismo valor exacto.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** coincide. Plantea $\text{Vol}=\pi r^2h=\pi(4\ cm)^2\cdot10\ cm=160\pi\ cm^3$, $d\text{Vol}=\frac{\partial V}{\partial r}dr+\frac{\partial V}{\partial h}dh=2\pi rh\,dr+\pi r^2dh$ con $dr=0{,}2$ cm y $dh=(0{,}1+0{,}5)$ cm, y llega a $16\pi+9{,}6\pi=25{,}6\pi\ cm^3$, que anota como "cantidad de material necesaria (aproximada)". El profe dibuja el corte de la pieza con los tres espesores rotulados.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2024-05#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" pagina="1">
+
+Dada la función: $z=\sin^2(2x-y)$
+
+a. Determinar el valor de la derivada direccional en el punto: $P\left(\pi,\frac{\pi}{3}\right)$. En la dirección/sentido que forma un ángulo $\alpha=-\frac{\pi}{6}$ respecto al semieje $x^+$
+
+b. Dar expresión del Gradiente en dicho punto P, graficarlo y determinar su módulo y dirección/sentido (ángulo $\theta$ respecto al semieje $x^+$). Indicar en el gráfico las direcciones de crecimiento máximo, mínimo y nulos.
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas sobre la misma función y el mismo punto: cuánto cambia $z$ al moverte en **una dirección dada** y cuál es la dirección "más empinada". ¿Qué datos de la función en $P$ necesitás? ¿Cómo se usa el ángulo $\alpha$ que te dan?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Plan: (1) derivadas parciales en $P$ (cuidado con la cadena: el interior es $2x-y$); (2) versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; (4) $\nabla z$, su módulo y ángulo; (5) máximo, mínimo y nulos a partir de $\theta$.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=2\sin(2x-y)\cos(2x-y)\cdot2$ y $z'_y=2\sin(2x-y)\cos(2x-y)\cdot(-1)$, evaluadas en $2x-y=2\pi-\frac\pi3=\frac{5\pi}{3}$. Para el ángulo del gradiente $\tan\theta=\frac{z'_y}{z'_x}$ y **mirá en qué cuadrante** cae el vector; el mínimo está a $180^\circ$ del máximo y los nulos a $\pm90^\circ$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar parcialmente. **Por qué:** es un seno al cuadrado: regla de la cadena (derivo la potencia, luego el seno, luego el interior $2x-y$, cuya derivada respecto de $x$ es $2$ y respecto de $y$ es $-1$).
+
+$$z'_x=2\sin(2x-y)\cos(2x-y)\cdot2=4\sin(2x-y)\cos(2x-y)$$
+
+$$z'_y=2\sin(2x-y)\cos(2x-y)\cdot(-1)=-2\sin(2x-y)\cos(2x-y)$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P$. **Por qué:** en $P$ el interior es $2x-y=2\pi-\frac\pi3=\frac{5\pi}{3}$ ($300^\circ$, 4.º cuadrante: seno negativo, coseno positivo).
+
+$$\sin\frac{5\pi}{3}=-\frac{\sqrt3}{2},\qquad\cos\frac{5\pi}{3}=\frac12$$
+
+Entonces:
+
+$$z'_x(P)=-\sqrt3\quad\text{porque}\quad4\cdot\left(-\frac{\sqrt3}{2}\right)\cdot\frac12=-\sqrt3$$
+
+$$z'_y(P)=\frac{\sqrt3}{2}\quad\text{porque}\quad-2\cdot\left(-\frac{\sqrt3}{2}\right)\cdot\frac12=\frac{\sqrt3}{2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** el versor $s^\circ$. **Por qué:** con $\alpha$ medido desde $x^+$ ya sale unitario; $\alpha=-\frac\pi6$ es $-30^\circ$ (4.º cuadrante).
+
+$$s^\circ=(\cos\alpha;\sin\alpha)=\left(\frac{\sqrt3}{2};-\frac12\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivada direccional (inciso a).
+
+$$\frac{\partial z}{\partial s}\Big|_P=z'_x\cos\alpha+z'_y\sin\alpha=(-\sqrt3)\cdot\frac{\sqrt3}{2}+\frac{\sqrt3}{2}\cdot\left(-\frac12\right)$$
+
+Cada producto:
+
+$$(-\sqrt3)\cdot\frac{\sqrt3}{2}=-\frac32\qquad\frac{\sqrt3}{2}\cdot\left(-\frac12\right)=-\frac{\sqrt3}{4}$$
+
+$$\frac{\partial z}{\partial s}\Big|_P=-\frac32-\frac{\sqrt3}{4}\approx-1{,}93$$
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, módulo y ángulo (inciso b). **Por qué:** el gradiente junta las parciales en un vector.
+
+$$\nabla z(P)=-\sqrt3\,i+\frac{\sqrt3}{2}\,j$$
+
+Módulo, con cada cuadrado en una línea:
+
+$$(\sqrt3)^2=3\qquad\left(\frac{\sqrt3}{2}\right)^2=\frac34$$
+
+$$\|\nabla z\|=\sqrt{3+\frac34}=\sqrt{\frac{15}{4}}=\frac{\sqrt{15}}{2}\approx1{,}94$$
+
+Dirección: $\tan\theta=\dfrac{z'_y}{z'_x}=\dfrac{\sqrt3/2}{-\sqrt3}=-\dfrac12$. **Cuidado con el cuadrante:** $z'_x<0$ y $z'_y>0$ ponen el vector en el 2.º cuadrante. La calculadora da $\arctan\left(-\frac12\right)\approx-26{,}57^\circ$ y hay que sumarle $180^\circ$:
+
+$$\theta=180^\circ-26{,}57^\circ\approx153{,}43^\circ\ \ (\approx2{,}678\ \text{rad})$$
+
+</Paso>
+<Paso>
+
+**Qué:** direcciones de crecimiento máximo, mínimo y nulo. **Por qué:** $\frac{\partial z}{\partial s}=\|\nabla z\|\cos\omega$, con $\omega$ el ángulo entre $s$ y $\nabla z$.
+
+- Máximo ($\omega=0^\circ$): $\theta_{\text{máx}}\approx153{,}43^\circ$, valor $\frac{\sqrt{15}}{2}$.
+- Mínimo ($\omega=180^\circ$): $\theta_{\text{mín}}\approx333{,}43^\circ$, valor $-\frac{\sqrt{15}}{2}$.
+- Nulos ($\omega=\pm90^\circ$): $63{,}43^\circ$ y $243{,}43^\circ$, tangentes a la curva de nivel por $P$.
+
+La dirección pedida ($-30^\circ=330^\circ$) queda a solo $3{,}4^\circ$ de la de mínimo, por eso la derivada direccional ($-1{,}93$) está muy cerca del valor mínimo posible ($-1{,}94$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2024-05/ej3.svg`} alt="Plano xy con ejes graduados en múltiplos de π/3. Desde P(π;π/3) sale en rojo el gradiente hacia arriba y a la izquierda a unos 153 grados, en azul la dirección de mínimo a 333 grados, en verde las direcciones nulas a 63 y 243 grados y en violeta la dirección S de −30 grados, casi pegada a la de mínimo." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=-\frac32-\frac{\sqrt3}{4}\approx-1{,}93,\qquad \nabla z(P)=-\sqrt3\,i+\frac{\sqrt3}{2}\,j,\qquad \|\nabla z\|=\frac{\sqrt{15}}{2},\qquad \theta\approx153{,}43^\circ$$
+
+**Ojo con:** (1) la derivada interna $2$ en $z'_x$ (si se olvida, sale $z'_x=-\frac{\sqrt3}{2}$); (2) usar $\arctan$ sin mirar el cuadrante; (3) el signo del seno para $\alpha=-30^\circ$.
+
+**Criterio estimado — no oficial** (la consigna pide valor, expresión, módulo, ángulo y un gráfico con máximo, mínimo y nulos):
+
+- **Bien:** parciales en $P$ correctas, versor, $\frac{\partial z}{\partial s}=-\frac32-\frac{\sqrt3}{4}$, gradiente con módulo y ángulo en el cuadrante correcto, y gráfico con $\nabla z$ y las cuatro direcciones.
+- **A medias:** cálculo bien pero el gráfico no marca las cuatro direcciones, o el ángulo sin corregir de cuadrante.
+- **Mal:** usa un vector sin normalizar, olvida la cadena y deriva mal, o no calcula el gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes, ahora **por definición**.
+
+**1) Límite por definición.** Sobre la recta $P+t\,s^\circ$, $x=\pi+\frac{\sqrt3}{2}t$ e $y=\frac\pi3-\frac12t$, el interior vale
+
+$$2x-y=\frac{5\pi}{3}+t\left(\sqrt3+\frac12\right)$$
+
+y la función es de una sola variable, $g(t)=\sin^2\!\left(\frac{5\pi}{3}+t\left(\sqrt3+\frac12\right)\right)$. La derivada direccional es $g'(0)$:
+
+$$g'(0)=2\sin\frac{5\pi}{3}\cos\frac{5\pi}{3}\cdot\left(\sqrt3+\frac12\right)=2\cdot\left(-\frac{\sqrt3}{2}\right)\cdot\frac12\cdot\left(\sqrt3+\frac12\right)=-\frac{\sqrt3}{2}\left(\sqrt3+\frac12\right)=-\frac32-\frac{\sqrt3}{4}$$
+
+**2) Dirección nula.** Con $s^\circ$ perpendicular al gradiente (a $63{,}43^\circ$), el producto escalar es $0$: la derivada direccional vale $0$ sobre la curva de nivel.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide en $\frac{\partial z}{\partial x}\big|_P=-\sqrt3$, $\frac{\partial z}{\partial y}\big|_P=\frac{\sqrt3}{2}$, $\frac{\partial z}{\partial s}\big|_P=-\frac32-\frac{\sqrt3}{4}$, $\nabla z=-\sqrt3\,i+\frac{\sqrt3}{2}\,j$ y $\|\nabla z\|=\sqrt{3+\frac34}=\frac{\sqrt{15}}{2}$ ("valor máx. deriv."), y el gráfico marca "Máx Cr.", "Mín. Cr." y los dos "Crec. Nulo".
+
+⚠️ **Discrepancia en el ángulo:** la resolución oficial da $\theta=\arctan\left(-\frac12\right)\Rightarrow\theta=\frac{5\pi}{6}\ (150^\circ)$; el recálculo da $\theta=180^\circ-\arctan\frac12\approx153{,}43^\circ$ — pendiente de confirmar con la cátedra. Para $150^\circ$ la tangente sería $-\frac{\sqrt3}{3}\approx-0{,}577$, no $-\frac12$. Causa probable: redondeo a un ángulo notable al pasar de $\arctan\left(-\frac12\right)$ al ángulo en grados; el módulo y la derivada direccional no se ven afectados. Detalle en `docs/revision/p1-1h9-2024-05-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2024-05#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" pagina={1} unidad="U3" tema="Lagrange y plano tangente">
+<Enunciado examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" pagina="1">
+
+Por el método de Lagrange, determinar las dimensiones del paralelepípedo recto de máximo volumen que tiene un vértice en el origen y el opuesto pertenece al plano tangente al paraboloide: $z=16-x^2-y^2$ en el punto $P(1;2)$.
+
+</Enunciado>
+
+<Pista>
+
+Hay dos ideas encadenadas: primero tenés que averiguar **qué plano** es el de la condición (no te lo dan escrito), y recién después maximizar el volumen de la caja con un vértice en ese plano. ¿Cómo se obtiene un plano que "toca" a una superficie en un punto?
+
+</Pista>
+<Pista>
+
+Dos pasos: (1) **plano tangente** a $z=f(x,y)$ en $(x_0;y_0)$: $z-z_0=f'_x(x-x_0)+f'_y(y-y_0)$ (teoría: *Plano tangente*, derivadas parciales de $f$ en $P$); (2) **Lagrange**: función principal $V=xyz$ y condición el plano, con $F=xyz+\lambda\,(\text{condición})$ (así lo escribe la cátedra en este examen). Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z_0=16-1-4=11$; $f'_x=-2x\to-2$ y $f'_y=-2y\to-4$ en $P$, así que el plano es $z-11=-2(x-1)-4(y-2)$. Con el plano en forma $2x+4y+z-21=0$, las cuatro ecuaciones son $yz+2\lambda=0$, $xz+4\lambda=0$, $xy+\lambda=0$ y la condición. Se despeja $-\lambda$ de las tres primeras.
+
+</Pista>
+<Paso>
+
+**Qué:** hallar el plano tangente. **Por qué:** es la condición del problema y no está dada. En $P(1;2)$ la altura del paraboloide es
+
+$$z_0=16-1^2-2^2=11$$
+
+Las derivadas parciales de $f=16-x^2-y^2$ son $f'_x=-2x$ y $f'_y=-2y$; en $P$:
+
+$$f'_x(P)=-2\qquad f'_y(P)=-4$$
+
+Plano tangente $z-z_0=f'_x(P)\,(x-1)+f'_y(P)\,(y-2)$:
+
+$$z-11=-2(x-1)-4(y-2)$$
+
+$$z-11=-2x+2-4y+8$$
+
+$$2x+4y+z=21$$
+
+</Paso>
+<Paso>
+
+**Qué:** plantear Lagrange. **Por qué:** la caja tiene un vértice en el origen y el opuesto $(x;y;z)$ en el plano; sus dimensiones son $x$, $y$, $z$ (positivas) y se maximiza $V=xyz$ sujeto a $2x+4y+z-21=0$.
+
+$$F(x,y,z,\lambda)=xyz+\lambda\,(2x+4y+z-21)$$
+
+$$F'_x=yz+2\lambda=0\qquad F'_y=xz+4\lambda=0\qquad F'_z=xy+\lambda=0$$
+
+$$F'_\lambda=2x+4y+z-21=0\quad(\#)$$
+
+</Paso>
+<Paso>
+
+**Qué:** despejar $-\lambda$ de las tres primeras e igualar. **Por qué:** así desaparece $\lambda$.
+
+$$-\lambda=\frac{yz}{2}=\frac{xz}{4}=xy$$
+
+De $\frac{yz}{2}=\frac{xz}{4}$, dividiendo por $z$ (positivo):
+
+$$y=\frac x2$$
+
+De $\frac{yz}{2}=xy$, dividiendo por $y$ (positivo):
+
+$$z=2x$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición $(\#)$. **Por qué:** queda una sola incógnita.
+
+$$2x+4\cdot\frac x2+2x=21$$
+
+$$2x+2x+2x=21\ \Rightarrow\ 6x=21\ \Rightarrow\ x=\frac72$$
+
+$$y=\frac x2=\frac74\qquad z=2x=7$$
+
+</Paso>
+<Paso>
+
+**Qué:** el volumen y por qué es máximo.
+
+$$V_{\text{máx}}=\frac72\cdot\frac74\cdot7=\frac{343}{8}\approx42{,}9$$
+
+Es un máximo porque sobre el triángulo del plano ($x,y,z\ge0$, cerrado y acotado) el volumen se anula en el borde, y el único punto crítico con $V>0$ es este. (El multiplicador queda $\lambda=-xy=-\frac{49}{8}$; las otras soluciones del sistema tienen alguna dimensión nula y $V=0$.)
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2024-05/ej4.svg`} alt="Perspectiva 3D del plano 2x+4y+z=21 como triángulo celeste con vértices en (21/2;0;0), (0;21/4;0) y (0;0;21), y la caja de volumen máximo en rojo con un vértice en el origen y el opuesto sobre el plano en (7/2;7/4;7)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Plano tangente: }2x+4y+z=21,\qquad x=\frac72,\quad y=\frac74,\quad z=7,\qquad V_{\text{máx}}=\frac{343}{8}\approx42{,}9$$
+
+**Ojo con:** olvidar que el primer paso es **calcular el plano tangente** (no es el plano $z=16-x^2-y^2$, que no es un plano) y usar el signo correcto en la condición: $F=xyz+\lambda\,g$ y $F=xyz-\lambda\,g$ dan el mismo $x,y,z$ (solo cambia el signo de $\lambda$).
+
+**Criterio estimado — no oficial** (la consigna pide las dimensiones por Lagrange):
+
+- **Bien:** plano tangente correcto, $F$ bien armada, sistema resuelto y las tres dimensiones (el volumen $\frac{343}{8}$ no se pide explícito pero el profe lo informa).
+- **A medias:** plano tangente bien y Lagrange bien planteado, con un error algebraico en el sistema; o plano con un error de cálculo y Lagrange correcto sobre ese plano.
+- **Mal:** no calcula el plano tangente (usa el paraboloide como condición) o maximiza sin la condición.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Desigualdad entre medias (AM–GM).** Los números positivos $2x$, $4y$ y $z$ suman $21$, así que su producto es máximo cuando son iguales ($7$ cada uno):
+
+$$2x\cdot4y\cdot z\le\left(\frac{21}{3}\right)^3=343\ \Rightarrow\ xyz\le\frac{343}{8}$$
+
+La igualdad se da con $2x=4y=z=7$, o sea $x=\frac72$, $y=\frac74$, $z=7$.
+
+**2) Sin multiplicadores.** Despejando $z=21-2x-4y$ del plano queda $V(x,y)=xy(21-2x-4y)$; sus dos derivadas se anulan en $\left(\frac72;\frac74\right)$, el hessiano es positivo y $V_{xx}<0$ (máximo), con $V=\frac{343}{8}$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" paginas="6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 6, resolución manuscrita atribuida al profesor):** coincide. Calcula el plano tangente con $z_0=16-1^2-2^2=11$, $z-11=-2(x-1)-4(y-2)\to2x+4y+z=21$; plantea $F=F_{\text{ppal}}+\lambda F_{\text{condic}}=xyz+\lambda(2x+4y+z-21)$ con $F'_x=yz+2\lambda$, $F'_y=xz+4\lambda$, $F'_z=xy+\lambda$, obtiene $-\lambda=\frac{yz}{2}=\frac{xz}{4}=xy\Rightarrow y=\frac x2,\ z=2x$ y, en $(\#)$, $x=\frac72$, $y=\frac74$, $z=7$, con $\text{Vol}_{\text{máx}}=\frac{343}{8}\approx42{,}8$. Observación: $\frac{343}{8}=42{,}875$, que redondea a $42{,}9$ (el escaneo escribe $\approx42{,}8$, truncado); no cambia el resultado.
+
+</div>
+</Ejercicio>
