@@ -58,7 +58,9 @@ $$D_f=\{(x,y):\ x^2+y^2>1\ \wedge\ y\ge x^2\}$$
 
 Si en cambio fuera $\ln[(y-x)(x^2+y^2-1)]$: S1 $y>x\wedge x^2+y^2>1$, S2 $y<x\wedge x^2+y^2<1$; $D_f=S_1\cup S_2$, todo con borde punteado.
 
-**Gráfico:** [FIGURA: plano $xy$, parábola $y=x^2$ en línea llena, circunferencia $x^2+y^2=1$ punteada, sombreada la zona dentro de la parábola y fuera del círculo, puntos de corte rotulados $(\pm0{,}786;\ 0{,}618)$ · fuente propia, ver estilo de figuras de p1-1h9-2025-05-g1 ej1]
+**Gráfico:**
+
+![Plano xy con la parábola y=x² llena, la circunferencia x²+y²=1 punteada y sombreada la región dentro de la parábola y fuera del círculo, con los cortes (±0,786; 0,618)](../../../public/figuras/machetes/dominio-1.svg)
 
 **Raíz de un cociente $\ge0$, con parámetro $a$** (1H9 May-24 #1): $z=\sqrt{\dfrac{N}{D}}$ con $N=\frac{x^2}{9}+\frac{y^2}{4}-a^2$ y $D=a^2-x^2+\frac{y^2}{4}$. El cociente es $\ge0$ cuando los dos tienen el mismo signo (el cero del numerador se admite, el del denominador no):
 
@@ -71,7 +73,7 @@ $$\big(N\ge0\wedge D>0\big)\ \vee\ \big(N\le0\wedge D<0\big)$$
 - Cortes elipse-hipérbola: $\left(\pm\frac{3a}{\sqrt5};\pm\frac{4a}{\sqrt5}\right)$.
 - **Caso $a=0$ aparte** (se dividió por $a^2$): $N=\frac{x^2}{9}+\frac{y^2}{4}\ge0$, $D=\frac{y^2}{4}-x^2$ y queda $D>0$, o sea $|y|>2|x|$ (el origen da $\frac00$ y queda afuera).
 
-[FIGURA: plano $xy$ con $a=1$, elipse llena de semiejes $3$ y $2$, hipérbola $x^2-\frac{y^2}{4}=1$ punteada, cuatro piezas sombreadas (dos laterales acotadas y dos no acotadas arriba y abajo) y los cuatro cortes rotulados · fuente figuras/p1-1h9-2024-05/ej1.svg]
+![Plano xy con a=1: elipse llena de semiejes 3 y 2, hipérbola x²−y²/4=1 punteada, cuatro piezas sombreadas (dos laterales acotadas y dos no acotadas arriba y abajo) y los cuatro cortes rotulados](../../../public/figuras/machetes/dominio-2.svg)
 
 ## Errores frecuentes
 - Dibujar siempre el borde lleno: hay que decidir **curva por curva** si pertenece.
