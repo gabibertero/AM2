@@ -58,6 +58,7 @@ $$IT=\int_0^{2\pi}\!\cos\theta\,d\theta\int_0^4 r^3\,dr\int_r^4dz$$
 **Qué:** pasar a cilíndricas. **Por qué:** la región es de revolución alrededor del eje $z$ y el integrando solo mezcla $x$ con $x^2+y^2$. Con $x=r\cos\theta$ y $r\ge0$ (por eso $\sqrt{r^2}=r$ y no $|r|$):
 
 $$x\sqrt{x^2+y^2}=r\cos\theta\cdot\sqrt{r^2}$$
+
 $$x\sqrt{x^2+y^2}=r\cos\theta\cdot r=r^2\cos\theta$$
 
 Se multiplica por el jacobiano $r$ (en valor absoluto, es positivo): el integrando queda $r^3\cos\theta$.
@@ -82,8 +83,11 @@ $$\int_r^4dz=4-r$$
 **Qué:** integrar en $r$. **Por qué:** se multiplica por $r^3$, se distribuye y se primitiva cada potencia:
 
 $$\int_0^4r^3(4-r)\,dr=\int_0^4(4r^3-r^4)\,dr$$
+
 $$=\Big[r^4-\frac{r^5}{5}\Big]_0^4$$
+
 $$=256-\frac{1024}{5}$$
+
 $$=\frac{256}{5}$$
 
 Resumido: $\int_0^4 r^3(4-r)\,dr=\frac{256}{5}$.
@@ -161,8 +165,11 @@ $$IC=\int_0^2\big[P\,dx+Q\,dy\big]_{C_1}+\int_2^0\big[P\,dx+Q\,dy\big]_{C_2}$$
 **Qué:** hallar los cortes y dibujar. **Por qué:** los cortes son los extremos de cada tramo. Reemplazo $y=x^2-x$ en la segunda ecuación $x=y^2-y$:
 
 $$x=(x^2-x)^2-(x^2-x)$$
+
 $$x=x^4-2x^3+x^2-x^2+x$$
+
 $$0=x^4-2x^3$$
+
 $$0=x^3(x-2)$$
 
 Entonces $x=0$ o $x=2$, y con $y=x^2-x$: $(0,0)$ y $(2,2)$ (los dos puntos también cumplen $x=y^2-y$). **Cómo reconocerlo:** una parábola "parada" ($y=\dots x^2$) y otra "acostada" ($x=\dots y^2$) con las mismas coeficientes son simétricas respecto de la recta $y=x$: por eso los cortes están sobre esa recta.
@@ -187,12 +194,17 @@ $$(x-y)\,dx-(y-x)\,dy=(x-y)\,(dx+dy)$$
 **Qué:** $IC_1$ por definición ($x$ de $0$ a $2$). **Por qué:** se reemplaza $y=x^2-x$ y $dy=(2x-1)\,dx$:
 
 $$x-y=x-(x^2-x)=2x-x^2$$
+
 $$dx+dy=dx+(2x-1)\,dx=2x\,dx$$
+
 $$(x-y)(dx+dy)=(2x-x^2)\cdot2x\,dx=(4x^2-2x^3)\,dx$$
 
 $$IC_1=\int_0^2(4x^2-2x^3)\,dx$$
+
 $$IC_1=\Big[\frac{4x^3}{3}-\frac{x^4}{2}\Big]_0^2$$
+
 $$IC_1=\frac{32}{3}-8$$
+
 $$IC_1=\frac83$$
 
 </Paso>
@@ -201,13 +213,19 @@ $$IC_1=\frac83$$
 **Qué:** $IC_2$ por definición ($y$ de $2$ a $0$). **Por qué:** ahora la variable es $y$: $x=y^2-y$ y $dx=(2y-1)\,dy$.
 
 $$x-y=y^2-y-y=y^2-2y$$
+
 $$dx+dy=(2y-1)\,dy+dy=2y\,dy$$
+
 $$(x-y)(dx+dy)=(y^2-2y)\cdot2y\,dy=(2y^3-4y^2)\,dy$$
 
 $$IC_2=\int_2^0(2y^3-4y^2)\,dy$$
+
 $$IC_2=-\int_0^2(2y^3-4y^2)\,dy$$
+
 $$IC_2=-\Big[\frac{y^4}{2}-\frac{4y^3}{3}\Big]_0^2$$
+
 $$IC_2=-\Big(8-\frac{32}{3}\Big)$$
+
 $$IC_2=\frac83$$
 
 </Paso>
@@ -242,7 +260,9 @@ $$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1-(-1)=2$$
 Entonces $IC=2\cdotA(D)$. El área sale de $A=\oint x\,dy$, tramo por tramo:
 
 $$\int_{C_1}x\,dy=\int_0^2x(2x-1)\,dx=\frac{16}{3}-2=\frac{10}{3}$$
+
 $$\int_{C_2}x\,dy=\int_2^0(y^2-y)\,dy=-\Big(\frac83-2\Big)=-\frac23$$
+
 $$A(D)=\frac{10}{3}-\frac23=\frac83$$
 
 $$IC=2\cdot\frac83=\frac{16}{3}$$
@@ -291,7 +311,9 @@ $$\int\frac{1+2u}{u}\,du=-\int\frac{dx}{x}$$
 **Qué:** despejar $y'$. **Por qué:** hay que dejar la ecuación como $y'=f(x,y)$ para ver su tipo.
 
 $$2y^2-x^2y'-2xyy'=0$$
+
 $$2y^2=y'(x^2+2xy)$$
+
 $$y'=\frac{2y^2}{x^2+2xy}$$
 
 **Cómo reconocerlo:** numerador y denominador son de grado $2$ en ($x$, $y$); si dividís arriba y abajo por $x^2$ queda $\dfrac{2(y/x)^2}{1+2(y/x)}$: solo depende de $y/x$. Eso es una EDO homogénea.
@@ -302,7 +324,9 @@ $$y'=\frac{2y^2}{x^2+2xy}$$
 **Qué:** sustituir $y=ux$. **Por qué:** así todo queda en función de $u$ y $x$. Con $y=u\,x$ se deriva como producto: $y'=u'x+u$.
 
 $$u'x+u=\frac{2u^2x^2}{x^2+2x\cdot ux}$$
+
 $$u'x+u=\frac{2u^2x^2}{x^2(1+2u)}$$
+
 $$u'x+u=\frac{2u^2}{1+2u}$$
 
 </Paso>
@@ -311,8 +335,11 @@ $$u'x+u=\frac{2u^2}{1+2u}$$
 **Qué:** separar variables. **Por qué:** se pasa $u$ al otro lado y se busca dejar $u$ a un lado y $x$ al otro.
 
 $$u'x=\frac{2u^2}{1+2u}-u$$
+
 $$u'x=\frac{2u^2-u(1+2u)}{1+2u}$$
+
 $$u'x=\frac{2u^2-u-2u^2}{1+2u}$$
+
 $$u'x=\frac{-u}{1+2u}$$
 
 Con $u'=\dfrac{du}{dx}$:
@@ -327,11 +354,13 @@ $$\frac{1+2u}{u}\,du=-\frac{dx}{x}$$
 **Qué:** integrar los dos lados. **Por qué:** una vez separadas, cada lado es una integral de una sola variable. Se parte $\frac{1+2u}{u}=\frac1u+2$:
 
 $$\int\Big(\frac1u+2\Big)du=-\int\frac{dx}{x}$$
+
 $$\ln|u|+2u=-\ln|x|+C$$
 
 Se pasa $\ln|x|$ al otro lado y se juntan los logaritmos ($\ln a+\ln b=\ln ab$):
 
 $$\ln|u|+\ln|x|+2u=C$$
+
 $$\ln|ux|+2u=C$$
 
 </Paso>
@@ -362,11 +391,13 @@ $$\ln|y|+\frac{2y}{x}=C$$
 Camino independiente: derivar la solución **implícitamente** respecto de $x$ (con $y=y(x)$) y comprobar que recupera la EDO.
 
 $$\frac{d}{dx}\Big[\ln|y|+\frac{2y}{x}\Big]=0$$
+
 $$\frac{y'}{y}+\frac{2(y'x-y)}{x^2}=0$$
 
 Multiplicando todo por $x^2y$:
 
 $$x^2y'+2y\,(y'x-y)=0$$
+
 $$x^2y'+2xyy'-2y^2=0$$
 
 Cambiando de signo es exactamente $2y^2-x^2y'-2xyy'=0$, la ecuación original.
@@ -415,7 +446,9 @@ Derivá dos veces, reemplazá en la EDO e igualá coeficientes.
 **Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución de $y''-2y'+y=0$ y sale de la ecuación característica (se prueba $y=e^{rx}$).
 
 $$r^2-2r+1=0$$
+
 $$(r-1)^2=0$$
+
 $$r=1\ \text{(raíz doble)}$$
 
 Con raíz doble, las dos soluciones independientes son $e^x$ y $x\,e^x$:
@@ -437,7 +470,9 @@ $$y_p=Ax^2e^x+Bx+D$$
 **Qué:** derivar $y_p$ dos veces. **Por qué:** para reemplazar en la EDO. Para $Ax^2e^x$ se usa la regla del producto:
 
 $$y_p'=(2Ax+Ax^2)\,e^x+B$$
+
 $$y_p''=(2A+2Ax+2Ax+Ax^2)\,e^x$$
+
 $$y_p''=(2A+4Ax+Ax^2)\,e^x$$
 
 </Paso>
@@ -496,6 +531,7 @@ Dos controles independientes. **1) Cambio $y=e^xw$ para la parte con $e^x$:** co
 **2) Sustituir la parte polinomial** $y=-x-2$ (con $y'=-1$, $y''=0$):
 
 $$y''-2y'+y=0-2(-1)+(-x-2)$$
+
 $$y''-2y'+y=2-x-2=-x$$
 
 que es el $-x$ del segundo miembro. Y $\frac12x^2e^x$ da $e^x$ (control 1), así que la suma da $e^x-x$.

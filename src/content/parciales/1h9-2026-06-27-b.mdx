@@ -58,6 +58,7 @@ $$IT=\int_0^{2\pi}\!\sin\theta\,d\theta\int_0^{\sqrt3}r^3\,dr\int_{r^2}^3dz$$
 **Qué:** pasar a cilíndricas. **Por qué:** la región es de revolución alrededor del eje $z$. Con $y=r\sin\theta$ y $r\ge0$ (por eso $\sqrt{r^2}=r$):
 
 $$y\sqrt{x^2+y^2}=r\sin\theta\cdot\sqrt{r^2}$$
+
 $$y\sqrt{x^2+y^2}=r\sin\theta\cdot r=r^2\sin\theta$$
 
 Se multiplica por el jacobiano $r$ (positivo): el integrando queda $r^3\sin\theta$.
@@ -82,9 +83,13 @@ $$\int_{r^2}^3dz=3-r^2$$
 **Qué:** integrar en $r$. **Por qué:** se multiplica por $r^3$, se distribuye y se primitiva:
 
 $$\int_0^{\sqrt3}r^3(3-r^2)\,dr=\int_0^{\sqrt3}(3r^3-r^5)\,dr$$
+
 $$=\Big[\frac{3r^4}{4}-\frac{r^6}{6}\Big]_0^{\sqrt3}$$
+
 $$=\frac{3\cdot9}{4}-\frac{27}{6}$$
+
 $$=\frac{27}{4}-\frac92$$
+
 $$=\frac94$$
 
 Resumido: $\int_0^{\sqrt3} r^3(3-r^2)\,dr=\frac{9}{4}$. (Con $(\sqrt3)^4=9$ y $(\sqrt3)^6=27$.)
@@ -162,8 +167,11 @@ $$IC=\int_0^2\big[P\,dx+Q\,dy\big]_{C_1}+\int_2^0\big[P\,dx+Q\,dy\big]_{C_2}$$
 **Qué:** hallar los cortes y dibujar. **Por qué:** los cortes son los extremos de cada tramo. Reemplazo $y=x^2-x$ en la segunda ecuación $x=y^2-y$:
 
 $$x=(x^2-x)^2-(x^2-x)$$
+
 $$x=x^4-2x^3+x^2-x^2+x$$
+
 $$0=x^4-2x^3$$
+
 $$0=x^3(x-2)$$
 
 Entonces $x=0$ o $x=2$, y con $y=x^2-x$: $(0,0)$ y $(2,2)$ (los dos puntos también cumplen $x=y^2-y$). **Cómo reconocerlo:** una parábola "parada" ($y=\dots x^2$) y otra "acostada" ($x=\dots y^2$) con los mismos coeficientes son simétricas respecto de la recta $y=x$: por eso los cortes están sobre esa recta. Las curvas son las mismas que en el Tema A: solo cambia el campo.
@@ -181,14 +189,21 @@ Entonces $x=0$ o $x=2$, y con $y=x^2-x$: $(0,0)$ y $(2,2)$ (los dos puntos tambi
 **Qué:** $IC_1$ por definición ($x$ de $0$ a $2$). **Por qué:** se reemplaza $y=x^2-x$ y $dy=(2x-1)\,dx$ en $P\,dx+Q\,dy$ con $P=x-y$, $Q=x+y$:
 
 $$x-y=x-(x^2-x)=2x-x^2$$
+
 $$x+y=x+(x^2-x)=x^2$$
+
 $$P\,dx+Q\,dy=(2x-x^2)\,dx+x^2(2x-1)\,dx$$
+
 $$P\,dx+Q\,dy=(2x-x^2+2x^3-x^2)\,dx$$
+
 $$P\,dx+Q\,dy=(2x^3-2x^2+2x)\,dx$$
 
 $$IC_1=\int_0^2(2x^3-2x^2+2x)\,dx$$
+
 $$IC_1=\Big[\frac{x^4}{2}-\frac{2x^3}{3}+x^2\Big]_0^2$$
+
 $$IC_1=8-\frac{16}{3}+4$$
+
 $$IC_1=\frac{20}{3}$$
 
 </Paso>
@@ -197,14 +212,21 @@ $$IC_1=\frac{20}{3}$$
 **Qué:** $IC_2$ por definición ($y$ de $2$ a $0$). **Por qué:** ahora la variable es $y$: $x=y^2-y$ y $dx=(2y-1)\,dy$.
 
 $$x-y=y^2-y-y=y^2-2y$$
+
 $$x+y=y^2-y+y=y^2$$
+
 $$P\,dx+Q\,dy=(y^2-2y)(2y-1)\,dy+y^2\,dy$$
+
 $$P\,dx+Q\,dy=(2y^3-5y^2+2y+y^2)\,dy$$
+
 $$P\,dx+Q\,dy=(2y^3-4y^2+2y)\,dy$$
 
 $$IC_2=\int_2^0(2y^3-4y^2+2y)\,dy$$
+
 $$IC_2=-\Big[\frac{y^4}{2}-\frac{4y^3}{3}+y^2\Big]_0^2$$
+
 $$IC_2=-\Big(8-\frac{32}{3}+4\Big)$$
+
 $$IC_2=-\frac43$$
 
 </Paso>
@@ -239,7 +261,9 @@ $$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1-(-1)=2$$
 Entonces $IC=2\cdotA(D)$. El área sale de $A=\oint x\,dy$, tramo por tramo:
 
 $$\int_{C_1}x\,dy=\int_0^2x(2x-1)\,dx=\frac{16}{3}-2=\frac{10}{3}$$
+
 $$\int_{C_2}x\,dy=\int_2^0(y^2-y)\,dy=-\Big(\frac83-2\Big)=-\frac23$$
+
 $$A(D)=\frac{10}{3}-\frac23=\frac83$$
 
 $$IC=2\cdot\frac83=\frac{16}{3}$$
@@ -288,6 +312,7 @@ $$\frac{dv}{v}=3x^2\,dx,\qquad u'=\frac{6x^2}{v}$$
 **Qué:** ordenar y reconocer el tipo. **Por qué:** hay que dejarla en la forma $y'+P\,y=Q$.
 
 $$y'-3x^2y-6x^2=0$$
+
 $$y'-3x^2y=6x^2$$
 
 **Cómo reconocerlo:** $y$ e $y'$ aparecen solo a la primera potencia y multiplicados por funciones de $x$: es lineal.
@@ -298,6 +323,7 @@ $$y'-3x^2y=6x^2$$
 **Qué:** sustituir $y=u\,v$. **Por qué:** al tener dos funciones incógnitas se gana libertad para elegir una (la $v$) y simplificar. Con $y=uv$ se deriva como producto, $y'=u'v+uv'$:
 
 $$u'v+uv'-3x^2uv=6x^2$$
+
 $$u'v+u\,(v'-3x^2v)=6x^2$$
 
 </Paso>
@@ -306,8 +332,11 @@ $$u'v+u\,(v'-3x^2v)=6x^2$$
 **Qué:** elegir $v$ anulando el paréntesis. **Por qué:** si $v'-3x^2v=0$ la ecuación se reduce a $u'v=6x^2$. Esa $v$ es separable (basta una solución particular, tomo constante de integración $0$):
 
 $$\frac{dv}{dx}=3x^2v$$
+
 $$\int\frac{dv}{v}=\int3x^2\,dx$$
+
 $$\ln v=x^3$$
+
 $$v=e^{x^3}$$
 
 </Paso>
@@ -316,13 +345,17 @@ $$v=e^{x^3}$$
 **Qué:** resolver para $u$. **Por qué:** con $v=e^{x^3}$ queda $u'v=6x^2$:
 
 $$u'e^{x^3}=6x^2$$
+
 $$u'=6x^2e^{-x^3}$$
+
 $$u=\int6x^2e^{-x^3}\,dx$$
 
 Sustitución $t=-x^3$, entonces $dt=-3x^2\,dx$, o sea $6x^2\,dx=-2\,dt$:
 
 $$u=-2\int e^t\,dt$$
+
 $$u=-2e^{t}+C$$
+
 $$u=-2e^{-x^3}+C$$
 
 </Paso>
@@ -331,7 +364,9 @@ $$u=-2e^{-x^3}+C$$
 **Qué:** volver a $y=uv$. **Por qué:** esa es la incógnita.
 
 $$y=\big(-2e^{-x^3}+C\big)\,e^{x^3}$$
+
 $$y=-2e^{-x^3}e^{x^3}+C\,e^{x^3}$$
+
 $$y=-2+C\,e^{x^3}$$
 
 </Paso>
@@ -355,7 +390,9 @@ $$y=-2+C\,e^{x^3}$$
 Dos caminos independientes. **1) Variables separables:** como $y'=3x^2(y+2)$ (de $y'-3x^2y-6x^2=0$ sacando factor $3x^2$):
 
 $$\frac{dy}{y+2}=3x^2\,dx$$
+
 $$\ln|y+2|=x^3+k$$
+
 $$y+2=C\,e^{x^3}$$
 
 Misma familia, con $C=\pm e^k$. Machete: [Variables separables](../../machetes/edo-variables-separables/).
@@ -363,6 +400,7 @@ Misma familia, con $C=\pm e^k$. Machete: [Variables separables](../../machetes/e
 **2) Sustituir en la EDO:** con $y=-2+Ce^{x^3}$, $y'=3x^2Ce^{x^3}$:
 
 $$y'-3x^2y-6x^2=3x^2Ce^{x^3}-3x^2(-2+Ce^{x^3})-6x^2$$
+
 $$=3x^2Ce^{x^3}+6x^2-3x^2Ce^{x^3}-6x^2=0$$
 
 </Comprobacion>
@@ -409,7 +447,9 @@ Derivá dos veces, reemplazá en la EDO e igualá coeficientes.
 **Qué:** resolver la homogénea. **Por qué:** $y_h$ es la solución de $y''-2y'+y=0$ y sale de la ecuación característica (se prueba $y=e^{rx}$).
 
 $$r^2-2r+1=0$$
+
 $$(r-1)^2=0$$
+
 $$r=1\ \text{(raíz doble)}$$
 
 Con raíz doble, las dos soluciones independientes son $e^x$ y $x\,e^x$:
@@ -431,7 +471,9 @@ $$y_p=Ax^2e^x+Bx+D$$
 **Qué:** derivar $y_p$ dos veces. **Por qué:** para reemplazar en la EDO. Para $Ax^2e^x$ se usa la regla del producto:
 
 $$y_p'=(2Ax+Ax^2)\,e^x+B$$
+
 $$y_p''=(2A+2Ax+2Ax+Ax^2)\,e^x$$
+
 $$y_p''=(2A+4Ax+Ax^2)\,e^x$$
 
 </Paso>
@@ -490,6 +532,7 @@ Dos controles independientes. **1) Cambio $y=e^xw$ para la parte con $e^x$:** co
 **2) Sustituir la parte polinomial** $y=x+1$ (con $y'=1$, $y''=0$):
 
 $$y''-2y'+y=0-2\cdot1+(x+1)$$
+
 $$y''-2y'+y=x-1$$
 
 que es el $x-1$ del segundo miembro. Y $-\frac12x^2e^x$ da $-e^x$ (control 1), así que la suma da $-e^x+x-1$.

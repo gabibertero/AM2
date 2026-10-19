@@ -34,6 +34,7 @@ fuentes:
 
 ## Fórmulas clave
 $$V=\iint_D \big(z_{sup}-z_{inf}\big)\,r\,dr\,d\theta$$
+
 $$V=\int_{\theta_1}^{\theta_2}\!\int_{r_1}^{r_2}\!\int_{z_{inf}}^{z_{sup}} r\,dz\,dr\,d\theta$$
 - $z_{sup}-z_{inf}$: altura del sólido sobre cada punto de $D$.
 - $r$ (extra): valor absoluto del jacobiano $|J|=r$ de $(r,\theta)\mapsto(x,y)$.

@@ -1,0 +1,522 @@
+---
+id: "p1-1h9-2023-07-rec"
+titulo: "Recuperatorio 1° Parcial Práctico — Comisión 1H9 (08/07/2023)"
+comision: "1H9"
+fecha: "08/07/2023"
+tipo: "recuperatorio"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–6"
+orden: 161
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import Pendiente from '../../components/Pendiente.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1H9 · Recuperatorio 1° Parcial Práctico – 08/07/2023 · Puntaje mínimo para aprobar: 6 (seis).
+
+Importante (consigna de corrección de la cátedra): se deben adjuntar todos los cálculos auxiliares. El examen debe ser presentado con prolijidad, orden y escritura legible, fundamental para poder controlar el desarrollo de los ejercicios. No está permitido el uso de calculadora ni de tablas de derivadas e integrales.
+
+Nota: el archivo se llama "1° Parcial 1H9 Jul-23.pdf" pero el encabezado de la hoja dice **Recuperatorio**.
+
+<Ejercicio id="p1-1h9-2023-07-rec#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina={1} unidad="U1" tema="Dominio (raíz y logaritmo)">
+<Enunciado examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$\begin{aligned}f(x,y)=\ &\sqrt{36-4x^2\ \boxed{?}\ 9y^2}\\&\cdot\ln\left(x^2+y^2-4\right)\end{aligned}$$
+
+</Enunciado>
+
+<Pendiente>: en el escaneo, el signo entre $4x^2$ y $9y^2$ está tachado o sobrescrito y no se lee con certeza (el recuadro $\boxed{?}$ lo marca). No se reconstruyó por cuenta propia: se resuelve con la lectura que usa la resolución oficial (p. 2), que copia $36-4x^2+9y^2$. Con el signo contrario el interior de la raíz sería una elipse y el dominio cambiaría. Pendiente de confirmar con la cátedra.</Pendiente>
+
+<Pista>
+
+Mirá cada factor: una raíz cuadrada y un logaritmo, multiplicados. ¿Qué tiene que cumplir el interior de la raíz? ¿Y el argumento del $\ln$? Como están multiplicados, ¿qué tienen que cumplirse: una de las dos condiciones o las dos?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: radicando $\ge0$ y argumento del $\ln$ $>0$, ambas a la vez (intersección). La primera, con la lectura de la oficial, es una **hipérbola** (con su interior entre las ramas) y la segunda es el exterior de una circunferencia. Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho (lectura de la oficial): $36-4x^2+9y^2\ge0$ y $x^2+y^2-4>0$. En la primera, pasá los términos con signo negativo al otro lado y dividí por $36$ para llegar a la forma canónica $\frac{x^2}{a^2}-\frac{y^2}{b^2}\le1$; en la segunda, leé el radio.
+
+</Pista>
+<Paso>
+
+**Qué:** la condición de la raíz. **Por qué:** una raíz cuadrada pide radicando $\ge0$ (puede valer $0$: la raíz de $0$ existe).
+
+$$36-4x^2+9y^2\ge0\ \Rightarrow\ 4x^2-9y^2\le36$$
+
+Dividiendo por $36$ (positivo, no cambia el sentido):
+
+$$\frac{x^2}{9}-\frac{y^2}{4}\le1$$
+
+**Cómo reconocerlo:** $\frac{x^2}{9}-\frac{y^2}{4}=1$ es una **hipérbola de eje horizontal**, con vértices $(\pm3;0)$ y asíntotas $y=\pm\frac23x$. Con "$\le1$" se toma la zona **entre las dos ramas** (contiene al origen: $0\le1$) y el borde, porque la raíz de $0$ existe.
+
+</Paso>
+<Paso>
+
+**Qué:** la condición del logaritmo. **Por qué:** $\ln$ pide argumento estrictamente positivo.
+
+$$x^2+y^2-4>0\ \Rightarrow\ x^2+y^2>4$$
+
+Es el **exterior** de la circunferencia de radio $2$ (sin el borde).
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y graficar. **Por qué:** como se multiplican, hacen falta las dos condiciones. La circunferencia de radio $2$ queda adentro de la zona entre las ramas (los vértices de la hipérbola están en $\pm3$, más lejos que el radio), así que el dominio es la zona entre las ramas **sin el disco** de radio $2$: hipérbola llena (borde incluido), circunferencia punteada (borde excluido).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2023-07-rec/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Zona sombreada entre las dos ramas de la hipérbola x²/9−y²/4=1 (llena, vértices (±3;0), asíntotas y=±(2/3)x punteadas), sin el disco de radio 2, cuya circunferencia está punteada. Se marcan (±3;0), (±2;0) y (0;±2)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2:\ \tfrac{x^2}{9}-\tfrac{y^2}{4}\le1\ \wedge\ x^2+y^2>4\Big\}$$
+
+(con la lectura de la resolución oficial, $36-4x^2+9y^2$).
+
+**Ojo con:** el borde: la hipérbola **sí** pertenece (raíz de $0$) y la circunferencia **no** ($\ln0$). Y no confundir la zona "entre las ramas" con la de "adentro de las ramas": $0\le1$ dice que el origen cumple la desigualdad.
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"; la cátedra pide el conjunto en notación de conjuntos):
+
+- **Bien:** las dos condiciones, hipérbola con asíntotas y vértices, circunferencia de radio $2$, gráfico con los bordes bien marcados y el conjunto analítico.
+- **A medias:** conjunto correcto sin gráfico (o al revés), o bordes mal marcados.
+- **Mal:** usa solo una de las dos condiciones, o toma el $\ln$ con $\ge0$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar en puntos de prueba**.
+
+- $(0;3)$: radicando $36+81=117\ge0$ y $\ln(9-4)=\ln5$. **Está.**
+- $(0;0)$: $\ln(-4)$ no existe. **No está** (dentro del disco).
+- $(2;0)$: $\ln0$. **No está** (borde de la circunferencia).
+- $(3;0)$: radicando $36-36=0$ y $\ln5$; el valor es $0\cdot\ln5=0$. **Está** (borde de la hipérbola incluido).
+- $(4;0)$: radicando $36-64<0$. **No está** (adentro de la rama).
+- $(5;5)$: radicando $36-100+225=161\ge0$ y $\ln46$. **Está.**
+
+Los seis coinciden con el gráfico.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** copia la función con $36-4x^2+9y^2$ y plantea a) $36-4x^2+9y^2\ge0\to4x^2-9y^2\le36\to\frac{x^2}{9}-\frac{y^2}{4}\le1$ ("interior a hipérbola eje horiz.") y b) $x^2+y^2-4>0\to x^2+y^2>4$ ("ext. circunf. $r=2$"). Dibuja la hipérbola con asíntotas $y=\pm\frac23x$ y la circunferencia punteada, y escribe $\text{Dom}f(x;y)=\{(x;y)\in\mathbb{R}^2/\frac{x^2}{9}-\frac{y^2}{4}\le1\ \wedge\ x^2+y^2>4\}$. Coincide con este recálculo. Lo que no se puede contrastar es la lectura del signo del enunciado impreso (ver nota de pendiente arriba).
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2023-07-rec#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina={1} unidad="U2" tema="Diferencial (errores en volumen y diagonal)">
+<Enunciado examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina="1">
+
+Los lados de un paralelepípedo recto miden 3, 2 y 6 cm, con errores en su medición del orden del 2%. Determinar por cálculo diferencial valores aproximados de los errores máximos en el cálculo del Volumen y la Diagonal principal.
+
+</Enunciado>
+
+<Pista>
+
+Tres medidas con error, y dos cantidades derivadas (volumen y diagonal) que dependen de las tres. Si cada error es chico, ¿cómo estimás cuánto cambia cada cantidad? ¿Qué significa "máximo"?
+
+</Pista>
+<Pista>
+
+Es **diferencial total** en tres variables, dos veces: $dV=V'_x\,dx+V'_y\,dy+V'_z\,dz$ y $dD=D'_x\,dx+D'_y\,dy+D'_z\,dz$, con los $dx,dy,dz$ iguales al $2\%$ de cada lado y los aportes sumados en positivo. Después los errores porcentuales $\frac{dV}{V}\cdot100$ y $\frac{dD}{D}\cdot100$. Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $V=xyz$ y $D=\sqrt{x^2+y^2+z^2}$ en $(3;2;6)$; $dx=0{,}02\cdot3$, $dy=0{,}02\cdot2$, $dz=0{,}02\cdot6$. Las parciales de $D$ son $\frac{x}{D}$, $\frac{y}{D}$, $\frac{z}{D}$ (calculá primero $D$ en el punto).
+
+</Pista>
+<Paso>
+
+**Qué:** volumen, diagonal y errores absolutos. **Por qué:** el diferencial necesita el valor de partida y los $dx,dy,dz$ en cm.
+
+$$V=3\cdot2\cdot6=36\ \text{cm}^3\qquad D=\sqrt{3^2+2^2+6^2}=\sqrt{49}=7\ \text{cm}$$
+
+$$dx=0{,}02\cdot3=0{,}06\qquad dy=0{,}02\cdot2=0{,}04\qquad dz=0{,}02\cdot6=0{,}12$$
+
+</Paso>
+<Paso>
+
+**Qué:** diferencial del volumen. **Por qué:** cada derivada parcial es el producto de las otras dos medidas.
+
+$$dV=yz\,dx+xz\,dy+xy\,dz=2\cdot6\cdot0{,}06+3\cdot6\cdot0{,}04+3\cdot2\cdot0{,}12$$
+
+$$12\cdot0{,}06=0{,}72\qquad18\cdot0{,}04=0{,}72\qquad6\cdot0{,}12=0{,}72$$
+
+$$dV=0{,}72+0{,}72+0{,}72=2{,}16\ \text{cm}^3$$
+
+$$E\%(V)=\frac{2{,}16}{36}\cdot100=6\%$$
+
+</Paso>
+<Paso>
+
+**Qué:** diferencial de la diagonal. **Por qué:** derivando la raíz, $D'_x=\dfrac{x}{\sqrt{x^2+y^2+z^2}}=\dfrac{x}{D}$ (y análogo en $y$, $z$).
+
+$$dD=\frac{x}{D}dx+\frac{y}{D}dy+\frac{z}{D}dz=\frac37\cdot0{,}06+\frac27\cdot0{,}04+\frac67\cdot0{,}12$$
+
+$$\frac{0{,}18}{7}+\frac{0{,}08}{7}+\frac{0{,}72}{7}=\frac{0{,}98}{7}=0{,}14\ \text{cm}$$
+
+$$E\%(D)=\frac{0{,}14}{7}\cdot100=2\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=2{,}16\ \text{cm}^3\ (E\%=6\%),\qquad dD=0{,}14\ \text{cm}\ (E\%=2\%)$$
+
+**Ojo con:** sumar los aportes **en valor absoluto** (error máximo), y no olvidar que la diagonal es una **raíz**: sus parciales llevan $D$ en el denominador.
+
+**Criterio estimado — no oficial** (la consigna pide valores aproximados de los errores máximos de $V$ y de $D$):
+
+- **Bien:** $dV$ y $dD$ por diferencial total con los $dx,dy,dz$ correctos, y los porcentajes ($6\%$ y $2\%$).
+- **A medias:** hace bien uno de los dos (volumen o diagonal), o plantea bien con un error de cuenta.
+- **Mal:** calcula con los lados perturbados y resta, sin diferencial; o toma el $2\%$ como $dx=2$, $dy=2$, $dz=2$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **errores relativos**.
+
+- Volumen (producto): $\dfrac{dV}{V}=\dfrac{dx}{x}+\dfrac{dy}{y}+\dfrac{dz}{z}=0{,}02+0{,}02+0{,}02=0{,}06$, o sea $6\%$.
+- Diagonal: como $dx=0{,}02\,x$, $dy=0{,}02\,y$ y $dz=0{,}02\,z$, resulta
+
+$$dD=\frac{0{,}02\,(x^2+y^2+z^2)}{D}=0{,}02\,D$$
+
+o sea $E\%(D)=2\%$ y $dD=0{,}02\cdot7=0{,}14$ cm. (Es lógico: si todos los lados crecen $2\%$, la diagonal también.)
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** coincide. $\text{Vol}=36\ \text{cm}^3$, $dx=0{,}06$, $dy=0{,}04$, $dz=0{,}12$, $d\text{Vol}=2\cdot6\cdot0{,}06+3\cdot6\cdot0{,}04+3\cdot2\cdot0{,}12=0{,}72+0{,}72+0{,}72=2{,}16\ \text{cm}^3$ y $E\%=\frac{2{,}16}{36}\cdot100=6\%$; $\text{Diag}=\sqrt{3^2+2^2+6^2}=7$ cm, $d\text{Diag}=\frac37\cdot0{,}06+\frac27\cdot0{,}04+\frac67\cdot0{,}12=\frac{0{,}98}{7}=0{,}14$ cm y $E\%=2\%$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2023-07-rec#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina={1} unidad="U2" tema="Direccional (definición) y gradiente">
+<Enunciado examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina="1">
+
+Dada la función: $f(x,y)=\ln\left(\dfrac{x}{y}\right)$
+
+a. Determinar el valor de la Derivada Direccional en el punto: $P(2,1)$ usando la definición, en la dirección y sentido creciente de la bisectriz del $2°$ cuadrante.
+
+b. Dar expresión cartesiana del vector Gradiente en dicho punto P, graficarlo y determinar su módulo y dirección/sentido (ángulo respecto al semieje x positivo.
+
+</Enunciado>
+
+<Pista>
+
+Dos pedidos distintos sobre la misma función: el inciso a pide un **método concreto** (fijate en la frase "usando la definición") y una dirección que hay que traducir a un ángulo; el b pide el vector que resume la variación en $P$. ¿Qué ángulo forma con $x^+$ la bisectriz del 2.º cuadrante? ¿Cuál es la definición de derivada direccional?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional por definición**: $\dfrac{\partial f}{\partial s}\Big|_P=\lim_{t\to0}\dfrac{f(P+t\,s^\circ)-f(P)}{t}$ con $s^\circ$ el versor, y después **gradiente**: $\nabla f=f'_x\,i+f'_y\,j$. Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: la bisectriz del 2.º cuadrante forma $135^\circ$, así que $s^\circ=\left(-\frac{\sqrt2}{2};\frac{\sqrt2}{2}\right)$ y $P+t\,s^\circ=\left(2-\frac{\sqrt2}{2}t;\ 1+\frac{\sqrt2}{2}t\right)$. Usá $f=\ln x-\ln y$ y el límite notable $\lim_{u\to0}\frac{\ln(1+u)}{u}=1$. Para el gradiente, $f'_x=\frac1x$ y $f'_y=-\frac1y$; el ángulo sale de $\tan\theta=\frac{f'_y}{f'_x}$ mirando el cuadrante.
+
+</Pista>
+<Paso>
+
+**Qué:** el versor. **Por qué:** la bisectriz del 2.º cuadrante es la recta $y=-x$ con $x<0$, a $135^\circ$ de $x^+$ (sentido creciente = hacia arriba y a la izquierda).
+
+$$s^\circ=(\cos135^\circ;\ \sin135^\circ)=\left(-\frac{\sqrt2}{2};\ \frac{\sqrt2}{2}\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el cociente incremental. **Por qué:** es lo que pide "usando la definición". Con $a=\frac{\sqrt2}{2}$, el punto desplazado es $(2-a\,t;\ 1+a\,t)$ y $f(P)=\ln\frac21=\ln2$:
+
+$$\frac{f(P+t\,s^\circ)-f(P)}{t}=\frac{\ln\frac{2-a\,t}{1+a\,t}-\ln2}{t}$$
+
+Juntando los logaritmos:
+
+$$\frac{\ln\frac{2-a\,t}{2\,(1+a\,t)}}{t}=\frac{\ln\frac{1-\frac{a\,t}{2}}{1+a\,t}}{t}=\frac{\ln\left(1-\frac{a\,t}{2}\right)-\ln\left(1+a\,t\right)}{t}$$
+
+</Paso>
+<Paso>
+
+**Qué:** tomar el límite. **Por qué:** con $\ln(1+u)\sim u$ cuando $u\to0$, cada logaritmo se compara con su argumento.
+
+$$\frac{\ln\left(1-\frac{a\,t}{2}\right)}{t}=-\frac a2\cdot\frac{\ln\left(1-\frac{a\,t}{2}\right)}{-\frac{a\,t}{2}}\ \xrightarrow[t\to0]{}\ -\frac a2\cdot1$$
+
+$$\frac{\ln\left(1+a\,t\right)}{t}=a\cdot\frac{\ln\left(1+a\,t\right)}{a\,t}\ \xrightarrow[t\to0]{}\ a\cdot1$$
+
+$$\frac{\partial f}{\partial s}\Big|_P=-\frac a2-a=-\frac{3a}{2}=-\frac32\cdot\frac{\sqrt2}{2}=-\frac{3\sqrt2}{4}$$
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, módulo y ángulo (inciso b). **Por qué:** las parciales de $f=\ln x-\ln y$ son $f'_x=\frac1x$ y $f'_y=-\frac1y$.
+
+$$f'_x(P)=\frac12\qquad f'_y(P)=-\frac11=-1$$
+
+$$\nabla f(P)=\frac12\,i-j$$
+
+$$\|\nabla f\|=\sqrt{\left(\frac12\right)^2+(-1)^2}=\sqrt{\frac14+1}=\sqrt{\frac54}=\frac{\sqrt5}{2}$$
+
+Ángulo: $\tan\theta=\dfrac{-1}{1/2}=-2$. El vector tiene $x>0$ e $y<0$: está en el **4.º cuadrante**, y $\arctan(-2)$ ya cae ahí (no hay que sumar $180^\circ$):
+
+$$\theta=\arctan(-2)\approx-63{,}43^\circ\ \ (\equiv296{,}57^\circ)$$
+
+Máximo crecimiento en $\theta$ (valor $\frac{\sqrt5}{2}$); mínimo en $\theta+180^\circ\approx116{,}57^\circ$; nulos a $\pm90^\circ$: $\approx26{,}57^\circ$ y $\approx206{,}57^\circ$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2023-07-rec/ej3.svg`} alt="Plano xy con ejes graduados de 1 en 1. Desde P(2;1) sale en rojo el gradiente (1/2;−1) hacia abajo a la derecha, en azul la dirección de mínimo hacia arriba a la izquierda, en verde punteado las direcciones nulas y en violeta la dirección S a 135 grados, la bisectriz del segundo cuadrante." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial f}{\partial s}\Big|_P=-\frac{3\sqrt2}{4},\qquad\nabla f(P)=\frac12\,i-j,\qquad\|\nabla f\|=\frac{\sqrt5}{2},\qquad\theta=\arctan(-2)\approx-63{,}43^\circ$$
+
+**Ojo con:** (1) la consigna dice **"usando la definición"**: hay que mostrar el límite, no solo $\nabla f\cdot s^\circ$; (2) la bisectriz del 2.º cuadrante es $135^\circ$ (no $45^\circ$ ni $-45^\circ$); (3) el cuadrante del gradiente.
+
+**Criterio estimado — no oficial** (la consigna del inciso a exige la definición y la del b un gráfico del gradiente):
+
+- **Bien:** versor a $135^\circ$, el límite planteado y resuelto ($-\frac{3\sqrt2}{4}$), $\nabla f$, módulo $\frac{\sqrt5}{2}$, ángulo en el 4.º cuadrante y gráfico del gradiente.
+- **A medias:** valor correcto obtenido solo con la fórmula $\nabla f\cdot s^\circ$ (sin la definición que pide el enunciado), o sin el gráfico.
+- **Mal:** versor mal (otro ángulo) o parciales mal derivadas.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **la fórmula con el gradiente**, que tiene que dar lo mismo que el límite:
+
+$$\frac{\partial f}{\partial s}\Big|_P=\nabla f(P)\cdot s^\circ=\frac12\cdot\left(-\frac{\sqrt2}{2}\right)+(-1)\cdot\frac{\sqrt2}{2}=-\frac{\sqrt2}{4}-\frac{\sqrt2}{2}=-\frac{3\sqrt2}{4}$$
+
+Y como chequeo de coherencia: con $\|\nabla f\|=\frac{\sqrt5}{2}\approx1{,}118$ y $\left|-\frac{3\sqrt2}{4}\right|\approx1{,}061$, el valor está dentro de $\pm\|\nabla f\|$, como corresponde.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** coincide en los resultados: $\alpha=\frac{3\pi}{4}\ (135^\circ)$, $\frac{\partial z}{\partial s}\big|_P=-\frac34\sqrt2$, $\nabla z=\frac12\,i-j$, $\|\nabla z\|=\frac{\sqrt5}{2}$ ("valor máx. de la der. direcc.") y $\theta_{\text{máx}}=\arctan\left(\frac{-1}{1/2}\right)=\arctan(-2)$, con el gráfico de $\theta_{\text{máx}}$, $\theta_{\text{mín}}$ y los dos nulos.
+
+⚠️ **Observación de método:** el enunciado pide el inciso a "usando la definición" y el profe lo resuelve con la fórmula $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$ (no plantea el límite). El resultado es el mismo; se registra porque la consigna era explícita. Registrado en `docs/revision/p1-1h9-2023-07-rec-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2023-07-rec#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina="1">
+
+Hallar los 5 puntos críticos y categorizarlos: Extremos Locales (Máximos o Mínimos) y/o puntos de ensilladura de haberlos, de la siguiente función:
+
+$$z=x^4+y^4-x^2-y^2-1$$
+
+</Enunciado>
+
+<Pendiente>: el enunciado habla de "los 5 puntos críticos", pero la función tiene **9** (el sistema de las parciales da tres valores posibles para $x$ y tres para $y$). La resolución oficial (p. 5) halla **7**, no 5 ni 9: omite $\left(\frac{\sqrt2}{2};\frac{\sqrt2}{2}\right)$ y $\left(-\frac{\sqrt2}{2};-\frac{\sqrt2}{2}\right)$. Se resuelve completo (los 9) y se deja constancia de la diferencia. Pendiente de confirmar con la cátedra.</Pendiente>
+
+<Pista>
+
+Te piden primero **dónde** puede haber un máximo, un mínimo o una silla, y después **qué es** cada candidato. Fijate cómo está armada la función: ¿hay términos que mezclen $x$ con $y$? ¿Qué le pasa a cada derivada parcial?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano**: (1) $z'_x=0$, $z'_y=0$; (2) segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ y signo de $z''_{xx}$: mínimo ($+$) o máximo ($-$). Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/). Teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=4x^3-2x=2x\,(2x^2-1)$ y $z'_y=4y^3-2y=2y\,(2y^2-1)$ están **separadas** (cada una depende de una sola variable): $x\in\{0;\pm\frac{\sqrt2}{2}\}$ e $y\in\{0;\pm\frac{\sqrt2}{2}\}$, y los puntos críticos son **todas las combinaciones**. Las segundas son $z''_{xx}=12x^2-2$, $z''_{yy}=12y^2-2$, $z''_{xy}=0$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivadas primeras e igualarlas a cero. **Por qué:** en un extremo o en una silla el plano tangente es horizontal. Se **factoriza** (no se divide por $x$ ni por $y$, para no perder soluciones).
+
+$$z'_x=4x^3-2x=2x\,(2x^2-1)=0\qquad z'_y=4y^3-2y=2y\,(2y^2-1)=0$$
+
+$$x=0\quad\text{o}\quad2x^2-1=0\Rightarrow x=\pm\sqrt{\tfrac12}=\pm\frac{\sqrt2}{2}$$
+
+$$y=0\quad\text{o}\quad y=\pm\frac{\sqrt2}{2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar los puntos críticos. **Por qué:** como $x$ e $y$ se resuelven por separado, vale **cualquier combinación**: $3\times3=9$ puntos.
+
+$$(0;0)\quad\left(0;\pm\tfrac{\sqrt2}{2}\right)\quad\left(\pm\tfrac{\sqrt2}{2};0\right)\quad\left(\pm\tfrac{\sqrt2}{2};\pm\tfrac{\sqrt2}{2}\right)\ (\text{cuatro, con los signos independientes})$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** al no haber términos cruzados, $z''_{xy}=0$ y el hessiano es un producto.
+
+$$z''_{xx}=12x^2-2\qquad z''_{yy}=12y^2-2\qquad z''_{xy}=0$$
+
+$$H(x;y)=\begin{vmatrix}12x^2-2&0\\0&12y^2-2\end{vmatrix}=(12x^2-2)(12y^2-2)$$
+
+Valores clave: con $x=0$ vale $-2$; con $x^2=\frac12$ vale $12\cdot\frac12-2=4$ (igual para $y$).
+
+</Paso>
+<Paso>
+
+**Qué:** clasificar los nueve.
+
+- $(0;0)$: $H=(-2)(-2)=4>0$ y $z''_{xx}=-2<0$: **máximo local**.
+- $\left(0;\pm\frac{\sqrt2}{2}\right)$: $H=(-2)\cdot4=-8<0$: **sillas** (dos puntos).
+- $\left(\pm\frac{\sqrt2}{2};0\right)$: $H=4\cdot(-2)=-8<0$: **sillas** (dos puntos).
+- $\left(\pm\frac{\sqrt2}{2};\pm\frac{\sqrt2}{2}\right)$: $H=4\cdot4=16>0$ y $z''_{xx}=4>0$: **mínimos locales** (cuatro puntos).
+
+Resumen: 1 máximo, 4 mínimos y 4 sillas.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2023-07-rec/ej4.svg`} alt="Arriba, superficie z=x⁴+y⁴−x²−y²−1 con sus nueve puntos críticos; abajo, curvas de nivel en el plano xy con ejes graduados en 0, ±√2/2 y ±1,5: máximo en el origen, cuatro mínimos en (±√2/2; ±√2/2) y cuatro sillas sobre los ejes en (0; ±√2/2) y (±√2/2; 0)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Máximo: }(0;0)\qquad\text{Mínimos: }\left(\pm\tfrac{\sqrt2}{2};\pm\tfrac{\sqrt2}{2}\right)\ \text{(4)}\qquad\text{Sillas: }\left(0;\pm\tfrac{\sqrt2}{2}\right),\ \left(\pm\tfrac{\sqrt2}{2};0\right)\ \text{(4)}$$
+
+**Ojo con:** el enunciado dice "5 puntos", pero hay 9: no hay que forzar el resultado a 5; y no omitir las combinaciones de signos de los mínimos (la resolución oficial se deja dos afuera).
+
+**Criterio estimado — no oficial** (la consigna pide hallar y categorizar; "5 puntos" no coincide con la función):
+
+- **Bien:** la factorización de ambas parciales, **todas** las combinaciones (9), el hessiano $(12x^2-2)(12y^2-2)$ y la clasificación correcta con el signo de $z''_{xx}$.
+- **A medias:** clasificación correcta pero con puntos críticos faltantes (por ejemplo los 7 de la resolución oficial), o puntos bien y alguna clasificación sin justificar con $H$.
+- **Mal:** divide por $x$ o por $y$ perdiendo soluciones y no recupera ninguna, o clasifica sin hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **la función separa variables**, $z=g(x)+g(y)-1$ con $g(u)=u^4-u^2$, y estudiar $g$ de una sola variable lo confirma todo.
+
+- $g'(u)=4u^3-2u=0$ en $u=0$ y $u=\pm\frac{\sqrt2}{2}$; $g''(u)=12u^2-2$ vale $-2$ en $u=0$ (máximo de $g$) y $4$ en $u=\pm\frac{\sqrt2}{2}$ (mínimos de $g$).
+- Un punto $(x;y)$ es máximo de $z$ si ambos son máximos de $g$ (solo $(0;0)$), mínimo si ambos son mínimos de $g$ (los cuatro $(\pm\frac{\sqrt2}{2};\pm\frac{\sqrt2}{2})$) y silla si uno es máximo y el otro mínimo (los cuatro mixtos).
+- Valores: $z(0;0)=-1$ y $z\left(\pm\frac{\sqrt2}{2};\pm\frac{\sqrt2}{2}\right)=\left(\frac14-\frac12\right)\cdot2-1=-\frac32$, que es menor, coherente con que sean mínimos.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** factoriza $z'_x=2x(2x^2-1)$ y $z'_y=2y(2y^2-1)$, obtiene $x\in\{0;\pm\frac{\sqrt2}{2}\}$ e $y\in\{0;\pm\frac{\sqrt2}{2}\}$ y lista siete puntos, $PC_1(0;0)$, $PC_2\left(0;\frac{\sqrt2}{2}\right)$, $PC_3\left(0;-\frac{\sqrt2}{2}\right)$, $PC_4\left(\frac{\sqrt2}{2};0\right)$, $PC_5\left(-\frac{\sqrt2}{2};0\right)$, $PC_6\left(\frac{\sqrt2}{2};-\frac{\sqrt2}{2}\right)$ y $PC_7\left(-\frac{\sqrt2}{2};\frac{\sqrt2}{2}\right)$ ("7 puntos críticos!"). El hessiano $(12x^2-2)(12y^2-2)$ da: $H_1=(-2)(-2)>0$ máximo, $H_{2,3,4,5}=\pm$ silla ($-8<0$), $H_6=4\cdot4>0$ y $H_7=16>0$ mínimos.
+
+⚠️ **Discrepancia:** la resolución oficial da **7** puntos críticos; el recálculo da **9**: faltan $\left(\frac{\sqrt2}{2};\frac{\sqrt2}{2}\right)$ y $\left(-\frac{\sqrt2}{2};-\frac{\sqrt2}{2}\right)$ (ambos mínimos, $H=16$). El enunciado dice "5": tampoco coincide con ninguna de las dos. Los siete que sí lista están bien clasificados. Pendiente de confirmar con la cátedra. Registrado en `docs/revision/p1-1h9-2023-07-rec-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2023-07-rec#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina={1} unidad="U3" tema="Lagrange (distancia mínima al plano)">
+<Enunciado examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" pagina="1">
+
+Hallar la mínima distancia del origen de coordenadas al plano: $2x+3y+6z=49$
+
+</Enunciado>
+
+<Pista>
+
+Hay que **minimizar una distancia** sujeta a que el punto esté en un plano. ¿Qué función te da la distancia de un punto $(x;y;z)$ al origen? ¿Qué relación tienen las variables entre sí por estar sobre el plano?
+
+</Pista>
+<Pista>
+
+Es **extremo condicionado (Lagrange)**: función principal = distancia (o su cuadrado, que se minimiza en el mismo punto) y condición $g=2x+3y+6z-49=0$. Se arma $F=f-\lambda\,g$ (así lo escribe la cátedra: $F=F_{\text{ppal}}-\lambda F_{\text{condic}}$) y se anulan las cuatro parciales. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: con $f=x^2+y^2+z^2$, $F=x^2+y^2+z^2-\lambda\,(2x+3y+6z-49)$ y
+
+$$F'_x=2x-2\lambda=0\qquad F'_y=2y-3\lambda=0\qquad F'_z=2z-6\lambda=0\qquad F'_\lambda=-(2x+3y+6z-49)=0$$
+
+Despejá $x$, $y$, $z$ en función de $\lambda$ y reemplazá en la condición.
+
+</Pista>
+<Paso>
+
+**Qué:** elegir la función a minimizar. **Por qué:** la distancia al origen es $d=\sqrt{x^2+y^2+z^2}$; como la raíz es creciente, $d$ y $d^2=x^2+y^2+z^2$ se minimizan en el **mismo** punto y las derivadas con $d^2$ son más simples.
+
+$$F(x,y,z,\lambda)=x^2+y^2+z^2-\lambda\,(2x+3y+6z-49)$$
+
+</Paso>
+<Paso>
+
+**Qué:** las cuatro ecuaciones. **Por qué:** en el punto buscado el gradiente de $f$ es paralelo al de la condición.
+
+$$F'_x=2x-2\lambda=0\ \Rightarrow\ x=\lambda$$
+
+$$F'_y=2y-3\lambda=0\ \Rightarrow\ y=\frac{3\lambda}{2}$$
+
+$$F'_z=2z-6\lambda=0\ \Rightarrow\ z=3\lambda$$
+
+$$F'_\lambda=-(2x+3y+6z-49)=0\ \Rightarrow\ 2x+3y+6z=49\quad(\#)$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición $(\#)$. **Por qué:** queda una sola incógnita, $\lambda$.
+
+$$2\lambda+3\cdot\frac{3\lambda}{2}+6\cdot3\lambda=49$$
+
+$$2\lambda+\frac{9\lambda}{2}+18\lambda=49\ \Rightarrow\ \frac{49\lambda}{2}=49\ \Rightarrow\ \lambda=2$$
+
+$$x=2\qquad y=3\qquad z=6$$
+
+</Paso>
+<Paso>
+
+**Qué:** la distancia y por qué es mínima.
+
+$$d=\sqrt{2^2+3^2+6^2}=\sqrt{4+9+36}=\sqrt{49}=7$$
+
+Es un **mínimo** porque el plano no está acotado y la distancia crece sin límite al alejarse; el único punto crítico tiene que ser el mínimo.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2023-07-rec/ej5.svg`} alt="Perspectiva 3D del plano 2x+3y+6z=49 como triángulo celeste con cortes en (49/2;0;0), (0;49/3;0) y (0;0;49/6), y el segmento rojo desde el origen hasta el punto más cercano (2;3;6), de longitud 7." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$Q=(2;\,3;\,6),\qquad d_{\text{mín}}=7$$
+
+**Ojo con:** escribir $\sqrt{\ }$ en $F$ y derivar como si no estuviera (da las mismas ecuaciones pero hay que ser coherente: o se usa la raíz y se deriva la raíz, o se usa $d^2$); y el signo de $\lambda$ (con $F=f-\lambda g$ o $f+\lambda g$ cambia el signo de $\lambda$, no el punto).
+
+**Criterio estimado — no oficial** (la consigna pide la mínima distancia):
+
+- **Bien:** función a minimizar y condición, $F$ y sus cuatro parciales, $Q=(2;3;6)$ y $d=7$.
+- **A medias:** sistema bien planteado con un error algebraico, o da el punto sin la distancia.
+- **Mal:** minimiza sin la condición, o usa la distancia entre dos puntos cualesquiera sin vincularla al plano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente (geometría): la **distancia de un punto a un plano**.
+
+$$d=\frac{|2\cdot0+3\cdot0+6\cdot0-49|}{\sqrt{2^2+3^2+6^2}}=\frac{49}{\sqrt{49}}=7$$
+
+Y el pie de la perpendicular desde el origen es $\frac{49}{49}\,(2;3;6)=(2;3;6)$, el mismo punto: el vector normal del plano es $(2;3;6)$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-07-rec" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 Jul-23.pdf" paginas="6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 6, resolución manuscrita atribuida al profesor):** coincide. Plantea $F=F_{\text{ppal}}-\lambda F_{\text{condic}}$, obtiene $\lambda=x=\frac23y=\frac z3$, $x=\frac23y$ y $z=2y$, reemplaza en $(\#)$ ($\frac43y+3y+12y=49\to\frac{49}{3}y=49\to y=3$), $x=2$, $z=6$, $(x;y;z)=(2;3;6)$ y $d=\sqrt{4+9+36}=\sqrt{49}=7$. Observación menor: escribe $F=\sqrt{x^2+y^2+z^2}-\lambda(\dots)$ pero deriva como si fuera $x^2+y^2+z^2$ ($F'_x=2x-2\lambda$); no cambia el punto ni la distancia.
+
+</div>
+</Ejercicio>

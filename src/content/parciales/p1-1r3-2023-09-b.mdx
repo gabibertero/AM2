@@ -1,0 +1,745 @@
+---
+id: "p1-1r3-2023-09-b"
+titulo: "1° Parcial Práctico — Comisión 1R3 (Grupo B, 29/9/2023)"
+comision: "1R3"
+fecha: "29/9/2023"
+tipo: "práctico"
+tema: "B"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–8"
+orden: 151
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1R3 · 1° Parcial Práctico – 29/09/2023 · Grupo B · Puntaje mínimo para aprobar: 6 (seis)
+
+<Ejercicio id="p1-1r3-2023-09-b#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$f(x,y)=\mathrm{Ln}\,(4-4x^2-y^2)+\arccos(x+y)$$
+
+</Enunciado>
+
+<Pista>
+
+Fijate qué operaciones hay: un logaritmo y un arco coseno. Para cada una preguntate qué valores del interior la "rompen". Después, ¿qué región del plano cumple las dos a la vez?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: logaritmo, argumento $\gt0$; $\arccos$, argumento entre $-1$ y $1$. La primera es el interior de una elipse y la segunda una franja entre dos rectas. Machete: [dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$4-4x^2-y^2>0,\qquad -1\le x+y\le1$$
+
+Falta pasar cada una a "interior de ..." y "entre rectas" y dibujarlas juntas.
+
+</Pista>
+<Paso>
+
+**Qué:** escribir una condición por operación. **Por qué:** $\mathrm{Ln}\,A$ existe solo si $A>0$ (desigualdad **estricta**) y $\arccos B$ solo si $-1\le B\le1$ (admite los extremos).
+
+$$\text{(a) }4-4x^2-y^2>0\qquad\text{(b) }-1\le x+y\le1$$
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (a). **Por qué:** pasando $4x^2+y^2$ al otro miembro y dividiendo por $4$:
+
+$$4x^2+y^2<4\ \Rightarrow\ x^2+\frac{y^2}{4}<1$$
+
+Es el **interior de la elipse** de semieje $1$ en $x$ y $2$ en $y$ (vértices $(\pm1;0)$ y $(0;\pm2)$). El borde no pertenece (logaritmo de $0$): punteado.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (b). **Por qué:** restando $x$ a los tres miembros:
+
+$$-1-x\le y\le1-x$$
+
+Son los puntos **entre** las rectas paralelas $y=-1-x$ e $y=1-x$ (pendiente $-1$). Las dos rectas **sí** pertenecen (el $\arccos$ de $\pm1$ existe): línea llena.
+
+</Paso>
+<Paso>
+
+**Qué:** ubicar dónde las rectas cortan la elipse. **Por qué:** son las esquinas de la región y conviene rotularlas. En la recta $y=1-x$:
+
+$$x^2+\frac{(1-x)^2}{4}=1$$
+
+Multiplicando por $4$:
+
+$$4x^2+1-2x+x^2=4\ \Rightarrow\ 5x^2-2x-3=0\ \Rightarrow\ (5x+3)(x-1)=0$$
+
+Sale $x=1$ (punto $(1;0)$) y $x=-\frac35$ (punto $\left(-\frac35;\frac85\right)$). En $y=-1-x$, por simetría, $(-1;0)$ y $\left(\frac35;-\frac85\right)$. Los cuatro puntos están sobre la elipse, así que **no** pertenecen al dominio.
+
+</Paso>
+<Paso>
+
+**Qué:** intersecar y dibujar. **Por qué:** el dominio es el trozo de franja que queda **dentro** de la elipse: una región con dos lados rectos (las rectas, incluidas) y dos arcos de elipse (excluidos).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2023-09-b/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Elipse punteada x²+y²/4=1 con vértices (±1;0) y (0;±2) y dos rectas llenas y=1−x e y=−1−x. Sombreado el trozo de franja entre las rectas que queda dentro de la elipse. Esquinas marcadas con círculo vacío en (1;0), (−1;0), (−3/5;8/5) y (3/5;−8/5)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ x^2+\frac{y^2}{4}<1\ \ \wedge\ \ -1-x\le y\le1-x\Big\}$$
+
+**Ojo con:** marcar el borde de la elipse como incluido, olvidar que las rectas **sí** entran, o dibujar la franja completa sin recortarla con la elipse.
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"):
+
+- **Bien:** las dos condiciones con su desigualdad estricta o no según corresponda, gráfico con la elipse y las dos rectas y la región sombreada, y el conjunto escrito analíticamente.
+- **A medias:** condiciones correctas pero un borde mal marcado, o falta el gráfico consolidado o la expresión analítica.
+- **Mal:** falta una condición entera (por ejemplo la franja del $\arccos$) o se confunde interior con exterior.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar la fórmula en puntos de prueba**.
+
+- $(0;\,0)$: $\mathrm{Ln}\,4$ existe y $\arccos0=\frac\pi2$. **Está en $D$.**
+- $(0{,}9;\,-0{,}2)$: $4-3{,}24-0{,}04=0{,}72\gt0$ y $x+y=0{,}7$. **Está en $D$.**
+- $(0{,}5;\,0{,}5)$: $x+y=1$ (sobre la recta, el $\arccos1$ existe) y $4-1-0{,}25\gt0$. **Está en $D$.**
+- $(1;\,0{,}5)$: $x+y=1{,}5$, y el $\arccos$ de $1{,}5$ no existe. **No está.**
+- $(0;\,-1{,}9)$: $4-3{,}61=0{,}39\gt0$ pero $x+y=-1{,}9\lt-1$. **No está.**
+- $(1;\,0)$: sobre la elipse, $4-4-0=0$ y el logaritmo de $0$ no existe. **No está.**
+
+Los seis puntos coinciden con la región dibujada.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** coincide. (a) $4-4x^2-y^2>0\to x^2+\frac{y^2}{4}<1$, "interior a elipse"; (b) $-1\le x+y\le1\to-1-x\le y\le1-x$, "entre rectas"; dibuja ambas, marca en rojo la zona común y escribe $\text{Dom}\,f=\{(x,y)\in\mathbb{R}^2\,/\,x^2+\frac{y^2}{4}<1\ \wedge\ -1-x\le y\le1-x\}$. No rotula los puntos de corte; acá se agregaron.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2023-09-b#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina={1} unidad="U1" tema="Límite doble (factorización y haz de rectas)">
+<Enunciado examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina="1">
+
+Determinar si existe el: $\displaystyle\lim_{(x,y)\to(1,-1)}\left(\frac{y+1}{y^2-x+y-xy}\right)$
+
+Intentar levantar la indeterminacion factorizando: en caso de obtener un valor de limite, verificar el mismo por el método del haz de rectas.
+
+</Enunciado>
+
+<Pista>
+
+Antes de nada: ¿qué da la fórmula si reemplazás $(1;-1)$? Si da una indeterminación, mirá el denominador: ¿hay algún factor que se repita con el numerador?
+
+</Pista>
+<Pista>
+
+Es un **límite doble con indeterminación $\frac00$ que se levanta factorizando**: se saca factor común en el denominador (agrupando de a dos términos), se cancela lo que es común con el numerador y se reemplaza. La verificación pedida es el **haz de rectas** por el punto, $y-y_0=m(x-x_0)$. Machete: [límites dobles](../../machetes/limites-dobles/). Teoría: Monllor, *01 Funciones de varias variables* (pp. 11–15).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: agrupando $y^2+y-x-xy$ como $y\,(y+1)-x\,(1+y)$ aparece el factor $(y+1)$ en los dos términos. Para el haz, la recta por $(1;-1)$ es $y=m(x-1)-1$.
+
+</Pista>
+<Paso>
+
+**Qué:** reemplazar el punto. **Por qué:** si da un número, ese es el límite; si da $\frac00$ hay que trabajar.
+
+$$\frac{-1+1}{(-1)^2-1+(-1)-1\cdot(-1)}=\frac{0}{1-1-1+1}=\frac00$$
+
+</Paso>
+<Paso>
+
+**Qué:** factorizar el denominador. **Por qué:** es la técnica que pide la consigna; se agrupa de a pares.
+
+$$y^2-x+y-xy=y\,(y+1)-x\,(1+y)=(y+1)\,(y-x)$$
+
+</Paso>
+<Paso>
+
+**Qué:** simplificar y reemplazar. **Por qué:** en los puntos de la función $y\neq-1$ (con $y=-1$ el denominador es $0$ y la función no está definida), así que se puede cancelar $(y+1)$:
+
+$$\frac{y+1}{(y+1)(y-x)}=\frac{1}{y-x}$$
+
+$$\lim_{(x;y)\to(1;-1)}\frac{1}{y-x}=\frac{1}{-1-1}=-\frac12$$
+
+El denominador $y-x$ tiende a $-2\neq0$, así que la función simplificada es continua en el punto y el límite es $-\frac12$.
+
+</Paso>
+<Paso>
+
+**Qué:** verificar por haz de rectas, como pide la consigna. **Por qué:** es una comprobación de consistencia (si por alguna recta saliera otro valor, habría un error). Las rectas por $(1;-1)$ son $y=m(x-1)-1$, con $x\to1$. En cada una $y-x=m(x-1)-1-x$, y entonces:
+
+$$\lim_{x\to1}\frac{1}{m(x-1)-1-x}=\frac{1}{m\cdot0-1-1}=-\frac12$$
+
+No depende de $m$. La recta vertical $x=1$ también: $f(1;y)=\frac{y+1}{y^2-1}=\frac{1}{y-1}\to-\frac12$ cuando $y\to-1$.
+
+</Paso>
+<Solucion>
+
+$$\lim_{(x;y)\to(1;-1)}\frac{y+1}{y^2-x+y-xy}=-\frac12$$
+
+**Ojo con:** cancelar sin factorizar bien (el factor es $(y+1)(y-x)$, **no** $(y+1)(y+x)$), y creer que el haz de rectas **demuestra** el límite: solo lo verifica; lo que lo demuestra es la factorización.
+
+**Criterio estimado — no oficial** (la consigna pide factorizar y verificar por haz de rectas):
+
+- **Bien:** reconoce $\frac00$, factoriza bien, obtiene $-\frac12$ y lo verifica con $y=m(x-1)-1$ (independiente de $m$).
+- **A medias:** factoriza y llega a $-\frac12$ pero no hace (o hace mal) la verificación por haz.
+- **Mal:** concluye que no existe sin factorizar, o factoriza mal.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **límites sucesivos y valores numéricos**.
+
+- Primero $y\to-1$ con $x$ fijo: $\dfrac{1}{y-x}\to\dfrac{1}{-1-x}$ y después $x\to1$ da $-\dfrac12$.
+- Primero $x\to1$ con $y$ fijo: $\dfrac{y+1}{y^2-1+y-y}=\dfrac{y+1}{y^2-1}=\dfrac{1}{y-1}$ y después $y\to-1$ da $-\dfrac12$.
+- Un punto cercano, por ejemplo $(1{,}001;\,-1{,}002)$: el numerador es $-0{,}002$ y el denominador $1{,}004004-1{,}001-1{,}002+1{,}003002=0{,}004006$, o sea $f\approx-0{,}4993\approx-\frac12$.
+
+Los tres coinciden.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** coincide. Reconoce $\frac00$, factoriza el denominador como $(y-x)(y+1)$, simplifica y obtiene $\lim\frac{1}{y-x}=\frac{1}{-1-1}=-\frac12$ ("este valor ya es el límite doble"). Aclara "si bien no es necesario" y plantea el haz de rectas $y-y_0=m(x-x_0)$, $y=m(x-1)-1$, con $\lim\frac{1}{m(x-1)-1-x}=\frac{1}{-2}=-\frac12$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2023-09-b#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina={1} unidad="U2" tema="Diferencial y error porcentual">
+<Enunciado examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina="1">
+
+Una pirámide recta de base rectangular tiene las siguientes medidas: lado A (base) = 1 m, lado B (base) = 2 m, altura H = 3 m.
+
+Calcular por método diferencial, en cuanto variara su volumen si los lados de su base disminuyen un 2% y su altura aumenta un 3%. Calcular también el Error (%)
+
+Dato: Volumen de la piramide recta: $V=\dfrac{A.B.H}{3}$
+
+</Enunciado>
+
+<Pista>
+
+El enunciado habla de medidas que **cambian un poquito** y pregunta cuánto cambia el volumen. ¿De cuántas variables depende $V$? ¿Qué te dicen "disminuyen" y "aumenta" sobre el signo de cada cambio?
+
+</Pista>
+<Pista>
+
+Es **diferencial total**: $dV=V'_A\,dA+V'_B\,dB+V'_H\,dH$, con los incrementos como datos (los que **bajan** llevan signo negativo) y $E\%=\dfrac{dV}{V}\cdot100$. Machete: [diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $V'_A=\dfrac{BH}{3}$, $V'_B=\dfrac{AH}{3}$, $V'_H=\dfrac{AB}{3}$ evaluadas en $(1;2;3)$. Incrementos en metros: $dA=-2\%\cdot1$, $dB=-2\%\cdot2$ y $dH=+3\%\cdot3$.
+
+</Pista>
+<Paso>
+
+**Qué:** calcular el volumen inicial. **Por qué:** hace falta para el error porcentual.
+
+$$V=\frac{A\,B\,H}{3}=\frac{1\cdot2\cdot3}{3}=2\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** pasar los porcentajes a incrementos en metros con su signo. **Por qué:** los lados **disminuyen** (negativo) y la altura **aumenta** (positivo).
+
+$$dA=-0{,}02\cdot1=-0{,}02\ \text{m}\qquad dB=-0{,}02\cdot2=-0{,}04\ \text{m}$$
+
+$$dH=+0{,}03\cdot3=+0{,}09\ \text{m}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales de $V$ en $(1;2;3)$. **Por qué:** cada una dice cuánto vale "un metro más" de esa medida en volumen.
+
+$$\frac{\partial V}{\partial A}=\frac{B\,H}{3}=\frac{2\cdot3}{3}=2$$
+
+$$\frac{\partial V}{\partial B}=\frac{A\,H}{3}=\frac{1\cdot3}{3}=1$$
+
+$$\frac{\partial V}{\partial H}=\frac{A\,B}{3}=\frac{1\cdot2}{3}=\frac23$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el diferencial. **Por qué:** es la suma de los tres aportes (cada derivada por su incremento).
+
+$$dV=2\cdot(-0{,}02)+1\cdot(-0{,}04)+\frac23\cdot0{,}09$$
+
+Cada término por separado:
+
+$$2\cdot(-0{,}02)=-0{,}04\qquad1\cdot(-0{,}04)=-0{,}04\qquad\frac23\cdot0{,}09=0{,}06$$
+
+$$dV=-0{,}04-0{,}04+0{,}06=-0{,}02\ \text{m}^3$$
+
+El signo negativo dice que el volumen **disminuye** $0{,}02\ \text{m}^3$ ($20$ litros): la baja de los lados pesa más que la suba de la altura.
+
+</Paso>
+<Paso>
+
+**Qué:** error porcentual. **Por qué:** compara el cambio con el volumen original.
+
+$$E\%=\frac{dV}{V}\cdot100=\frac{-0{,}02}{2}\cdot100=-1\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=-0{,}02\ \text{m}^3\ \ (\text{el volumen disminuye }20\ \text{litros}),\qquad E\%=-1\%$$
+
+**Ojo con:** respetar el signo de cada incremento (los lados bajan, la altura sube) y no tomar "$2\%$ del volumen": es $2\%$ de **cada lado**.
+
+**Criterio estimado — no oficial** (la consigna pide la variación y el error %):
+
+- **Bien:** las tres derivadas parciales, incrementos con su signo, $dV=-0{,}02\ \text{m}^3$ y $E\%=-1\%$.
+- **A medias:** planteo del diferencial correcto pero un error de signo o de cuenta en un incremento (se arrastra al resultado), o falta $E\%$.
+- **Mal:** no usa diferencial total (por ejemplo solo reemplaza valores nuevos en $V$), o deriva mal.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Variación exacta.** Con las medidas nuevas $0{,}98$, $1{,}96$ y $3{,}09$ m:
+
+$$V_{\text{nuevo}}=\frac{0{,}98\cdot1{,}96\cdot3{,}09}{3}\approx1{,}9784\ \text{m}^3\qquad\Delta V\approx-0{,}0216\ \text{m}^3$$
+
+Está muy cerca de $dV=-0{,}02$ (el diferencial es una aproximación de primer orden).
+
+**2) Diferencial logarítmico.** Como $V$ es un producto, el error relativo es la suma de los errores relativos:
+
+$$\frac{dV}{V}=\frac{dA}{A}+\frac{dB}{B}+\frac{dH}{H}=-0{,}02-0{,}02+0{,}03=-0{,}01=-1\%$$
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** coincide. $V=2\ \text{m}^3$, $dV=\frac{bh}{3}da+\frac{ah}{3}db+\frac{ab}{3}dh$ con $da=db=-2\%$ y $dh=+3\%$: $dV=\frac13\left(-\frac{12}{100}-\frac{12}{100}+\frac{18}{100}\right)=-0{,}02\ \text{m}^3$ ("disminuirá $0{,}02\ \text{m}^3$ (20 lts)") y $E\%=\frac{-0{,}02}{2}\cdot100=-1\%$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2023-09-b#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina={1} unidad="U2" tema="Derivada de función compuesta">
+<Enunciado examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina="1">
+
+Calcular la derivada de la siguiente función compuesta: $u=\dfrac{x^2}{y}+x\,y^2\ln(z^2)$
+
+Siendo: $\begin{cases}y=\ln(x)\\z=x^2+3x-1\end{cases}$ para valores de: $(x,y,z)=(1,1,1)$
+
+</Enunciado>
+
+<Pista>
+
+$u$ depende de tres letras, pero $y$ y $z$ a su vez dependen de $x$. Si dibujás el "árbol" desde $u$ hasta $x$, ¿cuántos caminos hay? ¿Qué derivada te piden: respecto de qué variable?
+
+</Pista>
+<Pista>
+
+Es **regla de la cadena con una variable independiente**: $\dfrac{du}{dx}=u'_x+u'_y\,\dfrac{dy}{dx}+u'_z\,\dfrac{dz}{dx}$ (un camino directo y dos a través de $y$ y de $z$). Machete: [derivada de funciones compuestas](../../machetes/derivada-compuesta/). Teoría: *U2 - Derivadas Compuestas e Implicitas* (de la p. 3, "derivada de la función compuesta").
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $u'_x=\dfrac{2x}{y}+y^2\ln(z^2)$, $u'_y=-\dfrac{x^2}{y^2}+2xy\ln(z^2)$, $u'_z=xy^2\cdot\dfrac{2z}{z^2}=\dfrac{2xy^2}{z}$, y las derivadas de las intermedias, $\dfrac{dy}{dx}=\dfrac1x$ y $\dfrac{dz}{dx}=2x+3$. Se evalúa todo en los valores dados.
+
+</Pista>
+<Paso>
+
+**Qué:** escribir la regla. **Por qué:** $x$ influye en $u$ de tres maneras: directo, por $y(x)$ y por $z(x)$, y los tres aportes se suman.
+
+$$\frac{du}{dx}=\frac{\partial u}{\partial x}+\frac{\partial u}{\partial y}\cdot\frac{dy}{dx}+\frac{\partial u}{\partial z}\cdot\frac{dz}{dx}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales de $u$. **Por qué:** en cada una las otras dos letras se tratan como constantes. En la última, $\frac{d}{dz}\ln(z^2)=\frac{2z}{z^2}=\frac2z$.
+
+$$u'_x=\frac{2x}{y}+y^2\ln(z^2)\qquad u'_y=-\frac{x^2}{y^2}+2xy\ln(z^2)\qquad u'_z=xy^2\cdot\frac{2z}{z^2}=\frac{2xy^2}{z}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas de las intermedias.
+
+$$\frac{dy}{dx}=\frac1x\qquad\frac{dz}{dx}=2x+3$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en los valores dados. **Por qué:** la consigna pide la derivada "para valores de $(x,y,z)=(1,1,1)$". **Lectura usada:** se evalúan las parciales con $(x;y;z)=(1;1;1)$ y las derivadas de las intermedias con $x=1$, que es lo que hace la cátedra (ver la nota al final: el punto $(1;1;1)$ no está sobre la curva $y=\ln x$, $z=x^2+3x-1$).
+
+$$u'_x=\frac{2}{1}+1\cdot\ln1=2\qquad u'_y=-\frac11+2\ln1=-1\qquad u'_z=\frac{2}{1}=2$$
+
+$$\frac{dy}{dx}=1\qquad\frac{dz}{dx}=2\cdot1+3=5$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar la suma. **Por qué:** cada aporte es una derivada parcial por su derivada de la intermedia.
+
+$$\frac{du}{dx}=2+(-1)\cdot1+2\cdot5$$
+
+$$\frac{du}{dx}=2-1+10=11$$
+
+</Paso>
+<Solucion>
+
+$$\frac{du}{dx}\Big|_{(1,1,1)}=11$$
+
+**Ojo con:** olvidar el camino **directo** ($u'_x$) y quedarse solo con los dos a través de $y$ y $z$; derivar $\ln(z^2)$ como $\frac{1}{z^2}$ (falta la derivada interna $2z$); y no olvidar que $\ln1=0$ anula varios términos.
+
+**Criterio estimado — no oficial** (la consigna pide la derivada en los valores dados):
+
+- **Bien:** fórmula con los tres caminos, las tres parciales y las dos derivadas intermedias correctas y el valor $11$.
+- **A medias:** planteo y parciales bien con un error de cuenta al evaluar, o sin evaluar.
+- **Mal:** omite un camino de la cadena, o deriva $u$ tratando $y$ y $z$ como constantes en todos los términos.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Simplificando antes.** Como $\ln(z^2)=2\ln z$ (con $z\gt0$), $u=\frac{x^2}{y}+2xy^2\ln z$, y las parciales son $u'_x=\frac{2x}{y}+2y^2\ln z=2$, $u'_y=-\frac{x^2}{y^2}+4xy\ln z=-1$, $u'_z=\frac{2xy^2}{z}=2$: los mismos valores, y la suma sigue siendo $2-1+10=11$.
+
+**2) Por una curva.** Se toma la curva $(1+t;\ 1+t;\ 1+5t)$, que pasa por $(1;1;1)$ con velocidad $(1;1;5)$ (la de $x$, $y(x)$ y $z(x)$ en $x=1$), y se deriva $g(t)=u(1+t,\,1+t,\,1+5t)$ en $t=0$: da $g'(0)=11$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide. Árbol $u\to x,y,z\to x$, $\frac{du}{dx}=\frac{\partial u}{\partial x}+\frac{\partial u}{\partial y}\frac{dy}{dx}+\frac{\partial u}{\partial z}\frac{dz}{dx}$, con $\frac{\partial u}{\partial z}=xy^2\cdot\frac{2z}{z^2}$, $\frac{dy}{dx}=\frac1x$ y $\frac{dz}{dx}=2x+3$, y al evaluar $2+0-1+0+4+6=11$.
+
+⚠️ **Enunciado:** el punto $(x,y,z)=(1,1,1)$ no es consistente con las ecuaciones de las intermedias: para $x=1$ resulta $y=\ln1=0$ (y $\frac{x^2}{y}$ no estaría definida) y $z=1+3-1=3$. El profe, igual que acá, evalúa las expresiones con los valores dados. No es un error de resolución sino de datos del enunciado; se registra en `docs/revision/p1-1r3-2023-09-b-discrepancias.md`. Pendiente de confirmar con la cátedra.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2023-09-b#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina="1">
+
+Dada la función: $f(x,y)=2\sqrt{5x^2-y^2}-\dfrac{3y}{x}-\ln(x^2y)$
+
+a. Determinar el valor de la derivada direccional en el punto: $P(1,1)$ En la dirección/sentido que forma un ángulo $\alpha=\dfrac{3\pi}{4}$ respecto al semieje $x^+$ medido en sentido positivo (giro antihorario)
+
+b. Dar expresión cartesiana del Gradiente en dicho punto P, graficarlo y determinar su módulo y dirección/sentido (ángulo $\theta$ respecto al semieje $x^+$ y marcarlo en el grafico)
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas sobre la misma función y el mismo punto: cuánto cambia $f$ al moverte en **una dirección dada** y cuál es la dirección "más empinada". ¿Qué datos de la función en $P$ necesitás para las dos?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Machete: [derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Plan: (1) derivadas parciales en $P$; (2) versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\dfrac{\partial f}{\partial s}=f'_x\cos\alpha+f'_y\sin\alpha$; (4) $\nabla f$, módulo y ángulo **mirando el cuadrante**.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $f'_x=\dfrac{10x}{\sqrt{5x^2-y^2}}+\dfrac{3y}{x^2}-\dfrac2x$ y $f'_y=-\dfrac{2y}{\sqrt{5x^2-y^2}}-\dfrac3x-\dfrac1y$. En $P(1;1)$ la raíz vale $\sqrt{5-1}=2$. Para $\alpha=\frac{3\pi}{4}=135^\circ$ el coseno es negativo y el seno positivo.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar parcialmente. **Por qué:** el gradiente y la direccional usan las dos derivadas en $P$. Para la raíz: $\frac{d}{dx}\,2\sqrt{5x^2-y^2}=2\cdot\frac{10x}{2\sqrt{5x^2-y^2}}$; y $\ln(x^2y)$ da $\frac2x$ respecto de $x$ y $\frac1y$ respecto de $y$.
+
+$$f'_x=\frac{10x}{\sqrt{5x^2-y^2}}+\frac{3y}{x^2}-\frac2x\qquad f'_y=-\frac{2y}{\sqrt{5x^2-y^2}}-\frac3x-\frac1y$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(1;1)$ (con $\sqrt{5-1}=2$).
+
+$$f'_x(P)=\frac{10}{2}+3-2=5+3-2=6$$
+
+$$f'_y(P)=-\frac22-3-1=-1-3-1=-5$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el versor. **Por qué:** la derivada direccional necesita un vector de módulo $1$. $\alpha=\frac{3\pi}4=135^\circ$ está en el 2.º cuadrante.
+
+$$s^\circ=(\cos\alpha;\sin\alpha)=\left(-\frac{\sqrt2}{2};\frac{\sqrt2}{2}\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivada direccional (inciso a). **Por qué:** es el producto escalar del gradiente con el versor.
+
+$$\frac{\partial f}{\partial s}\Big|_P=6\cdot\left(-\frac{\sqrt2}{2}\right)+(-5)\cdot\frac{\sqrt2}{2}=-3\sqrt2-\frac{5\sqrt2}{2}$$
+
+$$\frac{\partial f}{\partial s}\Big|_P=-\frac{11\sqrt2}{2}\approx-7{,}78$$
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, módulo y ángulo (inciso b). **Por qué:** el gradiente junta las dos parciales en un vector.
+
+$$\nabla f(P)=6\,i-5\,j$$
+
+$$6^2=36\qquad(-5)^2=25\qquad\|\nabla f\|=\sqrt{36+25}=\sqrt{61}\approx7{,}81$$
+
+Dirección: $\tan\theta=\dfrac{-5}{6}$ con componente $x$ positiva y $y$ negativa (4.º cuadrante), así que el ángulo de la calculadora sirve tal cual (medido hacia abajo desde $x^+$):
+
+$$\theta=\arctan\left(-\frac56\right)\approx-39{,}81^\circ\ \ (\text{o }320{,}19^\circ\text{ en sentido antihorario})$$
+
+</Paso>
+<Paso>
+
+**Qué:** graficar y marcar máximo, mínimo y nulos (el gráfico del gradiente lo pide la consigna). **Por qué:** $\frac{\partial f}{\partial s}=\|\nabla f\|\cos\omega$. El gradiente (máximo crecimiento) apunta a $-39{,}81^\circ$; el mínimo, a $140{,}19^\circ$; los nulos, a $50{,}19^\circ$ y $230{,}19^\circ$. Como $\nabla f$ es largo, en el gráfico se lo dibuja a escala $\frac12$ (sale de $P(1;1)$ y llega a $(4;-1{,}5)$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2023-09-b/ej5.svg`} alt="Plano xy con ejes graduados de 1 en 1. Desde P(1;1) sale en rojo el gradiente 6i−5j hacia abajo y a la derecha, dibujado a escala 1/2 hasta (4;−1,5), con el ángulo θ de −39,81 grados marcado desde el semieje x positivo; en azul la dirección de mínimo crecimiento hacia arriba a la izquierda, en verde la recta de crecimientos nulos y en violeta la dirección S de 135 grados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial f}{\partial s}\Big|_P=-\frac{11\sqrt2}{2}\approx-7{,}78,\qquad\nabla f(P)=6\,i-5\,j,\qquad\|\nabla f\|=\sqrt{61}\approx7{,}81,\qquad\theta\approx-39{,}81^\circ$$
+
+**Ojo con:** los signos de seno y coseno de $135^\circ$, y escribir la misma derivada parcial en las dos cuentas (la $f'_y=-5$ que se usa en la direccional es la misma que va en el gradiente).
+
+**Criterio estimado — no oficial** (la consigna pide valor, expresión cartesiana, módulo, ángulo y gráfico marcándolo):
+
+- **Bien:** parciales en $P$ correctas, versor, $\frac{\partial f}{\partial s}=-\frac{11\sqrt2}{2}$, gradiente con módulo $\sqrt{61}$ y $\theta\approx-39{,}81^\circ$ con el gráfico del gradiente en $P$ y el ángulo marcado.
+- **A medias:** cálculo bien pero gráfico sin el ángulo o sin el gradiente aplicado en $P$.
+- **Mal:** usa un vector sin normalizar, confunde seno y coseno, o no calcula el gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Cociente incremental.** Se mide $\dfrac{f(P+t\,s^\circ)-f(P)}{t}$ con $t$ chico: con $t=10^{-6}$ da $-7{,}7782$, y $-\frac{11\sqrt2}{2}=-7{,}7782$.
+
+**2) Propiedad del gradiente.** El ángulo entre $s$ ($135^\circ$) y $\nabla f$ ($-39{,}81^\circ$) es $\omega=174{,}81^\circ$ (casi opuestos, por eso la direccional es casi $-\|\nabla f\|$), y
+
+$$\|\nabla f\|\cos\omega=\sqrt{61}\cdot\cos(174{,}81^\circ)\approx7{,}81\cdot(-0{,}9957)=-7{,}78$$
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" paginas="6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 6, resolución manuscrita atribuida al profesor):** coincide en la derivada direccional: $f'_x(P)=\frac{10}{2}+3-2=6$, $f'_y(P)=-\frac22-3-1=-5$ y $\frac{\partial f}{\partial s}\big|_P=\left(\frac{10}{2}+3-2\right)\left(-\frac{\sqrt2}{2}\right)+\left(-\frac22-3-1\right)\frac{\sqrt2}{2}=-\frac{11\sqrt2}{2}$ (con tachones en el resultado). Dibuja el gradiente y marca $\nabla_{\text{máx}}$, $\nabla_{\text{mín}}$ y dos $\nabla_{\text{nulo}}$.
+
+⚠️ **Gradiente:** el escaneo escribe $\nabla z=6\,i-\frac92\,j$ (con la componente $-5$ tachada y reemplazada por $\frac92$), $\|\nabla z\|=\sqrt{36+\frac{81}{4}}=\frac{15}{2}$ y $\theta=\arctan\left(\frac{-9/2}{6}\right)=\arctan\left(-\frac34\right)$. El recálculo da $f'_y(P)=-5$, o sea $\nabla f=6\,i-5\,j$, $\|\nabla f\|=\sqrt{61}$ y $\theta=\arctan\left(-\frac56\right)$; además la propia derivada direccional del profe usa $-5$, no $-\frac92$ (con $-\frac92$ daría $-\frac{21\sqrt2}{4}$). Pendiente de confirmar con la cátedra (se anota en `docs/revision/p1-1r3-2023-09-b-discrepancias.md`).
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2023-09-b#6" numero={6} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina="1">
+
+Determinar los puntos críticos de: $f(x,y)=\dfrac43x^3+\dfrac13y^3-2x^2-y$
+
+Categorizarlos en Extremos (Máximos y/o Mínimos) o Puntos de ensilladura de haberlos.
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un mínimo o algo parecido, y después **qué es** cada candidato. ¿Qué tienen en común las pendientes de la superficie en esos puntos? ¿Cómo se distinguen entre sí?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1). Machete: [extremos relativos y hessiano](../../machetes/extremos-relativos-hessiano/). Plan: (1) $f'_x=0,\ f'_y=0$; (2) derivadas segundas; (3) $H=f''_{xx}f''_{yy}-(f''_{xy})^2$ en cada punto; (4) $H\lt0$ silla; $H\gt0$ extremo y el signo de $f''_{xx}$ dice mínimo (+) o máximo (−).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $f'_x=4x^2-4x$ depende solo de $x$ y $f'_y=y^2-1$ solo de $y$, así que se resuelven **por separado** (factorizando) y los puntos críticos son **todas las combinaciones**. Las segundas son $f''_{xx}=8x-4$, $f''_{yy}=2y$ y $f''_{xy}=0$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar una vez e igualar a cero. **Por qué:** en un extremo relativo las dos derivadas parciales se anulan. Cada ecuación se **factoriza** (no se divide por $x$):
+
+$$f'_x=4x^2-4x=4x\,(x-1)=0\ \Rightarrow\ x=0\ \text{ o }\ x=1$$
+
+$$f'_y=y^2-1=(y-1)(y+1)=0\ \Rightarrow\ y=1\ \text{ o }\ y=-1$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar los puntos críticos. **Por qué:** como cada ecuación solo tiene una variable, vale cualquier combinación: $2\times2=4$ puntos.
+
+$$(0;1)\qquad(0;-1)\qquad(1;1)\qquad(1;-1)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** el criterio de la cátedra usa $H=f''_{xx}\,f''_{yy}-(f''_{xy})^2$.
+
+$$f''_{xx}=8x-4\qquad f''_{yy}=2y\qquad f''_{xy}=0$$
+
+$$H(x;y)=(8x-4)(2y)-0^2=2y\,(8x-4)$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar $H$ en cada punto y clasificar. **Por qué:** $H\lt0$ implica **ensilladura**; $H\gt0$ implica extremo y el signo de $f''_{xx}$ decide.
+
+$$H(0;1)=2\cdot(-4)=-8\lt0\ \Rightarrow\ \text{ensilladura}$$
+
+$$H(0;-1)=-2\cdot(-4)=8\gt0,\ \ f''_{xx}(0)=-4\lt0\ \Rightarrow\ \text{máximo}$$
+
+$$H(1;1)=2\cdot4=8\gt0,\ \ f''_{xx}(1)=4\gt0\ \Rightarrow\ \text{mínimo}$$
+
+$$H(1;-1)=-2\cdot4=-8\lt0\ \Rightarrow\ \text{ensilladura}$$
+
+Los valores $f(0;-1)=\frac23$, $f(1;1)=-\frac43$, $f(0;1)=-\frac23$ y $f(1;-1)=0$ no se piden pero sirven de control.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2023-09-b/ej6.svg`} alt="Arriba, superficie z=4x³/3+y³/3−2x²−y en perspectiva con cuatro puntos marcados: dos sillas, un máximo y un mínimo. Abajo, curvas de nivel en el plano xy con ejes graduados de 1 en 1 y los cuatro puntos rotulados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$(0;1):\ \text{ensilladura}\quad(0;-1):\ \text{máximo}\quad(1;1):\ \text{mínimo}\quad(1;-1):\ \text{ensilladura}$$
+
+**Ojo con:** quedarse con solo dos de los cuatro puntos (hay que combinar **todas** las soluciones de $x$ con **todas** las de $y$), y clasificar un extremo sin mirar el signo de $f''_{xx}$.
+
+**Criterio estimado — no oficial** (la consigna pide puntos críticos y su categoría):
+
+- **Bien:** los cuatro puntos, $H$ correcto y la clasificación de cada uno justificada.
+- **A medias:** pierde algún punto crítico, o clasifica bien sin mostrar $H$ en cada punto.
+- **Mal:** no resuelve el sistema, o clasifica sin usar el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Como $f=g(x)+h(y)$ con $g=\frac43x^3-2x^2$ y $h=\frac13y^3-y$ (variables separadas), se mira cada una por separado:
+
+- $g'(x)=4x(x-1)$, $g''(x)=8x-4$: en $x=0$ hay **máximo** de $g$ ($g''=-4$) y en $x=1$ **mínimo** ($g''=4$).
+- $h'(y)=y^2-1$, $h''(y)=2y$: en $y=-1$ hay **máximo** de $h$ ($h''=-2$) y en $y=1$ **mínimo** ($h''=2$).
+
+Si las dos partes son máximo, la suma tiene máximo: $(0;-1)$. Si las dos son mínimo: $(1;1)$. Si una es máximo y la otra mínimo, es silla: $(0;1)$ y $(1;-1)$. Coincide con el hessiano.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" paginas="7" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 7, resolución manuscrita atribuida al profesor):** coincide. $f'_x=4x^2-4x=0\to x(x-1)=0$, $f'_y=y^2-1=0\to(y+1)(y-1)=0$; $PC_1(0,1)$, $PC_2(0,-1)$, $PC_3(1,1)$, $PC_4(1,-1)$; $H(x,y)=2y(8x-4)=16xy-8y$, $H_1(0,1)=-8$ silla, $H_2(0,-1)=+8$ y $H_3(1,1)=+8$ extremos y $H_4(1,-1)=-8$ silla; con $\frac{\partial^2z}{\partial y^2}$: $-2\lt0$ máximo $(0,-1)$ y $+2\gt0$ mínimo $(1,1)$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1r3-2023-09-b#7" numero={7} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina={1} unidad="U3" tema="Extremos ligados (Lagrange)">
+<Enunciado examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" pagina="1">
+
+Determinar por el método del operador de Lagrange, las coordenadas (x,y) del Extremo (Minimo) del paraboloide: $f(x,y)=\dfrac{x^2}{2}+y^2+x-y$ con su intersección con el plano: $x+y=1$
+
+</Enunciado>
+
+<Pista>
+
+Hay una función que querés hacer lo más chica posible (la altura del paraboloide) y una condición que ata $x$ e $y$ (el plano $x+y=1$, vertical). ¿Qué ecuación tiene que cumplir el punto además de ser un candidato a mínimo?
+
+</Pista>
+<Pista>
+
+Es **extremo condicionado (Lagrange)**: función principal $f$ y condición $g(x,y)=x+y-1=0$. Se arma $F(x,y,\lambda)=f-\lambda\,g$ y se anulan las **tres** derivadas. Machete: [extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/). Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $F'_x=x+1-\lambda=0$, $F'_y=2y-1-\lambda=0$ y $F'_\lambda=-(x+y-1)=0$. De las dos primeras, igualando los $\lambda$ despejados, sale $y$ en función de $x$. Después se reemplaza en el plano.
+
+</Pista>
+<Paso>
+
+**Qué:** plantear el modelo. **Por qué:** se busca el mínimo de $f$ restringido a los puntos donde $x+y=1$.
+
+$$F(x,y,\lambda)=\frac{x^2}{2}+y^2+x-y-\lambda\,(x+y-1)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $F$ respecto de las tres variables e igualar a cero.
+
+$$F'_x=x+1-\lambda=0\qquad F'_y=2y-1-\lambda=0$$
+
+$$F'_\lambda=-(x+y-1)=0\quad(\#)$$
+
+</Paso>
+<Paso>
+
+**Qué:** despejar $\lambda$ de las dos primeras e igualar. **Por qué:** así desaparece $\lambda$.
+
+$$\lambda=x+1=2y-1\ \Rightarrow\ 2y=x+2\ \Rightarrow\ y=\frac{x+2}{2}$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición $(\#)$. **Por qué:** queda una sola incógnita.
+
+$$x+\frac{x+2}{2}=1$$
+
+$$2x+x+2=2\ \Rightarrow\ 3x=0\ \Rightarrow\ x=0$$
+
+$$y=\frac{0+2}{2}=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** altura del punto y justificar que es mínimo. **Por qué:** la consigna pide las coordenadas $(x;y)$ del mínimo (y la altura $z$ completa el punto).
+
+$$z=f(0;1)=0+1+0-1=0\qquad\lambda=x+1=1$$
+
+Es mínimo y no máximo porque sobre la curva $x+y=1$ el paraboloide es una parábola abierta hacia arriba (ver la comprobación).
+
+</Paso>
+<Solucion>
+
+$$(x;y)=(0;1),\qquad z=f(0;1)=0\qquad(\lambda=1)$$
+
+**Ojo con:** olvidar la tercera ecuación (la condición) y quedarse con $y=\frac{x+2}{2}$ sin cerrar, y los signos al despejar $\lambda$ ($F'_y=2y-1-\lambda$: el $-1$ viene de derivar $-y$).
+
+**Criterio estimado — no oficial** (la consigna pide las coordenadas $(x;y)$ del mínimo):
+
+- **Bien:** $F$ bien armada, sistema resuelto y punto $(0;1)$ (con $z=0$).
+- **A medias:** planteo y derivadas bien pero un error algebraico que da otro punto, o sin cerrar con la condición.
+- **Mal:** minimiza sin la condición (daría $x=-1$, $y=\frac12$), o usa una función principal incorrecta.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Sin multiplicadores: sobre $x+y=1$ es $y=1-x$ y la función queda de una variable.
+
+$$f(x;1-x)=\frac{x^2}{2}+(1-x)^2+x-(1-x)=\frac{x^2}{2}+1-2x+x^2+x-1+x=\frac32x^2$$
+
+Es una parábola abierta hacia arriba con mínimo en $x=0$ (y $y=1-0=1$), valor $0$: coincide con $z=f(0;1)=0$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" paginas="8" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 8, resolución manuscrita atribuida al profesor):** coincide. Paraboloide $z=\frac{x^2}{2}+y^2+x-y$ con el plano $x+y=1$ (paralelo a $z$); $F'_x=x+1-\lambda$, $F'_y=2y-1-\lambda$, $\lambda=x+1=2y-1$, $y=\frac{x+2}{2}$; en $(\#)$ queda $x=0$, $y=1$; "extremo mínimo $(x,y,z)=(0,1,0)$", $z(0,1)=1-1=0$.
+
+</div>
+</Ejercicio>

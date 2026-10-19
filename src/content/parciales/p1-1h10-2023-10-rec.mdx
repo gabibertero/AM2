@@ -1,0 +1,430 @@
+---
+id: "p1-1h10-2023-10-rec"
+titulo: "Recuperatorio 1° Parcial Práctico — Comisión 1H10 (07/10/2023)"
+comision: "1H10"
+fecha: "07/10/2023"
+tipo: "recuperatorio"
+fuente: "parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–5"
+orden: 162
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1H10 · Recup. 1° Parcial Práctico – 7/10/2023
+
+Importante (consigna de corrección de la cátedra): todos los ejercicios deben ser resueltos, o al menos con planteos y desarrollos avanzados. No se permite el uso de tabla de derivadas. Se solicita prolijidad, orden y escritura grande y legible, adjuntando todos los cálculos auxiliares para poder controlar y evaluar los procedimientos.
+
+<Ejercicio id="p1-1h10-2023-10-rec#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" pagina={1} unidad="U1" tema="Dominio (módulo, log, raíz)">
+<Enunciado examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\dfrac{\ln\left|\frac{x^2}{4}+y^2-1\right|\cdot\log(x\cdot y)}{\sqrt{1-x^2-\frac{y^2}{4}}}$$
+
+</Enunciado>
+
+<Pista>
+
+Mirá la función por partes: un $\ln$ de un **módulo**, un $\log$ de un producto, y un cociente cuyo denominador es una raíz. ¿Qué puede pasar en cada una para que la cuenta no se pueda hacer? Fijate especialmente qué cambia por el hecho de que haya un módulo.
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones** con tres condiciones a la vez: $\ln|A|$ pide $A\ne0$ (el módulo ya hace positivo el argumento); $\log(xy)$ pide $xy>0$; el denominador pide radicando $>0$. Las cónicas son elipses. Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $\frac{x^2}{4}+y^2-1\ne0$, $\ x\,y>0$ y $1-x^2-\frac{y^2}{4}>0$. La primera deja afuera **solo** una elipse (semiejes $2$ en $x$ y $1$ en $y$); la tercera es el interior de otra elipse (semiejes $1$ en $x$ y $2$ en $y$); la segunda son dos cuadrantes.
+
+</Pista>
+<Paso>
+
+**Qué:** la condición del $\ln$ con módulo. **Por qué:** $\ln|A|$ existe para **cualquier** $A\ne0$ (el módulo siempre da un número positivo). No se exige $A>0$.
+
+$$\frac{x^2}{4}+y^2-1\ne0\ \Rightarrow\ \frac{x^2}{4}+y^2\ne1$$
+
+Se excluye **solo la curva** (elipse de semiejes $2$ y $1$), no su interior ni su exterior.
+
+</Paso>
+<Paso>
+
+**Qué:** la condición del $\log$. **Por qué:** $\log$ pide argumento positivo: $xy>0$ significa que $x$ e $y$ tienen **el mismo signo**.
+
+$$x>0\ \wedge\ y>0\ \ (1.^{er}\text{ cuadrante})\qquad\vee\qquad x<0\ \wedge\ y<0\ \ (3.^{er}\text{ cuadrante})$$
+
+Los ejes quedan afuera (ahí $xy=0$).
+
+</Paso>
+<Paso>
+
+**Qué:** la condición de la raíz en el denominador. **Por qué:** la raíz pide radicando $\ge0$ y, como divide, no puede ser $0$: queda $>0$.
+
+$$1-x^2-\frac{y^2}{4}>0\ \Rightarrow\ x^2+\frac{y^2}{4}<1$$
+
+Es el **interior** de la elipse de semiejes $1$ en $x$ y $2$ en $y$ (sin el borde).
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y graficar. **Por qué:** hacen falta las tres condiciones. Quedan las partes del interior de la elipse $x^2+\frac{y^2}{4}=1$ que están en el 1.º y 3.º cuadrante, sin los ejes y **sin los puntos de la curva** $\frac{x^2}{4}+y^2=1$. Las dos elipses se cortan donde $x^2=y^2=\frac45$ (restando las ecuaciones queda $x^2=y^2$), o sea en $\left(\pm\frac{2}{\sqrt5};\pm\frac{2}{\sqrt5}\right)$ con el mismo signo en este dominio.
+
+La curva $\frac{x^2}{4}+y^2=1$ **parte en dos** a cada trozo: la parte de afuera (celeste) y la de adentro (naranja). Las dos pertenecen al dominio; solo la curva misma está excluida.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2023-10-rec/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Elipse punteada negra x²+y²/4=1 (semiejes 1 y 2) y elipse punteada roja x²/4+y²=1 (semiejes 2 y 1). Sombreado, en el primero y tercer cuadrante dentro de la elipse negra: celeste fuera de la roja y naranja dentro de la roja. Puntos de corte (±2/√5; ±2/√5) y vértices rotulados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2:\ x\,y>0\ \wedge\ x^2+\tfrac{y^2}{4}<1\ \wedge\ \tfrac{x^2}{4}+y^2\ne1\Big\}$$
+
+**Ojo con:** el **módulo**: con $\ln|A|$ no se pide $A>0$, solo $A\ne0$; hay que dibujar la elipse $\frac{x^2}{4}+y^2=1$ como curva excluida y no tachar todo su interior. Y excluir los ejes ($xy=0$).
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"; la resolución oficial trata el módulo como si no estuviera, ver más abajo):
+
+- **Bien:** las tres condiciones, el conjunto analítico y un gráfico con las dos elipses punteadas, los cuadrantes 1.º y 3.º y los bordes excluidos.
+- **A medias:** conjunto bien sin gráfico (o al revés), u olvida los ejes o la elipse excluida.
+- **Mal:** exige $\frac{x^2}{4}+y^2-1>0$ ignorando el módulo (es la lectura de la resolución oficial, que conviene aclarar en el examen), o confunde interior con exterior.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar en puntos de prueba**.
+
+- $\left(\frac12;\frac12\right)$: $xy=\frac14>0$, $x^2+\frac{y^2}{4}=\frac{5}{16}<1$ y $\frac{x^2}{4}+y^2=\frac{5}{16}\ne1$. **Está** (dentro de la elipse roja, por el módulo).
+- $\left(\frac15;\ \frac95\right)\to\left(0{,}2;\,1{,}8\right)$: $xy>0$, $x^2+\frac{y^2}{4}=0{,}85<1$ y $\frac{x^2}{4}+y^2=3{,}25\ne1$. **Está** (celeste, arriba).
+- $(1;0)$ o cualquier punto del eje: $xy=0$. **No está.**
+- $(-0{,}5;\,0{,}5)$: $xy<0$. **No está** (2.º cuadrante).
+- $(1{,}5;\,1{,}5)$: $x^2+\frac{y^2}{4}>1$. **No está** (fuera de la elipse negra).
+- $\left(\frac{2}{\sqrt5};\frac{2}{\sqrt5}\right)$: está sobre ambas elipses, $\frac{x^2}{4}+y^2=1$ y $x^2+\frac{y^2}{4}=1$. **No está.**
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** plantea a) $\frac{x^2}{4}+y^2-1>0\to\frac{x^2}{4}+y^2>1$ ("Ext. a Elipse"), b) $xy>0\to$ 1.º y 3.º cuadrante, c) $1-x^2-\frac{y^2}{4}>0\to x^2+\frac{y^2}{4}<1$ ("Int. a Elipse"), grafica la parte de afuera de una elipse e interior de la otra en los dos cuadrantes (sombreado con rayas) y escribe $\text{Dom}f=\{(x;y)\in\mathbb{R}^2/\frac{x^2}{4}+y^2>1\ \wedge\ x^2+\frac{y^2}{4}<1\ \wedge\ xy>0\}$.
+
+⚠️ **Discrepancia:** la resolución oficial **no tiene en cuenta el módulo** del enunciado ($\ln|\cdot|$) y exige $\frac{x^2}{4}+y^2-1>0$. Con el módulo, la condición correcta es $\frac{x^2}{4}+y^2\ne1$, así que el recálculo incluye además la parte **de adentro** de esa elipse (en naranja en el gráfico) y excluye solo la curva. El resto (b y c) coincide. Pendiente de confirmar con la cátedra si se tomó el módulo como una simplificación o si el enunciado se quiso sin módulo. Registrado en `docs/revision/p1-1h10-2023-10-rec-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2023-10-rec#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" pagina={1} unidad="U2" tema="Diferencial (variación del volumen del cono)">
+<Enunciado examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" pagina="1">
+
+Calcular por método diferencial la variación de volumen de un cono circular recto de 3 m de radio y 2 m de altura, si se estima error del 1% en dichas mediciones.
+
+Calcular además el error %
+
+$$V=\frac{\pi}{3}r^2h$$
+
+</Enunciado>
+
+<Pista>
+
+Hay dos medidas con error (radio y altura) y una cantidad que depende de las dos (el volumen). Si los errores son chicos, ¿cómo aproximás la variación total? Y una vez que tenés la variación, ¿cómo la volvés un porcentaje?
+
+</Pista>
+<Pista>
+
+Es **diferencial total**: $dV=V'_r\,dr+V'_h\,dh$, con $dr$ y $dh$ el $1\%$ de cada medida; el error porcentual es $\frac{dV}{V}\cdot100$. Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $V'_r=\frac{2\pi rh}{3}$ y $V'_h=\frac{\pi r^2}{3}$ en $r=3$, $h=2$; $dr=0{,}01\cdot3$, $dh=0{,}01\cdot2$ (en metros). El volumen de partida es $V=\frac{\pi\cdot3^2\cdot2}{3}$.
+
+</Pista>
+<Paso>
+
+**Qué:** errores absolutos y volumen de partida. **Por qué:** el diferencial usa $dr$ y $dh$ en metros.
+
+$$dr=1\%\cdot3=0{,}03\ \text{m}\qquad dh=1\%\cdot2=0{,}02\ \text{m}$$
+
+$$V=\frac{\pi\cdot3^2\cdot2}{3}=6\pi\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales.
+
+$$\frac{\partial V}{\partial r}=\frac{2\pi rh}{3}=\frac{2\pi\cdot3\cdot2}{3}=4\pi$$
+
+$$\frac{\partial V}{\partial h}=\frac{\pi r^2}{3}=\frac{\pi\cdot3^2}{3}=3\pi$$
+
+</Paso>
+<Paso>
+
+**Qué:** el diferencial y el error porcentual. **Por qué:** se suman los aportes (error máximo).
+
+$$dV=4\pi\cdot0{,}03+3\pi\cdot0{,}02=0{,}12\pi+0{,}06\pi=0{,}18\pi\ \text{m}^3\approx0{,}565\ \text{m}^3$$
+
+$$E\%=\frac{dV}{V}\cdot100=\frac{0{,}18\pi}{6\pi}\cdot100=0{,}03\cdot100=3\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=0{,}18\,\pi\ \text{m}^3\approx0{,}565\ \text{m}^3,\qquad E\%=3\%$$
+
+**Ojo con:** el $1\%$ es de **cada medida** (no $dr=1$ ni $dh=1$), y las unidades son m³.
+
+**Criterio estimado — no oficial** (la consigna pide $dV$ y el error %):
+
+- **Bien:** $dr=0{,}03$ y $dh=0{,}02$, parciales, $dV=0{,}18\pi$ y $E\%=3\%$.
+- **A medias:** planteo correcto con un error de cuenta, o $dV$ bien sin el error %.
+- **Mal:** no usa diferencial, o toma el $1\%$ como incremento absoluto de $1$ m.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Diferencial logarítmico.**
+
+$$\frac{dV}{V}=2\,\frac{dr}{r}+\frac{dh}{h}=2\cdot0{,}01+0{,}01=0{,}03\ \Rightarrow\ 3\%$$
+
+**2) Variación real.** Con $r=3{,}03$ y $h=2{,}02$:
+
+$$\Delta V=\frac{\pi}{3}\left(3{,}03^2\cdot2{,}02-18\right)=\frac{\pi}{3}\cdot0{,}545418\approx0{,}1818\,\pi$$
+
+Casi igual que $0{,}18\pi$: la diferencia es de segundo orden.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** coincide. $\text{Vol}=\frac{\pi\cdot9\,\text{m}^2\cdot2\,\text{m}}{3}=6\pi\ \text{m}^3$, $d\text{Vol}=\frac23\pi rh\,dr+\frac{\pi r^2}{3}dh=0{,}12\pi+0{,}06\pi=0{,}18\pi\ \text{m}^3$ y $\text{Error}\%=\frac{0{,}18\pi}{6\pi}\cdot100=3\%$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2023-10-rec#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" pagina="1">
+
+Dada la función: $z=-5\sqrt{x^2+y^2}+12\dfrac{x}{y}+4\ln(x^2y)$
+
+Calcular en el punto: $P(3,4)$ la derivada direccional para $\alpha_x=-\dfrac{\pi}{4}$
+
+Calcular asimismo el gradiente de la función en P, dar su expresión cartesiana y graficar en el sistema de coordenadas. Determinar el valor máximo de la derivada dirección y el ángulo de máximo crecimiento de la función. Indicar en el grafico la dirección/sentido de máximo, mínimo y crecimientos nulos de la función.
+
+</Enunciado>
+
+<Pista>
+
+Te piden la variación de $z$ en una dirección dada y, aparte, la dirección más empinada. ¿Qué dos números de la función en $P$ necesitás para ambas cosas? ¿Qué relación hay entre el gradiente y el "valor máximo" de la derivada direccional?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente**: $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; el valor máximo es $\|\nabla z\|$ y el ángulo de máximo crecimiento es el de $\nabla z$. Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=-\dfrac{5x}{\sqrt{x^2+y^2}}+\dfrac{12}{y}+\dfrac8x$ y $z'_y=-\dfrac{5y}{\sqrt{x^2+y^2}}-\dfrac{12x}{y^2}+\dfrac4y$ (usá $\ln(x^2y)=2\ln x+\ln y$ para derivar), con $\sqrt{x^2+y^2}=5$ en $P$. Para el ángulo, $\tan\theta=\frac{z'_y}{z'_x}$ y mirá el cuadrante.
+
+</Pista>
+<Paso>
+
+**Qué:** simplificar el logaritmo antes de derivar. **Por qué:** $\ln(x^2y)=2\ln x+\ln y$ evita la regla de la cadena.
+
+$$z=-5\sqrt{x^2+y^2}+12\frac{x}{y}+8\ln x+4\ln y$$
+
+$$z'_x=-\frac{5x}{\sqrt{x^2+y^2}}+\frac{12}{y}+\frac{8}{x}$$
+
+$$z'_y=-\frac{5y}{\sqrt{x^2+y^2}}-\frac{12x}{y^2}+\frac{4}{y}$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(3;4)$. **Por qué:** $\sqrt{3^2+4^2}=\sqrt{25}=5$.
+
+$$z'_x(P)=-\frac{5\cdot3}{5}+\frac{12}{4}+\frac83=-3+3+\frac83=\frac83$$
+
+$$z'_y(P)=-\frac{5\cdot4}{5}-\frac{12\cdot3}{16}+\frac44=-4-\frac94+1=-\frac{21}{4}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivada direccional para $\alpha=-\frac\pi4$. **Por qué:** $\cos\left(-\frac\pi4\right)=\frac{\sqrt2}{2}$ y $\sin\left(-\frac\pi4\right)=-\frac{\sqrt2}{2}$.
+
+$$\frac{\partial z}{\partial s}\Big|_P=\frac83\cdot\frac{\sqrt2}{2}+\left(-\frac{21}{4}\right)\cdot\left(-\frac{\sqrt2}{2}\right)=\frac{4\sqrt2}{3}+\frac{21\sqrt2}{8}$$
+
+$$\frac43+\frac{21}{8}=\frac{32}{24}+\frac{63}{24}=\frac{95}{24}\ \Rightarrow\ \frac{\partial z}{\partial s}\Big|_P=\frac{95\sqrt2}{24}\approx5{,}60$$
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, valor máximo y ángulo. **Por qué:** el gradiente apunta al máximo crecimiento y su módulo es el valor de la derivada en esa dirección.
+
+$$\nabla z(P)=\frac83\,i-\frac{21}{4}\,j$$
+
+$$\left(\frac83\right)^2=\frac{64}{9}\qquad\left(\frac{21}{4}\right)^2=\frac{441}{16}$$
+
+$$\|\nabla z\|=\sqrt{\frac{64}{9}+\frac{441}{16}}=\sqrt{\frac{4993}{144}}=\frac{\sqrt{4993}}{12}\approx5{,}89$$
+
+**Ángulo:** $\tan\theta=\dfrac{-21/4}{8/3}=-\dfrac{63}{32}$. El vector tiene $x>0$ e $y<0$: **4.º cuadrante**, y $\arctan$ ya cae ahí:
+
+$$\theta=\arctan\left(-\frac{63}{32}\right)\approx-63{,}07^\circ\ \ (\equiv296{,}93^\circ)$$
+
+**Direcciones:** máximo en $\theta\approx-63{,}07^\circ$ (valor $5{,}89$); mínimo en $\theta+180^\circ\approx116{,}93^\circ$ (valor $-5{,}89$); nulos a $\pm90^\circ$ del gradiente: $\approx26{,}93^\circ$ y $\approx206{,}93^\circ$. La dirección pedida ($-45^\circ$) está a solo $18^\circ$ de la de máximo, por eso $5{,}60$ queda cerca de $5{,}89$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2023-10-rec/ej3.svg`} alt="Plano xy con ejes graduados de 1 en 1. Desde P(3;4) sale en rojo el gradiente (8/3;−21/4) hacia abajo y a la derecha (dibujado a escala 0,3), en azul la dirección de mínimo hacia arriba y a la izquierda, en verde punteado las direcciones nulas y en violeta la dirección S de −45 grados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=\frac{95\sqrt2}{24},\quad\nabla z(P)=\frac83\,i-\frac{21}{4}\,j,\quad\|\nabla z\|=\frac{\sqrt{4993}}{12}\approx5{,}89,\quad\theta=\arctan\left(-\frac{63}{32}\right)\approx-63{,}07^\circ$$
+
+**Ojo con:** (1) derivar bien el $\ln(x^2y)$: aporta $\frac8x$ a $z'_x$ y $\frac4y$ a $z'_y$; (2) los tres términos de cada parcial en $P$ (se suman $-3+3+\frac83$ y $-4-\frac94+1$); (3) el cuadrante del ángulo.
+
+**Criterio estimado — no oficial** (la consigna pide derivada direccional, gradiente con gráfico, valor máximo, ángulo y las direcciones máx/mín/nulas):
+
+- **Bien:** parciales en $P$, $\frac{95\sqrt2}{24}$, gradiente, valor máximo $\|\nabla z\|$, ángulo y gráfico con las cuatro direcciones.
+- **A medias:** cálculo bien sin gráfico o sin marcar las direcciones; o ángulo sin cuadrante.
+- **Mal:** parciales mal derivadas (por ejemplo, la derivada del $\ln$) o vector no unitario.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Sobre la recta.** Con $x=3+\frac{\sqrt2}{2}t$ e $y=4-\frac{\sqrt2}{2}t$, $g(t)=z(x(t);y(t))$ y $g'(0)=\frac{95\sqrt2}{24}$ (el sympy del test deriva $g$ sin armar las parciales a mano).
+
+**2) Máximo = módulo.** Con $\omega$ el ángulo entre $s$ y $\nabla z$ ($\omega\approx18{,}07^\circ$): $\frac{\partial z}{\partial s}=\|\nabla z\|\cos\omega=5{,}89\cdot0{,}9507\approx5{,}60$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** coincide en $\frac{\partial z}{\partial x}\big|_P=\frac83$ ($-\frac{5\cdot3}{\sqrt{25}}+\frac{12}{4}+\frac83$), $\frac{\partial z}{\partial y}\big|_P=-\frac{21}{4}$, $\frac{\partial z}{\partial s}=\frac83\cos\left(-\frac\pi4\right)-\frac{21}{4}\sin\left(-\frac\pi4\right)=\frac{95}{24}\sqrt2$, $\nabla z=\frac83\,i-\frac{21}{4}\,j$ y $\theta=\arctan\left(\frac{-21/4}{8/3}\right)=\arctan\left(-\frac{63}{32}\right)$.
+
+Observaciones: (a) el escaneo plantea el módulo como $\|\nabla z\|=\sqrt{\frac{64}{9}+\frac{N}{16}}$ y el numerador $N$ se lee como $442$ o $441$; el valor correcto es $\left(\frac{21}{4}\right)^2=\frac{441}{16}$ (posible errata de transcripción manuscrita) y el profe no llega a simplificar ni a dar el valor numérico. (b) El enunciado pide también el gráfico con máximo, mínimo y nulos: en el escaneo de la resolución no figura. Registrado en `docs/revision/p1-1h10-2023-10-rec-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2023-10-rec#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" pagina="1">
+
+Determinar los puntos críticos de la función: $z=x^3+3xy^2-15x-12y+1$
+
+Categorizarlos en Extremos (Máximos y/o Mínimos) y Puntos de ensilladura.
+
+No es necesario determinar las coordenadas completas.
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un mínimo o una silla, y después **qué es** cada candidato. ¿Qué tienen en común las pendientes de la superficie en esos puntos? ¿Cómo se distinguen entre sí?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano**: (1) $z'_x=0$, $z'_y=0$; (2) derivadas segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo y el signo de $z''_{xx}$ dice mínimo ($+$) o máximo ($-$). Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/). Teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=3x^2+3y^2-15$ y $z'_y=6xy-12$, que se simplifican a $x^2+y^2=5$ y $xy=2$. De la segunda, $x\ne0$ y $y=\frac2x$; reemplazando queda una **bicuadrada** en $x$ (se resuelve con $t=x^2$). Las segundas son $z''_{xx}=6x$, $z''_{yy}=6x$, $z''_{xy}=6y$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivadas primeras igualadas a cero. **Por qué:** en un extremo o silla el plano tangente es horizontal.
+
+$$z'_x=3x^2+3y^2-15=0\ \Rightarrow\ x^2+y^2=5\qquad z'_y=6xy-12=0\ \Rightarrow\ xy=2$$
+
+De $xy=2$ se ve que $x\ne0$ (si fuera $0$ el producto no daría $2$), así que se puede despejar sin perder soluciones:
+
+$$y=\frac2x$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar y resolver. **Por qué:** queda una ecuación en $x$ sola.
+
+$$x^2+\frac{4}{x^2}=5\ \Rightarrow\ x^4+4=5x^2\ \Rightarrow\ x^4-5x^2+4=0$$
+
+Con $t=x^2$:
+
+$$t^2-5t+4=0\ \Rightarrow\ t=\frac{5\pm\sqrt{25-16}}{2}=\frac{5\pm3}{2}\ \Rightarrow\ t=4\ \text{o}\ t=1$$
+
+$$x^2=4\Rightarrow x=\pm2\qquad x^2=1\Rightarrow x=\pm1$$
+
+Con $y=\frac2x$:
+
+$$P_1(2;1)\quad P_2(-2;-1)\quad P_3(1;2)\quad P_4(-1;-2)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** el signo de $H$ separa sillas de extremos.
+
+$$z''_{xx}=6x\qquad z''_{yy}=6x\qquad z''_{xy}=6y$$
+
+$$H(x;y)=\begin{vmatrix}6x&6y\\6y&6x\end{vmatrix}=36x^2-36y^2=36\,(x^2-y^2)$$
+
+</Paso>
+<Paso>
+
+**Qué:** clasificar.
+
+- $P_1(2;1)$: $H=36\cdot(4-1)=108>0$ y $z''_{xx}=12>0$: **mínimo local**.
+- $P_2(-2;-1)$: $H=108>0$ y $z''_{xx}=-12<0$: **máximo local**.
+- $P_3(1;2)$: $H=36\cdot(1-4)=-108<0$: **punto de ensilladura**.
+- $P_4(-1;-2)$: $H=-108<0$: **punto de ensilladura**.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2023-10-rec/ej4.svg`} alt="Arriba, superficie z=x³+3xy²−15x−12y+1 con sus cuatro puntos críticos; abajo, curvas de nivel en el plano xy con ejes graduados de 1 en 1 y rotulados el mínimo (2;1), el máximo (−2;−1) y las sillas (1;2) y (−1;−2)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Mín: }(2;1)\qquad\text{Máx: }(-2;-1)\qquad\text{Sillas: }(1;2)\ \text{y}\ (-1;-2)$$
+
+**Ojo con:** olvidar la solución $t=1$ de la bicuadrada (quedarse solo con $t=4$) y recordar que cada $x$ trae **un único** $y=\frac2x$ (no cuatro combinaciones); y no confundir el signo de $z''_{xx}$ en $P_2$.
+
+**Criterio estimado — no oficial** (la consigna pide hallar y categorizar; no pide las coordenadas $z$):
+
+- **Bien:** los cuatro puntos críticos, el hessiano $36(x^2-y^2)$ y la clasificación correcta con el signo de $z''_{xx}$ para mínimo y máximo.
+- **A medias:** puntos bien con alguna clasificación mal o sin justificar con $H$; o faltan dos puntos por perder una raíz.
+- **Mal:** clasifica sin hessiano, o plantea combinaciones que no cumplen $xy=2$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **la forma cuadrática en cada punto** (autovalores de la matriz hessiana $\begin{pmatrix}6x&6y\\6y&6x\end{pmatrix}$).
+
+- En $(2;1)$: $\begin{pmatrix}12&6\\6&12\end{pmatrix}$ tiene autovalores $12\pm6=18$ y $6$, ambos $>0$: **mínimo**.
+- En $(-2;-1)$: autovalores $-18$ y $-6$, ambos $<0$: **máximo**.
+- En $(1;2)$: $\begin{pmatrix}6&12\\12&6\end{pmatrix}$ tiene autovalores $6\pm12=18$ y $-6$, de signos opuestos: **silla**.
+- En $(-1;-2)$: autovalores $-18$ y $6$: **silla**.
+
+(En general los autovalores son $6x\pm6y$: dan $6(x+y)$ y $6(x-y)$.) Y, como chequeo de los puntos, cada uno cumple $x^2+y^2=5$ y $xy=2$: $4+1=5$ y $2\cdot1=2$; $1+4=5$ y $1\cdot2=2$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide. Simplifica $x^2+y^2-5=0$ y $xy-2=0\to y=\frac2x$, llega a $x^4-5x^2+4=0$ con $t=x^2$, $t=\frac{5\pm3}{2}$ ($t_1=4$, $t_2=1$), $x=\pm2$ y $x=\pm1$, y los puntos $PC_1(2;1)$, $PC_2(-2;-1)$, $PC_3(1;2)$, $PC_4(-1;-2)$. Con $H(x;y)=36x^2-36y^2=36(x^2-y^2)$ da $H_1=H_2=108>0$ (extremos: "$\partial^2z/\partial x^2\big|_{x=2}=12>0\to\text{Mín}(2;1)$" y "$\big|_{x=-2}=-12<0\to\text{Máx}(-2;-1)$") y $H_3=H_4=-108<0$ ("P. Silla").
+
+</div>
+</Ejercicio>

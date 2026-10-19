@@ -31,6 +31,7 @@ fuentes:
 
 ## Fórmulas clave
 $$\text{Cilíndricas: } x=r\cos\theta,\ y=r\sin\theta,\ z=z\qquad dV=r\,dz\,dr\,d\theta$$
+
 $$\text{Esféricas: } x=r\sin\varphi\cos\theta,\ y=r\sin\varphi\sin\theta,\ z=r\cos\varphi\qquad dV=r^2\sin\varphi\,dr\,d\varphi\,d\theta$$
 - $r$ (cilíndricas): distancia al eje $z$. $r$ (esféricas): distancia al origen.
 - $r$ y $r^2\sin\varphi$: valores absolutos de los jacobianos.

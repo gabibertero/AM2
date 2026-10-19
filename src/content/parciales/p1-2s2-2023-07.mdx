@@ -1,0 +1,552 @@
+---
+id: "p1-2s2-2023-07"
+titulo: "1° Parcial Práctico — Comisión 2S2 (7/7/2023)"
+comision: "2S2"
+fecha: "7/7/2023"
+tipo: "práctico"
+tema: "2S2 Jul-23"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–6"
+orden: 152
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 2S2 · 1° Parcial Práctico – 07/07/2023 · Puntaje mínimo para aprobar: 6 (seis)
+
+**Importante:** Se deben adjuntar todos los cálculos auxiliares. El examen debe ser presentado con prolijidad, orden y escritura legible, fundamental para poder controlar el desarrollo de los ejercicios. No está permitido el uso de calculadora ni de tablas de derivadas e integrales.
+
+<Ejercicio id="p1-2s2-2023-07#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$f(x,y)=\sqrt{36-9x^2-4y^2}\cdot\ln(x^2+y^2-1)$$
+
+</Enunciado>
+
+<Pista>
+
+Fijate qué operaciones hay: una raíz y un logaritmo, multiplicados. Para cada una preguntate qué valores del interior la "rompen". ¿El producto agrega alguna restricción nueva?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: una desigualdad por operación (raíz: radicando $\ge0$; logaritmo: argumento $\gt0$) y se queda uno con lo que cumple **las dos a la vez** (el producto no agrega nada). Cada una es una región del plano (elipse, circunferencia). Machete: [dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$36-9x^2-4y^2\ge0,\qquad x^2+y^2-1>0$$
+
+Dividí la primera por $36$ para llevarla a la forma de la elipse y dibujá las dos curvas juntas.
+
+</Pista>
+<Paso>
+
+**Qué:** escribir una condición por operación. **Por qué:** $\sqrt A$ existe si $A\ge0$ (admite el $0$) y $\ln B$ solo si $B>0$ (estricta).
+
+$$\text{(a) }36-9x^2-4y^2\ge0\qquad\text{(b) }x^2+y^2-1>0$$
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (a). **Por qué:** pasando $9x^2+4y^2$ al otro miembro y dividiendo por $36$:
+
+$$9x^2+4y^2\le36\ \Rightarrow\ \frac{x^2}{4}+\frac{y^2}{9}\le1$$
+
+Es el **interior de la elipse** de semieje $2$ en $x$ y $3$ en $y$ (vértices $(\pm2;0)$ y $(0;\pm3)$), **con el borde** (la raíz de $0$ existe): línea llena.
+
+</Paso>
+<Paso>
+
+**Qué:** interpretar (b). **Por qué:** pasando el $1$ al otro miembro:
+
+$$x^2+y^2>1$$
+
+Es el **exterior de la circunferencia** de radio $1$ centrada en el origen. El borde no pertenece (logaritmo de $0$): punteado.
+
+</Paso>
+<Paso>
+
+**Qué:** intersecar y dibujar. **Por qué:** la circunferencia de radio $1$ queda toda dentro de la elipse (la elipse llega al menos a $2$ de distancia del origen). El dominio es entonces la elipse llena **menos** el disco unidad abierto: un "anillo" con borde exterior incluido e interior excluido.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2023-07/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Elipse llena x²/4+y²/9=1 con vértices (±2;0) y (0;±3), y circunferencia punteada de radio 1 con vértices (±1;0) y (0;±1). Sombreada la región dentro de la elipse y fuera de la circunferencia." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ \frac{x^2}{4}+\frac{y^2}{9}\le1\ \ \wedge\ \ x^2+y^2>1\Big\}$$
+
+**Ojo con:** poner "$<$" en la elipse (la raíz de $0$ sí existe: el borde entra) o "$\ge$" en la circunferencia ($\ln0$ no existe); y confundir los semiejes ($2$ en $x$ y $3$ en $y$: el $9$ va con $y$).
+
+**Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"):
+
+- **Bien:** las dos condiciones con su desigualdad estricta o no según corresponda, gráfico con elipse llena y circunferencia punteada, región sombreada y el conjunto escrito analíticamente.
+- **A medias:** condiciones correctas pero un borde mal marcado, o falta el gráfico consolidado o la expresión analítica.
+- **Mal:** falta una condición entera, o se confunde interior con exterior.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar la fórmula en puntos de prueba**.
+
+- $(1{,}5;\,0)$: $\sqrt{36-20{,}25}=\sqrt{15{,}75}$ existe y $\ln(2{,}25-1)=\ln1{,}25$ existe. **Está en $D$.**
+- $(2;\,0)$ (sobre la elipse): $\sqrt{36-36}=0$ existe y $\ln3$ existe. **Está en $D$.**
+- $(0;\,0{,}5)$: el logaritmo es $\ln(0{,}25-1)$, de un negativo. **No está.**
+- $(1;\,0)$ (sobre la circunferencia): $\ln0$ no existe. **No está.**
+- $(2;\,2)$: $36-36-16\lt0$, la raíz de un negativo. **No está.**
+
+Los cinco puntos coinciden con la región dibujada.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** coincide. $36-9x^2-4y^2\ge0\to\frac{x^2}{4}+\frac{y^2}{9}\le1$ "interior elipse"; $x^2+y^2-1>0\to x^2+y^2>1$ "exterior circunferencia $r=1$"; grafica cada una y la combinación. ⚠️ **Errata de copia sin efecto:** en el conjunto final el escaneo escribe $\frac{y^2}{3}$ (en lugar de $\frac{y^2}{9}$); el dibujo del profe sí marca el vértice $(0;3)$ y las cuentas previas usan $9$, o sea que es una errata al transcribir. Se anota en `docs/revision/p1-2s2-2023-07-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2023-07#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina={1} unidad="U2" tema="Diferencial: errores en volumen y diagonal">
+<Enunciado examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina="1">
+
+Los lados de un paralelepípedo recto miden 2, 3 y 6 cm, con errores en su medición del orden del 1%. Determinar por cálculo diferencial valores aproximados de los errores máximos en el cálculo del Volumen y la Diagonal principal.
+
+</Enunciado>
+
+<Pista>
+
+Hay dos cantidades que dependen de las tres medidas (el volumen y la diagonal) y cada medida tiene un error chico. ¿Cómo se "contagian" esos errores a cada cantidad? ¿Qué significa que el error sea "máximo"?
+
+</Pista>
+<Pista>
+
+Es **diferencial total**: para una cantidad $Q(x;y;z)$ es $dQ=Q'_x\,dx+Q'_y\,dy+Q'_z\,dz$, con los tres errores tomados con el mismo signo (positivo) para el **máximo**, y $E\%=\dfrac{dQ}{Q}\cdot100$. Se hace una vez para $V=xyz$ y otra para $D=\sqrt{x^2+y^2+z^2}$. Machete: [diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $dx=1\%\cdot2$, $dy=1\%\cdot3$, $dz=1\%\cdot6$ en cm. $V'_x=yz$, $V'_y=xz$, $V'_z=xy$; y para la diagonal $D'_x=\frac{x}{D}$, $D'_y=\frac{y}{D}$, $D'_z=\frac{z}{D}$ con $D=\sqrt{4+9+36}=7$.
+
+</Pista>
+<Paso>
+
+**Qué:** pasar el porcentaje a errores absolutos. **Por qué:** el diferencial necesita los errores en cm, y para el máximo se toman todos positivos.
+
+$$dx=0{,}01\cdot2=0{,}02\qquad dy=0{,}01\cdot3=0{,}03\qquad dz=0{,}01\cdot6=0{,}06$$
+
+</Paso>
+<Paso>
+
+**Qué:** el volumen y su diferencial. **Por qué:** $V=xyz$, y cada derivada parcial es el producto de las otras dos medidas.
+
+$$V=2\cdot3\cdot6=36\ \text{cm}^3$$
+
+$$V'_x=yz=18\qquad V'_y=xz=12\qquad V'_z=xy=6$$
+
+$$dV=18\cdot0{,}02+12\cdot0{,}03+6\cdot0{,}06$$
+
+Cada término por separado:
+
+$$18\cdot0{,}02=0{,}36\qquad12\cdot0{,}03=0{,}36\qquad6\cdot0{,}06=0{,}36$$
+
+$$dV=0{,}36+0{,}36+0{,}36=1{,}08\ \text{cm}^3\qquad E\%=\frac{1{,}08}{36}\cdot100=3\%$$
+
+</Paso>
+<Paso>
+
+**Qué:** la diagonal principal y su diferencial. **Por qué:** la diagonal de un paralelepípedo recto es $D=\sqrt{x^2+y^2+z^2}$ y su derivada respecto de cada lado es ese lado dividido por $D$.
+
+$$D=\sqrt{4+9+36}=\sqrt{49}=7\ \text{cm}$$
+
+$$D'_x=\frac27\qquad D'_y=\frac37\qquad D'_z=\frac67$$
+
+$$dD=\frac27\cdot0{,}02+\frac37\cdot0{,}03+\frac67\cdot0{,}06=\frac{0{,}04+0{,}09+0{,}36}{7}=\frac{0{,}49}{7}=0{,}07\ \text{cm}$$
+
+$$E\%=\frac{0{,}07}{7}\cdot100=1\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=1{,}08\ \text{cm}^3\ (E\%=3\%),\qquad dD=0{,}07\ \text{cm}\ (E\%=1\%)$$
+
+**Ojo con:** olvidar la raíz y derivar $D$ como si fuera $x^2+y^2+z^2$ (falta el $\frac{1}{D}$), y mezclar unidades (todo en cm). Los errores "máximos" se suman todos en positivo.
+
+**Criterio estimado — no oficial** (la consigna pide dos resultados: error en el volumen y en la diagonal):
+
+- **Bien:** $dV=1{,}08$ y $dD=0{,}07$ con sus derivadas parciales planteadas (los $E\%$ son un extra de control).
+- **A medias:** una de las dos cantidades bien y la otra con error de planteo o de cuenta.
+- **Mal:** no usa diferencial total, o deriva mal.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Variación exacta.** Con las medidas nuevas $2{,}02$, $3{,}03$ y $6{,}06$:
+
+$$\Delta V=2{,}02\cdot3{,}03\cdot6{,}06-36\approx1{,}0908\ \text{cm}^3\qquad\Delta D=\sqrt{49{,}9849}-7=7{,}07-7=0{,}07\ \text{cm}$$
+
+(porque $7{,}07^2=49{,}9849$). Muy cerca de los diferenciales.
+
+**2) Diferencial logarítmico.** Si todos los lados crecen $1\%$: $V$ es un producto de tres lados, así que $\frac{dV}{V}=1\%+1\%+1\%=3\%$; y $D$ es homogénea de grado $1$ (si todos los lados crecen $1\%$, $D$ crece $1\%$): $\frac{dD}{D}=1\%$. Coincide con $3\%$ y $1\%$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** coincide. $dx=1\%\cdot2=0{,}02$, $dy=0{,}03$, $dz=0{,}06$; $V=36\ \text{cm}^3$, $dV=yz\,dx+xz\,dy+xy\,dz=0{,}36+0{,}36+0{,}36=1{,}08\ \text{cm}^3$, $E\%=3\%$; $D=\sqrt{4+9+36}=7\ \text{cm}$, $dD=\frac27\cdot0{,}02+\frac37\cdot0{,}03+\frac67\cdot0{,}06=\frac{0{,}49}{7}=0{,}07\ \text{cm}$ y $E\%=1\%$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2023-07#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina={1} unidad="U2" tema="Direccional (definición) y gradiente">
+<Enunciado examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina="1">
+
+Dada la función: $f(x,y)=\ln(x/y)$
+
+a. Determinar el valor de la Derivada Direccional en el punto: P(1,2) usando la definición, en la dirección y sentido creciente de la bisectriz del 2° cuadrante.
+
+b. Dar expresión cartesiana del vector Gradiente en dicho punto P, graficarlo y determinar su módulo y dirección/sentido (ángulo respecto al semieje x positivo.
+
+</Enunciado>
+
+<Pista>
+
+La consigna pide hacer el inciso (a) **por definición**: ¿qué cociente tenés que armar y a qué tiende? Antes, ¿qué vector unitario da "la dirección y sentido creciente de la bisectriz del 2.º cuadrante"?
+
+</Pista>
+<Pista>
+
+La bisectriz del 2.º cuadrante es la recta $y=-x$; el sentido "creciente" (hacia arriba) forma $\alpha=135^\circ$ con $x^+$. La **definición** es $\dfrac{\partial f}{\partial s}\Big|_P=\displaystyle\lim_{t\to0}\dfrac{f(P+t\,s^\circ)-f(P)}{t}$. Para (b): $\nabla f=f'_x\,i+f'_y\,j$, módulo y ángulo mirando el cuadrante. Machete: [derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: *Derivada Direccional*, pp. 15–19.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $s^\circ=\left(-\frac{\sqrt2}{2};\frac{\sqrt2}{2}\right)$ y $f(P+t\,s^\circ)=\ln\dfrac{1-\frac{\sqrt2}{2}t}{2+\frac{\sqrt2}{2}t}$, mientras que $f(P)=\ln\frac12$. La diferencia de logaritmos es el logaritmo del cociente, que se puede escribir como $\ln(1+at)-\ln(1+bt)$; se usa $\lim_{t\to0}\frac{\ln(1+at)}{t}=a$.
+
+</Pista>
+<Paso>
+
+**Qué:** armar el versor $s^\circ$. **Por qué:** la bisectriz del 2.º cuadrante tiene pendiente $-1$; "sentido creciente" es el de $y$ creciente ($x$ negativo, $y$ positivo), a $135^\circ$.
+
+$$s^\circ=(\cos135^\circ;\sin135^\circ)=\left(-\frac{\sqrt2}{2};\frac{\sqrt2}{2}\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** escribir la definición con este punto y versor. **Por qué:** es lo que pide la consigna.
+
+$$\frac{\partial f}{\partial s}\Big|_P=\lim_{t\to0}\frac{f\!\left(1-\frac{\sqrt2}{2}t;\ 2+\frac{\sqrt2}{2}t\right)-f(1;2)}{t}$$
+
+Con $f(1;2)=\ln\frac12$ y $f(x;y)=\ln\frac xy$:
+
+$$f\!\left(1-\tfrac{\sqrt2}{2}t;\,2+\tfrac{\sqrt2}{2}t\right)=\ln\frac{1-\frac{\sqrt2}{2}t}{2+\frac{\sqrt2}{2}t}$$
+
+</Paso>
+<Paso>
+
+**Qué:** restar y arreglar el logaritmo. **Por qué:** $\ln A-\ln\frac12$ es $\ln(2A)$, y $2A=\dfrac{2-\sqrt2\,t}{2+\frac{\sqrt2}{2}t}=\dfrac{1-\frac{\sqrt2}{2}t}{1+\frac{\sqrt2}{4}t}$ (dividiendo arriba y abajo por $2$). Entonces:
+
+$$f(P+t\,s^\circ)-f(P)=\ln\!\left(1-\frac{\sqrt2}{2}t\right)-\ln\!\left(1+\frac{\sqrt2}{4}t\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular el límite. **Por qué:** se usa el límite notable $\displaystyle\lim_{t\to0}\frac{\ln(1+at)}{t}=a$ en cada logaritmo (con $a=-\frac{\sqrt2}{2}$ y con $a=\frac{\sqrt2}{4}$).
+
+$$\frac{\partial f}{\partial s}\Big|_P=-\frac{\sqrt2}{2}-\frac{\sqrt2}{4}=-\frac{2\sqrt2}{4}-\frac{\sqrt2}{4}=-\frac{3\sqrt2}{4}\approx-1{,}06$$
+
+</Paso>
+<Paso>
+
+**Qué:** el gradiente, módulo y ángulo (inciso b). **Por qué:** el gradiente junta las dos parciales: $f'_x=\frac{1}{x}$ y $f'_y=-\frac1y$ (porque $\ln\frac xy=\ln x-\ln y$).
+
+$$\nabla f(P)=\frac11\,i-\frac12\,j=i-\frac12\,j$$
+
+$$\|\nabla f\|=\sqrt{1^2+\left(-\frac12\right)^2}=\sqrt{\frac54}=\frac{\sqrt5}{2}\approx1{,}12$$
+
+Dirección: componente $x$ positiva y componente $y$ negativa (4.º cuadrante), así que el ángulo de la calculadora sirve tal cual:
+
+$$\theta=\arctan\left(-\frac12\right)\approx-26{,}57^\circ\ \ (\text{o }333{,}43^\circ)$$
+
+</Paso>
+<Paso>
+
+**Qué:** graficar y marcar máximo, mínimo y nulos. **Por qué:** $\frac{\partial f}{\partial s}=\|\nabla f\|\cos\omega$. El gradiente (máximo crecimiento) sale de $P(1;2)$ y llega a $(2;1{,}5)$ (escala $1:1$); el mínimo es el opuesto ($153{,}43^\circ$) y los nulos son perpendiculares ($63{,}43^\circ$ y $243{,}43^\circ$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2023-07/ej3.svg`} alt="Plano xy con ejes graduados de 1 en 1. Desde P(1;2) sale en rojo el gradiente i−j/2 hacia la derecha y levemente hacia abajo, hasta (2;1,5), con el ángulo θ de −26,57 grados marcado desde el semieje x positivo; en azul la dirección de mínimo crecimiento hacia arriba a la izquierda, en verde la recta de crecimientos nulos y en violeta la dirección S de 135 grados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial f}{\partial s}\Big|_P=-\frac{3\sqrt2}{4}\approx-1{,}06,\qquad\nabla f(P)=i-\frac12\,j,\qquad\|\nabla f\|=\frac{\sqrt5}{2},\qquad\theta=\arctan\left(-\frac12\right)\approx-26{,}57^\circ$$
+
+**Ojo con:** el inciso (a) pide **la definición**: usar directo "$f'_x\cos\alpha+f'_y\sin\alpha$" da el mismo número, pero no es lo que se pide. Y cuidado con el sentido de la bisectriz del 2.º cuadrante: $135^\circ$, no $-45^\circ$.
+
+**Criterio estimado — no oficial** (la consigna pide la direccional por definición, gradiente en $P$, módulo, ángulo y gráfico):
+
+- **Bien:** versor a $135^\circ$, límite por definición bien planteado y resuelto ($-\frac{3\sqrt2}{4}$), gradiente $i-\frac12j$, módulo $\frac{\sqrt5}{2}$, $\theta\approx-26{,}57^\circ$ y gráfico en $P$.
+- **A medias:** valor correcto pero calculado por fórmula en vez de por definición, o gráfico incompleto (sin el ángulo o sin el gradiente aplicado en $P$).
+- **Mal:** versor equivocado (por ejemplo $-45^\circ$) o vector sin normalizar, o no calcula el gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Por fórmula con las parciales** (en este caso sí se puede usar, como control):
+
+$$f'_x\cos135^\circ+f'_y\sin135^\circ=1\cdot\left(-\frac{\sqrt2}{2}\right)-\frac12\cdot\frac{\sqrt2}{2}=-\frac{\sqrt2}{2}-\frac{\sqrt2}{4}=-\frac{3\sqrt2}{4}$$
+
+**2) Propiedad del gradiente.** El ángulo entre $s$ ($135^\circ$) y $\nabla f$ ($-26{,}57^\circ$) es $\omega=161{,}57^\circ$, y
+
+$$\|\nabla f\|\cos\omega=\frac{\sqrt5}{2}\cdot\cos161{,}57^\circ\approx1{,}118\cdot(-0{,}9487)\approx-1{,}0607=-\frac{3\sqrt2}{4}$$
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** coincide en los resultados: $\alpha_x=135^\circ\ (\frac{3\pi}{4})$, $\frac{\partial z}{\partial\alpha_x}\big|_P=\frac11\cos\frac{3\pi}{4}-\frac12\sin\frac{3\pi}{4}=-\frac{\sqrt2}{2}-\frac{\sqrt2}{4}=-\frac34\sqrt2$, $\nabla f\big|_P=i-\frac12j$, $\|\nabla f\|=\frac{\sqrt5}{2}$ ("valor máx. de la deriv. direccional") y $\theta_{\text{máx}}=\arctan\left(-\frac12\right)$, con el dibujo del gradiente y las direcciones máx., mín. y nulas.
+
+⚠️ **Método:** la consigna pide el inciso (a) "usando la definición"; el escaneo lo resuelve con la fórmula de las parciales y el versor ($f'_x\cos\alpha+f'_y\sin\alpha$), no con el límite. El resultado numérico coincide con el de la definición hecha acá. Pendiente de confirmar con la cátedra si lo toma como válido (se anota en `docs/revision/p1-2s2-2023-07-discrepancias.md`).
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2023-07#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina={1} unidad="U3" tema="Extremos relativos (caso H = 0)">
+<Enunciado examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina="1">
+
+Hallar los puntos críticos y categorizarlos: Extremos Locales (Máximos o Mínimos) y/o puntos de ensilladura de haberlos, de la siguiente función:
+
+$$z=\frac43x^3+\frac13y^3-6x^2+y^2+9x-2$$
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas en orden: primero **dónde** pueden estar los extremos y después **qué es** cada candidato. Al resolver las ecuaciones de las derivadas, fijate si alguna tiene una solución **doble**: puede traer complicaciones al clasificar.
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano**, pero con un detalle: cuando $H=0$ el criterio **no decide** (teoría: *Taylor y Extremos Relativos*, pp. 25–28 y p. 34, "el criterio falla"). Entonces hay que estudiar el **signo del incremento** $\Delta z$ cerca del punto. Machete: [extremos relativos y hessiano](../../machetes/extremos-relativos-hessiano/). Plan: (1) $z'_x=0$ y $z'_y=0$; (2) $H$ en cada punto; (3) si $H=0$, mirar el incremento.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=4x^2-12x+9$ es un **cuadrado perfecto**, $(2x-3)^2$, y $z'_y=y^2+2y=y(y+2)$. Las segundas son $z''_{xx}=8x-12$, $z''_{yy}=2y+2$ y $z''_{xy}=0$, así que $H=(8x-12)(2y+2)$ se anula en toda la recta $x=\frac32$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar una vez e igualar a cero. **Por qué:** en un extremo relativo las dos derivadas parciales se anulan. La primera es un cuadrado perfecto (su discriminante $144-144$ vale $0$) y la segunda se **factoriza**:
+
+$$z'_x=4x^2-12x+9=(2x-3)^2=0\ \Rightarrow\ x=\frac32\ \ (\text{raíz doble})$$
+
+$$z'_y=y^2+2y=y\,(y+2)=0\ \Rightarrow\ y=0\ \text{ o }\ y=-2$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar los puntos críticos. **Por qué:** cada ecuación solo tiene una variable, así que se combinan todas las soluciones.
+
+$$\left(\tfrac32;0\right)\qquad\left(\tfrac32;-2\right)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** el criterio de la cátedra usa $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$.
+
+$$z''_{xx}=8x-12\qquad z''_{yy}=2y+2\qquad z''_{xy}=0$$
+
+$$H(x;y)=(8x-12)(2y+2)=8\,(2x-3)(y+1)$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar $H$ en cada punto. **Por qué:** el factor $(2x-3)$ vale $0$ en $x=\frac32$, para cualquier $y$.
+
+$$H\!\left(\tfrac32;0\right)=8\cdot0\cdot1=0\qquad H\!\left(\tfrac32;-2\right)=8\cdot0\cdot(-1)=0$$
+
+Con $H=0$ el criterio del hessiano **no decide** ("incertidumbre"). Hasta acá llega lo que se resuelve con el criterio de cátedra.
+
+</Paso>
+<Paso>
+
+**Qué (elaborado para el sitio):** decidir mirando el incremento $\Delta z=z(x;y)-z(P)$ cerca de cada punto. **Por qué:** es la definición de extremo: si $\Delta z$ no cambia de signo hay extremo; si cambia, no lo hay. Con $u=x-\frac32$ y $v=y$ (el punto $(\frac32;0)$) se obtiene, desarrollando:
+
+$$\Delta z=\frac43u^3+v^2+\frac{v^3}{3}$$
+
+- Sobre $v=0$ queda $\Delta z=\frac43u^3$: **positivo** para $u\gt0$ y **negativo** para $u\lt0$.
+- Sobre $u=0$ queda $\Delta z=v^2\left(1+\frac v3\right)\gt0$.
+
+El incremento cambia de signo: **no es extremo** y se comporta como una **silla** (sube en una dirección y cruza de signo en la otra). Con $w=y+2$ (el punto $(\frac32;-2)$):
+
+$$\Delta z=\frac43u^3-w^2+\frac{w^3}{3}$$
+
+- Sobre $w=0$: $\Delta z=\frac43u^3$ cambia de signo.
+- Sobre $u=0$: $\Delta z=-w^2\left(1-\frac w3\right)\lt0$ (baja).
+
+También cambia de signo: **no es extremo**, otra silla. Valores de control: $z\left(\frac32;0\right)=\frac52$ y $z\left(\frac32;-2\right)=\frac{23}{6}$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2023-07/ej4.svg`} alt="Arriba, superficie z=4x³/3+y³/3−6x²+y²+9x−2 en perspectiva con dos puntos marcados sobre la recta x=3/2. Abajo, curvas de nivel en el plano xy con ejes graduados de 1 en 1 y los puntos (3/2;0) y (3/2;−2) rotulados; las curvas de nivel se aplanan a lo largo de x=3/2." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Puntos críticos: }\left(\tfrac32;0\right),\ \left(\tfrac32;-2\right)\qquad H=0\ \text{en ambos (el criterio no decide)}$$
+
+Estudiando el incremento: ninguno es máximo ni mínimo; ambos son **puntos de ensilladura** (el incremento cambia de signo).
+
+**Ojo con:** concluir "mínimo" o "máximo" mirando solo $z''_{yy}$ o $z''_{xx}$ cuando $H=0$ (el signo de una segunda derivada no alcanza), y no confundir "$H=0$" con "silla": $H=0$ solo dice que el criterio **falla**.
+
+**Criterio estimado — no oficial** (la consigna pide puntos críticos y categoría; la resolución de cátedra se detiene en $H=0$, "incertidumbre", y no sabemos cuánto puntúa avanzar de ahí):
+
+- **Bien:** los dos puntos críticos, $H$ bien calculado y reconocer que con $H=0$ el criterio no decide; mejor aún, decidir con el incremento.
+- **A medias:** halla los dos puntos pero pierde uno, o clasifica sin mostrar $H$.
+- **Mal:** declara mínimo, máximo o silla usando un criterio que no aplica con $H=0$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente, **sin desarrollar el incremento**: la derivada $z'_x=(2x-3)^2$ es $\ge0$ para **todo** $x$ (y vale $0$ solo en $x=\frac32$). Entonces, para cualquier $y$ fijo, la función $x\mapsto z(x;y)$ es **estrictamente creciente** (nunca tiene un máximo ni un mínimo local). Si un punto fuera extremo local de $z$, esa función de $x$ tendría un extremo local ahí, y no lo tiene. **Ningún punto del plano es extremo**, en particular tampoco $\left(\frac32;0\right)$ ni $\left(\frac32;-2\right)$. Coincide con lo hallado.
+
+Verificación numérica: $z\left(\frac32\pm0{,}1;\,0\right)=\frac52\pm0{,}0013\ldots$, uno mayor y otro menor que $z\left(\frac32;0\right)=\frac52$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide hasta donde llega. $\frac{\partial z}{\partial x}=4x^2-12x+9=0\to x=\frac{12\pm\sqrt{144-144}}{8}=\frac32$ y $\frac{\partial z}{\partial y}=y^2+2y=0\to y(y+2)=0$, $y=0$ o $y=-2$; $PC_1\left(\frac32,0\right)$ y $PC_2\left(\frac32,-2\right)$; $H(x,y)=(8x-12)(2y+2)=8(2x-3)(y+1)$ y $H_1=H_2=0\to$ "Incertidumbre". **La resolución termina ahí:** no clasifica los puntos. La clasificación como "no extremos / ensilladura" (por el signo del incremento y por $z'_x\ge0$) es elaborada para el sitio; se anota en `docs/revision/p1-2s2-2023-07-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2023-07#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina={1} unidad="U3" tema="Extremos ligados (Lagrange)">
+<Enunciado examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" pagina="1">
+
+Calcular las dimensiones de una caja rectangular (con tapa) de capacidad máxima si su superficie es de 216 cm². Calcular el volumen.
+
+</Enunciado>
+
+<Pista>
+
+Hay una cantidad que querés hacer lo más grande posible (la capacidad, o sea el volumen) y una restricción que ata las medidas (la superficie total es fija). ¿Qué dimensiones tiene la caja y qué caras suman la superficie "con tapa"?
+
+</Pista>
+<Pista>
+
+Es **extremo condicionado (Lagrange)**: función principal $V=xyz$ y condición $g(x,y,z)=2(xy+yz+xz)-216=0$ (con tapa: seis caras, tres pares iguales). Se arma $F(x,y,z,\lambda)=xyz-\lambda\,g$ y se anulan las **cuatro** derivadas. Machete: [extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/). Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $F'_x=yz-2\lambda(y+z)=0$, $F'_y=xz-2\lambda(x+z)=0$, $F'_z=xy-2\lambda(x+y)=0$ y $F'_\lambda=0$ devuelve la condición. De las tres primeras, igualando los cocientes $2\lambda=\frac{yz}{y+z}=\frac{xz}{x+z}=\frac{xy}{x+y}$, sale una relación entre las medidas. Después se reemplaza en la superficie.
+
+</Pista>
+<Paso>
+
+**Qué:** plantear el modelo. **Por qué:** la caja de dimensiones $x$, $y$, $z$ (positivas) tiene volumen $xyz$ y, con tapa, superficie $2xy+2yz+2xz$.
+
+$$F(x,y,z,\lambda)=xyz-\lambda\big[2(xy+yz+xz)-216\big]$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $F$ respecto de las cuatro variables e igualar a cero.
+
+$$F'_x=yz-2\lambda\,(y+z)=0\qquad F'_y=xz-2\lambda\,(x+z)=0\qquad F'_z=xy-2\lambda\,(x+y)=0$$
+
+$$F'_\lambda=-\big[2(xy+yz+xz)-216\big]=0\quad(\#)$$
+
+</Paso>
+<Paso>
+
+**Qué:** despejar $2\lambda$ de las tres primeras e igualar. **Por qué:** así desaparece $\lambda$ (las medidas son positivas, así que los denominadores no se anulan).
+
+$$2\lambda=\frac{yz}{y+z}=\frac{xz}{x+z}=\frac{xy}{x+y}$$
+
+De los dos primeros cocientes, multiplicando en cruz:
+
+$$yz\,(x+z)=xz\,(y+z)\ \Rightarrow\ xyz+yz^2=xyz+xz^2\ \Rightarrow\ yz^2=xz^2$$
+
+Dividiendo por $z^2$ (positivo): $y=x$. De los dos últimos, con el mismo razonamiento, $z=x$. Entonces **es un cubo**:
+
+$$x=y=z$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición $(\#)$. **Por qué:** queda una sola incógnita. Con $x=y=z$ hay que sumar tres productos iguales y **multiplicar por $2$** (la superficie con tapa tiene seis caras):
+
+$$2\,(x^2+x^2+x^2)=216\ \Rightarrow\ 6x^2=216\ \Rightarrow\ x^2=36\ \Rightarrow\ x=6$$
+
+$$x=y=z=6\ \text{cm}$$
+
+</Paso>
+<Paso>
+
+**Qué:** calcular el volumen y justificar que es máximo. **Por qué:** la consigna pide la capacidad. El volumen es
+
+$$V=6\cdot6\cdot6=216\ \text{cm}^3$$
+
+Es máximo y no mínimo porque el volumen tiende a $0$ cuando alguna dimensión tiende a $0$ (con superficie fija, la caja se "aplasta") y hay un único candidato con $V\gt0$.
+
+</Paso>
+<Solucion>
+
+$$x=y=z=6\ \text{cm},\qquad V_{\text{máx}}=216\ \text{cm}^3$$
+
+**Ojo con:** olvidar el factor $2$ de la superficie con tapa (da $x^2=72$ y un volumen que no cumple $S=216$), y confundir "con tapa" ($6$ caras) con "sin tapa" ($5$ caras). Siempre conviene verificar: un cubo de lado $6$ tiene $6\cdot36=216\ \text{cm}^2$.
+
+**Criterio estimado — no oficial** (la consigna pide dimensiones y volumen):
+
+- **Bien:** $F$ bien armada con la superficie $2(xy+yz+xz)$, sistema resuelto, las tres dimensiones $6$ cm y $V=216\ \text{cm}^3$.
+- **A medias:** planteo y derivadas bien, $x=y=z$, pero error al reemplazar en la superficie (por ejemplo olvidar el $2$), o dimensiones sin el volumen.
+- **Mal:** maximiza sin la condición, o usa una función o una superficie incorrectas.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Verificar la condición.** Un cubo de lado $6$ tiene superficie $6\cdot6^2=216\ \text{cm}^2$: cumple.
+
+**2) Desigualdad entre medias (AM–GM).** De $xy+yz+xz=108$ y $xy+yz+xz\ge3\,(xyz)^{2/3}$:
+
+$$108\ge3\,V^{2/3}\ \Rightarrow\ V^{2/3}\le36\ \Rightarrow\ V\le36^{3/2}=216$$
+
+con igualdad cuando $xy=yz=xz$, o sea $x=y=z$: el mismo cubo.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2023-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-23.pdf" paginas="6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 6, resolución manuscrita atribuida al profesor):** el planteo y la relación coinciden: $F=xyz+\lambda\cdot2(xy+yz+xz-216)$, $-\lambda=\frac{yz}{2(y+z)}=\frac{xz}{2(x+z)}=\frac{xy}{2(x+y)}$ y $x=y=z$ (la cátedra usa $F=F_{\text{ppal}}+\lambda F_{\text{cond}}$; con ese signo $\lambda$ sale negativo, el resultado no cambia).
+
+⚠️ **Resultado distinto:** en $(\#)$ el profe escribe $2(xy+yz+xz)=216$ pero al reemplazar $x=y=z$ pone $x\cdot x+x\cdot x+x\cdot x=216$ (se pierde el factor $2$), y obtiene $3x^2=216$, $x^2=72$, $x=6\sqrt2$, $V=(6\sqrt2)^3=432\sqrt2\ \text{cm}^3$. El recálculo da $6x^2=216$, $x=6$, $V=216\ \text{cm}^3$; el cubo de lado $6\sqrt2$ tiene superficie $6\cdot72=432\ \text{cm}^2\neq216$, así que no cumple la condición del enunciado. Pendiente de confirmar con la cátedra (se anota en `docs/revision/p1-2s2-2023-07-discrepancias.md`).
+
+</div>
+</Ejercicio>

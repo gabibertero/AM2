@@ -5,14 +5,13 @@ for (const [nombre, viewport] of Object.entries({ desktop: { width: 1280, height
     test.use({ viewport });
     const sinScrollH = async (page) => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
-    test('Home: dos instancias, p1 "Próximamente", final a confirmar', async ({ page }) => {
+    test('Home: dos instancias con contenido, final a confirmar', async ({ page }) => {
       await page.goto('');
       await expect(page.locator('h1')).toHaveText('Análisis Matemático II');
       await expect(page.locator('.inst-home')).toHaveCount(2);
       await expect(page.locator('[data-instancia="p1"] .mapa-u')).toHaveCount(3);
       await expect(page.locator('[data-instancia="p2"] .mapa-u')).toHaveCount(7);
-      await expect(page.locator('[data-instancia="p1"] .mapa-u').first()).toContainText('Próximamente');
-      await expect(page.locator('[data-instancia="p1"] .mapa-u a')).toHaveCount(0);
+      await expect(page.locator('[data-instancia="p1"] .mapa-u a').first()).toBeVisible();
       await expect(page.locator('[data-final]')).toContainText('fecha a confirmar');
       await expect(page.locator('[data-dias-txt]')).toContainText('2º parcial');
       await sinScrollH(page);
@@ -31,8 +30,8 @@ for (const [nombre, viewport] of Object.entries({ desktop: { width: 1280, height
     test('preguntero: filtro de instancia', async ({ page }) => {
       await page.goto('preguntero/');
       await page.locator('[data-filtro="instancia"][data-valor="p1"]').click();
-      await expect(page.locator('[data-pregunta]:visible')).toHaveCount(0);
-      await expect(page.locator('[data-vacio]')).toBeVisible();
+      await expect(page.locator('[data-pregunta][data-unidad="U4"]:visible')).toHaveCount(0);
+      await expect(page.locator('[data-pregunta]:visible').first()).toBeVisible();
       await page.locator('[data-filtro="instancia"][data-valor="p2"]').click();
       await expect(page.locator('[data-pregunta]:visible').first()).toBeVisible();
     });
@@ -41,7 +40,7 @@ for (const [nombre, viewport] of Object.entries({ desktop: { width: 1280, height
       await page.goto('preguntero/simulacro/?semilla=7');
       await page.locator('[data-instancia-sel]').selectOption('p1');
       await page.locator('[data-armar]').click();
-      await expect(page.locator('[data-sim-info]')).toContainText('Todavía no hay preguntas');
+      await expect(page.locator('[data-sim-lista] [data-tipo]').first()).toBeVisible();
       await page.locator('[data-instancia-sel]').selectOption('p2');
       await page.locator('[data-armar]').click();
       await expect(page.locator('[data-sim-lista] [data-tipo]').first()).toBeVisible();

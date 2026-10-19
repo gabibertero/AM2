@@ -34,6 +34,7 @@ fuentes:
 
 ## Fórmulas clave
 $$\oint_L P\,dx+Q\,dy=\iint_D\Big(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\Big)\,dx\,dy$$
+
 $$\text{En polares: } \iint_D \big(Q_x-P_y\big)\big|_{x=r\cos\theta,\ y=r\sin\theta}\; r\,dr\,d\theta$$
 - $Q_x-P_y$: "circulación por unidad de área" (rotacional escalar de $F$).
 - $D$: región plana encerrada por $L$.

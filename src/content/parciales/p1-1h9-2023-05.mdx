@@ -1,0 +1,411 @@
+---
+id: "p1-1h9-2023-05"
+titulo: "1° Parcial Práctico — Comisión 1H9 (13/05/2023)"
+comision: "1H9"
+fecha: "13/05/2023"
+tipo: "práctico"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–5"
+orden: 160
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II – Comisión 1H9 · 1° Parcial Práctico – 13/05/2023 · Puntaje mínimo para aprobar: 6 (seis). Cada ejercicio vale 2,5 p (4 × 2,5 = 10).
+
+<Ejercicio id="p1-1h9-2023-05#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" pagina={1} unidad="U1" tema="Dominio de definición">
+<Enunciado examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\dfrac{\ln\left(x^2+y^2-1\right)}{\sqrt{9-x^2-y^2}}$$
+
+</Enunciado>
+
+<Pista>
+
+Mirá la función por partes: un logaritmo arriba y una raíz abajo, que además es denominador. ¿Qué tiene que cumplir el argumento de un $\ln$? ¿Y el interior de una raíz cuadrada? ¿Qué pasa si el denominador vale cero?
+
+</Pista>
+<Pista>
+
+Es un **dominio por restricciones**: argumento del $\ln$ $>0$, radicando $>0$ (está en el denominador, así que tampoco puede dar $0$). Cada desigualdad es una región limitada por una circunferencia. Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $x^2+y^2-1>0$ y $9-x^2-y^2>0$. Pasá todo a la forma $x^2+y^2\ \square\ r^2$ para leer el radio de cada circunferencia, y quedate con los puntos que cumplen **las dos** a la vez (intersección).
+
+</Pista>
+<Paso>
+
+**Qué:** pedir que el logaritmo exista. **Por qué:** $\ln$ solo se define para argumentos estrictamente positivos.
+
+$$x^2+y^2-1>0\ \Rightarrow\ x^2+y^2>1$$
+
+Es el **exterior** de la circunferencia de centro $(0;0)$ y radio $1$ (sin el borde).
+
+</Paso>
+<Paso>
+
+**Qué:** pedir que la raíz exista y que el denominador no se anule. **Por qué:** la raíz necesita radicando $\ge0$, pero como está dividiendo, el radicando no puede ser $0$: queda estrictamente positivo.
+
+$$9-x^2-y^2>0\ \Rightarrow\ x^2+y^2<9$$
+
+Es el **interior** de la circunferencia de radio $3$ (sin el borde).
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y graficar. **Por qué:** la función existe solo donde valen las dos condiciones a la vez. Las dos circunferencias son concéntricas, así que queda una **corona circular** y las dos circunferencias se dibujan punteadas (no pertenecen).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2023-05/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Corona circular sombreada entre la circunferencia de radio 1 y la de radio 3, ambas punteadas (bordes excluidos), con los puntos (1;0) y (3;0) marcados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$D=\Big\{(x;y)\in\mathbb{R}^2:\ 1<x^2+y^2<9\Big\}$$
+
+**Ojo con:** incluir los bordes. En $x^2+y^2=1$ el $\ln$ da $\ln0$ y en $x^2+y^2=9$ el denominador es $0$: ninguna de las dos circunferencias pertenece.
+
+**Criterio estimado — no oficial** (2,5 p; la consigna pide "gráfica y analíticamente"):
+
+- **Bien:** las dos desigualdades, el conjunto analítico $1<x^2+y^2<9$ y el gráfico de la corona con bordes punteados.
+- **A medias:** conjunto bien pero sin gráfico (o gráfico sin distinguir bordes), o una sola de las dos condiciones.
+- **Mal:** admite $\ge$ en alguna de las dos o confunde interior con exterior.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **evaluar la función en puntos de prueba**.
+
+- $(0;0)$: $\ln(-1)$ no existe. **No está** (dentro del hueco).
+- $(2;0)$: $\dfrac{\ln3}{\sqrt5}$. **Está.**
+- $(0;2)$: $\dfrac{\ln3}{\sqrt5}$. **Está** (por simetría radial, solo importa $r^2=x^2+y^2$).
+- $(1;0)$: $\ln0$. **No está** (borde interior).
+- $(3;0)$: denominador $\sqrt0=0$. **No está** (borde exterior).
+- $(3;1)$: $9-10<0$, la raíz no existe. **No está** (afuera).
+
+Los seis puntos coinciden con la corona.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** coincide. Plantea a) $x^2+y^2-1>0\to x^2+y^2>1$ ("exterior de circunferencia, radio $r=1$") y b) $9-x^2-y^2>0\to x^2+y^2<9$ ("interior de circunferencia, radio $r=3$"), grafica la corona con ambas circunferencias punteadas y escribe $\text{Dom}f(x;y)=\{(x;y)\in\mathbb{R}^2/\,1<x^2+y^2<9\}$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2023-05#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" pagina={1} unidad="U2" tema="Diferencial (error en el volumen del cono)">
+<Enunciado examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" pagina="1">
+
+El radio de la base y altura de un cono circular recto miden 1 y 2 mts respectivamente, con un posible error del 1% en la medición de ambos. Utilizar Cálculo Diferencial para estimar el máximo error en la determinación del Volumen de dicho cono.
+
+Recordar: $Vol=\dfrac{\pi R^2H}{3}$
+
+</Enunciado>
+
+<Pista>
+
+Medís dos cosas (radio y altura), cada una con un error, y el volumen depende de las dos. Si el error es chico, ¿se puede aproximar el cambio total del volumen sumando el aporte de cada medida? ¿Qué significa "máximo" error?
+
+</Pista>
+<Pista>
+
+Es **diferencial total**: $dV=V'_R\,dR+V'_H\,dH$, con $dR$ y $dH$ los errores absolutos (el 1% de cada medida) y los aportes sumados todos en positivo (error máximo). Después, el error porcentual es $\frac{dV}{V}\cdot100$. Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $V'_R=\frac{2\pi RH}{3}$ y $V'_H=\frac{\pi R^2}{3}$ en $R=1$, $H=2$; con $dR=0{,}01\cdot1$ y $dH=0{,}01\cdot2$ (en metros). Al final el error porcentual es $\frac{dV}{V}\cdot100$ con $V=\frac{\pi\cdot1^2\cdot2}{3}$.
+
+</Pista>
+<Paso>
+
+**Qué:** pasar el $1\%$ a errores absolutos. **Por qué:** el diferencial usa $dR$ y $dH$ en las mismas unidades que las medidas (metros), no porcentajes.
+
+$$dR=1\%\cdot1=0{,}01\ \text{m}\qquad dH=1\%\cdot2=0{,}02\ \text{m}$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas parciales del volumen. **Por qué:** cada una dice cuánto cambia $V$ por cada metro de error en esa medida.
+
+$$\frac{\partial V}{\partial R}=\frac{2\pi RH}{3}=\frac{2\pi\cdot1\cdot2}{3}=\frac{4\pi}{3}$$
+
+$$\frac{\partial V}{\partial H}=\frac{\pi R^2}{3}=\frac{\pi\cdot1^2}{3}=\frac{\pi}{3}$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar el diferencial. **Por qué:** el error máximo se obtiene sumando los dos aportes en valor absoluto.
+
+$$dV=\frac{4\pi}{3}\cdot0{,}01+\frac{\pi}{3}\cdot0{,}02$$
+
+$$\frac{4\pi}{3}\cdot0{,}01=\frac{0{,}04\pi}{3}\qquad\frac{\pi}{3}\cdot0{,}02=\frac{0{,}02\pi}{3}$$
+
+$$dV=\frac{0{,}06\pi}{3}=0{,}02\pi\ \text{m}^3\approx0{,}063\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** error porcentual. **Por qué:** el error relativo compara $dV$ con el volumen del cono.
+
+$$V=\frac{\pi\cdot1^2\cdot2}{3}=\frac{2\pi}{3}\ \text{m}^3$$
+
+$$E\%=\frac{dV}{V}\cdot100=\frac{0{,}02\pi}{2\pi/3}\cdot100$$
+
+$$\frac{0{,}02\pi}{2\pi/3}=0{,}03\ \Rightarrow\ E\%=3\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=0{,}02\,\pi\ \text{m}^3\approx0{,}063\ \text{m}^3,\qquad E\%=3\%$$
+
+**Ojo con:** las unidades: $0{,}02\pi$ está en **m³** (no en cm). Y el "máximo" se logra sumando los dos aportes con el mismo signo.
+
+**Criterio estimado — no oficial** (2,5 p; la consigna pide estimar el máximo error del volumen con diferencial):
+
+- **Bien:** $dR$ y $dH$ en metros, derivadas parciales, $dV=0{,}02\pi$ y su error relativo $3\%$.
+- **A medias:** planteo correcto con un error de cuenta o de unidad en el resultado.
+- **Mal:** no usa diferencial (calcula el volumen con los valores perturbados y resta sin plantearlo), o toma el $1\%$ como $dR=1$ y $dH=2$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Diferencial logarítmico.** Como $V$ es un producto de potencias, el error relativo es la suma de los relativos ponderados por el exponente:
+
+$$\frac{dV}{V}=2\,\frac{dR}{R}+\frac{dH}{H}=2\cdot0{,}01+0{,}01=0{,}03$$
+
+Da el mismo $3\%$.
+
+**2) Variación real.** Con $R=1{,}01$ y $H=2{,}02$:
+
+$$\Delta V=\frac{\pi}{3}\left(1{,}01^2\cdot2{,}02-2\right)=\frac{\pi}{3}\cdot0{,}060602\approx0{,}0202\,\pi$$
+
+Es casi igual a $0{,}02\pi$ (la diferencia es de segundo orden).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** coincide en $dR=0{,}01$ m, $dH=0{,}02$ m, $dV=\frac{2}{3}\pi RH\,dR+\frac{\pi}{3}R^2dH=0{,}04\frac\pi3+0{,}02\frac\pi3=0{,}02\pi$, $V=\frac23\pi\ \text{m}^3$ y $E\%=\frac{dV}{V}\cdot100=3\%$.
+
+⚠️ **Errata de unidades:** el escaneo cierra $d\text{Vol}=0{,}02\pi\ \text{m}\equiv2\pi\ \text{cm}$; las unidades correctas son volumen ($\text{m}^3$) y $0{,}02\pi\ \text{m}^3=20\,000\,\pi\ \text{cm}^3$, no $2\pi$. El resultado numérico en m³ y el $3\%$ no cambian. Registrado en `docs/revision/p1-1h9-2023-05-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2023-05#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" pagina="1">
+
+Dada la función: $z=x^3+3\dfrac{x}{y}+4y^2$
+
+a. Determinar el valor de la derivada direccional: $\partial z/\partial\alpha$ en el punto: $P(1;-1)$. En la dirección/sentido (creciente) que forma ángulo $\alpha=\pi/3$ respecto al semieje $x^+$
+
+b. Dar expresión cartesiana del vector Gradiente en dicho punto P, indicando su módulo y dirección/sentido respecto al semieje $x^+$ medido en el sentido antihorario.
+
+</Enunciado>
+
+<Pista>
+
+Te piden cuánto cambia $z$ al moverte desde $P$ en **una dirección dada** y, aparte, el vector que reúne la información de cambio de $z$ en $P$. ¿Qué datos de la función en $P$ necesitás? ¿Cómo entra el ángulo $\alpha$?
+
+</Pista>
+<Pista>
+
+Es **derivada direccional + gradiente**: $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$ y $\nabla z=z'_x\,i+z'_y\,j$. Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=3x^2+\frac3y$ y $z'_y=-\frac{3x}{y^2}+8y$, evaluadas en $P(1;-1)$. Para el ángulo del gradiente, $\tan\theta=\frac{z'_y}{z'_x}$ tiene el denominador en $0$: **mirá hacia dónde apunta** el vector (a lo largo de qué eje, para arriba o para abajo).
+
+</Pista>
+<Paso>
+
+**Qué:** derivar parcialmente. **Por qué:** $x/y$ se deriva como $x\cdot y^{-1}$.
+
+$$z'_x=3x^2+\frac{3}{y}\qquad z'_y=-\frac{3x}{y^2}+8y$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en $P(1;-1)$.
+
+$$z'_x(P)=3\cdot1^2+\frac{3}{-1}=3-3=0$$
+
+$$z'_y(P)=-\frac{3\cdot1}{(-1)^2}+8\cdot(-1)=-3-8=-11$$
+
+</Paso>
+<Paso>
+
+**Qué:** el versor y la derivada direccional (inciso a). **Por qué:** con $\alpha$ medido desde $x^+$, el versor $s^\circ=(\cos\alpha;\sin\alpha)$ ya es unitario.
+
+$$s^\circ=\left(\cos\frac\pi3;\ \sin\frac\pi3\right)=\left(\frac12;\ \frac{\sqrt3}{2}\right)$$
+
+$$\frac{\partial z}{\partial s}\Big|_P=0\cdot\frac12+(-11)\cdot\frac{\sqrt3}{2}=-\frac{11\sqrt3}{2}\approx-9{,}53$$
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, módulo y dirección (inciso b).
+
+$$\nabla z(P)=0\,i-11\,j=-11\,j$$
+
+$$\|\nabla z\|=\sqrt{0^2+(-11)^2}=11$$
+
+**Por qué la dirección:** $z'_x=0$ y $z'_y<0$, así que el vector apunta **hacia abajo** a lo largo del eje $y$ negativo. Medido en sentido antihorario desde $x^+$:
+
+$$\theta=270^\circ=\frac{3\pi}{2}\quad(\text{equivale a }-90^\circ=-\frac\pi2)$$
+
+(con $\arctan\frac{-11}{0}$ la calculadora no sirve: hay que mirar el dibujo). Ese es el sentido de máximo crecimiento y vale $11$; el de mínimo es $90^\circ$ (hacia arriba) y los nulos son $0^\circ$ y $180^\circ$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2023-05/ej3.svg`} alt="Plano xy con ejes graduados de 1 en 1. Desde P(1;−1) sale en rojo el gradiente hacia abajo (dibujado a escala 1/4), en azul la dirección de mínimo hacia arriba, en verde punteado las direcciones nulas horizontales y en violeta la dirección S a 60 grados." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=-\frac{11\sqrt3}{2},\qquad\nabla z(P)=-11\,j,\qquad\|\nabla z\|=11,\qquad\theta=270^\circ\ (=-90^\circ)$$
+
+**Ojo con:** (1) el signo en $z'_y$: $-\frac{3x}{y^2}$ y $8y$ con $y=-1$ restan los dos; (2) $z'_x=0$ no hace nulo al gradiente: queda el término $z'_y$; (3) la consigna pide el ángulo **antihorario**: $270^\circ$ (o $-90^\circ$, equivalente).
+
+**Criterio estimado — no oficial** (2,5 p en total para el ejercicio; la consigna pide valor, gradiente, módulo y ángulo):
+
+- **Bien:** parciales en $P$, $\frac{\partial z}{\partial s}=-\frac{11\sqrt3}{2}$, $\nabla z=-11\,j$, $\|\nabla z\|=11$ y el ángulo $-\frac\pi2$ (o $\frac{3\pi}{2}$).
+- **A medias:** cálculo bien pero sin el ángulo, o con el ángulo mal justificado (usando $\arctan$ con denominador cero).
+- **Mal:** usa un vector sin normalizar o confunde las parciales ($z'_x$ y $z'_y$ intercambiadas).
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes.
+
+**1) Por definición, sobre la recta.** Con $x=1+\frac t2$ e $y=-1+\frac{\sqrt3}{2}t$:
+
+$$g(t)=z\left(1+\tfrac t2;\ -1+\tfrac{\sqrt3}{2}t\right)\ \Rightarrow\ g'(0)=z'_x\cdot\frac12+z'_y\cdot\frac{\sqrt3}{2}=-\frac{11\sqrt3}{2}$$
+
+(el sympy del test deriva $g$ y evalúa en $t=0$ sin usar las parciales armadas a mano).
+
+**2) Dirección nula.** Con $s^\circ=(1;0)$, perpendicular al gradiente, $\frac{\partial z}{\partial s}=0\cdot1=0$: la derivada es $0$ sobre la curva de nivel (horizontal en $P$).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** coincide. Deriva $z'_x=3x^2+\frac3y$ y $z'_y=-3\frac{x}{y^2}+8y$, evalúa $z'_x(P)=0$ y $z'_y(P)=-11$, llega a $\frac{\partial z}{\partial s}\big|_P=-11\frac{\sqrt3}{2}$, $\nabla z=0\,i-11\,j=-11\,j$, $\|\nabla z\|=11$ ("valor máx. de la deriv. direcc. en P") y $\theta_{\text{máx}}=\arctan\left(\frac{-11}{0}\right)=\arctan(-\infty)=-\frac\pi2\ (-90^\circ)$. Dibuja $\theta_{\text{máx}}$, $\theta_{\text{mín}}$ y los dos $\theta_{\text{nulo}}$. Observación: el enunciado pide el ángulo en sentido antihorario; $-90^\circ$ y $270^\circ$ son el mismo sentido, solo cambia la forma de expresarlo.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h9-2023-05#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" pagina="1">
+
+Hallar y categorizar los Extremos Locales y Puntos de ensilladura en caso de haberlos, de la siguiente función:
+
+$$z=\frac{x^2}{2}+xy+\frac{y^3}{3}$$
+
+No es necesario calcular las coordenadas "z"
+
+</Enunciado>
+
+<Pista>
+
+Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un mínimo o una silla, y después **qué es** cada candidato. ¿Qué pasa con la pendiente de la superficie en esos puntos? ¿Cómo se distinguen entre sí?
+
+</Pista>
+<Pista>
+
+Es **extremos relativos con hessiano**: (1) puntos críticos: $z'_x=0$, $z'_y=0$; (2) derivadas segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo y el signo de $z''_{xx}$ dice mínimo ($+$) o máximo ($-$). Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/). Teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=x+y$ y $z'_y=x+y^2$. De la primera, $x=-y$; reemplazando en la segunda queda una ecuación en $y$ que se **factoriza** (no se divide por $y$). Las segundas son $z''_{xx}=1$, $z''_{xy}=1$, $z''_{yy}=2y$.
+
+</Pista>
+<Paso>
+
+**Qué:** derivadas primeras igualadas a cero. **Por qué:** en un extremo o en una silla el plano tangente es horizontal.
+
+$$z'_x=x+y=0\qquad z'_y=x+y^2=0$$
+
+De la primera, $x=-y$. En la segunda:
+
+$$-y+y^2=0\ \Rightarrow\ y\,(y-1)=0$$
+
+$$y=0\ \Rightarrow\ x=0\qquad y=1\ \Rightarrow\ x=-1$$
+
+Puntos críticos: $P_1(0;0)$ y $P_2(-1;1)$.
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** el signo de $H$ distingue silla de extremo.
+
+$$z''_{xx}=1\qquad z''_{xy}=1\qquad z''_{yy}=2y$$
+
+$$H(x;y)=\begin{vmatrix}1&1\\1&2y\end{vmatrix}=1\cdot2y-1\cdot1=2y-1$$
+
+</Paso>
+<Paso>
+
+**Qué:** clasificar cada punto.
+
+- $P_1(0;0)$: $H=2\cdot0-1=-1<0$, **punto de ensilladura**.
+- $P_2(-1;1)$: $H=2\cdot1-1=1>0$, hay extremo; como $z''_{xx}=1>0$, es un **mínimo local**.
+
+(Si se quisiera la altura: $z(-1;1)=\frac12-1+\frac13=-\frac16$; el enunciado no la pide.)
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h9-2023-05/ej4.svg`} alt="Arriba, superficie z=x²/2+xy+y³/3 con los dos puntos críticos; abajo, curvas de nivel en el plano xy con ejes graduados de 1 en 1, el mínimo en (−1;1) y la silla en (0;0)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$P_1(0;0):\ \text{punto de ensilladura}\qquad P_2(-1;1):\ \text{mínimo local}$$
+
+**Ojo con:** dividir por $y$ al resolver $-y+y^2=0$ y perder $y=0$ (y con él el punto $(0;0)$), y concluir mínimo mirando solo $H>0$ sin ver el signo de $z''_{xx}$.
+
+**Criterio estimado — no oficial** (2,5 p; la consigna pide hallar y categorizar):
+
+- **Bien:** los dos puntos críticos, el hessiano $2y-1$ y la clasificación correcta con el signo de $z''_{xx}$ para el mínimo.
+- **A medias:** puntos críticos bien y una clasificación errada o sin justificar con $H$.
+- **Mal:** pierde un punto crítico (por dividir por $y$) sin recuperarlo, o clasifica sin hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Camino independiente: **mirar la función cerca de cada punto**.
+
+- En $(0;0)$ la función vale $0$. Sobre el eje $x$ ($y=0$): $z=\frac{x^2}{2}\ge0$. Sobre la recta $y=-x$ con $x$ chico: $z=\frac{x^2}{2}-x^2-\frac{x^3}{3}=-\frac{x^2}{2}-\frac{x^3}{3}<0$. Toma valores de los dos signos: **silla**.
+- En $(-1;1)$, con $x=-1+h$ e $y=1+k$ el desarrollo da
+$$z+\frac16=\frac{h^2}{2}+hk+k^2+\frac{k^3}{3}\quad\text{y}\quad\frac{h^2}{2}+hk+k^2=\frac12(h+k)^2+\frac12k^2>0$$
+Para $(h;k)$ chicos y no nulos es positivo: **mínimo local**.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide. Obtiene $z'_x=x+y=0\to x=-y$ y $z'_y=x+y^2=0\to y(-1+y)=0$, los puntos $PC_1(0;0)$ y $PC_2(-1;1)$, el hessiano $\begin{vmatrix}1&1\\1&2y\end{vmatrix}=2y-1$ con $H_1(0;0)=-1<0$ ("P. Silla") y $H_2(-1;1)=+1>0$ ("Extremo") y, por el signo de $z''_{xx}>0$, "Mín $(-1;1)$".
+
+</div>
+</Ejercicio>

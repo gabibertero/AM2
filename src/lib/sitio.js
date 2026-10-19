@@ -17,9 +17,9 @@ export const instanciaDeUnidades = (us) => (us?.length && us.every((u) => instan
 
 // Unidades del programa 2025 (U11 Fourier queda fuera). `cae`: qué se vio en parciales prácticos.
 export const UNIDADES = [
-  { u: 'U1', titulo: 'Funciones de varias variables', cae: 'proximamente', slug: 'u01' },
-  { u: 'U2', titulo: 'Derivadas y diferenciales', cae: 'proximamente', slug: 'u02' },
-  { u: 'U3', titulo: 'Máximos y mínimos', cae: 'proximamente', slug: 'u03' },
+  { u: 'U1', titulo: 'Funciones de varias variables', cae: 'practico', slug: 'u01' },
+  { u: 'U2', titulo: 'Derivadas y diferenciales', cae: 'practico', slug: 'u02' },
+  { u: 'U3', titulo: 'Máximos y mínimos', cae: 'practico', slug: 'u03' },
   { u: 'U4', titulo: 'Integrales múltiples', cae: 'practico', slug: 'u04' },
   { u: 'U5', titulo: 'Integrales curvilíneas', cae: 'practico', slug: 'u05' },
   { u: 'U6', titulo: 'Funciones y campos vectoriales', cae: 'tentativo', slug: 'u06' },

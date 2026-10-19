@@ -181,6 +181,7 @@ $$IT=\int_0^{\pi/2}\!\!d\theta\int_0^1 r^2(\cos\theta+\sin\theta)\,dr\int_{1-r^2
 **Qué:** integrar en $z$. **Por qué:** es la integral más interna y da la altura a distancia $r$ del eje. Agrupamos y usamos $\sin^2\theta+\cos^2\theta=1$:
 
 $$\int_{1-r^2\cos^2\theta}^{2+r^2\sin^2\theta}dz=2+r^2\sin^2\theta-1+r^2\cos^2\theta$$
+
 $$=1+r^2(\sin^2\theta+\cos^2\theta)=1+r^2$$
 
 </Paso>
@@ -297,6 +298,7 @@ $$IC_2=\int_{1}^{-1}(2x^3-3x^2-1)\,dx=-\int_{-1}^{1}(2x^3-3x^2-1)\,dx=-\big(0-2-
 **Qué (verificación con Green):** aplicar el teorema. **Por qué:** la curva es cerrada, simple, antihoraria y $P,Q$ son derivables, entonces $\oint P\,dx+Q\,dy=\iint_D\big(\tfrac{\partial Q}{\partial x}-\tfrac{\partial P}{\partial y}\big)dx\,dy$. Acá $\tfrac{\partial Q}{\partial x}=2$ y $\tfrac{\partial P}{\partial y}=-1$, o sea el integrando es $2-(-1)=3$ (constante: es 3 veces el área de $D$):
 
 $$IC=3\int_{-1}^{1}\!dx\int_{x^2-1}^{1-x^2}dy=3\int_{-1}^{1}\big[(1-x^2)-(x^2-1)\big]dx=3\int_{-1}^{1}(2-2x^2)\,dx$$
+
 $$=3\Big[2x-\frac{2x^3}{3}\Big]_{-1}^{1}=3\Big(\frac43+\frac43\Big)=3\cdot\frac83=8$$
 
 </Paso>
@@ -465,6 +467,7 @@ $$y_p=A\sin x+B\cos x+Dx$$
 **Qué:** derivar $y_p$ dos veces. **Por qué:** para poder reemplazar en la ecuación.
 
 $$y_p'=A\cos x-B\sin x+D$$
+
 $$y_p''=-A\sin x-B\cos x$$
 
 </Paso>
