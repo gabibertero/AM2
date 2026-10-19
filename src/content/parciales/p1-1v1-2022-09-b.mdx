@@ -1,0 +1,418 @@
+---
+id: "p1-1v1-2022-09-b"
+titulo: "1° Parcial Práctico — Comisión 1V1 (Grupo B, 15/09/2022)"
+comision: "1V1"
+fecha: "15/09/2022"
+tipo: "práctico"
+tema: "Grupo B"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–5"
+orden: 170
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import Pendiente from '../../components/Pendiente.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II · Comisión 1V1 · 1° Parcial Práctico - 15/09/2022 · Grupo B · Puntaje mínimo para aprobar: 6 (seis)
+
+<Ejercicio id="p1-1v1-2022-09-b#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" pagina={1} unidad="U1" tema="Dominio (logaritmos y raíz)">
+<Enunciado examen="p1-1v1-2022-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función.
+
+$$z=\frac{\ln(x+y)-\log(4-x-y)}{\sqrt{16-x^2-y^2}}$$
+
+</Enunciado>
+
+<Pista>
+
+Mirá qué operaciones tiene la función: dos logaritmos restándose arriba y una raíz abajo. ¿Qué le pide cada una a lo que lleva adentro? ¿Cambia algo que la raíz esté dividiendo?
+
+</Pista>
+<Pista>
+
+El dominio es la **intersección de las condiciones de existencia**: logaritmo con argumento $\gt0$ y raíz del denominador con radicando $\gt0$ (no puede ser 0). Salen dos rectas y una circunferencia: se grafican y se decide qué lado vale. Machete: [dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$x+y\gt0\qquad 4-x-y\gt0\qquad 16-x^2-y^2\gt0$$
+
+</Pista>
+<Paso>
+
+**Qué:** el primer logaritmo. **Por qué:** el $\ln$ existe si su argumento es positivo.
+
+$$x+y\gt0\ \Rightarrow\ y\gt-x$$
+
+Semiplano **por encima** de la recta $y=-x$ (borde excluido).
+
+</Paso>
+<Paso>
+
+**Qué:** el segundo logaritmo (decimal). **Por qué:** mismo criterio: argumento positivo (la base no cambia la condición).
+
+$$4-x-y\gt0\ \Rightarrow\ y\lt4-x$$
+
+Semiplano **por debajo** de $y=4-x$. Juntas, las dos condiciones dejan la **franja** entre las rectas paralelas $y=-x$ e $y=4-x$. La resta de logaritmos no agrega nada más.
+
+</Paso>
+<Paso>
+
+**Qué:** la raíz del denominador. **Por qué:** la raíz pide radicando $\ge0$, pero al estar dividiendo no puede valer 0, entonces $\gt0$.
+
+$$16-x^2-y^2\gt0\ \Rightarrow\ x^2+y^2\lt4^2$$
+
+**Interior** de la circunferencia de centro el origen y radio 4 (borde excluido). Ojo: acá es *menor*, a diferencia de un radicando con $x^2+y^2-16$.
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y dibujar. **Por qué:** el dominio es lo que cumple las tres a la vez. La circunferencia corta a $y=4-x$ en $(4,0)$ y $(0,4)$, y a $y=-x$ en $(2\sqrt2,-2\sqrt2)$ y $(-2\sqrt2,2\sqrt2)$ (porque $x^2+x^2=16$ da $x=\pm2\sqrt2$). Queda la parte de la franja que está **dentro** del círculo: un solo trozo, limitado por dos segmentos de recta y dos arcos.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1v1-2022-09-b/ej1.svg`} alt="Plano xy con ejes graduados de a 1 de −5 a 5. Dos rectas paralelas discontinuas, y=−x e y=4−x, y una circunferencia discontinua de radio 4 centrada en el origen. Se sombrea la parte de la franja entre las rectas que queda dentro de la circunferencia, en un solo trozo. Se rotulan los cortes (4,0), (0,4), (2√2,−2√2) y (−2√2,2√2). Todos los bordes están excluidos." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\mathrm{Dom}\,z=\big\{(x,y)\in\mathbb R^2\ /\ -x\lt y\lt4-x\ \wedge\ x^2+y^2\lt16\big\}$$
+
+**Ojo con:** que ningún borde se incluye (todas las desigualdades son estrictas), y que la raíz del denominador pide $x^2+y^2\lt16$ (interior), no el exterior.
+
+**Criterio estimado — no oficial** (consigna: *gráfica y analíticamente*):
+
+- **Bien:** las tres condiciones, gráfico con rectas y circunferencia discontinuas, el trozo de la franja dentro del círculo sombreado y el dominio escrito.
+- **A medias:** analítico correcto sin gráfico, o gráfico con la franja sin recortar por el círculo.
+- **Mal:** pedir $\ge0$ en la raíz del denominador, invertir el sentido de la desigualdad de la circunferencia o ignorar alguno de los logaritmos.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Puntos de prueba con la fórmula original:
+
+- $(-2,3)$: $x+y=1\gt0$, $4-1=3\gt0$, $16-4-9=3\gt0$: **en el dominio**.
+- $(2,-1)$: $x+y=1\gt0$, $4-1=3\gt0$, $16-4-1=11\gt0$: **en el dominio**.
+- $(0,0)$: $\ln0$ no existe, **fuera**.
+- $(3,3)$: $x+y=6$ y $4-6\lt0$: el segundo logaritmo no existe, **fuera**.
+- $(-3;3{,}5)$: está en la franja pero $16-9-12{,}25\lt0$: la raíz no existe, **fuera**.
+- $(4,0)$: $4-4-0=0$, el $\log0$ no existe, **fuera** (por eso el borde no se incluye).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1v1-2022-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** coincide: plantea a) $x+y\gt0$ ("por encima de la recta"), b) $4-x-y\gt0$ ("por debajo de la recta"), c) $16-x^2-y^2\gt0\Rightarrow x^2+y^2\lt16$ ("interior a circunf. $r=4$"), grafica la franja dentro del círculo con bordes discontinuos y escribe $\mathrm{Dom}\,f=\{(x,y)\in\mathbb R^2/-x\lt y\lt4-x\wedge x^2+y^2\lt16\}$. Sin discrepancias.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1v1-2022-09-b#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" pagina={1} unidad="U2" tema="Diferencial y error (cono truncado)">
+<Enunciado examen="p1-1v1-2022-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" pagina="1">
+
+Dado un cono truncado recto con las siguientes medidas: radio de la base R= 2 mts, radio superior r= 1 mts y altura H= 3 mts. Siendo que el error de medición tanto de los radios como de la altura es de 1 cm, determinar:
+
+a) Máximo error aproximado en el cálculo de su volumen
+
+b) Error % (dV/V)
+
+$$V=\frac{\pi H(R^2+Rr+r^2)}{3}$$
+
+</Enunciado>
+
+<Pista>
+
+Te piden cuánto puede equivocarse el volumen si cada medida tiene un error de 1 cm. Son tres medidas que influyen a la vez. ¿Cómo se junta el aporte de cada una? ¿Qué significa "máximo" y "aproximado"? Cuidado con las unidades: las medidas están en metros.
+
+</Pista>
+<Pista>
+
+Método: **diferencial total** $dV=V'_H\,dH+V'_R\,dR+V'_r\,dr$ con $dH=dR=dr=0{,}01$ m (el error máximo se toma sumando los aportes, todos con signo positivo) y $E\%=\dfrac{dV}{V}\cdot100$. Machete: [diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$dV=\frac\pi3(R^2+Rr+r^2)\,dH+\frac\pi3H(2R+r)\,dR+\frac\pi3H(R+2r)\,dr$$
+
+con $R=2$, $r=1$, $H=3$ y los tres incrementos iguales a $0{,}01$.
+
+</Pista>
+<Paso>
+
+**Qué:** el volumen de partida. **Por qué:** es contra lo que se compara el error.
+
+$$V=\frac{\pi\cdot3\,(4+2+1)}3=7\pi\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** las tres derivadas parciales. **Por qué:** son los coeficientes del diferencial; cada una dice cuánto pesa el error de su medida.
+
+$$V'_H=\frac\pi3(R^2+Rr+r^2)=\frac\pi3\cdot7$$
+
+$$V'_R=\frac\pi3H(2R+r)=\frac\pi3\cdot3\cdot5=\frac\pi3\cdot15$$
+
+$$V'_r=\frac\pi3H(R+2r)=\frac\pi3\cdot3\cdot4=\frac\pi3\cdot12$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar $dV$ con $dH=dR=dr=0{,}01$ m. **Por qué:** el 1 cm es $0{,}01$ m; como piden el error **máximo**, los tres aportes se suman.
+
+$$dV=\frac\pi3\,(7+15+12)\cdot0{,}01$$
+
+$$7+15+12=34$$
+
+$$dV=\frac{34\pi}{3}\cdot0{,}01=\frac{17\pi}{150}\ \text{m}^3\approx0{,}356\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** el error porcentual. **Por qué:** compara la variación con el volumen original.
+
+$$E\%=\frac{17\pi/150}{7\pi}\cdot100=\frac{34}{21}\%\approx1{,}62\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=\frac{17\pi}{150}\ \text{m}^3\approx0{,}356\ \text{m}^3,\qquad E\%=\frac{34}{21}\%\approx1{,}62\%$$
+
+**Ojo con:** pasar el centímetro a metros ($0{,}01$ y no $1$), usar los tres incrementos (los dos radios **y** la altura) y no olvidar el $\frac\pi3$ al sumar los tres términos.
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** $V=7\pi$, las tres parciales, $dV=\frac{17\pi}{150}$ y $E\%\approx1{,}62\%$.
+- **A medias:** planteo correcto del diferencial con un error de cuenta al final, o sin pasar a metros.
+- **Mal:** no usar diferencial, o ignorar alguno de los tres incrementos.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Contra el incremento exacto, con $R=2{,}01$, $r=1{,}01$ y $H=3{,}01$:
+
+$$V_{\text{nuevo}}=\frac{\pi\cdot3{,}01\,(2{,}01^2+2{,}01\cdot1{,}01+1{,}01^2)}3$$
+
+Entonces $\Delta V\approx0{,}3579\ \text{m}^3$ y $\Delta V/V\approx1{,}63\%$. El diferencial da $0{,}3560\ \text{m}^3$ y $1{,}619\%$: coinciden (la diferencia son los términos de orden superior).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1v1-2022-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita atribuida al profesor):** coincide en $V=7\pi\ \text{m}^3$, en el diferencial $dV=\frac\pi3(R^2+rR+r^2)dh+\frac\pi3h(2R+r)dR+\frac\pi3h(R+2r)dr$ y en los tres términos $\frac\pi3\cdot7\cdot0{,}01$, $\frac\pi3\cdot15\cdot0{,}01$ y $\frac\pi3\cdot12\cdot0{,}01$.
+
+⚠️ **Discrepancia aritmética:** el escaneo suma $7+15+12=24$ y llega a $d\text{Vol}=0{,}08\,\pi\ \text{m}^3$ y $E\%=\frac87\%\approx1{,}14\%$. La suma correcta es $7+15+12=34$: el recálculo da $dV=\frac{17\pi}{150}\approx0{,}1133\,\pi\ \text{m}^3$ y $E\%=\frac{34}{21}\%\approx1{,}62\%$ (el incremento exacto da $1{,}63\%$, cerca de $1{,}62\%$ y lejos de $1{,}14\%$). Pendiente de confirmar con la cátedra. Registrado en `docs/revision/p1-1v1-2022-09-b-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1v1-2022-09-b#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" pagina={1} unidad="U2" tema="Direccional y gradiente en 3D">
+<Enunciado examen="p1-1v1-2022-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" pagina="1">
+
+Dada la función: $u=2x^2+y^2-3z^2$
+
+a. Determinar el valor de la derivada direccional: $\partial u/\partial S$ en el punto M (7;2;1)
+En la dirección y sentido del vector: $\vec v=6\vec\imath+3\vec\jmath+2\vec k$
+
+b. Dar expresión cartesiana del vector Gradiente en dicho punto M, indicando su módulo y dirección/sentido a través de sus cosenos directores (no es necesario determinar sus ángulos directores ni graficar)
+
+</Enunciado>
+
+<Pista>
+
+La función depende de tres variables y la dirección viene dada por un vector. ¿Qué hay que hacerle a ese vector para usarlo como dirección? ¿Qué cosas del gradiente te piden: expresión, módulo y qué más?
+
+</Pista>
+<Pista>
+
+Método: la derivada direccional es $\dfrac{\partial u}{\partial s}=u'_x\cos\alpha+u'_y\cos\beta+u'_z\cos\gamma$, con $(\cos\alpha,\cos\beta,\cos\gamma)$ los **cosenos directores** del vector $\vec v$ (se obtienen dividiendo $\vec v$ por su módulo); el gradiente $\nabla u=u'_x\vec i+u'_y\vec j+u'_z\vec k$ tiene sus propios cosenos directores. Machete: [derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $u'_x=4x$, $u'_y=2y$, $u'_z=-6z$, y $\|\vec v\|=\sqrt{36+9+4}$. Los cosenos directores de $\vec v$ son sus componentes divididas por ese módulo.
+
+</Pista>
+<Paso>
+
+**Qué:** las derivadas parciales en $M(7,2,1)$. **Por qué:** son las componentes del gradiente.
+
+$$u'_x=4x\ \Rightarrow\ u'_x(M)=28$$
+
+$$u'_y=2y\ \Rightarrow\ u'_y(M)=4$$
+
+$$u'_z=-6z\ \Rightarrow\ u'_z(M)=-6$$
+
+</Paso>
+<Paso>
+
+**Qué:** los cosenos directores de $\vec v$. **Por qué:** la derivada direccional exige un vector de módulo 1.
+
+$$\|\vec v\|=\sqrt{36+9+4}=7$$
+
+$$\cos\alpha=\frac67,\qquad\cos\beta=\frac37,\qquad\cos\gamma=\frac27$$
+
+</Paso>
+<Paso>
+
+**Qué:** la derivada direccional. **Por qué:** es el producto escalar del gradiente con el versor.
+
+$$\frac{\partial u}{\partial s}\Big|_M=28\cdot\frac67+4\cdot\frac37+(-6)\cdot\frac27$$
+
+$$\frac{\partial u}{\partial s}\Big|_M=24+\frac{12}7-\frac{12}7=24$$
+
+</Paso>
+<Paso>
+
+**Qué:** el gradiente, su módulo y sus cosenos directores. **Por qué:** el módulo es la mayor pendiente y los cosenos dan la dirección y el sentido (el signo del coseno es el sentido en cada eje).
+
+$$\nabla u(M)=28\,\vec i+4\,\vec j-6\,\vec k$$
+
+$$\|\nabla u\|=\sqrt{784+16+36}=\sqrt{836}\approx28{,}9$$
+
+$$\cos\alpha=\frac{28}{\sqrt{836}}\approx0{,}968,\qquad\cos\beta=\frac4{\sqrt{836}}\approx0{,}138,\qquad\cos\gamma=\frac{-6}{\sqrt{836}}\approx-0{,}208$$
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial u}{\partial s}\Big|_M=24,\qquad\nabla u(M)=28\,\vec i+4\,\vec j-6\,\vec k,\qquad\|\nabla u\|=\sqrt{836}\approx28{,}9$$
+
+$$\cos\alpha=\frac{28}{\sqrt{836}},\quad\cos\beta=\frac{4}{\sqrt{836}},\quad\cos\gamma=\frac{-6}{\sqrt{836}}$$
+
+**Ojo con:** el signo de $-6$ (el coseno en $z$ es negativo: el gradiente apunta hacia abajo en $z$), y no usar $\vec v$ sin dividir por su módulo 7 (daría $7\cdot24=168$).
+
+**Criterio estimado — no oficial** (la consigna aclara que no hace falta graficar ni dar ángulos):
+
+- **Bien:** versor $(6,3,2)/7$, parciales $28,4,-6$, derivada $24$, gradiente, $\sqrt{836}$ y los tres cosenos directores.
+- **A medias:** todo bien pero sin los cosenos directores (o sin el módulo), o un error de cuenta en alguno.
+- **Mal:** no normalizar $\vec v$, o evaluar las parciales en otro punto.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+1. **Suma de cuadrados de los cosenos:** $\dfrac{28^2+4^2+6^2}{836}=\dfrac{836}{836}=1$: son los cosenos de un vector unitario.
+2. **Cociente incremental numérico** con paso $10^{-7}$ en la dirección $\vec v/7$: $\dfrac{u(M+h\,\hat v)-u(M)}h\approx24{,}0000$.
+3. **Consistencia:** $24\le\|\nabla u\|=28{,}9$, como debe pasar con cualquier derivada direccional.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1v1-2022-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita atribuida al profesor):** coincide: cosenos de $\vec v$ ($\frac67,\frac37,\frac27$), $\frac{\partial u}{\partial s}\big|_M=4\cdot7\cdot\frac67+2\cdot2\cdot\frac37-6\cdot1\cdot\frac27=24$, $\nabla u=28\,\vec i+4\,\vec j-6\,\vec k$, $\|\nabla u\|=\sqrt{836}\ (\approx29)$ y los cosenos directores $\frac{28}{\sqrt{836}}$, $\frac4{\sqrt{836}}$, $\frac{-6}{\sqrt{836}}$. Sin discrepancias.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1v1-2022-09-b#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" pagina={1} unidad="U3" tema="Lagrange (distancia al plano)">
+<Enunciado examen="p1-1v1-2022-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" pagina="1">
+
+Mediante el método de Lagrange, determinar la mínima distancia al origen de coordenadas del plano: $x+3y+5z=7$
+
+</Enunciado>
+
+<Pista>
+
+Te piden la distancia más corta del origen a un plano, o sea el punto del plano más cercano al origen. ¿Qué cantidad querés minimizar y qué condición tienen que cumplir los puntos?
+
+</Pista>
+<Pista>
+
+Método: **extremos ligados con Lagrange**. Función principal: la distancia al origen (conviene su cuadrado $x^2+y^2+z^2$, que tiene el mismo mínimo y se deriva más fácil); condición: $x+3y+5z-7=0$. Se arma $F=f-\lambda g$ y se anulan las **cuatro** derivadas. Machete: [extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/). Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$F(x,y,z,\lambda)=x^2+y^2+z^2-\lambda\,(x+3y+5z-7)$$
+
+y las ecuaciones $F'_x=F'_y=F'_z=F'_\lambda=0$.
+
+</Pista>
+<Paso>
+
+**Qué:** armar $F$ y derivar. **Por qué:** en el mínimo los gradientes de $f$ y de la condición son paralelos; eso es lo que expresan $F'_x=F'_y=F'_z=0$.
+
+$$F'_x=2x-\lambda=0,\qquad F'_y=2y-3\lambda=0,\qquad F'_z=2z-5\lambda=0$$
+
+$$F'_\lambda=-(x+3y+5z-7)=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** despejar $x$, $y$, $z$ en función de $\lambda$. **Por qué:** así se reduce el sistema a una sola incógnita.
+
+$$x=\lambda/2,\qquad y=\frac{3\lambda}2,\qquad z=\frac{5\lambda}2$$
+
+Es lo mismo que $y=3x$ y $z=5x$.
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición. **Por qué:** es la ecuación que falta.
+
+$$x+3\cdot3x+5\cdot5x=7$$
+
+$$x+9x+25x=7$$
+
+$$35x=7\ \Rightarrow\ x=\frac15$$
+
+$$x=\frac15,\quad y=\frac35,\quad z=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** la distancia. **Por qué:** es la distancia del punto hallado al origen. Es un **mínimo** porque la distancia a un plano no tiene máximo (crece sin límite al alejarse) y hay un único punto crítico.
+
+$$d=\sqrt{\Big(\frac15\Big)^2+\Big(\frac35\Big)^2+1^2}=\sqrt{\frac1{25}+\frac9{25}+\frac{25}{25}}=\sqrt{\frac{35}{25}}$$
+
+$$d=\frac{\sqrt{35}}5\approx1{,}18$$
+
+</Paso>
+<Solucion>
+
+$$\text{Punto más cercano: }\Big(\frac15,\frac35,1\Big),\qquad d=\frac{\sqrt{35}}5\approx1{,}18$$
+
+**Ojo con:** que la respuesta es la **distancia** (la raíz), no el punto, y que si minimizás $x^2+y^2+z^2$ tenés que sacar la raíz al final.
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** función principal y condición, las cuatro derivadas, punto $\left(\frac15,\frac35,1\right)$ y $d=\frac{\sqrt{35}}5$.
+- **A medias:** punto correcto pero sin calcular la distancia, o distancia sin justificar que es mínimo.
+- **Mal:** no usar Lagrange (la consigna lo exige) o no usar la condición del plano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Fórmula de distancia de un punto a un plano (camino independiente, sin Lagrange):
+
+$$d=\frac{|1\cdot0+3\cdot0+5\cdot0-7|}{\sqrt{1^2+3^2+5^2}}=\frac7{\sqrt{35}}=\frac{\sqrt{35}}5$$
+
+Coincide. Además el punto $\left(\frac15,\frac35,1\right)$ cumple el plano ($\frac15+\frac95+5=7$) y es múltiplo de la normal $(1,3,5)$, como corresponde al pie de la perpendicular desde el origen.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1v1-2022-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1V1 Sep-22.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide en el resultado. Usa $F=\sqrt{x^2+y^2+z^2}-\lambda(x+3y+5z-7)$ (la distancia directa, no su cuadrado), obtiene $\lambda=2x=\frac23y=\frac25z$, luego $y=3x$, $z=5x$, $x=\frac15$, el punto $\left(\frac15,\frac35,1\right)$ y $d=\sqrt{\frac{35}{25}}=\frac{\sqrt{35}}5\ (\approx1{,}2)$. Sin discrepancias.
+
+</div>
+</Ejercicio>

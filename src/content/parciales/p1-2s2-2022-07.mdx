@@ -1,0 +1,637 @@
+---
+id: "p1-2s2-2022-07"
+titulo: "1° Parcial Práctico — Comisión 2S2 (01/07/2022)"
+comision: "2S2"
+fecha: "01/07/2022"
+tipo: "práctico"
+tema: "Jul-22"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–8"
+orden: 171
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import Pendiente from '../../components/Pendiente.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II · Comisión 2S2 · 1° Parcial Práctico - 01/07/2022 · Puntaje mínimo para aprobar: 6 (seis) · Duración de la evaluación: 2:30 horas · No se puede utilizar ningún artefacto electrónico durante el parcial.
+
+<Ejercicio id="p1-2s2-2022-07#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina={1} unidad="U1" tema="Dominio (logaritmo y raíz)">
+<Enunciado examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$z=\frac{\ln(x^2+y^2-1)}{\sqrt{9-x^2-y^2}}$$
+
+</Enunciado>
+
+<Pista>
+
+Fijate qué tiene la función: un logaritmo arriba y una raíz abajo. ¿Qué le pide cada uno a lo que lleva adentro? ¿Qué pasa con la raíz por estar en el denominador?
+
+</Pista>
+<Pista>
+
+El dominio es la **intersección de las condiciones de existencia**: logaritmo con argumento $\gt0$ y raíz del denominador con radicando $\gt0$ (no puede ser 0). Salen dos circunferencias concéntricas: se grafican y se decide qué zona vale. Machete: [dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$x^2+y^2-1\gt0\qquad 9-x^2-y^2\gt0$$
+
+</Pista>
+<Paso>
+
+**Qué:** el logaritmo. **Por qué:** el $\ln$ existe si su argumento es positivo.
+
+$$x^2+y^2-1\gt0\ \Rightarrow\ x^2+y^2\gt1$$
+
+**Exterior** de la circunferencia de centro el origen y radio 1 (borde excluido).
+
+</Paso>
+<Paso>
+
+**Qué:** la raíz del denominador. **Por qué:** la raíz pide radicando $\ge0$, pero al estar dividiendo no puede valer 0, entonces $\gt0$.
+
+$$9-x^2-y^2\gt0\ \Rightarrow\ x^2+y^2\lt3^2$$
+
+**Interior** de la circunferencia de radio 3 (borde excluido).
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y dibujar. **Por qué:** el dominio es lo que cumple las dos a la vez: lo que queda **entre** las dos circunferencias, una **corona circular** abierta (sin ninguno de los dos bordes).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2022-07/ej1.svg`} alt="Plano xy con ejes graduados de a 1 de −4 a 4. Dos circunferencias discontinuas concéntricas en el origen, de radios 1 y 3, con los cortes con los ejes rotulados (1,0), (0,1), (3,0) y (0,3). Se sombrea la corona entre ambas. Los dos bordes están excluidos." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\mathrm{Dom}\,z=\big\{(x,y)\in\mathbb R^2\ /\ 1\lt x^2+y^2\lt9\big\}$$
+
+**Ojo con:** que ningún borde se incluye ($x^2+y^2=1$ anula el argumento del $\ln$ y $x^2+y^2=9$ anula el denominador), y no confundir el signo: la raíz tiene $-x^2-y^2$, así que da el **interior** de la circunferencia de radio 3.
+
+**Criterio estimado — no oficial** (consigna: *gráfica y analíticamente*):
+
+- **Bien:** las dos condiciones, gráfico con las dos circunferencias discontinuas y la corona sombreada, y el dominio escrito.
+- **A medias:** analítico correcto sin gráfico, o gráfico sin distinguir qué zona se sombrea.
+- **Mal:** pedir $\ge0$ en la raíz del denominador o invertir alguna de las dos desigualdades.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Puntos de prueba con la fórmula original:
+
+- $(2,0)$: $4-1=3\gt0$ y $9-4=5\gt0$: **en el dominio**.
+- $(0,-2)$: $4-1=3\gt0$ y $9-4=5\gt0$: **en el dominio**.
+- $(0,0)$: $\ln(-1)$ no existe, **fuera** (adentro del círculo de radio 1).
+- $(4,0)$: $9-16\lt0$, la raíz no existe, **fuera**.
+- $(3,0)$: $9-9=0$, la raíz vale 0 y está dividiendo, **fuera** (por eso el borde no se incluye).
+- $(1,0)$: $\ln0$ no existe, **fuera**.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita atribuida al profesor):** plantea a) $x^2+y^2-1\gt0\to x^2+y^2\gt1$ ("exterior a círculo $r=1$") y b) $9-x^2+y^2\gt0\to\frac{x^2}9-\frac{y^2}9\lt1$ ("interior a hipérbola horiz."), grafica la zona fuera del círculo y entre las ramas de la hipérbola, aclara "no se incluyen fronteras" y escribe $\mathrm{Dom}\,z=\{(x,y)\in\mathbb R^2/x^2+y^2\gt1\wedge\frac{x^2}9-\frac{y^2}9\lt1\}$.
+
+⚠️ **Discrepancia:** la resolución oficial usa $9-x^2+y^2$ (con $+y^2$) y obtiene una hipérbola, pero el enunciado impreso dice $\sqrt{9-x^2-y^2}$ (corresponde la circunferencia de radio 3 y una corona). El recálculo está hecho con el enunciado **literal**. Pendiente de confirmar con la cátedra cuál de los dos tiene la errata. Registrado en `docs/revision/p1-2s2-2022-07-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2022-07#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina={1} unidad="U2" tema="Diferencial: error en V y S del cono">
+<Enunciado examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina="1">
+
+El radio de la base y altura de un cono circular recto miden 1 y 2 mts respectivamente, con un posible error en la medición del 5 % en la medición de ambos.
+Utilizar Cálculo Diferencial para estimar el máximo error en la determinación del Volumen y Superficie total de dicho cono.
+
+Recordar: $Vol=\frac{\pi R^2H}{3}$ $\qquad$ $Sup=\pi R^2+\pi RG$ $\qquad$ (G: generatriz)
+
+(Anotado a mano sobre el enunciado impreso: $r$ sobre el 1, $h$ sobre el 2, y $G=\sqrt{r^2+h^2}$.)
+
+</Enunciado>
+
+<Pista>
+
+Hay dos cosas para estimar (volumen y superficie) y las dos dependen de las mismas medidas: radio y altura. ¿Cuánto vale el error de cada medida? ¿Y cómo juntás el aporte de las dos? Fijate que la superficie usa la generatriz, que también depende de $r$ y $h$.
+
+</Pista>
+<Pista>
+
+Método: **diferencial total** con $dr=5\%\cdot r$ y $dh=5\%\cdot h$ (el error máximo suma los aportes con signo positivo), una vez para $V=\frac\pi3r^2h$ y otra para $S=\pi r^2+\pi r\sqrt{r^2+h^2}$ (derivada de la raíz con regla de la cadena). Machete: [diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $dr=0{,}05$ m y $dh=0{,}1$ m.
+
+$$dV=\frac{2\pi}3rh\,dr+\frac\pi3r^2\,dh$$
+
+$$dS=\Big(2\pi r+\pi G+\frac{\pi r^2}{G}\Big)dr+\frac{\pi rh}{G}\,dh,\qquad G=\sqrt{r^2+h^2}$$
+
+</Pista>
+<Paso>
+
+**Qué:** los datos y los incrementos. **Por qué:** el 5% de cada medida es el error de esa medida.
+
+$$dr=0{,}05\cdot1=0{,}05\ \text{m},\qquad dh=0{,}05\cdot2=0{,}1\ \text{m}$$
+
+$$V=\frac{\pi\cdot1^2\cdot2}3=\frac{2\pi}3\ \text{m}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** el diferencial del volumen. **Por qué:** es el error máximo aproximado de $V$.
+
+$$V'_r=\frac{2\pi}3rh=\frac{4\pi}3,\qquad V'_h=\frac\pi3r^2=\frac\pi3$$
+
+$$dV=\frac{4\pi}3\cdot0{,}05+\frac\pi3\cdot0{,}1=\frac\pi{15}+\frac\pi{30}$$
+
+$$dV=\frac\pi{10}\ \text{m}^3\approx0{,}314\ \text{m}^3$$
+
+$$E\%_V=\frac{dV}V\cdot100=\frac{\pi/10}{2\pi/3}\cdot100=15\%$$
+
+</Paso>
+<Paso>
+
+**Qué:** la superficie total y la generatriz. **Por qué:** hace falta el valor de $S$ en el punto.
+
+$$G=\sqrt{r^2+h^2}=\sqrt{1+4}=\sqrt5$$
+
+$$S=\pi r^2+\pi rG=\pi+\pi\sqrt5=\pi\,(1+\sqrt5)\ \text{m}^2\approx10{,}17\ \text{m}^2$$
+
+</Paso>
+<Paso>
+
+**Qué:** las derivadas parciales de $S$. **Por qué:** $G$ depende de $r$ y de $h$, así que al derivar $\pi rG$ hay que usar la regla del producto y la de la cadena ($G'_r=r/G$, $G'_h=h/G$).
+
+$$S'_r=2\pi r+\pi G+\pi r\cdot\frac rG=2\pi+\pi\sqrt5+\frac{\pi}{\sqrt5}$$
+
+$$S'_h=\pi r\cdot\frac hG=\frac{2\pi}{\sqrt5}$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar $dS$ y simplificar. **Por qué:** se suman los dos aportes y se usa $\frac1{\sqrt5}=\frac{\sqrt5}5$.
+
+$$dS=\Big(2\pi+\pi\sqrt5+\frac{\pi\sqrt5}5\Big)\cdot0{,}05+\frac{2\pi\sqrt5}5\cdot0{,}1$$
+
+$$dS=0{,}1\pi+0{,}05\pi\sqrt5+0{,}01\pi\sqrt5+0{,}04\pi\sqrt5$$
+
+$$dS=0{,}1\pi\,(1+\sqrt5)=\frac{\pi\,(1+\sqrt5)}{10}\ \text{m}^2\approx1{,}02\ \text{m}^2$$
+
+$$E\%_S=\frac{dS}S\cdot100=\frac{\pi(1+\sqrt5)/10}{\pi(1+\sqrt5)}\cdot100=10\%$$
+
+</Paso>
+<Solucion>
+
+$$dV=\frac\pi{10}\ \text{m}^3\approx0{,}314\ \text{m}^3\ (E\%=15\%),\qquad dS=\frac{\pi(1+\sqrt5)}{10}\ \text{m}^2\approx1{,}02\ \text{m}^2\ (E\%=10\%)$$
+
+**Ojo con:** que $S=\pi+\pi\sqrt5$ (son **dos** términos, no $\sqrt5\,\pi$), y no olvidar que $G$ también cambia cuando cambian $r$ y $h$ (el término $\pi r^2/G$ en $S'_r$ y todo $S'_h$ salen de ahí).
+
+**Criterio estimado — no oficial** (la consigna pide estimar el error en volumen **y** en superficie):
+
+- **Bien:** $dr$ y $dh$ con el 5%, $dV=\frac\pi{10}$, $S=\pi(1+\sqrt5)$ y $dS=\frac{\pi(1+\sqrt5)}{10}$ (con los errores relativos si se piden).
+- **A medias:** el volumen completo y el planteo de $dS$ correcto sin llegar al número, o el diferencial de $S$ sin la dependencia de $G$.
+- **Mal:** no usar diferencial, o tomar un único incremento para las dos medidas.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Dos caminos independientes:
+
+1. **Cono semejante:** si $r$ y $h$ crecen ambos un 5%, el cono nuevo es semejante con razón $1{,}05$. El volumen escala como $1{,}05^3$ y la superficie como $1{,}05^2$:
+
+$$\frac{\Delta V}V=1{,}05^3-1\approx15{,}76\%,\qquad\frac{\Delta S}S=1{,}05^2-1=10{,}25\%$$
+
+El diferencial da $15\%$ y $10\%$ (el primer orden del desarrollo: $3\cdot5\%$ y $2\cdot5\%$): coinciden en el orden de magnitud y la diferencia son los términos de orden superior.
+
+2. **Valor exacto de $S$ nueva** con $r=1{,}05$ y $h=2{,}1$: $\Delta S\approx1{,}042\ \text{m}^2$, cerca del $1{,}02$ del diferencial.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" paginas="3–4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (pp. 3–4, resolución manuscrita atribuida al profesor):** coincide en $dr=0{,}05$ m, $dh=0{,}10$ m, $V=\frac23\pi\ \text{m}^3$, $dV=\frac{2}{3}\pi\cdot1\cdot2\cdot0{,}05+\frac\pi3\cdot0{,}1=\frac\pi{10}\ \text{m}^3$ y $E\%(\mathrm{Vol})=15\%$, y en el planteo de $dS=\big(2\pi r+\pi\sqrt{r^2+h^2}+\frac{\pi r^2}{\sqrt{r^2+h^2}}\big)dr+\frac{\pi rh}{\sqrt{r^2+h^2}}dh$.
+
+⚠️ **Discrepancias y parte inconclusa:** (1) el escaneo escribe $\text{Sup}=\sqrt5\,\pi\ \text{m}^2$ después de $\pi\cdot1+\pi\cdot1\sqrt{1+4}$; el valor correcto es $\pi+\pi\sqrt5=\pi(1+\sqrt5)$. (2) Al juntar los términos de $dS$ el último renglón mantiene $\frac{2\pi\sqrt5}{5}$ con el factor $\frac5{100}$, pero ese aporte venía multiplicado por $0{,}1=\frac{10}{100}$ (debería ser $\frac{4\pi\sqrt5}5\cdot\frac5{100}$). (3) El cálculo de $d\text{Sup}$ y de $E\%(\text{Sup})$ queda con "…" sin terminar. El recálculo da $dS=\frac{\pi(1+\sqrt5)}{10}\approx1{,}02\ \text{m}^2$ y $E\%=10\%$. Pendiente de confirmar con la cátedra. Registrado en `docs/revision/p1-2s2-2022-07-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2022-07#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina={1} unidad="U2" tema="Derivadas de una función implícita">
+<Enunciado examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina="1">
+
+Dada la función: $x^2+y^2+2/z^2=\ln(xyz)$
+
+Que define implícitamente a: $z=f(x;y)$
+
+Determinar el valor de ambas derivadas parciales, en el punto: M(1;1;1)
+
+</Enunciado>
+
+<Pista>
+
+No te piden despejar $z$ (no se puede). ¿Cómo conseguís $\partial z/\partial x$ si $z$ está "escondida" dentro de la ecuación? ¿Qué pasa si pasás todo a un solo miembro?
+
+</Pista>
+<Pista>
+
+Método: **derivada implícita**. Se pasa todo a un lado, $F(x,y,z)=x^2+y^2+\dfrac2{z^2}-\ln(xyz)=0$, y se usa $\dfrac{\partial z}{\partial x}=-\dfrac{F'_x}{F'_z}$, $\dfrac{\partial z}{\partial y}=-\dfrac{F'_y}{F'_z}$, evaluando en $M$. Machete: [derivada implícita](../../machetes/derivada-implicita/). Teoría: Monllor, 02-DERIVADAS Y DIFERENCIALES 2015.pdf, pp. 22–30.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $F'_x=2x-\dfrac1x$, $F'_y=2y-\dfrac1y$ y $F'_z=-\dfrac4{z^3}-\dfrac1z$. Falta evaluar en $(1,1,1)$ y armar los dos cocientes.
+
+</Pista>
+<Paso>
+
+**Qué:** pasar todo a un miembro y mirar el punto. **Por qué:** la fórmula del cociente pide $F(x,y,z)=0$.
+
+$$F(x,y,z)=x^2+y^2+\frac2{z^2}-\ln(xyz)=0$$
+
+Ojo: en $M(1,1,1)$ el miembro izquierdo vale $1+1+2=4$ y $\ln1=0$, es decir **$M$ no cumple la ecuación** (hay una errata en el enunciado, que el profe tampoco menciona). Las derivadas parciales de $F$ igual se pueden evaluar en $M$ y es lo que se pide, así que se sigue con el enunciado tal cual; se deja anotado en la resolución oficial.
+
+</Paso>
+<Paso>
+
+**Qué:** las derivadas parciales de $F$. **Por qué:** son los datos de los cocientes. Para $\ln(xyz)$ conviene usar $\ln x+\ln y+\ln z$.
+
+$$F'_x=2x-\frac1x,\qquad F'_y=2y-\frac1y,\qquad F'_z=-\frac4{z^3}-\frac1z$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluarlas en $M(1,1,1)$.
+
+$$F'_x(M)=2-1=1,\qquad F'_y(M)=2-1=1$$
+
+$$F'_z(M)=-4-1=-5$$
+
+</Paso>
+<Paso>
+
+**Qué:** los cocientes. **Por qué:** el signo menos viene de derivar $F(x,y,z(x,y))=0$ con la regla de la cadena.
+
+$$\frac{\partial z}{\partial x}=-\frac{F'_x}{F'_z}=-\frac{1}{-5}=\frac15$$
+
+$$\frac{\partial z}{\partial y}=-\frac{F'_y}{F'_z}=-\frac{1}{-5}=\frac15$$
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial x}\Big|_M=\frac15,\qquad\frac{\partial z}{\partial y}\Big|_M=\frac15$$
+
+**Ojo con:** el signo menos del cociente, la derivada de $2/z^2=2z^{-2}$ (da $-4/z^3$, no $-2/z$) y la derivada de $\ln(xyz)$ respecto de $z$ (es $\frac{xy}{xyz}=\frac1z$).
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** $F$ igualada a cero, $F'_x$, $F'_y$, $F'_z$, el cociente con signo menos y los dos valores $\frac15$.
+- **A medias:** método correcto con un error en alguna derivada o en el signo, o un solo valor calculado.
+- **Mal:** despejar $z$ a mano o derivar sin considerar que $z$ depende de $x$ e $y$.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Otro camino: derivar **toda la ecuación** respecto de $x$ con $z=z(x,y)$ y despejar $z'_x$:
+
+$$2x-\frac4{z^3}\,z'_x=\frac1x+\frac{z'_x}z$$
+
+En $M$:
+
+$$2-4\,z'_x=1+z'_x\ \Rightarrow\ 1=5\,z'_x\ \Rightarrow\ z'_x=\frac15$$
+
+Idéntico con $y$ (por la simetría de $x$ e $y$ en la ecuación): $z'_y=\frac15$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5, resolución manuscrita atribuida al profesor):** coincide. Plantea $h(x,y,z)=x^2+y^2+\frac2{z^2}-\ln(xyz)=0$, $\frac{\partial z}{\partial x}=-\frac{\partial h/\partial x}{\partial h/\partial z}=-\frac{2-1}{-4-1}$ y llega a $\frac{\partial z}{\partial x}=\frac15$ y $\frac{\partial z}{\partial y}=\frac15$. 
+
+⚠️ **Observación sobre el enunciado:** $M(1;1;1)$ no satisface $x^2+y^2+2/z^2=\ln(xyz)$ (izquierda $=4$, derecha $=0$), así que $\frac15$ es el valor de $-F'_x/F'_z$ en $M$, no la pendiente de un punto real de la superficie. El profe no lo advierte. Pendiente de confirmar con la cátedra. Registrado en `docs/revision/p1-2s2-2022-07-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2022-07#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina={1} unidad="U2" tema="Direccional (ángulo) y gradiente">
+<Enunciado examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina="1">
+
+Dada la función: $z=x^3+3x/y+4y^2$
+
+a. Determinar el valor de la derivada direccional: $\partial z/\partial\alpha$ en: P(1;-1) siendo $\alpha=\pi/3$
+
+b. Dar expresión cartesiana del vector Gradiente en dicho punto P, indicando su módulo y dirección/sentido respecto al semieje x positivo medido en el sentido antihorario.
+
+</Enunciado>
+
+<Pista>
+
+La dirección viene dada por un ángulo respecto del eje $x$. ¿Cómo lo convertís en las componentes de un vector unitario? Para el gradiente te piden tres cosas: expresión, módulo y ángulo medido de una forma precisa.
+
+</Pista>
+<Pista>
+
+Método: $\dfrac{\partial z}{\partial\alpha}=z'_x\cos\alpha+z'_y\sin\alpha$ con $\alpha=\frac\pi3$; el gradiente es $\nabla z=z'_x\vec i+z'_y\vec j$, su módulo $\|\nabla z\|$ es el valor máximo de la derivada direccional y su ángulo $\theta$ se mide desde el semieje $x^+$ en sentido antihorario. Machete: [derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$z'_x=3x^2+\frac3y,\qquad z'_y=-\frac{3x}{y^2}+8y$$
+
+con $\cos\frac\pi3=\frac12$ y $\sin\frac\pi3=\frac{\sqrt3}2$. Evaluá en $P(1,-1)$.
+
+</Pista>
+<Paso>
+
+**Qué:** las parciales y su valor en $P(1,-1)$. **Por qué:** son las componentes del gradiente.
+
+$$z'_x=3x^2+\frac3y\ \Rightarrow\ z'_x(P)=3-3=0$$
+
+$$z'_y=-\frac{3x}{y^2}+8y\ \Rightarrow\ z'_y(P)=-3-8=-11$$
+
+</Paso>
+<Paso>
+
+**Qué:** la derivada direccional. **Por qué:** combina parciales y coseno/seno del ángulo.
+
+$$\frac{\partial z}{\partial\alpha}=0\cdot\frac12+(-11)\cdot\frac{\sqrt3}2$$
+
+$$\frac{\partial z}{\partial\alpha}=-\frac{11\sqrt3}2\approx-9{,}53$$
+
+</Paso>
+<Paso>
+
+**Qué:** el gradiente y su módulo. **Por qué:** el módulo es la máxima pendiente posible.
+
+$$\nabla z(P)=0\,\vec i-11\,\vec j=-11\,\vec j,\qquad\|\nabla z\|=11$$
+
+</Paso>
+<Paso>
+
+**Qué:** el ángulo del gradiente. **Por qué:** apunta hacia $-y$ (sobre el eje, con $x$-componente nula), así que no hace falta una arcotangente: es el semieje $y^-$. Medido en sentido antihorario desde $x^+$ son $270^\circ$, que equivale a $-90^\circ$.
+
+$$\theta=270^\circ=\frac{3\pi}2\quad(\equiv-\tfrac\pi2)$$
+
+El mínimo crecimiento es el sentido opuesto ($90^\circ$) y los crecimientos nulos son las direcciones horizontales ($0^\circ$ y $180^\circ$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2022-07/ej4.svg`} alt="Plano xy con ejes graduados de a 1 y el punto P(1,−1). Flecha roja: gradiente (0, −11) a escala 3/10, hacia abajo, ángulo 270°, máximo crecimiento. Flecha azul opuesta: mínimo crecimiento. Recta verde discontinua horizontal por P: crecimientos nulos. Flecha violeta: dirección S a 60° respecto del semieje x positivo." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial\alpha}\Big|_P=-\frac{11\sqrt3}2\approx-9{,}53,\qquad\nabla z(P)=-11\,\vec j,\qquad\|\nabla z\|=11,\qquad\theta=\frac{3\pi}2\ (-\tfrac\pi2)$$
+
+**Ojo con:** la derivada de $3x/y$ respecto de $y$ (da $-3x/y^2$) y el ángulo del gradiente: con $z'_x=0$ no se usa la arcotangente, el vector va sobre el eje $y$ negativo.
+
+**Criterio estimado — no oficial** (la consigna no pide graficar, pero el gráfico ayuda a justificar el ángulo):
+
+- **Bien:** $z'_x=0$, $z'_y=-11$, $-\frac{11}2\sqrt3$, $\nabla z=-11\,\vec j$, módulo $11$ y ángulo $-\frac\pi2$ (o $\frac{3\pi}2$), en sentido antihorario desde $x^+$.
+- **A medias:** derivada direccional correcta y gradiente sin el ángulo, o ángulo mal expresado (por ejemplo $+90^\circ$).
+- **Mal:** evaluar las parciales fuera de $P$ o usar el ángulo $\alpha$ en grados mezclados con radianes.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+1. **Gradiente · versor:** $(0,-11)\cdot\big(\frac12,\frac{\sqrt3}2\big)=-\frac{11\sqrt3}2$. Coincide.
+2. **Cociente incremental numérico** con $h=10^{-7}$ en la dirección de $\alpha=60^\circ$: $\dfrac{z(P+h\,\hat s)-z(P)}h\approx-9{,}526$.
+3. **Consistencia:** $9{,}53\le\|\nabla z\|=11$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" paginas="6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 6, resolución manuscrita atribuida al profesor):** coincide: $\frac{\partial z}{\partial s}\big|_P=(3-3)\cdot\frac12+(-3-8)\frac{\sqrt3}2=-\frac{11}2\sqrt3$, $\nabla z=0\,\vec i-11\,\vec j=-11\,\vec j$, $\|\nabla z\|=11$ ("valor máx. der. direc.") y $\theta=-\frac\pi2\ (\text{o }-90^\circ)$, con el gráfico de "Máx. Crec.", "Mín. Crec." y "Crec. nulo". Sin discrepancias.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2022-07#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina={1} unidad="U3" tema="Extremos locales (hessiano)">
+<Enunciado examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina="1">
+
+Hallar los Extremos Locales y Puntos Silla de haberlos, de la siguiente función:
+
+$$z=\frac{x^2}2+xy+\frac{y^3}3$$
+
+No es necesario calcular las coordenadas "z"
+
+</Enunciado>
+
+<Pista>
+
+¿Qué cumplen las derivadas parciales en un punto donde la superficie puede tener cima, valle o silla? ¿Con qué herramienta decidís cuál de las tres es?
+
+</Pista>
+<Pista>
+
+Método: **puntos críticos** ($z'_x=0$, $z'_y=0$) y **hessiano** $H=z''_{xx}z''_{yy}-(z''_{xy})^2$: $H\gt0$ extremo (signo de $z''_{xx}$: $\gt0$ mínimo, $\lt0$ máximo), $H\lt0$ silla, $H=0$ inconcluso. Machete: [extremos relativos (hessiano)](../../machetes/extremos-relativos-hessiano/). Teoría: Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$z'_x=x+y=0\qquad z'_y=x+y^2=0$$
+
+De la primera, $y=-x$: reemplazá en la segunda.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar e igualar a cero. **Por qué:** condición necesaria de extremo relativo.
+
+$$z'_x=x+y=0\ \Rightarrow\ y=-x$$
+
+$$z'_y=x+y^2=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** resolver el sistema. **Por qué:** sustituyendo $y=-x$ queda una ecuación de una variable.
+
+$$x+(-x)^2=0\ \Rightarrow\ x+x^2=0\ \Rightarrow\ x\,(1+x)=0$$
+
+$$x=0\ \Rightarrow\ y=0\qquad\qquad x=-1\ \Rightarrow\ y=1$$
+
+Puntos críticos: $(0,0)$ y $(-1,1)$.
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano.
+
+$$z''_{xx}=1,\qquad z''_{yy}=2y,\qquad z''_{xy}=1$$
+
+$$H(x,y)=1\cdot2y-1^2=2y-1$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar y clasificar.
+
+- $(0,0)$: $H=-1\lt0$: **silla**.
+- $(-1,1)$: $H=2-1=1\gt0$ y $z''_{xx}=1\gt0$: **mínimo local**.
+
+</Paso>
+<Paso>
+
+**Qué:** el valor de $z$ en el mínimo (la consigna dice que no es necesario, pero sirve para ubicar el punto).
+
+$$z(-1,1)=\frac{(-1)^2}2+(-1)\cdot1+\frac{1^3}3=\frac12-1+\frac13=-\frac16$$
+
+</Paso>
+<Solucion>
+
+$$(0,0)\ \text{silla},\qquad(-1,1)\ \text{mínimo local}\ \big[z=-\tfrac16\big]$$
+
+**Ojo con:** que el hessiano depende de $y$ (hay que evaluarlo en cada punto) y que el signo de $z''_{xx}$ decide entre máximo y mínimo cuando $H\gt0$.
+
+**Criterio estimado — no oficial** (la consigna dice que no hace falta calcular las coordenadas $z$):
+
+- **Bien:** los dos puntos críticos, $H=2y-1$ y la clasificación correcta de los dos.
+- **A medias:** los dos puntos con una clasificación mal, o clasificar sin justificar con $z''_{xx}$.
+- **Mal:** no usar el hessiano o quedarse con un solo punto crítico.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Estudio directo por trayectorias (sin hessiano):
+
+- **Silla en $(0,0)$:** sobre $y=0$, $z=\frac{x^2}2\ge0$; sobre $y=-x$, $z=-\frac{x^2}2-\frac{x^3}3\lt0$ para $x$ chico no nulo. Hay valores mayores y menores que $z(0,0)=0$ cerca: silla.
+- **Mínimo en $(-1,1)$:** con $z''_{xx}=1\gt0$ y $H=1\gt0$, la forma cuadrática $\frac12\,(\Delta x)^2+\Delta x\,\Delta y+\Delta y^2$ es definida positiva (discriminante $1-4\cdot\frac12\cdot1=-1\lt0$).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" paginas="7" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 7, resolución manuscrita atribuida al profesor):** coincide: puntos críticos $PC_1(0,0)$ y $PC_2(-1,1)$, $H(x,y)=2y-1$, $H_1(0,0)=-1\lt0$ silla, $H_2(-1,1)=+1\gt0$ extremo, "como $\frac{\partial^2z}2=1\gt0\Rightarrow$ mínimo $(-1,1)$" y, en "coordenadas completas", $z(-1,1)=-\frac16$. Sin discrepancias.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2022-07#6" numero={6} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina={1} unidad="U3" tema="Lagrange (distancia al plano)">
+<Enunciado examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" pagina="1">
+
+Determinar la distancia al origen de coordenadas, del plano:
+
+$$2x+y+3z=42$$
+
+</Enunciado>
+
+<Pista>
+
+La distancia de un plano al origen es la del punto del plano que está más cerca del origen. ¿Qué cantidad minimizás y qué condición cumplen los puntos candidatos?
+
+</Pista>
+<Pista>
+
+Método: **extremos ligados con Lagrange** (la consigna no lo nombra, pero es el método de la cátedra para este tipo). Función principal: el cuadrado de la distancia $x^2+y^2+z^2$ (mismo mínimo, derivadas más simples); condición: $2x+y+3z-42=0$. Se arma $F=f-\lambda g$ y se anulan las **cuatro** derivadas. Machete: [extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/). Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$F=x^2+y^2+z^2-\lambda\,(2x+y+3z-42)$$
+
+$$F'_x=2x-2\lambda,\qquad F'_y=2y-\lambda,\qquad F'_z=2z-3\lambda$$
+
+Despejá $x$, $y$, $z$ en función de $\lambda$ y reemplazá en el plano.
+
+</Pista>
+<Paso>
+
+**Qué:** armar $F$ y derivar. **Por qué:** en el punto más cercano el gradiente de $f$ es paralelo al de la condición.
+
+$$F'_x=2x-2\lambda=0,\qquad F'_y=2y-\lambda=0,\qquad F'_z=2z-3\lambda=0$$
+
+$$F'_\lambda=-(2x+y+3z-42)=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** despejar $x,y,z$ en función de $\lambda$.
+
+$$x=\lambda,\qquad y=\frac\lambda2,\qquad z=\frac{3\lambda}2$$
+
+Equivale a $y=\frac x2$ y $z=\frac{3x}2$.
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en el plano. **Por qué:** es la ecuación que falta. Cuidado con la cuenta: se suman tres términos en $\lambda$.
+
+$$2\lambda+\frac\lambda2+3\cdot\frac{3\lambda}2=42$$
+
+$$2\lambda+\frac12\lambda+\frac92\lambda=42$$
+
+$$7\lambda=42\ \Rightarrow\ \lambda=6$$
+
+$$x=6,\qquad y=3,\qquad z=9$$
+
+</Paso>
+<Paso>
+
+**Qué:** la distancia. **Por qué:** es la distancia del punto hallado al origen. Es un **mínimo** porque la distancia a un plano no tiene máximo y hay un único punto crítico.
+
+$$d=\sqrt{6^2+3^2+9^2}=\sqrt{36+9+81}=\sqrt{126}$$
+
+$$d=3\sqrt{14}\approx11{,}22$$
+
+</Paso>
+<Solucion>
+
+$$\text{Punto más cercano: }(6,3,9),\qquad d=3\sqrt{14}\approx11{,}22$$
+
+**Ojo con:** sumar bien los coeficientes ($2+\frac12+\frac92=7$) y recordar que el punto hallado es el más cercano al origen: si $x$ da algo muy grande (como 21) la distancia resulta mayor que $42/\sqrt{14}$, y eso es imposible.
+
+**Criterio estimado — no oficial:**
+
+- **Bien:** función principal y condición, las cuatro derivadas, el punto $(6,3,9)$ y $d=3\sqrt{14}$.
+- **A medias:** planteo y relaciones $y=\frac x2$, $z=\frac{3x}2$ correctos pero un error de cuenta al resolver, o punto correcto sin la distancia.
+- **Mal:** no usar la condición del plano o minimizar sin ligadura.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Fórmula de distancia de un punto a un plano (camino independiente, sin Lagrange):
+
+$$d=\frac{|2\cdot0+0+3\cdot0-42|}{\sqrt{2^2+1^2+3^2}}=\frac{42}{\sqrt{14}}=3\sqrt{14}$$
+
+Coincide. El punto $(6,3,9)$ cumple el plano ($12+3+27=42$) y es múltiplo de la normal $(2,1,3)$, como corresponde al pie de la perpendicular desde el origen.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2022-07" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jul-22.pdf" paginas="8" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 8, resolución manuscrita atribuida al profesor):** coincide en el planteo: $F=\sqrt{x^2+y^2+z^2}-\lambda(2x+y+3z-42)$, las relaciones $\frac x2=y=\frac z3$ (o sea $y=\frac x2$, $z=\frac32x$) y la ecuación $2x+\frac x2+3\cdot\frac32x=42$.
+
+⚠️ **Discrepancia y parte inconclusa:** el escaneo escribe $\frac{14}2x=42$ (que es $7x=42$) y concluye $x=21$, con $y=\frac{21}2$ y $z=\frac{63}2$; la solución correcta de $7x=42$ es $x=6$ (y entonces $y=3$, $z=9$). El renglón final $\text{Dist.}=\sqrt{21^2+(\frac{21}2)^2+(\frac{63}2)^2}=\dots$ queda con "…" sin terminar (con $x=21$ daría $\frac{21\sqrt{14}}2\approx39{,}3$, que es mayor que la distancia correcta $3\sqrt{14}\approx11{,}22$). Pendiente de confirmar con la cátedra. Registrado en `docs/revision/p1-2s2-2022-07-discrepancias.md`.
+
+</div>
+</Ejercicio>
