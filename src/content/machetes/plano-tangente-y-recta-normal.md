@@ -47,6 +47,14 @@ $$z-4=-2(x-1)-4(y-2)\ \Leftrightarrow\ 2x+4y+z=14,\qquad \frac{x-1}{-2}=\frac{y-
 
 Implícita _(propio)_: $x^2+y^2+z^2=14$ en $(1,2,3)$ ($1+4+9=14$ ✓). $F=x^2+y^2+z^2-14$, $\nabla F=(2x,2y,2z)=(2,4,6)$. Plano: $2(x-1)+4(y-2)+6(z-3)=0\Leftrightarrow x+2y+3z=14$. Recta normal: $\dfrac{x-1}{2}=\dfrac{y-2}{4}=\dfrac{z-3}{6}$.
 
+**Ejemplo encadenado con Lagrange** (1H9 May-24 #4): "caja de volumen máximo con un vértice en el origen y el opuesto en el plano tangente al paraboloide $z=16-x^2-y^2$ en $P(1;2)$". El plano **no está dado**: primero se calcula.
+- $z_0=16-1-4=11$ (el $P(1;2)$ da solo $x_0,y_0$; la cota se calcula), $f'_x=-2x\to-2$, $f'_y=-2y\to-4$.
+
+$$z-11=-2(x-1)-4(y-2)\ \Leftrightarrow\ 2x+4y+z=21$$
+
+- Ese plano pasa a ser la **condición de Lagrange**: $F=xyz+\lambda\,(2x+4y+z-21)$ y se maximiza $V=xyz$ (resultado en el machete de extremos ligados: $x=\frac72$, $y=\frac74$, $z=7$, $V=\frac{343}8$).
+- Error típico: usar el paraboloide como condición (no es un plano).
+
 ## Errores frecuentes
 - Olvidar el $-1$ en $\vec n=(f'_x,f'_y,-1)$ al pasar de explícita a implícita.
 - Evaluar las parciales en un punto distinto de $M$.
@@ -60,4 +68,4 @@ Implícita _(propio)_: $x^2+y^2+z^2=14$ en $(1,2,3)$ ($1+4+9=14$ ✓). $F=x^2+y^
 - $\vec n$ es perpendicular a dos tangentes en la superficie (p. ej. $(1,0,f'_x)$ y $(0,1,f'_y)$).
 - La recta normal pasa por $M$ con dirección $\vec n$.
 
-> **Elaborado para el sitio — verificar con la cátedra:** fórmulas y primer ejemplo son de Monllor p.14-16 y de U2 Compuestas e Implícitas. El ejemplo de la esfera y la condición de paralelismo son estándar y propios.
+> **Elaborado para el sitio — verificar con la cátedra:** fórmulas y primer ejemplo son de Monllor p.14-16 y de U2 Compuestas e Implícitas. El ejemplo de la esfera y la condición de paralelismo son estándar y propios; el encadenado con Lagrange es 1H9 May-24 #4, con resolución del profe.

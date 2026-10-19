@@ -3,7 +3,7 @@ slug: dominio-de-funciones-de-dos-variables
 titulo: "Dominio de funciones de dos variables (con gráfico)"
 unidad: U1
 orden: 13
-ejerciciosOficiales: ["p1-1h9-2025-05-g1#1", "p1-1h9-2025-05-g2#1", "p1-1h9-2025-07-rec#1", "p1-1h9-2024-05#1", "p1-1h10-2024-b#1", "p1-1h10-2025-09#1", "p1-1r3-2024-10-a#1", "p1-1r3-2024-10-b#1", "p1-1r7-2025-10#1", "p1-2s2-2025-06-b#1", "p1-2s2-2024-06-b#1", "p1-todas-2025-11-rec#1"]
+ejerciciosOficiales: ["p1-1h9-2025-05-g1#1", "p1-1h9-2025-05-g2#1", "p1-1h9-2025-07-rec#1", "p1-1h9-2024-05#1", "p1-1h10-2024-b#1", "p1-1h10-2025-09#1", "p1-1r3-2024-10-a#1", "p1-1r3-2024-10-b#1", "p1-1r7-2025-10#1", "p1-2s2-2025-06-b#1", "p1-2s2-2024-06-b#1", "p1-todas-2025-11-rec#1", "p1-1h9-2023-05#1", "p1-1h9-2023-07-rec#1", "p1-1h10-2023-10-rec#1", "p1-2s2-2023-07#1", "p1-1r3-2023-09-a#1", "p1-1r3-2023-09-b#1"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 7-9"
   - "U1.pdf (cónicas y signos S1/S2), p. 15-33 (casi solo imagen)"
@@ -44,6 +44,8 @@ $$D_f=\{(x,y)\in\mathbb R^2:\ \text{todas las restricciones a la vez}\}$$
 $$A\cdot B>0\ \Leftrightarrow\ (A>0\wedge B>0)\ \vee\ (A<0\wedge B<0)$$
 - Borde llena: pertenece al dominio ($\ge,\le$). Borde punteada: no pertenece ($>,<$, o $\ne0$).
 - Una curva puede ser borde **lleno en un tramo y punteado en otro** si viene de restricciones distintas.
+- **Módulo en un logaritmo:** $\ln|A|$ pide solo $A\ne0$ (no $A>0$): se **excluye la curva** $A=0$, no una región (1H10 Sep-25 #1: $\ln|4-x^2-4y^2|$ saca la elipse $x^2+4y^2=4$). Ese ejercicio no tiene resolución oficial en el PDF; la resolución del sitio es elaborada.
+- **Producto en el denominador:** $xy\ne0$ saca **los dos ejes** ($x\ne0$ e $y\ne0$), con borde punteado; hay que fijarse si alguna de las dos ya queda excluida por otra condición (Recup. Nov-25 #1: con $xy\sqrt{y^2-x^2+4}$ abajo se pide además $y^2-x^2+4>0$; y el disco $x^2+y^2\le9$ del numerador entra con borde **lleno** porque esa raíz admite $0$).
 
 ## Ejemplo resuelto
 $z=\ln(x^2+y^2-1)+\sqrt{y-x^2}$ _(propio, verificado a mano)_.
@@ -58,6 +60,19 @@ Si en cambio fuera $\ln[(y-x)(x^2+y^2-1)]$: S1 $y>x\wedge x^2+y^2>1$, S2 $y<x\we
 
 **Gráfico:** [FIGURA: plano $xy$, parábola $y=x^2$ en línea llena, circunferencia $x^2+y^2=1$ punteada, sombreada la zona dentro de la parábola y fuera del círculo, puntos de corte rotulados $(\pm0{,}786;\ 0{,}618)$ · fuente propia, ver estilo de figuras de p1-1h9-2025-05-g1 ej1]
 
+**Raíz de un cociente $\ge0$, con parámetro $a$** (1H9 May-24 #1): $z=\sqrt{\dfrac{N}{D}}$ con $N=\frac{x^2}{9}+\frac{y^2}{4}-a^2$ y $D=a^2-x^2+\frac{y^2}{4}$. El cociente es $\ge0$ cuando los dos tienen el mismo signo (el cero del numerador se admite, el del denominador no):
+
+$$\big(N\ge0\wedge D>0\big)\ \vee\ \big(N\le0\wedge D<0\big)$$
+
+- $N=0$ es la **elipse** $\frac{x^2}{(3a)^2}+\frac{y^2}{(2a)^2}=1$, **borde lleno** (ahí el cociente vale $0$). $N\ge0$ es el exterior, $N\le0$ el interior.
+- $D=0$ es la **hipérbola** $\frac{x^2}{a^2}-\frac{y^2}{(2a)^2}=1$, **borde punteado** (divide por cero). $D>0$ es entre las ramas (contiene al origen), $D<0$ adentro de las ramas.
+- Caso 1: exterior de la elipse y entre las ramas (dos piezas no acotadas, arriba y abajo). Caso 2: interior de la elipse y adentro de las ramas (dos "lentes" a los costados). El dominio es la **unión** de los dos casos.
+- El profe pide el **gráfico consolidado** con $a$, $2a$ y $3a$ marcados: los dos casos juntos en un solo dibujo, elipse llena e hipérbola punteada.
+- Cortes elipse-hipérbola: $\left(\pm\frac{3a}{\sqrt5};\pm\frac{4a}{\sqrt5}\right)$.
+- **Caso $a=0$ aparte** (se dividió por $a^2$): $N=\frac{x^2}{9}+\frac{y^2}{4}\ge0$, $D=\frac{y^2}{4}-x^2$ y queda $D>0$, o sea $|y|>2|x|$ (el origen da $\frac00$ y queda afuera).
+
+[FIGURA: plano $xy$ con $a=1$, elipse llena de semiejes $3$ y $2$, hipérbola $x^2-\frac{y^2}{4}=1$ punteada, cuatro piezas sombreadas (dos laterales acotadas y dos no acotadas arriba y abajo) y los cuatro cortes rotulados · fuente figuras/p1-1h9-2024-05/ej1.svg]
+
 ## Errores frecuentes
 - Dibujar siempre el borde lleno: hay que decidir **curva por curva** si pertenece.
 - Olvidar que $\ln$ y el denominador piden $>0$ / $\ne0$ (borde fuera), y la raíz sola pide $\ge0$ (borde dentro).
@@ -66,10 +81,14 @@ Si en cambio fuera $\ln[(y-x)(x^2+y^2-1)]$: S1 $y>x\wedge x^2+y^2>1$, S2 $y<x\we
 - Sombrear sin punto de prueba: se invierte el lado.
 - No completar cuadrados y confundir la cónica (hipérbola vs. elipse).
 - Dar solo el dibujo o solo la fórmula: se piden **gráfica y analíticamente**.
+- Raíz de un cociente: quedarse con un solo caso (faltan las piezas de $N\le0\wedge D<0$), o incluir el borde de lo que está en el denominador.
+- Con parámetro: tratar $a$ como variable, o no ver el caso $a=0$.
+- $\ln|A|$: exigir $A>0$ (con módulo solo se excluye $A=0$).
+- Olvidar que $xy\ne0$ saca **ambos** ejes.
 
 ## Cómo comprobar el resultado
 - Elegí un punto dentro de la región final y reemplazalo en la función original: tiene que dar un número real.
 - Elegí uno fuera (y uno sobre cada borde) y verificá que el borde punteado **no** está y el lleno **sí**.
 - Revisá que la intersección de curvas dibujada coincida con la que calculaste.
 
-> **Elaborado para el sitio — verificar con la cátedra:** la tabla de restricciones y el método S1/S2 siguen el resumen de la cátedra (U1 p. 15-33 y fotos de método); el ejemplo es propio.
+> **Elaborado para el sitio — verificar con la cátedra:** la tabla de restricciones y el método S1/S2 siguen el resumen de la cátedra (U1 p. 15-33 y fotos de método); el ejemplo del log y la raíz es propio; los de cociente con parámetro, $\ln|A|$ y $xy\ne0$ son de 1H9 May-24 #1 (resolución del profe), 1H10 Sep-25 #1 (sin resolución oficial) y Recup. Nov-25 #1. Hay seis dominios más de 2023 en los ejercicios linkeados.

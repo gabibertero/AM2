@@ -3,7 +3,7 @@ slug: extremos-relativos-hessiano
 titulo: "Extremos relativos: puntos críticos y hessiano"
 unidad: U3
 orden: 20
-ejerciciosOficiales: ["p1-1h9-2025-05-g1#3", "p1-1h9-2025-05-g2#3", "p1-1h9-2025-07-rec#3", "p1-1h10-2024-b#3", "p1-1h10-2025-09#4", "p1-1r3-2024-10-a#5", "p1-1r3-2024-10-b#5", "p1-1r7-2025-10#4", "p1-2s2-2025-06-b#4", "p1-2s2-2024-06-b#4"]
+ejerciciosOficiales: ["p1-1h9-2025-05-g1#3", "p1-1h9-2025-05-g2#3", "p1-1h9-2025-07-rec#3", "p1-1h10-2024-b#3", "p1-1h10-2025-09#4", "p1-1r3-2024-10-a#5", "p1-1r3-2024-10-b#5", "p1-1r7-2025-10#4", "p1-2s2-2025-06-b#4", "p1-2s2-2024-06-b#4", "p1-1h9-2023-05#4", "p1-1h10-2023-10-rec#4", "p1-1h9-2023-07-rec#4", "p1-2s2-2023-07#4", "p1-1r3-2023-09-a#6", "p1-1r3-2023-09-b#6"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 6-12"
   - "U2 - Taylor y Extremos Relativos .pdf, p. 20-40"
@@ -54,6 +54,10 @@ $z=x^3+3xy+y^3$ _(teoría U3, verificado)_.
 - $H(-1,-1)=27>0$ y $f''_{xx}=-6<0$: **máximo** relativo en $(-1,-1,1)$.
 
 Caso dudoso: $z=x^4+y^4$ tiene $H=144x^2y^2=0$ en el origen, pero $\Delta f=x^4+y^4>0$: mínimo. Con $x^3+y^3$ (también $H=0$) hay silla porque $\Delta f$ cambia de signo con $x$ sobre $y=0$.
+
+**Caso $H=0$ en un parcial** (2S2 Jul-23 #4): $z=\frac43x^3+\frac13y^3-6x^2+y^2+9x-2$. Acá $z'_x=4x^2-12x+9=(2x-3)^2$ (raíz **doble** $x=\frac32$) y $z'_y=y(y+2)$; críticos $\left(\frac32;0\right)$ y $\left(\frac32;-2\right)$, con $H=8(2x-3)(y+1)=0$ en ambos.
+- **El profe se detiene en "incertidumbre"**: la resolución de la cátedra termina ahí y no clasifica los puntos. Con lo que pide el criterio de la cátedra alcanza para llegar hasta "$H=0$, no decide".
+- Para ir más allá (elaborado para el sitio): como $z'_x=(2x-3)^2\ge0$, $z$ es creciente en $x$ para todo $y$ y **ningún punto es extremo** (ambos son sillas por el signo del incremento).
 
 ## Errores frecuentes
 - Perder puntos críticos al resolver el sistema (p. ej. dividir por $x$ y perder $x=0$).
