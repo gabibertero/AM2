@@ -2,20 +2,21 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/readme/banner-oscuro.svg">
-  <img alt="AM II · 2º parcial" src="docs/readme/banner-claro.svg" width="100%">
+  <img alt="AM II · 1º y 2º parcial" src="docs/readme/banner-claro.svg" width="100%">
 </picture>
 
-**Practicá el 2º parcial de Análisis Matemático II (UTN FRC) con los exámenes reales: pistas de a poco, resolución verificada y modo examen con nota.**
+**Practicá el 1º y el 2º parcial de Análisis Matemático II (UTN FRC) con los exámenes reales: pistas de a poco, resolución verificada y modo examen con nota.**
 
 [![Abrir el sitio](https://img.shields.io/badge/▶_ABRIR_EL_SITIO-1d4fd8?style=for-the-badge&labelColor=1d4fd8)](https://gabibertero.github.io/AM2/)
 
-![Unidades](https://img.shields.io/badge/unidades-U4_a_U10-3b82c4?style=flat-square)
-![Parciales](https://img.shields.io/badge/parciales_resueltos-11-b0477f?style=flat-square)
+![Unidades](https://img.shields.io/badge/unidades-U1_a_U10-3b82c4?style=flat-square)
+![Parciales](https://img.shields.io/badge/parciales_resueltos-31-b0477f?style=flat-square)
 ![Anteriores](https://img.shields.io/badge/años_anteriores-8-c2671f?style=flat-square)
-![Preguntas](https://img.shields.io/badge/preguntero-84_preguntas-7a5cc7?style=flat-square)
-![Tests E2E](https://img.shields.io/badge/E2E-38_✓-14876b?style=flat-square)
-![Tests unitarios](https://img.shields.io/badge/unitarios-41_✓-14876b?style=flat-square)
+![Preguntas](https://img.shields.io/badge/preguntero-133_preguntas-7a5cc7?style=flat-square)
+![Tests E2E](https://img.shields.io/badge/E2E-76_✓-14876b?style=flat-square)
+![Tests unitarios](https://img.shields.io/badge/unitarios-78_✓-14876b?style=flat-square)
 ![sympy](https://img.shields.io/badge/verificado_con-sympy-3b82c4?style=flat-square)
+![Machetes](https://img.shields.io/badge/machetes-21-c2671f?style=flat-square)
 ![Celular](https://img.shields.io/badge/funciona_en-celular-c2671f?style=flat-square)
 [![Hecho con Claude](https://img.shields.io/badge/Hecho%20con-Claude-D97757?logo=claude&logoColor=white&style=flat-square)](https://claude.com/claude-code)
 
@@ -53,21 +54,52 @@
 
 <table>
 <tr>
-<td valign="top" width="33%">📝 <b>11 parciales oficiales</b><br><sub>pistas, pasos, comprobación, criterio estimado y resolución oficial escaneada</sub></td>
+<td valign="top" width="33%">🎯 <b>Dos instancias</b><br><sub>1º parcial (U1–U3) y 2º parcial (U4–U10), cada una con su mapa de temas</sub></td>
+<td valign="top" width="33%">📝 <b>31 parciales resueltos</b><br><sub>20 del 1º y 11 del 2º: pistas, pasos, comprobación y criterio estimado; la resolución oficial escaneada va con datos tapados</sub></td>
 <td valign="top" width="33%">🗂️ <b>8 años anteriores</b><br><sub>resueltos y verificados</sub></td>
+</tr>
+<tr>
 <td valign="top" width="33%">⏱️ <b>Modo examen</b><br><sub>cronómetro, solo enunciados y autocalificación</sub></td>
-</tr>
-<tr>
 <td valign="top" width="33%">🤖 <b>Corrección con IA</b><br><sub>Claude, ChatGPT o Gemini con el prompt armado</sub></td>
-<td valign="top" width="33%">❓ <b>Preguntero U4–U10</b><br><sub>84 preguntas, simulacro 2 temas + 4 cortas + 3 choice</sub></td>
-<td valign="top" width="33%">📖 <b>Teoría U4–U10</b><br><sub>con figuras, estilo de cátedra</sub></td>
+<td valign="top" width="33%">❓ <b>Preguntero U1–U10</b><br><sub>133 preguntas (49 del 1º, 84 del 2º), simulacro 2 temas + 4 cortas + 3 choice</sub></td>
 </tr>
 <tr>
-<td valign="top" width="33%">🧰 <b>12 machetes</b><br><sub>qué hacer según el tipo de problema</sub></td>
-<td valign="top" width="33%">🧪 <b>Laboratorio</b><br><sub>7 generadores con semilla</sub></td>
-<td valign="top" width="33%">🏠 <b>Home</b><br><sub>cuenta regresiva al 2º parcial (31/10), progreso y "seguir donde dejaste"</sub></td>
+<td valign="top" width="33%">📖 <b>Teoría U1–U10</b><br><sub>con figuras, estilo de cátedra</sub></td>
+<td valign="top" width="33%">🧰 <b>21 machetes</b><br><sub>qué hacer según el tipo de problema; la pista 2 de cada ejercicio del 1º enlaza a su machete</sub></td>
+<td valign="top" width="33%">🧪 <b>Laboratorio</b><br><sub>8 generadores del 1º y 7 del 2º, con semilla</sub></td>
+</tr>
+<tr>
+<td valign="top" width="33%">⚠️ <b>Avisos de discrepancia</b><br><sub>donde sympy no coincide con la resolución del profe, el ejercicio lo anota</sub></td>
+<td valign="top" width="33%">🏠 <b>Home</b><br><sub>mapa por instancia, cuenta regresiva al 2º parcial (31/10), progreso y "seguir donde dejaste"</sub></td>
+<td valign="top" width="33%">🔌 <b>Usable sin JS</b><br><sub>enunciados, pistas, pasos y teoría se leen aunque el script no cargue</sub></td>
 </tr>
 </table>
+
+<details>
+<summary><b>🏠 Home con las dos instancias</b></summary>
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/home-largo-oscuro.png">
+  <img alt="Home con accesos y mapa de la materia por instancia" src="docs/readme/home-largo-claro.png" width="100%">
+</picture>
+
+</details>
+
+<details>
+<summary><b>🧮 Laboratorio del 1º parcial</b></summary>
+
+<br>
+
+Ocho generadores: dominio (con gráfico de la región), gradiente y derivada direccional en 2 y 3 variables, diferencial, extremos relativos, Lagrange, derivada implícita y plano tangente. Cada uno trae la solución paso a paso.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/lab-p1-oscuro.png">
+  <img alt="Laboratorio: ejercicio de Lagrange con semilla 7" src="docs/readme/lab-p1-claro.png" width="100%">
+</picture>
+
+</details>
 
 <details>
 <summary><b>⏱️ Modo examen</b> (GIF)</summary>
@@ -81,11 +113,11 @@ Empezás, resolvés en papel con el reloj corriendo, entregás y te autocalific�
 </details>
 
 <details>
-<summary><b>🧪 Laboratorio</b> (GIF)</summary>
+<summary><b>🧪 Laboratorio del 2º parcial</b> (GIF)</summary>
 
 <br>
 
-Ejercicios nuevos de EDO de 1º y 2º orden, exactas, Bernoulli, Green y polares. La misma semilla da siempre el mismo ejercicio, así que podés pasarle el enlace a un amigo. Cada uno trae solución paso a paso.
+En el 2º parcial: EDO de 1º y 2º orden, exactas, Bernoulli, Green y polares (el 1º está en el siguiente bloque). La misma semilla da siempre el mismo ejercicio, así que podés pasarle el enlace a un amigo. Cada uno trae solución paso a paso.
 
 <img src="docs/readme/laboratorio.gif" alt="Laboratorio: ejercicio generado y su solución" width="100%">
 
@@ -154,6 +186,7 @@ Diseñado para 390 px sin scroll horizontal, con tema claro y oscuro.
 ## Cómo usarlo
 
 ```text
+0. Elegí instancia → 1º parcial (U1–U3) o 2º parcial (U4–U10)
 1. Machete        → identificá el tipo de problema y su método
 2. Teoría         → repasá la unidad si algo no cierra
 3. Parcial        → resolvelo en papel, sin ayudas
@@ -167,21 +200,27 @@ Diseñado para 390 px sin scroll horizontal, con tema claro y oscuro.
 > Si no sabés cómo arrancar, andá al **Laboratorio**: generás ejercicios con semilla hasta que el método te salga solo.
 
 > [!NOTE]
+> Si en un ejercicio ves un aviso de discrepancia con el profe, es que sympy y la resolución de cátedra dan distinto; ahí contrastá con tu cátedra.
+
+> [!NOTE]
 > Tu progreso se guarda **solo en tu navegador** (`localStorage`). Si cambiás de dispositivo o borrás los datos del sitio, empezás de cero.
 
 ## Temas
 
-| Unidad | Tema | Práctica | Teoría |
-|:---:|---|:---:|:---:|
-| **U4** | Integrales múltiples | ✅ | ✅ |
-| **U5** | Integrales curvilíneas, Green, potencial | ✅ | ✅ |
-| **U6** | Funciones vectoriales | alcance tentativo | ✅ |
-| **U7** | Computación numérica | sin material | sin material |
-| **U8** | EDO de 1º orden | ✅ | ✅ |
-| **U9** | EDO de orden superior | ✅ | ✅ |
-| **U10** | EDP | alcance tentativo | ✅ |
+| Instancia | Unidad | Tema | Práctica | Teoría |
+|:---:|:---:|---|:---:|:---:|
+| **1º parcial** | **U1** | Funciones de varias variables, dominio | ✅ | ✅ |
+| | **U2** | Derivadas direccionales, diferencial, implícita, plano tangente | ✅ | ✅ |
+| | **U3** | Máximos y mínimos, Lagrange | ✅ | ✅ |
+| **2º parcial** | **U4** | Integrales múltiples | ✅ | ✅ |
+| | **U5** | Integrales curvilíneas, Green, potencial | ✅ | ✅ |
+| | **U6** | Funciones vectoriales | alcance tentativo | ✅ |
+| | **U7** | Computación numérica | sin material | sin material |
+| | **U8** | EDO de 1º orden | ✅ | ✅ |
+| | **U9** | EDO de orden superior | ✅ | ✅ |
+| | **U10** | EDP | alcance tentativo | ✅ |
 
-Fourier (U11) queda fuera. Programa 2025.
+Fourier (U11) queda fuera. Programa 2025. Los escaneos del 1º parcial (119 páginas) se publican con los datos personales tapados.
 
 ## Privacidad
 
@@ -200,7 +239,7 @@ Fourier (U11) queda fuera. Programa 2025.
 
 ```mermaid
 flowchart TD
-  A[Material de la cátedra<br/>parciales, teoría] --> B[Inventario<br/>docs/inventario]
+  A[Material de la cátedra<br/>parciales 1º y 2º, teoría] --> B[Inventario<br/>docs/inventario]
   B --> C[Resolución<br/>pistas, pasos, figuras]
   C --> D{{Verificación<br/>tests/check_*.py con sympy}}
   D --> E[MDX en src/content]
@@ -209,7 +248,7 @@ flowchart TD
   G --> H[GitHub Pages]
 ```
 
-Sin framework de frontend: JavaScript vanilla, las fórmulas se renderizan al construir y el sitio funciona sin JS para leer el contenido.
+Sin framework de frontend: JavaScript vanilla, las fórmulas se renderizan al construir y el sitio funciona sin JS para leer el contenido (un test lo recorre con JS apagado, y otro revisa las 80 páginas en 390 px).
 
 <details>
 <summary><b>🌳 Árbol de carpetas</b></summary>
@@ -217,10 +256,10 @@ Sin framework de frontend: JavaScript vanilla, las fórmulas se renderizan al co
 ```text
 .
 ├── src/
-│   ├── content/      parciales, anteriores, teoria, machetes, preguntas (MDX/MD)
+│   ├── content/      parciales (p1-* del 1º), anteriores, teoria, machetes, preguntas (MDX/MD)
 │   ├── pages/        rutas de Astro
 │   ├── components/   piezas reutilizables (ejercicio, pregunta, panel de examen)
-│   ├── scripts/      examen, preguntero, progreso, IA y laboratorio (lab/)
+│   ├── scripts/      examen, preguntero, progreso, IA y laboratorio (lab/: p1-*.js del 1º, el resto del 2º)
 │   └── styles/
 ├── tests/            *.spec.mjs (Playwright) · *.test.mjs (node --test) · check_*.py (sympy)
 ├── scripts/          chequeo de ids, escaneos y capturas
@@ -243,15 +282,15 @@ npm run build          # chequea ids y construye
 npm run preview        # sirve el build
 
 npx playwright install chromium   # una sola vez
-npm test               # 38 tests E2E (celular, sin JS, modo examen, laboratorio...)
-npm run test:unit      # 41 tests de lógica pura
+npm test               # 76 tests E2E (celular, sin JS, modo examen, laboratorio, recorrido del 1º...)
+npm run test:unit      # 78 tests de lógica pura
 python3 tests/check_1r3.py        # un check con sympy (hay uno por examen resuelto)
 ```
 
 <details>
 <summary><b>➕ Cómo agregar un examen</b></summary>
 
-1. Copiá un archivo de `src/content/parciales/` (o `anteriores/`) y completá el frontmatter: fecha, tipo, unidades y fuente.
+1. Copiá un archivo de `src/content/parciales/` (o `anteriores/`; los del 1º llevan prefijo `p1-`) y completá el frontmatter: fecha, tipo, unidades, instancia y fuente.
 2. Transcribí el enunciado tal cual y agregá el escaneo (con los datos personales tapados) a `public/`.
 3. Escribí pistas, pasos, solución y criterio; cada ejercicio con un `id` único (`npm run check` lo valida).
 4. Sumá `tests/check_<id>.py` que recalcule el resultado con sympy.
@@ -261,17 +300,21 @@ python3 tests/check_1r3.py        # un check con sympy (hay uno por examen resue
 
 ## Roadmap
 
-- [x] Parciales oficiales resueltos y verificados con sympy (11)
+- [x] Dos instancias en el sitio: 1º parcial (U1–U3) y 2º parcial (U4–U10)
+- [x] 31 parciales oficiales resueltos y verificados con sympy (20 del 1º, 11 del 2º), escaneos con datos tapados
 - [x] Exámenes de años anteriores resueltos (8)
 - [x] Modo examen con cronómetro y autocalificación
 - [x] Corrección con IA (Claude, ChatGPT, Gemini)
-- [x] Preguntero U4–U10 y simulacro 2 + 4 + 3
-- [x] Teoría U4–U10 con figuras
-- [x] Laboratorio con 7 generadores con semilla
-- [x] Home con cuenta regresiva, progreso y "seguir donde dejaste"
+- [x] Preguntero U1–U10 (133 preguntas) y simulacro 2 + 4 + 3
+- [x] Teoría U1–U10 con figuras
+- [x] 21 machetes, con enlace desde la pista 2 de cada ejercicio del 1º
+- [x] Laboratorio con 15 generadores con semilla (8 del 1º, 7 del 2º)
+- [x] Home con mapa por instancia, cuenta regresiva, progreso y "seguir donde dejaste"
+- [x] Sitio usable sin JS
 - [ ] Material de U7 (computación numérica), hoy sin fuentes
 - [ ] Revisar las lecturas de gráficos marcadas como pendientes en algunos años anteriores
-- [ ] Más generadores en el laboratorio (integrales triples, Stokes)
+- [ ] Confirmar con la cátedra las discrepancias anotadas (p. ej. 1H10 ej. 2 del 2º parcial; recuperatorio 2025 ej. 2 del 1º)
+- [ ] Más generadores en el laboratorio (integrales triples, Stokes, límites dobles)
 
 ## FAQ
 
@@ -308,12 +351,14 @@ En unos pocos casos sympy no coincide con la resolución del profe; esos casos e
 Este proyecto se construyó con [Claude Code](https://claude.com/claude-code), con revisión y criterio final de Gabi. Claude hizo:
 
 - **Diseño:** paleta, tipografía, tema claro/oscuro, favicon, Home y auditoría estética con capturas en desktop y 390 px.
-- **Código:** modo examen, corrección con IA, preguntero, progreso local y laboratorio con semilla.
-- **Contenido:** transcripción, resolución de los parciales y años anteriores, teoría, machetes y preguntas.
-- **Verificación:** un script de sympy por examen resuelto, auditorías didácticas y code review.
+- **Código:** modo examen, corrección con IA, preguntero, progreso local, laboratorio con semilla (15 generadores) y Home con las dos instancias.
+- **Contenido:** transcripción y resolución de los 31 parciales y los años anteriores, teoría U1–U10, 21 machetes con figuras y 133 preguntas.
+- **Verificación:** un script de sympy por examen resuelto (33 checks), auditorías didácticas y code review.
 - **Tests:** Playwright (E2E, celular, sin JS) y `node --test`.
 
-Agentes que intervinieron: `resolvedor`, `web`, `disenador`, `estetica`, `profe`, `verificador`, `redactor`, `graficos`, `tester`, `readme` y `ecc:code-reviewer`. Auditorías de `profe`: parciales 91–95, preguntero 96, teoría 93.
+Agentes que intervinieron: `resolvedor`, `web`, `disenador`, `estetica`, `profe`, `verificador`, `redactor`, `graficos`, `tester`, `readme` y `ecc:code-reviewer`. Auditorías de `profe`: parciales 91–95, preguntero 96, teoría 93; en la etapa del 1º parcial, preguntero 92, teoría 94, machetes 80 y laboratorio 74 (corregido hasta ≥ 90 según `estetica`, `tester` y `ecc:code-reviewer`).
+
+En la etapa del 1º parcial: `resolvedor` resolvió y verificó con sympy los 20 parciales, `web` programó el laboratorio y el sitio usable sin JS, `disenador` armó el Home con las dos instancias, `profe` auditó teoría, preguntero, machetes y laboratorio, `estetica` auditó con capturas (77 → 82), `tester` escribió el test de recorrido del 1º, `ecc:code-reviewer` revisó el código y `readme` actualizó este documento.
 
 Los commits llevan `Co-Authored-By: Claude`, por eso Claude figura en Contributors.
 

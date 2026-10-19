@@ -2,6 +2,27 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
+## [3.0.0] - 2026-10-19
+
+### Agregado
+- Segunda instancia: 1º parcial (U1–U3), con los 20 parciales resueltos y verificados con sympy (pistas, pasos, comprobación, escaneos con datos personales tapados).
+- Avisos de discrepancia con el profe en los ejercicios donde sympy no coincide con la resolución de cátedra.
+- Machete enlazado en la pista 2 de cada ejercicio del 1º; 9 machetes nuevos (21 en total) con figuras.
+- Teoría U1–U3 y preguntero U1–U3 (49 preguntas; 133 en total).
+- Laboratorio del 1º con 8 generadores: dominio (con gráfico de la región), derivada direccional en 2D y 3D, diferencial, extremos, Lagrange, implícita y plano tangente.
+- Home con las dos instancias y mapa de la materia por unidad.
+- Tests: 76 E2E (incluido el recorrido del 1º parcial) y 78 unitarios.
+
+### Cambiado
+- El sitio funciona sin JS: parciales, pistas, pasos y teoría se leen sin script.
+- Estética del 1º parcial y del laboratorio según las auditorías de `estetica` y `profe`.
+- README con las dos instancias, capturas nuevas y banner actualizado.
+
+### Corregido
+- Fórmulas `$$` consecutivas que se renderizaban en línea.
+- Chips largos que desbordaban en celular.
+- Hallazgos de `profe` (teoría, preguntero, machetes, laboratorio), `ecc:code-reviewer` y `tester`.
+
 ## [2.0.0] - 2026-10-15
 
 ### Agregado

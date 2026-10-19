@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-label="AM II · 2º parcial: sitio de estudio de Análisis Matemático II">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-label="AM II · 1º y 2º parcial: sitio de estudio de Análisis Matemático II">
   <rect width="1280" height="440" fill="#f4f1ea"/>
   <g transform="translate(60 0)"><g stroke="#5c5850" stroke-opacity=".4" stroke-width="2" fill="none"><path d="M780 50V380H1210"/><path d="M780 50l-7 14M780 50l7 14M1210 380l-14-7M1210 380l-14 7"/></g>
   <ellipse cx="1000" cy="215" rx="125" ry="95" fill="#1d4fd8" fill-opacity=".14" stroke="#1d4fd8" stroke-width="5" stroke-dasharray="72 22"/>
@@ -7,6 +7,6 @@
   </g>
   <text x="80" y="130" font-family="Georgia,'Times New Roman',serif" font-size="60" fill="#1d4fd8">∬  ∮  ∇</text>
   <text x="80" y="235" font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="60" fill="#1d1b18">Análisis Matemático II</text>
-  <text x="80" y="300" font-family="Helvetica,Arial,sans-serif" font-size="32" fill="#5c5850">2º parcial · exámenes reales, pistas de a poco</text>
+  <text x="80" y="300" font-family="Helvetica,Arial,sans-serif" font-size="32" fill="#5c5850">1º y 2º parcial · exámenes reales, pistas de a poco</text>
   <text x="80" y="360" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="24" letter-spacing="3" fill="#1d4fd8">UTN FRC · INGENIERÍA EN SISTEMAS</text>
 </svg>
