@@ -10,20 +10,23 @@ const OPTXT = { '\\geq': '≥', '\\leq': '≤', '>': '>', '<': '<', '\\neq': '�
 
 // G(x,y) = c + σ·h(x,y), con h de una familia (recta, parábola, circunferencia, hipérbola, elipse) y c ≠ 0 (el origen no está en el borde).
 // canon(w) da la curva h = w despejada (forma canónica) y cómo se lee.
-function forma(rng, evitar1) {
+function forma(rng, evitar = []) {
   for (;;) {
-    const sigma = rng.signo(), t = rng.elegir(['lin', 'par', 'circ', 'hip', 'elip']);
-    const a = rng.nz(3), k = rng.elegir([2, 4]);
+    const sigma = rng.signo(), t = rng.elegir(['lin', 'par', 'circ', 'hip', 'elip', 'circd']);
+    const a = rng.nz(3), k = rng.elegir([2, 4]), ad = rng.nz(2), bd = rng.nz(2), rd = rng.elegir([2, 3]);
+    const resta = (v, n) => (n > 0 ? `${v}-${n}` : `${v}+${-n}`);
     const T = {
       lin: { nombre: 'una recta', ts: [[a, 'x', '0', (x) => a * x], [1, 'y', '0', (x, y) => y]], canon: (w) => ({ tex: `y=${suma([[-a, 'x'], [w, '']])}`, txt: 'una recta (se despeja y)' }) },
       par: { nombre: 'una parábola', ts: [[1, 'x^{2}', '0^{2}', (x) => x * x], [-1, 'y', '0', (x, y) => -y]], canon: (w) => ({ tex: `y=${suma([[1, 'x^{2}'], [-w, '']])}`, txt: `una parábola con vértice en (0, ${-w}) y eje vertical` }) },
       circ: { nombre: 'una circunferencia con centro en el origen', ts: [[1, 'x^{2}', '0^{2}', (x) => x * x], [1, 'y^{2}', '0^{2}', (x, y) => y * y]], canon: (w) => ({ tex: `x^{2}+y^{2}=\\left(\\sqrt{${w}}\\right)^{2}`, txt: `una circunferencia de centro (0, 0) y radio √${w}` }) },
       hip: { nombre: 'una hipérbola', ts: [[1, 'xy', '0\\cdot 0', (x, y) => x * y]], canon: (w) => ({ tex: `y=\\frac{${w}}{x}`, txt: 'una hipérbola con asíntotas los ejes coordenados' }) },
+      circd: { nombre: 'una circunferencia con centro desplazado (se completan cuadrados)', ts: [[1, 'x^{2}', '0^{2}', (x) => x * x], [1, 'y^{2}', '0^{2}', (x, y) => y * y], [-2 * ad, 'x', '0', (x) => x], [-2 * bd, 'y', '0', (x, y) => y]],
+        canon: (w) => ({ tex: `\\left(${resta('x', ad)}\\right)^{2}+\\left(${resta('y', bd)}\\right)^{2}=${w + ad * ad + bd * bd}`, txt: `una circunferencia de centro (${ad}, ${bd}) y radio √${w + ad * ad + bd * bd} (completo cuadrados: sumo ${ad * ad} y ${bd * bd} en ambos miembros)` }) },
       elip: { nombre: 'una elipse con centro en el origen', ts: [[1, 'x^{2}', '0^{2}', (x) => x * x], [k, 'y^{2}', '0^{2}', (x, y) => k * y * y]], canon: (w) => ({ tex: `\\frac{x^{2}}{${w}}+\\frac{y^{2}}{${texF(fr(w, k))}}=1`, txt: `una elipse de semiejes √${w} (en x) y √(${texF(fr(w, k)).replace(/\\frac\{(\d+)\}\{(\d+)\}/, '$1/$2')}) (en y)` }) },
     }[t];
     const r = rng.ent(2, 4);
-    const c = t === 'circ' ? -sigma * r * r : t === 'elip' ? -sigma * rng.elegir([4, 8, 12, 16]) : rng.nz(4);
-    if (evitar1 && c === 1) continue; // G = 1 también tiene que ser una curva propia (solo importa en ln(G) del denominador)
+    const c = t === 'circd' ? sigma * (ad * ad + bd * bd - rd * rd) : t === 'circ' ? -sigma * r * r : t === 'elip' ? -sigma * rng.elegir([4, 8, 12, 16]) : rng.nz(4);
+    if (evitar.includes(c)) continue; // G = 1 (ln G en el denominador) o G = ±1 (arcsen, arccos) también tienen que ser curvas propias, sin pasar por el origen
     const hf = (x, y) => T.ts.reduce((s, [kk, , , f]) => s + kk * f(x, y), 0);
     const h = suma(T.ts.map(([kk, b]) => [kk, b]));
     return {
@@ -39,11 +42,15 @@ const ln = (g) => (g > 0 ? Math.log(g) : NaN); // ln(0) = −∞ no es un valor 
 const RAIZ = 'La raíz cuadrada (en los reales) solo existe si el radicando es mayor o igual que 0.';
 const LOG = 'El logaritmo solo está definido para argumentos estrictamente positivos.';
 const DEN = 'El denominador no puede ser 0.';
+const ARC = (n) => `La función ${n} solo está definida para argumentos entre −1 y 1: hacen falta las dos desigualdades −1 ≤ G ≤ 1 a la vez.`;
 const TIPOS = {
   raiz: { n: 1, tex: (g) => `\\sqrt{${g[0]}}`, f: (g) => Math.sqrt(g[0]), cs: [[0, '\\geq', 0, RAIZ]] },
   ln: { n: 1, tex: (g) => `\\ln\\left(${g[0]}\\right)`, f: (g) => ln(g[0]), cs: [[0, '>', 0, LOG]] },
   coc: { n: 1, num: true, tex: (g, N) => `\\frac{${N}}{${g[0]}}`, f: (g, N) => N / g[0], cs: [[0, '\\neq', 0, DEN]] },
   rd: { n: 1, num: true, tex: (g, N) => `\\frac{${N}}{\\sqrt{${g[0]}}}`, f: (g, N) => N / Math.sqrt(g[0]), cs: [[0, '>', 0, 'La raíz pide radicando ≥ 0 y, como está en el denominador, la raíz no puede valer 0: queda radicando estrictamente positivo.']] },
+  lnabs: { n: 1, tex: (g) => `\\ln\\left|${g[0]}\\right|`, f: (g) => Math.log(Math.abs(g[0])), cs: [[0, '\\neq', 0, 'El logaritmo pide argumento positivo; con valor absoluto, |G| > 0, o sea G ≠ 0.']] },
+  asen: { n: 1, tex: (g) => `\\operatorname{arcsen}\\left(${g[0]}\\right)`, f: (g) => Math.asin(g[0]), cs: [[0, '\\geq', -1, ARC('arcsen')], [0, '\\leq', 1, ARC('arcsen')]] },
+  acos: { n: 1, tex: (g) => `\\arccos\\left(${g[0]}\\right)`, f: (g) => Math.acos(g[0]), cs: [[0, '\\geq', -1, ARC('arccos')], [0, '\\leq', 1, ARC('arccos')]] },
   lnd: { n: 1, num: true, tex: (g, N) => `\\frac{${N}}{\\ln\\left(${g[0]}\\right)}`, f: (g, N) => N / ln(g[0]), cs: [[0, '>', 0, LOG], [0, '\\neq', 1, 'El denominador ln(G) no puede ser 0, y ln(G) = 0 exactamente cuando G = 1.']] },
   suma: { n: 2, tex: (g) => `\\sqrt{${g[0]}}+\\ln\\left(${g[1]}\\right)`, f: (g) => Math.sqrt(g[0]) + ln(g[1]), cs: [[0, '\\geq', 0, RAIZ], [1, '>', 0, LOG]] },
   rc: { n: 2, tex: (g) => `\\frac{\\sqrt{${g[0]}}}{${g[1]}}`, f: (g) => Math.sqrt(g[0]) / g[1], cs: [[0, '\\geq', 0, RAIZ], [1, '\\neq', 0, DEN]] },
@@ -68,7 +75,7 @@ function armar(rng) {
   const gs = [];
   do {
     gs.length = 0;
-    for (let i = 0; i < T.n; i++) gs.push(forma(rng, id === 'lnd'));
+    for (let i = 0; i < T.n; i++) gs.push(forma(rng, id === 'lnd' ? [1] : id === 'asen' || id === 'acos' ? [1, -1] : []));
   } while (T.n === 2 && gs[0].t === gs[1].t);
   const a = rng.nz(2), b = rng.nz(2);
   const N = suma([[a, 'x'], [b, 'y']]), Nf = (x, y) => a * x + b * y;
@@ -93,12 +100,12 @@ function dominio(rng) {
   const pasos = [];
   const dtex = (i) => `\\left\\{(x,y)\\in\\mathbb{R}^{2}:\\ ${i}\\right\\}`;
   const frontera = (g, n, v, op, extra) => {
-    const vtxt = v === 1 ? '1' : '0', rr = g.ineq(op, v);
+    const vtxt = String(v), rr = g.ineq(op, v);
     pasos.push({ txt: `Frontera ${extra}: se obtiene cambiando la desigualdad por una igualdad (G = ${vtxt}) y despejando; queda ${rr.canon.txt}. ${bordeTxt(op)}`, tex: lineas([`${g.G}&=${vtxt}`, `${rr.borde.replace('=', '&=')}`, `&\\Leftrightarrow\\ ${rr.canon.tex}`]) });
   };
   const origen = (g, op, v, n) => {
-    const vtxt = v === 1 ? '1' : '0';
-    pasos.push({ txt: `Para saber de qué lado de la curva está la región pruebo el origen (0, 0), que no está sobre la curva porque G(0,0) ≠ ${vtxt}:`, tex: lineas([`G(0,0)&=${g.G0}`, `&=${g.c}`]) });
+    const vtxt = String(v);
+    pasos.push({ txt: `Para saber de qué lado de la curva está la región pruebo el origen (0, 0), que no está sobre la curva porque $G(0,0)\\neq ${vtxt}$:`, tex: lineas([`G(0,0)&=${g.G0}`, `&=${g.c}`]) });
     const ok = OPJS[op](g.c, v);
     pasos.push({ txt: `Como ${g.c} ${OPTXT[op]} ${vtxt} es ${ok ? 'verdadero' : 'falso'}, el origen ${ok ? 'SÍ' : 'NO'} cumple: la región es el lado de la curva ${ok ? 'que contiene al origen' : 'opuesto al que contiene al origen'}. En desigualdades:`, tex: g.ineq(op, v).tex });
   };
@@ -110,21 +117,20 @@ function dominio(rng) {
     const casos = [[res[0], res[1], 1], [res[2], res[3], 2]];
     for (const [r1, r2, n] of casos) pasos.push({ txt: `Caso S${n === 1 ? '₁' : '₂'}: el lado de G₁ y el lado de G₂ a la vez (intersección). ${n === 2 ? 'Cada desigualdad es la contraria a la del caso S₁, o sea la región del otro lado de cada curva.' : ''}`, tex: `S_{${n}}=${dtex(`${r1.r.tex},\\ ${r2.r.tex}`)}` });
     domTex = `D_{f}=S_{1}\\cup S_{2}`;
-    pasos.push({ txt: 'El dominio es la unión de los dos casos (cualquiera de los dos sirve), no la intersección. El borde de una curva pertenece al dominio solo si la desigualdad es no estricta y se cumple en ese punto.', tex: domTex });
-    pasos.push({ txt: 'Gráfico: se dibujan las dos curvas (llenas si el borde está incluido, punteadas si no) y se sombrean las dos regiones, la que contiene al origen según cada curva y la opuesta; el dominio queda formado por S₁ y S₂ juntas.', tex: `D_{f}=\\left\\{(x,y):\\ S_{1}\\ \\text{o}\\ S_{2}\\right\\}` });
+    pasos.push({ txt: 'El dominio es la unión de los dos casos (cualquiera de los dos sirve), no la intersección. El borde de una curva pertenece al dominio solo si la desigualdad es no estricta y se cumple en ese punto.' });
+    pasos.push({ txt: 'Gráfico: se dibujan las dos curvas (llenas si el borde está incluido, punteadas si no) y se sombrean las dos regiones, la que contiene al origen según cada curva y la opuesta; el dominio queda formado por S₁ y S₂ juntas.' });
   } else {
     res.forEach((c, i) => {
       const n = i + 1;
-      pasos.push({ txt: `Condición ${n}: ${c.motivo} Entonces hace falta:`, tex: `${c.g.G}${c.op}${c.v === 1 ? '1' : '0'}` });
+      pasos.push({ txt: `Condición ${n}: ${c.motivo} Entonces hace falta:`, tex: `${c.g.G}${c.op}${c.v}` });
       frontera(c.g, n, c.v, c.op, `de la condición ${n}`);
       if (c.op === '\\neq') return;
       origen(c.g, c.op, c.v, n);
     });
     const dom = res.map((c) => c.r.tex);
     domTex = `D_{f}=${dtex(dom.join(',\\ '))}`;
-    if (res.length > 1) pasos.push({ txt: 'El dominio es el conjunto de puntos que cumplen todas las condiciones a la vez (intersección). El borde de una condición solo pertenece al dominio si esa condición lo incluye y las demás también se cumplen allí.', tex: domTex });
-    else pasos.push({ txt: 'Esa única condición describe el dominio. Lo escribo como conjunto:', tex: domTex });
-    pasos.push({ txt: 'Gráfico: se dibujan las curvas borde (llenas si están incluidas, punteadas si no) y se sombrea la región que cumple todo lo anterior.', tex: domTex });
+    pasos.push({ txt: res.length > 1 ? 'El dominio es el conjunto de puntos que cumplen todas las condiciones a la vez (intersección). El borde de una condición solo pertenece al dominio si esa condición lo incluye y las demás también se cumplen allí. Queda escrito en el resultado.' : 'Esa única condición describe el dominio; queda escrito como conjunto en el resultado.' });
+    pasos.push({ txt: 'Gráfico: se dibujan las curvas borde (llenas si están incluidas, punteadas si no) y se sombrea la región que cumple todo lo anterior.' });
   }
   const conds = res.map((c) => (x, y) => OPJS[c.op](c.g.gf(x, y), c.v));
   const vistas = new Set(), curvas = [];

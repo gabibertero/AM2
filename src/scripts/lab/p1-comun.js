@@ -1,5 +1,5 @@
 // Utilidades compartidas por los generadores del 1º parcial: TeX, radicales simples y polinomios en x, y, z. Lógica pura.
-import { fr, fSum, fMul, fVal, texF, suma, unir } from './mate.js';
+import { fr, fSum, fMul, fVal, texF, suma, unir, SEN } from './mate.js';
 
 export const lineas = (ls) => `\\begin{aligned}${ls.join('\\\\')}\\end{aligned}`;
 export const cases = (ls) => `\\begin{cases}${ls.join('\\\\')}\\end{cases}`;
@@ -54,30 +54,31 @@ export function p3Sub(p, P) {
 }
 export const unirT = (a, b) => unir(a === '0' ? '' : a, b === '0' ? '' : b) || '0';
 
-// Superficie F(x,y,z)=0 con un punto P que la cumple y F_z(P) ≠ 0. Parte polinómica + opcional c·ln z (z0=1) o c·e^{y−z} (y0=z0).
+// Superficie F(x,y,z)=0 con un punto P que la cumple y F_z(P) ≠ 0 (o = 0 si cero: caso en que no se puede aplicar el teorema).
+// Parte polinómica + opcional c·ln z (z0=1), c·e^{y−z} (y0=z0) o c·sen(z−z0).
 const POOL = [[2, 0, 0], [0, 2, 0], [0, 0, 2], [1, 1, 0], [1, 0, 1], [0, 1, 1], [2, 0, 1], [0, 2, 1], [1, 1, 1], [0, 1, 2], [1, 0, 2], [0, 0, 3], [1, 0, 0], [0, 1, 0], [0, 0, 1]];
-export function superficie(rng) {
-  for (;;) {
-    const tipo = rng.elegir(['poli', 'poli', 'lnz', 'expyz']);
+export function superficie(rng, cero = false) {
+  for (let n = 0; ; n++) {
+    const tipo = rng.elegir(['poli', 'poli', 'lnz', 'expyz', 'senz']);
     const z0 = tipo === 'lnz' ? 1 : rng.nz(2);
     const P = [rng.nz(2), tipo === 'expyz' ? z0 : rng.nz(2), z0];
     const ms = [];
     while (ms.length < (tipo === 'poli' ? 3 : 2)) { const m = rng.elegir(POOL); if (!ms.some((t) => t.join() === m.join())) ms.push(m); }
     let poly = p3(ms.map((m) => [rng.nz(3), ...m]));
     const c = tipo === 'poli' ? 0 : rng.nz(3);
-    const espVal = tipo === 'expyz' ? c : 0;
+    const espVal = tipo === 'expyz' ? c : 0, senz = tipo === 'senz', zArg = z0 > 0 ? `z-${z0}` : `z+${-z0}`, zP = `${z0}-${fac(z0 < 0, z0)}`;
     poly = p3([...poly, [-(fVal(p3Fr(poly, ...P)) + espVal), 0, 0, 0]]);
     const D = [0, 1, 2].map((v) => p3D(poly, v));
-    const val = [p3Fr(D[0], ...P), fSum(p3Fr(D[1], ...P), fr(tipo === 'expyz' ? c : 0)), fSum(p3Fr(D[2], ...P), fr(tipo === 'lnz' ? c : tipo === 'expyz' ? -c : 0))];
-    if (val[2].n === 0 || val.every((v) => v.n === 0)) continue;
+    const val = [p3Fr(D[0], ...P), fSum(p3Fr(D[1], ...P), fr(tipo === 'expyz' ? c : 0)), fSum(p3Fr(D[2], ...P), fr(tipo === 'lnz' || senz ? c : tipo === 'expyz' ? -c : 0))];
+    if ((cero && n < 400 ? val[2].n !== 0 : val[2].n === 0) || val.every((v) => v.n === 0)) continue; // tras 400 intentos fallidos de F_z = 0 se rinde y da un F_z ≠ 0
     const ev = (y, z) => (tipo === 'expyz' ? `e^{${fac(y < 0, y)}-${fac(z < 0, z)}}` : '');
     const gen = [p3Tex(D[0]), p3Tex(D[1]), p3Tex(D[2])];
     const sub = [p3Sub(D[0], P), p3Sub(D[1], P), p3Sub(D[2], P)];
     const lnz = tipo === 'lnz', ex = tipo === 'expyz';
-    const Ftex = unirT(p3Tex(poly), lnz ? suma([[c, '\\ln z']]) : ex ? suma([[c, 'e^{y-z}']]) : '0');
-    const Gen = [gen[0], ex ? unirT(gen[1], suma([[c, 'e^{y-z}']])) : gen[1], lnz ? unirT(gen[2], `${c < 0 ? '-' : ''}\\frac{${Math.abs(c)}}{z}`) : ex ? unirT(gen[2], suma([[-c, 'e^{y-z}']])) : gen[2]];
-    const Sub = [sub[0], ex ? unirT(sub[1], suma([[c, ev(P[1], P[2])]])) : sub[1], lnz ? unirT(sub[2], `${c < 0 ? '-' : ''}\\frac{${Math.abs(c)}}{${P[2]}}`) : ex ? unirT(sub[2], suma([[-c, ev(P[1], P[2])]])) : sub[2]];
-    const Fn = (x, y, z) => p3Ev(poly, x, y, z) + (lnz ? c * Math.log(z) : ex ? c * Math.exp(y - z) : 0);
-    return { P, Fn, Ftex, Gen, Sub, val, FPsub: unirT(p3Sub(poly, P), lnz ? suma([[c, `\\ln ${P[2]}`]]) : ex ? suma([[c, ev(P[1], P[2])]]) : '0'), tipo };
+    const Ftex = unirT(p3Tex(poly), lnz ? suma([[c, '\\ln z']]) : ex ? suma([[c, 'e^{y-z}']]) : senz ? suma([[c, `${SEN}\\left(${zArg}\\right)`]]) : '0');
+    const Gen = [gen[0], ex ? unirT(gen[1], suma([[c, 'e^{y-z}']])) : gen[1], lnz ? unirT(gen[2], `${c < 0 ? '-' : ''}\\frac{${Math.abs(c)}}{z}`) : senz ? unirT(gen[2], suma([[c, `\\cos\\left(${zArg}\\right)`]])) : ex ? unirT(gen[2], suma([[-c, 'e^{y-z}']])) : gen[2]];
+    const Sub = [sub[0], ex ? unirT(sub[1], suma([[c, ev(P[1], P[2])]])) : sub[1], lnz ? unirT(sub[2], `${c < 0 ? '-' : ''}\\frac{${Math.abs(c)}}{${P[2]}}`) : senz ? unirT(sub[2], suma([[c, `\\cos\\left(${zP}\\right)`]])) : ex ? unirT(sub[2], suma([[-c, ev(P[1], P[2])]])) : sub[2]];
+    const Fn = (x, y, z) => p3Ev(poly, x, y, z) + (lnz ? c * Math.log(z) : ex ? c * Math.exp(y - z) : senz ? c * Math.sin(z - z0) : 0);
+    return { P, Fn, Ftex, Gen, Sub, val, FPsub: unirT(p3Sub(poly, P), lnz ? suma([[c, `\\ln ${P[2]}`]]) : ex ? suma([[c, ev(P[1], P[2])]]) : senz ? suma([[c, `${SEN}\\left(${zP}\\right)`]]) : '0'), tipo };
   }
 }

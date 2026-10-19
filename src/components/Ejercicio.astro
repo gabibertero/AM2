@@ -10,9 +10,13 @@ interface Props {
 }
 const { id, numero, fuente, pagina, unidad, tema, machete } = Astro.props;
 import IA from './IA.astro';
+import { getCollection } from 'astro:content';
 const archivo = fuente.split('/').pop().replace(/\.[a-z]+$/i, '');
 const ayudas = `ayudas-${id.replace(/\W/g, '-')}`;
 const base = import.meta.env.BASE_URL;
+// El chip enlaza al machete concreto (por título o slug); si no se encuentra, al índice.
+const m = machete ? (await getCollection('machetes')).find((e) => e.data.slug === machete || e.data.titulo === machete) : null;
+const hrefMachete = `${base}machetes/${m ? m.data.slug + '/' : ''}`;
 const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelto', 'Resuelto']];
 ---
 <section class="ejercicio" id={`ej-${numero}`} data-ejercicio data-id={id} data-unidad={unidad} data-ia-ctx>
@@ -24,11 +28,11 @@ const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelt
         <span class="chip chip-u" data-unidad={unidad}>{unidad}</span>
         <span class="chip" data-ia-tit>{tema}</span>
         <span class="ej-fuente">{archivo}, p.{pagina}</span>
-        {machete && <a class="chip chip-link" href={`${base}machetes/`}>Machete: {machete}</a>}
+        {machete && <a class="chip chip-link" href={hrefMachete}>Machete: {m ? m.data.titulo : machete}</a>}
       </p>
     </div>
   </header>
-  <fieldset class="estado">
+  <fieldset class="estado" data-js hidden>
     <legend>Estado</legend>
     <span class="seg">
     {estados.map(([valor, texto]) => (
@@ -37,7 +41,7 @@ const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelt
     </span>
   </fieldset>
   <div id={ayudas} aria-live="polite"><slot /></div>
-  <div class="acciones">
+  <div class="acciones" data-js hidden>
     <button type="button" data-accion="pista" aria-expanded="false" aria-controls={ayudas}>Ver pista</button>
     <button type="button" data-accion="paso" aria-expanded="false" aria-controls={ayudas}>Siguiente paso</button>
     <button type="button" data-accion="solucion" aria-expanded="false" aria-controls={ayudas}>Ver solución completa</button>
@@ -53,4 +57,9 @@ const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelt
     </div>
   </div>
 </section>
-<script>import '../scripts/figuras.js';</script>
+<script>
+  import '../scripts/figuras.js';
+  // Sin JS las ayudas se ven (noscript) y estos controles quedan ocultos.
+  document.querySelectorAll('.ejercicio [data-js]').forEach((e) => (e.hidden = false));
+</script>
+<noscript><style is:inline>.ejercicio .capa[hidden]{display:block!important}</style></noscript>

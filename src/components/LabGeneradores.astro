@@ -1,16 +1,11 @@
 ---
-// Generadores de ejercicios con semilla (lógica pura en scripts/lab/, UI en scripts/lab/ui.js). Sin JS solo se ve la lista de tipos.
+// Generadores de ejercicios con semilla (lógica pura en scripts/lab/, UI en scripts/lab/ui.js). El generador va primero; la lista de tipos va debajo, en un <details open> que se puede plegar.
 import IA from './IA.astro';
 import InstanciaSec from './InstanciaSec.astro';
 import { GENERADORES } from '../scripts/lab/index.js';
 import { INSTANCIAS } from '../lib/sitio.js';
 // Cada generador declara `instancia` (por defecto p2: los actuales son de U4–U10).
 ---
-{INSTANCIAS.map(({ i }) => { const gs = GENERADORES.filter((g) => (g.instancia ?? 'p2') === i); return (
-  <InstanciaSec i={i} vacio={!gs.length} nivel={2}>
-    <ul class="lab-lista">{gs.map((g) => <li>{g.nombre}</li>)}</ul>
-  </InstanciaSec>
-); })}
 <noscript><p class="suave">El laboratorio necesita JavaScript para generar los ejercicios.</p></noscript>
 
 <section class="lab-gen" aria-labelledby="h-gen" data-lab hidden>
@@ -42,6 +37,15 @@ import { INSTANCIAS } from '../lib/sitio.js';
   </article>
 </section>
 
+<details class="lab-tipos" open>
+  <summary>Tipos de ejercicio disponibles</summary>
+  {INSTANCIAS.map(({ i }) => { const gs = GENERADORES.filter((g) => (g.instancia ?? 'p2') === i); return (
+  <InstanciaSec i={i} vacio={!gs.length} nivel={2}>
+    <ul class="lab-lista">{gs.map((g) => <li>{g.nombre}</li>)}</ul>
+  </InstanciaSec>
+); })}
+</details>
+
 <script>
   import { iniciarLab } from '../scripts/lab/ui.js';
   const raiz = document.querySelector('[data-lab]');
@@ -49,6 +53,8 @@ import { INSTANCIAS } from '../lib/sitio.js';
 </script>
 
 <style>
+  .lab-tipos { margin-top: var(--s-32); }
+  .lab-tipos > summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
   .lab-lista { columns: 2 16rem; padding-left: 1.2em; margin: 0 0 1rem; }
   .lab-ctrl { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; margin-bottom: 8px; }
   .lab-campo { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
@@ -69,7 +75,7 @@ import { INSTANCIAS } from '../lib/sitio.js';
   .lab-sol li { margin: 0 0 .7em; }
   .lab-res { margin-top: .4em; padding-top: .6em; border-top: 1px solid var(--borde); }
   .lab-res-t { margin: 0; font-weight: 700; }
-  .lab-sol :global(.lab-graf) { display: block; max-width: 100%; height: auto; background: var(--sup); border: 1px solid var(--borde); border-radius: var(--r-s); margin-top: 6px; }
+  .lab-sol :global(.lab-graf) { display: block; width: 100%; max-width: 340px; height: auto; margin: 6px auto 0; background: var(--sup); border: 1px solid var(--borde); border-radius: var(--r-s); }
   .lab-bloque p { margin: 0 0 .2em; }
   .lab-tex { overflow-x: auto; overflow-y: hidden; position: relative; max-width: 100%; }
   .lab-tex :global(.katex-display) { margin: .3em 0; }

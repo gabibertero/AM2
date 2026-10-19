@@ -74,7 +74,7 @@ for (const g of GENERADORES) {
       // Signos/productos mal pegados al evaluar (en TeX y en el texto explicativo).
       const MAL = /\+\s*[-−]|[-−]\s*[-−]|(?:·|\\cdot)\s*[-−]|\d\\left\(\s*[-−]?\d+(?:\.\d+)?\s*\\right\)|\d\(|\d\s+\d/;
       for (const t of [...e.enunciado, ...e.pasos, e.resultado].flatMap((o) => [o.tex, o.txt])) assert.ok(!t || !MAL.test(t), `semilla ${s}: producto/signo mal armado en "${t}"`);
-      for (const p of e.pasos) assert.ok(p.txt && p.tex, `semilla ${s}: paso sin texto o sin fórmula`);
+      for (const p of e.pasos) assert.ok(p.txt && (p.tex || g.id === 'dominio'), `semilla ${s}: paso sin texto o sin fórmula`); // en dominio el cierre y el gráfico no repiten D_f
       assert.ok(!/\\sin(?![a-z])/.test(todo), `semilla ${s}: usar \\operatorname{sen}, no \\sin`);
       vistos.add(e.enunciado[0].tex);
     }
@@ -286,9 +286,9 @@ function resolverZ(F, x, y, z0) {
 const lattice = [];
 for (let i = -12; i <= 12; i++) for (let j = -12; j <= 12; j++) lattice.push([i / 2, j / 2]);
 
-test(`p1 instancia: los siete generadores del 1º parcial están registrados con instancia 'p1'`, () => {
+test(`p1 instancia: los ocho generadores del 1º parcial están registrados con instancia 'p1'`, () => {
   const ids = GENERADORES.filter((g) => g.instancia === 'p1').map((g) => g.id).sort();
-  assert.deepEqual(ids, ['dominio', 'diferencial', 'direccional', 'extremos', 'implicita', 'lagrange', 'plano'].sort());
+  assert.deepEqual(ids, ['dominio', 'diferencial', 'direccional', 'direccional3', 'extremos', 'implicita', 'lagrange', 'plano'].sort());
 });
 
 test(`dominio: f es real y finita exactamente donde valen las desigualdades (reticulado de ${lattice.length} puntos, bordes incluidos) (${N} semillas)`, () => {
@@ -301,14 +301,14 @@ test(`dominio: f es real y finita exactamente donde valen las desigualdades (ret
       v.conds.forEach((c, i) => assert.equal(c(x, y), v.resueltas[i](x, y), `semilla ${s}, cond ${i}, (${x},${y}): desigualdad despejada distinta de la original`));
     }
   }
-  assert.equal(tipos.size, 11, [...tipos].join());
+  assert.equal(tipos.size, 14, [...tipos].join());
 });
 
 test('dominio: control negativo, tratar el borde de una condición estricta como incluido SÍ se detecta', () => {
   let probados = 0, fallan = 0;
   for (const s of semillas) {
     const e = generar('dominio', s), v = e.verif;
-    if (v.id === 'raiz' || v.id === 'rp' || v.union) continue; // solo tienen ≥ / ≤: no hay borde excluido que equivocar
+    if (['raiz', 'rp', 'asen', 'acos'].includes(v.id) || v.union) continue; // solo tienen ≥ / ≤: no hay borde excluido que equivocar
     probados++;
     const mal = (x, y) => v.conds.every((c, i) => c(x, y) || v.bordes[i](x, y));
     if (lattice.some(([x, y]) => mal(x, y) !== Number.isFinite(v.f(x, y)))) fallan++;
@@ -550,7 +550,7 @@ test(`implícita: dy/dx de g(x,y)=0, de una ecuación con y(x), z(x) (con arctg)
       cerca((zp - zm) / (2 * h), v.dzdx, 1e-5, `dz/dx semilla ${s}`);
     }
   }
-  assert.deepEqual([...modos].sort(), ['arctg', 'curva', 'sistema', 'sup', 'yz']);
+  assert.deepEqual([...modos].sort(), ['arctg', 'cero', 'curva', 'sistema', 'sup', 'yz']);
 });
 
 test('implícita: control negativo, el cociente con el jacobiano al revés o sin el signo menos SÍ se detecta', () => {
@@ -643,4 +643,72 @@ test('dominio: en los tipos con producto/cociente el dominio es la UNIÓN S1 ∪
     }
   }
   assert.ok(uni > 40, `pocos con unión: ${uni}`);
+});
+
+test(`direccional3: ∇f, versor unitario, D_u f = ∇f·u, máximo y mínimo contra diferencias finitas en 3 variables (${N} semillas)`, () => {
+  const modos = new Set();
+  for (const s of semillas) {
+    const e = generar('direccional3', s), v = e.verif, [x0, y0, z0] = v.P, h = 1e-5;
+    modos.add(/\\alpha=/.test(e.enunciado[1].tex) ? 'angulos' : 'vector');
+    const g = [0, 1, 2].map((i) => { const d = [0, 0, 0]; d[i] = h; return (v.f(x0 + d[0], y0 + d[1], z0 + d[2]) - v.f(x0 - d[0], y0 - d[1], z0 - d[2])) / (2 * h); });
+    g.forEach((gi, i) => cerca(gi, v.grad[i], 1e-6, `f_${i} semilla ${s}`));
+    cerca(Math.hypot(...v.u), 1, 1e-12, `|u| semilla ${s}`);
+    cerca((v.f(x0 + h * v.u[0], y0 + h * v.u[1], z0 + h * v.u[2]) - v.f(x0 - h * v.u[0], y0 - h * v.u[1], z0 - h * v.u[2])) / (2 * h), v.duf, 1e-6, `D_u f semilla ${s}`);
+    cerca(Math.hypot(...g), v.mod, 1e-6, `|∇f| semilla ${s}`);
+    cerca(Math.hypot(...v.dirMax), 1, 1e-12, `|u_max| semilla ${s}`);
+    v.dirMax.forEach((c, i) => cerca(c * v.mod, v.grad[i], 1e-9, `u_max = ∇f/|∇f| semilla ${s}`));
+    assert.ok(v.duf <= v.mod + 1e-9 && v.duf >= -v.mod - 1e-9, `semilla ${s}: |D_u f| no puede superar |∇f|`);
+    assert.ok(!/NaN|undefined/.test(JSON.stringify(e)), `semilla ${s}`);
+  }
+  assert.deepEqual([...modos].sort(), ['angulos', 'vector']);
+});
+
+test('direccional: hay puntos no amables (arctg y raíz sin exponencial en 0 ni ln 1) con gradiente exacto', () => {
+  let atg = 0, rz = 0;
+  for (const s of semillas) {
+    const e = generar('direccional', s), f = e.enunciado[0].tex;
+    if (/arctg/.test(f)) atg++;
+    if (/^f\(x,y\)=\\sqrt\{x\^\{2\}\+y\^\{2\}\}$/.test(f)) rz++;
+  }
+  assert.ok(atg > 5 && rz > 10, `${atg} ${rz}`);
+});
+
+test('implícita: aparece sen(z−z₀) y el caso F\'_z(P)=0 dice que NO se puede aplicar el teorema (y F_z es 0 de verdad)', () => {
+  let ceros = 0, sen = 0;
+  for (const s of semillas) {
+    const e = generar('implicita', s), v = e.verif;
+    if (/operatorname\{sen\}/.test(e.enunciado[0].tex)) sen++;
+    if (v.modo !== 'cero') continue;
+    ceros++;
+    const [x0, y0, z0] = v.P, h = 1e-5;
+    assert.ok(Math.abs(v.F(x0, y0, z0)) < 1e-12, `F(P) semilla ${s}`);
+    cerca((v.F(x0, y0, z0 + h) - v.F(x0, y0, z0 - h)) / (2 * h), 0, 1e-6, `F_z(P) = 0 semilla ${s}`);
+    assert.equal(v.val[2], 0);
+    assert.ok(/NO se puede aplicar el teorema/.test(e.pasos.map((p) => p.txt).join(' ')) && /no se garantiza/.test(e.resultado.tex), `semilla ${s}`);
+  }
+  assert.ok(ceros > 10 && sen > 8, `${ceros} ${sen}`);
+});
+
+test('dominio: hay cónica de centro desplazado (completa cuadrados), arcsen/arccos con −1 ≤ G ≤ 1 y ln|G|; D_f no se repite en los pasos', () => {
+  let circd = 0;
+  const vistos = new Set();
+  for (const s of semillas) {
+    const e = generar('dominio', s), todo = e.pasos.map((p) => p.txt).join(' ');
+    vistos.add(e.verif.id);
+    if (/completo cuadrados/.test(todo)) { circd++; assert.ok(/\\left\(x[-+]\d+\\right\)\^\{2\}/.test(e.pasos.map((p) => p.tex).join(' ')), `semilla ${s}`); }
+    if (e.verif.id === 'asen' || e.verif.id === 'acos') assert.ok(/entre −1 y 1/.test(todo) && e.resultado.tex.split('\\\\').length >= 1, `semilla ${s}`);
+    assert.ok(!e.pasos.some((p) => /D_\{f\}/.test(p.tex ?? '')), `semilla ${s}: D_f repetido en los pasos`);
+    assert.equal((e.resultado.tex.match(/D_\{f\}/g) ?? []).length, 1, `semilla ${s}`);
+  }
+  assert.ok(circd > 30, `pocas circunferencias desplazadas: ${circd}`);
+  for (const id of ['asen', 'acos', 'lnabs']) assert.ok(vistos.has(id), id);
+});
+
+test('lagrange: cuando se pide la superficie total el enunciado dice que la caja es de volumen máximo', () => {
+  let n = 0;
+  for (const s of semillas) {
+    const t = generar('lagrange', s).enunciado[0].txt;
+    if (/superficie total/.test(t)) { n++; assert.ok(/volumen máximo/.test(t), `semilla ${s}: ${t}`); }
+  }
+  assert.ok(n > 5);
 });

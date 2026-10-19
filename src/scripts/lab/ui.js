@@ -10,9 +10,22 @@ const el = (tag, clase, texto) => {
   if (texto) n.textContent = texto;
   return n;
 };
+// Texto con notación: `$…$` y las derivadas con apóstrofo (f'_x, F'_z(P), g'_y = 0…) se pintan con KaTeX en línea; el resto es textContent.
+const NOTACION = /\$([^$]+)\$|([A-Za-z]'{1,2}_[xyz12]{1,3}(?:\([^()]*\))?(?:\s?=\s?0\b)?)/g;
+function texto(p, s) {
+  let i = 0;
+  for (const m of s.matchAll(NOTACION)) {
+    if (m.index > i) p.append(s.slice(i, m.index));
+    const span = el('span', 'lab-inl');
+    katex.render(m[1] ?? m[2].replace(/_([xyz12]{2,3})/, '_{$1}'), span, { throwOnError: false });
+    p.append(span);
+    i = m.index + m[0].length;
+  }
+  if (i < s.length) p.append(s.slice(i));
+}
 function bloque(b) {
   const d = el('div', 'lab-bloque');
-  if (b.txt) d.append(el('p', '', b.txt));
+  if (b.txt) { const p = el('p'); texto(p, b.txt); d.append(p); }
   if (b.tex) {
     const m = el('div', 'lab-tex');
     katex.render(b.tex, m, { displayMode: true, throwOnError: false });
@@ -20,9 +33,10 @@ function bloque(b) {
   }
   return d;
 }
-// Gráfico del dominio (si el generador lo da): región en color, curvas borde llenas (incluidas) o punteadas (excluidas), ejes y marcas.
+// Gráfico del dominio (si el generador lo da): región en color, curvas borde llenas (incluidas) o punteadas (excluidas), ejes numerados.
+// Se dibuja en píxeles de dispositivo (devicePixelRatio) para que sea nítido; el CSS lo achica o centra.
 function grafico(g) {
-  const R = 6, W = 320, c = el('canvas', 'lab-graf');
+  const R = 6, L = 340, s = Math.min(3, Math.max(1, Math.round(window.devicePixelRatio || 1))), W = L * s, c = el('canvas', 'lab-graf');
   c.width = W; c.height = W;
   c.setAttribute('role', 'img');
   c.setAttribute('aria-label', 'Gráfico del dominio: región sombreada, borde lleno si está incluido y punteado si no. El detalle está escrito en los pasos.');
@@ -34,12 +48,23 @@ function grafico(g) {
   ctx.globalAlpha = 0.28; ctx.fillStyle = acento;
   for (let j = 0; j < W; j++) for (let i = 0; i < W; i++) { const [x, y] = xy(i, j); if (g.dom(x, y)) ctx.fillRect(i, j, 1, 1); }
   ctx.globalAlpha = 1; ctx.fillStyle = texto;
-  ctx.fillRect(0, W / 2, W, 1); ctx.fillRect(W / 2, 0, 1, W); // ejes
-  for (let k = -R + 1; k < R; k++) { const p = ((k + R) / (2 * R)) * W; ctx.fillRect(p, W / 2 - 3, 1, 7); ctx.fillRect(W / 2 - 3, p, 7, 1); }
+  ctx.fillRect(0, W / 2 - s / 2, W, s); ctx.fillRect(W / 2 - s / 2, 0, s, W); // ejes
+  ctx.font = `${11 * s}px sans-serif`; ctx.textBaseline = 'top';
+  for (let k = -R + 1; k < R; k++) {
+    const p = ((k + R) / (2 * R)) * W;
+    ctx.fillRect(p - s / 2, W / 2 - 3 * s, s, 6 * s); ctx.fillRect(W / 2 - 3 * s, p - s / 2, 6 * s, s);
+    if (k && k % 3 === 0) { // números en ±3 (los extremos ±6 se dicen en el título)
+      const t = String(k).replace('-', '\u2212');
+      ctx.textAlign = 'center'; ctx.fillText(t, p, W / 2 + 5 * s);
+      ctx.textAlign = 'left'; ctx.fillText(t, W / 2 + 6 * s, W - p - 6 * s);
+    }
+  }
+  ctx.textAlign = 'right'; ctx.fillText('x', W - 3 * s, W / 2 + 5 * s);
+  ctx.textAlign = 'left'; ctx.fillText('y', W / 2 + 6 * s, 3 * s);
   for (const cv of g.curvas) {
     const lado = (i, j) => { const [x, y] = xy(i, j); return cv.g(x, y) - cv.c > 0; };
     for (let j = 0; j < W - 1; j++) for (let i = 0; i < W - 1; i++) {
-      if ((lado(i, j) !== lado(i + 1, j) || lado(i, j) !== lado(i, j + 1)) && (cv.incl || ((i + j) >> 2) % 2 === 0)) ctx.fillRect(i, j, 2, 2);
+      if ((lado(i, j) !== lado(i + 1, j) || lado(i, j) !== lado(i, j + 1)) && (cv.incl || ((i + j) >> 2) % 2 === 0)) ctx.fillRect(i, j, 1.5 * s, 1.5 * s);
     }
   }
   return c;
@@ -83,7 +108,7 @@ export function iniciarLab(raiz) {
     const res = el('div', 'lab-res');
     res.append(el('p', 'lab-res-t', 'Resultado'), bloque(e.resultado));
     sol.replaceChildren(el('h3', '', 'Solución elaborada (no oficial)'), ol, res);
-    if (e.grafico) sol.append(el('p', 'lab-res-t', 'Gráfico del dominio (x, y entre −6 y 6)'), grafico(e.grafico));
+    if (e.grafico) sol.append(el('p', 'lab-res-t', 'Gráfico del dominio (x e y entre −6 y 6)'), grafico(e.grafico));
     sol.hidden = true;
     btnVer.setAttribute('aria-expanded', 'false');
     btnVer.textContent = 'Ver solución';

@@ -7,7 +7,7 @@ import { lineas, num, fp, fac, aprox, raiz, radTerms, radTex, radVal, radMul, p3
 const ex = (k, v) => (k === 1 ? `e^{${v}}` : k === -1 ? `e^{-${v}}` : `e^{${k}${v}}`);
 // Plantillas: f, parciales generales, valores en P (exactos) y la sustitución visible. Con def, solo las que se resuelven a mano por definición.
 function funcion(rng, def) {
-  const tipo = def ? rng.elegir(['poli', 'poli', 'lxy']) : rng.elegir(['poli', 'poli', 'e1', 'e2', 'e3', 'l1', 'l2', 'l3', 'lrz', 'lxy']);
+  const tipo = def ? rng.elegir(['poli', 'poli', 'lxy']) : rng.elegir(['poli', 'poli', 'e1', 'e2', 'e3', 'l1', 'l2', 'l3', 'lrz', 'lxy', 'atg', 'rzp', 'rzp']);
   const n = (v) => fac(v < 0, `${v}`);
   for (;;) {
     if (tipo === 'poli') {
@@ -23,17 +23,17 @@ function funcion(rng, def) {
     if (tipo === 'e1') { // x² e^{ky}, P = (x0, 0)
       const k = rng.nz(2), x0 = rng.nz(3), E = ex(k, 'y');
       return { ftex: `x^{2}${E}`, fn: (x, y) => x * x * Math.exp(k * y), P: [x0, 0], gen: [`2x${E}`, suma([[k, `x^{2}${E}`]])],
-        sub: [`2\\cdot ${n(x0)}\\cdot e^{${k}\\cdot 0}`, suma([[k, `${n(x0)}^{2}e^{${k}\\cdot 0}`]])], g: [fr(2 * x0), fr(k * x0 * x0)], nota: 'e^0 = 1' };
+        sub: [`2\\cdot ${n(x0)}\\cdot e^{${k}\\cdot 0}`, suma([[k, `${n(x0)}^{2}e^{${k}\\cdot 0}`]])], g: [fr(2 * x0), fr(k * x0 * x0)], nota: '$e^{0}=1$' };
     }
     if (tipo === 'e2') { // y e^{kx}, P = (0, y0)
       const k = rng.nz(2), y0 = rng.nz(3), E = ex(k, 'x');
       return { ftex: `y${E}`, fn: (x, y) => y * Math.exp(k * x), P: [0, y0], gen: [suma([[k, `y${E}`]]), E],
-        sub: [suma([[k, `${n(y0)}e^{${k}\\cdot 0}`]]), `e^{${k}\\cdot 0}`], g: [fr(k * y0), fr(1)], nota: 'e^0 = 1' };
+        sub: [suma([[k, `${n(y0)}e^{${k}\\cdot 0}`]]), `e^{${k}\\cdot 0}`], g: [fr(k * y0), fr(1)], nota: '$e^{0}=1$' };
     }
     if (tipo === 'e3') { // (x+y) e^{xy}, P = (x0, 0)
       const x0 = rng.nz(3);
       return { ftex: '\\left(x+y\\right)e^{xy}', fn: (x, y) => (x + y) * Math.exp(x * y), P: [x0, 0], gen: ['\\left(1+y\\left(x+y\\right)\\right)e^{xy}', '\\left(1+x\\left(x+y\\right)\\right)e^{xy}'],
-        sub: [`\\left(1+0\\cdot\\left(${x0}+0\\right)\\right)e^{${n(x0)}\\cdot 0}`, `\\left(1+${n(x0)}\\cdot\\left(${x0}+0\\right)\\right)e^{${n(x0)}\\cdot 0}`], g: [fr(1), fr(1 + x0 * x0)], nota: 'e^0 = 1' };
+        sub: [`\\left(1+0\\cdot\\left(${x0}+0\\right)\\right)e^{${n(x0)}\\cdot 0}`, `\\left(1+${n(x0)}\\cdot\\left(${x0}+0\\right)\\right)e^{${n(x0)}\\cdot 0}`], g: [fr(1), fr(1 + x0 * x0)], nota: '$e^{0}=1$' };
     }
     if (tipo === 'l1') {
       const x0 = rng.nz(3), y0 = rng.nz(3), s = x0 * x0 + y0 * y0;
@@ -52,19 +52,30 @@ function funcion(rng, def) {
       if (R <= 0) continue;
       const pr = p3([[a, 2, 0, 0], [b, 0, 2, 0]]), Rt = p3Tex(pr);
       return { ftex: `\\ln\\sqrt{${Rt}}`, fn: (x, y) => Math.log(Math.sqrt(a * x * x + b * y * y)), P: [x0, y0],
-        simp: `\\frac{1}{2}\\ln\\left(${Rt}\\right)`, simpTxt: 'Antes de derivar simplifico: ln √A = ½·ln A (si derivara la raíz sin simplificar es fácil perder el factor ½).',
+        simp: `\\frac{1}{2}\\ln\\left(${Rt}\\right)`, simpTxt: 'Antes de derivar simplifico: $\\ln\\sqrt{A}=\\frac{1}{2}\\ln A$ (si derivara la raíz sin simplificar es fácil perder el factor ½).',
         gen: [`\\frac{${suma([[a, 'x']])}}{${Rt}}`, `\\frac{${suma([[b, 'y']])}}{${Rt}}`],
         sub: [`\\frac{${a}\\cdot ${n(x0)}}{${p3Sub(pr, [x0, y0, 0])}}`, `\\frac{${b}\\cdot ${n(y0)}}{${p3Sub(pr, [x0, y0, 0])}}`], g: [fr(a * x0, R), fr(b * y0, R)] };
     }
     if (tipo === 'lxy') { // ln(x/y) = ln x − ln y, con x, y > 0
       const x0 = rng.ent(1, 4), y0 = rng.ent(1, 4);
       return { ftex: '\\ln\\frac{x}{y}', fn: (x, y) => Math.log(x / y), P: [x0, y0], lxy: true,
-        simp: '\\ln x-\\ln y', simpTxt: 'Antes de derivar uso la propiedad del logaritmo: ln(x/y) = ln x − ln y.',
+        simp: '\\ln x-\\ln y', simpTxt: 'Antes de derivar uso la propiedad del logaritmo: $\\ln\\frac{x}{y}=\\ln x-\\ln y$.',
         gen: ['\\frac{1}{x}', '-\\frac{1}{y}'], sub: [`\\frac{1}{${x0}}`, `-\\frac{1}{${y0}}`], g: [fr(1, x0), fr(-1, y0)] };
+    }
+    if (tipo === 'atg') { // arctg(y/x) en un punto cualquiera (x0 ≠ 0): sin valores "amables"
+      const x0 = rng.nz(3), y0 = rng.nz(3), s = x0 * x0 + y0 * y0, S = `${n(x0)}^{2}+${n(y0)}^{2}`;
+      return { ftex: '\\operatorname{arctg}\\frac{y}{x}', fn: (x, y) => Math.atan(y / x), P: [x0, y0], gen: ['-\\frac{y}{x^{2}+y^{2}}', '\\frac{x}{x^{2}+y^{2}}'],
+        sub: [`-\\frac{${n(y0)}}{${S}}`, `\\frac{${n(x0)}}{${S}}`], g: [fr(-y0, s), fr(x0, s)], nota: `$${x0 * x0}+${y0 * y0}=${s}$` };
+    }
+    if (tipo === 'rzp') { // √(x²+y²) en un punto con radio entero (terna pitagórica)
+      const [a0, b0, r0] = rng.elegir([[3, 4, 5], [5, 12, 13], [6, 8, 10], [8, 15, 17]]), [x0, y0] = rng() < 0.5 ? [a0, b0] : [b0, a0];
+      const sx = rng.signo(), sy = rng.signo(), X = sx * x0, Y = sy * y0, S = `\\sqrt{${n(X)}^{2}+${n(Y)}^{2}}`;
+      return { ftex: '\\sqrt{x^{2}+y^{2}}', fn: (x, y) => Math.hypot(x, y), P: [X, Y], gen: ['\\frac{x}{\\sqrt{x^{2}+y^{2}}}', '\\frac{y}{\\sqrt{x^{2}+y^{2}}}'],
+        sub: [`\\frac{${n(X)}}{${S}}`, `\\frac{${n(Y)}}{${S}}`], g: [fr(X, r0), fr(Y, r0)], nota: `$\\sqrt{${X * X}+${Y * Y}}=${r0}$` };
     }
     // l3: x ln y, P = (x0, 1)
     const x0 = rng.nz(3);
-    return { ftex: 'x\\ln y', fn: (x, y) => x * Math.log(y), P: [x0, 1], gen: ['\\ln y', '\\frac{x}{y}'], sub: ['\\ln 1', `\\frac{${n(x0)}}{1}`], g: [fr(0), fr(x0)], nota: 'ln 1 = 0' };
+    return { ftex: 'x\\ln y', fn: (x, y) => x * Math.log(y), P: [x0, 1], gen: ['\\ln y', '\\frac{x}{y}'], sub: ['\\ln 1', `\\frac{${n(x0)}}{1}`], g: [fr(0), fr(x0)], nota: '$\\ln 1=0$' };
   }
 }
 
@@ -113,7 +124,7 @@ function direccion(rng, def, [x0, y0]) {
     return { ux: r.ux, uy: r.uy, enun: { txt: 'Dirección: la que va de P hacia el punto Q.', tex: `Q=\\left(${Q[0]},\\ ${Q[1]}\\right)` },
       pasos: [{ txt: 'La dirección va de P a Q, o sea la del vector v = Q − P:', tex: `\\vec v=Q-P=\\left(${Q[0]}-${fp(x0)},\\ ${Q[1]}-${fp(y0)}\\right)=\\left(${a},\\ ${b}\\right)` }, ...r.pasos] };
   }
-  const cu = rng.ent(1, 4), [a, b] = BISECTRIZ[cu], r = normaliza(a, b, `La bisectriz del ${cu}º cuadrante forma ${[45, 135, 225, 315][cu - 1]}° con el semieje positivo de las x y tiene la dirección de v = (${a}, ${b}). `);
+  const cu = rng.ent(1, 4), [a, b] = BISECTRIZ[cu], r = normaliza(a, b, `La bisectriz del ${cu}º cuadrante forma ${[45, 135, 225, 315][cu - 1]}° con el semieje positivo de las x y tiene la dirección de $\\vec v=(${a},\\ ${b})$. `);
   return { ux: r.ux, uy: r.uy, enun: { txt: `Dirección: la de la bisectriz del ${cu}º cuadrante.`, tex: `\\vec v=\\left(${a},\\ ${b}\\right)` }, pasos: r.pasos };
 }
 
@@ -214,4 +225,72 @@ function direccional(rng) {
   };
 }
 
-export const GENERADORES_P1_DIRECCIONAL = [{ id: 'direccional', nombre: 'Gradiente y derivada direccional', grupo: 'Cálculo', instancia: 'p1', generar: direccional }];
+
+// f(x,y,z): gradiente en P, versor por vector o por ángulos directores (cosenos directores), D_u f = ∇f·u y máximo/mínimo crecimiento.
+const COS = { 45: [2, fr(1, 2)], 60: [1, fr(1, 2)], 90: null, 120: [1, fr(-1, 2)], 135: [2, fr(-1, 2)] };
+const TERNAS = [[60, 60, 45], [60, 45, 120], [120, 60, 45], [45, 60, 60], [135, 60, 60], [60, 135, 60], [90, 45, 45], [45, 90, 135], [120, 120, 45], [60, 120, 135]];
+const VEC3 = [[1, 2, 2], [2, 3, 6], [2, -1, 2], [1, 1, 1], [1, -1, 2], [0, 3, 4], [-2, 1, 2], [3, -4, 12], [1, 0, -1], [2, 2, 1], [-1, 2, 3]];
+const POOL3 = [[2, 0, 0], [0, 2, 0], [0, 0, 2], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1], [2, 1, 0], [0, 1, 2], [1, 0, 0], [0, 1, 0], [0, 0, 1]];
+function direccional3(rng) {
+  let p, P, G;
+  for (;;) {
+    const ms = [], k = rng.ent(3, 4);
+    while (ms.length < k) { const m = rng.elegir(POOL3); if (!ms.some((t) => t.join() === m.join())) ms.push(m); }
+    p = p3(ms.map((m) => [rng.nz(3), ...m]));
+    P = [rng.nz(2), rng.nz(2), rng.nz(2)];
+    G = [0, 1, 2].map((v) => p3Fr(p3D(p, v), ...P));
+    if (G.some((g) => g.n !== 0)) break;
+  }
+  const nm = ['x', 'y', 'z'], D = [0, 1, 2].map((v) => p3D(p, v)), n = (v) => fac(v < 0, `${v}`);
+  const modo = rng.elegir(['vector', 'angulos']);
+  let ux, uy, uz, enun, pasosDir;
+  if (modo === 'vector') {
+    const [a, b, c] = rng.elegir(VEC3), [k, s] = raiz(a * a + b * b + c * c), cmp = (t) => radTerms([[s, fr(t, k * s)]]);
+    [ux, uy, uz] = [a, b, c].map(cmp);
+    const M = radTex([[s, fr(k)]]), crudo = `\\sqrt{${a * a + b * b + c * c}}`;
+    enun = { txt: 'Dirección: la del vector v.', tex: `\\vec v=\\left(${a},\\ ${b},\\ ${c}\\right)` };
+    pasosDir = [
+      { txt: 'El vector v no tiene módulo 1, así que lo normalizo (u = v / ‖v‖). Los tres cocientes son los cosenos directores de la dirección:', tex: lineas([`\\left\\|\\vec v\\right\\|&=\\sqrt{${n(a)}^{2}+${n(b)}^{2}+${n(c)}^{2}}=${crudo}${M !== crudo ? `=${M}` : ''}`, `\\vec u&=\\frac{\\vec v}{\\left\\|\\vec v\\right\\|}=\\left(\\cos\\alpha,\\ \\cos\\beta,\\ \\cos\\gamma\\right)`, `&=\\left(${radTex(ux)},\\ ${radTex(uy)},\\ ${radTex(uz)}\\right)`]) },
+    ];
+  } else {
+    const [al, be, ga] = rng.elegir(TERNAS), cm = (g) => (COS[g] ? radTerms([COS[g]]) : []);
+    [ux, uy, uz] = [al, be, ga].map(cm);
+    enun = { txt: 'Dirección: la que forma con los semiejes positivos x, y, z los ángulos α, β y γ.', tex: `\\alpha=${al}^{\\circ},\\ \\beta=${be}^{\\circ},\\ \\gamma=${ga}^{\\circ}` };
+    pasosDir = [
+      { txt: 'La dirección está dada por sus ángulos directores, así que el versor es u = (cos α, cos β, cos γ). Control: la suma de los cuadrados de los cosenos directores tiene que dar 1.', tex: lineas([`\\vec u&=\\left(\\cos ${al}^{\\circ},\\ \\cos ${be}^{\\circ},\\ \\cos ${ga}^{\\circ}\\right)`, `&=\\left(${radTex(ux)},\\ ${radTex(uy)},\\ ${radTex(uz)}\\right)`, `\\left\\|\\vec u\\right\\|^{2}&=\\cos^{2}\\alpha+\\cos^{2}\\beta+\\cos^{2}\\gamma=1`]) },
+    ];
+  }
+  const u = [ux, uy, uz], g = G;
+  const dT = radTerms(u.flatMap((c, i) => radMul(c, g[i]))), Duf = radVal(dT);
+  const prods = u.map((c, i) => radTex(radMul(c, g[i]))).reduce((a, b) => unirT(a, b));
+  const lnU = lineas([`\\frac{\\partial f}{\\partial\\vec u}(P)&=\\nabla f(P)\\cdot\\vec u`, `&=${g.map((gi, i) => `${fp(gi)}\\cdot ${fac(radVal(u[i]) < 0, radTex(u[i]))}`).join('+')}`, `&=${prods}`, ...(radTex(dT) !== prods ? [`&=${radTex(dT)}`] : [])]);
+  const q = g.reduce((acc, gi) => fSum(acc, fMul(gi, gi)), fr(0)), [kN, sN] = raiz(q.n * q.d);
+  const mod = radTerms([[sN, fr(kN, q.d)]]), modN = radVal(mod);
+  const dirMax = g.map((gi) => radTerms([[sN, fMul(gi, fr(q.d, kN * sN))]]));
+  const ang = (x) => dg((Math.acos(Math.max(-1, Math.min(1, x))) * 180) / Math.PI);
+  const cosM = g.map((gi) => fVal(gi) / modN);
+  const neg = (r) => radTex(radMul(r, -1));
+  const vec3 = (r) => `\\left(${r.map(radTex).join(',\\ ')}\\right)`;
+  const pasos = [
+    { txt: 'Calculo las tres derivadas parciales de f (f es polinómica, de clase C¹: es diferenciable y vale el gradiente):', tex: lineas(nm.map((v, i) => `f'_${v}(x,y,z)&=${p3Tex(D[i])}`)) },
+    { txt: `Las evalúo en P=(${P.join(',')}):`, tex: lineas(nm.flatMap((v, i) => [`f'_${v}(P)&=${p3Sub(D[i], P)}`, `&=${num(g[i])}`])) },
+    { txt: 'El gradiente en P junta las tres derivadas parciales:', tex: `\\nabla f(P)=\\left(${g.map(num).join(',\\ ')}\\right)` },
+    ...pasosDir,
+    { txt: 'Como f es diferenciable en P, la derivada direccional es el producto escalar del gradiente con el versor u:', tex: lnU },
+    { txt: 'Máximo crecimiento: ∂f/∂u(P) = ‖∇f(P)‖ cos φ es máxima cuando u tiene la dirección y sentido del gradiente, y vale ‖∇f(P)‖. Calculo el módulo:', tex: lineas([`\\left\\|\\nabla f(P)\\right\\|&=\\sqrt{${g.map((gi) => `\\left(${num(gi)}\\right)^{2}`).join('+')}}`, `&=\\sqrt{${texF(q)}}${radTex(mod) !== `\\sqrt{${texF(q)}}` ? `=${radTex(mod)}` : ''}`]) },
+    { txt: 'El versor de máximo crecimiento es ∇f(P)/‖∇f(P)‖; sus componentes son los cosenos directores del gradiente y de ahí salen los ángulos con cada semieje:', tex: lineas([`\\vec u_{\\max}&=${vec3(dirMax)}`, `\\alpha&=\\arccos\\left(${radTex(dirMax[0])}\\right)${ang(cosM[0])}`, `\\beta&=\\arccos\\left(${radTex(dirMax[1])}\\right)${ang(cosM[1])}`, `\\gamma&=\\arccos\\left(${radTex(dirMax[2])}\\right)${ang(cosM[2])}`]) },
+    { txt: 'Mínimo crecimiento: es el sentido opuesto (cos φ = −1) y el valor es −‖∇f(P)‖:', tex: lineas([`\\vec u_{\\min}&=-\\vec u_{\\max}=\\left(${dirMax.map(neg).join(',\\ ')}\\right)`, `\\frac{\\partial f}{\\partial\\vec u_{\\min}}(P)&=-${radTex(mod)}`]) },
+  ];
+  const dU = '\\frac{\\partial f}{\\partial\\vec u}';
+  return {
+    enunciado: [{ txt: `Sea f(x,y,z) como se indica y el punto P=(${P.join(',')}). Calcular la derivada direccional de f en P según la dirección dada, y hallar la dirección (con sus cosenos directores) y el módulo del máximo crecimiento y el mínimo crecimiento.`, tex: `f(x,y,z)=${p3Tex(p)}` }, enun],
+    pasos,
+    resultado: { txt: 'Derivada direccional, gradiente, máximo y mínimo crecimiento:', tex: lineas([`${dU}(P)&=${radTex(dT)}\\approx ${aprox(Duf, 4)}`, `\\nabla f(P)&=\\left(${g.map(num).join(',\\ ')}\\right)`, `\\text{máx.: }\\vec u_{\\max}&=${vec3(dirMax)},\\ \\left\\|\\nabla f\\right\\|=${radTex(mod)}\\approx ${aprox(modN, 4)}`, `\\text{mín.: }\\vec u_{\\min}&=\\left(${dirMax.map(neg).join(',\\ ')}\\right),\\ ${dU}=-${radTex(mod)}`]) },
+    verif: { f: (x, y, z) => p3Ev(p, x, y, z), P, grad: g.map(fVal), u: u.map(radVal), duf: Duf, mod: modN, dirMax: dirMax.map(radVal) },
+  };
+}
+
+export const GENERADORES_P1_DIRECCIONAL = [
+  { id: 'direccional', nombre: 'Gradiente y derivada direccional', grupo: 'Cálculo', instancia: 'p1', generar: direccional },
+  { id: 'direccional3', nombre: 'Derivada direccional en 3 variables', grupo: 'Cálculo', instancia: 'p1', generar: direccional3 },
+];

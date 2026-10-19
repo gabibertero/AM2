@@ -184,7 +184,7 @@ function cajaPlano(rng) {
   } else {
     [al, be, ga] = [rng.ent(1, 6), rng.ent(1, 6), rng.ent(1, 6)];
     de = 3 * mcm(mcm(al, be), ga) * rng.ent(1, 3);
-    enunPlano = { txt: `Un paralelepípedo tiene 3 caras en los planos coordenados y el vértice opuesto al origen sobre el plano dado, con x, y, z > 0. Hallar con Lagrange sus dimensiones y ${pideS ? 'su superficie total' : 'su volumen máximo'}.`, tex: `${suma([[al, 'x'], [be, 'y'], [ga, 'z']])}=${de}` };
+    enunPlano = { txt: `Un paralelepípedo tiene 3 caras en los planos coordenados y el vértice opuesto al origen sobre el plano dado, con x, y, z > 0. ${pideS ? 'Hallar con Lagrange la caja de volumen máximo y dar sus dimensiones y su superficie total.' : 'Hallar con Lagrange sus dimensiones y su volumen máximo.'}`, tex: `${suma([[al, 'x'], [be, 'y'], [ga, 'z']])}=${de}` };
   }
   const plano = suma([[al, 'x'], [be, 'y'], [ga, 'z']]);
   const s = fr(de, 3), X = fMul(s, fr(1, al)), Y = fMul(s, fr(1, be)), Z = fMul(s, fr(1, ga));

@@ -7,7 +7,7 @@ const ID = 'p1-1h9-2025-05-g1';
 const RUTA = `parciales/${ID}/`;
 const ej = (page, n) => page.locator(`[data-id="${ID}#${n}"]`);
 const sinScrollH = (page) => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
-const P1_GEN = ['dominio', 'direccional', 'diferencial', 'extremos', 'lagrange', 'implicita', 'plano'];
+const P1_GEN = ['dominio', 'direccional', 'direccional3', 'diferencial', 'extremos', 'lagrange', 'implicita', 'plano'];
 const DIR = process.env.SITE_DIR || 'dist';
 
 for (const [nombre, viewport] of Object.entries({ desktop: { width: 1280, height: 800 }, celular: { width: 390, height: 844 } })) {
@@ -247,6 +247,19 @@ test('sin JS: parcial P1, teoría U1 y preguntero muestran contenido y sin boton
     const muertos = await page.locator('main button:visible').evaluateAll((bs) => bs.map((b) => b.textContent.trim()));
     // en el Home "Reiniciar progreso" necesita JS: es un botón muerto sin JS
     expect(muertos.filter((t) => t !== 'Reiniciar progreso'), r).toEqual([]);
+  }
+  await ctx.close();
+});
+
+test('sin JS: el parcial muestra todas las pistas, pasos y soluciones (no hay nada oculto ni botones de ayuda)', async ({ browser, baseURL }) => {
+  const ctx = await browser.newContext({ javaScriptEnabled: false, baseURL, viewport: { width: 390, height: 844 } });
+  const page = await ctx.newPage();
+  for (const r of [RUTA, 'parciales/1r3-2025-11-14/']) {
+    await page.goto(r);
+    const ocultos = await page.locator('[data-pista], [data-paso], [data-solucion]').evaluateAll((es) => es.filter((e) => getComputedStyle(e).display === 'none').length);
+    expect(ocultos, r).toBe(0);
+    expect(await page.locator('[data-pista], [data-paso], [data-solucion]').count(), r).toBeGreaterThan(5);
+    expect(await page.locator('.acciones:visible, fieldset.estado:visible').count(), r).toBe(0);
   }
   await ctx.close();
 });

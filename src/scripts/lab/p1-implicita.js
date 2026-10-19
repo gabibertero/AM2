@@ -8,8 +8,25 @@ const par = (f) => (f.n < 0 ? `\\left(${num(f)}\\right)` : num(f));
 const frac = (t, d) => (t.n === 0 ? '0' : `-\\frac{${par(t)}}{${par(d)}}`); // el signo menos y el del numerador a la vista
 const cociente = (nombre, t, d, v) => [`${nombre}&=${frac(t, d)}`, ...(frac(t, d) === num(v) ? [] : [`&=${num(v)}`])];
 
+// F'_z(P) = 0: la hipótesis del teorema falla y no se puede derivar z(x,y) con el cociente −F'_x/F'_z.
+function sinTeorema(S) {
+  const [x0, y0, z0] = S.P, nom = ['x', 'y', 'z'];
+  return {
+    enunciado: [{ txt: `Analizar si la ecuación define implícitamente a z como función de x e y cerca del punto P=(${x0}, ${y0}, ${z0}) (verificar antes que P cumple la ecuación). Si se puede, calcular las derivadas parciales de z en (${x0}, ${y0}); si no, explicar por qué:`, tex: `${S.Ftex}=0` }],
+    pasos: [
+      { txt: `Verifico que el punto P=(${x0}, ${y0}, ${z0}) pertenece a la superficie, reemplazando en F:`, tex: lineas([`F(P)&=${S.FPsub}`, '&=0']) },
+      { txt: 'Calculo las derivadas parciales de F respecto de cada variable (z se trata como una variable más):', tex: lineas(nom.map((v, i) => `F'_${v}&=${S.Gen[i]}`)) },
+      { txt: 'Las evalúo en P:', tex: lineas(nom.flatMap((v, i) => [`F'_${v}(P)&=${S.Sub[i]}`, `&=${num(S.val[i])}`])) },
+      { txt: "El teorema de la función implícita pide F'_z(P) ≠ 0 para poder despejar z = z(x,y) cerca de P. Acá F'_z(P) = 0, así que NO se puede aplicar el teorema en P: no se puede asegurar que la ecuación defina a z como función de x e y en un entorno de P, y no vale usar z'_x = −F'_x/F'_z (dividiría por 0). Eso no prueba que z(x,y) no exista, solo que este teorema no lo garantiza.", tex: "F'_z(P)=0" },
+    ],
+    resultado: { txt: 'No se puede aplicar el teorema de la función implícita en P:', tex: "F'_z(P)=0\ \Rightarrow\ \text{no se garantiza }z=z(x,y)" },
+    verif: { modo: 'cero', F: S.Fn, P: S.P, val: S.val.map(fVal) },
+  };
+}
+
 function superficieZ(rng) {
-  const S = superficie(rng), [x0, y0, z0] = S.P, [Fx, Fy, Fz] = S.val;
+  const S = superficie(rng, rng() < 0.2), [x0, y0, z0] = S.P, [Fx, Fy, Fz] = S.val;
+  if (Fz.n === 0) return sinTeorema(S);
   const zx = fr(-Fx.n * Fz.d, Fx.d * Fz.n), zy = fr(-Fy.n * Fz.d, Fy.d * Fz.n);
   const nom = ['x', 'y', 'z'];
   const pasos = [
@@ -131,7 +148,7 @@ function sistema(rng) {
       { txt: `Verifico que P=(${x0}, ${y0}, ${z0}) cumple las dos ecuaciones:`, tex: lineas([`g_{1}(P)&=${p3Sub(g[0], P)}=0`, `g_{2}(P)&=${p3Sub(g[1], P)}=0`]) },
       { txt: "Calculo las derivadas parciales de g₁ y g₂ respecto de x, y, z:", tex: lineas([0, 1].flatMap((k) => nm.map((v, i) => `g'_{${k + 1}${v}}&=${D[k][i]}`))) },
       { txt: 'Las evalúo en P y armo la matriz jacobiana (filas = funciones g₁ y g₂, columnas = variables x, y, z):', tex: `\\begin{pmatrix}${num(J[0][0])}&${num(J[0][1])}&${num(J[0][2])}\\\\${num(J[1][0])}&${num(J[1][1])}&${num(J[1][2])}\\end{pmatrix}` },
-      { txt: `El jacobiano respecto de las variables dependientes y, z es ${num(Den)} ≠ 0 (cuenta de abajo, más adelante). Por el teorema de la función implícita para sistemas, el sistema define y = y(x), z = z(x) cerca de P. Derivando ambas ecuaciones y resolviendo el sistema lineal (Cramer) queda, con la cuenta de abajo siempre ∂(g₁,g₂)/∂(y,z):`, tex: lineas([`\\frac{dy}{dx}&=-\\frac{${jac('x', 'z')}}{${jac('y', 'z')}}`, `\\frac{dz}{dx}&=-\\frac{${jac('y', 'x')}}{${jac('y', 'z')}}`]) },
+      { txt: `El jacobiano respecto de las variables dependientes y, z es ∂(g₁,g₂)/∂(y,z) = ${num(Den)} ≠ 0, así que por el teorema de la función implícita para sistemas el sistema define y = y(x), z = z(x) cerca de P. Derivo ambas ecuaciones respecto de x (regla de la cadena) y queda un sistema lineal en y' y z', que se resuelve con Cramer. El denominador es siempre ∂(g₁,g₂)/∂(y,z):`, tex: lineas([`g'_{1x}+g'_{1y}\\,y'+g'_{1z}\\,z'&=0`, `g'_{2x}+g'_{2y}\\,y'+g'_{2z}\\,z'&=0`, `\\frac{dy}{dx}&=-\\frac{${jac('x', 'z')}}{${jac('y', 'z')}}`, `\\frac{dz}{dx}&=-\\frac{${jac('y', 'x')}}{${jac('y', 'z')}}`]) },
       { txt: 'Calculo los tres determinantes en P (cada uno con las columnas en el orden que indica el jacobiano):', tex: lineas([`${jac('y', 'z')}&=${mat(1, 2)}=${num(Den)}`, `${jac('x', 'z')}&=${mat(0, 2)}=${num(Ny)}`, `${jac('y', 'x')}&=${mat(1, 0)}=${num(Nz)}`]) },
       { txt: 'Reemplazo en los cocientes:', tex: lineas([...cociente('\\frac{dy}{dx}', Ny, Den, dy), ...cociente('\\frac{dz}{dx}', Nz, Den, dz)]) },
     ];
