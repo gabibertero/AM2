@@ -124,6 +124,7 @@ Desarrolle el Teorema de Schwarz: enunciado, hipótesis y demostración a partir
 $$f''_{xy}(x,y)=f''_{yx}(x,y)$$
 
 **Propiedades.**
+- **Hipótesis para la demostración:** deben existir $f'_x$ y $f'_y$ en el entorno (para aplicar el TVM a $\varphi$ y $\psi$ y derivar), además de las segundas $f''_{xy}$, $f''_{yx}$, que son continuas en el punto.
 - Se extiende a órdenes superiores y a más variables si las derivadas son continuas.
 - Para $z=f(x,y)$ hay 4 derivadas de orden 2 y 8 de orden 3. El orden no altera el resultado siempre que se derive la misma cantidad de veces respecto de cada variable: $z'''_{xxy}=z'''_{xyx}=z'''_{yxx}$ y $z'''_{xyy}=z'''_{yxy}=z'''_{yyx}$. De las 8 de orden 3 hay solo 4 distintas: $z'''_{xxx},\ z'''_{xxy},\ z'''_{xyy},\ z'''_{yyy}$.
 
@@ -182,7 +183,7 @@ El TVM de una variable da $c\in(0,1)$ con $\phi(1)-\phi(0)=\phi'(c)$, que es la 
 
 **Para qué se usa.** Es la herramienta de las demostraciones de Schwarz, del diferencial total, de la derivada direccional y de la fórmula de Taylor (U3).
 
-**Gráfico.** Curva $y=f(x)$ con $A=(a,f(a))$ y $B=(b,f(b))$, la secante $AB$ y un punto $(c,f(c))$ con tangente paralela (ambos ángulos $\alpha$ iguales). Para dos variables, el mismo dibujo en dos tiempos: primero en el plano $y=\text{cte}$ y después en $x=\text{cte}$.
+**Gráfico.** Curva $y=f(x)$ con $A=(a,f(a))$ y $B=(b,f(b))$, la secante $AB$ y un punto $(c,f(c))$ con tangente paralela (ambos ángulos $\alpha$ iguales). Para dos variables, el mismo dibujo en dos tiempos: primero en el plano $y=\text{cte}$ y después en $x=\text{cte}$. Gráfico del TVM de 2 variables: en el plano $0xy$, el entorno $E$ (convexo) con los puntos $P_0$ y $P$ y el **segmento $P_0P$** que los une; sobre él, el punto $\xi=(x_0+c\Delta x,\,y_0+c\Delta y)$ con $0\lt c\lt1$. Arriba, la superficie con la curva que se obtiene al subir el segmento, y la tangente en $\xi$ paralela a la secante entre $f(P_0)$ y $f(P)$ (es el gráfico de una variable de $\phi(t)$).
 </Pregunta>
 
 <Pregunta id="u2-t05" unidad="U2" tipo="tema" titulo="Diferencial total: obtención, interpretación y aplicación"
@@ -202,7 +203,7 @@ Desarrolle la obtención de la fórmula del diferencial total, a partir del incr
 
 </Fragment>
 
-**Hipótesis.** $z=f(x,y)$ continua con derivadas parciales continuas en el punto. Incremento total: $\Delta z=f(x+\Delta x,y+\Delta y)-f(x,y)$.
+**Hipótesis.** $z=f(x,y)$ continua, con derivadas parciales que **existen en un entorno del punto y son continuas en el punto**. Incremento total: $\Delta z=f(x+\Delta x,y+\Delta y)-f(x,y)$.
 
 **Desarrollo.**
 1. Se suma y resta $f(x,y+\Delta y)$:
@@ -267,7 +268,7 @@ con $\omega$ el ángulo entre $\nabla f$ y $\vec S_0$. Para una dirección dada 
 
 Si $\theta_{\max}$ es el ángulo del gradiente ($\operatorname{tg}\theta_{\max}=f'_y/f'_x$ corrigiendo cuadrante), $\theta_{\min}=\theta_{\max}+180^\circ$ y los nulos son $\theta_{\max}\pm90^\circ$.
 
-**Propiedad 2: el gradiente es normal a la curva de nivel.** Hipótesis: $f\in C^1$ y $\nabla f(P)\neq\vec0$. Sea $(x(t),y(t))$ una parametrización de la curva de nivel $f=h$ por $P$, con tangente $\vec T=(x',y')$. Como $f(x(t),y(t))=h$, derivando con la cadena $f'_x\,x'+f'_y\,y'=0$, o sea $\nabla f\cdot\vec T=0$. (Con la implícita: $\dfrac{dy}{dx}=-\dfrac{f'_x}{f'_y}=k_1$ y la pendiente del gradiente es $k_2=\dfrac{f'_y}{f'_x}$, entonces $k_1k_2=-1$.)
+**Propiedad 2: el gradiente es normal a la curva de nivel.** Hipótesis: $f$ diferenciable ($f\in C^1$) y $\nabla f(P)\neq\vec0$. Sea $(x(t),y(t))$ una parametrización de la curva de nivel $f=h$ por $P$, con tangente $\vec T=(x',y')$. Como $f(x(t),y(t))=h$, derivando con la cadena $f'_x\,x'+f'_y\,y'=0$, o sea $\nabla f\cdot\vec T=0$. (Con la implícita: $\dfrac{dy}{dx}=-\dfrac{f'_x}{f'_y}=k_1$ y la pendiente del gradiente es $k_2=\dfrac{f'_y}{f'_x}$, entonces $k_1k_2=-1$; esto vale con $f'_x\neq0$ y $f'_y\neq0$, para que ambas pendientes existan y sean no nulas.)
 
 **Propiedad 3.** En la dirección de la tangente a la curva de nivel la derivada direccional es nula ($\omega=90^\circ$): sobre una curva de nivel la función no cambia.
 
@@ -379,8 +380,16 @@ Explique paso por paso cómo se derivan las funciones implícitas de una, dos y 
 
 Se consideran las funciones implícitas como compuestas y se deriva con la cadena. **Hipótesis (existencia, local):** $g\in C^1$, $g(P_0)=0$ y la derivada respecto de la variable a despejar $\neq0$.
 - $g(x,y)=0$ define $y=f(x)$: $g'_x+g'_y\,y'=0$, entonces $\dfrac{dy}{dx}=-\dfrac{g'_x}{g'_y}$ ($g'_y\neq0$).
-- $g(x,y,z)=0$ define $z=f(x,y)$: $\dfrac{\partial z}{\partial x}=-\dfrac{g'_x}{g'_z}$, $\dfrac{\partial z}{\partial y}=-\dfrac{g'_y}{g'_z}$. Con $n$ variables, $\dfrac{\partial y}{\partial x_i}=-\dfrac{g'_{x_i}}{g'_y}$.
-- Sistema $g_1=g_2=0$ en $(x,y,z)$ que define $y(x),z(x)$: se deriva cada ecuación respecto de $x$ y queda un sistema lineal en $y',z'$; por Cramer
+- $g(x,y,z)=0$ define $z=f(x,y)$. Paso a paso: (1) se escribe $g(x,y,z(x,y))=0$; (2) se deriva respecto de $x$ con $y$ fija: $g'_x+g'_z\,\dfrac{\partial z}{\partial x}=0$; (3) se deriva respecto de $y$ con $x$ fija: $g'_y+g'_z\,\dfrac{\partial z}{\partial y}=0$; (4) se despeja ($g'_z\neq0$):
+
+$$\frac{\partial z}{\partial x}=-\frac{g'_x}{g'_z},\qquad\frac{\partial z}{\partial y}=-\frac{g'_y}{g'_z}$$
+
+  Con $n$ variables, $\dfrac{\partial y}{\partial x_i}=-\dfrac{g'_{x_i}}{g'_y}$.
+- Sistema $g_1=g_2=0$ en $(x,y,z)$ que define $y(x),z(x)$: se deriva cada ecuación respecto de $x$ y se escribe el sistema lineal en $y',z'$:
+
+$$\begin{cases}g_{1x}'+g_{1y}'\,y'+g_{1z}'\,z'=0\\ g_{2x}'+g_{2y}'\,y'+g_{2z}'\,z'=0\end{cases}\iff\begin{cases}g_{1y}'\,y'+g_{1z}'\,z'=-g_{1x}'\\ g_{2y}'\,y'+g_{2z}'\,z'=-g_{2x}'\end{cases}$$
+
+  Recién entonces se resuelve por Cramer:
 
 $$\frac{dy}{dx}=-\frac{\partial(g_1,g_2)/\partial(x,z)}{\partial(g_1,g_2)/\partial(y,z)},\qquad\frac{dz}{dx}=-\frac{\partial(g_1,g_2)/\partial(y,x)}{\partial(g_1,g_2)/\partial(y,z)}$$
 

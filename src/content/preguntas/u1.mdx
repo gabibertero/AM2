@@ -12,7 +12,9 @@ import Pregunta from '../../components/Pregunta.astro';
   fq="fotos-clase/2026-08-28 foto 004.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 7-9">
 <Fragment slot="enunciado">
 
-Defina un campo escalar de dos variables, su dominio y su imagen. ¿Cómo se representan gráficamente el dominio y la imagen? ¿A qué se llama gráfico de una función de dos variables?
+**Enunciado oficial (P1 27/07/22, foto 004, preg. 3):** ¿Qué son y cómo se representan gráficamente el dominio y la imagen de una función de la forma z=f(x,y)?
+
+**Cuestionario AM2_A 2025, n.º 10:** Defina un campo escalar de dos variables, su dominio y su imagen. ¿Cómo se representan gráficamente el dominio y la imagen? ¿A qué se llama gráfico de una función de dos variables?
 
 </Fragment>
 <Fragment slot="guia">
@@ -90,7 +92,9 @@ y eligiendo $\delta=\varepsilon/2$ se cumple $|f-0|\lt\varepsilon$. Moraleja: ap
   fq="fotos-clase/2026-08-28 foto 023.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 12-15">
 <Fragment slot="enunciado">
 
-En el cálculo de límites dobles, ¿cuándo es necesario y para qué se calculan límites sucesivos, radiales y a lo largo de una curva? Explique cómo se resuelve el límite doble por análisis de funciones y qué concluye de cada método.
+**Enunciado oficial (P1 27/07/22, foto 023, preg. 4):** En el cálculo de límites dobles ¿cuándo es necesario y para qué calcula límites sucesivos, radiales y a lo largo de una curva?
+
+**Cuestionario AM2_A 2025, n.º 16, 17 y 18:** Explique cómo se resuelve el límite doble por análisis de funciones y qué concluye de cada método.
 
 </Fragment>
 <Fragment slot="guia">
@@ -112,6 +116,8 @@ $$L_1=\lim_{x\to x_0}\Big[\lim_{y\to y_0}f(x,y)\Big],\qquad L_2=\lim_{y\to y_0}\
 
 - Si ambos existen y $L_1\neq L_2$: **no existe** el límite doble.
 - Si $L_1=L_2$: no garantiza la existencia; hay que probar otras trayectorias.
+- Si alguno de los sucesivos **no existe**, no se concluye nada sobre el límite doble.
+- Recíproca parcial: si el límite doble **existe**, todo sucesivo que exista vale lo mismo que el doble.
 
 **Límites radiales** (haz de rectas por $P_0$): $y-y_0=m(x-x_0)$, se calcula el límite en función de $m$. **Falta la recta vertical $x=x_0$** (no está en la ecuación anterior): se estudia aparte. Las trayectorias deben estar dentro de $D$.
 - Si depende de $m$ (o la vertical da otro valor): **no existe**.
@@ -153,10 +159,11 @@ Clasifique los cuatro tipos de funciones dando un ejemplo de cada caso. ¿Qué d
 |---|---|---|---|
 | **Función escalar** | $\mathbb R\to\mathbb R$ | $y=f(x)$, la de Análisis I | $y=x^2$ |
 | **Campo escalar** | $\mathbb R^n\to\mathbb R$, $n\ge2$ | a $n$ variables le corresponde un número | $z=x^2+y^2$ |
-| **Función vectorial** | $\mathbb R\to\mathbb R^m$ | a una variable (parámetro $t$) le corresponde un vector | $\vec r(t)=f(t)\,\vec i+g(t)\,\vec j$ |
-| **Campo vectorial** | $\mathbb R^n\to\mathbb R^m$, $n\ge2$ | a varias variables le corresponde un vector | campo eléctrico, velocidades de un fluido |
+| **Función vectorial** | $\mathbb R\to\mathbb R^m$, $m\ge2$ | a una variable (parámetro $t$) le corresponde un vector | $\vec r(t)=f(t)\,\vec i+g(t)\,\vec j$ |
+| **Campo vectorial** | $\mathbb R^n\to\mathbb R^m$, $n\ge2$ | a varias variables le corresponde un vector | $\vec F(x,y)=(-y,\,x)$; campo eléctrico, velocidades de un fluido |
 
 **Propiedades / notación.**
+- En general, una **función vectorial** es $f:\mathbb R^n\to\mathbb R^m$ con $m\ge2$; si $n=1$ es la curva paramétrica, si $n\ge2$ es un campo vectorial. Ejemplo de campo: $\vec F=(-y,x)$, que en cada punto $(x,y)$ da un vector perpendicular al radio.
 - Una función vectorial equivale a $m$ funciones escalares $y_i=f_i(\vec x)$.
 - En $\mathbb R^2$: $\vec r(t)=[f(t),g(t)]=f(t)\,\vec i+g(t)\,\vec j$; $t$ es el parámetro y $f,g$ las componentes. En $\mathbb R^3$ se agrega $h(t)$.
 - Campo vectorial: $\vec F(x,y)=P\,\vec i+Q\,\vec j$ en $\mathbb R^2$; $\vec F=P\,\vec i+Q\,\vec j+R\,\vec k$ en $\mathbb R^3$.
@@ -251,7 +258,7 @@ Defina las propiedades de los límites dobles.
 
 </Fragment>
 
-Valen las mismas que en una variable. Si $\lim f=L_1$ y $\lim g=L_2$ en $P_0$:
+Valen las mismas que en una variable. Si $\lim f=L_1$ y $\lim g=L_2$ en $P_0$ (**si ambos límites existen**):
 
 $$\lim(f\pm g)=L_1\pm L_2,\qquad\lim(f\cdot g)=L_1L_2,\qquad\lim\frac fg=\frac{L_1}{L_2}\ \ (L_2\neq0)$$
 
@@ -269,7 +276,7 @@ Defina las condiciones de continuidad de $z=f(x,y)$ en $P(a,b)$ e indique cuánd
 
 $f$ es **continua en $P_0$** si $\lim_{(x,y)\to(a,b)}f(x,y)=f(a,b)$, lo que incluye tres condiciones: (1) existe el límite doble; (2) $f$ está definida en $P_0$; (3) el límite coincide con $f(a,b)$.
 
-**Discontinuidad evitable:** existe el límite doble pero la función no es continua (no está definida en $P_0$ o su valor es otro); gráficamente, un "agujero". Se evita redefiniendo $f(P_0)=L$. Ejemplo: $z=\dfrac{\sin3xy}{x}$ en el origen, límite $0$ y $f(0,0)$ no definida; con $z=0$ en $(0,0)$ queda continua. Si no existe el límite doble, la discontinuidad es **esencial**.
+**Discontinuidad evitable:** existe el límite doble pero la función no es continua (no está definida en $P_0$ o su valor es otro); gráficamente, un "agujero". Se evita redefiniendo $f(P_0)=L$. Ejemplo: $z=\dfrac{\sin3xy}{x}$ en el origen, límite $0$ y $f(0,0)$ no definida; con $z=0$ en $(0,0)$ queda continua en el origen. Ojo: la función no está definida en **toda la recta $x=0$**, no solo en el origen; esa redefinición arregla únicamente el punto $(0,0)$; en los otros puntos $(0,y_0)$ de la recta el límite es $3y_0$ y también habría que redefinir. Si no existe el límite doble, la discontinuidad es **esencial**.
 </Pregunta>
 
 <Pregunta id="u1-h01" unidad="U1" tipo="choice" correcta={3} titulo="Entorno reducido"

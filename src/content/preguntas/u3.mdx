@@ -55,7 +55,7 @@ y aparece el hessiano $H$ multiplicando a $\Delta y^2$.
 3. *Conservación del signo.* Las segundas derivadas son continuas, entonces $H$ y $f''_{xx}$ conservan en un entorno de $P_0$ el signo que tienen en $P_0$.
 4. *Análisis de signos.*
    - $H\gt0$: es $f''_{xx}f''_{yy}\gt f''^{\,2}_{xy}\ge0$, luego $f''_{xx}\neq0$. El corchete es positivo para todo incremento no nulo, y $\Delta f$ tiene el signo de $f''_{xx}$: si $f''_{xx}\gt0$, $\Delta f\gt0$ (**mínimo**); si $\lt0$, $\Delta f\lt0$ (**máximo**).
-   - $H\lt0$: la forma cuadrática toma ambos signos según la dirección, entonces $\Delta f$ cambia de signo en todo entorno: **ensilladura**.
+   - $H\lt0$: la forma cuadrática toma ambos signos según la dirección, entonces $\Delta f$ cambia de signo en todo entorno: **ensilladura**. Ambos signos, con $f''_{xx}\neq0$: con $\Delta y=0$ queda $2\Delta f=f''_{xx}\Delta x^2$, con el signo de $f''_{xx}$; con $f''_{xx}\Delta x+f''_{xy}\Delta y=0$ queda $2\Delta f=\dfrac{H\,\Delta y^2}{f''_{xx}}$, de signo **opuesto** a $f''_{xx}$ (porque $H\lt0$). Si $f''_{xx}=0$: $H=-f''^{\,2}_{xy}\lt0$ (así $f''_{xy}\neq0$) y $2\Delta f=2f''_{xy}\Delta x\Delta y+f''_{yy}\Delta y^2$ cambia de signo según el signo de $\Delta x\Delta y$ (eligiendo $\Delta y$ chico frente a $\Delta x$): **ensilladura**.
    - $H=0$: el signo queda determinado por términos que el criterio no controla (el resto): **no se puede concluir**.
 
 *Variante por trinomio:* con $\Delta x=\Delta S\cos\gamma$, $\Delta y=\Delta S\sin\gamma$ y $t=\operatorname{tg}\gamma$, el corchete es $f''_{yy}t^2+2f''_{xy}t+f''_{xx}$, de discriminante $-4H$: si $H\gt0$ no cambia de signo (extremo); si $H\lt0$ sí (silla).
@@ -79,7 +79,7 @@ Dada $z=f(x,y)$ sujeta a $\varphi(x,y)=0$, desarrolle el método de los multipli
 
 - Definición: extremo condicionado y función auxiliar de Lagrange.
 - Propiedades: hipótesis ($C^1$, $\nabla\varphi\neq\vec0$), tres ecuaciones con tres incógnitas, interpretación geométrica, generalización.
-- Desarrollo: deducción con $y=y(x)$ hasta el sistema (6).
+- Desarrollo: deducción con $y=y(x)$ hasta el sistema de tres ecuaciones con tres incógnitas.
 - Gráfico: restricción tangente a una curva de nivel, con $\nabla f\parallel\nabla\varphi$.
 
 </Fragment>
@@ -92,11 +92,11 @@ Dada $z=f(x,y)$ sujeta a $\varphi(x,y)=0$, desarrolle el método de los multipli
 
 $$\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}\frac{dy}{dx}=0\ (3),\qquad\frac{\partial\varphi}{\partial x}+\frac{\partial\varphi}{\partial y}\frac{dy}{dx}=0\ (4)$$
 
-Se despeja $dy/dx$ de ambas y se igualan:
+Se despeja $dy/dx$ de ambas y se igualan (con $\varphi'_y\neq0$), lo que da $f'_x\varphi'_y=f'_y\varphi'_x$ (5):
 
-$$\frac{\partial f/\partial x}{\partial\varphi/\partial x}=\frac{\partial f/\partial y}{\partial\varphi/\partial y}=-\lambda$$
+$$\frac{f'_x}{\varphi'_x}=\frac{f'_y}{\varphi'_y}=-\lambda,\qquad\lambda=-\frac{f'_y}{\varphi'_y}\ \ (\varphi'_y\neq0)$$
 
-Resulta el sistema de **tres ecuaciones con tres incógnitas** $x,y,\lambda$:
+De $\lambda=-f'_y/\varphi'_y$ sale $f'_y+\lambda\varphi'_y=0$, y de (5) sale $f'_x+\lambda\varphi'_x=0$. Resulta el sistema de **tres ecuaciones con tres incógnitas** $x,y,\lambda$:
 
 $$f'_x+\lambda\varphi'_x=0,\qquad f'_y+\lambda\varphi'_y=0,\qquad\varphi(x,y)=0$$
 
@@ -108,7 +108,7 @@ que son las derivadas parciales de $F(x,y,\lambda)=f+\lambda\varphi$: los puntos
 
 **Interpretación geométrica** _(estándar)_: $\nabla f=-\lambda\nabla\varphi$, los gradientes son paralelos y la curva de nivel de $f$ es tangente a la restricción. **Generalización:** con $m\lt n$ condiciones, $F=f+\lambda_1\varphi_1+\dots+\lambda_m\varphi_m$ y se anulan sus derivadas respecto de las $n+m$ variables.
 
-**Ejemplo.** $z=2x+y^2$ sujeta a $x^2+y^2-4=0$: $2+2\lambda x=0$ y $2y(1+\lambda)=0$. Con $y=0$: $(\pm2,0)$; con $\lambda=-1$: $(1,\pm\sqrt3)$. Valores $f(2,0)=4$, $f(-2,0)=-4$, $f(1,\pm\sqrt3)=5$: máximos en $(1,\pm\sqrt3)$ y mínimo en $(-2,0)$.
+**Ejemplo.** $z=2x+y^2$ sujeta a $x^2+y^2-4=0$: $2+2\lambda x=0$ y $2y(1+\lambda)=0$. Con $y=0$: $(\pm2,0)$; con $\lambda=-1$: $(1,\pm\sqrt3)$. Valores $f(2,0)=4$, $f(-2,0)=-4$, $f(1,\pm\sqrt3)=5$: máximos en $(1,\pm\sqrt3)$; $(-2,0)$ es el mínimo absoluto y $(2,0)$ es un mínimo local condicionado ($\overline H=-16\lt0$, valor $4$).
 
 **Gráfico.** Curva de restricción $\varphi=0$ y varias curvas de nivel de $f$; en el punto de contacto comparten tangente y se dibujan $\nabla f$ y $\nabla\varphi$ paralelos.
 </Pregunta>
@@ -130,7 +130,7 @@ Dada $z=f(x,y)$ y $P(a,b)$, defina la fórmula de Taylor y de Maclaurin e indiqu
 
 </Fragment>
 
-**Definición.** Sea $f$ con derivadas parciales continuas hasta el orden $n+1$ en un entorno de $P_0(x_0,y_0)$ contenido en $D$:
+**Definición.** Sea $f$ con derivadas parciales continuas hasta el orden $n+1$ en un entorno de $P_0(x_0,y_0)$ contenido en $D$ (el entorno debe contener el **segmento $P_0P$**, es decir, ser convexo):
 
 $$f(x,y)=\sum_{i=0}^{n}\frac1{i!}\Big(\Delta x\frac{\partial}{\partial x}+\Delta y\frac{\partial}{\partial y}\Big)^{i}f(x_0,y_0)+R_n,\qquad R_n=\frac1{(n+1)!}\Big(\Delta x\frac{\partial}{\partial x}+\Delta y\frac{\partial}{\partial y}\Big)^{n+1}f(\xi)$$
 
@@ -201,7 +201,13 @@ Dada $z=f(x,y)$ sujeta a $g(x,y)=0$, desarrolle el método de las variables liga
 
 </Fragment>
 
-Se despeja una variable de la condición, $y=y(x)$, y se reemplaza: $z=F(x)$ de una variable. **Necesaria:** $F'(x_0)=0$. **Suficiente** _(estándar, Análisis I)_: $F''(x_0)\lt0$ máximo, $F''(x_0)\gt0$ mínimo, $F''=0$ no decide. Limitaciones: solo para hasta dos variables independientes y no siempre se puede despejar; para eso está Lagrange. Ejemplo (Monllor): recipiente cilíndrico de 2 litros con mínima chapa, $f=\frac{\pi D^2}2+\pi DH$ con $\frac{\pi D^2}{4}H=2000$.
+Se despeja una variable de la condición, $y=y(x)$, y se reemplaza: $z=F(x)$ de una variable. **Necesaria:** $F'(x_0)=0$. **Suficiente** _(estándar, Análisis I)_: $F''(x_0)\lt0$ máximo, $F''(x_0)\gt0$ mínimo, $F''=0$ no decide. Limitaciones: solo para hasta dos variables independientes y no siempre se puede despejar; para eso está Lagrange. Ejemplo (Monllor): recipiente cilíndrico de 2 litros con mínima chapa, $f=\frac{\pi D^2}2+\pi DH$ con $\frac{\pi D^2}{4}H=2000$ (cm³). Se despeja $H=\dfrac{8000}{\pi D^2}$ y queda
+
+$$F(D)=\frac{\pi D^2}{2}+\frac{8000}{D}$$
+
+$$F'(D)=\pi D-\frac{8000}{D^2}=0\ \Rightarrow\ D^3=\frac{8000}{\pi}\ \Rightarrow\ D=\frac{20}{\sqrt[3]{\pi}}\approx13{,}65\ \text{cm}$$
+
+Entonces $H=\dfrac{8000}{\pi D^2}=D\approx13{,}65$ cm. Es mínimo porque $F''(D)=\pi+\dfrac{16000}{D^3}\gt0$.
 </Pregunta>
 
 <Pregunta id="u3-c05" unidad="U3" tipo="corta" titulo="Caso H = 0 y extremos sin derivadas"
