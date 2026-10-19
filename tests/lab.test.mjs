@@ -684,7 +684,7 @@ test('implícita: aparece sen(z−z₀) y el caso F\'_z(P)=0 dice que NO se pued
     assert.ok(Math.abs(v.F(x0, y0, z0)) < 1e-12, `F(P) semilla ${s}`);
     cerca((v.F(x0, y0, z0 + h) - v.F(x0, y0, z0 - h)) / (2 * h), 0, 1e-6, `F_z(P) = 0 semilla ${s}`);
     assert.equal(v.val[2], 0);
-    assert.ok(/NO se puede aplicar el teorema/.test(e.pasos.map((p) => p.txt).join(' ')) && /no se garantiza/.test(e.resultado.tex), `semilla ${s}`);
+    assert.ok(/NO se puede aplicar el teorema/.test(e.pasos.map((p) => p.txt).join(' ')) && /no se garantiza/.test(e.resultado.tex) && /\\Rightarrow/.test(e.resultado.tex) && !/\t/.test(e.resultado.tex), `semilla ${s}`);
   }
   assert.ok(ceros > 10 && sen > 8, `${ceros} ${sen}`);
 });

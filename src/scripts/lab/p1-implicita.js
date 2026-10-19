@@ -19,7 +19,7 @@ function sinTeorema(S) {
       { txt: 'Las evalúo en P:', tex: lineas(nom.flatMap((v, i) => [`F'_${v}(P)&=${S.Sub[i]}`, `&=${num(S.val[i])}`])) },
       { txt: "El teorema de la función implícita pide F'_z(P) ≠ 0 para poder despejar z = z(x,y) cerca de P. Acá F'_z(P) = 0, así que NO se puede aplicar el teorema en P: no se puede asegurar que la ecuación defina a z como función de x e y en un entorno de P, y no vale usar z'_x = −F'_x/F'_z (dividiría por 0). Eso no prueba que z(x,y) no exista, solo que este teorema no lo garantiza.", tex: "F'_z(P)=0" },
     ],
-    resultado: { txt: 'No se puede aplicar el teorema de la función implícita en P:', tex: "F'_z(P)=0\ \Rightarrow\ \text{no se garantiza }z=z(x,y)" },
+    resultado: { txt: 'No se puede aplicar el teorema de la función implícita en P:', tex: String.raw`F'_z(P)=0\ \Rightarrow\ \text{no se garantiza }z=z(x,y)` },
     verif: { modo: 'cero', F: S.Fn, P: S.P, val: S.val.map(fVal) },
   };
 }

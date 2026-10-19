@@ -203,3 +203,63 @@ Orden por peso. Cada punto dice qué agregar y dónde.
 
 - Sin ejecución: puede haber un caso límite del RNG (por ejemplo la forma en que `raiz()` arma `yv` en `circunferencia`, o `dg()` con ángulos casi enteros) que no vi. Los tests con 1000 semillas deberían atraparlo; conviene correrlos antes de dar el lab por cerrado.
 - Los puntajes de notación (18/20 para todos) dejan 2 puntos por la comprobación final incompleta, común a todos los generadores.
+
+## Auditoría final 2026-10-19
+
+Alcance: estado del árbol tras el commit cb79822: los 8 generadores de `src/scripts/lab/p1-*.js` (nuevo `direccional3`), `p1-comun.js` y los tests de `tests/lab.test.mjs` del lab (incluidos los ejemplos nuevos).
+Método: lectura completa del código y de los tests, y verificación a mano de la matemática de lo nuevo. No hay shell en esta sesión: no corrí `git show --stat cb79822` ni los tests, así que no sé qué archivos tocó el commit más allá de lo que se ve en el árbol. Los puntajes son por lectura.
+
+### Estado de los pendientes de la re-auditoría
+
+| Pendiente | Estado |
+|---|---|
+| 1 Lagrange `cajaPlano` pide S sin decir qué se optimiza | Resuelto. Dice "de volumen máximo" y hay test. |
+| 2 Direccional: 3 variables y cosenos directores | Resuelto con `direccional3` (vector o ángulos α, β, γ; ternas con Σcos² = 1 verificadas a mano). Los puntos no amables están con `arctg(y/x)` y `√(x²+y²)`. `e1`, `e2`, `e3` y `l3` siguen amables. |
+| 3 Direccional: gráfico del gradiente | Sin resolver. El paso de nulas dice "el gráfico se hace aparte". |
+| 4 Dominio: centro desplazado, arcsen/arccos, ln\|A\| | Resuelto (`circd`, `asen`, `acos`, `lnabs`, con test). Faltan `xy ≠ 0` en un denominador y el paso de intersecciones entre bordes. |
+| 5 Implícita: `senz` y F'_z(P) = 0 | Resuelto (`senz`, modo `cero` con "NO se puede aplicar el teorema"). Aparece un bug de TeX nuevo, ver crítico C1. |
+| 6 Implícita: sistema lineal en y', z' | Resuelto, las dos ecuaciones están a la vista y la frase confusa ya no está. |
+| 7 a 12 | Sin cambios (menores). Rama vacía de `circunferencia`, cono sin S, extremos no polinómicos, controles finales en extremos, plano y dominio, ∇f = 0, signo en la simétrica. |
+
+### Puntajes
+
+| Generador | Notación /20 | Matemática /25 | Porqué /25 | Nivel parcial / bordes /30 | **Total /100** | Re-auditoría |
+|---|---|---|---|---|---|---|
+| dominio | 19 | 25 | 23 | 24 | **91** | 89 |
+| direccional | 18 | 25 | 22 | 23 | **88** | 85 |
+| direccional3 (nuevo) | 18 | 25 | 22 | 21 | **86** | — |
+| diferencial | 18 | 25 | 23 | 24 | **90** | 90 |
+| extremos | 18 | 25 | 24 | 26 | **93** | 93 |
+| lagrange | 18 | 25 | 24 | 25 | **92** | 91 |
+| implicita | 16 | 25 | 24 | 24 | **89** | 88 |
+| plano | 18 | 25 | 23 | 25 | **91** | 91 |
+| **Global (8 generadores)** | | | | | **90,0** | 89,6 |
+
+Global de los 7 originales: 90,6. Con C1 corregido, `implicita` pasa a 92 y el global a 90,4.
+Objetivo ≥ 90 en cada uno: lo cumplen dominio, diferencial, extremos, lagrange y plano. No lo cumplen `direccional` (88), `direccional3` (86) e `implicita` (89, por un bug de una línea).
+
+### Críticos
+
+- **C1 [CRÍTICO] `p1-implicita.js`, línea 22: TeX roto en el resultado del modo `cero`.** La cadena está en comillas dobles: `"F'_z(P)=0\ \Rightarrow\ \text{no se garantiza }z=z(x,y)"`. En JS `\ ` da un espacio, `\R` da `R` y `\t` da un TAB. El resultado real es `F'_z(P)=0 Rightarrow <TAB>ext{no se garantiza }z=z(x,y)`: el alumno ve "Rightarrow" y "ext" en letra itálica. KaTeX no tira error, así que el test de compilación no lo atrapa, y el test del modo `cero` solo busca la frase "no se garantiza", que sigue estando. Arreglo: duplicar las barras (`\\ \\Rightarrow\\ \\text{…}`) o usar `String.raw`, y agregar al test que `resultado.tex` contenga `\Rightarrow` y no contenga TAB. Revisar con grep otras cadenas de comillas dobles con una sola barra (`"...\\` sin duplicar) en los generadores. Las que vi (`"F'_x+F'_y\\,y'&=0..."`, `"H=f''_{xx}..."`) están bien.
+
+Sin otros críticos: la matemática de todos los modos nuevos está bien. Verifiqué a mano `cajaVolumenFijo` (λ = 4/q con tapa y 2/q sin tapa, S mínima 6q² y 12q², argumento S → ∞), `cajaPlano` (el plano tangente a z = k − x² − y² en (x₀, y₀) da 2x₀x + 2y₀y + z = k + x₀² + y₀²), `circunferencia` (valores b(r² + x₀²) y ±2b·x₀·r, máximo y mínimo distintos), `direccional3` (versor, D_u f = ∇f·u, ángulos directores del gradiente) y `porDefinicion`.
+
+### Pendientes
+
+Orden por peso.
+
+1. **[CRÍTICO] C1** (arriba). Una línea.
+2. **[MAYOR] Direccional, gráfico del gradiente (`p1-direccional.js`, paso de nulas, línea 218).** Cuatro parciales oficiales piden graficar ∇f con máximo, mínimo y nulos. Agregar un campo `grafico` en el resultado (como en dominio) con ∇f en P, u_máx, u_mín y las dos nulas, y que `ui.js` lo dibuje. Es lo único que mantiene a `direccional` debajo de 90 (con esto pasa a 91).
+3. **[MAYOR] `direccional3`, alcance.** Solo polinomios y solo pide máximo y mínimo. Para llegar a 90: (a) funciones no polinómicas (e^{xyz}, ln(x²+y²+z²), √ con módulo entero) con un punto no amable; (b) el plano de derivadas nulas (u ⟂ ∇f) como una línea; (c) el modo por definición con u racional como en 2D.
+4. **[MAYOR] Direccional, funciones amables.** `e1`, `e2`, `e3` y `l3` siguen con e⁰ = 1 o ln 1 = 0. Agregar `e^{xy}` en un punto con exponente distinto de 0 (por ejemplo (1, 2)), como pide el nivel de parcial.
+5. **[MENOR] Dominio.** Falta `xy ≠ 0` en un denominador (saca los dos ejes) y el paso 6 del machete: con dos curvas, resolver el sistema entre bordes y rotular las intersecciones.
+6. **[MENOR] Controles finales (H46) en extremos, plano y dominio.** Extremos: "reemplazar P en f'_x y f'_y da 0". Plano: "P verifica la ecuación del plano". Dominio: un punto de prueba dentro y otro fuera.
+7. **[MENOR] Lagrange `circunferencia`, rama vacía.** Variante con \|x₀\| > r: "esta rama no tiene solución real, queda solo y = 0".
+8. **[MENOR] Diferencial.** Cono solo con V: aclarar en el enunciado "se usa la altura h y el radio r" o agregar la variante con generatriz.
+9. **[MENOR] Extremos.** Documentar que solo cubre polinomios (H33).
+10. **[MENOR] Direccional con ∇f(P) = 0 (H17) y simétrica del plano con signo abajo.** Sin cambios.
+
+### Riesgos
+
+- No corrí los tests ni `git show`: puede haber un caso del RNG que no vi, y el diff exacto de cb79822 no lo revisé. Antes de dar el lab por cerrado: correr `node --test tests/lab.test.mjs`, arreglar C1 y sumar el test que prohíbe TAB y barras perdidas en el TeX.
+- Los puntajes de `direccional` y `direccional3` dependen de cuánto pese el gráfico del gradiente; si la cátedra lo toma como aparte, `direccional` ya está en 90.
