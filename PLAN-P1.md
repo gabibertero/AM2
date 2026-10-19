@@ -22,11 +22,11 @@ Plan del 2026-10-15. En paralelo con el estudio del 2º parcial (31/10), sin rom
 - Teoría: `U1.pdf`, `U1- Diapositivas.pdf`, `U2 - *.pdf` (4), Monllor 01–03, `teoria/Resumen teorico primer parcial am2.pdf`, `teoria/AM2 Resumen primer parcial.pdf`, `teoria/Demostraciones parcial 1.pdf`, Guía Aiassa 1º parte, `Ejercicios Direccionales .pdf`, `Ejercicios Funciones Implícitas .pdf`.
 
 ## Etapas (commit + push al cerrar cada una)
-- [ ] **P1-A Inventario** — `inventariador` ×2: los 20 PDFs y el modelo, y aparte las fotos de WhatsApp, las fotos de clase y las fuentes de teoría. Salida: `docs/inventario/P1-*.md`.
-- [ ] **P1-B Instancias** — `web`: campo `instancia` (`p1` | `p2`, default `p2`) en las colecciones; Home con mapa por instancia; filtros en parciales, anteriores, machetes, teoría, preguntero y laboratorio; rutas sin romper URLs actuales. Audita `ecc:code-reviewer` + `tester`.
-- [ ] **P1-C Parciales** — transcripción fiel (`verificador`) + resolución con el estándar aprobado (`resolvedor`, tandas de ≤3, sympy). Prioridad: 2025 → 2024 → 2023 → 2022. Audita `profe` (muestra).
-- [ ] **P1-D Teoría + preguntero + machetes U1–U3** — `redactor`; audita `profe` + `verificador`; figuras `graficos`.
-- [ ] **P1-E Laboratorio U1–U3** — `web`: extremos con hessiano, Lagrange, direccional y gradiente, plano tangente, derivada implícita y compuesta, dominio. Audita `profe` + `ecc:code-reviewer`.
-- [ ] **P1-F Revisión** — `estetica` + `tester` (recorrido completo) + README (`readme`).
+- [x] **P1-A Inventario** — `inventariador` ×2: los 20 PDFs y el modelo, y aparte las fotos de WhatsApp, las fotos de clase y las fuentes de teoría. Salida: `docs/inventario/P1-*.md`.
+- [x] **P1-B Instancias** — `web`: campo `instancia` (`p1` | `p2`, default `p2`) en las colecciones; Home con mapa por instancia; filtros en parciales, anteriores, machetes, teoría, preguntero y laboratorio; rutas sin romper URLs actuales. Audita `ecc:code-reviewer` + `tester`.
+- [x] **P1-C Parciales** — transcripción fiel (`verificador`) + resolución con el estándar aprobado (`resolvedor`, tandas de ≤3, sympy). Prioridad: 2025 → 2024 → 2023 → 2022. Audita `profe` (muestra).
+- [x] **P1-D Teoría + preguntero + machetes U1–U3** — `redactor`; audita `profe` + `verificador`; figuras `graficos`.
+- [x] **P1-E Laboratorio U1–U3** — `web`: extremos con hessiano, Lagrange, direccional y gradiente, plano tangente, derivada implícita y compuesta, dominio. Audita `profe` + `ecc:code-reviewer`.
+- [x] **P1-F Revisión** — `estetica` + `tester` (recorrido completo) + README (`readme`).
 
 ## Pendientes para Gabi
