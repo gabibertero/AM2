@@ -39,9 +39,9 @@ fuentes:
 
 ## Fórmulas clave
 
-$$D_f=\{(x,y)\in\mathbb R^2:\ \text{todas las restricciones a la vez}\}$$
+$$\begin{aligned}D_f=\{(x,y)\in\mathbb R^2:\ &\text{todas las restricciones}\\&\text{a la vez}\}\end{aligned}$$
 
-$$A\cdot B>0\ \Leftrightarrow\ (A>0\wedge B>0)\ \vee\ (A<0\wedge B<0)$$
+$$\begin{aligned}A\cdot B>0\ \Leftrightarrow\ &(A>0\wedge B>0)\\&\vee\ (A<0\wedge B<0)\end{aligned}$$
 - Borde llena: pertenece al dominio ($\ge,\le$). Borde punteada: no pertenece ($>,<$, o $\ne0$).
 - Una curva puede ser borde **lleno en un tramo y punteado en otro** si viene de restricciones distintas.
 - **Módulo en un logaritmo:** $\ln|A|$ pide solo $A\ne0$ (no $A>0$): se **excluye la curva** $A=0$, no una región (1H10 Sep-25 #1: $\ln|4-x^2-4y^2|$ saca la elipse $x^2+4y^2=4$). Ese ejercicio no tiene resolución oficial en el PDF; la resolución del sitio es elaborada.

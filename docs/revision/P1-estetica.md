@@ -92,3 +92,60 @@ Sin críticos nuevos ni pendientes.
 Aviso de figura ahora discreto y sin círculo, pestaña activa visible, favicon más grueso, Home con CTA y progreso en el primer pantallazo, listado de parciales ordenado, laboratorio sin scroll horizontal y con foco/tema oscuro bien resueltos, panel de examen compacto en 390.
 
 Para llegar a ≥90: resolver 1, 5, 6, 7 y 9 (≈ +8), y 2–4 y 8 (≈ +3) lleva a ~92.
+
+---
+
+# Auditoría final 2026-10-19 — tras beadde0 (estética 2ª vuelta) y cb79822 (laboratorio) — 87/100
+
+Capturas: `/private/tmp/claude-501/estetica/final/` (313 PNG; `home|parciales|pA|pB|machetes|macA|macB|teoria|teoria2|teoria3|preg-<d|m>-<light|dark>-fold|tN`, `ex-*` 4 pasos del modo examen, `lab-<dominio|direccional3|implicita>-…-tN`, `favicon-16/32/180`, `zoom-*`) y mediciones JSON en `final/m/` (`medir-estetica.mjs` x 10 páginas x 390/1280 x claro/oscuro = 40 corridas) más evaluate propio (placeholder, h1/saltos, header sticky, imágenes). Build de `dist` servido en :4399 bajo `/AM2/`.
+
+Medido OK en las 40 corridas: 0 fallas de contraste, 0 scroll horizontal de página, 0 desbordes (salvo `a.saltar`, intencional), 0 objetivos táctiles <44px (salvo un `button[data-filtro]` de 42x44 en el Preguntero), fuentes <13px solo en sub/superíndices KaTeX, 1 h1 y 0 saltos de jerarquía por página, `title` y description en todas, placeholder 6,3–6,5:1 en ambos temas, favicon + apple-touch + theme-color claro/oscuro. Sin críticos.
+
+| Bloque | Antes | Ahora | Nota |
+|---|---|---|---|
+| Espaciado y ritmo | 15 | 16 | aire bueno; siguen valores fuera de escala (ver 2) |
+| Tipografía | 12 | 13 | notación del laboratorio ya en KaTeX; quedan fórmulas cortadas en 390 y "∂f/∂u = ‖∇f‖ cos φ" en texto plano |
+| Color | 14 | 15 | placeholder resuelto; tema oscuro del lab y del gráfico bien |
+| Alineación | 7 | 7 | la caja de machetes/teoría y "Salir" siguen sin alinear |
+| Home | 14 | 14 | sin cambios: U10 huérfana |
+| Celular | 8 | 9 | checkboxes eliminados, header estático de 149px (no tapa), fórmulas con fade; falta que no se corten |
+| Consistencia | 8 | 9 | "Ver solución" unificado, chip de procedencia corto, filtros en una fila con scroll en 390 |
+| Detalles | 4 | 4 | SVG `ej*` sin `width/height` |
+
+## Resuelto desde la re-auditoría (no romper)
+Generador del laboratorio arriba del todo y sin listas duplicadas (`lab-dominio-m-light-t0.png`: select, semilla y ejercicio en el primer pantallazo); gráfico del dominio centrado y nítido (canvas 340, `devicePixelRatio`); la fórmula de D_f ya no se repite tres veces; notación `f'_x`, `F'_y`, `G(0,0)` en KaTeX; placeholder ≥6:1; 0 checkboxes de 24px; Preguntero con "Ver solución" y chip "Cayó en P1 · 27/07/22"; `.katex-display` con degradé de borde derecho (mask-image) en 390.
+
+## Lo que queda (ordenado por impacto)
+1. [Machetes y Teoría · 1280 · ambos] Sin cambios (M5): tarjeta verde y "En esta página" llegan a x=933 y el h1 a x=1015 (macA: "Dominio de funciones de dos variables (con / gráfico)" se pasa de la caja y parte "gráfico" solo en la 2ª línea); ~190px de hueco a la derecha y tres bordes derechos distintos. En Teoría el chip "U1" va a la izquierda del h1 y en Machetes arriba (`macA-d-light-t0.png`, `teoria-d-dark-t0.png`). Fix: `max-width:770px` también al h1/cabecera o `h1{text-wrap:balance; max-width:20ch}`; chip siempre arriba del h1. Archivo: `src/styles/global.css` (`.lectura`/`.indice`), `machetes/[slug].astro`, `teoria/[slug].astro`.
+2. [Espaciado · todas · escala] Sigue M9: `div.ia` 9.6px, `span.chip-u` 2/14px, `p.meta` margin-bottom 6.4px, `h1` 10.6px, `ul.tabs` padding-bottom 6px, `img` padding 6px, `.lab-enun` 6/14px, `ul.lab-lista` padding-left 20.4px, `blockquote.preg-enun` 9.6px, `ul/ol` 21.3px y 40px, `p` 6.8px. Fix: 9.6→8 o 12, 14→12/16, 6→8, 6.4→8, 10.6→12, 20.4/21.3→24, 6.8→8. Archivos: `src/styles/global.css`, `src/components/LabGeneradores.astro`.
+3. [Home · 1280 · ambos] Mapa del 2º parcial: U10 sola en la 3.ª fila y alturas dispares (U6 y U7 con ~100px de aire entre lista y enlaces, `home-d-dark-t1.png`). Fix: `grid-template-columns:repeat(4,1fr)` en ≥1100px (7 unidades → 4+3) o `align-self:stretch` con los enlaces anclados abajo (`margin-top:auto`). Archivo: `src/pages/index.astro` / `HomeMapa.astro`.
+4. [Machetes, Teoría, Laboratorio, Parciales · 390 · ambos] Las fórmulas display siguen más anchas que su caja (284 visibles / 338–456 de contenido): `D_f = {(x,y)∈ℝ² : todas las re…`, `(N≥0 ∧ D>0) ∨ (N≤0 ∧ D<` (`zoom-formulas-m.png`), `f(x,y)=√(−x²−y²+2x+4y−1` del enunciado y `…=(` / `…≠ 0` en pasos del lab (`lab-dominio-m-dark-t1.png`). El degradé de 24px avisa poco. Fix: `font-size:.85em` en `.katex-display` a ≤480px y degradé de 40px; en pasos del lab partir con `\\` o `aligned` las fórmulas de >1 línea. Archivos: `global.css` (`.katex-display`), `src/scripts/lab/p1-dominio.js`, `p1-extremos.js`.
+5. [Parcial P1 · 1280 · modo examen] "Salir del modo examen" termina en x=1103 y el contenido de la tarjeta en 1095 (8px de más, `ex-d-light-4entregado.png`); 48px de aire entre "Modo examen" y "Nota estimada". Fix: `.examen-panel[data-fase='entregado'] .ex-salir{right:var(--s-24)}` y reducir el gap del panel a 24. Archivo: `src/styles/global.css` líneas ~322–340.
+6. [Parcial P1 · 390 · ambos] Rótulo "PASO · ELABORADO PARA EL SITIO — NO OFICIAL" / "PISTA · …" repetido en cada paso (2 líneas) y columna de texto de ~30 caracteres por anidado de tarjeta+riel+sangría (también en las soluciones del lab: 22–28 car., `lab-dominio-m-dark-t1.png`). Fix: rótulo completo solo en la primera capa y "Paso 3" en el resto; `padding-inline:12px` en el riel a ≤480px y `.lab-sol ol{padding-left:20px}`. Archivos: `Paso.astro`, `Pista.astro`, `LabGeneradores.astro`.
+7. [Parciales listado y títulos · ambos] Sigue "1° Parcial Práctico" (grado) frente a "1º parcial" (ordinal), también en el filtro del Preguntero ("1° parcial (U1–U3)"), y el chip de comisión "todas" en minúscula (`parciales-d-light-t0.png`). Fix: "º" y "Todas". Archivos: datos de parciales / `parciales/index.astro`, `preguntero/index.astro`.
+8. [Laboratorio · dominio · ambos] El gráfico (340px) solo numera ±3 y no rotula la región (`lab-dominio-d-light-t1.png`); una de las rectas punteadas se ve cortada contra el borde. Fix: marcas en −6/−3/3/6 y leyenda "región sombreada = dominio". Archivo: `src/scripts/lab/ui.js`.
+9. [Teoría · 1280 · ambos] La tabla "Tipo / f: ℝⁿ→ℝᵐ" sigue partiendo el encabezado en 3 líneas y "Fuente: 01-FUNCIONES DE VARIAS VARIABLES 2015 p.11" sigue pegada al párrafo como nombre de archivo (`teoria-d-dark-t0.png`). Fix: `th{white-space:nowrap}` en esa columna y `.cita` en su propia línea. Archivo: `teoria/[slug].astro`.
+10. [Parcial P1 · ambos · detalle] `ej*.svg` (3 en `p1-1h9-2025-07-rec`) sin `width/height` (riesgo de salto de layout). Fix: agregar dimensiones. Archivo: `src/components/Ejercicio.astro`.
+
+## Lo que está bien (no romper)
+Primer pantallazo del laboratorio y del Home (CTA + cuenta regresiva + progreso en 390 y 1280), tema oscuro completo (lab, tarjetas, gráfico), Preguntero y listado de parciales ordenados, header estático y compacto en celular, foco/hover y favicon.
+
+Para llegar a ≥90 alcanza con 1, 2, 3 y 5 (≈ +3) y 4 y 6 (≈ +2).
+
+---
+
+# Confirmación 2026-10-19 — tras ea73820 — 89/100
+
+Capturas: `/private/tmp/claude-501/estetica/confirmacion/` (home, pA, machetes, macA/macB, teoria/teoria2, `ex-*`, `lab-*`); mediciones en `confirmacion/m/` (20 corridas: Home, parcial P1, machete, teoría y laboratorio x 390/1280 x claro/oscuro).
+
+| Punto | Estado | Medido |
+|---|---|---|
+| 1. Machetes/Teoría 1280 | OK | h1, lectura y tarjeta terminan todos en x=930 (antes 933/1015); chip "U1" arriba del h1 en ambas |
+| 2. Escala de espaciado | no re-medido (fuera del alcance 1–5) | — |
+| 3. Home 1280 | OK | mapa 4+3 sin U10 huérfana; enlaces anclados abajo y alineados por fila |
+| 4. Fórmulas display 390 | PARCIAL | `.katex-display` a 14.45px con degradé, pero siguen cortadas en machete (`D_f={(x,y)∈ℝ²: todas las re…` 284/388px y `A·B>0 ⇔ …` 284/385px) y en 1 fórmula del lab (286/323); los pasos del lab ya parten con aligned y caben |
+| 5. Modo examen 1280 | OK | "Salir" termina en x=1095 con padding 24 de la tarjeta (1120) |
+
+Sin regresiones: 0 fallas de contraste, 0 scroll horizontal (390 y 1280, claro y oscuro), único desborde `a.saltar` intencional. Sin críticos.
+
+Puntaje: alineación 7→9, Home 14→15, resto igual (tipografía 13 y celular 9 por el punto 4) = **89/100**. Para 90: partir con `\\`/`aligned` las 3 fórmulas anchas citadas (machete dominio, lab dominio) o `font-size:.75em` a ≤480px.
