@@ -1,0 +1,329 @@
+---
+titulo: "Máximos y mínimos"
+unidad: "U3"
+orden: 3
+---
+import Pregunta from '../../components/Pregunta.astro';
+
+{/* Formato: ver u5.mdx. Respuestas alineadas con src/content/teoria/u03.md. "_estándar_" = agregado no oficial. Los dos teóricos del 27/07/22 son DISTINTOS: foto 004 y foto 023. */}
+
+<Pregunta id="u3-t01" unidad="U3" tipo="tema" titulo="Extremos relativos: condiciones necesaria y suficiente, hessiano desde Taylor"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 2 (3 pts); P1 · 27/07/22 · tema de la foto 004, preg. 6 (1 pt); P1 · 26/06/23, preg. 6 (1 pt); Cuestionario AM2_A 2025, n.º 44 (desarrollo)"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg; fotos-clase/2026-08-28 foto 004.jpeg; fotos-clase/2026-08-28 foto 009.jpeg; AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 6-12; teoria/U2 - Taylor y Extremos Relativos .pdf, p. 20-28">
+<Fragment slot="enunciado">
+
+Desarrolle las condiciones necesaria y suficiente para que exista un extremo relativo de $z=f(x,y)$ y los puntos de ensilladura. Demuestre la condición suficiente, desarrollando paso a paso desde Taylor el análisis de signos del hessiano. ¿Qué es el hessiano y en qué se aplica?
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: máximo y mínimo relativo (con $\Delta f$), punto crítico, ensilladura.
+- Propiedades: condición necesaria (plano tangente horizontal, no suficiente); suficiente con los cuatro casos del hessiano; caso $H=0$ dudoso.
+- Desarrollo: Taylor con $n=1$ en el punto crítico, completar cuadrados, análisis de signos de $H$ y $f''_{xx}$.
+- Gráfico: paraboloide hacia arriba/abajo, silla, y elipses/hipérbolas de la forma cuadrática.
+
+</Fragment>
+
+**Definición.** $f$ tiene un **máximo relativo** en $P_0$ si $f(x,y)\le f(x_0,y_0)$ en un entorno de $P_0$ ($\Delta f\le0$ para incrementos pequeños); **mínimo relativo** si $\Delta f\ge0$. Es **estricto** con desigualdades estrictas en el entorno reducido. Un **punto de ensilladura** es un punto con $f'_x=f'_y=0$ en el que no hay extremo: en todo entorno hay puntos con $f\gt f(P_0)$ y con $f\lt f(P_0)$ (el plano tangente atraviesa la superficie).
+
+**Condición necesaria.** Si hay extremo en $P_0$ y existen las parciales, entonces $f'_x(P_0)=0$ y $f'_y(P_0)=0$. *Prueba:* $g(x)=f(x,y_0)$ tiene extremo en $x_0$, luego $g'(x_0)=f'_x(x_0,y_0)=0$; igual con $h(y)=f(x_0,y)$. Geométricamente el plano tangente es horizontal. Es necesaria pero **no suficiente** (ejemplo: $z=-x^2+y^2$ en el origen es silla). Los puntos con ambas parciales nulas son **críticos o estacionarios**. Un extremo también puede darse donde no existen las parciales (ej. $z=1-\sqrt[3]{x^2+y^2}$).
+
+**Condición suficiente.** Hipótesis: $f$ continua con parciales continuas hasta el orden 2 en un entorno del punto crítico $P_0$. Hessiano:
+
+$$H(P_0)=\begin{vmatrix}f''_{xx}&f''_{xy}\\f''_{yx}&f''_{yy}\end{vmatrix}=f''_{xx}f''_{yy}-(f''_{xy})^2$$
+
+| En el punto crítico | Resultado |
+|---|---|
+| $H\gt0$ y $f''_{xx}\gt0$ | mínimo relativo |
+| $H\gt0$ y $f''_{xx}\lt0$ | máximo relativo |
+| $H\lt0$ | ensilladura |
+| $H=0$ | dudoso: el criterio no decide |
+
+El hessiano se aplica a los puntos críticos para **clasificarlos**.
+
+**Demostración (Taylor $\to$ hessiano).**
+1. *Taylor con $n=1$ en $P_0$.* Como $f'_x(P_0)=f'_y(P_0)=0$, los términos de primer orden desaparecen. Con las derivadas segundas en $\xi=(x_0+c\Delta x,\ y_0+c\Delta y)$, $0\lt c\lt1$:
+
+$$\Delta f=\frac12\Big[f''_{xx}(\xi)\Delta x^2+2f''_{xy}(\xi)\Delta x\Delta y+f''_{yy}(\xi)\Delta y^2\Big]$$
+
+El signo de $\Delta f$ es el del corchete.
+2. *Se completa el cuadrado* (con $f''_{xx}\neq0$), multiplicando y dividiendo por $f''_{xx}$:
+
+$$2\Delta f=\frac1{f''_{xx}}\Big[\big(f''_{xx}\Delta x+f''_{xy}\Delta y\big)^2+\big(f''_{xx}f''_{yy}-f''^{\,2}_{xy}\big)\Delta y^2\Big]$$
+
+y aparece el hessiano $H$ multiplicando a $\Delta y^2$.
+3. *Conservación del signo.* Las segundas derivadas son continuas, entonces $H$ y $f''_{xx}$ conservan en un entorno de $P_0$ el signo que tienen en $P_0$.
+4. *Análisis de signos.*
+   - $H\gt0$: es $f''_{xx}f''_{yy}\gt f''^{\,2}_{xy}\ge0$, luego $f''_{xx}\neq0$. El corchete es positivo para todo incremento no nulo, y $\Delta f$ tiene el signo de $f''_{xx}$: si $f''_{xx}\gt0$, $\Delta f\gt0$ (**mínimo**); si $\lt0$, $\Delta f\lt0$ (**máximo**).
+   - $H\lt0$: la forma cuadrática toma ambos signos según la dirección, entonces $\Delta f$ cambia de signo en todo entorno: **ensilladura**.
+   - $H=0$: el signo queda determinado por términos que el criterio no controla (el resto): **no se puede concluir**.
+
+*Variante por trinomio:* con $\Delta x=\Delta S\cos\gamma$, $\Delta y=\Delta S\sin\gamma$ y $t=\operatorname{tg}\gamma$, el corchete es $f''_{yy}t^2+2f''_{xy}t+f''_{xx}$, de discriminante $-4H$: si $H\gt0$ no cambia de signo (extremo); si $H\lt0$ sí (silla).
+
+**Caso dudoso.** Se estudia el signo de $f(x,y)-f(P_0)$ en un entorno. Con $H=0$ en el origen: $z=x^4+y^4$ mínimo estricto; $z=x^3+y^3$ sin extremo; $z=(x-y)^2$ mínimos no estrictos sobre una recta. Un extremo puede darse con $H=0$: el hessiano es condición suficiente, no necesaria.
+
+**Ejemplo.** $z=x^3+3xy+y^3$: $f'_x=3x^2+3y=0$, $f'_y=3y^2+3x=0$ dan $(0,0)$ y $(-1,-1)$. $H=36xy-9$: $H(0,0)=-9\lt0$, silla en $(0,0,0)$; $H(-1,-1)=27\gt0$ y $f''_{xx}=-6\lt0$, máximo relativo en $(-1,-1,1)$.
+
+**Gráfico.** Cuatro superficies pequeñas con su hessiano: paraboloide hacia arriba (mínimo), hacia abajo (máximo), silla ($H\lt0$) y una "plana" tipo $x^4+y^4$ ($H=0$). En el plano $\Delta x\,\Delta y$, la forma cuadrática: elipses si $H\gt0$, hipérbolas si $H\lt0$.
+</Pregunta>
+
+<Pregunta id="u3-t02" unidad="U3" tipo="tema" titulo="Extremos condicionados: multiplicadores de Lagrange"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 5 (1 pt); Cuestionario AM2_A 2025, n.º 47 (desarrollo)"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg; AM2_A 2025.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 14-17; teoria/Demostraciones parcial 1.pdf, p. 10">
+<Fragment slot="enunciado">
+
+Dada $z=f(x,y)$ sujeta a $\varphi(x,y)=0$, desarrolle el método de los multiplicadores de Lagrange. ¿Cuáles son la condición necesaria y la suficiente para que exista un extremo condicionado?
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: extremo condicionado y función auxiliar de Lagrange.
+- Propiedades: hipótesis ($C^1$, $\nabla\varphi\neq\vec0$), tres ecuaciones con tres incógnitas, interpretación geométrica, generalización.
+- Desarrollo: deducción con $y=y(x)$ hasta el sistema (6).
+- Gráfico: restricción tangente a una curva de nivel, con $\nabla f\parallel\nabla\varphi$.
+
+</Fragment>
+
+**Definición.** Se buscan los extremos de $z=f(x,y)$ con $x,y$ ligadas por $\varphi(x,y)=0$, sin despejar.
+
+**Hipótesis.** $f,\varphi\in C^1$ en un entorno de $P_0$ y $\nabla\varphi(P_0)\neq\vec0$; en la deducción se supone $\varphi'_y(P_0)\neq0$ para poder escribir $y=y(x)$. Si $\nabla\varphi(P_0)=\vec0$ el método puede fallar _(ejemplo estándar: $f=x$ con $x^3-y^2=0$, mínimo en el origen)_.
+
+**Deducción.** Si solo $x$ es independiente, la condición necesaria $dz/dx=0$ da (3), y derivando la restricción se obtiene (4):
+
+$$\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}\frac{dy}{dx}=0\ (3),\qquad\frac{\partial\varphi}{\partial x}+\frac{\partial\varphi}{\partial y}\frac{dy}{dx}=0\ (4)$$
+
+Se despeja $dy/dx$ de ambas y se igualan:
+
+$$\frac{\partial f/\partial x}{\partial\varphi/\partial x}=\frac{\partial f/\partial y}{\partial\varphi/\partial y}=-\lambda$$
+
+Resulta el sistema de **tres ecuaciones con tres incógnitas** $x,y,\lambda$:
+
+$$f'_x+\lambda\varphi'_x=0,\qquad f'_y+\lambda\varphi'_y=0,\qquad\varphi(x,y)=0$$
+
+que son las derivadas parciales de $F(x,y,\lambda)=f+\lambda\varphi$: los puntos buscados son **puntos críticos de $F$**.
+
+**Condición necesaria:** el sistema anterior. Da candidatos, pero no dice si son máximo, mínimo o ninguno. Monllor indica que llegar a la suficiente con derivadas sucesivas es muy complicado y que en problemas concretos se decide por el carácter del problema.
+
+**Condición suficiente** _(estándar; ver el hessiano orlado)_: con $F''$ calculada con $\lambda_0$, si $\overline H\gt0$ máximo condicionado, si $\overline H\lt0$ mínimo condicionado, si $\overline H=0$ no decide; equivale al signo de $d^2F$ restringido a $d\varphi=0$.
+
+**Interpretación geométrica** _(estándar)_: $\nabla f=-\lambda\nabla\varphi$, los gradientes son paralelos y la curva de nivel de $f$ es tangente a la restricción. **Generalización:** con $m\lt n$ condiciones, $F=f+\lambda_1\varphi_1+\dots+\lambda_m\varphi_m$ y se anulan sus derivadas respecto de las $n+m$ variables.
+
+**Ejemplo.** $z=2x+y^2$ sujeta a $x^2+y^2-4=0$: $2+2\lambda x=0$ y $2y(1+\lambda)=0$. Con $y=0$: $(\pm2,0)$; con $\lambda=-1$: $(1,\pm\sqrt3)$. Valores $f(2,0)=4$, $f(-2,0)=-4$, $f(1,\pm\sqrt3)=5$: máximos en $(1,\pm\sqrt3)$ y mínimo en $(-2,0)$.
+
+**Gráfico.** Curva de restricción $\varphi=0$ y varias curvas de nivel de $f$; en el punto de contacto comparten tangente y se dibujan $\nabla f$ y $\nabla\varphi$ paralelos.
+</Pregunta>
+
+<Pregunta id="u3-t03" unidad="U3" tipo="tema" titulo="Fórmula de Taylor y Maclaurin para dos variables"
+  aparecio="Cuestionario AM2_A 2025, n.º 43; P1 · 26/06/23 (respuesta manuscrita con Taylor y TVM)"
+  fq="AM2_A 2025.pdf, p. 2; fotos-clase/2026-08-28 foto 009.jpeg" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 2-6; teoria/U2 - Taylor y Extremos Relativos .pdf, p. 9-19">
+<Fragment slot="enunciado">
+
+Dada $z=f(x,y)$ y $P(a,b)$, defina la fórmula de Taylor y de Maclaurin e indique para qué se utilizan.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: polinomio de Taylor más resto, hipótesis de continuidad hasta el orden $n+1$.
+- Propiedades: Maclaurin, resto de Lagrange, orden del error.
+- Desarrollo: aplicar Taylor de una variable tres veces; forma para $n=2$.
+- Gráfico: $P_0$, $P$, $\Delta x$, $\Delta y$, $\Delta S$ y el resto como diferencia vertical.
+
+</Fragment>
+
+**Definición.** Sea $f$ con derivadas parciales continuas hasta el orden $n+1$ en un entorno de $P_0(x_0,y_0)$ contenido en $D$:
+
+$$f(x,y)=\sum_{i=0}^{n}\frac1{i!}\Big(\Delta x\frac{\partial}{\partial x}+\Delta y\frac{\partial}{\partial y}\Big)^{i}f(x_0,y_0)+R_n,\qquad R_n=\frac1{(n+1)!}\Big(\Delta x\frac{\partial}{\partial x}+\Delta y\frac{\partial}{\partial y}\Big)^{n+1}f(\xi)$$
+
+con $\Delta x=x-x_0$, $\Delta y=y-y_0$, $\xi=(x_0+c\Delta x,\ y_0+c\Delta y)$ y $0\lt c\lt1$. Es decir $f=f(P_0)+df+\frac1{2!}d^2f+\dots+R_n$. **Maclaurin** es el caso $P_0=(0,0)$.
+
+**Propiedades.**
+- El exponente simbólico $i$ es el orden de derivación y el exponente de $\Delta x,\Delta y$ (como en $d^nz$).
+- $|R_n|\le c\,\Delta S^{n+1}$: para $n$ fijo, $R_n=o(\Delta S^n)$. Cuanto más cerca de $P_0$ y más términos, menor el error.
+- Para $n=0$ es el TVM de dos variables; por eso conviene ligar Taylor con el TVM.
+
+**Para qué se usan.** (1) Aproximar el valor de $f$ cerca de $P_0$; (2) **deducir la condición suficiente de extremos** (hessiano).
+
+**Desarrollo.** Se aplica Taylor de una variable tres veces: con $x$ fijo, en $y$ hasta $n=2$; los coeficientes son funciones de $x$ y se les aplica Taylor en $x_0$; se reemplaza, se ordena por potencias de $(x-x_0)$ y $(y-y_0)$ y por Schwarz se juntan los términos mixtos. Resulta la suma de diferenciales sucesivos. Para $n=2$:
+
+$$f=f(P_0)+f'_x\Delta x+f'_y\Delta y+\frac1{2!}\Big[f''_{xx}\Delta x^2+2f''_{xy}\Delta x\Delta y+f''_{yy}\Delta y^2\Big]+R_2$$
+
+**Ejemplo.** $f=y^x$ en $P_0(3,1)$ hasta orden 2: $y^x\approx1+3(y-1)+\frac12[2(x-3)(y-1)+6(y-1)^2]$. Para $f(2{,}9;1{,}1)$ da $1{,}32$ contra $1{,}3184$ exacto.
+
+**Gráfico.** Plano $0xy$ con $P_0$, $P$, los catetos $\Delta x,\Delta y$ y la hipotenusa $\Delta S$. Sobre la superficie, $f(P)$ exacto y el valor del polinomio, con $R_n$ como diferencia vertical.
+</Pregunta>
+
+<Pregunta id="u3-c01" unidad="U3" tipo="corta" titulo="Hessiano y en qué se aplica"
+  aparecio="P1 · 26/06/23, preg. 6 (1 pt)"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 8-11">
+<Fragment slot="enunciado">
+
+¿Qué entiende por hessiano y en qué se aplica?
+
+</Fragment>
+
+Es el determinante de las derivadas segundas en un punto crítico, $H=f''_{xx}f''_{yy}-(f''_{xy})^2$. Se aplica para **clasificar los puntos críticos**: $H\gt0$ extremo (mínimo si $f''_{xx}\gt0$, máximo si $\lt0$); $H\lt0$ ensilladura; $H=0$ dudoso. Requiere $f\in C^2$ y es condición suficiente.
+</Pregunta>
+
+<Pregunta id="u3-c02" unidad="U3" tipo="corta" titulo="Hessiano orlado"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 6 (1 pt)"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 16 (resultado estándar, no figura en las fuentes)">
+<Fragment slot="enunciado">
+
+¿Qué entiende por hessiano orlado y en qué se aplica?
+
+</Fragment>
+
+_Resultado estándar, no oficial._ Para $f(x,y)$ con $\varphi(x,y)=0$ y $F=f+\lambda\varphi$, es el hessiano de $F$ bordeado con las derivadas de la condición:
+
+$$\overline H=\begin{vmatrix}0&\varphi'_x&\varphi'_y\\\varphi'_x&F''_{xx}&F''_{xy}\\\varphi'_y&F''_{xy}&F''_{yy}\end{vmatrix}$$
+
+Se aplica como condición **suficiente** de extremo condicionado, en los puntos que dio el sistema de Lagrange: $\overline H\gt0$ máximo condicionado, $\overline H\lt0$ mínimo condicionado, $\overline H=0$ no decide. Ejemplo: $f=xy$ con $x+y=2$: $(1,1)$, $\overline H=2\gt0$, máximo.
+</Pregunta>
+
+<Pregunta id="u3-c03" unidad="U3" tipo="corta" titulo="Mapa de contorno para hallar extremos"
+  aparecio="Cuestionario AM2_A 2025, n.º 45"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/U2 - Taylor y Extremos Relativos .pdf, p. 37-40">
+<Fragment slot="enunciado">
+
+¿Cómo se utiliza un mapa de contorno (curvas de nivel de $z=f(x,y)$) para hallar extremos relativos y puntos de ensilladura?
+
+</Fragment>
+
+Se grafican varias curvas $f(x,y)=C$. Curvas cerradas concéntricas que se achican alrededor de un punto al **aumentar** $C$: máximo relativo; al **disminuir** $C$: mínimo relativo. Una curva de nivel que se **corta a sí misma** en un punto: ensilladura. Ejemplo: $z=x^2-y^2$, con $C=0$ las rectas $y=\pm x$ y con $C=1,4$ hipérbolas: silla en el origen. Se confirma con las condiciones necesaria y suficiente.
+</Pregunta>
+
+<Pregunta id="u3-c04" unidad="U3" tipo="corta" titulo="Método de las variables ligadas"
+  aparecio="Cuestionario AM2_A 2025, n.º 46 (desarrollo)"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 14">
+<Fragment slot="enunciado">
+
+Dada $z=f(x,y)$ sujeta a $g(x,y)=0$, desarrolle el método de las variables ligadas. Condición necesaria y suficiente.
+
+</Fragment>
+
+Se despeja una variable de la condición, $y=y(x)$, y se reemplaza: $z=F(x)$ de una variable. **Necesaria:** $F'(x_0)=0$. **Suficiente** _(estándar, Análisis I)_: $F''(x_0)\lt0$ máximo, $F''(x_0)\gt0$ mínimo, $F''=0$ no decide. Limitaciones: solo para hasta dos variables independientes y no siempre se puede despejar; para eso está Lagrange. Ejemplo (Monllor): recipiente cilíndrico de 2 litros con mínima chapa, $f=\frac{\pi D^2}2+\pi DH$ con $\frac{\pi D^2}{4}H=2000$.
+</Pregunta>
+
+<Pregunta id="u3-c05" unidad="U3" tipo="corta" titulo="Caso H = 0 y extremos sin derivadas"
+  aparecio="Lo que contó Gabi del 1º parcial (máximos relativos con Taylor y hessiano)"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 11; teoria/U2 - Taylor y Extremos Relativos .pdf, p. 34-36">
+<Fragment slot="enunciado">
+
+¿Qué se hace si $H=0$ en un punto crítico? ¿Puede haber un extremo donde no existen las derivadas?
+
+</Fragment>
+
+Con $H=0$ no se puede afirmar nada: se estudia el signo de $\Delta f=f(x,y)-f(P_0)$ en un entorno (factoreando, o con trayectorias por $P_0$). Ejemplos en el origen: $x^4+y^4$ mínimo; $x^3+y^3$ silla. Sí puede haber extremo donde no existen las parciales: $z=1-\sqrt[3]{x^2+y^2}$ tiene máximo relativo en $(0,0,1)$ aunque el hessiano no se pueda usar.
+</Pregunta>
+
+<Pregunta id="u3-c06" unidad="U3" tipo="corta" titulo="Procedimiento para hallar extremos relativos"
+  aparecio="P1 · 27/07/22 · tema de la foto 004, preg. 6 (1 pt)"
+  fq="fotos-clase/2026-08-28 foto 004.jpeg" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 12">
+<Fragment slot="enunciado">
+
+Indique los pasos para encontrar y clasificar los extremos relativos de $z=f(x,y)$.
+
+</Fragment>
+
+(1) Puntos críticos: resolver $f'_x=0$, $f'_y=0$. (2) Calcular $H$ en cada uno: $\gt0$ extremo, $\lt0$ silla, $=0$ nada puede asegurarse. (3) Si $H\gt0$, el signo de $f''_{xx}$ decide: $\lt0$ máximo, $\gt0$ mínimo. (4) Si se pide, la cota $z_i=f(x_i,y_i)$.
+</Pregunta>
+
+<Pregunta id="u3-h01" unidad="U3" tipo="choice" correcta={2} titulo="Clasificación con el hessiano"
+  aparecio="P1 · 26/06/23, preg. 6 (1 pt)"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 8-11">
+<Fragment slot="enunciado">
+
+En un punto crítico con $H\gt0$ y $f''_{xx}\lt0$ la función tiene:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Un mínimo relativo
+2. Un máximo relativo
+3. Un punto de ensilladura
+4. No se puede afirmar nada
+
+</Fragment>
+
+Con $H\gt0$ hay extremo y $f''_{xx}\lt0$ indica máximo. Mínimo sería $f''_{xx}\gt0$; silla, $H\lt0$; dudoso, $H=0$.
+</Pregunta>
+
+<Pregunta id="u3-h02" unidad="U3" tipo="choice" correcta={4} titulo="Condición necesaria de extremo"
+  aparecio="P1 · 27/07/22 · tema de la foto 004, preg. 6 (1 pt)"
+  fq="fotos-clase/2026-08-28 foto 004.jpeg" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 7">
+<Fragment slot="enunciado">
+
+Si $f$ tiene un extremo en $P_0$ y existen sus derivadas parciales de primer orden, entonces:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $H(P_0)\gt0$
+2. $f''_{xx}(P_0)\neq0$
+3. $f'_x(P_0)=0$ o $f'_y(P_0)=0$, pero no necesariamente ambas
+4. $f'_x(P_0)=0$ y $f'_y(P_0)=0$
+
+</Fragment>
+
+Es la condición necesaria: ambas parciales se anulan. El recíproco es falso (ensilladura) y un extremo puede darse con $H=0$.
+</Pregunta>
+
+<Pregunta id="u3-h03" unidad="U3" tipo="choice" correcta={1} titulo="Clasificación de x³+3xy+y³"
+  aparecio="Lo que contó Gabi del 1º parcial (máximos relativos con Taylor y hessiano)"
+  fq="parciales/1er-parcial/WhatsApp Image 2026-09-06 at 17.33.50.jpeg" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 12">
+<Fragment slot="enunciado">
+
+Los puntos críticos de $z=x^3+3xy+y^3$ son $(0,0)$ y $(-1,-1)$. Entonces:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $(0,0)$ es silla y $(-1,-1)$ es máximo relativo
+2. $(0,0)$ es mínimo y $(-1,-1)$ es silla
+3. Ambos son máximos relativos
+4. $(0,0)$ es máximo y $(-1,-1)$ es mínimo
+
+</Fragment>
+
+$H=36xy-9$: $H(0,0)=-9\lt0$ silla; $H(-1,-1)=27\gt0$ con $f''_{xx}=6x=-6\lt0$, máximo.
+</Pregunta>
+
+<Pregunta id="u3-h04" unidad="U3" tipo="choice" correcta={3} titulo="Condición necesaria en Lagrange"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 5 (1 pt); Cuestionario AM2_A 2025, n.º 47"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg; AM2_A 2025.pdf, p. 3" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 15-16">
+<Fragment slot="enunciado">
+
+Para extremos de $f(x,y)$ sujeta a $\varphi(x,y)=0$, la condición necesaria de Lagrange es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $f'_x=0$ y $f'_y=0$
+2. $\varphi'_x=0$ y $\varphi'_y=0$
+3. $f'_x+\lambda\varphi'_x=0$, $f'_y+\lambda\varphi'_y=0$ y $\varphi=0$
+4. $\overline H\gt0$
+
+</Fragment>
+
+Son los puntos críticos de $F=f+\lambda\varphi$. La 1 es la condición de extremo libre y la 4 es la condición suficiente.
+</Pregunta>
+
+<Pregunta id="u3-h05" unidad="U3" tipo="choice" correcta={2} titulo="Fórmula de Maclaurin"
+  aparecio="Cuestionario AM2_A 2025, n.º 43"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 2-5">
+<Fragment slot="enunciado">
+
+La fórmula de Maclaurin para dos variables es la de Taylor con:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $n=0$
+2. $P_0=(0,0)$
+3. Resto $R_n=0$
+4. $\Delta x=\Delta y$
+
+</Fragment>
+
+Maclaurin es el caso $P_0=(0,0)$, con $\Delta x=x$, $\Delta y=y$.
+</Pregunta>

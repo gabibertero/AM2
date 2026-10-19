@@ -1,0 +1,504 @@
+---
+titulo: "Derivadas y diferenciales"
+unidad: "U2"
+orden: 2
+---
+import Pregunta from '../../components/Pregunta.astro';
+
+{/* Formato: ver u5.mdx. Respuestas alineadas con src/content/teoria/u02.md. "_estándar_" = agregado no oficial. Convención de cátedra: el subíndice de f'' se lee de izquierda a derecha. Los dos teóricos del 27/07/22 son DISTINTOS: foto 004 y foto 023. */}
+
+<Pregunta id="u2-t01" unidad="U2" tipo="tema" titulo="Derivada direccional: obtención de la fórmula"
+  aparecio="P1 · 27/07/22 · tema de la foto 004, preg. 1 (3 pts); Cuestionario AM2_A 2025, n.º 38 (desarrollo), 39 y 41"
+  fq="fotos-clase/2026-08-28 foto 004.jpeg; AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 31-34; teoria/U2- Derivada Direccional.pdf, p. 1-3">
+<Fragment slot="enunciado">
+
+Desarrolle la obtención de la fórmula de cálculo de la derivada direccional. Grafique el punto, el ángulo y el vector de dirección. Indique cuándo las derivadas parciales son un caso particular y dé su interpretación geométrica.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: límite de $\Delta z/\Delta S$ en la dirección de un ángulo $\alpha$.
+- Propiedades: hipótesis ($f$ continua con parciales continuas), no es un límite doble, casos $\alpha=0^\circ,90^\circ$, dirección dada por un vector.
+- Desarrollo: del incremento total a $f'_x\cos\alpha+f'_y\sin\alpha$.
+- Gráfico: $P$, $\vec v$, $\alpha$, $\Delta S$, $\Delta x$, $\Delta y$; en 3D, plano vertical y recta tangente.
+
+</Fragment>
+
+**Definición.** Sea $z=f(x,y)$ en $D$ y $P(x,y)\in D$. Por $P$ se traza un vector $\vec v$ que forma el ángulo $\alpha$ con el sentido positivo de $0x$ ($0\le\alpha\lt2\pi$). Sobre su dirección se toma $P_0(x+\Delta x,y+\Delta y)$ a distancia $\Delta S=\sqrt{\Delta x^2+\Delta y^2}$. La derivada de $f$ en $P$ en la dirección de $\vec v$ es
+
+$$\frac{\partial z}{\partial S}=z'_{\vec v}(P)=\lim_{\Delta S\to0}\frac{\Delta z}{\Delta S}=\lim_{\Delta S\to0}\frac{f(x+\Delta x,y+\Delta y)-f(x,y)}{\Delta S}$$
+
+**Propiedades / condiciones.**
+- Hipótesis: $f$ continua con derivadas parciales continuas en $D$ (para escribir el incremento con el diferencial).
+- **No es un límite doble:** $\Delta x,\Delta y$ no son independientes, están ligados por la dirección.
+- **Casos particulares:** con $\alpha=0^\circ$ da $f'_x$; con $\alpha=90^\circ$ da $f'_y$.
+- Si la dirección es un vector $\vec v=h\,\vec i+k\,\vec j$ se usa su versor $(\cos\alpha,\sin\alpha)=\vec v/|\vec v|$; el ángulo sale de $\operatorname{arctg}(k/h)$ corrigiendo el cuadrante.
+- **Interpretación geométrica:** es la pendiente de la recta tangente a la superficie, en el punto $R(x,y,f(x,y))$, en la dirección de $\vec v$: $\partial z/\partial S=\operatorname{tg}\theta$, con la curva que resulta de cortar la superficie con el plano **vertical** que contiene a $\vec v$.
+
+**Desarrollo.** Con las hipótesis, el incremento total es
+
+$$\Delta z=\frac{\partial z}{\partial x}\Delta x+\frac{\partial z}{\partial y}\Delta y+\varepsilon_1\Delta x+\varepsilon_2\Delta y,\qquad\varepsilon_1,\varepsilon_2\to0\ \text{ si }\Delta S\to0$$
+
+Se divide por $\Delta S$ y, por el gráfico, $\Delta x/\Delta S=\cos\alpha$ y $\Delta y/\Delta S=\sin\alpha$:
+
+$$\frac{\Delta z}{\Delta S}=\frac{\partial z}{\partial x}\cos\alpha+\frac{\partial z}{\partial y}\sin\alpha+\varepsilon_1\cos\alpha+\varepsilon_2\sin\alpha$$
+
+Al tomar $\Delta S\to0$ los dos últimos términos tienden a $0$:
+
+$$\frac{\partial z}{\partial S}=f'_x(x,y)\cos\alpha+f'_y(x,y)\sin\alpha$$
+
+(La cátedra llega a lo mismo con el TVM: $f(a+h,b+k)-f(a,b)=f'_x(a+c_1h,b+k)\,h+f'_y(a,b+c_2k)\,k$.)
+
+**Ejemplo.** $z=x^2+y^2+xy$ en $P(1,2)$, $\alpha=\pi/4$: $f'_x=4$, $f'_y=5$, entonces $\partial z/\partial S=(4+5)\frac{\sqrt2}{2}=\frac{9\sqrt2}{2}$.
+
+**Gráfico.** Plano $0xy$ con $P_0$, el vector $\vec v$ saliendo con el ángulo $\alpha$ medido desde $+x$, el punto $P$ a distancia $\Delta S$ y los catetos $\Delta x=\Delta S\cos\alpha$, $\Delta y=\Delta S\sin\alpha$. En 3D: superficie, plano vertical que contiene a $\vec v$, curva intersección y recta tangente en $R$ con su ángulo $\theta$.
+</Pregunta>
+
+<Pregunta id="u2-t02" unidad="U2" tipo="tema" titulo="Regla de la cadena: derivada de la función compuesta"
+  aparecio="P1 · 27/07/22 · tema de la foto 004, preg. 2 (3 pts); Cuestionario AM2_A 2025, n.º 31, 32 y 33"
+  fq="fotos-clase/2026-08-28 foto 004.jpeg; AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 19-21">
+<Fragment slot="enunciado">
+
+Usando la regla de la cadena, deduzca la fórmula de la derivada de la función compuesta de un campo escalar de dos variables que dependen de una única variable independiente $t$. Explique cómo se extiende a dos y a $n$ variables independientes.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $z=f(x,y)$ con $x=x(t)$, $y=y(t)$: variables intermedias e independiente.
+- Propiedades: hipótesis (diferenciable; $x,y$ derivables), $d$ para totales y $\partial$ para parciales.
+- Desarrollo: incremento, diferenciabilidad, dividir por $\Delta t$, límite.
+- Gráfico: diagrama de árbol.
+
+</Fragment>
+
+**Definición.** $z=f(x,y)$ con $x=x(t)$, $y=y(t)$ es una **función compuesta** de $t$ (variable independiente); $x,y$ son las **variables intermedias**. Se busca $\dfrac{dz}{dt}$ sin reemplazar para formar $z(t)$.
+
+**Propiedades / hipótesis.**
+- $f$ diferenciable en $(x(t),y(t))$ (por ejemplo, parciales continuas) y $x(t)$, $y(t)$ derivables.
+- Se escribe $d$ en $\frac{dz}{dt},\frac{dx}{dt},\frac{dy}{dt}$ (dependen de una sola variable) y $\partial$ para las parciales de $f$.
+
+**Deducción.**
+1. Se incrementa $t$ en $\Delta t$: $x$ e $y$ reciben $\Delta x,\Delta y$ y $z$ recibe $\Delta z=f(x+\Delta x,y+\Delta y)-f(x,y)$.
+2. Por la diferenciabilidad de $f$:
+
+$$\Delta z=\frac{\partial z}{\partial x}\Delta x+\frac{\partial z}{\partial y}\Delta y+\varepsilon_1\Delta x+\varepsilon_2\Delta y,\qquad\varepsilon_1,\varepsilon_2\to0\ \text{ si }\Delta S\to0$$
+
+3. Se divide por $\Delta t$:
+
+$$\frac{\Delta z}{\Delta t}=\frac{\partial z}{\partial x}\frac{\Delta x}{\Delta t}+\frac{\partial z}{\partial y}\frac{\Delta y}{\Delta t}+\varepsilon_1\frac{\Delta x}{\Delta t}+\varepsilon_2\frac{\Delta y}{\Delta t}$$
+
+4. Se toma $\Delta t\to0$: como $x,y$ son derivables, son continuas, $\Delta x,\Delta y\to0$ y por lo tanto $\varepsilon_1,\varepsilon_2\to0$; además $\Delta x/\Delta t\to dx/dt$ y $\Delta y/\Delta t\to dy/dt$ (finitos), así que los dos últimos términos tienden a $0$:
+
+$$\frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}$$
+
+**Extensión.** Con $x=\varphi_1(u,v)$, $y=\varphi_2(u,v)$: el mismo razonamiento (incrementando $u$ con $v$ constante) da
+
+$$\frac{\partial z}{\partial u}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial u}$$
+
+y análogo para $v$. Para $n$ intermedias, $\dfrac{\partial z}{\partial x_i}=\sum_j\dfrac{\partial z}{\partial y_j}\dfrac{\partial y_j}{\partial x_i}$. Si una variable es a la vez independiente e intermedia ($z=f(x,y,w)$ con $y=g_1(x)$, $w=g_2(x)$): $\dfrac{dz}{dx}=\dfrac{\partial f}{\partial x}+\dfrac{\partial f}{\partial y}\dfrac{dy}{dx}+\dfrac{\partial f}{\partial w}\dfrac{dw}{dx}$.
+
+**Ejemplo.** $z=x^2y$, $x=u+v$, $y=uv$: $\dfrac{\partial z}{\partial u}=2xy\cdot1+x^2\cdot v=2(u+v)uv+(u+v)^2v$.
+
+**Gráfico.** Árbol: $z$ arriba; ramas a $x$ e $y$ rotuladas $\partial z/\partial x$ y $\partial z/\partial y$; de cada una, ramas a las independientes rotuladas $dx/dt$, etc. Se **multiplica** a lo largo de cada camino y se **suma** entre caminos.
+</Pregunta>
+
+<Pregunta id="u2-t03" unidad="U2" tipo="tema" titulo="Teorema de Schwarz"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 1 (3 pts); Cuestionario AM2_A 2025, n.º 21 y 22 (desarrollo)"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 5-7">
+<Fragment slot="enunciado">
+
+Desarrolle el Teorema de Schwarz: enunciado, hipótesis y demostración a partir de $A=f(x+\Delta x,y+\Delta y)-f(x+\Delta x,y)-f(x,y+\Delta y)+f(x,y)$. Indique qué derivadas sucesivas hasta el orden 3 son iguales.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: enunciado con derivadas segundas continuas.
+- Propiedades: qué se extiende (órdenes superiores, más variables) y cuáles son iguales hasta orden 3.
+- Desarrollo: dos lecturas de $A$ con el TVM e igualación.
+- Gráfico: rectángulo con los cuatro valores y signos $+,-,-,+$.
+
+</Fragment>
+
+**Enunciado.** Si $z=f(x,y)$ tiene derivadas parciales segundas **continuas** en un entorno de un punto interior $P(x,y)$, entonces en ese punto
+
+$$f''_{xy}(x,y)=f''_{yx}(x,y)$$
+
+**Propiedades.**
+- Se extiende a órdenes superiores y a más variables si las derivadas son continuas.
+- Para $z=f(x,y)$ hay 4 derivadas de orden 2 y 8 de orden 3. El orden no altera el resultado siempre que se derive la misma cantidad de veces respecto de cada variable: $z'''_{xxy}=z'''_{xyx}=z'''_{yxx}$ y $z'''_{xyy}=z'''_{yxy}=z'''_{yyx}$. De las 8 de orden 3 hay solo 4 distintas: $z'''_{xxx},\ z'''_{xxy},\ z'''_{xyy},\ z'''_{yyy}$.
+
+**Demostración.** Se analiza $A$ (expresión (1)).
+- *Primera lectura* (diferencias en $x$): con $\varphi(y)=f(x+\Delta x,y)-f(x,y)$ es $A=\varphi(y+\Delta y)-\varphi(y)$. El TVM da $A=\varphi'(y_1)\Delta y=[f'_y(x+\Delta x,y_1)-f'_y(x,y_1)]\Delta y$; el TVM de nuevo, en $x$:
+
+$$A=f''_{yx}(x_1,y_1)\,\Delta x\,\Delta y\qquad(2)$$
+
+- *Segunda lectura* (diferencias en $y$): con $\psi(x)=f(x,y+\Delta y)-f(x,y)$, el TVM en $x$ y luego en $y$ da
+
+$$A=f''_{xy}(x_2,y_2)\,\Delta x\,\Delta y\qquad(3)$$
+
+- Se igualan (2) y (3) y se simplifica $\Delta x\Delta y$: $f''_{yx}(x_1,y_1)=f''_{xy}(x_2,y_2)$. Con $\Delta x,\Delta y\to0$, $(x_i,y_i)\to(x,y)$ y, por la **continuidad** de las derivadas segundas, queda $f''_{yx}(x,y)=f''_{xy}(x,y)$. La continuidad se usa en este último paso, para pasar el límite adentro.
+
+**Ejemplo.** $z=x^4\sin5y$: $z''_{xy}=z''_{yx}=20x^3\cos5y$.
+
+**Gráfico.** Rectángulo de vértices $(x,y)$, $(x+\Delta x,y)$, $(x,y+\Delta y)$, $(x+\Delta x,y+\Delta y)$ con los cuatro valores de $f$ de $A$ y sus signos $+,-,-,+$; dos flechas con las dos lecturas (primero en $y$ y después en $x$, y al revés).
+</Pregunta>
+
+<Pregunta id="u2-t04" unidad="U2" tipo="tema" titulo="Teorema del Valor Medio"
+  aparecio="P1 · 26/06/23, preg. 1 (3 pts); Cuestionario AM2_A 2025, n.º 23"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 6, 8; teoria/Demostraciones parcial 1.pdf, p. 9">
+<Fragment slot="enunciado">
+
+Desarrolle el Teorema del Valor Medio (una variable y dos variables independientes). Realice el gráfico e indique para qué se utiliza.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: enunciado en una variable y en dos variables.
+- Propiedades: hipótesis ($C^1$ en un entorno convexo), interpretación geométrica, para qué sirve.
+- Desarrollo: demostración con función auxiliar (Rolle) y con $\phi(t)$ sobre el segmento.
+- Gráfico: curva con secante y tangente paralela.
+
+</Fragment>
+
+**Una variable.** Si $f$ es continua en $[a,b]$ y derivable en $(a,b)$, existe $c\in(a,b)$ tal que
+
+$$f(b)-f(a)=f'(c)\,(b-a)$$
+
+Geométricamente: hay un punto de la curva con tangente paralela a la secante que une los extremos. *Demostración (estándar, Análisis I, vía Rolle).* Se define $h(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)$, continua en $[a,b]$, derivable en $(a,b)$, con $h(a)=0=h(b)$. Por Rolle existe $c$ con $h'(c)=0$, que es la tesis.
+
+**Dos variables.** *Enunciado.* Sea $f$ de clase $C^1$ en un entorno $E$ de $P_0(x_0,y_0)$ y $P(x_0+\Delta x,y_0+\Delta y)\in E$. Existe $c\in(0,1)$ tal que
+
+$$f(P)-f(P_0)=f'_x(\xi)\,\Delta x+f'_y(\xi)\,\Delta y,\qquad\xi=(x_0+c\Delta x,\ y_0+c\Delta y)$$
+
+con $\xi$ un punto del segmento $P_0P$ (el entorno es convexo).
+
+*Demostración.* Se reduce a una variable caminando por el segmento: $\phi(t)=f(x_0+t\Delta x,\ y_0+t\Delta y)$, $t\in[0,1]$, con $\phi(0)=f(P_0)$ y $\phi(1)=f(P)$. Es continua y, por la regla de la cadena, derivable:
+
+$$\phi'(t)=f'_x(x_0+t\Delta x,\,y_0+t\Delta y)\,\Delta x+f'_y(x_0+t\Delta x,\,y_0+t\Delta y)\,\Delta y$$
+
+El TVM de una variable da $c\in(0,1)$ con $\phi(1)-\phi(0)=\phi'(c)$, que es la tesis.
+
+*Forma "una variable por vez"* (la de las demostraciones de la cátedra): sumando y restando $f(x,y+\Delta y)$ y aplicando el TVM a cada diferencia, $\Delta z=f'_x(x_1,y+\Delta y)\Delta x+f'_y(x,y_1)\Delta y$, con $x\lt x_1\lt x+\Delta x$ e $y\lt y_1\lt y+\Delta y$.
+
+**Para qué se usa.** Es la herramienta de las demostraciones de Schwarz, del diferencial total, de la derivada direccional y de la fórmula de Taylor (U3).
+
+**Gráfico.** Curva $y=f(x)$ con $A=(a,f(a))$ y $B=(b,f(b))$, la secante $AB$ y un punto $(c,f(c))$ con tangente paralela (ambos ángulos $\alpha$ iguales). Para dos variables, el mismo dibujo en dos tiempos: primero en el plano $y=\text{cte}$ y después en $x=\text{cte}$.
+</Pregunta>
+
+<Pregunta id="u2-t05" unidad="U2" tipo="tema" titulo="Diferencial total: obtención, interpretación y aplicación"
+  aparecio="P1 · 26/06/23, preg. 2 (2 pts) y preg. 5 (1 pt); P1 · 27/07/22 · tema de la foto 004, preg. 4 (1 pt); Cuestionario AM2_A 2025, n.º 24 y 28 (desarrollo), 27"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg; fotos-clase/2026-08-28 foto 004.jpeg; AM2_A 2025.pdf, p. 1-2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 8-13">
+<Fragment slot="enunciado">
+
+Desarrolle la obtención de la fórmula del diferencial total, a partir del incremento total $\Delta z$ hasta relacionarlo con $dz$. Indique su interpretación gráfica y una aplicación.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $dz$ como parte principal lineal del incremento.
+- Propiedades: infinitésimo de orden superior, extensión a $n$ variables, suma de diferenciales parciales, diferenciable.
+- Desarrollo: sumar y restar $f(x,y+\Delta y)$, TVM, continuidad de las parciales.
+- Gráfico: $\Delta z$ sobre la superficie y $dz$ sobre el plano tangente.
+
+</Fragment>
+
+**Hipótesis.** $z=f(x,y)$ continua con derivadas parciales continuas en el punto. Incremento total: $\Delta z=f(x+\Delta x,y+\Delta y)-f(x,y)$.
+
+**Desarrollo.**
+1. Se suma y resta $f(x,y+\Delta y)$:
+
+$$\Delta z=\big[f(x+\Delta x,y+\Delta y)-f(x,y+\Delta y)\big]+\big[f(x,y+\Delta y)-f(x,y)\big]$$
+
+2. El primer corchete es una diferencia en $x$ (con $y+\Delta y$ fijo) y el segundo en $y$ (con $x$ fijo). El TVM a cada uno:
+
+$$\Delta z=f'_x(x_1,y+\Delta y)\,\Delta x+f'_y(x,y_1)\,\Delta y,\qquad x\lt x_1\lt x+\Delta x,\ \ y\lt y_1\lt y+\Delta y$$
+
+3. Por la continuidad de las parciales, $f'_x(x_1,y+\Delta y)=f'_x(x,y)+\varepsilon_1$ y $f'_y(x,y_1)=f'_y(x,y)+\varepsilon_2$, con $\varepsilon_1,\varepsilon_2\to0$ si $\Delta S\to0$.
+4. Resulta el incremento total como infinitésimo compuesto:
+
+$$\Delta z=f'_x(x,y)\,\Delta x+f'_y(x,y)\,\Delta y+\varepsilon_1\Delta x+\varepsilon_2\Delta y$$
+
+5. Los dos últimos términos son un infinitésimo de **orden superior** respecto de $\Delta S$; los dos primeros son la **parte principal** y son lineales en $\Delta x,\Delta y$.
+
+**Definición.** La parte principal es el **diferencial total** (con $dx=\Delta x$, $dy=\Delta y$):
+
+$$dz=f'_x(x,y)\,dx+f'_y(x,y)\,dy=\frac{\partial z}{\partial x}dx+\frac{\partial z}{\partial y}dy$$
+
+y vale $\Delta z\approx dz$. Para $y=f(x_1,\dots,x_n)$: $dy=\sum_i\frac{\partial y}{\partial x_i}dx_i$. Es la **suma de los diferenciales parciales** $d_{x_i}y=\frac{\partial y}{\partial x_i}dx_i$ (superposición de efectos). Si $\Delta z$ se escribe así con $A,B$ constantes, $f$ es *diferenciable*; parciales continuas es condición suficiente.
+
+**Interpretación gráfica.** Fijado $P_0(x_0,y_0)$, con $dx=x-x_0$, $dy=y-y_0$: $dz=f'_x(P_0)(x-x_0)+f'_y(P_0)(y-y_0)$ es exactamente $z-z_0$ para el **plano tangente** en $M_0$. Entonces $\Delta z$ es el incremento de altura **sobre la superficie**, $dz$ es el incremento **sobre el plano tangente**, y $\Delta z-dz$ es un infinitésimo de orden superior: cerca del punto el plano tangente reemplaza a la superficie.
+
+**Aplicaciones.** Cálculo aproximado de valores, $f(x+\Delta x,y+\Delta y)\approx f+f'_x\,dx+f'_y\,dy$, y **evaluación de errores**: el error máximo aproximado es $e_{\max}\approx|f'_x||dx|+|f'_y||dy|$. Ejemplo: $z=2x^3y^2$ en $P(1,2)$, $dx=0{,}03$, $dy=0{,}02$: $dz=24\cdot0{,}03+8\cdot0{,}02=0{,}88$ contra $\Delta z\approx0{,}9175$.
+
+**Gráfico.** Superficie, punto $M_0$ y plano tangente; en $0xy$ el incremento $(dx,dy)$. Dos segmentos verticales en el punto incrementado: el que llega a la superficie ($\Delta z$) y el que llega al plano tangente ($dz$), con la diferencia marcada.
+</Pregunta>
+
+<Pregunta id="u2-t06" unidad="U2" tipo="tema" titulo="Gradiente: expresión, qué representa y propiedades"
+  aparecio="P1 · 27/07/22 · tema de la foto 004, preg. 5 (1 pt); P1 · 26/06/23, preg. 7 (1 pt); Cuestionario AM2_A 2025, n.º 40 y 42 (desarrollo)"
+  fq="fotos-clase/2026-08-28 foto 004.jpeg; fotos-clase/2026-08-28 foto 009.jpeg; AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 36-39; teoria/U2- Derivada Direccional.pdf, p. 13-19">
+<Fragment slot="enunciado">
+
+Escriba la expresión del gradiente de una función en un punto e indique qué representa. Desarrolle sus propiedades geométricas y cómo se halla la derivada en una dirección dada por un vector.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: vector de las derivadas parciales.
+- Propiedades: derivada direccional como producto escalar, máximo/mínimo/nulos, perpendicular a la curva de nivel.
+- Desarrollo: $|\nabla f|\cos\omega$ y demostración de la perpendicularidad.
+- Gráfico: curva de nivel, tangente y $\nabla f$ perpendicular.
+
+</Fragment>
+
+**Definición.**
+
+$$\nabla f(x,y)=\operatorname{grad}f=\frac{\partial f}{\partial x}\,\vec i+\frac{\partial f}{\partial y}\,\vec j=(f'_x,\,f'_y)$$
+
+En tres variables, $\nabla u=(u'_x,u'_y,u'_z)$. **Qué representa:** apunta en la dirección en que la función **crece más rápido**, su módulo es esa tasa máxima y es **perpendicular a la curva de nivel**. Ejemplo: $z=x^2+xy+y$ en $P(3,2)$: $\nabla f=(2x+y,\,x+1)=(8,4)$.
+
+**Propiedad 1: derivada direccional.** Con $\vec S_0=\cos\alpha\,\vec i+\sin\alpha\,\vec j$ (versor),
+
+$$\frac{\partial z}{\partial S}=\nabla f\cdot\vec S_0=f'_x\cos\alpha+f'_y\sin\alpha=|\nabla f|\cos\omega$$
+
+con $\omega$ el ángulo entre $\nabla f$ y $\vec S_0$. Para una dirección dada por $\vec v$ se usa $\vec v_n=\vec v/|\vec v|$. Consecuencia:
+- $\omega=0^\circ$: derivada **máxima**, vale $|\nabla f|=\sqrt{f_x'^2+f_y'^2}$.
+- $\omega=180^\circ$: derivada **mínima**, vale $-|\nabla f|$.
+- $\omega=90^\circ$ o $270^\circ$: derivada **nula**.
+
+Si $\theta_{\max}$ es el ángulo del gradiente ($\operatorname{tg}\theta_{\max}=f'_y/f'_x$ corrigiendo cuadrante), $\theta_{\min}=\theta_{\max}+180^\circ$ y los nulos son $\theta_{\max}\pm90^\circ$.
+
+**Propiedad 2: el gradiente es normal a la curva de nivel.** Hipótesis: $f\in C^1$ y $\nabla f(P)\neq\vec0$. Sea $(x(t),y(t))$ una parametrización de la curva de nivel $f=h$ por $P$, con tangente $\vec T=(x',y')$. Como $f(x(t),y(t))=h$, derivando con la cadena $f'_x\,x'+f'_y\,y'=0$, o sea $\nabla f\cdot\vec T=0$. (Con la implícita: $\dfrac{dy}{dx}=-\dfrac{f'_x}{f'_y}=k_1$ y la pendiente del gradiente es $k_2=\dfrac{f'_y}{f'_x}$, entonces $k_1k_2=-1$.)
+
+**Propiedad 3.** En la dirección de la tangente a la curva de nivel la derivada direccional es nula ($\omega=90^\circ$): sobre una curva de nivel la función no cambia.
+
+**Gráfico.** Plano $0xy$ con una curva de nivel $f=h$, el punto $P$ y su recta tangente; $\nabla f(P)$ saliendo de $P$ perpendicular a la tangente y hacia el lado donde $f$ crece; el versor $\vec S_0$ con el ángulo $\omega$.
+</Pregunta>
+
+<Pregunta id="u2-c01" unidad="U2" tipo="corta" titulo="Derivadas parciales e interpretación geométrica"
+  aparecio="Cuestionario AM2_A 2025, n.º 19 y 20 (desarrollo)"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 2-4">
+<Fragment slot="enunciado">
+
+Defina la derivada parcial de $z=f(x,y)$ respecto de $x$ y respecto de $y$. Indique su interpretación geométrica y el gráfico.
+
+</Fragment>
+
+$$\frac{\partial z}{\partial x}=f'_x=\lim_{\Delta x\to0}\frac{f(x+\Delta x,y)-f(x,y)}{\Delta x},\qquad\frac{\partial z}{\partial y}=f'_y=\lim_{\Delta y\to0}\frac{f(x,y+\Delta y)-f(x,y)}{\Delta y}$$
+
+Se deriva respecto de una variable tratando a la otra como constante: es un límite de una variable. **Interpretación:** se corta la superficie con el plano $x=\text{cte}$ y queda una curva $MT$; la secante $MT_1$ forma el ángulo $\beta$ con $+0y$ y $\Delta_yz/\Delta y=\operatorname{tg}\beta$. Al hacer $\Delta y\to0$, la secante tiende a la tangente $MB$ y $f'_y=\operatorname{tg}\beta$: es la **pendiente de la recta tangente a la superficie en la dirección de $0y$**. Análogamente $f'_x=\operatorname{tg}\alpha$ con el plano $y=\text{cte}$. Gráfico: superficie, punto $M$, plano cortante, curva, tangente y ángulo. Ejemplo: $z=3x^2y-y^2$ en $(1,2)$: $f'_x=12$, $f'_y=-1$.
+</Pregunta>
+
+<Pregunta id="u2-c02" unidad="U2" tipo="corta" titulo="Derivadas sucesivas hasta orden 3"
+  aparecio="Cuestionario AM2_A 2025, n.º 21"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 5-6">
+<Fragment slot="enunciado">
+
+Dada $z=f(x,y)$, defina sus derivadas sucesivas hasta el orden 3. Indique cuáles son iguales y enuncie el teorema de Schwarz.
+
+</Fragment>
+
+Se vuelven a derivar las parciales (que son funciones de $x,y$). Orden 2 (4): $z''_{xx},z''_{xy},z''_{yx},z''_{yy}$. Orden 3 (8, $2^n$ en general). Si son continuas, es igual el resultado cuando se deriva la misma cantidad de veces respecto de cada variable: $z''_{xy}=z''_{yx}$, $z'''_{xxy}=z'''_{xyx}=z'''_{yxx}$, $z'''_{xyy}=z'''_{yxy}=z'''_{yyx}$; quedan 4 distintas de orden 3. **Schwarz:** con derivadas segundas continuas en un entorno de un punto interior, $f''_{xy}=f''_{yx}$ en el punto.
+</Pregunta>
+
+<Pregunta id="u2-c03" unidad="U2" tipo="corta" titulo="Diferenciales de orden superior"
+  aparecio="Cuestionario AM2_A 2025, n.º 25 y 26"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 17-18">
+<Fragment slot="enunciado">
+
+Demuestre cómo, a partir del diferencial total de primer orden, se obtiene el de orden 2, y defina el diferencial de orden $n$.
+
+</Fragment>
+
+Con $x,y$ independientes ($dx,dy$ constantes) y derivadas continuas: $d^2z=d(dz)=d(z'_x)\,dx+d(z'_y)\,dy$. Como $d(z'_x)=z''_{xx}dx+z''_{xy}dy$ y $d(z'_y)=z''_{yx}dx+z''_{yy}dy$, y por Schwarz $z''_{xy}=z''_{yx}$:
+
+$$d^2z=\frac{\partial^2z}{\partial x^2}dx^2+2\frac{\partial^2z}{\partial x\,\partial y}dx\,dy+\frac{\partial^2z}{\partial y^2}dy^2$$
+
+En general
+
+$$d^nz=\Big(\frac{\partial}{\partial x}dx+\frac{\partial}{\partial y}dy\Big)^{n}z$$
+
+donde el exponente simbólico $n$ es el orden de derivación y el exponente de $dx,dy$. Se usa en Taylor y en el hessiano.
+</Pregunta>
+
+<Pregunta id="u2-c04" unidad="U2" tipo="corta" titulo="Error máximo aproximado con diferenciales"
+  aparecio="Cuestionario AM2_A 2025, n.º 27"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 11-13">
+<Fragment slot="enunciado">
+
+Dada $z=f(x,y)$, ¿cómo se calcula el error máximo aproximado usando diferenciales?
+
+</Fragment>
+
+Si al medir $x,y$ se cometen errores pequeños $dx,dy$, el error en $z$ es $\Delta z\approx dz$. Como los errores pueden tener cualquier signo, se suman valores absolutos:
+
+$$e_{\max}\approx\left|\frac{\partial z}{\partial x}\right||dx|+\left|\frac{\partial z}{\partial y}\right||dy|$$
+
+Ejemplo (Monllor): cilindro $V=\pi D^2L/4$ con $D=120$ mm, $L=80$ mm y error máximo $0{,}02$ mm en cada medida: $e_{\max}\approx527{,}78\ \text{mm}^3$.
+</Pregunta>
+
+<Pregunta id="u2-c05" unidad="U2" tipo="corta" titulo="Plano tangente, recta normal y vector normal"
+  aparecio="Cuestionario AM2_A 2025, n.º 29 y 30"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 14-16">
+<Fragment slot="enunciado">
+
+Dada $z=f(x,y)$ y $P(a,b)$, indique la ecuación del plano tangente y la recta normal en $(a,b,f(a,b))$, y cómo se calculan el vector normal y el versor normal positivo.
+
+</Fragment>
+
+Con $f$ diferenciable en $(a,b)$ (si solo existen las parciales, el plano no aproxima):
+
+$$z-z_0=f'_x(a,b)(x-a)+f'_y(a,b)(y-b),\qquad\frac{x-a}{f'_x}=\frac{y-b}{f'_y}=\frac{z-z_0}{-1}$$
+
+Vector normal $\vec n=(f'_x,f'_y,-1)$ (o su opuesto); versor $\vec n/|\vec n|$. El versor normal positivo apunta hacia arriba: $\left(\dfrac{-f'_x}{\sqrt{1+f_x'^2+f_y'^2}},\dfrac{-f'_y}{\sqrt{\cdots}},\dfrac1{\sqrt{\cdots}}\right)$. Para $F(x,y,z)=0$: $F'_x(x-x_0)+F'_y(y-y_0)+F'_z(z-z_0)=0$ y $\vec n=\nabla F$. Ejemplo: $z=9-x^2-y^2$ en $(1,2,4)$: $2x+4y+z=14$.
+</Pregunta>
+
+<Pregunta id="u2-c06" unidad="U2" tipo="corta" titulo="Funciones compuestas de dos y de n variables independientes"
+  aparecio="Cuestionario AM2_A 2025, n.º 32 y 33 (desarrollo)"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 19-21">
+<Fragment slot="enunciado">
+
+Explique paso por paso cómo se deriva una función compuesta de dos y de $n$ variables independientes.
+
+</Fragment>
+
+Sea $z=f(x,y)$ con $x=\varphi_1(u,v)$, $y=\varphi_2(u,v)$, todas continuas con parciales continuas. (1) Se dibuja el árbol: $z$, intermedias $x,y$, independientes $u,v$. (2) Para $\partial z/\partial u$ se incrementa $u$ con $v$ constante; $x,y$ reciben $\Delta_ux,\Delta_uy$ y por el diferencial total $\Delta z=z'_x\Delta_ux+z'_y\Delta_uy+\varepsilon_1\Delta_ux+\varepsilon_2\Delta_uy$. (3) Se divide por $\Delta u$ y se hace $\Delta u\to0$ ($\varepsilon_i\to0$):
+
+$$\frac{\partial z}{\partial u}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial u}$$
+
+y análogo para $v$. Regla práctica: multiplicar a lo largo de cada camino y sumar los caminos. Para $n$ variables, $f:\mathbb R^m\to\mathbb R$ con $y_j=g_j(x_1,\dots,x_n)$: $\dfrac{\partial z}{\partial x_i}=\sum_{j=1}^m\dfrac{\partial z}{\partial y_j}\dfrac{\partial y_j}{\partial x_i}$.
+</Pregunta>
+
+<Pregunta id="u2-c07" unidad="U2" tipo="corta" titulo="Derivación de funciones implícitas y sistemas"
+  aparecio="Cuestionario AM2_A 2025, n.º 34, 35, 36 y 37"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 22-30">
+<Fragment slot="enunciado">
+
+Explique paso por paso cómo se derivan las funciones implícitas de una, dos y $n$ variables independientes, y un sistema de funciones implícitas de una variable independiente.
+
+</Fragment>
+
+Se consideran las funciones implícitas como compuestas y se deriva con la cadena. **Hipótesis (existencia, local):** $g\in C^1$, $g(P_0)=0$ y la derivada respecto de la variable a despejar $\neq0$.
+- $g(x,y)=0$ define $y=f(x)$: $g'_x+g'_y\,y'=0$, entonces $\dfrac{dy}{dx}=-\dfrac{g'_x}{g'_y}$ ($g'_y\neq0$).
+- $g(x,y,z)=0$ define $z=f(x,y)$: $\dfrac{\partial z}{\partial x}=-\dfrac{g'_x}{g'_z}$, $\dfrac{\partial z}{\partial y}=-\dfrac{g'_y}{g'_z}$. Con $n$ variables, $\dfrac{\partial y}{\partial x_i}=-\dfrac{g'_{x_i}}{g'_y}$.
+- Sistema $g_1=g_2=0$ en $(x,y,z)$ que define $y(x),z(x)$: se deriva cada ecuación respecto de $x$ y queda un sistema lineal en $y',z'$; por Cramer
+
+$$\frac{dy}{dx}=-\frac{\partial(g_1,g_2)/\partial(x,z)}{\partial(g_1,g_2)/\partial(y,z)},\qquad\frac{dz}{dx}=-\frac{\partial(g_1,g_2)/\partial(y,x)}{\partial(g_1,g_2)/\partial(y,z)}$$
+
+con el jacobiano del denominador $\neq0$.
+</Pregunta>
+
+<Pregunta id="u2-c08" unidad="U2" tipo="corta" titulo="Derivada direccional: casos particulares, gradiente e interpretación"
+  aparecio="Cuestionario AM2_A 2025, n.º 39, 40 y 41 (desarrollo)"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/U2- Derivada Direccional.pdf, p. 1-14; teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 31-36">
+<Fragment slot="enunciado">
+
+¿En qué casos las derivadas parciales son un caso particular de la derivada direccional? ¿Cómo se halla la derivada en $P(a,b)$ según un vector usando el gradiente? Dé la interpretación geométrica.
+
+</Fragment>
+
+Con $\alpha=0^\circ$ la derivada direccional es $f'_x$; con $\alpha=90^\circ$ es $f'_y$. Según un vector $\vec v$: se normaliza $\vec v_n=\vec v/|\vec v|$ y
+
+$$\frac{\partial z}{\partial S}=\nabla f(a,b)\cdot\vec v_n$$
+
+Ejemplo: $z=x^5-5y^2$ en $(1,2)$, $\vec v=4\vec i+3\vec j$: $\nabla f=(5,-20)$, $\vec v_n=(\tfrac45,\tfrac35)$, entonces $4-12=-8$. **Interpretación:** es la pendiente de la recta tangente a la superficie, en la dirección de $\vec v$, de la curva que resulta de cortar la superficie con el plano vertical que contiene a $\vec v$: $\partial z/\partial S=\operatorname{tg}\theta$.
+</Pregunta>
+
+<Pregunta id="u2-h01" unidad="U2" tipo="choice" correcta={2} titulo="Dirección de máximo crecimiento"
+  aparecio="P1 · 27/07/22 · tema de la foto 004, preg. 5 (1 pt); Cuestionario AM2_A 2025, n.º 42"
+  fq="fotos-clase/2026-08-28 foto 004.jpeg; AM2_A 2025.pdf, p. 2" fr="teoria/U2- Derivada Direccional.pdf, p. 13-19">
+<Fragment slot="enunciado">
+
+La derivada direccional de $f$ en $P$ es **máxima** cuando la dirección:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Es perpendicular a $\nabla f(P)$
+2. Coincide con la de $\nabla f(P)$, y su valor es $|\nabla f(P)|$
+3. Es opuesta a $\nabla f(P)$
+4. Es tangente a la curva de nivel
+
+</Fragment>
+
+Como $\partial z/\partial S=|\nabla f|\cos\omega$, es máxima con $\omega=0^\circ$. La 3 da el mínimo ($-|\nabla f|$); la 1 y la 4 dan derivada nula.
+</Pregunta>
+
+<Pregunta id="u2-h02" unidad="U2" tipo="choice" correcta={3} titulo="Derivadas de tercer orden iguales"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 1 (3 pts); Cuestionario AM2_A 2025, n.º 21"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 5-7">
+<Fragment slot="enunciado">
+
+Si las derivadas son continuas, por Schwarz $z'''_{xxy}$ es igual a:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $z'''_{xyy}$
+2. $z'''_{yyx}$
+3. $z'''_{yxx}$
+4. $z'''_{yyy}$
+
+</Fragment>
+
+Se deriva dos veces respecto de $x$ y una respecto de $y$ en cualquier orden: $z'''_{xxy}=z'''_{xyx}=z'''_{yxx}$. Las otras derivan una vez en $x$ y dos en $y$, o tres en $y$.
+</Pregunta>
+
+<Pregunta id="u2-h03" unidad="U2" tipo="choice" correcta={4} titulo="Interpretación gráfica del diferencial"
+  aparecio="P1 · 26/06/23, preg. 5 (1 pt); Cuestionario AM2_A 2025, n.º 28"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg; AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 8-10, 14-15">
+<Fragment slot="enunciado">
+
+Gráficamente, $dz$ en un punto $P_0$ representa el incremento de altura:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Sobre la superficie al pasar de $P_0$ al punto incrementado
+2. A lo largo de la curva de nivel que pasa por $P_0$
+3. Sobre el plano $0xy$
+4. Sobre el plano tangente a la superficie en $P_0$
+
+</Fragment>
+
+$dz=f'_x(P_0)(x-x_0)+f'_y(P_0)(y-y_0)$ es $z-z_0$ para el plano tangente. El incremento sobre la superficie es $\Delta z$.
+</Pregunta>
+
+<Pregunta id="u2-h04" unidad="U2" tipo="choice" correcta={1} titulo="Derivada de una función implícita"
+  aparecio="Cuestionario AM2_A 2025, n.º 34"
+  fq="AM2_A 2025.pdf, p. 2" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 22-25">
+<Fragment slot="enunciado">
+
+Si $g(x,y)=0$ define $y=f(x)$ con $g'_y\neq0$, entonces $\dfrac{dy}{dx}$ es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $-\dfrac{g'_x}{g'_y}$
+2. $\dfrac{g'_x}{g'_y}$
+3. $-\dfrac{g'_y}{g'_x}$
+4. $g'_x+g'_y$
+
+</Fragment>
+
+Se deriva $g(x,f(x))=0$ con la cadena: $g'_x+g'_y\,y'=0$, de donde $y'=-g'_x/g'_y$.
+</Pregunta>
+
+<Pregunta id="u2-h05" unidad="U2" tipo="choice" correcta={3} titulo="Cálculo de una derivada direccional"
+  aparecio="P1 · 27/07/22 · tema de la foto 004, preg. 1 (3 pts)"
+  fq="fotos-clase/2026-08-28 foto 004.jpeg" fr="teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 33">
+<Fragment slot="enunciado">
+
+Para $z=x^2+y^2+xy$ en $P(1,2)$ y $\alpha=\pi/4$, la derivada direccional vale:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $9$
+2. $\dfrac92$
+3. $\dfrac{9\sqrt2}{2}$
+4. $\dfrac{3\sqrt2}{2}$
+
+</Fragment>
+
+$f'_x=2x+y=4$, $f'_y=2y+x=5$ y $\partial z/\partial S=4\cos\frac\pi4+5\sin\frac\pi4=\frac{9\sqrt2}{2}$.
+</Pregunta>

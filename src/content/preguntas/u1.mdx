@@ -1,0 +1,373 @@
+---
+titulo: "Funciones de varias variables"
+unidad: "U1"
+orden: 1
+---
+import Pregunta from '../../components/Pregunta.astro';
+
+{/* Formato: ver u5.mdx. Respuestas alineadas con src/content/teoria/u01.md. "_estándar_" = agregado no oficial. Los dos teóricos del 27/07/22 son DISTINTOS: foto 004 y foto 023. */}
+
+<Pregunta id="u1-t01" unidad="U1" tipo="tema" titulo="Campo escalar de dos variables: dominio, imagen y gráfico"
+  aparecio="P1 · 27/07/22 · tema de la foto 004, preg. 3 (1 pt); Cuestionario AM2_A 2025, n.º 10 (desarrollo)"
+  fq="fotos-clase/2026-08-28 foto 004.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 7-9">
+<Fragment slot="enunciado">
+
+Defina un campo escalar de dos variables, su dominio y su imagen. ¿Cómo se representan gráficamente el dominio y la imagen? ¿A qué se llama gráfico de una función de dos variables?
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $z=f(x,y)$ con existencia y unicidad; dominio $D_f$ e imagen $I_f$.
+- Propiedades: dominio = región del plano $0xy$; imagen = intervalo (o unión) sobre el eje $z$; gráfico = superficie; restricciones para hallar el dominio.
+- Desarrollo: ejemplo $z=1/\sqrt{9-x^2-y^2}$ con $D_f$ e $I_f$.
+- Gráfico: región $D$ en $0xy$, superficie encima, punto $P\in D$ y su $M(x,y,z)$.
+
+</Fragment>
+
+**Definición.** $z=f(x,y)$ es una función (campo escalar) de dos variables independientes definida en $D$ si a cada par $(x,y)\in D$ le corresponde **uno y solo un** valor de $z$. $x,y$ son las variables independientes y $z$ la dependiente: $f:\mathbb R^2\to\mathbb R$.
+
+- **Dominio** $D_f\subseteq\mathbb R^2$: conjunto de pares $(x,y)$ donde la función está definida. Se representa como una **región del plano $0xy$**.
+- **Imagen** (o rango) $I_f\subseteq\mathbb R$: conjunto de valores que toma $z$. Se representa **sobre el eje $z$**, como un intervalo o unión de intervalos (es la proyección de la superficie sobre ese eje).
+- **Gráfico de la función:** lugar geométrico de los puntos $M(x,y,z)$ con $z=f(x,y)$. Es una **superficie** en el espacio; su proyección sobre $0xy$ es el dominio.
+
+**Propiedades.**
+- Existencia y unicidad: toda recta perpendicular al plano $0xy$ por un punto del dominio corta a la superficie en **un solo punto**.
+- Forma de darla: *explícita* $z=f(x,y)$ o *implícita* $F(x,y,z)=0$.
+- Para hallar $D_f$ se piden las restricciones de cada operación: cociente $B\neq0$; raíz de índice par $A\ge0$; $\ln A$ con $A\gt0$; $\arcsin A$ y $\arccos A$ con $-1\le A\le1$. El dominio es la intersección de todas las condiciones (suelen ser cónicas). _(regla estándar)_
+- Con tres variables el dominio está en $\mathbb R^3$; con cuatro o más no se puede dibujar.
+
+**Desarrollo (ejemplo de Monllor).** $z=\dfrac1{\sqrt{9-x^2-y^2}}$: el radicando debe ser $\ge0$ y además está en el denominador, entonces $9-x^2-y^2\gt0$:
+
+$$D_f=\{(x,y)\in\mathbb R^2:\ x^2+y^2\lt9\},\qquad I_f=\{z\in\mathbb R:\ z\ge\tfrac13\}$$
+
+El dominio es el interior del círculo de radio 3 (abierto y acotado); el mínimo de $z$ está en el origen.
+
+**Gráfico.** Región $D$ sombreada en el plano $0xy$; encima la superficie $z=f(x,y)$; un punto $P(x,y)\in D$ y su $M(x,y,z)$ sobre la superficie unidos por un segmento vertical; en el eje $z$ se marca la imagen. Para el ejemplo: círculo abierto de radio 3 y superficie que sube al acercarse al borde.
+</Pregunta>
+
+<Pregunta id="u1-t02" unidad="U1" tipo="tema" titulo="Límite doble con épsilon y delta"
+  aparecio="Cuestionario AM2_A 2025, n.º 13 (desarrollo)"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 11-15">
+<Fragment slot="enunciado">
+
+Desarrolle la definición de límite doble con épsilon y delta. Realice el gráfico del límite doble en el espacio.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $\varepsilon$-$\delta$ con entorno reducido y punto de acumulación.
+- Propiedades: por qué entorno reducido, $P_0$ de acumulación, infinitas trayectorias, propiedades del límite.
+- Desarrollo: ejemplo por definición $\lim 2xy^2/(x^2+y^2)=0$.
+- Gráfico: superficie, $E'(P_0,\delta)$ y banda $(L-\varepsilon,L+\varepsilon)$.
+
+</Fragment>
+
+**Definición.** Sea $z=f(x,y)$ definida en $D$ y $P_0(x_0,y_0)$ **punto de acumulación** de $D$. Entonces $\lim_{(x,y)\to(x_0,y_0)}f(x,y)=L$ si
+
+$$\forall\varepsilon\gt0\ \exists\delta\gt0:\ \ 0\lt\Delta S\lt\delta,\ (x,y)\in D\ \Longrightarrow\ |f(x,y)-L|\lt\varepsilon$$
+
+con $\Delta S=\sqrt{(x-x_0)^2+(y-y_0)^2}$; es decir, $P\in E'(P_0,\delta)\cap D\Rightarrow f(P)\in(L-\varepsilon,L+\varepsilon)$.
+
+**Propiedades / condiciones.**
+- Los puntos que se prueban deben **pertenecer a $D$**; $P_0$ puede no pertenecer.
+- Se usa entorno **reducido** porque no importa el valor de $f$ en $P_0$ (puede no estar definida).
+- $P_0$ debe ser punto de acumulación de $D$: alrededor tiene que haber puntos del dominio.
+- $\delta$ depende de $\varepsilon$.
+- Diferencia con una variable: en $\mathbb R$ hay dos trayectorias hacia $x_0$; en $\mathbb R^2$ hay **infinitas**. Se lo llama "doble" o "simultáneo" porque $x$ e $y$ tienden a la vez.
+- Propiedades: el límite de una suma (diferencia, producto) es la suma (diferencia, producto) de los límites; el del cociente, el cociente si el límite del denominador es distinto de cero.
+
+**Desarrollo (Monllor, Ej. 1).** $\displaystyle\lim_{(x,y)\to(0,0)}\frac{2xy^2}{x^2+y^2}=0$: se acota
+
+$$\left|\frac{2xy^2}{x^2+y^2}\right|\le2|x|\le2\sqrt{x^2+y^2}\lt2\delta$$
+
+y eligiendo $\delta=\varepsilon/2$ se cumple $|f-0|\lt\varepsilon$. Moraleja: aplicar la definición **no es práctico**; en la práctica se reemplaza, se salvan indeterminaciones y, si no se puede, se prueba la no existencia por trayectorias (pregunta siguiente).
+
+**Gráfico.** Superficie $z=f(x,y)$; en el plano $0xy$ el punto $P_0$ con su entorno reducido de radio $\delta$ (círculo con el centro vaciado); en el eje $z$ el intervalo $(L-\varepsilon,L+\varepsilon)$ y la banda horizontal que determina. La porción de superficie sobre el entorno reducido debe quedar toda dentro de la banda.
+</Pregunta>
+
+<Pregunta id="u1-t03" unidad="U1" tipo="tema" titulo="Límites sucesivos, radiales y por curvas: cuándo y para qué"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 4 (1 pt); Cuestionario AM2_A 2025, n.º 16, 17 y 18"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 12-15">
+<Fragment slot="enunciado">
+
+En el cálculo de límites dobles, ¿cuándo es necesario y para qué se calculan límites sucesivos, radiales y a lo largo de una curva? Explique cómo se resuelve el límite doble por análisis de funciones y qué concluye de cada método.
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: límite sucesivo, radial y por curva.
+- Propiedades: sirven para **descartar** la existencia, nunca para probarla; qué se concluye de cada resultado.
+- Desarrollo: método (reemplazo, indeterminación, trayectorias) y ejemplos.
+- Gráfico: trayectorias hacia $P_0$ (escalonada, rectas, parábola).
+
+</Fragment>
+
+**Cuándo hacen falta.** Se parte por **análisis de funciones**: (1) reemplazar $(x_0,y_0)$; si da un número, ese es el límite. (2) Si da indeterminación, intentar salvarla (simplificar, factorear, límites notables; ej. $\lim\frac{\sin3xy}{x}=\lim3y\frac{\sin3xy}{3xy}=0$). (3) Si no se puede salvar, **no se puede confirmar la existencia mirando trayectorias** (son infinitas), pero sí **probar que NO existe**: ahí se usan sucesivos, radiales y curvas.
+
+**Criterio general.** Si por dos trayectorias que llegan a $P_0$ la función tiende a valores distintos, o por alguna no tiene límite, el límite doble **no existe**.
+
+**Límites sucesivos** (trayectorias escalonadas paralelas a los ejes):
+
+$$L_1=\lim_{x\to x_0}\Big[\lim_{y\to y_0}f(x,y)\Big],\qquad L_2=\lim_{y\to y_0}\Big[\lim_{x\to x_0}f(x,y)\Big]$$
+
+- Si ambos existen y $L_1\neq L_2$: **no existe** el límite doble.
+- Si $L_1=L_2$: no garantiza la existencia; hay que probar otras trayectorias.
+
+**Límites radiales** (haz de rectas por $P_0$): $y-y_0=m(x-x_0)$, se calcula el límite en función de $m$. **Falta la recta vertical $x=x_0$** (no está en la ecuación anterior): se estudia aparte. Las trayectorias deben estar dentro de $D$.
+- Si depende de $m$ (o la vertical da otro valor): **no existe**.
+- Si es igual para toda recta, vertical incluida: no alcanza para asegurar la existencia (hay curvas que no son rectas).
+
+**Por curvas** ($y=kx^2$, $y=kx^3$, …): se usan cuando sucesivos y radiales coinciden. Si por alguna curva da un valor distinto, **no existe**.
+
+**Ejemplos.** $f=\dfrac{x-y}{x+y}$ en $(0,0)$ _(estándar)_: $L_1=1$ y $L_2=-1$, no existe. Monllor Ej. 6: $f=\dfrac{2xy}{3x^2-y^2}$ da sucesivos $0$ y $0$, pero por $y=mx$ da $\dfrac{2m}{3-m^2}$ (depende de $m$; con $y=2x$ vale $-4$): no existe. Tipo $\dfrac{2x^2y}{x^4+y^2}$ _(versión estándar)_: sucesivos $0$, radiales $\dfrac{2mx}{x^2+m^2}\to0$, pero por $y=x^2$ da $\dfrac{2x^4}{2x^4}=1\neq0$.
+
+| Resultado | Conclusión |
+|---|---|
+| Reemplazo da un número | existe, vale ese número |
+| Sucesivos distintos, radial que depende de $m$ o dos curvas con distinto límite | **no existe** |
+| Sucesivos y radiales iguales | no se afirma nada: probar curvas o usar la definición |
+
+**Gráfico.** Plano $0xy$ con $P_0$ y varias trayectorias que llegan a él: una escalonada (paralela a los ejes), un haz de rectas con pendientes distintas, la recta vertical y una parábola.
+</Pregunta>
+
+<Pregunta id="u1-t04" unidad="U1" tipo="tema" titulo="Los cuatro tipos de funciones; función vectorial y campo vectorial"
+  aparecio="P1 · 26/06/23, preg. 3 (1 pt); Cuestionario AM2_A 2025, n.º 7 (desarrollo)"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 2-5">
+<Fragment slot="enunciado">
+
+Clasifique los cuatro tipos de funciones dando un ejemplo de cada caso. ¿Qué diferencia hay entre función vectorial y campo vectorial?
+
+</Fragment>
+<Fragment slot="guia">
+
+- Definición: $f:\mathbb R^n\to\mathbb R^m$ (a cada elemento le corresponde uno y solo un elemento).
+- Propiedades: cuántas variables entran y qué sale (número o vector); notación en $\mathbb R^2$ y $\mathbb R^3$.
+- Desarrollo: tabla de los cuatro casos con ejemplo.
+- Gráfico: curva con el vector $\vec r(t)$ y región con un vector en cada punto.
+
+</Fragment>
+
+**Definición.** Una función $f:\mathbb R^n\to\mathbb R^m$ hace corresponder a cada $\vec x\in X\subseteq\mathbb R^n$ **uno y solo un** elemento $\vec y\in Y\subseteq\mathbb R^m$.
+
+| Tipo | $f:\mathbb R^n\to\mathbb R^m$ | Qué es | Ejemplo |
+|---|---|---|---|
+| **Función escalar** | $\mathbb R\to\mathbb R$ | $y=f(x)$, la de Análisis I | $y=x^2$ |
+| **Campo escalar** | $\mathbb R^n\to\mathbb R$, $n\ge2$ | a $n$ variables le corresponde un número | $z=x^2+y^2$ |
+| **Función vectorial** | $\mathbb R\to\mathbb R^m$ | a una variable (parámetro $t$) le corresponde un vector | $\vec r(t)=f(t)\,\vec i+g(t)\,\vec j$ |
+| **Campo vectorial** | $\mathbb R^n\to\mathbb R^m$, $n\ge2$ | a varias variables le corresponde un vector | campo eléctrico, velocidades de un fluido |
+
+**Propiedades / notación.**
+- Una función vectorial equivale a $m$ funciones escalares $y_i=f_i(\vec x)$.
+- En $\mathbb R^2$: $\vec r(t)=[f(t),g(t)]=f(t)\,\vec i+g(t)\,\vec j$; $t$ es el parámetro y $f,g$ las componentes. En $\mathbb R^3$ se agrega $h(t)$.
+- Campo vectorial: $\vec F(x,y)=P\,\vec i+Q\,\vec j$ en $\mathbb R^2$; $\vec F=P\,\vec i+Q\,\vec j+R\,\vec k$ en $\mathbb R^3$.
+- **Diferencia pedida:** la función vectorial tiene **una** variable independiente y devuelve un vector; el campo vectorial tiene **varias** variables independientes y devuelve un vector.
+
+**Gráfico.** Función vectorial: una curva en el plano o espacio recorrida al variar $t$, con el vector $\vec r(t)$ desde el origen al punto. Campo vectorial: una región con un vector dibujado en cada punto $A(x,y)$.
+</Pregunta>
+
+<Pregunta id="u1-c01" unidad="U1" tipo="corta" titulo="Entorno y entorno reducido"
+  aparecio="P1 · 26/06/23, preg. 4 (1 pt); Cuestionario AM2_A 2025, n.º 1"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 5-6, 11">
+<Fragment slot="enunciado">
+
+Exprese en símbolos la definición de entorno reducido de centro $P_0(x_0,y_0)$ y radio $\delta$, escriba su significado y dé un ejemplo.
+
+</Fragment>
+
+El **entorno** es el interior del círculo de centro $P_0$ y radio $\delta$:
+
+$$E(P_0,\delta)=\Big\{(x,y)\in\mathbb R^2\ /\ \sqrt{(x-x_0)^2+(y-y_0)^2}\lt\delta\Big\}$$
+
+El **entorno reducido** es el entorno sin su centro, $E'(P_0,\delta)=E(P_0,\delta)-\{P_0\}$, o sea $0\lt\sqrt{(x-x_0)^2+(y-y_0)^2}\lt\delta$. Significa "puntos tan cerca de $P_0$ como se quiera, pero distintos de $P_0$"; se usa en el límite porque no importa qué pasa en el punto mismo. Ejemplo: $E'((0,0),1)$ es el disco abierto de radio 1 sin el origen. En $\mathbb R^3$ es el interior de una esfera sin el centro.
+</Pregunta>
+
+<Pregunta id="u1-c02" unidad="U1" tipo="corta" titulo="Clasificación de puntos y conjuntos abiertos o cerrados"
+  aparecio="Cuestionario AM2_A 2025, n.º 2, 3, 4 y 5"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 6">
+<Fragment slot="enunciado">
+
+Defina punto interior, exterior, de frontera, de acumulación y aislado de un conjunto, y conjunto abierto y cerrado. Dé un ejemplo.
+
+</Fragment>
+
+- **Interior:** pertenece al conjunto y existe un entorno suyo contenido en el conjunto.
+- **Exterior:** no pertenece y existe un entorno suyo sin puntos del conjunto.
+- **Frontera:** (pertenezca o no) en todo entorno suyo hay puntos del conjunto y de afuera. La *frontera* es el conjunto de todos ellos.
+- **De acumulación:** (pertenezca o no) en **todo** entorno reducido suyo hay algún punto del conjunto.
+- **Aislado:** pertenece al conjunto y tiene un entorno reducido sin puntos del conjunto.
+- **Abierto:** formado solo por puntos interiores. **Cerrado:** contiene también su frontera.
+
+Ejemplo _(estándar)_: $A=\{x^2+y^2\le1\}\cup\{(3,0)\}$. $(0,0)$ es interior; $(1,0)$ es frontera y de acumulación; $(3,0)$ es frontera y aislado; $(0;1{,}5)$ es exterior. El disco abierto $x^2+y^2\lt1$ es abierto; el cerrado $x^2+y^2\le1$ es cerrado.
+</Pregunta>
+
+<Pregunta id="u1-c03" unidad="U1" tipo="corta" titulo="Conjunto conexo y simplemente conexo"
+  aparecio="Cuestionario AM2_A 2025, n.º 6"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 6-7">
+<Fragment slot="enunciado">
+
+Defina conjunto conexo y simplemente conexo. ¿Para qué se usa la conexión simple más adelante?
+
+</Fragment>
+
+**Conexo:** dos puntos cualesquiera se pueden unir con una poligonal contenida en el conjunto. **Simplemente conexo:** toda poligonal cerrada del conjunto se puede reducir a un punto por deformación continua sin salir del conjunto; no tiene agujeros. Ejemplos _(estándar)_: el disco es simplemente conexo; la corona $1\lt x^2+y^2\lt4$ es conexa pero **no** simplemente conexa; dos discos separados no son conexos. Se la retoma en U5: la recíproca de "independencia de la trayectoria $\Rightarrow P_y=Q_x$" vale solo en un dominio simplemente conexo.
+</Pregunta>
+
+<Pregunta id="u1-c04" unidad="U1" tipo="corta" titulo="Curva de nivel y superficie de nivel"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 3 (1 pt); Cuestionario AM2_A 2025, n.º 8 y 9"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 9-10">
+<Fragment slot="enunciado">
+
+¿Qué entiende por curva de nivel y para qué se usa? Defina también superficie de nivel y dé un ejemplo de cada una.
+
+</Fragment>
+
+La **curva de nivel** de $z=f(x,y)$ de valor $C$ es el conjunto de puntos $(x,y)$ donde la función toma el mismo valor, $f(x,y)=C$: es la proyección sobre $0xy$ de la intersección de la superficie con el plano $z=C$. Para $u=f(x,y,z)$, la **superficie de nivel** es $f(x,y,z)=C$.
+
+**Para qué se usa:** representan la superficie en el plano (mapa de contorno) sin dibujarla en 3D; con varias curvas se ubican extremos y puntos silla (U3); el gradiente es perpendicular a la curva de nivel (U2).
+
+Ejemplos: $z=x^2+y^2$ tiene curvas de nivel $x^2+y^2=C$, circunferencias de radio $\sqrt C$ (con $C=4$, radio 2). $u=x^2+y^2+z^2$ tiene superficies de nivel esferas de radio $\sqrt C$ _(estándar)_.
+</Pregunta>
+
+<Pregunta id="u1-c05" unidad="U1" tipo="corta" titulo="Forma explícita e implícita; existencia y unicidad"
+  aparecio="Cuestionario AM2_A 2025, n.º 11 y 12"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 7-8">
+<Fragment slot="enunciado">
+
+¿Cuándo una función está expresada en forma explícita o implícita? Defina existencia y unicidad y dé un ejemplo de superficie con existencia pero sin unicidad.
+
+</Fragment>
+
+**Explícita:** la variable dependiente está despejada, $z=x^2y-y^3$. **Implícita:** viene en una ecuación $F(x,y,z)=0$, por ejemplo $3x-y+4z-5=0$.
+
+**Existencia:** para cada $(x,y)\in D$ hay un valor $z$. **Unicidad:** ese valor es único (toda perpendicular a $0xy$ por un punto de $D$ corta a la superficie en un solo punto). Ejemplo _(estándar)_: la esfera $x^2+y^2+z^2=9$ da, para cada $(x,y)$ con $x^2+y^2\lt9$, dos valores $z=\pm\sqrt{9-x^2-y^2}$: hay existencia pero no unicidad, y no es el gráfico de una función.
+</Pregunta>
+
+<Pregunta id="u1-c06" unidad="U1" tipo="corta" titulo="Propiedades de los límites dobles"
+  aparecio="Cuestionario AM2_A 2025, n.º 14"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 15">
+<Fragment slot="enunciado">
+
+Defina las propiedades de los límites dobles.
+
+</Fragment>
+
+Valen las mismas que en una variable. Si $\lim f=L_1$ y $\lim g=L_2$ en $P_0$:
+
+$$\lim(f\pm g)=L_1\pm L_2,\qquad\lim(f\cdot g)=L_1L_2,\qquad\lim\frac fg=\frac{L_1}{L_2}\ \ (L_2\neq0)$$
+
+Permiten calcular directamente gran parte de los límites, porque la mayoría de las funciones usuales son continuas. _(Monllor enuncia suma y diferencia con "etc."; producto y cociente son las de Análisis I.)_
+</Pregunta>
+
+<Pregunta id="u1-c07" unidad="U1" tipo="corta" titulo="Continuidad y discontinuidad evitable"
+  aparecio="Cuestionario AM2_A 2025, n.º 15"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 15-16">
+<Fragment slot="enunciado">
+
+Defina las condiciones de continuidad de $z=f(x,y)$ en $P(a,b)$ e indique cuándo una función tiene una discontinuidad evitable.
+
+</Fragment>
+
+$f$ es **continua en $P_0$** si $\lim_{(x,y)\to(a,b)}f(x,y)=f(a,b)$, lo que incluye tres condiciones: (1) existe el límite doble; (2) $f$ está definida en $P_0$; (3) el límite coincide con $f(a,b)$.
+
+**Discontinuidad evitable:** existe el límite doble pero la función no es continua (no está definida en $P_0$ o su valor es otro); gráficamente, un "agujero". Se evita redefiniendo $f(P_0)=L$. Ejemplo: $z=\dfrac{\sin3xy}{x}$ en el origen, límite $0$ y $f(0,0)$ no definida; con $z=0$ en $(0,0)$ queda continua. Si no existe el límite doble, la discontinuidad es **esencial**.
+</Pregunta>
+
+<Pregunta id="u1-h01" unidad="U1" tipo="choice" correcta={3} titulo="Entorno reducido"
+  aparecio="P1 · 26/06/23, preg. 4 (1 pt); Cuestionario AM2_A 2025, n.º 1"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 5-6, 11">
+<Fragment slot="enunciado">
+
+El entorno reducido de centro $P_0(x_0,y_0)$ y radio $\delta$ es el conjunto de puntos $(x,y)$ que cumplen:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $\sqrt{(x-x_0)^2+(y-y_0)^2}\le\delta$
+2. $\sqrt{(x-x_0)^2+(y-y_0)^2}\lt\delta$
+3. $0\lt\sqrt{(x-x_0)^2+(y-y_0)^2}\lt\delta$
+4. $0\lt\sqrt{(x-x_0)^2+(y-y_0)^2}\le\delta$
+
+</Fragment>
+
+La 3: excluye el centro ($0\lt$) y la desigualdad con $\delta$ es estricta. La 2 es el entorno completo; la 1 incluye el borde; la 4 incluye el borde.
+</Pregunta>
+
+<Pregunta id="u1-h02" unidad="U1" tipo="choice" correcta={1} titulo="Sucesivos distintos"
+  aparecio="Cuestionario AM2_A 2025, n.º 17"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 13-14">
+<Fragment slot="enunciado">
+
+Si los dos límites sucesivos de $f(x,y)$ en $P_0$ existen y son distintos entre sí, entonces el límite doble en $P_0$:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. No existe
+2. Existe y vale el promedio de ambos
+3. Existe y vale uno de los dos
+4. Puede existir o no: no se puede concluir
+
+</Fragment>
+
+Dos trayectorias (las escalonadas) dan valores distintos, entonces el límite doble **no existe**. Lo que no se puede concluir es el caso en que los sucesivos son iguales.
+</Pregunta>
+
+<Pregunta id="u1-h03" unidad="U1" tipo="choice" correcta={4} titulo="Función vectorial"
+  aparecio="P1 · 26/06/23, preg. 3 (1 pt); Cuestionario AM2_A 2025, n.º 7"
+  fq="fotos-clase/2026-08-28 foto 009.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 2-5">
+<Fragment slot="enunciado">
+
+¿Cuál de las siguientes es una **función vectorial** (una variable independiente que devuelve un vector)?
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. $\vec F(x,y)=-y\,\vec i+x\,\vec j$
+2. $z=x^2+y^2$
+3. $y=x^2$
+4. $\vec r(t)=\cos t\,\vec i+\operatorname{sen}t\,\vec j$
+
+</Fragment>
+
+La 4 depende de un parámetro $t$ y devuelve un vector. La 1 es un campo vectorial (dos variables); la 2 es un campo escalar; la 3 es una función escalar.
+</Pregunta>
+
+<Pregunta id="u1-h04" unidad="U1" tipo="choice" correcta={2} titulo="Discontinuidad evitable"
+  aparecio="Cuestionario AM2_A 2025, n.º 15"
+  fq="AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 15-16">
+<Fragment slot="enunciado">
+
+$f$ tiene una discontinuidad **evitable** en $P_0$ cuando:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. No existe el límite doble en $P_0$
+2. Existe el límite doble en $P_0$ pero $f$ no está definida en $P_0$ o su valor es distinto del límite
+3. Existen los límites sucesivos pero son distintos
+4. Existe el límite doble y coincide con $f(P_0)$
+
+</Fragment>
+
+La 2 es la definición: se evita redefiniendo $f(P_0)$ con el valor del límite. La 1 es la discontinuidad esencial; la 4 es continuidad.
+</Pregunta>
+
+<Pregunta id="u1-h05" unidad="U1" tipo="choice" correcta={3} titulo="Curva de nivel de un paraboloide"
+  aparecio="P1 · 27/07/22 · tema de la foto 023, preg. 3 (1 pt); Cuestionario AM2_A 2025, n.º 8"
+  fq="fotos-clase/2026-08-28 foto 023.jpeg; AM2_A 2025.pdf, p. 1" fr="teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 9-10">
+<Fragment slot="enunciado">
+
+La curva de nivel $C=4$ de $z=x^2+y^2$ es:
+
+</Fragment>
+<Fragment slot="opciones">
+
+1. Una circunferencia de radio 4 con centro en el origen
+2. Una parábola
+3. Una circunferencia de radio 2 con centro en el origen
+4. Un solo punto, el origen
+
+</Fragment>
+
+$x^2+y^2=4$ es una circunferencia de radio $\sqrt4=2$. El punto aislado corresponde a $C=0$.
+</Pregunta>

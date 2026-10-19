@@ -1,0 +1,550 @@
+---
+id: "p1-2s2-2024-06-b"
+titulo: "1° Parcial Práctico — Comisión 2S2 (Tema B, 5/6/2024)"
+comision: "2S2"
+fecha: "5/6/2024"
+tipo: "práctico"
+tema: "Tema B"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–7"
+orden: 141
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import Pendiente from '../../components/Pendiente.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II · Comisión 2S2 · 1° Parcial Práctico - 5/6/2024 · Tema B
+
+Importante (consigna de corrección de la cátedra): todos los ejercicios tienen la misma puntuación, pero al menos deben ser planteados todos. Se solicita escritura legible (clara y grande), prolijidad y desarrollo completo y ordenado. Se deben adjuntar todos los cálculos auxiliares. No está permitido el uso de calculadora ni tabla de derivadas e integrales.
+
+<Ejercicio id="p1-2s2-2024-06-b#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina={1} unidad="U1" tema="Dominio">
+<Enunciado examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina="1">
+
+Graficar en el plano cartesiano y expresar analíticamente el dominio de definición de la función:
+
+$$z=\mathrm{Ln}(x^2-y^2+1)-\mathrm{arcsen}(x)+\sqrt{1-\frac{x^2}{4}-\frac{y^2}{9}}$$
+
+</Enunciado>
+
+<Pista>
+
+La función tiene tres piezas: un logaritmo, un arcoseno y una raíz. ¿Qué le exige cada una a lo que tiene adentro? ¿Cuáles admiten el borde y cuáles no?
+
+</Pista>
+<Pista>
+
+El dominio es la **intersección de las condiciones de existencia**: logaritmo con argumento $\gt0$, arcoseno con argumento en $[-1,1]$ y raíz con radicando $\ge0$. Las curvas son una hipérbola, dos rectas verticales y una elipse. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $x^2-y^2+1\gt0$; $-1\le x\le1$; $1-\frac{x^2}4-\frac{y^2}9\ge0$.
+
+</Pista>
+<Paso>
+
+**Qué:** el logaritmo. **Por qué:** el argumento debe ser estrictamente positivo.
+
+$$x^2-y^2+1\gt0\ \Rightarrow\ y^2-x^2\lt1$$
+
+La frontera $y^2-x^2=1$ es una hipérbola de eje vertical con vértices $(0,\pm1)$. En $(0,0)$ da $0\lt1$ (verdadero): vale la zona **entre las dos ramas**, borde excluido.
+
+</Paso>
+<Paso>
+
+**Qué:** el arcoseno. **Por qué:** $\mathrm{arcsen}\,x$ existe solo para $x\in[-1,1]$, con los extremos incluidos.
+
+$$-1\le x\le1$$
+
+Es la franja vertical entre las rectas $x=-1$ y $x=1$, **con** las rectas.
+
+</Paso>
+<Paso>
+
+**Qué:** la raíz. **Por qué:** el radicando debe ser mayor o igual a 0 (el cero sí se admite).
+
+$$1-\frac{x^2}4-\frac{y^2}9\ge0\ \Rightarrow\ \frac{x^2}4+\frac{y^2}9\le1$$
+
+Es el interior de una elipse de semiejes $2$ (en $x$) y $3$ (en $y$), **con borde incluido**.
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y dibujar. **Por qué:** el dominio es lo que cumple las tres condiciones a la vez. Dentro de la franja $|x|\le1$ la hipérbola da $|y|\lt\sqrt{1+x^2}\le\sqrt2\approx1{,}41$, y la elipse admite hasta $|y|\le3\sqrt{1-\frac{x^2}4}\ge2{,}59$: la elipse **no recorta nada** (la condición queda cumplida sola), aunque conviene dibujarla porque la consigna pide graficar y la cátedra la incluye en el conjunto.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2024-06-b/ej1.svg`} alt="Plano xy con ejes graduados de a 1. Elipse x²/4+y²/9=1 con trazo continuo (vértices (±2,0) y (0,±3)), rectas verticales x=±1 con trazo continuo e hipérbola y²−x²=1 con trazo discontinuo. Se sombrea la zona de la franja |x|≤1 comprendida entre las dos ramas de la hipérbola, toda dentro de la elipse." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\mathrm{Dom}\,z=\Big\{(x,y)\in\mathbb R^2\ /\ y^2-x^2\lt1\ \wedge\ -1\le x\le1\ \wedge\ \frac{x^2}{4}+\frac{y^2}{9}\le1\Big\}$$
+
+**Ojo con:** la hipérbola es estricta ($\lt$) y la elipse y las rectas $x=\pm1$ son con $\le$; y escribir $-x^2+y^2\lt1$ con el signo bien (se invierte fácil al despejar).
+
+**Criterio estimado — no oficial** (consigna: graficar y expresar analíticamente; la cátedra pide que al menos se planteen todos los ejercicios):
+
+- **Bien:** las tres condiciones con sus bordes, y el gráfico de la intersección.
+- **A medias:** dominio analítico correcto con gráfico incompleto o sin distinguir los bordes.
+- **Mal:** omitir una de las tres condiciones o confundir las desigualdades estrictas con las no estrictas.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Puntos de prueba con la función original:
+
+- $(0,0)$: $1\gt0$, $|0|\le1$, radicando $1$: **en el dominio**.
+- $(1;\,1{,}2)$: $x^2-y^2+1=0{,}56\gt0$, $x=1$ (arcsen existe), radicando $1-\frac14-0{,}16=0{,}59\ge0$: **en el dominio**.
+- $(0;\,1)$: $x^2-y^2+1=0$, el logaritmo no existe: **fuera** (sobre la hipérbola).
+- $(1{,}5;\,0)$: $|x|\gt1$, el arcoseno no existe: **fuera**.
+- $(0;\,2)$: $x^2-y^2+1=-3\lt0$: **fuera**, aunque esté dentro de la elipse.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2, resolución manuscrita a lápiz):** coincide: las tres condiciones, los tres gráficos parciales, el gráfico consolidado y el conjunto final $\{-x^2+y^2\lt1\ \wedge\ -1\le x\le1\ \wedge\ \frac{x^2}4+\frac{y^2}9\le1\}$ son los mismos. Su gráfico consolidado sombrea la zona que cumple las tres, la misma que el recálculo.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2024-06-b#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina={1} unidad="U2" tema="Diferencial y error %">
+<Enunciado examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina="1">
+
+Sea un cono recto circular truncado cuyas dimensiones son: altura $h=30\ cm$, radio menor $r=10\ cm$, radio mayor $R=20\ cm$
+
+Cuánto variará su volumen si su altura aumenta 3mm y los radios disminuyen 1mm c/u? Calcular también su error %.
+
+Recordar:
+
+$$Volumen=\frac{\pi h}{3}(r^2+r\cdot R+R^2)$$
+
+</Enunciado>
+
+<Pista>
+
+El volumen depende de tres medidas y las tres cambian un poquito. ¿Qué herramienta te permite estimar el cambio total sumando el aporte de cada medida? ¿En qué unidad tenés que expresar los cambios?
+
+</Pista>
+<Pista>
+
+Método: **diferencial total** $dV=V'_r\,dr+V'_R\,dR+V'_h\,dh$ con los cambios como incrementos, y $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho, todo en **cm**: $dh=+0{,}3$, $dr=dR=-0{,}1$.
+
+$$V'_r=\frac{\pi h}{3}(2r+R)\qquad V'_R=\frac{\pi h}{3}(r+2R)\qquad V'_h=\frac\pi3(r^2+rR+R^2)$$
+
+</Pista>
+<Paso>
+
+**Qué:** pasar los cambios a cm. **Por qué:** las medidas están en cm, así que todo debe estar en la misma unidad ($1\ \text{mm}=0{,}1\ \text{cm}$). La altura **aumenta** (signo $+$) y los radios **disminuyen** (signo $-$).
+
+$$dh=+3\ \text{mm}=+0{,}3\ \text{cm},\qquad dr=dR=-1\ \text{mm}=-0{,}1\ \text{cm}$$
+
+</Paso>
+<Paso>
+
+**Qué:** el volumen de partida. **Por qué:** hace falta para el error porcentual.
+
+$$V=\frac{\pi\cdot30}3\,(10^2+10\cdot20+20^2)=10\pi\,(100+200+400)$$
+
+$$V=7000\pi\ \text{cm}^3$$
+
+</Paso>
+<Paso>
+
+**Qué:** las derivadas parciales en $(r,R,h)=(10,20,30)$. **Por qué:** son los coeficientes del diferencial.
+
+$$V'_r=\frac{\pi\cdot30}3(2\cdot10+20)=10\pi\cdot40=400\pi$$
+
+$$V'_R=\frac{\pi\cdot30}3(10+2\cdot20)=10\pi\cdot50=500\pi$$
+
+$$V'_h=\frac\pi3(100+200+400)=\frac{700\pi}3$$
+
+</Paso>
+<Paso>
+
+**Qué:** armar y evaluar $dV$. **Por qué:** cada término es "cuánto aporta cada medida":
+
+$$400\pi\cdot(-0{,}1)=-40\pi,\qquad500\pi\cdot(-0{,}1)=-50\pi,\qquad\frac{700\pi}3\cdot0{,}3=70\pi$$
+
+$$dV=-40\pi-50\pi+70\pi=-20\pi\ \text{cm}^3\approx-62{,}83\ \text{cm}^3$$
+
+El volumen **disminuye** (los radios pesan más que la altura).
+
+</Paso>
+<Paso>
+
+**Qué:** el error porcentual. **Por qué:** compara la variación con el volumen original.
+
+$$E\%=\frac{dV}{V}\cdot100=\frac{-20\pi}{7000\pi}\cdot100=-\frac27\%\approx-0{,}2857\%$$
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2024-06-b/ej2.svg`} alt="Corte vertical del tronco de cono sobre ejes graduados en cm: base mayor de radio R=20 (de −20 a 20 en y=0), base menor de radio r=10 a la altura h=30 (de −10 a 10)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$dV=-20\pi\ \text{cm}^3\approx-62{,}83\ \text{cm}^3,\qquad E\%=-\frac27\%\approx-0{,}29\%$$
+
+**Ojo con:** pasar los milímetros a centímetros (3 mm = 0,3 cm, no 3) y los signos: los radios **disminuyen**. Además el $V'_h$ no lleva el factor $h$: se deriva respecto de $h$.
+
+**Criterio estimado — no oficial** (consigna: cuánto varía y error %):
+
+- **Bien:** unidades convertidas, las tres parciales, $dV=-20\pi$, $V=7000\pi$ y $E\%=-\frac27\%$.
+- **A medias:** planteo correcto con un error de cuenta o un signo, o dejar los incrementos en mm sin convertir.
+- **Mal:** no usar el método diferencial, o tomar como incremento un cambio de un solo radio.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Contra el **incremento exacto** con $r=9{,}9$, $R=19{,}9$, $h=30{,}3$:
+
+$$V_{\text{nuevo}}=\frac{\pi\cdot30{,}3}3\,(9{,}9^2+9{,}9\cdot19{,}9+19{,}9^2)=6979{,}403\pi$$
+
+$$\Delta V=6979{,}403\pi-7000\pi=-20{,}597\pi\approx-64{,}71\ \text{cm}^3$$
+
+El diferencial $-20\pi$ ($-62{,}83$) aproxima al incremento exacto con una diferencia de unos $1{,}9\ \text{cm}^3$ (error real $\approx-0{,}294\%$ frente a $-0{,}286\%$): la diferencia son los términos de orden superior.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3, resolución manuscrita a lápiz):** coincide: $dr=dR=-0{,}1$, $dh=+0{,}3$, parciales $400\pi$, $500\pi$ y $\frac{700}3\pi$, $dV=-20\pi$ cm³, $V=7000\pi$ cm³ y $E\%=-\frac27\%$. Detalle de redondeo: el profe escribe $-0{,}28\%$ (truncado) y el valor es $-0{,}2857\%$, que redondeado es $-0{,}29\%$. Registrado como errata menor en `docs/revision/p1-2s2-2024-discrepancias.md`; el resultado exacto $-\frac27\%$ coincide.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2024-06-b#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina={1} unidad="U2" tema="Direccional y gradiente 3D">
+<Enunciado examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina="1">
+
+Dada la función: $u=z^3-x^2y$ y el punto: $M(1,6,2)$
+
+a. Calcular la Derivada parcial en M y en la dirección del vector $\overline{MN}$ siendo $N(4,10,14)$
+
+b. Determinar el Gradiente en M indicando: Expresión cartesiana, módulo y dirección (cosenos directores).
+
+c. Verificar el valor de la Derivada direccional aplicando propiedad del Gradiente.
+
+</Enunciado>
+
+<Pista>
+
+Ahora la función tiene tres variables. ¿Cómo describís una dirección en el espacio a partir de dos puntos? ¿Qué vector junta las tres derivadas parciales en $M$?
+
+</Pista>
+<Pista>
+
+Método: la dirección es el vector $\overline{MN}=N-M$ (se normaliza con sus **cosenos directores**); $\dfrac{\partial u}{\partial s}=u'_x\cos\alpha+u'_y\cos\beta+u'_z\cos\gamma$; el **gradiente** $\nabla u=(u'_x,u'_y,u'_z)$ y la propiedad $\dfrac{\partial u}{\partial s}=\nabla u\cdot\hat s=\|\nabla u\|\cos\varphi$. Teoría: Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $\overline{MN}=(3,4,12)$ y las parciales son $u'_x=-2xy$, $u'_y=-x^2$, $u'_z=3z^2$, a evaluar en $M(1,6,2)$.
+
+</Pista>
+<Paso>
+
+**Qué:** el vector dirección y su versor. **Por qué:** la derivada direccional necesita una dirección de módulo 1.
+
+$$\overline{MN}=N-M=(4-1,\ 10-6,\ 14-2)=(3,4,12)$$
+
+$$\|\overline{MN}\|=\sqrt{9+16+144}=\sqrt{169}=13$$
+
+$$\cos\alpha=\frac3{13},\qquad\cos\beta=\frac4{13},\qquad\cos\gamma=\frac{12}{13}$$
+
+</Paso>
+<Paso>
+
+**Qué:** las parciales en $M(1,6,2)$. **Por qué:** son las componentes del gradiente.
+
+$$u'_x=-2xy=-2\cdot1\cdot6=-12$$
+
+$$u'_y=-x^2=-1$$
+
+$$u'_z=3z^2=3\cdot4=12$$
+
+</Paso>
+<Paso>
+
+**Qué:** la derivada direccional (inciso a). **Por qué:** combina las parciales con los cosenos directores.
+
+$$\frac{\partial u}{\partial s}=-12\cdot\frac3{13}-1\cdot\frac4{13}+12\cdot\frac{12}{13}$$
+
+$$\frac{\partial u}{\partial s}=\frac{-36-4+144}{13}=\frac{104}{13}=8$$
+
+</Paso>
+<Paso>
+
+**Qué:** el gradiente, su módulo y sus cosenos directores (inciso b). **Por qué:** el módulo es el máximo valor de la direccional y los cosenos dan hacia dónde apunta.
+
+$$\nabla u(M)=-12\,\vec i-\vec j+12\,\vec k$$
+
+$$\|\nabla u\|=\sqrt{144+1+144}=\sqrt{289}=17$$
+
+$$\cos\theta_x=-\frac{12}{17},\quad\cos\theta_y=-\frac1{17},\quad\cos\theta_z=\frac{12}{17}$$
+
+$$\theta_x\approx134{,}9^\circ,\qquad\theta_y\approx93{,}4^\circ,\qquad\theta_z\approx45{,}1^\circ$$
+
+</Paso>
+<Paso>
+
+**Qué:** verificar con la propiedad del gradiente (inciso c). **Por qué:** $\frac{\partial u}{\partial s}=\|\nabla u\|\cos\varphi$, con $\varphi$ el ángulo entre $\nabla u$ y $\hat s$. El coseno de ese ángulo sale de los cosenos directores de ambos vectores, sin repetir el producto de antes:
+
+$$\cos\varphi=-\frac{12}{17}\cdot\frac3{13}-\frac1{17}\cdot\frac4{13}+\frac{12}{17}\cdot\frac{12}{13}=\frac{104}{221}=\frac8{17}$$
+
+$$\frac{\partial u}{\partial s}=\|\nabla u\|\cos\varphi=17\cdot\frac8{17}=8$$
+
+Coincide con el inciso a, con $\varphi\approx61{,}9^\circ$ (agudo: en esa dirección $u$ crece, y menos que el máximo $17$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2024-06-b/ej3.svg`} alt="Perspectiva 3D con ejes graduados de a 2. Desde el punto M(1,6,2): flecha violeta hacia N(4,10,14), dirección s=MN de módulo 13; flecha roja hacia arriba y hacia −x, el gradiente (−12,−1,12) dibujado a escala 1/2." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial u}{\partial s}\Big|_M=8,\qquad\nabla u(M)=-12\,\vec i-\vec j+12\,\vec k,\qquad\|\nabla u\|=17$$
+
+$$\cos\theta_x=-\frac{12}{17},\quad\cos\theta_y=-\frac1{17},\quad\cos\theta_z=\frac{12}{17}$$
+
+**Ojo con:** normalizar $\overline{MN}$ (dividir por $13$) antes de multiplicar, y el signo de $u'_x=-2xy$ y $u'_y=-x^2$ (negativos).
+
+**Criterio estimado — no oficial** (consigna: a, b y c; la verificación con la propiedad del gradiente se pide aparte):
+
+- **Bien:** $\overline{MN}$ normalizado, $\frac{\partial u}{\partial s}=8$, $\nabla u$, $17$, cosenos directores y la verificación con $\|\nabla u\|\cos\varphi$.
+- **A medias:** a y b bien pero sin la verificación del inciso c, o sin normalizar (da $104$).
+- **Mal:** usar $N$ como dirección sin restar $M$, o evaluar el gradiente en otro punto.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Por **ángulos** (otro camino): $\varphi=\arccos\frac8{17}\approx61{,}9^\circ$ entre $\nabla u$ y $\overline{MN}$, y $\|\nabla u\|\cos\varphi=17\cdot\frac8{17}=8$. Además un cociente incremental numérico con paso $10^{-8}$ a lo largo de $\hat s=(\frac3{13},\frac4{13},\frac{12}{13})$ da $8{,}000$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4, resolución manuscrita a lápiz):** coincide en a y b: $\overline{MN}=\langle3,4,12\rangle$, $\|\overline{MN}\|=13$, $-12$, $-1$, $12$, $\frac{\partial u}{\partial s}=8$, $\nabla u=-12\,\vec i-\vec j+12\,\vec k$, $\|\nabla u\|=17$ y los cosenos directores como $\theta_x\simeq\arccos(-\frac{12}{17})$, etc. El escaneo **no desarrolla el inciso c** (verificación con la propiedad del gradiente); lo de arriba es solo elaborado.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2024-06-b#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina="1">
+
+Dada la función:
+
+$$z=\frac23x^3-18x-\frac43y^3+16y$$
+
+Calcular y categorizar los Puntos Críticos indicando si son Extremos Locales (Máximo y/o Mínimo) o puntos de ensilladura.
+
+</Enunciado>
+
+<Pista>
+
+¿Qué condición cumplen las derivadas parciales en un punto donde la superficie tiene cima, valle o silla? Después, ¿cómo decidís cuál de las tres es cada uno?
+
+</Pista>
+<Pista>
+
+Método: **puntos críticos** ($z'_x=0$, $z'_y=0$) y **hessiano** $H=z''_{xx}z''_{yy}-(z''_{xy})^2$: $H\gt0$ extremo (signo de $z''_{xx}$), $H\lt0$ silla, $H=0$ inconcluso. Teoría: Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $z'_x=2x^2-18=0$ y $z'_y=-4y^2+16=0$. Cada ecuación tiene una sola variable: se resuelven por separado y se combinan.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar e igualar a cero. **Por qué:** condición necesaria.
+
+$$z'_x=2x^2-18=0\ \Rightarrow\ x^2=9\ \Rightarrow\ x=\pm3$$
+
+$$z'_y=-4y^2+16=0\ \Rightarrow\ y^2=4\ \Rightarrow\ y=\pm2$$
+
+</Paso>
+<Paso>
+
+**Qué:** combinar. **Por qué:** las ecuaciones están desacopladas, valen todas las parejas.
+
+$$PC_1(3,2),\quad PC_2(3,-2),\quad PC_3(-3,2),\quad PC_4(-3,-2)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** clasifican cada punto.
+
+$$z''_{xx}=4x,\qquad z''_{yy}=-8y,\qquad z''_{xy}=0$$
+
+$$H(x,y)=4x\cdot(-8y)-0^2=-32xy$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar y clasificar.
+
+$$H(3,2)=-192\lt0\ \Rightarrow\ \text{silla}$$
+
+$$H(3,-2)=192\gt0\ \text{y}\ z''_{xx}(3)=12\gt0\ \Rightarrow\ \text{mínimo}$$
+
+$$H(-3,2)=192\gt0\ \text{y}\ z''_{xx}(-3)=-12\lt0\ \Rightarrow\ \text{máximo}$$
+
+$$H(-3,-2)=-192\lt0\ \Rightarrow\ \text{silla}$$
+
+Valores de $z$ (opcional): $z(3,-2)=-\frac{172}3$, $z(-3,2)=\frac{172}3$, $z(3,2)=-\frac{44}3$, $z(-3,-2)=\frac{44}3$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2024-06-b/ej4.svg`} alt="Arriba, la superficie z en perspectiva con ejes graduados y los cuatro puntos críticos marcados. Abajo, curvas de nivel en el plano xy con ejes graduados de a 1: máximo en (−3,2), mínimo en (3,−2) y puntos silla en (3,2) y (−3,−2)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$(3,2)\ \text{silla},\quad(3,-2)\ \text{mínimo},\quad(-3,2)\ \text{máximo},\quad(-3,-2)\ \text{silla}$$
+
+**Ojo con:** el $-8y$ de $z''_{yy}$ (por el $-\frac43y^3$) cambia los signos del hessiano: $H=-32xy$, no $+32xy$. Y con $H\gt0$ falta decidir máx/mín con el signo de $z''_{xx}$.
+
+**Criterio estimado — no oficial** (consigna: calcular y categorizar):
+
+- **Bien:** los cuatro puntos, $H=-32xy$ y las cuatro clasificaciones con máx/mín justificados.
+- **A medias:** puntos bien y una clasificación errada, o "extremo" sin distinguir máx/mín.
+- **Mal:** hallar menos de cuatro puntos o no usar el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Chequeo por entorno, sin hessiano: en $(3,-2)$ los ocho vecinos a distancia $0{,}1$ dan $z\gt-\frac{172}3$ (mínimo local) y en $(-3,2)$ dan $z\lt\frac{172}3$ (máximo local). En $(3,2)$: $z(3{,}1;\,2)\gt z(3,2)$ pero $z(3;\,2{,}1)\lt z(3,2)$, o sea sube en una dirección y baja en otra: **silla**; igual en $(-3,-2)$. Como la función es una suma $f(x)+g(y)$ con $f=\frac23x^3-18x$ y $g=-\frac43y^3+16y$, también se ve separando: $f$ tiene mínimo en $3$ y máximo en $-3$; $g$ tiene máximo en $2$ y mínimo en $-2$. Mínimo en $(3,-2)$ (mín de $f$ + mín de $g$), máximo en $(-3,2)$ y mezclas en los otros dos: sillas.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" paginas="5–6" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (pp. 5–6, resolución manuscrita a lápiz):** los cuatro puntos y la clasificación (silla $(3,2)$, mínimo $(3,-2)$, máximo $(-3,2)$, silla $(-3,-2)$) coinciden. ⚠️ **Errata de cuenta:** el escaneo escribe $H(x,y)=-36xy$ y evalúa con $-36$; el recálculo da $4x\cdot(-8y)=-32xy$ (los signos de $H$, y por lo tanto la clasificación, no cambian). Pendiente de confirmar con la cátedra.
+
+**Página 6 ("4 bis (Modificado)"):** el escaneo agrega $z=\frac23x^3-18x+\frac43y^3-16y$, que **no figura en el enunciado impreso** (se transcribió solo el ejercicio 4 original). Allí plantea los mismos puntos críticos y escribe "de aquí en adelante, desarrollo y resultados idénticos al ejercicio original". ⚠️ Con esa función $z''_{yy}=8y$ y $H=32xy$: los puntos críticos son los mismos, pero la clasificación **no** es idéntica (mínimo en $(3,2)$, máximo en $(-3,-2)$, sillas en $(3,-2)$ y $(-3,2)$). Probablemente "idéntico" se refiere al procedimiento. Registrado en `docs/revision/p1-2s2-2024-discrepancias.md`. No se corrigió el original.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-2s2-2024-06-b#5" numero={5} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina={1} unidad="U3" tema="Lagrange: caja sin tapa">
+<Enunciado examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" pagina="1">
+
+Una caja sin tapa de base rectangular debe tener un volumen $V=32\ cm^3$
+
+Aplicando el método de Lagrange, cuáles deben ser las dimensiones de sus 3 lados para que su superficie sea mínima?
+
+</Enunciado>
+
+<Pista>
+
+La caja tiene tres medidas. ¿Cuál querés que sea lo menor posible y qué condición tienen que cumplir sí o sí? Y ojo con "sin tapa": ¿cuántas caras tiene?
+
+</Pista>
+<Pista>
+
+Método: **Lagrange** con la superficie $S$ a minimizar y el volumen fijo como condición: $F=S-\lambda\,g$ y se anulan las cuatro derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho, con $x,y$ los lados de la base y $z$ la altura:
+
+$$S=xy+2xz+2yz,\qquad g=xyz-32$$
+
+$$F(x,y,z,\lambda)=xy+2xz+2yz-\lambda\,(xyz-32)$$
+
+</Pista>
+<Paso>
+
+**Qué:** modelar la superficie. **Por qué:** sin tapa quedan **5 caras**: la base ($xy$) y cuatro laterales (dos de $x\cdot z$ y dos de $y\cdot z$). Con tapa habría un $xy$ más y el problema sería otro.
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $F$ e igualar a cero.
+
+$$F'_x=y+2z-\lambda yz=0,\qquad F'_y=x+2z-\lambda xz=0,\qquad F'_z=2x+2y-\lambda xy=0$$
+
+$$F'_\lambda=-(xyz-32)=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** eliminar $\lambda$. **Por qué:** las tres primeras dan $\lambda$ de tres formas (se divide por variables positivas, pues son medidas de una caja).
+
+$$\lambda=\frac{y+2z}{yz},\qquad\lambda=\frac{x+2z}{xz},\qquad\lambda=\frac{2x+2y}{xy}$$
+
+Igualando las dos primeras y multiplicando en cruz:
+
+$$x\,(y+2z)=y\,(x+2z)\ \Rightarrow\ xy+2xz=xy+2yz$$
+
+$$2xz=2yz\ \Rightarrow\ x=y$$
+
+Igualando la segunda y la tercera:
+
+$$y\,(x+2z)=z\,(2x+2y)\ \Rightarrow\ xy+2yz=2xz+2yz$$
+
+$$xy=2xz\ \Rightarrow\ y=2z$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición. **Por qué:** deja una incógnita. Con $x=y$ y $z=\frac x2$:
+
+$$x\cdot x\cdot\frac x2=32\ \Rightarrow\ x^3=64\ \Rightarrow\ x=4$$
+
+$$y=4,\qquad z=2,\qquad\lambda=\frac{y+2z}{yz}=\frac{8}{8}=1$$
+
+$$S=xy+2xz+2yz=16+16+16=48\ \text{cm}^2$$
+
+**Por qué es mínimo:** si $x$ o $y$ tienden a $0$ o a $\infty$ la superficie crece sin límite, así que el único punto crítico es el mínimo (se confirma en la comprobación).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-2s2-2024-06-b/ej5.svg`} alt="Perspectiva 3D con ejes graduados de a 1 de una caja sin tapa de 4 por 4 por 2, con la cara superior abierta dibujada con trazo discontinuo." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$x=4\ \text{cm},\qquad y=4\ \text{cm},\qquad z=2\ \text{cm},\qquad S_{\min}=48\ \text{cm}^2$$
+
+**Ojo con:** contar bien las caras (sin tapa: $xy+2xz+2yz$) y no dividir por una variable sin avisar que no es $0$ (acá son longitudes, positivas).
+
+**Criterio estimado — no oficial** (consigna: Lagrange y las 3 dimensiones):
+
+- **Bien:** $S$ y $g$ bien planteadas, $F$ con $-\lambda$, el sistema, $x=y=4$, $z=2$.
+- **A medias:** planteo correcto con un error de cuenta final, o resolver bien pero sin dar las tres dimensiones.
+- **Mal:** superficie con tapa ($2xy$) o resolver sin Lagrange cuando se pide ese método.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Por **sustitución** (otro camino): de $xyz=32$, $z=\frac{32}{xy}$, y la superficie queda
+
+$$S(x,y)=xy+\frac{64}x+\frac{64}y$$
+
+Sus parciales $S'_x=y-\frac{64}{x^2}$ y $S'_y=x-\frac{64}{y^2}$ se anulan en $x=y=4$. Allí $S''_{xx}=\frac{128}{x^3}=2$, $S''_{yy}=2$, $S''_{xy}=1$, con $H=4-1=3\gt0$ y $S''_{xx}\gt0$: **mínimo**, $S=16+16+16=48$ y $z=\frac{32}{16}=2$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-2s2-2024-06-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 2S2 Jun-24.pdf" paginas="7" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 7, resolución manuscrita a lápiz):** coincide: $V=xyz=32$, $S=2xz+2yz+xy$, $F=\text{ppal}-\lambda\,\text{cond}$, las cuatro derivadas, $x=y$, $y=2z$ y el resultado $x=4$, $y=4$, $z=2$ cm, con la verificación numérica $S=32+16=48$. El escaneo tiene un círculo con "x/5" cerca del título (ponderación ilegible).
+
+</div>
+</Ejercicio>

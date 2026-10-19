@@ -1,0 +1,434 @@
+---
+id: "p1-1h10-2024-b"
+titulo: "1° Parcial Práctico — Comisión 1H10 (B, 2024)"
+comision: "1H10"
+fecha: "xx/xx/2024"
+tipo: "práctico"
+tema: "Tema B"
+fuente: "parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf"
+paginasEnunciado: "1"
+paginasResolucion: "2–5"
+orden: 140
+unidades: ["U1", "U2", "U3"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+import Pendiente from '../../components/Pendiente.astro';
+import ResolucionOficial from '../../components/ResolucionOficial.astro';
+
+Universidad Tecnológica Nacional - FRC · Análisis Matemático II · Comisión 1H10 · 1° Parcial Práctico - xx/xx/2024 (día y mes sin completar en el original)
+
+Puntaje mínimo para aprobar: 6 (seis). Importante (consigna de corrección de la cátedra): todos los ejercicios tienen la misma puntuación, pero deben ser resueltos todos. Se solicita escritura legible (clara y grande), prolijidad y desarrollo completo y ordenado. Se debe graficar y adjuntar todos los cálculos auxiliares. No está permitido el uso de calculadora ni tabla de derivadas e integrales.
+
+<Ejercicio id="p1-1h10-2024-b#1" numero={1} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" pagina={1} unidad="U1" tema="Dominio (logaritmo y arcoseno)">
+<Enunciado examen="p1-1h10-2024-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" pagina="1">
+
+Determinar gráfica y analíticamente el dominio de definición de la siguiente función:
+
+$$f(x,y)=\log(4-x^2-y^2)+\arcsin(y-x)$$
+
+</Enunciado>
+
+<Pista>
+
+Mirá cada pieza de la función: un logaritmo y un arcoseno. ¿Qué le exige cada una a lo que tiene adentro? ¿Alguna de las dos admite que el borde sea parte del dominio?
+
+</Pista>
+<Pista>
+
+El dominio es la **intersección de las condiciones de existencia**: logaritmo con argumento $\gt0$ y arcoseno con argumento en $[-1,1]$. Una condición es una región limitada por una circunferencia y la otra por dos rectas paralelas. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $4-x^2-y^2\gt0$ y $-1\le y-x\le1$. Despejá $y$ en la segunda para dibujar las dos rectas.
+
+</Pista>
+<Paso>
+
+**Qué:** el logaritmo. **Por qué:** el logaritmo solo existe para argumentos estrictamente positivos.
+
+$$4-x^2-y^2\gt0\ \Rightarrow\ x^2+y^2\lt4$$
+
+Es el **interior** de la circunferencia de centro $(0,0)$ y radio $2$, con el borde **excluido** (desigualdad estricta).
+
+</Paso>
+<Paso>
+
+**Qué:** el arcoseno. **Por qué:** $\arcsin u$ está definido solo para $-1\le u\le1$, y los extremos $\pm1$ sí valen ($\arcsin(\pm1)=\pm\frac\pi2$).
+
+$$-1\le y-x\le1$$
+
+Sumando $x$ en los tres miembros:
+
+$$-1+x\le y\le1+x$$
+
+Es la **banda** entre las rectas $y=x-1$ e $y=x+1$, con las dos rectas **incluidas**.
+
+</Paso>
+<Paso>
+
+**Qué:** intersectar y dibujar. **Por qué:** el dominio es lo que cumple las dos condiciones a la vez: la parte de la banda que cae dentro del disco. Cómo reconocerlo: en el gráfico, borde de la circunferencia con trazo discontinuo (no entra) y rectas con trazo continuo (sí entran). Las rectas cortan la circunferencia en $\left(\frac{-1\pm\sqrt7}{2},\frac{1\pm\sqrt7}{2}\right)$ y $\left(\frac{1\pm\sqrt7}{2},\frac{-1\pm\sqrt7}{2}\right)$ aproximadamente ($\pm1{,}82$ y $\pm0{,}82$).
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2024-b/ej1.svg`} alt="Plano xy con ejes graduados de a 1. Circunferencia x²+y²=4 con trazo discontinuo (borde excluido) y las rectas y=x+1 e y=x−1 con trazo continuo (borde incluido). Se sombrea la parte de la banda entre las rectas que queda dentro del disco." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\mathrm{Dom}\,f=\Big\{(x,y)\in\mathbb R^2\ /\ x^2+y^2\lt4\ \wedge\ -1+x\le y\le1+x\Big\}$$
+
+**Ojo con:** el borde: la circunferencia **no** pertenece (logaritmo, $\gt0$) pero las rectas **sí** (arcoseno, $\le$). Y el gráfico no se omite: la consigna pide "gráfica y analíticamente".
+
+**Criterio estimado — no oficial** (consigna de corrección: todos los ejercicios deben resolverse y se debe graficar):
+
+- **Bien:** las dos condiciones, la intersección graficada y el borde bien distinguido.
+- **A medias:** dominio analítico correcto con gráfico incompleto o sin distinguir los bordes.
+- **Mal:** olvidar una de las dos condiciones (por ejemplo, dibujar solo el disco o solo la banda) o invertir las desigualdades.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Puntos de prueba con la función original:
+
+- $(0,0)$: $4-0=4\gt0$ y $y-x=0\in[-1,1]$: **en el dominio**.
+- $(1,2)$: $x^2+y^2=5\ge4$, el logaritmo no existe: **fuera**.
+- $(1{,}5;\,0)$: $x^2+y^2=2{,}25\lt4$ pero $y-x=-1{,}5\lt-1$: el arcoseno no existe: **fuera**.
+- $(0{,}5;\,1{,}5)$: $x^2+y^2=2{,}5\lt4$ y $y-x=1$ (sobre la recta $y=x+1$): **en el dominio** ($\arcsin1=\frac\pi2$).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2024-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" paginas="2" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 2):** el planteo, las dos condiciones, el gráfico (disco con banda) y el conjunto final coinciden con el recálculo.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2024-b#2" numero={2} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" pagina={1} unidad="U2" tema="Derivada direccional y gradiente">
+<Enunciado examen="p1-1h10-2024-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" pagina="1">
+
+Dada la función:
+
+$$f(x,y)=2\sqrt{x^2-y^2}+3\frac{y}{x}-\ln(x\cdot y)^2$$
+
+a. Determinar el valor de la derivada direccional en el punto: $P(1,1)$. En la dirección/sentido que forma un ángulo $\alpha=\frac34\pi\ (135^\circ)$ respecto al semieje $x^+$.
+
+b. Dar expresión cartesiana del Gradiente en dicho punto P, graficarlo y determinar su módulo y dirección/sentido: $\theta=\arctan(\dots\dots)$
+
+</Enunciado>
+
+<Pendiente>: la resolución oficial (p. 3) **no corresponde al enunciado**: usa $z=2\sqrt{5x^2-y^2}-3\frac yx-\ln(xy)^2$ (con $5x^2$ y signo $-$ en el término $3\frac yx$). Además, con la función tal como está impresa, en $P(1,1)$ el radicando $x^2-y^2$ vale $0$, las derivadas parciales de la raíz no existen y yendo a $135^\circ$ se sale del dominio, así que el ejercicio no se puede resolver como está escrito. Se resuelve debajo con la **lectura de la resolución oficial** ($5x^2$ y $-3\frac yx$), y $\ln(x\cdot y)^2$ se leyó como $\ln\big((xy)^2\big)$, igual que el profe (su derivada $\frac{2xy}{x^2y^2}$ es la de $\ln(x^2y^2)$). Pendiente de confirmar con la cátedra.</Pendiente>
+
+<Pista>
+
+Hay dos pedidos: cuánto cambia $f$ si te movés desde $P$ en un sentido concreto, y hacia dónde conviene moverse para que cambie lo más rápido posible. ¿Qué vector te resume las derivadas parciales en $P$?
+
+</Pista>
+<Pista>
+
+Método: **derivadas parciales** en $P$; direccional $\dfrac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; **gradiente** $\nabla z=z'_x\,\vec i+z'_y\,\vec j$ con módulo $\|\nabla z\|$ y ángulo $\theta=\arctan\dfrac{z'_y}{z'_x}$ (cuidando el cuadrante). Teoría: Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho (lectura de la resolución oficial, $z=2\sqrt{5x^2-y^2}-3\frac yx-\ln(xy)^2$):
+
+$$z'_x=\frac{10x}{\sqrt{5x^2-y^2}}+\frac{3y}{x^2}-\frac2x\qquad z'_y=\frac{-2y}{\sqrt{5x^2-y^2}}-\frac3x-\frac2y$$
+
+</Pista>
+<Paso>
+
+**Qué:** ver si el enunciado tal cual se puede resolver. **Por qué:** conviene saber qué se está resolviendo. En $P(1,1)$ el radicando de $\sqrt{x^2-y^2}$ es $1-1=0$: la derivada $\frac{2x}{\sqrt{x^2-y^2}}$ no existe y además hacia $135^\circ$ el radicando pasa a ser negativo. Por eso se sigue con la función de la resolución oficial.
+
+</Paso>
+<Paso>
+
+**Qué:** el ángulo de la dirección. **Por qué:** $\alpha=\frac34\pi$ se mide desde el semieje $x^+$ en sentido antihorario, en el 2.º cuadrante.
+
+$$\cos\tfrac{3\pi}4=-\tfrac{\sqrt2}2,\qquad\sin\tfrac{3\pi}4=\tfrac{\sqrt2}2$$
+
+</Paso>
+<Paso>
+
+**Qué:** las parciales en $P(1,1)$. **Por qué:** son las componentes del gradiente. La raíz vale $\sqrt{5-1}=2$.
+
+$$z'_x(P)=\frac{10}{2}+3-2=6$$
+
+$$z'_y(P)=\frac{-2}{2}-3-2=-6$$
+
+</Paso>
+<Paso>
+
+**Qué:** la derivada direccional. **Por qué:** combina las parciales con el versor de la dirección.
+
+$$\frac{\partial z}{\partial s}=6\cdot\Big(-\frac{\sqrt2}2\Big)+(-6)\cdot\frac{\sqrt2}2=-3\sqrt2-3\sqrt2$$
+
+$$\frac{\partial z}{\partial s}=-6\sqrt2\approx-8{,}49$$
+
+</Paso>
+<Paso>
+
+**Qué:** gradiente, módulo y dirección. **Por qué:** el módulo es el valor máximo de la derivada direccional y el ángulo da el sentido de máximo crecimiento.
+
+$$\nabla z(P)=6\,\vec i-6\,\vec j,\qquad\|\nabla z\|=\sqrt{36+36}=6\sqrt2\approx8{,}49$$
+
+$$\theta=\arctan\frac{-6}{6}=\arctan(-1)=-45^\circ$$
+
+El vector está en el **4.º cuadrante** ($x$ positiva, $y$ negativa), así que $\theta=-45^\circ$ (o $315^\circ$) es correcto sin sumar nada.
+
+</Paso>
+<Paso>
+
+**Qué:** direcciones en el gráfico. **Por qué:** lo pide la consigna ("graficarlo"). Máximo crecimiento: sentido de $\nabla z$ ($315^\circ$). Mínimo: el opuesto ($135^\circ$). Nulo: perpendiculares ($45^\circ$ y $225^\circ$), tangentes a la curva de nivel por $P$. Notá que la dirección pedida ($135^\circ$) **es justo la de mínimo crecimiento**, por eso la direccional da $-\|\nabla z\|$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2024-b/ej2.svg`} alt="Plano xy con ejes graduados de a 1 y el punto P(1,1). Flecha roja: gradiente (6,−6) a escala 1/3, apuntando hacia abajo a la derecha (−45°), máximo crecimiento. Flecha azul opuesta, hacia arriba a la izquierda a 135°: mínimo crecimiento y dirección S. Recta verde discontinua perpendicular: crecimiento nulo." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\frac{\partial z}{\partial s}\Big|_P=-6\sqrt2,\qquad\nabla z(P)=6\,\vec i-6\,\vec j$$
+
+$$\|\nabla z\|=6\sqrt2,\qquad\theta=-45^\circ\ (315^\circ)$$
+
+**Ojo con:** el enunciado impreso no coincide con la resolución del profe (ver la nota de arriba), y el signo de $-3\frac yx$ y de la raíz: con ellos el gradiente en $P$ cambia por completo. Y al dar $\theta$, revisar siempre el cuadrante del vector.
+
+**Criterio estimado — no oficial** (consigna: calcular, dar expresión cartesiana, graficar y dar módulo y dirección/sentido):
+
+- **Bien:** parciales evaluadas en $P$, versor de $135^\circ$, direccional, gradiente, módulo, ángulo en el cuadrante correcto y gráfico.
+- **A medias:** todo bien pero sin gráfico o con el ángulo en el cuadrante equivocado.
+- **Mal:** usar un versor que no sea el de $135^\circ$, evaluar las parciales en otro punto o no calcular el gradiente.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Por la **propiedad del gradiente**: la direccional es $\nabla z\cdot\hat s$ con $\hat s=(-\tfrac{\sqrt2}2,\tfrac{\sqrt2}2)$, y también es $\|\nabla z\|\cos\varphi$ con $\varphi$ el ángulo entre $\nabla z$ y $\hat s$. Como $\nabla z$ apunta a $315^\circ$ y $\hat s$ a $135^\circ$, $\varphi=180^\circ$ y $\cos\varphi=-1$:
+
+$$\frac{\partial z}{\partial s}=6\sqrt2\cdot(-1)=-6\sqrt2$$
+
+Coincide. Además, un cociente incremental numérico con paso $10^{-8}$ en esa dirección da $-8{,}485$ (y $-6\sqrt2=-8{,}485$).
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2024-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" paginas="3" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 3):** ⚠️ La resolución oficial da $\frac{\partial z}{\partial s}=-2\sqrt2$, $\nabla z=5\,\vec i+\vec j$, $\|\nabla z\|=\sqrt{26}$ y $\theta=\arctan\frac15$; el recálculo con **su misma función** da $-6\sqrt2$, $6\,\vec i-6\,\vec j$, $6\sqrt2$ y $-45^\circ$. Causa probable: el escaneo toma como $z'_y$ la expresión $\frac{3y}{x^2}-\frac{2xy}{x^2y^2}$ (que en realidad es parte de $z'_x$) y no deriva respecto de $y$; $z'_x$ queda solo con $\frac{10x}{\sqrt{5x^2-y^2}}=5$. Pendiente de confirmar con la cátedra. Registrado en `docs/revision/p1-1h10-2024-discrepancias.md`.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2024-b#3" numero={3} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" pagina={1} unidad="U3" tema="Extremos relativos (hessiano)">
+<Enunciado examen="p1-1h10-2024-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" pagina="1">
+
+Determinar los puntos críticos de:
+
+$$f(x,y)=\frac43x^3+\frac13y^3-2x^2-y-10$$
+
+Categorizarlos en Extremos (Máximos y/o Mínimos) o Puntos de ensilladura de haberlos.
+
+</Enunciado>
+
+<Pista>
+
+¿Qué condición cumplen las derivadas parciales donde la superficie tiene cima, valle o silla? Una vez que tengas los puntos, ¿cómo decidís cuál de las tres cosas es cada uno?
+
+</Pista>
+<Pista>
+
+Método: **puntos críticos** ($f'_x=0$, $f'_y=0$) y **hessiano** $H=f''_{xx}f''_{yy}-(f''_{xy})^2$: $H\gt0$ extremo (el signo de $f''_{xx}$ o $f''_{yy}$ decide máx/mín), $H\lt0$ silla, $H=0$ inconcluso. Teoría: Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+</Pista>
+<Pista>
+
+Planteo casi hecho: $f'_x=4x^2-4x=0$ y $f'_y=y^2-1=0$. Cada ecuación tiene solo una variable, así que se resuelven por separado y se combinan.
+
+</Pista>
+<Paso>
+
+**Qué:** derivar e igualar a cero. **Por qué:** en un extremo o una silla las dos parciales se anulan (condición necesaria).
+
+$$f'_x=4x^2-4x=0\ \Rightarrow\ 4x\,(x-1)=0\ \Rightarrow\ x=0\ \text{o}\ x=1$$
+
+$$f'_y=y^2-1=0\ \Rightarrow\ (y+1)(y-1)=0\ \Rightarrow\ y=-1\ \text{o}\ y=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** combinar. **Por qué:** como las ecuaciones están desacopladas, valen todas las parejas.
+
+$$P_1(0,1),\quad P_2(0,-1),\quad P_3(1,1),\quad P_4(1,-1)$$
+
+</Paso>
+<Paso>
+
+**Qué:** derivadas segundas y hessiano. **Por qué:** clasifican cada punto.
+
+$$f''_{xx}=8x-4,\qquad f''_{yy}=2y,\qquad f''_{xy}=0$$
+
+$$H(x,y)=(8x-4)\cdot2y-0^2=8y\,(2x-1)$$
+
+</Paso>
+<Paso>
+
+**Qué:** evaluar en cada punto.
+
+$$H(0,1)=8\cdot1\cdot(-1)=-8\lt0\ \Rightarrow\ \text{silla}$$
+
+$$H(0,-1)=8\cdot(-1)\cdot(-1)=8\gt0\ \Rightarrow\ \text{extremo}$$
+
+$$H(1,1)=8\cdot1\cdot1=8\gt0\ \Rightarrow\ \text{extremo}$$
+
+$$H(1,-1)=8\cdot(-1)\cdot1=-8\lt0\ \Rightarrow\ \text{silla}$$
+
+</Paso>
+<Paso>
+
+**Qué:** decidir máximo o mínimo en los dos extremos. **Por qué:** con $H\gt0$ el signo de $f''_{yy}$ (o de $f''_{xx}$) lo define.
+
+$$f''_{yy}(0,-1)=-2\lt0\ \Rightarrow\ \text{máximo en }(0,-1)$$
+
+$$f''_{yy}(1,1)=2\gt0\ \Rightarrow\ \text{mínimo en }(1,1)$$
+
+Verificación con el otro signo: $f''_{xx}(0)=-4\lt0$ (máx) y $f''_{xx}(1)=4\gt0$ (mín). Valores de $f$ (opcional): $f(0,-1)=-\frac{28}3$, $f(1,1)=-\frac{34}3$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2024-b/ej3.svg`} alt="Arriba, la superficie f en perspectiva con ejes graduados y los cuatro puntos críticos marcados. Abajo, curvas de nivel en el plano xy con ejes graduados de a 1: máximo en (0,−1), mínimo en (1,1) y puntos silla en (0,1) y (1,−1)." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$(0,1)\ \text{silla},\quad(0,-1)\ \text{máximo relativo},\quad(1,1)\ \text{mínimo relativo},\quad(1,-1)\ \text{silla}$$
+
+**Ojo con:** perder puntos críticos: dos raíces en $x$ por dos en $y$ son **cuatro** puntos. Y con $H\gt0$ todavía falta decidir máximo o mínimo con el signo de una segunda derivada.
+
+**Criterio estimado — no oficial** (consigna: determinar y categorizar):
+
+- **Bien:** los cuatro puntos, $H=8y(2x-1)$ y las cuatro clasificaciones, con máx/mín justificados.
+- **A medias:** puntos bien y una clasificación errada, o decir "extremo" sin distinguir máx/mín.
+- **Mal:** hallar menos de cuatro puntos críticos o no usar el hessiano.
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Chequeo por entorno, sin hessiano, mirando $f$ a $0{,}1$ de cada punto:
+
+- En $(1,1)$: $f(1{,}1;1)$ y $f(1;1{,}1)$ y los demás vecinos dan valores mayores que $f(1,1)$: **mínimo local**.
+- En $(0,-1)$: los vecinos dan valores menores que $f(0,-1)$: **máximo local**.
+- En $(0,1)$: $f(0;\,1{,}1)\gt f(0,1)$ pero $f(0{,}1;\,1)\lt f(0,1)$: sube en una dirección y baja en otra, **silla**. Igual en $(1,-1)$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2024-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" paginas="4" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 4):** los cuatro puntos, $H=2y(8x-4)=8y(2x-1)$, los valores $\mp8$ y la clasificación (silla, máx $(0,-1)$, mín $(1,1)$, silla) coinciden con el recálculo. El profe define máx/mín con el signo de $f''_{yy}$.
+
+</div>
+</Ejercicio>
+
+<Ejercicio id="p1-1h10-2024-b#4" numero={4} fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" pagina={1} unidad="U3" tema="Lagrange: mínimo condicionado">
+<Enunciado examen="p1-1h10-2024-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" pagina="1">
+
+Determinar por el método de Lagrange las coordenadas (x,y) del extremo (mínimo) del paraboloide elíptico
+
+$$z=\frac{x^2}{2}+y^2+x-y$$
+
+con su intersección con el plano $x+y=1$
+
+</Enunciado>
+
+<Pista>
+
+Hay una función que querés minimizar, pero no podés moverte libremente: solo podés estar sobre una recta. ¿Qué dos cosas tenés: qué se minimiza y qué relación tienen que cumplir $x$ e $y$?
+
+</Pista>
+<Pista>
+
+Método: **Lagrange**. Se arma $F(x,y,\lambda)=F_{\text{ppal}}-\lambda\,F_{\text{cond}}$ y se anulan las tres derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+</Pista>
+<Pista>
+
+Planteo casi hecho:
+
+$$F(x,y,\lambda)=\frac{x^2}2+y^2+x-y-\lambda\,(x+y-1)$$
+
+</Pista>
+<Paso>
+
+**Qué:** el planteo. **Por qué:** la función a minimizar es $z$ y la condición es $g(x,y)=x+y-1=0$ (el plano $x+y=1$ es paralelo al eje $z$, así que cortarlo con el paraboloide es mirar a $z$ solo sobre esa recta).
+
+</Paso>
+<Paso>
+
+**Qué:** derivar $F$ e igualar a cero.
+
+$$F'_x=x+1-\lambda=0,\qquad F'_y=2y-1-\lambda=0$$
+
+$$F'_\lambda=-(x+y-1)=0$$
+
+</Paso>
+<Paso>
+
+**Qué:** eliminar $\lambda$. **Por qué:** las dos primeras dan $\lambda$ de dos formas, que se igualan.
+
+$$\lambda=x+1,\qquad\lambda=2y-1$$
+
+$$x+1=2y-1\ \Rightarrow\ x=2y-2$$
+
+</Paso>
+<Paso>
+
+**Qué:** reemplazar en la condición. **Por qué:** deja una sola incógnita.
+
+$$(2y-2)+y=1\ \Rightarrow\ 3y=3\ \Rightarrow\ y=1$$
+
+$$x=2\cdot1-2=0,\qquad\lambda=x+1=1$$
+
+</Paso>
+<Paso>
+
+**Qué:** el valor y por qué es mínimo. **Por qué:** el enunciado ya dice que es un mínimo, pero conviene verlo: sobre la recta, $y=1-x$ y
+
+$$z=\frac{x^2}2+(1-x)^2+x-(1-x)=\frac32x^2$$
+
+que es una parábola con vértice en $x=0$ (valor $0$) y abre hacia arriba: mínimo. El punto es $(0,1)$ con $z=0$.
+
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1h10-2024-b/ej4.svg`} alt="Plano xy con ejes graduados de a 1. Recta x+y=1 en azul, curvas de nivel de z como elipses punteadas y la de z=0 en rojo, que toca la recta justo en el punto (0,1), marcado como mínimo." style={{maxWidth:'100%',height:'auto'}} />
+
+</Paso>
+<Solucion>
+
+$$\text{Mín}\ (x,y)=(0,1),\qquad z=0,\ \lambda=1$$
+
+**Ojo con:** el signo de $\lambda$: con $F=\text{ppal}-\lambda\,\text{cond}$ aparece $-\lambda$ en cada parcial (si se usa $+\lambda$ cambia el signo de $\lambda$, no el punto). Y se piden las coordenadas $(x,y)$: no hace falta $z$, pero conviene darlo.
+
+**Criterio estimado — no oficial** (consigna: Lagrange, coordenadas del mínimo):
+
+- **Bien:** $F$ con $-\lambda$, las tres ecuaciones, $x=0$, $y=1$.
+- **A medias:** planteo correcto con un error de cuenta, o no usar Lagrange (resolver por sustitución, que da el mismo punto).
+- **Mal:** no incluir la condición $x+y=1$ o minimizar el paraboloide sin restricción (daría otro punto).
+
+*Solución elaborada — no oficial, verificada con sympy.*
+
+</Solucion>
+<Comprobacion>
+
+Por **sustitución** (otro camino): con $y=1-x$ queda $z(x)=\frac32x^2$, $z'(x)=3x=0\Rightarrow x=0$ y $z''=3\gt0$: mínimo en $x=0$, $y=1$. Además, en el mínimo ligado el gradiente de $z$ es paralelo al normal del plano: $\nabla z(0,1)=(x+1,\,2y-1)=(1,1)=\lambda\,(1,1)$ con $\lambda=1$.
+
+</Comprobacion>
+<ResolucionOficial examen="p1-1h10-2024-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 (B) 2024.pdf" paginas="5" />
+<div class="capa oficial" data-solucion hidden>
+
+**Contraste con el profe (p. 5):** $F$, el sistema, $x=2y-2$, $y=1$, $x=0$ y el mínimo $(0,1)$ coinciden con el recálculo.
+
+</div>
+</Ejercicio>
