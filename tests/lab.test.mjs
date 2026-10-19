@@ -301,14 +301,14 @@ test(`dominio: f es real y finita exactamente donde valen las desigualdades (ret
       v.conds.forEach((c, i) => assert.equal(c(x, y), v.resueltas[i](x, y), `semilla ${s}, cond ${i}, (${x},${y}): desigualdad despejada distinta de la original`));
     }
   }
-  assert.equal(tipos.size, 8, [...tipos].join());
+  assert.equal(tipos.size, 11, [...tipos].join());
 });
 
 test('dominio: control negativo, tratar el borde de una condición estricta como incluido SÍ se detecta', () => {
   let probados = 0, fallan = 0;
   for (const s of semillas) {
     const e = generar('dominio', s), v = e.verif;
-    if (v.id === 'raiz') continue; // solo tiene ≥: no hay borde excluido que equivocar
+    if (v.id === 'raiz' || v.id === 'rp' || v.union) continue; // solo tienen ≥ / ≤: no hay borde excluido que equivocar
     probados++;
     const mal = (x, y) => v.conds.every((c, i) => c(x, y) || v.bordes[i](x, y));
     if (lattice.some(([x, y]) => mal(x, y) !== Number.isFinite(v.f(x, y)))) fallan++;
@@ -317,8 +317,8 @@ test('dominio: control negativo, tratar el borde de una condición estricta como
 });
 
 const gradNum = (v) => dif2(v.f, ...v.P);
-test(`direccional: gradiente, versor, D_u f = ∇f·u y máximo crecimiento (módulo y ángulo con cuadrante) contra diferencias finitas (${N} semillas)`, () => {
-  let q = 0;
+test(`direccional: gradiente, versor, D_u f = ∇f·u, máximo, mínimo y direcciones nulas (módulo y ángulo con cuadrante) contra diferencias finitas (${N} semillas)`, () => {
+  let q = 0, defs = 0;
   for (const s of semillas) {
     const v = generar('direccional', s).verif, [x0, y0] = v.P;
     const g = gradNum(v);
@@ -330,6 +330,12 @@ test(`direccional: gradiente, versor, D_u f = ∇f·u y máximo crecimiento (mó
     // la derivada direccional máxima sobre todas las direcciones está en theta y vale |∇f|
     const D = (t) => g[0] * Math.cos(t) + g[1] * Math.sin(t);
     cerca(D(v.theta), v.mod, 1e-6, `D en theta semilla ${s}`);
+    cerca(D(v.thetaMin), -v.mod, 1e-6, `D en thetaMin semilla ${s}`); // mínimo = sentido opuesto
+    assert.ok(v.thetaMin >= 0 && v.thetaMin < 2 * Math.PI, `semilla ${s}: thetaMin fuera de [0, 2π)`);
+    assert.equal(v.nulas.length, 2);
+    for (const t of v.nulas) { assert.ok(Math.abs(D(t)) < 1e-6 * (1 + v.mod), `semilla ${s}: derivada nula en ${t}`); assert.ok(t >= 0 && t < 2 * Math.PI); }
+    cerca(Math.abs(Math.atan2(Math.sin(v.nulas[0] - v.nulas[1]), Math.cos(v.nulas[0] - v.nulas[1]))), Math.PI, 1e-9, `nulas opuestas semilla ${s}`);
+    if (v.def) { defs++; cerca(v.limite, v.duf, 1e-12, `semilla ${s}: el límite por definición no da D_u f`); }
     let mejor = -Infinity, tm = 0;
     for (let k = 0; k < 3600; k++) { const t = (k * Math.PI) / 1800; if (D(t) > mejor) { mejor = D(t); tm = t; } }
     assert.ok(Math.abs(Math.atan2(Math.sin(tm - v.theta), Math.cos(tm - v.theta))) < 0.002, `semilla ${s}: ángulo de máximo crecimiento`);
@@ -337,6 +343,7 @@ test(`direccional: gradiente, versor, D_u f = ∇f·u y máximo crecimiento (mó
     if (g[0] < 0) { q++; assert.ok(Math.abs(D(Math.atan(g[1] / g[0])) - v.mod) > 1e-3, `semilla ${s}: arctan sin corregir cuadrante daría otra dirección`); }
   }
   assert.ok(q > 50, 'pocos gradientes con g_x < 0 (cuadrantes 2 y 3)');
+  assert.ok(defs > 30, `pocos ejercicios por definición: ${defs}`);
 });
 
 test('direccional: control negativo, el sentido contrario o una derivada direccional mal calculada SÍ se detectan', () => {
@@ -352,35 +359,47 @@ test('direccional: control negativo, el sentido contrario o una derivada direcci
   assert.equal(fallan, 100);
 });
 
-test(`diferencial: dV = Σ|V_i||Δ_i| coincide con las derivadas numéricas, con la variación real y con el error relativo/porcentual (${N} semillas)`, () => {
+test(`diferencial: dV coincide con las derivadas numéricas, con la variación real y con el error relativo/porcentual en los 5 modos (${N} semillas)`, () => {
   const figs = new Set();
   for (const s of semillas) {
     const { verif: v } = generar('diferencial', s);
-    figs.add(`${v.id}-${v.mag}`);
-    const n = v.vals.length;
+    figs.add(v.modo === 'abs' || v.modo === 'signo' ? `${v.modo}-${v.id}-${v.mag}` : v.modo);
     const parc = v.vals.map((_, i) => { const a = [...v.vals], b = [...v.vals]; a[i] += 1e-5; b[i] -= 1e-5; return (v.f(a) - v.f(b)) / 2e-5; });
     parc.forEach((p, i) => cerca(p, v.parc[i], 1e-6, `parcial ${i} semilla ${s}`));
-    const dF = parc.reduce((t, p, i) => t + Math.abs(p) * v.delta[i], 0);
-    cerca(dF, v.dF, 1e-6, `error absoluto semilla ${s}`);
-    cerca(dF / v.f(v.vals), v.rel, 1e-6, `relativo semilla ${s}`);
-    cerca(100 * v.rel, v.pct, 1e-9, `porcentual semilla ${s}`);
-    // variación real en el peor caso (todas las medidas aumentadas): coincide con dF salvo términos de 2º orden
-    const real = v.f(v.vals.map((m, i) => m + v.delta[i])) - v.f(v.vals);
-    assert.ok(Math.abs(real - dF) / dF < 0.12, `semilla ${s}: variación real ${real} vs dF ${dF}`);
-    assert.ok(n >= 2 && v.delta.every((d) => d > 0));
+    // error máximo = suma de valores absolutos; con signo / material / aproximación = suma con signo
+    const dF = parc.reduce((t, p, i) => t + (v.modo === 'abs' ? Math.abs(p * v.delta[i]) : p * v.delta[i]), 0);
+    cerca(dF, v.dF, 1e-6, `dF semilla ${s} (${v.modo})`);
+    if (v.modo === 'abs') assert.ok(v.delta.every((d) => d > 0));
+    if (v.modo === 'signo') assert.ok(v.delta.some((d) => d > 0) && v.delta.some((d) => d < 0), `semilla ${s}: debe haber aumento y disminución`);
+    if (v.rel != null) { cerca(dF / v.f(v.vals), v.rel, 1e-6, `relativo semilla ${s}`); cerca(100 * v.rel, v.pct, 1e-9, `porcentual semilla ${s}`); }
+    // variación real (con las medidas cambiadas): coincide con dF salvo términos de 2º orden, medidos contra la escala Σ|p·δ|
+    const real = v.f(v.vals.map((m, i) => m + v.delta[i])) - v.f(v.vals), escala = parc.reduce((t, p, i) => t + Math.abs(p * v.delta[i]), 0);
+    assert.ok(Math.abs(real - dF) <= 0.12 * escala, `semilla ${s}: variación real ${real} vs dF ${dF}`);
+    if (v.modo === 'aprox') assert.ok(Math.abs(v.f(v.vals.map((m, i) => m + v.delta[i])) - v.aprox) < 5e-3, `semilla ${s}: aproximación ${v.aprox}`);
+    if (v.modo === 'tiro') assert.ok(v.delta[1] < 0.1, `semilla ${s}: dθ debe estar en radianes`); // 5° = 0,087 rad; en grados sería 5
   }
-  assert.equal(figs.size, 5, [...figs].join()); // cil V/S, cono V, caja V/S
+  for (const m of ['hueca', 'aprox', 'tiro']) assert.ok(figs.has(m), `falta el modo ${m}`);
+  assert.ok([...figs].filter((f) => f.startsWith('abs-')).length >= 5 && [...figs].filter((f) => f.startsWith('signo-')).length >= 3, [...figs].join());
 });
 
 test('diferencial: control negativo, omitir un término o el valor absoluto SÍ se detecta frente a la variación real', () => {
-  let fallan = 0;
-  for (const s of semillas.slice(0, 100)) {
+  let fallan = 0, total = 0;
+  for (const s of semillas.slice(0, 200)) {
     const { verif: v } = generar('diferencial', s);
-    const real = v.f(v.vals.map((m, i) => m + v.delta[i])) - v.f(v.vals);
+    if (v.modo !== 'abs' && v.modo !== 'signo') continue;
+    total++;
+    const real = v.f(v.vals.map((m, i) => m + v.delta[i])) - v.f(v.vals), escala = v.parc.reduce((t, p, i) => t + Math.abs(p * v.delta[i]), 0);
     const sinUltimo = v.parc.slice(0, -1).reduce((t, p, i) => t + p * v.delta[i], 0);
-    if (Math.abs(real - sinUltimo) / real > 0.12) fallan++;
+    if (Math.abs(real - sinUltimo) > 0.12 * escala) fallan++;
+    if (v.modo === 'signo') assert.ok(Math.abs(real - v.dF) <= 0.12 * escala); // y con signo NO coincide con el máximo absoluto
   }
-  assert.ok(fallan >= 95, `solo ${fallan}/100 detectados`);
+  assert.ok(fallan >= 0.9 * total, `solo ${fallan}/${total} detectados`);
+});
+
+test('diferencial: con signo la variación puede ser negativa y distinta del error máximo (valor absoluto)', () => {
+  let neg = 0;
+  for (const s of semillas) { const { verif: v } = generar('diferencial', s); if (v.modo === 'signo' && v.dF < 0) neg++; }
+  assert.ok(neg > 5, `solo ${neg} variaciones negativas`);
 });
 
 // Clasificación observada de un punto crítico por muestreo en una circunferencia chica.
@@ -413,7 +432,7 @@ test(`extremos: ∇f = 0 en cada punto, no faltan puntos críticos enteros, H co
     for (let x = -9; x <= 9; x++) for (let y = -9; y <= 9; y++) if (v.fx(x, y) === 0 && v.fy(x, y) === 0) assert.ok(hall.has(`${x},${y}`), `semilla ${s}: falta el punto crítico (${x},${y})`);
   }
   assert.deepEqual([...clases].sort(), ['dudoso', 'máximo', 'mínimo', 'silla']);
-  assert.deepEqual([...fams].sort(), ['fol', 'sep']);
+  assert.deepEqual([...fams].sort(), ['cuart', 'fol', 'sep']);
 });
 
 test('extremos: control negativo, cambiar máximo por mínimo SÍ falla el muestreo', () => {
@@ -431,9 +450,9 @@ test(`lagrange: el candidato cumple la restricción y ∇f = λ∇g, el valor es
     const e = generar('lagrange', s), v = e.verif;
     tipos.add(e.enunciado[0].txt.slice(0, 70));
     const gr = (F, p) => (v.dim === 3 ? dif3(F, ...p) : dif2(F, ...p));
-    for (const { p, lam } of v.cands) {
+    for (const { p, lam, val } of v.cands) {
       cerca(v.g(...p), v.c, 1e-9, `restricción semilla ${s}`);
-      cerca(v.f(...p), v.val, 1e-9, `valor semilla ${s}`);
+      cerca(v.f(...p), val, 1e-9, `valor del candidato semilla ${s}`);
       const gf = gr(v.f, p), gg = gr(v.g, p);
       gf.forEach((c, i) => cerca(c, lam * gg[i], 1e-6, `∇f=λ∇g (${i}) semilla ${s}`));
     }
@@ -444,13 +463,19 @@ test(`lagrange: el candidato cumple la restricción y ∇f = λ∇g, el valor es
       if (!p) continue;
       n++;
       cerca(v.g(...p), v.c, 1e-9, `muestra factible semilla ${s}`);
-      const dv = v.f(...p) - v.val;
-      assert.ok(v.tipo === 'max' ? dv <= 1e-9 * (1 + Math.abs(v.val)) : dv >= -1e-9 * (1 + Math.abs(v.val)), `semilla ${s}: f(${p}) = ${v.f(...p)} supera al ${v.tipo} ${v.val}`);
+      const fp = v.f(...p), tol = 1e-9 * (1 + Math.abs(v.val));
+      if (v.tipo !== 'min') assert.ok(fp <= (v.tipo === 'max' ? v.val : v.max) + tol, `semilla ${s}: f(${p}) = ${fp} supera al máximo`);
+      if (v.tipo !== 'max') assert.ok(fp >= (v.tipo === 'min' ? v.val : v.min) - tol, `semilla ${s}: f(${p}) = ${fp} está por debajo del mínimo`);
     }
     assert.ok(n >= 500, `semilla ${s}: pocas muestras factibles`);
     if (v.orlado !== undefined) assert.ok(v.tipo === 'max' ? v.orlado > 0 : v.orlado < 0, `semilla ${s}: signo del orlado`);
+    if (v.sup !== undefined) { const [x, y, z] = v.cands[0].p; cerca(2 * (x * y + y * z + x * z), v.sup, 1e-9, `superficie semilla ${s}`); }
+    if (v.tipo === 'ambos') { // el máximo y el mínimo son los extremos de los valores de los candidatos
+      assert.equal(v.max, Math.max(...v.cands.map((c) => c.val))); assert.equal(v.min, Math.min(...v.cands.map((c) => c.val)));
+      assert.ok(v.cands.length === 4 && v.max > v.min, `semilla ${s}: debe haber 4 candidatos y valores distintos`);
+    }
   }
-  assert.ok(tipos.size >= 6, [...tipos].join('|'));
+  assert.ok(tipos.size >= 9, [...tipos].join('|'));
 });
 
 test('lagrange: control negativo, un candidato desplazado SÍ viola ∇f = λ∇g', () => {
@@ -469,6 +494,7 @@ test(`implícita: F(P) = 0 y z_x, z_y coinciden con diferencias sobre la superfi
   const h = 1e-5;
   for (const s of semillas) {
     const { verif: v } = generar('implicita', s), [x0, y0, z0] = v.P;
+    if (v.modo !== 'sup') continue;
     assert.ok(Math.abs(v.F(x0, y0, z0)) < 1e-12, `F(P) semilla ${s}`);
     const Z = (x, y) => resolverZ(v.F, x, y, z0);
     cerca(Z(x0, y0), z0, 1e-10, `z(P) semilla ${s}`);
@@ -478,17 +504,71 @@ test(`implícita: F(P) = 0 y z_x, z_y coinciden con diferencias sobre la superfi
 });
 
 test('implícita: control negativo, el signo cambiado (+F_x/F_z) SÍ se detecta', () => {
-  let fallan = 0;
+  let fallan = 0, total = 0;
   for (const s of semillas.slice(0, 100)) {
     const { verif: v } = generar('implicita', s), [x0, y0, z0] = v.P, h = 1e-4;
+    if (v.modo !== 'sup') continue;
+    total++;
     const zx = (resolverZ(v.F, x0 + h, y0, z0) - resolverZ(v.F, x0 - h, y0, z0)) / (2 * h), zy = (resolverZ(v.F, x0, y0 + h, z0) - resolverZ(v.F, x0, y0 - h, z0)) / (2 * h);
     if (Math.abs(zx + v.zx) > 1e-3 || Math.abs(zy + v.zy) > 1e-3) fallan++;
   }
-  assert.ok(fallan >= 90, `solo ${fallan}/100 detectados`);
+  assert.ok(total > 20 && fallan >= 0.9 * total, `solo ${fallan}/${total} detectados`);
 });
 
-test(`plano: el punto está en el plano, n = ∇ numérico y la superficie se despega del plano como h² (${N} semillas)`, () => {
+// Resuelve f(t) = 0 con Newton desde t0 (una variable) o el sistema 2x2 (y, z) con jacobiano numérico.
+const newton1 = (fn, t0) => { let t = t0; for (let i = 0; i < 60; i++) { const d = (fn(t + 1e-7) - fn(t - 1e-7)) / 2e-7, dt = fn(t) / d; t -= dt; if (Math.abs(dt) < 1e-14) break; } return t; };
+function newton2(g1, g2, x, y0, z0) {
+  let y = y0, z = z0;
+  for (let i = 0; i < 60; i++) {
+    const e = 1e-7, a = (g1(x, y + e, z) - g1(x, y - e, z)) / (2 * e), b = (g1(x, y, z + e) - g1(x, y, z - e)) / (2 * e);
+    const c = (g2(x, y + e, z) - g2(x, y - e, z)) / (2 * e), d = (g2(x, y, z + e) - g2(x, y, z - e)) / (2 * e), det = a * d - b * c;
+    const f1 = g1(x, y, z), f2 = g2(x, y, z), dy = (d * f1 - b * f2) / det, dz = (a * f2 - c * f1) / det;
+    y -= dy; z -= dz;
+    if (Math.abs(dy) + Math.abs(dz) < 1e-14) break;
+  }
+  return [y, z];
+}
+test(`implícita: dy/dx de g(x,y)=0, de una ecuación con y(x), z(x) (con arctg) y de un sistema coinciden con diferencias finitas (${N} semillas)`, () => {
+  const h = 1e-5, modos = new Set();
+  for (const s of semillas) {
+    const { verif: v } = generar('implicita', s), [x0, y0, z0] = v.P;
+    modos.add(v.modo);
+    if (v.modo === 'curva') {
+      assert.ok(Math.abs(v.F(x0, y0)) < 1e-12, `g(P) semilla ${s}`);
+      const Y = (x) => newton1((y) => v.F(x, y), y0);
+      cerca((Y(x0 + h) - Y(x0 - h)) / (2 * h), v.dydx, 1e-5, `dy/dx semilla ${s}`);
+    } else if (v.modo === 'yz' || v.modo === 'arctg') {
+      assert.ok(Math.abs(v.F(x0, y0, z0)) < 1e-12, `F(P) semilla ${s}`);
+      const Y = (x) => newton1((y) => v.F(x, y, z0), y0), Z = (x) => newton1((z) => v.F(x, y0, z), z0);
+      cerca((Y(x0 + h) - Y(x0 - h)) / (2 * h), v.dydx, 1e-5, `dy/dx (z fija) semilla ${s} ${v.modo}`);
+      cerca((Z(x0 + h) - Z(x0 - h)) / (2 * h), v.dzdx, 1e-5, `dz/dx (y fija) semilla ${s} ${v.modo}`);
+    } else if (v.modo === 'sistema') {
+      assert.ok(Math.abs(v.g1(x0, y0, z0)) < 1e-12 && Math.abs(v.g2(x0, y0, z0)) < 1e-12, `P en las dos ecuaciones semilla ${s}`);
+      assert.notEqual(v.den, 0);
+      const [yp, zp] = newton2(v.g1, v.g2, x0 + h, y0, z0), [ym, zm] = newton2(v.g1, v.g2, x0 - h, y0, z0);
+      cerca((yp - ym) / (2 * h), v.dydx, 1e-5, `dy/dx semilla ${s}`);
+      cerca((zp - zm) / (2 * h), v.dzdx, 1e-5, `dz/dx semilla ${s}`);
+    }
+  }
+  assert.deepEqual([...modos].sort(), ['arctg', 'curva', 'sistema', 'sup', 'yz']);
+});
+
+test('implícita: control negativo, el cociente con el jacobiano al revés o sin el signo menos SÍ se detecta', () => {
+  let fallan = 0, total = 0;
+  for (const s of semillas.slice(0, 200)) {
+    const { verif: v } = generar('implicita', s), [x0, y0, z0] = v.P, h = 1e-5;
+    if (v.modo !== 'sistema') continue;
+    total++;
+    const [yp, zp] = newton2(v.g1, v.g2, x0 + h, y0, z0), [ym, zm] = newton2(v.g1, v.g2, x0 - h, y0, z0);
+    const num1 = (yp - ym) / (2 * h), num2 = (zp - zm) / (2 * h);
+    if ((Math.abs(num1 + v.dydx) > 1e-3 || v.dydx === 0) && (Math.abs(num2 + v.dzdx) > 1e-3 || v.dzdx === 0)) fallan++;
+  }
+  assert.ok(total > 20 && fallan >= 0.8 * total, `solo ${fallan}/${total} detectados`);
+});
+
+test(`plano: el punto está en el plano, n = ∇ numérico, la superficie se despega del plano como h² y el tangente paralelo tiene la normal proporcional (${N} semillas)`, () => {
   const h = 1e-4;
+  let par = 0;
   for (const s of semillas) {
     const { verif: v } = generar('plano', s), [x0, y0, z0] = v.P;
     assert.ok(Math.abs(v.G(x0, y0, z0)) < 1e-12, `P en la superficie semilla ${s}`);
@@ -498,7 +578,13 @@ test(`plano: el punto está en el plano, n = ∇ numérico y la superficie se de
       const x = x0 + h * dx, y = y0 + h * dy, z = resolverZ(v.G, x, y, z0);
       assert.ok(Math.abs(v.n[0] * x + v.n[1] * y + v.n[2] * z - v.D) < 1e-5, `semilla ${s}: residuo ${v.n[0] * x + v.n[1] * y + v.n[2] * z - v.D}`);
     }
+    if (v.paralelo) { // la normal del plano tangente es múltiplo de la del plano dado (producto vectorial nulo) y el plano dado NO es el tangente
+      par++;
+      const [a, b, c] = v.paralelo, [p, q, r] = v.n;
+      assert.ok([q * c - r * b, r * a - p * c, p * b - q * a].every((w) => Math.abs(w) < 1e-9), `semilla ${s}: normales no paralelas`);
+    }
   }
+  assert.ok(par > 30, `pocos ejercicios con plano paralelo: ${par}`);
 });
 
 test('plano: control negativo, un plano con la normal equivocada SÍ se despega de la superficie', () => {
@@ -517,7 +603,44 @@ test(`p1: todo el TeX de los generadores del 1º parcial compila en KaTeX sin er
   for (const g of GENERADORES.filter((x) => x.instancia === 'p1')) {
     for (const s of semillas) {
       const e = generar(g.id, s);
-      for (const o of [...e.enunciado, ...e.pasos, e.resultado]) if (o.tex) assert.doesNotThrow(() => katex.renderToString(o.tex, { throwOnError: true, strict: false }), `${g.id} semilla ${s}: ${o.tex}`);
+      for (const o of [...e.enunciado, ...e.pasos, e.resultado]) if (o.tex) assert.doesNotThrow(() => katex.renderToString(o.tex, { throwOnError: true, strict: 'error' }), `${g.id} semilla ${s}: ${o.tex}`);
     }
   }
+});
+
+test('p1: notación de cátedra unificada (f\'_x, F\'_x, arctg, H, D_f, e_máx) y sin restos de la notación vieja', () => {
+  for (const g of GENERADORES.filter((x) => x.instancia === 'p1')) {
+    for (const s of semillas) {
+      const e = generar(g.id, s), todo = [...e.enunciado, ...e.pasos, e.resultado].flatMap((o) => [o.tex, o.txt]).filter(Boolean).join('\n');
+      assert.ok(!/(?<![\\\w'])[fF]_\{?[xyz]\b|\\arctan|arctan\(|\\operatorname\{Dom\}|\\varepsilon|z_x\b|z_y\b/.test(todo), `${g.id} semilla ${s}: notación vieja en ${todo.match(/(?<![\\\w'])[fF]_\{?[xyz]\b|\\arctan|\\operatorname\{Dom\}|\\varepsilon|z_x\b|z_y\b/)?.[0]}`);
+    }
+  }
+});
+
+test('lagrange: la justificación de existencia no dice "acotado" para las cajas y hay ejercicios con 4 candidatos y con volumen fijo', () => {
+  let cajas = 0, circ = 0, vfijo = 0;
+  for (const s of semillas) {
+    const e = generar('lagrange', s), todo = e.pasos.map((p) => p.txt).join(' ');
+    if (/caja rectangular con/.test(e.enunciado[0].txt) && /máxim/.test(e.enunciado[0].txt)) { cajas++; assert.ok(!/conjunto de puntos .* es acotado/.test(todo), `semilla ${s}`); assert.ok(/tiende a 0 o a ∞/.test(todo)); }
+    if (e.verif.tipo === 'ambos') circ++;
+    if (/menor cantidad de material/.test(e.enunciado[0].txt)) vfijo++;
+  }
+  assert.ok(cajas > 20 && circ > 20 && vfijo > 20, `${cajas} ${circ} ${vfijo}`);
+});
+
+test('dominio: en los tipos con producto/cociente el dominio es la UNIÓN S1 ∪ S2 y nunca queda vacío', () => {
+  let uni = 0;
+  for (const s of semillas) {
+    const v = generar('dominio', s).verif;
+    let n = 0;
+    for (const [x, y] of lattice) if (v.dom(x, y)) n++;
+    assert.ok(n >= 1, `semilla ${s}: dominio vacío en el reticulado`);
+    if (v.union) {
+      uni++;
+      const [a, b, c, d] = v.conds;
+      // hay puntos en S1 sin estar en S2 y viceversa (si fuera una intersección faltarían)
+      assert.ok(lattice.every(([x, y]) => v.dom(x, y) === ((a(x, y) && b(x, y)) || (c(x, y) && d(x, y)))), `semilla ${s}`);
+    }
+  }
+  assert.ok(uni > 40, `pocos con unión: ${uni}`);
 });

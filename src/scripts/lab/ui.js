@@ -20,6 +20,30 @@ function bloque(b) {
   }
   return d;
 }
+// Gráfico del dominio (si el generador lo da): región en color, curvas borde llenas (incluidas) o punteadas (excluidas), ejes y marcas.
+function grafico(g) {
+  const R = 6, W = 320, c = el('canvas', 'lab-graf');
+  c.width = W; c.height = W;
+  c.setAttribute('role', 'img');
+  c.setAttribute('aria-label', 'Gráfico del dominio: región sombreada, borde lleno si está incluido y punteado si no. El detalle está escrito en los pasos.');
+  const ctx = c.getContext('2d');
+  if (!ctx) return c;
+  const cs = getComputedStyle(document.documentElement);
+  const acento = cs.getPropertyValue('--acento').trim() || '#2563eb', texto = cs.getPropertyValue('--texto').trim() || '#111';
+  const xy = (i, j) => [((i + 0.5) / W) * 2 * R - R, R - ((j + 0.5) / W) * 2 * R];
+  ctx.globalAlpha = 0.28; ctx.fillStyle = acento;
+  for (let j = 0; j < W; j++) for (let i = 0; i < W; i++) { const [x, y] = xy(i, j); if (g.dom(x, y)) ctx.fillRect(i, j, 1, 1); }
+  ctx.globalAlpha = 1; ctx.fillStyle = texto;
+  ctx.fillRect(0, W / 2, W, 1); ctx.fillRect(W / 2, 0, 1, W); // ejes
+  for (let k = -R + 1; k < R; k++) { const p = ((k + R) / (2 * R)) * W; ctx.fillRect(p, W / 2 - 3, 1, 7); ctx.fillRect(W / 2 - 3, p, 7, 1); }
+  for (const cv of g.curvas) {
+    const lado = (i, j) => { const [x, y] = xy(i, j); return cv.g(x, y) - cv.c > 0; };
+    for (let j = 0; j < W - 1; j++) for (let i = 0; i < W - 1; i++) {
+      if ((lado(i, j) !== lado(i + 1, j) || lado(i, j) !== lado(i, j + 1)) && (cv.incl || ((i + j) >> 2) % 2 === 0)) ctx.fillRect(i, j, 2, 2);
+    }
+  }
+  return c;
+}
 const azar = (actual) => { let s; do s = 1 + Math.floor(Math.random() * 999999); while (s === actual); return s; };
 
 export function iniciarLab(raiz) {
@@ -59,6 +83,7 @@ export function iniciarLab(raiz) {
     const res = el('div', 'lab-res');
     res.append(el('p', 'lab-res-t', 'Resultado'), bloque(e.resultado));
     sol.replaceChildren(el('h3', '', 'Solución elaborada (no oficial)'), ol, res);
+    if (e.grafico) sol.append(el('p', 'lab-res-t', 'Gráfico del dominio (x, y entre −6 y 6)'), grafico(e.grafico));
     sol.hidden = true;
     btnVer.setAttribute('aria-expanded', 'false');
     btnVer.textContent = 'Ver solución';

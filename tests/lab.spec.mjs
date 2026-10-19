@@ -56,7 +56,7 @@ for (const [nombre, viewport] of Object.entries(vistas)) {
       page.on('console', (m) => ['error', 'warning'].includes(m.type()) && problemas.push(m.text())); // incluye los warn de KaTeX
       await page.goto('laboratorio/?tipo=polares&semilla=5');
       const ids = await page.locator('#lab-tipo option').evaluateAll((os) => os.map((o) => o.value));
-      expect(ids.length).toBe(7);
+      expect(ids.length).toBeGreaterThanOrEqual(12); // 7 del 1º parcial más los del 2º
       for (const id of ids) {
         await page.locator('#lab-tipo').selectOption(id);
         await page.locator('[data-ver]').click();
@@ -80,7 +80,7 @@ for (const [nombre, viewport] of Object.entries(vistas)) {
       const problemas = [];
       page.on('pageerror', (e) => problemas.push(e.message));
       page.on('console', (m) => ['error', 'warning'].includes(m.type()) && problemas.push(m.text()));
-      for (const id of ['lineal', 'bernoulli', 'homogenea2', 'nohomogenea', 'exacta', 'green', 'polares']) {
+      for (const id of ['lineal', 'bernoulli', 'homogenea2', 'nohomogenea', 'exacta', 'green', 'polares', 'dominio', 'direccional', 'diferencial', 'extremos', 'lagrange', 'implicita', 'plano']) {
         for (const semilla of [3, 17, 101, 4242, 90001]) {
           await page.goto(`laboratorio/?tipo=${id}&semilla=${semilla}`);
           await page.locator('[data-ver]').click();
@@ -109,4 +109,19 @@ test('el Home enlaza al laboratorio', async ({ page }) => {
   await page.goto('');
   await page.locator('.accesos a[href$="/laboratorio/"]').click();
   await expect(page.getByRole('heading', { level: 1, name: 'Laboratorio' })).toBeVisible();
+});
+
+test('laboratorio: el dominio muestra su gráfico dentro de la solución, sin scroll horizontal en 390px', async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await ctx.newPage();
+  const problemas = [];
+  page.on('pageerror', (e) => problemas.push(e.message));
+  await page.goto('laboratorio/?tipo=dominio&semilla=7');
+  await page.locator('[data-ver]').click();
+  const c = page.locator('[data-solucion] canvas.lab-graf');
+  await expect(c).toBeVisible();
+  expect(await c.evaluate((n) => n.getContext('2d').getImageData(0, 0, n.width, n.height).data.some((v, i) => i % 4 === 3 && v > 0))).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  expect(problemas).toEqual([]);
+  await ctx.close();
 });
