@@ -55,6 +55,9 @@ assert sp.atan2(gy, gx) == -sp.pi/2 and (sp.atan2(gy, gx) % (2*sp.pi)) == 3*sp.p
 g = f3.subs({x: 1 + t*u[0], y: -1 + t*u[1]}); assert sp.simplify(sp.diff(g, t).subs(t, 0) - DD) == 0
 # comprobación 2: dirección nula (1,0) ⟂ ∇z
 assert gx*1 + gy*0 == 0
+_c = lambda v: float((f3.subs({x: 1 + 1e-6*v[0], y: -1 + 1e-6*v[1]}) - f3.subs({x: 1, y: -1}))/1e-6)   # comprobación: cociente incremental
+assert abs(_c((.5, 3**.5/2)) + 11*3**.5/2) < 1e-3 and abs(_c((0, -1)) - 11) < 1e-3 and abs(_c((1, 0))) < 1e-3
+en_mdx(r"\approx-9{,}5263", r"da $11=\|\nabla z\|$")
 en_mdx(r"z'_x(P)=3\cdot1^2+\frac{3}{-1}=3-3=0", r"-\frac{3\cdot1}{(-1)^2}+8\cdot(-1)=-3-8=-11", r"-\frac{11\sqrt3}{2}", r"\nabla z(P)=0\,i-11\,j=-11\,j", r"\theta=270^\circ")
 
 # --- Ej 4: z = x²/2 + xy + y³/3

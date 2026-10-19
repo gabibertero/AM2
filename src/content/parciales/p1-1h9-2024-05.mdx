@@ -39,6 +39,8 @@ Mirá la estructura: una raíz cuadrada cuyo interior es un **cociente**. ¿Cuá
 
 Es un **dominio por restricciones con parámetro**: radicando $\ge0$ y denominador $\ne0$. Un cociente es $\ge0$ cuando numerador y denominador tienen el **mismo signo** (o el numerador es $0$). Hay que estudiar dos casos, y cada desigualdad es una cónica (elipse, hipérbola) con semiejes en función de $a$. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -169,6 +171,8 @@ El material de una pieza hueca es el volumen del "cuerpo" completo menos el del 
 
 Es **diferencial total**: el material es aproximadamente $dV=V'_r\,dr+V'_h\,dh$, tomando como incrementos los espesores. El radio crece por la pared lateral; la altura crece por la **suma** del fondo y la tapa. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
 
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
+
 </Pista>
 <Pista>
 
@@ -271,6 +275,8 @@ Te piden dos cosas sobre la misma función y el mismo punto: cuánto cambia $z$ 
 
 Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Plan: (1) derivadas parciales en $P$ (cuidado con la cadena: el interior es $2x-y$); (2) versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; (4) $\nabla z$, su módulo y ángulo; (5) máximo, mínimo y nulos a partir de $\theta$.
 
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
+
 </Pista>
 <Pista>
 
@@ -355,6 +361,8 @@ $$\frac{\partial z}{\partial s}\Big|_P=-\frac32-\frac{\sqrt3}{4}\approx-1{,}93,\
 
 **Ojo con:** (1) la derivada interna $2$ en $z'_x$ (si se olvida, sale $z'_x=-\frac{\sqrt3}{2}$); (2) usar $\arctan$ sin mirar el cuadrante; (3) el signo del seno para $\alpha=-30^\circ$.
 
+La resolución del profe da $\theta=\arctan\left(-\frac12\right)\Rightarrow\frac{5\pi}{6}\ (150^\circ)$; acá $\theta\approx153{,}43^\circ$ ($=180^\circ-\arctan\frac12$); el módulo y la direccional coinciden. Ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (la consigna pide valor, expresión, módulo, ángulo y un gráfico con máximo, mínimo y nulos):
 
 - **Bien:** parciales en $P$ correctas, versor, $\frac{\partial z}{\partial s}=-\frac32-\frac{\sqrt3}{4}$, gradiente con módulo y ángulo en el cuadrante correcto, y gráfico con $\nabla z$ y las cuatro direcciones.
@@ -376,7 +384,13 @@ y la función es de una sola variable, $g(t)=\sin^2\!\left(\frac{5\pi}{3}+t\left
 
 $$g'(0)=2\sin\frac{5\pi}{3}\cos\frac{5\pi}{3}\cdot\left(\sqrt3+\frac12\right)=2\cdot\left(-\frac{\sqrt3}{2}\right)\cdot\frac12\cdot\left(\sqrt3+\frac12\right)=-\frac{\sqrt3}{2}\left(\sqrt3+\frac12\right)=-\frac32-\frac{\sqrt3}{4}$$
 
-**2) Dirección nula.** Con $s^\circ$ perpendicular al gradiente (a $63{,}43^\circ$), el producto escalar es $0$: la derivada direccional vale $0$ sobre la curva de nivel.
+**2) Cociente incremental numérico en otros sentidos (sin usar las parciales).** Con $t=10^{-6}$:
+
+- hacia $153{,}43^\circ$ (el ángulo que se afirma para el gradiente) da $1{,}9365=\frac{\sqrt{15}}{2}$, el valor máximo;
+- hacia $150^\circ$ (el ángulo de la resolución del profe) da $1{,}9330$, algo menor: no es la dirección de máximo;
+- hacia $63{,}43^\circ$ (perpendicular al gradiente) da $0$.
+
+Eso confirma el gradiente $-\sqrt3\,i+\frac{\sqrt3}{2}\,j$ y que su ángulo es $153{,}43^\circ$ y no $150^\circ$.
 
 </Comprobacion>
 <ResolucionOficial examen="p1-1h9-2024-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-24.pdf" paginas="5" />
@@ -404,6 +418,8 @@ Hay dos ideas encadenadas: primero tenés que averiguar **qué plano** es el de 
 <Pista>
 
 Dos pasos: (1) **plano tangente** a $z=f(x,y)$ en $(x_0;y_0)$: $z-z_0=f'_x(x-x_0)+f'_y(y-y_0)$ (teoría: *Plano tangente*, derivadas parciales de $f$ en $P$); (2) **Lagrange**: función principal $V=xyz$ y condición el plano, con $F=xyz+\lambda\,(\text{condición})$ (así lo escribe la cátedra en este examen). Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+Machete: [Extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/) · [Plano tangente y recta normal](../../machetes/plano-tangente-y-recta-normal/).
 
 </Pista>
 <Pista>

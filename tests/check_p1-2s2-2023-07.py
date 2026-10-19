@@ -91,4 +91,7 @@ assert (R(108, 3))**R(3, 2) == 216 and sp.sqrt(36)**3 == 216
 Vs = x*y*(108 - x*y)/(x + y); ss = sp.solve([sp.diff(Vs, x), sp.diff(Vs, y)], [x, y], dict=True)
 assert {(c[x], c[y]) for c in ss if c[x].is_real and c[y].is_real and c[x] > 0 and c[y] > 0} == {(6, 6)} and Vs.subs({x: 6, y: 6}) == 216
 en_mdx(r"6x^2=216\ \Rightarrow\ x^2=36\ \Rightarrow\ x=6", r"V=6\cdot6\cdot6=216\ \text{cm}^3", r"V\le36^{3/2}=216", r"x=y=z=6\ \text{cm},\qquad V_{\text{máx}}=216\ \text{cm}^3", r"432\sqrt2")
+en_mdx(r"""La resolución del profe resuelve el inciso (a) con la fórmula $f'_x\cos\alpha+f'_y\sin\alpha$ y no por definición, como pide la consigna (mismo resultado, $-\frac{3\sqrt2}{4}$);""")  # aviso de discrepancia con la resolución del profe
+en_mdx(r"""La resolución del profe da $x=y=z=6\sqrt2$ y $V=432\sqrt2\ \text{cm}^3$ (pierde el factor $2$ de la superficie); acá $x=y=z=6$ y $V=216\ \text{cm}^3$;""")  # aviso de discrepancia con la resolución del profe
+en_mdx(r"""Saco denominador común $7$""")
 print("OK p1-2s2-2023-07")

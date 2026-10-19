@@ -37,7 +37,9 @@ Mirá la función por partes: un logaritmo arriba y una raíz abajo, que además
 </Pista>
 <Pista>
 
-Es un **dominio por restricciones**: argumento del $\ln$ $>0$, radicando $>0$ (está en el denominador, así que tampoco puede dar $0$). Cada desigualdad es una región limitada por una circunferencia. Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+Es un **dominio por restricciones**: argumento del $\ln$ $>0$, radicando $>0$ (está en el denominador, así que tampoco puede dar $0$). Cada desigualdad es una región limitada por una circunferencia. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
 
 </Pista>
 <Pista>
@@ -123,7 +125,9 @@ Medís dos cosas (radio y altura), cada una con un error, y el volumen depende d
 </Pista>
 <Pista>
 
-Es **diferencial total**: $dV=V'_R\,dR+V'_H\,dH$, con $dR$ y $dH$ los errores absolutos (el 1% de cada medida) y los aportes sumados todos en positivo (error máximo). Después, el error porcentual es $\frac{dV}{V}\cdot100$. Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+Es **diferencial total**: $dV=V'_R\,dR+V'_H\,dH$, con $dR$ y $dH$ los errores absolutos (el 1% de cada medida) y los aportes sumados todos en positivo (error máximo). Después, el error porcentual es $\frac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
 
 </Pista>
 <Pista>
@@ -174,6 +178,8 @@ $$\frac{0{,}02\pi}{2\pi/3}=0{,}03\ \Rightarrow\ E\%=3\%$$
 $$dV=0{,}02\,\pi\ \text{m}^3\approx0{,}063\ \text{m}^3,\qquad E\%=3\%$$
 
 **Ojo con:** las unidades: $0{,}02\pi$ está en **m³** (no en cm). Y el "máximo" se logra sumando los dos aportes con el mismo signo.
+
+La resolución del profe cierra con "$0{,}02\pi\ \text{m}\equiv2\pi\ \text{cm}$" (unidades equivocadas); el valor correcto es $0{,}02\pi\ \text{m}^3$; ver ⚠️ en la resolución oficial.
 
 **Criterio estimado — no oficial** (2,5 p; la consigna pide estimar el máximo error del volumen con diferencial):
 
@@ -229,7 +235,9 @@ Te piden cuánto cambia $z$ al moverte desde $P$ en **una dirección dada** y, a
 </Pista>
 <Pista>
 
-Es **derivada direccional + gradiente**: $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$ y $\nabla z=z'_x\,i+z'_y\,j$. Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+Es **derivada direccional + gradiente**: $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$ y $\nabla z=z'_x\,i+z'_y\,j$. Teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
 
 </Pista>
 <Pista>
@@ -298,13 +306,13 @@ $$\frac{\partial z}{\partial s}\Big|_P=-\frac{11\sqrt3}{2},\qquad\nabla z(P)=-11
 
 Dos caminos independientes.
 
-**1) Por definición, sobre la recta.** Con $x=1+\frac t2$ e $y=-1+\frac{\sqrt3}{2}t$:
+**1) Cociente incremental numérico (sin usar las parciales).** Con $t=10^{-6}$ y $s^\circ=\left(\frac12;\frac{\sqrt3}{2}\right)$:
 
-$$g(t)=z\left(1+\tfrac t2;\ -1+\tfrac{\sqrt3}{2}t\right)\ \Rightarrow\ g'(0)=z'_x\cdot\frac12+z'_y\cdot\frac{\sqrt3}{2}=-\frac{11\sqrt3}{2}$$
+$$\frac{z(P+t\,s^\circ)-z(P)}{t}\approx-9{,}5263$$
 
-(el sympy del test deriva $g$ y evalúa en $t=0$ sin usar las parciales armadas a mano).
+que coincide con $-\frac{11\sqrt3}{2}\approx-9{,}5263$.
 
-**2) Dirección nula.** Con $s^\circ=(1;0)$, perpendicular al gradiente, $\frac{\partial z}{\partial s}=0\cdot1=0$: la derivada es $0$ sobre la curva de nivel (horizontal en $P$).
+**2) Otros sentidos, con el mismo cociente.** Hacia $(0;-1)$ (la dirección del gradiente, $270^\circ$) da $11=\|\nabla z\|$, el valor máximo; hacia $(1;0)$ (perpendicular, dirección nula) da $0$. Eso confirma $\nabla z=-11\,j$ y $\theta=270^\circ$ sin repetir las derivadas.
 
 </Comprobacion>
 <ResolucionOficial examen="p1-1h9-2023-05" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 May-23.pdf" paginas="4" />
@@ -333,7 +341,9 @@ Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un míni
 </Pista>
 <Pista>
 
-Es **extremos relativos con hessiano**: (1) puntos críticos: $z'_x=0$, $z'_y=0$; (2) derivadas segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo y el signo de $z''_{xx}$ dice mínimo ($+$) o máximo ($-$). Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/). Teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1.
+Es **extremos relativos con hessiano**: (1) puntos críticos: $z'_x=0$, $z'_y=0$; (2) derivadas segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo y el signo de $z''_{xx}$ dice mínimo ($+$) o máximo ($-$). Teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>

@@ -53,4 +53,5 @@ dmin = sp.sqrt(f.subs(s)); assert dmin == sp.sqrt(35)/5 and abs(float(dmin) - 1.
 assert sp.Rational(7)/sp.sqrt(1 + 9 + 25) == sp.sqrt(35)/5          # fórmula punto-plano
 assert sp.simplify(f.subs(s) - R(7, 5)) == 0
 en_mdx(r"x=\lambda/2", r"x+9x+25x=7", r"x=\frac15,\quad y=\frac35,\quad z=1", r"d=\frac{\sqrt{35}}5\approx1{,}18")
+en_mdx(r"""La resolución del profe suma $7+15+12=24$ y da $dV=0{,}08\,\pi\ \text{m}^3$ y $E\%=\frac87\%\approx1{,}14\%$; acá la suma es $34$ y $dV=\frac{17\pi}{150}\approx0{,}1133\,\pi\ \text{m}^3$, $E\%=\frac{34}{21}\%\approx1{,}62\%$;""")  # aviso de discrepancia con la resolución del profe
 print("OK p1-1v1-2022-09-b")

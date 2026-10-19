@@ -32,6 +32,9 @@ assert sp.sqrt(36 + 36) == 6*sp.sqrt(2) and sp.atan(R(-6, 6)) == -sp.pi/4
 # 135° es el sentido opuesto a ∇z (315°): direccional = −‖∇z‖
 assert ds == -sp.sqrt(36 + 36)
 hh = sp.Float("1e-8"); q = (f.subs({x: 1 + hh*sp.cos(al), y: 1 + hh*sp.sin(al)}) - f.subs(P))/hh; assert abs(float(q) + 6*float(sp.sqrt(2))) < 1e-4
+_c = lambda u: float((f.subs({x: 1 + hh*u[0], y: 1 + hh*u[1]}) - f.subs(P))/hh)   # comprobación: otros sentidos
+assert abs(_c((1/sp.sqrt(2), -1/sp.sqrt(2))) - 6*2**.5) < 1e-4 and abs(_c((1/sp.sqrt(2), 1/sp.sqrt(2)))) < 1e-4
+en_mdx(r"-8{,}4853=-6\sqrt2", r"8{,}4853=6\sqrt2", r"z=\frac{x^2}2+1-2x+x^2+x-1+x")
 # enunciado literal: radicando 0 en P y se sale del dominio hacia 135°
 g = 2*sp.sqrt(x**2 - y**2) + 3*y/x - sp.log((x*y)**2)
 assert (1**2 - 1**2) == 0 and sp.simplify(sp.diff(g, x) - (2*x/sp.sqrt(x**2 - y**2) - 2/x - 3*y/x**2)) == 0

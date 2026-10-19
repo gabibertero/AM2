@@ -42,6 +42,8 @@ Fijate qué operaciones hay en la fórmula: un logaritmo, un arco coseno y, abaj
 
 Es un **dominio por restricciones**: una desigualdad por cada operación (logaritmo: argumento $\gt0$; $\arccos$: argumento entre $-1$ y $1$; raíz en el denominador: radicando $\gt0$) y se queda uno con lo que cumple **todas a la vez**. Cada una es una región del plano (circunferencia, franja entre rectas, elipse). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -94,18 +96,34 @@ $$x^2+\frac{(1-x)^2}{4}=1$$
 
 Multiplicando por $4$:
 
+$$4x^2+(1-x)^2=4$$
+
+Desarrollando el cuadrado:
+
 $$4x^2+1-2x+x^2=4$$
 
-$$5x^2-2x-3=0\ \Rightarrow\ (5x+3)(x-1)=0$$
+Pasando el $4$ y juntando términos:
+
+$$5x^2-2x-3=0$$
+
+Factorizando (se verifica: $(5x+3)(x-1)=5x^2-5x+3x-3$):
+
+$$(5x+3)(x-1)=0$$
 
 Sale $x=1$ (punto $(1;0)$) y $x=-\frac35$ (punto $\left(-\frac35;\frac85\right)$). En la recta $y=-1-x$, por simetría, salen $(-1;0)$ y $\left(\frac35;-\frac85\right)$. Estos cuatro puntos están dentro de la circunferencia (por ejemplo $\frac{9}{25}+\frac{64}{25}=\frac{73}{25}<4$).
+
+Las rectas también cortan a la circunferencia. En $y=1-x$:
+
+$$x^2+(1-x)^2=4\ \Rightarrow\ 2x^2-2x-3=0\ \Rightarrow\ x=\frac{1\pm\sqrt7}{2}$$
+
+o sea los puntos $\left(\frac{1-\sqrt7}{2};\frac{1+\sqrt7}{2}\right)\approx(-0{,}82;1{,}82)$ y $\left(\frac{1+\sqrt7}{2};\frac{1-\sqrt7}{2}\right)\approx(1{,}82;-0{,}82)$. En $y=-1-x$, por simetría, salen $\left(\frac{-1\pm\sqrt7}{2};\frac{-1\mp\sqrt7}{2}\right)$.
 
 </Paso>
 <Paso>
 
-**Qué:** intersecar y dibujar. **Por qué:** la franja (b) atraviesa el centro de la elipse; la parte de la franja que queda **dentro** de la elipse no sirve por (c). Lo que sobra son dos trozos dentro de la circunferencia: uno arriba a la izquierda (entre la elipse, la recta $y=1-x$ y la circunferencia) y otro abajo a la derecha, simétrico. Los puntos $(0;\pm2)$ donde la elipse toca a la circunferencia quedan fuera de la franja ($|y+x|=2>1$).
+**Qué:** intersecar y dibujar. **Por qué:** la franja (b) atraviesa el centro de la elipse; la parte de la franja que queda **dentro** de la elipse no sirve por (c). Lo que sobra son dos trozos dentro de la circunferencia. El de arriba a la izquierda está limitado por **ambas rectas**: por la recta $y=1-x$, desde $\left(-\frac35;\frac85\right)$ hasta el corte con la circunferencia en $x=\frac{1-\sqrt7}{2}$; por la recta $y=-1-x$, desde $(-1;0)$ hasta el corte en $x=\frac{-1-\sqrt7}{2}$; por el arco de elipse entre $\left(-\frac35;\frac85\right)$ y $(-1;0)$; y por el arco de circunferencia entre los dos cortes. El de abajo a la derecha es el simétrico: sus rectas van de $(1;0)$ a $x=\frac{1+\sqrt7}{2}$ (sobre $y=1-x$) y de $\left(\frac35;-\frac85\right)$ a $x=\frac{-1+\sqrt7}{2}$ (sobre $y=-1-x$). Los puntos $(0;\pm2)$ donde la elipse toca a la circunferencia quedan fuera de la franja ($|y+x|=2>1$).
 
-<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-a/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Circunferencia de radio 2 punteada, elipse x²+y²/4=1 punteada con vértices en (±1;0) y (0;±2), y dos rectas llenas y=1−x e y=−1−x. Sombreadas dos piezas: arriba a la izquierda entre la recta y=1−x, la elipse y la circunferencia, y abajo a la derecha entre la recta y=−1−x, la elipse y la circunferencia. Puntos rotulados (1;0), (−1;0), (−3/5;8/5) y (3/5;−8/5)." style={{maxWidth:'100%',height:'auto'}} />
+<img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-a/ej1.svg`} alt="Plano xy con ejes graduados de 1 en 1. Circunferencia de radio 2 punteada, elipse x²+y²/4=1 punteada con vértices en (±1;0) y (0;±2), y dos rectas llenas y=1−x e y=−1−x. Sombreadas dos piezas dentro de la franja entre las rectas y fuera de la elipse: arriba a la izquierda, limitada por las dos rectas, un arco de elipse entre (−3/5;8/5) y (−1;0) y un arco de circunferencia (las rectas cortan a la circunferencia en x=(1−√7)/2 y x=(−1−√7)/2), y abajo a la derecha su simétrica (cortes en x=(1+√7)/2 y x=(−1+√7)/2). Puntos rotulados (1;0), (−1;0), (−3/5;8/5) y (3/5;−8/5)." style={{maxWidth:'100%',height:'auto'}} />
 
 </Paso>
 <Solucion>
@@ -163,6 +181,8 @@ El enunciado habla de medidas que **cambian un poquito** y pregunta cuánto camb
 <Pista>
 
 Es **diferencial total**: $dV=V'_A\,dA+V'_B\,dB+V'_H\,dH$, con los incrementos como datos (los que **bajan** llevan signo negativo y todos en las mismas unidades), y $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
 
 </Pista>
 <Pista>
@@ -225,6 +245,8 @@ $$dV=-0{,}2\ \text{m}^3\ \ (\text{el volumen disminuye}),\qquad E\%=-2\%$$
 
 **Ojo con:** pasar los 30 cm a **metros** ($0{,}3$, no $0{,}03$) y respetar el signo de $dH$; con el signo cambiado el resultado da $+1{,}0$.
 
+La resolución del profe da $dV=0{,}34\ \text{m}^3$ y $E\%=3{,}4\%$ (en la cuenta usa $dH=-0{,}03$ m en vez de $-0{,}3$ m); ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (el parcial dice que alcanza con planteos bien hechos; la consigna pide dos resultados: variación y error %):
 
 - **Bien:** las tres derivadas parciales, incrementos en la misma unidad y con su signo, $dV$ y $E\%$ calculados.
@@ -281,6 +303,8 @@ $$\frac{\partial z}{\partial x}=-\frac{J(f,g\,/\,y,x)}{J(f,g\,/\,y,z)}$$
 
 Teoría: Rocha-Giordano, *Derivación de Funciones Implícitas* (7_Derivadas Func Implícitas.pdf, p. 2, "tercer caso").
 
+Machete: [Derivada implícita](../../machetes/derivada-implicita/).
+
 </Pista>
 <Pista>
 
@@ -327,12 +351,34 @@ Sumando y agrupando:
 
 $$18xy^3z-16xy^2z^3+6yz^5=2yz\left(9xy^2-8xyz^2+3z^4\right)$$
 
+Ahora el **numerador**, expandido. Primer producto:
+
+$$(3xy^2-z^4)(2-2y^2)=6xy^2-6xy^4-2z^4+2y^2z^4$$
+
+Segundo producto:
+
+$$(2x+y^3)(-4xy+3z^2)=-8x^2y+6xz^2-4xy^4+3y^3z^2$$
+
+Restando el segundo al primero:
+
+$$6xy^2-6xy^4-2z^4+2y^2z^4+8x^2y-6xz^2+4xy^4-3y^3z^2$$
+
+Juntando términos semejantes ($-6xy^4+4xy^4=-2xy^4$):
+
+$$8x^2y-2xy^4+6xy^2-6xz^2-3y^3z^2+2y^2z^4-2z^4$$
+
+Este numerador no tiene factor común con el denominador, así que **no se simplifica más**.
+
 </Paso>
 <Solucion>
 
-$$\frac{\partial z}{\partial x}=-\frac{(3xy^2-z^4)(2-2y^2)-(2x+y^3)(-4xy+3z^2)}{2yz\left(9xy^2-8xyz^2+3z^4\right)}$$
+$$\frac{\partial z}{\partial x}=-\frac{8x^2y-2xy^4+6xy^2-6xz^2-3y^3z^2+2y^2z^4-2z^4}{2yz\left(9xy^2-8xyz^2+3z^4\right)}$$
+
+(el numerador es el producto de la fórmula original, ya expandido; no tiene factor común con el denominador).
 
 **Ojo con:** el signo menos delante del cociente, el orden de las columnas en el numerador ($y$ primero, $x$ después) y no mezclar $g'_y=-4xy+3z^2$ (derivada de $-2xy^2$ respecto de $y$ es $-4xy$) con $-2xy+3z^2$.
+
+La resolución del profe escribe $g'_y=-2xy+3z^2$ en el determinante de abajo; la derivada correcta es $-4xy+3z^2$ (errata de copia que no cambia el planteo); ver ⚠️ en la resolución oficial.
 
 **Criterio estimado — no oficial** (el parcial dice que "lo más importante es el planteo inicial, el cálculo de las derivadas y resolver los determinantes"):
 
@@ -347,11 +393,19 @@ $$\frac{\partial z}{\partial x}=-\frac{(3xy^2-z^4)(2-2y^2)-(2x+y^3)(-4xy+3z^2)}{
 
 Dos caminos independientes.
 
-**1) Derivar las ecuaciones y despejar.** Derivando $f=0$ y $g=0$ respecto de $x$ queda el sistema lineal en $y'$ y $z'$:
+**1) Derivar las ecuaciones y resolver por Cramer.** Derivando $f=0$ y $g=0$ respecto de $x$ y pasando los términos en $x$ al segundo miembro queda un sistema lineal en $y'$ y $z'$:
 
-$$f'_x+f'_y\,y'+f'_z\,z'=0\qquad g'_x+g'_y\,y'+g'_z\,z'=0$$
+$$\begin{cases}f'_y\,y'+f'_z\,z'=-f'_x\\ g'_y\,y'+g'_z\,z'=-g'_x\end{cases}$$
 
-Despejando $z'$ (eliminando $y'$) da exactamente el mismo cociente.
+Por Cramer, $z'$ es el cociente de dos determinantes:
+
+$$z'=\frac{\begin{vmatrix}f'_y&-f'_x\\g'_y&-g'_x\end{vmatrix}}{\begin{vmatrix}f'_y&f'_z\\g'_y&g'_z\end{vmatrix}}$$
+
+Desarrollando el de arriba, $-f'_y\,g'_x+f'_x\,g'_y$. Sacando el signo menos de factor común:
+
+$$z'=-\frac{f'_y\,g'_x-f'_x\,g'_y}{f'_y\,g'_z-f'_z\,g'_y}=-\frac{\begin{vmatrix}f'_y&f'_x\\g'_y&g'_x\end{vmatrix}}{\begin{vmatrix}f'_y&f'_z\\g'_y&g'_z\end{vmatrix}}$$
+
+que es exactamente la fórmula del planteo.
 
 **2) Valor numérico sobre la curva.** El punto $(8;\,2;\,2\sqrt2)$ cumple las dos ecuaciones: $64+64-2\cdot64=0$ en la primera y $16-64+48=0$ en la segunda. Ahí las derivadas valen $f'_y=32$, $f'_x=24$, $f'_z=-128\sqrt2$, $g'_y=-40$, $g'_x=-6$, $g'_z=24\sqrt2$, y la fórmula da
 
@@ -392,6 +446,8 @@ Te piden tres cosas sobre la misma función y el mismo punto: cuánto cambia $z$
 
 Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Plan: (1) derivadas parciales en $P$; (2) versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\dfrac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; (4) $\nabla z=z'_x\,i+z'_y\,j$, módulo y ángulo; (5) la propiedad del gradiente: $\dfrac{\partial z}{\partial s}=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega$, con $\omega$ el ángulo entre $\nabla z$ y $s$.
 
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
+
 </Pista>
 <Pista>
 
@@ -409,9 +465,19 @@ $$z'_x=4xy^3-12x^3y\qquad z'_y=6x^2y^2-3x^4$$
 
 **Qué:** evaluar en $P(1;2)$.
 
-$$z'_x(P)=4\cdot1\cdot8-12\cdot1\cdot2=32-24=8$$
+$$z'_x(P)=4\cdot1\cdot2^3-12\cdot1^3\cdot2$$
 
-$$z'_y(P)=6\cdot1\cdot4-3\cdot1=24-3=21$$
+Cada producto:
+
+$$4\cdot1\cdot8=32\qquad12\cdot1\cdot2=24$$
+
+$$z'_x(P)=32-24=8$$
+
+$$z'_y(P)=6\cdot1^2\cdot2^2-3\cdot1^4$$
+
+$$6\cdot1\cdot4=24\qquad3\cdot1=3$$
+
+$$z'_y(P)=24-3=21$$
 
 </Paso>
 <Paso>
@@ -468,11 +534,19 @@ $$\omega=\theta-\alpha=69{,}15^\circ-(-45^\circ)=114{,}15^\circ$$
 
 Su coseno, sin calculadora, sale de las componentes ($\cos\omega=\cos\theta\cos\alpha+\sin\theta\sin\alpha$ con $\cos\theta=\frac{8}{\sqrt{505}}$ y $\sin\theta=\frac{21}{\sqrt{505}}$):
 
-$$\cos\omega=\frac{8}{\sqrt{505}}\cdot\frac{\sqrt2}{2}+\frac{21}{\sqrt{505}}\cdot\left(-\frac{\sqrt2}{2}\right)=-\frac{13\sqrt2}{2\sqrt{505}}\approx-0{,}409$$
+$$\cos\omega=\frac{8}{\sqrt{505}}\cdot\frac{\sqrt2}{2}+\frac{21}{\sqrt{505}}\cdot\left(-\frac{\sqrt2}{2}\right)$$
+
+$$\cos\omega=\frac{8\sqrt2}{2\sqrt{505}}-\frac{21\sqrt2}{2\sqrt{505}}$$
+
+$$\cos\omega=\frac{(8-21)\sqrt2}{2\sqrt{505}}=-\frac{13\sqrt2}{2\sqrt{505}}\approx-0{,}409$$
 
 Entonces:
 
-$$\frac{\partial z}{\partial s}\Big|_P=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega=\sqrt{505}\cdot\left(-\frac{13\sqrt2}{2\sqrt{505}}\right)=-\frac{13\sqrt2}{2}$$
+$$\frac{\partial z}{\partial s}\Big|_P=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega$$
+
+Reemplazo y se simplifica $\sqrt{505}$:
+
+$$\frac{\partial z}{\partial s}\Big|_P=\sqrt{505}\cdot\left(-\frac{13\sqrt2}{2\sqrt{505}}\right)=-\frac{13\sqrt2}{2}$$
 
 Coincide con el inciso (a).
 
@@ -531,6 +605,8 @@ Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un míni
 
 Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1). Plan: (1) puntos críticos: resolver $z'_x=0,\ z'_y=0$; (2) derivadas segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo, y el signo de $z''_{xx}$ dice mínimo (+) o máximo (−).
 
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
+
 </Pista>
 <Pista>
 
@@ -564,7 +640,11 @@ Hay **dos puntos críticos**.
 
 $$z''_{xx}=6x\qquad z''_{yy}=2\qquad z''_{xy}=-3$$
 
-$$H(x;y)=z''_{xx}\,z''_{yy}-(z''_{xy})^2=6x\cdot2-(-3)^2=12x-9$$
+$$H(x;y)=z''_{xx}\,z''_{yy}-(z''_{xy})^2=6x\cdot2-(-3)^2$$
+
+Con $6x\cdot2=12x$ y $(-3)^2=9$:
+
+$$H(x;y)=12x-9$$
 
 </Paso>
 <Paso>
@@ -573,7 +653,11 @@ $$H(x;y)=z''_{xx}\,z''_{yy}-(z''_{xy})^2=6x\cdot2-(-3)^2=12x-9$$
 
 $$H(0;0)=-9<0\ \Rightarrow\ \text{ensilladura}$$
 
-$$H\!\left(\tfrac32;\tfrac94\right)=12\cdot\tfrac32-9=18-9=9>0\ \Rightarrow\ \text{extremo}$$
+$$H\!\left(\tfrac32;\tfrac94\right)=12\cdot\tfrac32-9$$
+
+Con $12\cdot\frac32=18$:
+
+$$H\!\left(\tfrac32;\tfrac94\right)=18-9=9>0\ \Rightarrow\ \text{extremo}$$
 
 $$z''_{xx}\!\left(\tfrac32;\tfrac94\right)=6\cdot\tfrac32=9>0\ \Rightarrow\ \text{mínimo relativo}$$
 
@@ -635,6 +719,8 @@ Hay una cantidad que querés hacer lo más grande posible (el volumen de la caja
 <Pista>
 
 Es **extremo condicionado (Lagrange)**: función principal $V=xyz$ y condición $g(x,y,z)=x+\frac y3+\frac z4-1=0$. Se arma $F(x,y,z,\lambda)=xyz-\lambda\,g$ y se anulan las **cuatro** derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+Machete: [Extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/).
 
 </Pista>
 <Pista>
@@ -720,7 +806,11 @@ $$x\cdot\frac y3\cdot\frac z4\le\left(\frac13\right)^3\ \Rightarrow\ xyz\le\frac
 
 La igualdad se da con $x=\frac y3=\frac z4=\frac13$, o sea el mismo punto.
 
-**2) Sin multiplicadores.** Despejando $z=4\left(1-x-\frac y3\right)$ queda $V(x,y)=4xy\left(1-x-\frac y3\right)$ y sus dos derivadas se anulan en $\left(\frac13;1\right)$, con $V=\frac49$.
+**2) Sin multiplicadores.** Despejando $z=4\left(1-x-\frac y3\right)$ queda $V(x,y)=4xy\left(1-x-\frac y3\right)$ y sus dos derivadas parciales son
+
+$$V'_x=4y\left(1-2x-\frac y3\right)\qquad V'_y=4x\left(1-x-\frac{2y}{3}\right)$$
+
+En $\left(\frac13;1\right)$ los paréntesis valen $1-\frac23-\frac13=0$ y $1-\frac13-\frac23=0$, o sea ambas derivadas se anulan, y $V=4\cdot\frac13\cdot1\cdot\left(1-\frac13-\frac13\right)=\frac49$.
 
 </Comprobacion>
 <ResolucionOficial examen="p1-1r3-2024-10-a" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (A) Oct-24.pdf" paginas="7" />

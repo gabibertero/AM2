@@ -43,6 +43,8 @@ La función tiene tres piezas: un logaritmo, un arcoseno y una raíz. ¿Qué le 
 
 El dominio es la **intersección de las condiciones de existencia**: logaritmo con argumento $\gt0$, arcoseno con argumento en $[-1,1]$ y raíz con radicando $\ge0$. Las curvas son una hipérbola, dos rectas verticales y una elipse. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -139,6 +141,8 @@ El volumen depende de tres medidas y las tres cambian un poquito. ¿Qué herrami
 
 Método: **diferencial total** $dV=V'_r\,dr+V'_R\,dR+V'_h\,dh$ con los cambios como incrementos, y $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
 
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
+
 </Pista>
 <Pista>
 
@@ -200,6 +204,8 @@ $$dV=-20\pi\ \text{cm}^3\approx-62{,}83\ \text{cm}^3,\qquad E\%=-\frac27\%\appro
 
 **Ojo con:** pasar los milímetros a centímetros (3 mm = 0,3 cm, no 3) y los signos: los radios **disminuyen**. Además el $V'_h$ no lleva el factor $h$: se deriva respecto de $h$.
 
+La resolución del profe da $E\%\simeq-0{,}28\%$ (truncado); acá $-\frac27\%\approx-0{,}29\%$ (mismo valor exacto); ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (consigna: cuánto varía y error %):
 
 - **Bien:** unidades convertidas, las tres parciales, $dV=-20\pi$, $V=7000\pi$ y $E\%=-\frac27\%$.
@@ -249,6 +255,8 @@ Ahora la función tiene tres variables. ¿Cómo describís una dirección en el 
 <Pista>
 
 Método: la dirección es el vector $\overline{MN}=N-M$ (se normaliza con sus **cosenos directores**); $\dfrac{\partial u}{\partial s}=u'_x\cos\alpha+u'_y\cos\beta+u'_z\cos\gamma$; el **gradiente** $\nabla u=(u'_x,u'_y,u'_z)$ y la propiedad $\dfrac{\partial u}{\partial s}=\nabla u\cdot\hat s=\|\nabla u\|\cos\varphi$. Teoría: Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
 
 </Pista>
 <Pista>
@@ -321,6 +329,8 @@ $$\cos\theta_x=-\frac{12}{17},\quad\cos\theta_y=-\frac1{17},\quad\cos\theta_z=\f
 
 **Ojo con:** normalizar $\overline{MN}$ (dividir por $13$) antes de multiplicar, y el signo de $u'_x=-2xy$ y $u'_y=-x^2$ (negativos).
 
+La resolución del profe no desarrolla el inciso (c); acá se resuelve aparte con la propiedad del gradiente; ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (consigna: a, b y c; la verificación con la propiedad del gradiente se pide aparte):
 
 - **Bien:** $\overline{MN}$ normalizado, $\frac{\partial u}{\partial s}=8$, $\nabla u$, $17$, cosenos directores y la verificación con $\|\nabla u\|\cos\varphi$.
@@ -362,6 +372,8 @@ Calcular y categorizar los Puntos Críticos indicando si son Extremos Locales (M
 <Pista>
 
 Método: **puntos críticos** ($z'_x=0$, $z'_y=0$) y **hessiano** $H=z''_{xx}z''_{yy}-(z''_{xy})^2$: $H\gt0$ extremo (signo de $z''_{xx}$), $H\lt0$ silla, $H=0$ inconcluso. Teoría: Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>
@@ -417,6 +429,8 @@ $$(3,2)\ \text{silla},\quad(3,-2)\ \text{mínimo},\quad(-3,2)\ \text{máximo},\q
 
 **Ojo con:** el $-8y$ de $z''_{yy}$ (por el $-\frac43y^3$) cambia los signos del hessiano: $H=-32xy$, no $+32xy$. Y con $H\gt0$ falta decidir máx/mín con el signo de $z''_{xx}$.
 
+La resolución del profe escribe $H(x,y)=-36xy$; acá $H=-32xy$ (los signos de $H$ y la clasificación no cambian); ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (consigna: calcular y categorizar):
 
 - **Bien:** los cuatro puntos, $H=-32xy$ y las cuatro clasificaciones con máx/mín justificados.
@@ -458,6 +472,8 @@ La caja tiene tres medidas. ¿Cuál querés que sea lo menor posible y qué cond
 <Pista>
 
 Método: **Lagrange** con la superficie $S$ a minimizar y el volumen fijo como condición: $F=S-\lambda\,g$ y se anulan las cuatro derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+Machete: [Extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/).
 
 </Pista>
 <Pista>

@@ -61,7 +61,8 @@ inter = sp.solve([xs**2 - ys**2 - 1, xs**2/4 + ys**2 - 1], [xs, ys], dict=True)
 assert inter == [{xs: sp.sqrt(R(8, 5)), ys: sp.sqrt(R(3, 5))}]                         # vértices de D (ambos en 1.er cuadrante)
 assert sp.simplify(1 - R(8, 5)/4 - R(3, 5)) == 0 and R(8, 5) - R(3, 5) == 1
 assert R(1, 4) < 1 and 1 - R(1, 4) > 0 and 1**2 - 0 >= 1                              # (1;0): sobre la hipérbola pero xy=0 → excluido
-en_mdx("05-g1", r"\sqrt{\tfrac85}", r"\sqrt{\tfrac35}", r"x^2-y^2\ge1", r"\frac{x^2}{4}+y^2<1", r"x\,y>0")
+assert round(f1(1.5, 0.3), 4) == 0.0211                                                # valor de la Comprobación
+en_mdx("05-g1", r"z\approx0{,}0211", r"\sqrt{\tfrac85}", r"\sqrt{\tfrac35}", r"x^2-y^2\ge1", r"\frac{x^2}{4}+y^2<1", r"x\,y>0")
 
 # --- Ej 2: z = sen³(x−y), P(π, π/4)
 z2 = sp.sin(x - y)**3
@@ -83,7 +84,8 @@ assert dir_deriv(z2, (sp.pi, sp.pi/4), (1, 1)) == 0                             
 assert sp.atan2(gy, gx) == 3*sp.pi/4 and sp.atan2(gy, gx)*180/sp.pi == 135
 assert R(9, 8) + R(9, 8) == R(9, 4) and sp.sqrt(R(9, 4)) == R(3, 2)
 assert R(6, 8) + R(6, 8) == R(3, 2)
-en_mdx("05-g1", r"\frac{\partial z}{\partial s}\Big|_P=\frac32\ \ (\alpha=135^\circ)", r"\|\nabla z\|=\frac32", r"-\frac{3\sqrt2}{4}\,i+\frac{3\sqrt2}{4}\,j", r"\theta=\frac{3\pi}{4}=135^\circ", r"y'(1)=-3+2=-1")
+assert dir_deriv(z2, (sp.pi, sp.pi/4), (1, -1)) == -R(3, 2)                            # sentido opuesto (315°)
+en_mdx("05-g1", r"\frac{\partial z}{\partial s}\Big|_P=\frac32\ \ \big(-\tfrac32\text{ si }\alpha=315^\circ\big)", r"\|\nabla z\|=\frac32", r"-\frac{3\sqrt2}{4}\,i+\frac{3\sqrt2}{4}\,j", r"\theta=\frac{3\pi}{4}=135^\circ", r"y'(1)=-3+2=-1")
 
 # --- Ej 3: z = x² + y²/2 + x²y
 z3 = x**2 + y**2/2 + x**2*y
@@ -144,7 +146,7 @@ assert [z3.subs({x: a, y: b}) for a, b in [(3, -2), (-3, 2)]] == [-R(172, 3), R(
 # comprobación por separación de variables: z=g(x)+h(y)
 g, h = R(2, 3)*x**3 - 18*x, -R(4, 3)*y**3 + 16*y
 assert sp.expand(g + h - z3) == 0 and [sp.diff(g, x, 2).subs(x, v) for v in (3, -3)] == [12, -12] and [sp.diff(h, y, 2).subs(y, v) for v in (2, -2)] == [-16, 16]
-en_mdx("05-g2", r"H(x;y)=4x\cdot(-8y)-0^2=-32\,xy", r"H(3;2)=-32\cdot6=-192<0", r"H(3;-2)=-32\cdot(-6)=192>0", r"z''_{xx}(3;-2)=4\cdot3=12>0", r"z''_{xx}(-3;2)=4\cdot(-3)=-12<0")
+en_mdx("05-g2", r"H(x;y)=4x\cdot(-8y)-0^2=-32\,xy", r"H(3;2)=-32\cdot(3\cdot2)=-32\cdot6=-192<0", r"H(3;-2)=-32\cdot\big(3\cdot(-2)\big)=-32\cdot(-6)=192>0", r"z''_{xx}(3;-2)=4\cdot3=12>0", r"z''_{xx}(-3;2)=4\cdot(-3)=-12<0")
 
 # ===================================================================== Recuperatorio
 # --- Ej 1: arccos(y/x³) / (36−4x²−9y²)^(1/4)
@@ -173,7 +175,7 @@ assert 9 + 4 == 13
 assert dir_deriv(z2, (1, -1), (-2, 3)) == 0                                            # nula ⟂ a (3,2)
 assert z2.subs({x: 1, y: -1}) == 0 and sp.simplify((y**2 - x**3).subs({x: 1, y: -1})) == 0   # curva de nivel z=0: y² = x³ pasa por P
 assert abs(float(sp.sqrt(13))*float(sp.cos(sp.atan(R(2, 3)))) - 3) < 1e-9                # |∇|·cosθ = z'x
-en_mdx("07-rec", r"\frac{\partial z}{\partial s}\Big|_P=\frac{\sqrt2}{2}\ (\alpha=-45^\circ)", r"\nabla z(P)=3\,i+2\,j", r"\|\nabla z\|=\sqrt{3^2+2^2}=\sqrt{9+4}=\sqrt{13}", r"\theta_{\text{máx}}=\arctan\frac23", r"y'(3)=-6+5=-1=\tan\alpha")
+en_mdx("07-rec", r"\frac{\partial z}{\partial s}\Big|_P=\frac{\sqrt2}{2}\ \Big(-\tfrac{\sqrt2}{2}\text{ si }\alpha=135^\circ\Big)", r"\nabla z(P)=3\,i+2\,j", r"\|\nabla z\|=\sqrt{3^2+2^2}=\sqrt{9+4}=\sqrt{13}", r"\theta_{\text{máx}}=\arctan\frac23", r"y'(3)=-6+5=-1=\tan\alpha")
 
 # --- Ej 3: z = x³ + y³ + 48/y + 3/x
 z3 = x**3 + y**3 + 48/y + 3/x
@@ -193,4 +195,6 @@ assert [z3.subs({x: a, y: b}) for a, b in [(1, 2), (-1, -2), (1, -2), (-1, 2)]] 
 assert 6 + 6 == 12 and 12 + R(96, 8) == 24
 en_mdx("07-rec", r"H(1;2)=288>0", r"H(1;-2)=-288<0", r"z''_{xx}(1;2)=12>0", r"z''_{xx}(-1;-2)=-12<0", r"z(1;2)=36")
 
+en_mdx("05-g2", r"""$H>0$: es extremo, y el signo de $z''_{xx}$ decide:""")
+en_mdx("05-g2", r"""Otra vez extremo; el signo de $z''_{xx}$ decide:""")
 print("OK check_p1-1h9-2025")

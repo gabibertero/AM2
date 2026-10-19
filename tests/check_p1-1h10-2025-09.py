@@ -23,7 +23,7 @@ assert len(sol) == 4 and all(s[y]**2 == R(3, 5) and s[x]**2 == R(8, 5) for s in 
 xe = sp.sqrt(3); assert xe**2 + 4*R(1, 4) == 4 and xe**2 - R(1, 4) - 1 == R(7, 4) and not en_dominio(xe, R(1, 2))
 # y la parte de la elipse con |y|>√(3/5) cae fuera de la región (4-4y²<1+y²)
 assert sp.solve(sp.Eq(4 - 4*y**2, 1 + y**2), y) == [-sp.sqrt(R(3, 5)), sp.sqrt(R(3, 5))]
-en_mdx(r"x^2-y^2\gt1", r"x^2+4y^2\ne4", r"y\ne0", r"y^2=\frac35,\qquad x^2=\frac85")
+en_mdx(r"x^2-y^2\gt1", r"x^2+4y^2\ne4", r"y\ne0", r"5y^2=3", r"y^2=\frac35,\qquad x^2=1+\frac35=\frac85")
 
 # --- Ej 2: V = xyz, (3,2,1), e = 1% de cada medida
 X_, Y_, Z_ = x, y, z
@@ -49,6 +49,9 @@ assert sp.simplify(sp.sqrt(gx**2 + gy**2) - 5*sp.E) == 0
 th = sp.atan(R(3, 4)); assert abs(float(th)*180/float(sp.pi) - 36.87) < 1e-2
 # comprobación: cociente incremental numérico en la dirección de 60°
 h = sp.Float("1e-8"); q = (f.subs({x: 1 + h*u[0], y: 1 + h*u[1]}) - f.subs(P))/h; assert abs(float(q) - float(ds)) < 1e-4
+_c = lambda v: float((f.subs({x: 1 + h*v[0], y: 1 + h*v[1]}) - f.subs(P))/h)   # comprobación: otros sentidos (cociente incremental)
+assert abs(_c((R(4, 5), R(3, 5))) - 5*float(sp.E)) < 1e-4 and abs(_c((-R(3, 5), R(4, 5)))) < 1e-4
+en_mdx(r"13{,}59=5e", r"\frac15(-3;4)")
 # crecimiento nulo ⇒ perpendicular al gradiente: ∇·(−3,4)/5 = 0
 assert gx*(-3) + gy*4 == 0
 en_mdx(r"4e\,\vec i+3e\,\vec j", r"5e", r"e\Big(2+\tfrac32\sqrt3\Big)\approx12{,}5", r"37^\circ")

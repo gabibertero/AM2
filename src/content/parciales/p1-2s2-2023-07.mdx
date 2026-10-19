@@ -40,7 +40,9 @@ Fijate qué operaciones hay: una raíz y un logaritmo, multiplicados. Para cada 
 </Pista>
 <Pista>
 
-Es un **dominio por restricciones**: una desigualdad por operación (raíz: radicando $\ge0$; logaritmo: argumento $\gt0$) y se queda uno con lo que cumple **las dos a la vez** (el producto no agrega nada). Cada una es una región del plano (elipse, circunferencia). Machete: [dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+Es un **dominio por restricciones**: una desigualdad por operación (raíz: radicando $\ge0$; logaritmo: argumento $\gt0$) y se queda uno con lo que cumple **las dos a la vez** (el producto no agrega nada). Cada una es una región del plano (elipse, circunferencia). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
 
 </Pista>
 <Pista>
@@ -134,7 +136,9 @@ Hay dos cantidades que dependen de las tres medidas (el volumen y la diagonal) y
 </Pista>
 <Pista>
 
-Es **diferencial total**: para una cantidad $Q(x;y;z)$ es $dQ=Q'_x\,dx+Q'_y\,dy+Q'_z\,dz$, con los tres errores tomados con el mismo signo (positivo) para el **máximo**, y $E\%=\dfrac{dQ}{Q}\cdot100$. Se hace una vez para $V=xyz$ y otra para $D=\sqrt{x^2+y^2+z^2}$. Machete: [diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+Es **diferencial total**: para una cantidad $Q(x;y;z)$ es $dQ=Q'_x\,dx+Q'_y\,dy+Q'_z\,dz$, con los tres errores tomados con el mismo signo (positivo) para el **máximo**, y $E\%=\dfrac{dQ}{Q}\cdot100$. Se hace una vez para $V=xyz$ y otra para $D=\sqrt{x^2+y^2+z^2}$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
 
 </Pista>
 <Pista>
@@ -174,7 +178,11 @@ $$D=\sqrt{4+9+36}=\sqrt{49}=7\ \text{cm}$$
 
 $$D'_x=\frac27\qquad D'_y=\frac37\qquad D'_z=\frac67$$
 
-$$dD=\frac27\cdot0{,}02+\frac37\cdot0{,}03+\frac67\cdot0{,}06=\frac{0{,}04+0{,}09+0{,}36}{7}=\frac{0{,}49}{7}=0{,}07\ \text{cm}$$
+$$dD=\frac27\cdot0{,}02+\frac37\cdot0{,}03+\frac67\cdot0{,}06$$
+
+Saco denominador común $7$ y multiplico arriba:
+
+$$dD=\frac{0{,}04+0{,}09+0{,}36}{7}=\frac{0{,}49}{7}=0{,}07\ \text{cm}$$
 
 $$E\%=\frac{0{,}07}{7}\cdot100=1\%$$
 
@@ -233,7 +241,9 @@ La consigna pide hacer el inciso (a) **por definición**: ¿qué cociente tenés
 </Pista>
 <Pista>
 
-La bisectriz del 2.º cuadrante es la recta $y=-x$; el sentido "creciente" (hacia arriba) forma $\alpha=135^\circ$ con $x^+$. La **definición** es $\dfrac{\partial f}{\partial s}\Big|_P=\displaystyle\lim_{t\to0}\dfrac{f(P+t\,s^\circ)-f(P)}{t}$. Para (b): $\nabla f=f'_x\,i+f'_y\,j$, módulo y ángulo mirando el cuadrante. Machete: [derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: *Derivada Direccional*, pp. 15–19.
+La bisectriz del 2.º cuadrante es la recta $y=-x$; el sentido "creciente" (hacia arriba) forma $\alpha=135^\circ$ con $x^+$. La **definición** es $\dfrac{\partial f}{\partial s}\Big|_P=\displaystyle\lim_{t\to0}\dfrac{f(P+t\,s^\circ)-f(P)}{t}$. Para (b): $\nabla f=f'_x\,i+f'_y\,j$, módulo y ángulo mirando el cuadrante. Teoría: *Derivada Direccional*, pp. 15–19.
+
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
 
 </Pista>
 <Pista>
@@ -299,6 +309,8 @@ $$\frac{\partial f}{\partial s}\Big|_P=-\frac{3\sqrt2}{4}\approx-1{,}06,\qquad\n
 
 **Ojo con:** el inciso (a) pide **la definición**: usar directo "$f'_x\cos\alpha+f'_y\sin\alpha$" da el mismo número, pero no es lo que se pide. Y cuidado con el sentido de la bisectriz del 2.º cuadrante: $135^\circ$, no $-45^\circ$.
 
+La resolución del profe resuelve el inciso (a) con la fórmula $f'_x\cos\alpha+f'_y\sin\alpha$ y no por definición, como pide la consigna (mismo resultado, $-\frac{3\sqrt2}{4}$); ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (la consigna pide la direccional por definición, gradiente en $P$, módulo, ángulo y gráfico):
 
 - **Bien:** versor a $135^\circ$, límite por definición bien planteado y resuelto ($-\frac{3\sqrt2}{4}$), gradiente $i-\frac12j$, módulo $\frac{\sqrt5}{2}$, $\theta\approx-26{,}57^\circ$ y gráfico en $P$.
@@ -347,7 +359,9 @@ Te piden dos cosas en orden: primero **dónde** pueden estar los extremos y desp
 </Pista>
 <Pista>
 
-Es **extremos relativos con hessiano**, pero con un detalle: cuando $H=0$ el criterio **no decide** (teoría: *Taylor y Extremos Relativos*, pp. 25–28 y p. 34, "el criterio falla"). Entonces hay que estudiar el **signo del incremento** $\Delta z$ cerca del punto. Machete: [extremos relativos y hessiano](../../machetes/extremos-relativos-hessiano/). Plan: (1) $z'_x=0$ y $z'_y=0$; (2) $H$ en cada punto; (3) si $H=0$, mirar el incremento.
+Es **extremos relativos con hessiano**, pero con un detalle: cuando $H=0$ el criterio **no decide** (teoría: *Taylor y Extremos Relativos*, pp. 25–28 y p. 34, "el criterio falla"). Entonces hay que estudiar el **signo del incremento** $\Delta z$ cerca del punto. Plan: (1) $z'_x=0$ y $z'_y=0$; (2) $H$ en cada punto; (3) si $H=0$, mirar el incremento.
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>
@@ -456,7 +470,9 @@ Hay una cantidad que querés hacer lo más grande posible (la capacidad, o sea e
 </Pista>
 <Pista>
 
-Es **extremo condicionado (Lagrange)**: función principal $V=xyz$ y condición $g(x,y,z)=2(xy+yz+xz)-216=0$ (con tapa: seis caras, tres pares iguales). Se arma $F(x,y,z,\lambda)=xyz-\lambda\,g$ y se anulan las **cuatro** derivadas. Machete: [extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/). Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+Es **extremo condicionado (Lagrange)**: función principal $V=xyz$ y condición $g(x,y,z)=2(xy+yz+xz)-216=0$ (con tapa: seis caras, tres pares iguales). Se arma $F(x,y,z,\lambda)=xyz-\lambda\,g$ y se anulan las **cuatro** derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+Machete: [Extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/).
 
 </Pista>
 <Pista>
@@ -518,6 +534,8 @@ Es máximo y no mínimo porque el volumen tiende a $0$ cuando alguna dimensión 
 $$x=y=z=6\ \text{cm},\qquad V_{\text{máx}}=216\ \text{cm}^3$$
 
 **Ojo con:** olvidar el factor $2$ de la superficie con tapa (da $x^2=72$ y un volumen que no cumple $S=216$), y confundir "con tapa" ($6$ caras) con "sin tapa" ($5$ caras). Siempre conviene verificar: un cubo de lado $6$ tiene $6\cdot36=216\ \text{cm}^2$.
+
+La resolución del profe da $x=y=z=6\sqrt2$ y $V=432\sqrt2\ \text{cm}^3$ (pierde el factor $2$ de la superficie); acá $x=y=z=6$ y $V=216\ \text{cm}^3$; ver ⚠️ en la resolución oficial.
 
 **Criterio estimado — no oficial** (la consigna pide dimensiones y volumen):
 

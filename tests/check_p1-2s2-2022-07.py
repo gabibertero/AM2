@@ -81,4 +81,8 @@ assert sp.Integer(42)/sp.sqrt(4 + 1 + 9) == 3*sp.sqrt(14)
 d_of = sp.sqrt(21**2 + R(21, 2)**2 + R(63, 2)**2); assert sp.simplify(d_of - 21*sp.sqrt(14)/2) == 0 and float(d_of) > float(d6)
 assert 2*21 + R(21, 2) + 3*R(63, 2) != 42                       # (21, 21/2, 63/2) NO está en el plano
 en_mdx(r"2\lambda+\frac12\lambda+\frac92\lambda=42", r"7\lambda=42\ \Rightarrow\ \lambda=6", r"x=6,\qquad y=3,\qquad z=9", r"d=3\sqrt{14}\approx11{,}22")
+en_mdx(r"""La resolución del profe usa $9-x^2+y^2$ (una hipérbola) y no la del enunciado impreso, $\sqrt{9-x^2-y^2}$; acá se resuelve el enunciado literal (corona $1\lt x^2+y^2\lt9$);""")  # aviso de discrepancia con la resolución del profe
+en_mdx(r"""La resolución del profe deja $\text{Sup}=\sqrt5\,\pi$ y un último término de $dS$ mal armado, y no cierra $dS$ ni $E\%(S)$; acá $S=\pi(1+\sqrt5)\approx10{,}17\ \text{m}^2$, $dS\approx1{,}02\ \text{m}^2$ y $E\%=10\%$;""")  # aviso de discrepancia con la resolución del profe
+en_mdx(r"""El punto $M(1;1;1)$ no cumple la ecuación (izquierda $4$, derecha $0$) y la resolución del profe no lo advierte: da $\frac15$ y $\frac15$ igual que acá, como valores de $-F'_x/F'_z$ y $-F'_y/F'_z$ en $M$;""")  # aviso de discrepancia con la resolución del profe
+en_mdx(r"""La resolución del profe llega a $x=21$, $y=\frac{21}{2}$, $z=\frac{63}{2}$ (de $\frac{14}{2}x=42$) y deja la distancia sin terminar; acá $x=6$, $y=3$, $z=9$ y $d=3\sqrt{14}\approx11{,}22$;""")  # aviso de discrepancia con la resolución del profe
 print("OK p1-2s2-2022-07")

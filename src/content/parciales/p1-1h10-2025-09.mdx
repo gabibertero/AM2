@@ -44,6 +44,8 @@ Mirá cada parte de la función por separado: el $\ln$ de un módulo, el $\log$ 
 
 El dominio es la **intersección de las condiciones de existencia** de cada pieza. Cada condición es una curva (hipérbola, elipse, ejes) y una desigualdad o una exclusión; hay que dibujarlas y decidir en cada borde si entra o no. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -90,7 +92,7 @@ Los dos ejes quedan excluidos. Pero $x\ne0$ ya está incluido en la condición d
 
 **Qué:** intersectar y dibujar. **Por qué:** el dominio es la zona de la hipérbola menos la elipse y menos el eje $x$. La elipse y la hipérbola se cruzan donde $x^2=1+y^2$ y $x^2+4y^2=4$ a la vez:
 
-$$1+y^2+4y^2=4\ \Rightarrow\ y^2=\frac35,\qquad x^2=\frac85$$
+$$1+y^2+4y^2=4\ \Rightarrow\ 5y^2=3\ \Rightarrow\ y^2=\frac35,\qquad x^2=1+\frac35=\frac85$$
 
 Esto es, los cuatro puntos $(\pm1{,}26;\ \pm0{,}77)$. Solo los arcos de la elipse con $|y|\lt\sqrt{3/5}$ caen dentro de la región (dos arcos chicos cerca de $(\pm2,0)$); el resto de la elipse está fuera del dominio de todas formas.
 
@@ -142,6 +144,8 @@ El "material" es lo que hay entre el volumen de adentro y el de afuera: una cás
 <Pista>
 
 Método: el **diferencial total** $dV=V_x\,dx+V_y\,dy+V_z\,dz$ aproxima el material, tomando como $dx,dy,dz$ los espesores. El error porcentual es $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
 
 </Pista>
 <Pista>
@@ -232,6 +236,8 @@ Pedís cuánto cambia $z$ al moverte desde $P$ en una dirección dada, y además
 
 Método: **derivada direccional** $\dfrac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$ y **gradiente** $\nabla z=z'_x\,\vec i+z'_y\,\vec j$. El máximo de la direccional es $\|\nabla z\|$, en la dirección de $\nabla z$; el crecimiento es nulo en las direcciones perpendiculares. Teoría: Rocha-Giordano, *Derivada Direccional* (8_Derivada Direccional.pdf, pp. 1–2).
 
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
+
 </Pista>
 <Pista>
 
@@ -311,12 +317,12 @@ $$\Big(\tfrac{\partial z}{\partial s}\Big)_{\max}=\|\nabla z\|=5e\approx13{,}6,\
 </Solucion>
 <Comprobacion>
 
-Dos caminos independientes del cálculo con $\cos$ y $\sin$:
+Dos caminos independientes del cálculo con las parciales, ambos con **cociente incremental numérico** (sin derivar), con $h=10^{-6}$:
 
-1. **Gradiente · versor:** $\nabla z\cdot\vec s_0=(4e,3e)\cdot(\tfrac12,\tfrac{\sqrt3}2)=2e+\tfrac{3\sqrt3}2e\approx12{,}50$.
-2. **Cociente incremental numérico** (sin derivar): con $h=10^{-4}$, $\dfrac{z(1+h\cos60^\circ,\ 1+h\sin60^\circ)-z(1,1)}{h}\approx12{,}50$.
+1. **Mismo sentido ($60^\circ$):** $\dfrac{z(1+h\cos60^\circ,\ 1+h\sin60^\circ)-z(1,1)}{h}\approx12{,}50$, igual a $e\left(2+\frac32\sqrt3\right)\approx12{,}50$.
+2. **Otros sentidos:** hacia $\frac15(4;3)$ (la dirección de $\nabla z$) da $13{,}59=5e$, el valor máximo; hacia $\frac15(-3;4)$ (perpendicular) da $0$. Eso confirma $\nabla z=4e\,\vec i+3e\,\vec j$ y $\theta\approx37^\circ$ sin usar las derivadas.
 
-Y el chequeo de consistencia: $12{,}5\le\|\nabla z\|=13{,}6$. Las direcciones nulas cumplen $\nabla z\cdot(-3,4)/5=\tfrac{-12e+12e}5=0$.
+Chequeo de consistencia: $12{,}5\le\|\nabla z\|=13{,}6$.
 
 </Comprobacion>
 <ResolucionOficial examen="p1-1h10-2025-09" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H10 Sep-25.pdf" paginas="3" />
@@ -337,6 +343,8 @@ Un punto crítico es donde la función "se aplana". ¿Qué tiene que valer en es
 <Pista>
 
 Método: **puntos críticos** con $z'_x=0$ y $z'_y=0$; después el **hessiano** $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$: si $H\gt0$ hay extremo (el signo de $z''_{xx}$ dice si es mínimo $\gt0$ o máximo $\lt0$), si $H\lt0$ hay silla, si $H=0$ no se puede concluir. Teoría: Rocha-Giordano, *Extremos Relativos* (10_Extremos.pdf, p. 1).
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>
@@ -437,6 +445,8 @@ Querés el punto del plano más cercano al origen. ¿Qué cantidad querés hacer
 <Pista>
 
 Método: **extremos ligados con multiplicador de Lagrange $\lambda$**. Función a optimizar: el cuadrado de la distancia (tiene el mismo mínimo y evita la raíz); condición: el plano. Se arma $F=f-\lambda g$ y se anulan sus cuatro derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+Machete: [Extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/).
 
 </Pista>
 <Pista>

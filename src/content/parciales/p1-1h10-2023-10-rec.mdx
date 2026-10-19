@@ -39,7 +39,9 @@ Mirá la función por partes: un $\ln$ de un **módulo**, un $\log$ de un produc
 </Pista>
 <Pista>
 
-Es un **dominio por restricciones** con tres condiciones a la vez: $\ln|A|$ pide $A\ne0$ (el módulo ya hace positivo el argumento); $\log(xy)$ pide $xy>0$; el denominador pide radicando $>0$. Las cónicas son elipses. Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+Es un **dominio por restricciones** con tres condiciones a la vez: $\ln|A|$ pide $A\ne0$ (el módulo ya hace positivo el argumento); $\log(xy)$ pide $xy>0$; el denominador pide radicando $>0$. Las cónicas son elipses. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
 
 </Pista>
 <Pista>
@@ -88,6 +90,8 @@ La curva $\frac{x^2}{4}+y^2=1$ **parte en dos** a cada trozo: la parte de afuera
 $$D=\Big\{(x;y)\in\mathbb{R}^2:\ x\,y>0\ \wedge\ x^2+\tfrac{y^2}{4}<1\ \wedge\ \tfrac{x^2}{4}+y^2\ne1\Big\}$$
 
 **Ojo con:** el **módulo**: con $\ln|A|$ no se pide $A>0$, solo $A\ne0$; hay que dibujar la elipse $\frac{x^2}{4}+y^2=1$ como curva excluida y no tachar todo su interior. Y excluir los ejes ($xy=0$).
+
+La resolución del profe pide $\frac{x^2}{4}+y^2>1$ (ignora el módulo) y deja afuera la parte de adentro de esa elipse; acá se incluye (naranja); ver ⚠️ en la resolución oficial.
 
 **Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"; la resolución oficial trata el módulo como si no estuviera, ver más abajo):
 
@@ -138,7 +142,9 @@ Hay dos medidas con error (radio y altura) y una cantidad que depende de las dos
 </Pista>
 <Pista>
 
-Es **diferencial total**: $dV=V'_r\,dr+V'_h\,dh$, con $dr$ y $dh$ el $1\%$ de cada medida; el error porcentual es $\frac{dV}{V}\cdot100$. Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+Es **diferencial total**: $dV=V'_r\,dr+V'_h\,dh$, con $dr$ y $dh$ el $1\%$ de cada medida; el error porcentual es $\frac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
 
 </Pista>
 <Pista>
@@ -229,7 +235,9 @@ Te piden la variación de $z$ en una dirección dada y, aparte, la dirección m�
 </Pista>
 <Pista>
 
-Es **derivada direccional + gradiente**: $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; el valor máximo es $\|\nabla z\|$ y el ángulo de máximo crecimiento es el de $\nabla z$. Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+Es **derivada direccional + gradiente**: $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; el valor máximo es $\|\nabla z\|$ y el ángulo de máximo crecimiento es el de $\nabla z$. Teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2.
+
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
 
 </Pista>
 <Pista>
@@ -254,7 +262,11 @@ $$z'_y=-\frac{5y}{\sqrt{x^2+y^2}}-\frac{12x}{y^2}+\frac{4}{y}$$
 
 $$z'_x(P)=-\frac{5\cdot3}{5}+\frac{12}{4}+\frac83=-3+3+\frac83=\frac83$$
 
-$$z'_y(P)=-\frac{5\cdot4}{5}-\frac{12\cdot3}{16}+\frac44=-4-\frac94+1=-\frac{21}{4}$$
+$$z'_y(P)=-\frac{5\cdot4}{5}-\frac{12\cdot3}{16}+\frac44$$
+
+El segundo término es $\frac{36}{16}=\frac94$:
+
+$$z'_y(P)=-4-\frac94+1=-\frac{21}{4}$$
 
 </Paso>
 <Paso>
@@ -291,6 +303,8 @@ $$\frac{\partial z}{\partial s}\Big|_P=\frac{95\sqrt2}{24},\quad\nabla z(P)=\fra
 
 **Ojo con:** (1) derivar bien el $\ln(x^2y)$: aporta $\frac8x$ a $z'_x$ y $\frac4y$ a $z'_y$; (2) los tres términos de cada parcial en $P$ (se suman $-3+3+\frac83$ y $-4-\frac94+1$); (3) el cuadrante del ángulo.
 
+La resolución del profe escribe el módulo con un numerador ilegible ($442$ o $441$); el correcto es $\left(\frac{21}{4}\right)^2=\frac{441}{16}$, o sea $\|\nabla z\|=\frac{\sqrt{4993}}{12}\approx5{,}89$ (y no trae el gráfico pedido); ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (la consigna pide derivada direccional, gradiente con gráfico, valor máximo, ángulo y las direcciones máx/mín/nulas):
 
 - **Bien:** parciales en $P$, $\frac{95\sqrt2}{24}$, gradiente, valor máximo $\|\nabla z\|$, ángulo y gráfico con las cuatro direcciones.
@@ -306,7 +320,13 @@ Dos caminos independientes.
 
 **1) Sobre la recta.** Con $x=3+\frac{\sqrt2}{2}t$ e $y=4-\frac{\sqrt2}{2}t$, $g(t)=z(x(t);y(t))$ y $g'(0)=\frac{95\sqrt2}{24}$ (el sympy del test deriva $g$ sin armar las parciales a mano).
 
-**2) Máximo = módulo.** Con $\omega$ el ángulo entre $s$ y $\nabla z$ ($\omega\approx18{,}07^\circ$): $\frac{\partial z}{\partial s}=\|\nabla z\|\cos\omega=5{,}89\cdot0{,}9507\approx5{,}60$.
+**2) Cociente incremental en otros sentidos (sin usar las parciales).** Con $t=10^{-6}$:
+
+- hacia el gradiente, $\frac{1}{\|\nabla z\|}\left(\frac83;-\frac{21}{4}\right)$, da $5{,}8884=\frac{\sqrt{4993}}{12}$ (el valor máximo);
+- hacia un versor perpendicular, $\frac{1}{\|\nabla z\|}\left(\frac{21}{4};\frac83\right)$, da $0$;
+- hacia $-45^\circ$ da $5{,}5979=\frac{95\sqrt2}{24}$, como en el inciso (a).
+
+Así se confirma el gradiente y su ángulo sin repetir las derivadas.
 
 </Comprobacion>
 <ResolucionOficial examen="p1-1h10-2023-10-rec" fuente="parciales/1er-parcial/Practicos de otros años/Recup. 1° Parcial 1H10 Oct-23.pdf" paginas="4" />
@@ -337,7 +357,9 @@ Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un míni
 </Pista>
 <Pista>
 
-Es **extremos relativos con hessiano**: (1) $z'_x=0$, $z'_y=0$; (2) derivadas segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo y el signo de $z''_{xx}$ dice mínimo ($+$) o máximo ($-$). Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/). Teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1.
+Es **extremos relativos con hessiano**: (1) $z'_x=0$, $z'_y=0$; (2) derivadas segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo y el signo de $z''_{xx}$ dice mínimo ($+$) o máximo ($-$). Teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1.
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>

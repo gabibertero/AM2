@@ -42,6 +42,8 @@ Mirá las operaciones: un logaritmo, un arco seno y, abajo, una raíz que ademá
 
 Es un **dominio por restricciones**: una desigualdad por operación (logaritmo: argumento $\gt0$; $\arcsin$: argumento entre $-1$ y $1$; raíz en el denominador: radicando $\gt0$), y se queda uno con lo que cumple **todas a la vez**. Cada una es una región del plano (hipérbola, franja vertical, circunferencia). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -113,7 +115,7 @@ $$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ \frac{x^2}{9}-\frac{y^2}{4}<1\ \ \wedge\ \ |x
 Camino independiente: **evaluar en puntos de prueba**.
 
 - $(0;\,2)$: $1-0+1=2>0$, $\arcsin0=0$ y $\sqrt{4-1}$ existen. **Está.**
-- $(5;\,3)$: $1-\frac{25}{9}+\frac94=\frac{17}{36}>0$ existe el log, $\arcsin1=\frac\pi2$ existe y $34>1$. **Está** (borde de la franja incluido).
+- $(5;\,3)$: $1-\frac{25}{9}+\frac94$ con denominador común $36$ es $\frac{36-100+81}{36}=\frac{17}{36}>0$, existe el log, $\arcsin1=\frac\pi2$ existe y $34>1$. **Está** (borde de la franja incluido).
 - $(4;\,0)$: $1-\frac{16}{9}<0$, el log no existe. **No está.**
 - $(6;\,0)$: además de caer fuera de las ramas, $\arcsin\frac65$ no existe. **No está.**
 - $(0;\,0{,}5)$: $x^2+y^2=0{,}25<1$, raíz de un negativo. **No está.**
@@ -149,6 +151,8 @@ Las medidas tienen un error de medición chico y te piden cuánto puede equivoca
 
 Es **diferencial total**: $dV=V'_l\,dl+V'_h\,dh$ con $dl$ y $dh$ los errores máximos (todos con el mismo signo, porque se pide la **máxima** variación), y $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
 
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
+
 </Pista>
 <Pista>
 
@@ -159,7 +163,9 @@ Planteo casi hecho: $V'_l=\dfrac{\sqrt3}{6}\,l\,h$ y $V'_h=\dfrac{\sqrt3}{12}\,l
 
 **Qué:** volumen inicial. **Por qué:** hace falta para el error porcentual.
 
-$$V=\frac{\sqrt3}{12}\cdot20^2\cdot30=\frac{\sqrt3}{12}\cdot12000=1000\sqrt3\ \text{cm}^3$$
+$$20^2=400\qquad400\cdot30=12000$$
+
+$$V=\frac{\sqrt3}{12}\cdot12000=1000\sqrt3\ \text{cm}^3$$
 
 </Paso>
 <Paso>
@@ -173,7 +179,11 @@ $$dl=2\%\cdot20=0{,}4\ \text{cm}\qquad dh=2\%\cdot30=0{,}6\ \text{cm}$$
 
 **Qué:** derivadas parciales. **Por qué:** $V=\frac{\sqrt3}{12}l^2h$ (derivo $l^2$ y dejo $h$ constante, o al revés).
 
-$$\frac{\partial V}{\partial l}=\frac{\sqrt3}{6}\,l\,h=\frac{\sqrt3}{6}\cdot600=100\sqrt3$$
+$$\frac{\partial V}{\partial l}=\frac{\sqrt3}{6}\,l\,h$$
+
+Con $l=20$ y $h=30$:
+
+$$\frac{\partial V}{\partial l}=\frac{\sqrt3}{6}\cdot(20\cdot30)=\frac{\sqrt3}{6}\cdot600=100\sqrt3$$
 
 $$\frac{\partial V}{\partial h}=\frac{\sqrt3}{12}\,l^2=\frac{\sqrt3}{12}\cdot400=\frac{100\sqrt3}{3}$$
 
@@ -250,6 +260,8 @@ $$\frac{\partial y}{\partial x}=-\frac{J(f,g\,/\,x,z)}{J(f,g\,/\,y,z)}$$
 
 Teoría: Rocha-Giordano, *Derivación de Funciones Implícitas* (7_Derivadas Func Implícitas.pdf, p. 2, "tercer caso").
 
+Machete: [Derivada implícita](../../machetes/derivada-implicita/).
+
 </Pista>
 <Pista>
 
@@ -287,7 +299,11 @@ $$(3x^2y+z^2)(-xy-2xz)=-3x^3y^2-6x^3yz-xyz^2-2xz^3$$
 
 $$(y^2+2xz)(2xy-yz-z^2)=2xy^3-y^3z-y^2z^2+4x^2yz-2xyz^2-2xz^3$$
 
-Restando el segundo al primero:
+Restando el segundo al primero (se cambia el signo de cada término del segundo):
+
+$$-3x^3y^2-6x^3yz-xyz^2-2xz^3-2xy^3+y^3z+y^2z^2-4x^2yz+2xyz^2+2xz^3$$
+
+Los $-2xz^3$ y $+2xz^3$ se cancelan, y $-xyz^2+2xyz^2=xyz^2$:
 
 $$-3x^3y^2-6x^3yz-4x^2yz-2xy^3+xyz^2+y^3z+y^2z^2$$
 
@@ -304,7 +320,11 @@ $$(x^3+2yz)(-xy-2xz)=-x^4y-2x^4z-2xy^2z-4xyz^2$$
 
 $$(y^2+2xz)(x^2-xz)=x^2y^2-xy^2z+2x^3z-2x^2z^2$$
 
-Restando y agrupando:
+Restando (se cambia el signo de cada término del segundo):
+
+$$-x^4y-2x^4z-2xy^2z-4xyz^2-x^2y^2+xy^2z-2x^3z+2x^2z^2$$
+
+Juntando $-2xy^2z+xy^2z=-xy^2z$ y ordenando:
 
 $$-x^4y-2x^4z-2x^3z-x^2y^2-xy^2z-4xyz^2+2x^2z^2$$
 
@@ -332,7 +352,15 @@ $$\frac{\partial y}{\partial x}=-\frac{y\left(3x^3y+6x^3z+4x^2z+2xy^2-xz^2-y^2z-
 
 Dos caminos independientes.
 
-**1) Derivar las ecuaciones y despejar.** Derivando $f=0$ y $g=0$ respecto de $x$: $f'_x+f'_y\,y'+f'_z\,z'=0$ y $g'_x+g'_y\,y'+g'_z\,z'=0$. Despejando $y'$ (eliminando $z'$) sale el mismo cociente.
+**1) Derivar las ecuaciones y resolver por Cramer.** Derivando $f=0$ y $g=0$ respecto de $x$ y pasando los términos en $x$ al segundo miembro:
+
+$$\begin{cases}f'_y\,y'+f'_z\,z'=-f'_x\\ g'_y\,y'+g'_z\,z'=-g'_x\end{cases}$$
+
+Por Cramer:
+
+$$y'=\frac{\begin{vmatrix}-f'_x&f'_z\\-g'_x&g'_z\end{vmatrix}}{\begin{vmatrix}f'_y&f'_z\\g'_y&g'_z\end{vmatrix}}=-\frac{\begin{vmatrix}f'_x&f'_z\\g'_x&g'_z\end{vmatrix}}{\begin{vmatrix}f'_y&f'_z\\g'_y&g'_z\end{vmatrix}}$$
+
+(se saca el $-1$ de la primera columna del determinante de arriba). Es la fórmula del planteo.
 
 **2) Valor numérico sobre la curva.** Un punto de la curva es $z=1$, $x\approx-0{,}5249$, $y\approx-0{,}6558$ (cumple las dos ecuaciones). Calculando $(x;y)$ para $z=1\pm10^{-4}$ y dividiendo $\Delta y$ por $\Delta x$ se obtiene el mismo valor que la fórmula evaluada en ese punto (coinciden hasta la quinta cifra).
 
@@ -366,6 +394,8 @@ Te piden tres cosas sobre la misma función y el mismo punto: cuánto cambia $z$
 <Pista>
 
 Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Plan: (1) derivadas parciales en $P$; (2) versor del segmento $\overrightarrow{PQ}$ (vector dividido por su módulo); (3) $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; (4) $\nabla z$, módulo y ángulo; (5) propiedad: $\frac{\partial z}{\partial s}=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega$.
+
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
 
 </Pista>
 <Pista>
@@ -435,11 +465,17 @@ $$\omega=\theta-\alpha=45^\circ-53{,}13^\circ=-8{,}13^\circ$$
 
 Su coseno exacto sale de $\cos\omega=\cos\theta\cos\alpha+\sin\theta\sin\alpha$:
 
-$$\cos\omega=\frac{\sqrt2}{2}\cdot\frac35+\frac{\sqrt2}{2}\cdot\frac45=\frac{7\sqrt2}{10}\approx0{,}990$$
+$$\cos\omega=\frac{\sqrt2}{2}\cdot\frac35+\frac{\sqrt2}{2}\cdot\frac45$$
+
+$$\cos\omega=\frac{3\sqrt2}{10}+\frac{4\sqrt2}{10}=\frac{7\sqrt2}{10}\approx0{,}990$$
 
 Entonces:
 
-$$\frac{\partial z}{\partial s}\Big|_P=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega=3\sqrt2\cdot\frac{7\sqrt2}{10}=\frac{42}{10}=\frac{21}{5}$$
+$$\frac{\partial z}{\partial s}\Big|_P=\nabla z\cdot s^\circ=\|\nabla z\|\cos\omega$$
+
+Reemplazo, con $\sqrt2\cdot\sqrt2=2$:
+
+$$\frac{\partial z}{\partial s}\Big|_P=3\sqrt2\cdot\frac{7\sqrt2}{10}=\frac{42}{10}=\frac{21}{5}$$
 
 Coincide con el inciso (a). Se ve además que $s$ está casi alineado con el gradiente, por eso la derivada direccional ($4{,}2$) es casi el máximo ($4{,}24$).
 
@@ -495,6 +531,8 @@ Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un míni
 <Pista>
 
 Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1). Plan: (1) $z'_x=0$, $z'_y=0$; (2) segundas; (3) $H=z''_{xx}z''_{yy}-(z''_{xy})^2$ en cada punto; (4) $H<0$ silla; $H>0$ extremo, con el signo de $z''_{xx}$ para saber cuál.
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>
@@ -598,6 +636,8 @@ Querés el punto de la recta que está **más cerca** de $P$. ¿Qué cantidad ha
 
 Es **extremo condicionado (Lagrange)**: función principal la distancia de $(x;y)$ a $P$ (conviene minimizar su **cuadrado**, que tiene el mismo mínimo y se deriva sin raíz) y condición $x+2y-5=0$. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
 
+Machete: [Extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/).
+
 </Pista>
 <Pista>
 
@@ -639,7 +679,9 @@ El punto de la recta más cercano es $Q(1;2)$ (cumple $1+2\cdot2=5$), con $\lamb
 
 **Qué:** calcular la distancia y justificar que es mínima. **Por qué:** sobre una recta la distancia a un punto no tiene máximo (crece sin límite), así que el único punto crítico es el mínimo.
 
-$$d=\sqrt{(1+1)^2+(2+2)^2}=\sqrt{4+16}=\sqrt{20}=2\sqrt5\approx4{,}47$$
+$$d=\sqrt{(1+1)^2+(2+2)^2}$$
+
+$$d=\sqrt{2^2+4^2}=\sqrt{4+16}=\sqrt{20}=2\sqrt5\approx4{,}47$$
 
 <img src={`${import.meta.env.BASE_URL}figuras/p1-1r3-2024-10-b/ej6.svg`} alt="Plano xy con ejes graduados de 1 en 1. Recta x+2y=5 en negro, punto P(−1;−2) en violeta, punto Q(1;2) sobre la recta en verde y el segmento PQ en rojo, perpendicular a la recta, con longitud 2√5." style={{maxWidth:'100%',height:'auto'}} />
 
@@ -665,7 +707,11 @@ Dos caminos independientes.
 
 **1) Fórmula punto-recta.** La distancia de $P(-1;-2)$ a $x+2y-5=0$ es
 
-$$d=\frac{|1\cdot(-1)+2\cdot(-2)-5|}{\sqrt{1^2+2^2}}=\frac{10}{\sqrt5}=2\sqrt5$$
+$$d=\frac{|1\cdot(-1)+2\cdot(-2)-5|}{\sqrt{1^2+2^2}}$$
+
+El numerador es $|-1-4-5|=10$ y el denominador $\sqrt{1+4}=\sqrt5$:
+
+$$d=\frac{10}{\sqrt5}=2\sqrt5$$
 
 **2) Perpendicularidad.** La recta tiene dirección $(2;-1)$ y $\overrightarrow{PQ}=(2;4)$; su producto escalar es $2\cdot2+4\cdot(-1)=0$: $PQ$ es perpendicular a la recta, como corresponde a la distancia mínima.
 

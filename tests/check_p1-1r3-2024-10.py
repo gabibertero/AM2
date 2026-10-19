@@ -71,6 +71,9 @@ assert (-R(3, 5))**2 + (R(8, 5))**2 < 4 and R(8, 5) == 1 + R(3, 5)  # (−3/5; 8
 assert sp.solve(x**2 + (1 - x)**2 - 4, x) == [(1 - sp.sqrt(7))/2, (1 + sp.sqrt(7))/2]
 assert 1**2 + 0 == 1 and 0 + 2**2/4 == 1                                  # a_x = 1, b_y = 2: semiejes de la elipse
 assert abs((float(sp.log(2)) - float(sp.pi/2))/0.5 + 1.7553) < 1e-3                        # z(−1; 1) existe
+assert sp.solve(2*x**2 - 2*x - 3, x) == [(1 - sp.sqrt(7))/2, (1 + sp.sqrt(7))/2] and sp.expand((5*x + 3)*(x - 1) - (5*x**2 - 2*x - 3)) == 0
+assert set(sp.solve(x**2 + (-1 - x)**2 - 4, x)) == {(-1 - sp.sqrt(7))/2, (-1 + sp.sqrt(7))/2}                # cortes recta y = −1 − x con la circunferencia
+en_mdx("a", r"x=\frac{1\pm\sqrt7}{2}", r"\frac{-1-\sqrt7}{2}", r"\frac{1+\sqrt7}{2}", r"\frac{1-\sqrt7}{2}")
 en_mdx("a", r"x^2+y^2<4", r"-1-x\le y\le1-x", r"x^2+\frac{y^2}{4}>1", r"-1\le y+x\le1")
 
 # --- Ej 2: pirámide V = A·B·H/3
@@ -120,6 +123,10 @@ def punto(xv):
 hh = R(1, 10**4); zp_num = (punto(8 + hh)[1] - punto(8 - hh)[1])/float(2*hh)
 zp_for = float((-Num/Den).subs(P0))
 assert abs(zp_num - zp_for) < 1e-5, (zp_num, zp_for)
+assert sp.expand((3*x*y**2 - z**4)*(2 - 2*y**2) - (6*x*y**2 - 6*x*y**4 - 2*z**4 + 2*y**2*z**4)) == 0
+assert sp.expand((2*x + y**3)*(-4*x*y + 3*z**2) - (-8*x**2*y + 6*x*z**2 - 4*x*y**4 + 3*y**3*z**2)) == 0
+assert sp.gcd(sp.expand(Num), sp.expand(Den)) == 1                                    # el numerador no se simplifica con el denominador
+en_mdx("a", r"8x^2y-2xy^4+6xy^2-6xz^2-3y^3z^2+2y^2z^4-2z^4", r"no se simplifica más", r"\begin{vmatrix}f'_y&-f'_x")
 en_mdx("a", r"2yz\left(9xy^2-8xyz^2+3z^4\right)", r"\frac{\partial z}{\partial x}=-\frac{\Delta_{zx}}{\Delta_{ppal}}", r"6yz", r"-4xy+3z^2")
 
 # --- Ej 4: z = 2x²y³ − 3x⁴y + 10, P(1,2), α = −45°
@@ -161,7 +168,7 @@ assert z5.subs({x: R(3, 2), y: R(9, 4)}) == R(53, 16) and z5.subs({x: 0, y: 0}) 
 assert sp.expand(z5 - ((y - 3*x/2)**2 + x**3 - R(9, 4)*x**2 + 5)) == 0
 gg = x**3 - R(9, 4)*x**2 + 5
 assert sp.solve(sp.diff(gg, x), x) == [0, R(3, 2)] and [sp.diff(gg, x, 2).subs(x, v) for v in (0, R(3, 2))] == [-R(9, 2), R(9, 2)]
-en_mdx("a", r"H(x;y)=z''_{xx}\,z''_{yy}-(z''_{xy})^2=6x\cdot2-(-3)^2=12x-9", r"H(0;0)=-9<0", r"H\!\left(\tfrac32;\tfrac94\right)=12\cdot\tfrac32-9=18-9=9>0", r"z''_{xx}\!\left(\tfrac32;\tfrac94\right)=6\cdot\tfrac32=9>0")
+en_mdx("a", r"H(x;y)=z''_{xx}\,z''_{yy}-(z''_{xy})^2=6x\cdot2-(-3)^2", r"H(x;y)=12x-9", r"H(0;0)=-9<0", r"H\!\left(\tfrac32;\tfrac94\right)=18-9=9>0", r"z''_{xx}\!\left(\tfrac32;\tfrac94\right)=6\cdot\tfrac32=9>0")
 
 # --- Ej 6: Lagrange, caja con vértice en x + y/3 + z/4 = 1
 l = sp.symbols("l")
@@ -176,6 +183,8 @@ assert 12*R(1, 3)**3 == R(4, 9) and s6[x] == s6[y]/3 == s6[z]/4 == R(1, 3)
 Vxy = sp.expand((x*y*4*(1 - x - y/3)))
 sol2 = sp.solve([sp.diff(Vxy, x), sp.diff(Vxy, y)], [x, y], dict=True)
 assert {(s[x], s[y]) for s in sol2} >= {(R(1, 3), 1)} and Vxy.subs({x: R(1, 3), y: 1}) == R(4, 9)
+assert sp.expand(sp.diff(Vxy, x) - 4*y*(1 - 2*x - y/3)) == 0 and sp.expand(sp.diff(Vxy, y) - 4*x*(1 - x - 2*y/3)) == 0
+en_mdx("a", r"V'_x=4y\left(1-2x-\frac y3\right)", r"V'_y=4x\left(1-x-\frac{2y}{3}\right)")
 en_mdx("a", r"y=3x", r"z=4x", r"x=\frac13", r"V_{\text{máx}}=\frac13\cdot1\cdot\frac43=\frac49")
 
 # ===================================================================== B
@@ -272,6 +281,10 @@ assert abs(float(2*sp.sqrt(5)) - 4.4721) < 1e-4
 assert sp.Rational(abs(1*(-1) + 2*(-2) - 5), 1)/sp.sqrt(5) == 2*sp.sqrt(5)
 assert (1 - (-1))*2 + (2 - (-2))*(-1) == 0
 assert sp.simplify(d2.subs({x: 5 - 2*y}).subs(y, 2) - 20) == 0 and sp.simplify(sp.diff(d2.subs(x, 5 - 2*y), y, 2)) == 10   # f(y) convexa → mínimo
-en_mdx("b", r"y=2x", r"x=1", r"Q(1;2)", r"d=\sqrt{(1+1)^2+(2+2)^2}=\sqrt{4+16}=\sqrt{20}=2\sqrt5")
+en_mdx("b", r"y=2x", r"x=1", r"Q(1;2)", r"d=\sqrt{2^2+4^2}=\sqrt{4+16}=\sqrt{20}=2\sqrt5")
 
+en_mdx("a", r"""La resolución del profe escribe $g'_y=-2xy+3z^2$ en el determinante de abajo; la derivada correcta es $-4xy+3z^2$ (errata de copia que no cambia el planteo);""")  # aviso de discrepancia con la resolución del profe
+en_mdx("a", r"""Reemplazo y se simplifica $\sqrt{505}$""")
+en_mdx("b", r"""Reemplazo, con $\sqrt2\cdot\sqrt2=2$""")
+en_mdx("b", r"""Con $l=20$ y $h=30$:""")
 print("OK check_p1-1r3-2024-10")

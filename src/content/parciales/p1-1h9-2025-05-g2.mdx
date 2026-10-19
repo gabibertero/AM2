@@ -40,6 +40,8 @@ Fijate qué funciones "delicadas" aparecen: un logaritmo, una raíz, un arcoseno
 
 Es un **dominio por restricciones**: una condición por cada función, y el dominio es la intersección de todas. Logaritmo: argumento $>0$; raíz: radicando $\ge0$; arcoseno: argumento entre $-1$ y $1$; denominador: $\arcsin(y)\neq0$. Después se identifica cada región (hipérbola, elipse, franja) y se sombrea lo común.
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -80,6 +82,8 @@ $$\frac{1+y^2}{9}+\frac{y^2}{4}=1$$
 Multiplicando por $36$:
 
 $$4(1+y^2)+9y^2=36$$
+
+$$4+4y^2+9y^2=36$$
 
 $$13y^2=32\ \Rightarrow\ y^2=\frac{32}{13}\approx2{,}46>1$$
 
@@ -149,6 +153,8 @@ Hay dos pedidos sobre la misma función y el mismo punto: cuánto cambia $z$ al 
 <Pista>
 
 Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19). Plan: parciales en $P$; la dirección es el vector $\overrightarrow{PQ}$ **normalizado** (versor); $\dfrac{\partial z}{\partial s}=\nabla z\cdot s^\circ$. Gradiente $\nabla z=z'_x\,i+z'_y\,j$; su módulo es el máximo de la derivada direccional y su ángulo la dirección de máximo crecimiento. El logaritmo de un cociente conviene separarlo antes de derivar.
+
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
 
 </Pista>
 <Pista>
@@ -245,7 +251,11 @@ $$g(t)=\ln\frac{\left(1+\frac35t\right)^2+2}{\left(-2-\frac45t\right)^2}$$
 
 y la derivada direccional es $\displaystyle\lim_{t\to0}\frac{g(t)-g(0)}{t}=g'(0)=-\frac25$ (calculado con sympy, es el mismo número).
 
-**2) Con el ángulo entre vectores.** $\cos\omega=\dfrac{\nabla z\cdot s^\circ}{\|\nabla z\|}=\dfrac{-2/5}{\sqrt{13}/3}\approx-0{,}333$, o sea $\omega\approx109{,}4^\circ$; $\|\nabla z\|\cos\omega=-\frac25$.
+**2) Cociente incremental numérico (independiente de las parciales).** Con $t=10^{-5}$ el punto es $(1{,}000006;\,-2{,}000008)$ y
+
+$$\frac{z(1{,}000006;\,-2{,}000008)-z(1;-2)}{10^{-5}}\approx-0{,}4000$$
+
+que coincide con $-\frac25$.
 
 **3) Dirección nula.** Un versor perpendicular al gradiente, $\left(-\frac{3}{\sqrt{13}};\frac{2}{\sqrt{13}}\right)$, da por el mismo límite $0$.
 
@@ -277,6 +287,8 @@ Te piden primero los **candidatos** a máximo, mínimo o silla, y después decid
 <Pista>
 
 Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28). Plan: $z'_x=0,\ z'_y=0$; derivadas segundas; $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$ en cada punto crítico. Si $H<0$: silla. Si $H>0$: el signo de $z''_{xx}$ da mínimo (+) o máximo (−). Si $H=0$ el criterio no decide.
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>
@@ -313,13 +325,21 @@ $$H(x;y)=4x\cdot(-8y)-0^2=-32\,xy$$
 
 **Qué:** evaluar $H$ y clasificar. **Por qué:** $H<0$ es silla; $H>0$ obliga a mirar el signo de $z''_{xx}$.
 
-$$H(3;2)=-32\cdot6=-192<0\ \Rightarrow\ \text{silla}$$
+$$H(3;2)=-32\cdot(3\cdot2)=-32\cdot6=-192<0\ \Rightarrow\ \text{silla}$$
 
-$$H(-3;-2)=-32\cdot6=-192<0\ \Rightarrow\ \text{silla}$$
+$$H(-3;-2)=-32\cdot\big((-3)(-2)\big)=-32\cdot6=-192<0\ \Rightarrow\ \text{silla}$$
 
-$$H(3;-2)=-32\cdot(-6)=192>0,\qquad z''_{xx}(3;-2)=4\cdot3=12>0\ \Rightarrow\ \text{mínimo}$$
+$$H(3;-2)=-32\cdot\big(3\cdot(-2)\big)=-32\cdot(-6)=192>0$$
 
-$$H(-3;2)=-32\cdot(-6)=192>0,\qquad z''_{xx}(-3;2)=4\cdot(-3)=-12<0\ \Rightarrow\ \text{máximo}$$
+$H>0$: es extremo, y el signo de $z''_{xx}$ decide:
+
+$$z''_{xx}(3;-2)=4\cdot3=12>0\ \Rightarrow\ \text{mínimo}$$
+
+$$H(-3;2)=-32\cdot\big((-3)\cdot2\big)=-32\cdot(-6)=192>0$$
+
+Otra vez extremo; el signo de $z''_{xx}$ decide:
+
+$$z''_{xx}(-3;2)=4\cdot(-3)=-12<0\ \Rightarrow\ \text{máximo}$$
 
 (No se piden las cotas; para ubicarte, el mínimo está en $z=-\frac{172}{3}$ y el máximo en $z=\frac{172}{3}$.)
 

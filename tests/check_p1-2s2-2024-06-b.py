@@ -91,4 +91,7 @@ Hs = sp.diff(Ss, x, 2)*sp.diff(Ss, y, 2) - sp.diff(Ss, x, y)**2
 assert (sp.diff(Ss, x, 2).subs({x: 4, y: 4}), sp.diff(Ss, y, 2).subs({x: 4, y: 4}), sp.diff(Ss, x, y).subs({x: 4, y: 4}), Hs.subs({x: 4, y: 4})) == (2, 2, 1, 3)
 assert Ss.subs({x: 4, y: 4}) == 48 and all(Ss.subs({x: 4 + a, y: 4 + b}) > 48 for a in (-1, 0, 1) for b in (-1, 0, 1) if (a, b) != (0, 0))
 en_mdx(r"S=xy+2xz+2yz", r"x^3=64\ \Rightarrow\ x=4", r"S=xy+2xz+2yz=16+16+16=48\ \text{cm}^2", r"S(x,y)=xy+\frac{64}x+\frac{64}y", r"H=4-1=3\gt0")
+en_mdx(r"""La resolución del profe da $E\%\simeq-0{,}28\%$ (truncado); acá $-\frac27\%\approx-0{,}29\%$ (mismo valor exacto);""")  # aviso de discrepancia con la resolución del profe
+en_mdx(r"""La resolución del profe no desarrolla el inciso (c); acá se resuelve aparte con la propiedad del gradiente;""")  # aviso de discrepancia con la resolución del profe
+en_mdx(r"""La resolución del profe escribe $H(x,y)=-36xy$; acá $H=-32xy$ (los signos de $H$ y la clasificación no cambian);""")  # aviso de discrepancia con la resolución del profe
 print("OK p1-2s2-2024-06-b")

@@ -64,10 +64,12 @@ assert gy/gx == -R(63, 32)
 th = sp.atan2(gy, gx); thd = float(th)*180/np.pi
 assert abs(thd + 63.0723) < 1e-3 and abs(thd % 360 - 296.9277) < 1e-3
 assert abs(thd + 180 - 116.9277) < 1e-3 and abs((thd + 90) - 26.9277) < 1e-3 and abs((thd + 270) - 206.9277) < 1e-3
+_n = float(mod); _c = lambda u: float((f3.subs({x: 3 + 1e-6*u[0], y: 4 + 1e-6*u[1]}) - f3.subs({x: 3, y: 4}))/1e-6)   # comprobación 2: cociente incremental
+assert abs(_c((float(gx)/_n, float(gy)/_n)) - _n) < 1e-3 and abs(_c((-float(gy)/_n, float(gx)/_n))) < 1e-3
 omega = abs(thd + 45); assert abs(omega - 18.0723) < 1e-3 and abs(float(mod)*np.cos(np.radians(omega)) - float(DD)) < 1e-9         # comprobación 2
 assert abs(np.cos(np.radians(omega)) - 0.9507) < 1e-4
 assert abs(float(mod2 - R(64, 9) - R(441, 16))) < 1e-12 and R(32, 24) + R(63, 24) == R(95, 24)
-en_mdx(r"\frac{95\sqrt2}{24}", r"\nabla z(P)=\frac83\,i-\frac{21}{4}\,j", r"\frac{\sqrt{4993}}{12}", r"\arctan\left(-\frac{63}{32}\right)\approx-63{,}07^\circ",
+en_mdx(r"5{,}8884=\frac{\sqrt{4993}}{12}", r"\frac{36}{16}=\frac94", r"\frac{95\sqrt2}{24}", r"\nabla z(P)=\frac83\,i-\frac{21}{4}\,j", r"\frac{\sqrt{4993}}{12}", r"\arctan\left(-\frac{63}{32}\right)\approx-63{,}07^\circ",
        r"z'_x(P)=-\frac{5\cdot3}{5}+\frac{12}{4}+\frac83=-3+3+\frac83=\frac83", r"-4-\frac94+1=-\frac{21}{4}", r"\frac{32}{24}+\frac{63}{24}=\frac{95}{24}")
 
 # --- Ej 4: z = x³ + 3xy² − 15x − 12y + 1
@@ -90,4 +92,5 @@ assert f4.subs({x: 2, y: 1}) == -27 and f4.subs({x: -2, y: -1}) == 29
 en_mdx(r"x^4-5x^2+4=0", r"t=\frac{5\pm\sqrt{25-16}}{2}=\frac{5\pm3}{2}", r"H(x;y)=\begin{vmatrix}6x&6y\\6y&6x\end{vmatrix}=36x^2-36y^2=36\,(x^2-y^2)",
        r"H=36\cdot(4-1)=108>0", r"H=36\cdot(1-4)=-108<0")
 
+en_mdx(r"""La resolución del profe escribe el módulo con un numerador ilegible ($442$ o $441$); el correcto es $\left(\frac{21}{4}\right)^2=\frac{441}{16}$, o sea $\|\nabla z\|=\frac{\sqrt{4993}}{12}\approx5{,}89$ (y no trae el gráfico pedido);""")  # aviso de discrepancia con la resolución del profe
 print("OK check_p1-1h10-2023-10-rec")

@@ -44,6 +44,8 @@ Mirá cada pieza: un logaritmo y una raíz arriba; abajo un producto $xy$ por un
 
 El dominio es la **intersección de las condiciones de existencia**: logaritmo con argumento $\gt0$, raíz del numerador con radicando $\ge0$, y el denominador **distinto de 0** (raíz con radicando $\gt0$, y $x\ne0$, $y\ne0$). Como la consigna enfatiza el gráfico, cada curva se rotula y se marcan cortes. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -157,6 +159,8 @@ Hay dos funciones, $H$ y $R$, cada una de dos variables ($v_0$ y $\theta$) con e
 
 Método: **diferencial total** de cada función, $dH=H'_{v_0}\,dv_0+H'_\theta\,d\theta$ y $dR=R'_{v_0}\,dv_0+R'_\theta\,d\theta$, con $d\theta$ **en radianes**; después $E\%=\dfrac{dz}{z}\cdot100$ para cada una. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
 
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
+
 </Pista>
 <Pista>
 
@@ -266,6 +270,8 @@ La derivada direccional es "cuánto cambia $f$" al moverte en cierta dirección.
 
 Método: simplificar con propiedades del logaritmo ($\ln\sqrt u=\frac12\ln u$), derivar y plantear $\dfrac{\partial f}{\partial s}=f'_x\cos\alpha+f'_y\sin\alpha=0$; la dirección nula es perpendicular al gradiente. El gradiente es $\nabla f=f'_x\vec i+f'_y\vec j$ y su módulo es el máximo de la direccional. Teoría: Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2 (el ejercicio 7 es de este tipo).
 
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
+
 </Pista>
 <Pista>
 
@@ -285,7 +291,11 @@ $$f=\ln\big((5x^2-4y^2)^{1/2}\big)=\frac12\ln(5x^2-4y^2)$$
 
 **Qué:** derivadas parciales. **Por qué:** regla de la cadena: la derivada de $\ln u$ es $\frac{u'}{u}$.
 
-$$f'_x=\frac12\cdot\frac{10x}{5x^2-4y^2}=\frac{5x}{5x^2-4y^2},\qquad f'_y=\frac12\cdot\frac{-8y}{5x^2-4y^2}=\frac{-4y}{5x^2-4y^2}$$
+Derivadas del interior: $(5x^2-4y^2)'_x=10x$ y $(5x^2-4y^2)'_y=-8y$. Entonces:
+
+$$f'_x=\frac12\cdot\frac{10x}{5x^2-4y^2}=\frac{5x}{5x^2-4y^2}$$
+
+$$f'_y=\frac12\cdot\frac{-8y}{5x^2-4y^2}=\frac{-4y}{5x^2-4y^2}$$
 
 </Paso>
 <Paso>
@@ -299,7 +309,11 @@ $$f'_x(P)=\frac{5\cdot4}{-20}=-1,\qquad f'_y(P)=\frac{-4\cdot5}{-20}=1$$
 
 **Qué:** plantear derivada direccional nula. **Por qué:** es lo que pide la primera parte.
 
-$$\frac{\partial f}{\partial s}=-1\cdot\cos\alpha+1\cdot\sin\alpha=0\ \Rightarrow\ \sin\alpha=\cos\alpha\ \Rightarrow\ \operatorname{tg}\alpha=1$$
+$$\frac{\partial f}{\partial s}=-1\cdot\cos\alpha+1\cdot\sin\alpha=0$$
+
+Despejo: $\sin\alpha=\cos\alpha$; como $\cos\alpha\neq0$ (si fuera $0$, también lo sería el seno), divido y queda
+
+$$\operatorname{tg}\alpha=1$$
 
 $$\alpha=45^\circ\quad\text{o}\quad\alpha=45^\circ+180^\circ=225^\circ$$
 
@@ -361,6 +375,8 @@ Te piden una superficie, pero el dato que optimiza es el volumen. ¿Qué dos pas
 <Pista>
 
 Método: **Lagrange** para el volumen $V=xyz$ con el plano como condición, $F=V-\lambda\,g$; con las dimensiones de la caja óptima se calcula la superficie total $S=2(xy+yz+xz)$. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+Machete: [Extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/).
 
 </Pista>
 <Pista>

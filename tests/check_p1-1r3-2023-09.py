@@ -25,7 +25,7 @@ assert len(sol) == 4 and all(s[y]**2 == R(16, 21) and s[x]**2 == R(20, 21) for s
 assert sp.solve(sp.Eq((1 - y**2/16)/4 + y**2, 1), y**2) == [R(16, 21)] and R(63, 64) == 1 - R(1, 64)
 assert abs(float(4/sp.sqrt(21)) - .8729) < 1e-3 and abs(float(sp.sqrt(R(20, 21))) - .9759) < 1e-3
 assert 1 - 4/R(16) > 0 and 1 - R(9, 16) > 0 and 9 - 1 > 0
-en_a(r"\frac{x^2}{4}+y^2>1", r"x^2+\frac{y^2}{16}<1", r"y^2=\frac{16}{21}", r"\sqrt{0{,}75}")
+en_a(r"\frac{x^2}{4}+y^2>1", r"x^2+\frac{y^2}{16}<1", r"y^2=\frac34\cdot\frac{64}{63}=\frac{16}{21}", r"\sqrt{0{,}75}")
 
 # --- Ej 2: límite de 5x²y/(x⁴+3y²) en (0,0) ---
 f2 = 5*x**2*y/(x**4 + 3*y**2)
@@ -69,10 +69,12 @@ ds = sp.simplify(gx*s5[0] + gy*s5[1]); assert ds == 2*sp.sqrt(2)
 assert sp.sqrt(gx**2 + gy**2) == sp.sqrt(10)
 th = sp.atan2(gy, gx); th_deg = float(th)*180/3.141592653589793 % 360; assert abs(th_deg - 251.57) < .01 and abs(float(sp.atan(3))*180/3.141592653589793 - 71.57) < .01
 assert abs(float(cociente(f5, (4, 3), (float(s5[0]), float(s5[1])), 1e-6)) - 2*2**.5) < 1e-4
+_q = 10**.5   # Comprobación 2: otros sentidos por cociente incremental
+assert abs(float(cociente(f5, (4, 3), (-1/_q, -3/_q), 1e-6)) - _q) < 1e-4 and abs(float(cociente(f5, (4, 3), (3/_q, -1/_q), 1e-6))) < 1e-4
 om = th_deg - 225; cosom = sp.cos(sp.atan(3) - sp.pi/4)   # 251,57−225=26,57 = arctan3 − 45°
 assert abs(om - 26.57) < .01 and sp.simplify(sp.sqrt(10)*(gx/sp.sqrt(10)*s5[0] + gy/sp.sqrt(10)*s5[1]) - 2*sp.sqrt(2)) == 0 and sp.simplify((gx*s5[0] + gy*s5[1])/sp.sqrt(10) - 2*sp.sqrt(2)/sp.sqrt(10)) == 0
 assert abs(th_deg - 180 - 71.57) < .01 and abs((th_deg + 180) % 360 - 71.57) < .01 and abs((th_deg + 90) % 360 - 341.57) < .01 and abs((th_deg - 90) % 360 - 161.57) < .01
-en_a(r"\frac{\partial f}{\partial s}\Big|_P=2\sqrt2\approx2{,}83", r"\sqrt{10}\approx3{,}16", r"251{,}57^\circ", r"f'_x(P)=-\frac{5\cdot4}{5}+\frac33+\frac84=-4+1+2=-1", r"\frac{2\sqrt2}{\sqrt{10}}")
+en_a(r"\frac{\partial f}{\partial s}\Big|_P=2\sqrt2\approx2{,}83", r"\sqrt{10}\approx3{,}16", r"251{,}57^\circ", r"f'_x(P)=-\frac{5\cdot4}{5}+\frac33+\frac84=-4+1+2=-1", r"3{,}1623=\sqrt{10}", r"\arctan3\approx71{,}57^\circ")
 
 # --- Ej 6: 3xy − x³ − 3y²/2 − 5 ---
 f6 = 3*x*y - x**3 - R(3, 2)*y**2 - 5
@@ -82,7 +84,7 @@ assert (sp.diff(f6, x, 2), sp.diff(f6, y, 2), sp.diff(f6, x, y)) == (-6*x, -3, 3
 assert H6.subs(x, 0) == -9 and H6.subs(x, 1) == 9 and sp.diff(f6, x, 2).subs(x, 1) == -6 and f6.subs({x: 0, y: 0}) == -5 and f6.subs({x: 1, y: 1}) == -R(9, 2)
 assert sp.expand(f6 - (-R(3, 2)*(y - x)**2 + R(3, 2)*x**2 - x**3 - 5)) == 0
 g6 = R(3, 2)*x**2 - x**3 - 5; assert (sp.diff(g6, x, 2).subs(x, 0), sp.diff(g6, x, 2).subs(x, 1)) == (3, -3) and sp.solve(sp.diff(g6, x), x) == [0, 1]
-en_a(r"H(x;y)=(-6x)(-3)-3^2=18x-9", r"H(0;0)=-9\lt0", r"H(1;1)=18-9=9\gt0", r"f(1;1)=-\frac92")
+en_a(r"H(x;y)=(-6x)(-3)-3^2", r"H(x;y)=18x-9", r"H(0;0)=-9\lt0", r"H(1;1)=18-9=9\gt0", r"f(1;1)=-\frac92")
 
 # --- Ej 7: distancia del plano x+4y+9z=98 al origen ---
 F7 = x**2 + y**2 + z**2 - l*(x + 4*y + 9*z - 98)
@@ -136,7 +138,7 @@ assert sp.log(1) == 0 and 1**2 + 3*1 - 1 == 3
 u4s = x**2/y + 2*x*y**2*sp.log(z); assert (sp.diff(u4s, x).subs(M1), sp.diff(u4s, y).subs(M1), sp.diff(u4s, z).subs(M1)) == (2, -1, 2)
 # comprobación 2: curva (1+t,1+t,1+5t)
 g = u4b.subs({x: 1 + t, y: 1 + t, z: 1 + 5*t}); assert sp.simplify(sp.diff(g, t).subs(t, 0)) == 11
-en_b(r"\frac{du}{dx}\Big|_{(1,1,1)}=11", r"u'_x=\frac{2}{1}+1\cdot\ln1=2\qquad u'_y=-\frac11+2\ln1=-1\qquad u'_z=\frac{2}{1}=2", r"\frac{du}{dx}=2-1+10=11")
+en_b(r"\frac{du}{dx}\Big|_{(1,1,1)}=11", r"u'_x=\frac{2}{1}+1\cdot\ln1=2+0=2", r"u'_y=-\frac11+2\ln1=-1+0=-1", r"u'_z=\frac{2\cdot1\cdot1^2}{1}=2", r"\frac{du}{dx}=2-1+10=11")
 
 # --- Ej 5: f = 2√(5x²−y²) − 3y/x − ln(x²y), P(1,1), α=3π/4 ---
 f5b = 2*sp.sqrt(5*x**2 - y**2) - 3*y/x - sp.log(x**2*y)
@@ -147,6 +149,9 @@ s5b = (sp.cos(3*sp.pi/4), sp.sin(3*sp.pi/4)); dsb = sp.simplify(gxb*s5b[0] + gyb
 assert sp.sqrt(gxb**2 + gyb**2) == sp.sqrt(61) and abs(float(sp.sqrt(61)) - 7.81) < .01
 thb = float(sp.atan(R(-5, 6)))*180/3.141592653589793; assert abs(thb + 39.81) < .01 and abs(thb % 360 - 320.19) < .01
 assert abs(float(cociente(f5b, (1, 1), (float(s5b[0]), float(s5b[1])), 1e-6)) + 7.7782) < 1e-3
+_q = 61**.5   # Comprobación 2: otros sentidos por cociente incremental
+assert abs(float(cociente(f5b, (1, 1), (6/_q, -5/_q), 1e-6)) - _q) < 1e-3 and abs(float(cociente(f5b, (1, 1), (5/_q, 6/_q), 1e-6))) < 1e-3
+en_b(r"7{,}8102=\sqrt{61}", r"\arctan\left(-\frac34\right)", r"(5x+3)(x-1)=0", r"f(x;1-x)=\frac32x^2")
 omb = 135 - thb; assert abs(omb - 174.81) < .01 and abs(float(sp.sqrt(61))*float(sp.cos(sp.rad(omb))) + 7.78) < .01
 assert abs((thb + 180) % 360 - 140.19) < .01 and abs((thb + 90) % 360 - 50.19) < .01 and abs((thb - 90) % 360 - 230.19) < .01
 # lo que figura en el escaneo (z_y = −9/2): inconsistente con su propia direccional
@@ -175,4 +180,7 @@ assert f7.subs({x: 0, y: 1}) == 0 and sp.solve(x + (x + 2)/2 - 1, x) == [0]
 gs = sp.expand(f7.subs(y, 1 - x)); assert gs == R(3, 2)*x**2 and sp.diff(gs, x, 2) == 3 and sp.solve(sp.diff(gs, x), x) == [0]
 assert sp.solve([sp.diff(f7, x), sp.diff(f7, y)], [x, y], dict=True) == [{x: -1, y: R(1, 2)}]
 en_b(r"x+\frac{x+2}{2}=1", r"(x;y)=(0;1),\qquad z=f(0;1)=0", r"\frac32x^2")
+en_b(r"""El punto $(1;1;1)$ no está sobre $y=\ln x$, $z=x^2+3x-1$ (en $x=1$ resulta $y=0$, $z=3$); como la resolución del profe, se evalúan las expresiones con los valores dados;""")  # aviso de discrepancia con la resolución del profe
+en_b(r"""$$u'_x=\frac{2x}{y}+y^2\ln(z^2)$$""")
+en_b(r"""Como $\ln1=0$, los términos con logaritmo se anulan""")
 print("OK p1-1r3-2023-09 (A y B)")

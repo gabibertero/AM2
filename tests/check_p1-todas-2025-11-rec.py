@@ -79,4 +79,6 @@ assert Vs.subs({x: 1, y: 2}) == 6
 # comprobación 2: media geométrica, 6x·3y·2z = 36xyz con suma 18 → cada uno 6
 assert 6*1 == 3*2 == 2*3 == 6 and 36*V == 6*6*6
 en_mdx(r"6x+6x+6x=18\ \Rightarrow\ 18x=18\ \Rightarrow\ x=1", r"S=2(2+6+3)=2\cdot11=22\ \text{m}^2", r"H=36-9=27\gt0")
+en_mdx(r"""(5x^2-4y^2)'_x=10x""", r"""f'_y=\frac12\cdot\frac{-8y}{5x^2-4y^2}=\frac{-4y}{5x^2-4y^2}$$""")
+en_mdx(r"""Despejo: $\sin\alpha=\cos\alpha$""")
 print("OK p1-todas-2025-11-rec")

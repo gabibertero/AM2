@@ -40,6 +40,8 @@ Mirá qué operaciones aparecen en la fórmula: un logaritmo, una raíz y un coc
 
 Es un **dominio por restricciones**: hay que plantear una desigualdad por cada operación (logaritmo: argumento positivo; raíz par: radicando $\ge0$; denominador: distinto de cero) y quedarse con los puntos que cumplen **todas a la vez**. Después se reconoce cada desigualdad como región del plano (elipse, hipérbola, cuadrantes) y se dibuja la intersección.
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -125,7 +127,7 @@ $$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ \frac{x^2}{4}+y^2<1\ \ \wedge\ \ x^2-y^2\ge1\
 
 Camino independiente: **evaluar la fórmula en puntos de prueba** y ver si da un real.
 
-- $(1{,}5;\,0{,}3)$: $\ln(1-0{,}5625-0{,}09)=\ln0{,}3475$ existe, $\sqrt{2{,}25-0{,}09-1}=\sqrt{1{,}16}$ existe, $\sqrt{2\cdot1{,}5\cdot0{,}3}=\sqrt{0{,}9}\neq0$. Da $z\approx0{,}0209$: **está en $D$**.
+- $(1{,}5;\,0{,}3)$: $\ln(1-0{,}5625-0{,}09)=\ln0{,}3475$ existe, $\sqrt{2{,}25-0{,}09-1}=\sqrt{1{,}16}$ existe, $\sqrt{2\cdot1{,}5\cdot0{,}3}=\sqrt{0{,}9}\neq0$. Da $z\approx0{,}0211$: **está en $D$**.
 - $(1{,}5;\,-0{,}3)$: $xy<0$, el denominador sería $\sqrt{-0{,}9}$: **no está**.
 - $(1;\,0)$: sobre la hipérbola pero $xy=0$, denominador $0$: **no está**.
 - $(0{,}5;\,0{,}2)$: $x^2-y^2-1<0$, raíz de un negativo: **no está**.
@@ -162,6 +164,8 @@ Te piden dos cosas distintas sobre la misma función y el mismo punto: cuánto c
 
 Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19). Plan: (1) derivadas parciales en $P$; (2) pendiente de la tangente a la parábola → ángulo $\alpha$ → versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\dfrac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; (4) el gradiente es $\nabla z=z'_x\,i+z'_y\,j$, su módulo es el valor máximo de la derivada direccional y su ángulo es la dirección de máximo crecimiento.
 
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
+
 </Pista>
 <Pista>
 
@@ -185,9 +189,11 @@ $$\sin\frac{3\pi}{4}=\frac{\sqrt2}{2},\qquad \cos\frac{3\pi}{4}=-\frac{\sqrt2}{2
 
 Entonces:
 
-$$z'_x(P)=3\cdot\frac12\cdot\left(-\frac{\sqrt2}{2}\right)=-\frac{3\sqrt2}{4}$$
+Primero $3\cdot\frac12=\frac32$:
 
-$$z'_y(P)=-3\cdot\frac12\cdot\left(-\frac{\sqrt2}{2}\right)=\frac{3\sqrt2}{4}$$
+$$z'_x(P)=\frac32\cdot\left(-\frac{\sqrt2}{2}\right)=-\frac{3\sqrt2}{4}$$
+
+$$z'_y(P)=-\frac32\cdot\left(-\frac{\sqrt2}{2}\right)=\frac{3\sqrt2}{4}$$
 
 </Paso>
 <Paso>
@@ -246,7 +252,7 @@ Fijate que la dirección $s$ pedida **coincide con la del máximo**: por eso la 
 </Paso>
 <Solucion>
 
-$$\frac{\partial z}{\partial s}\Big|_P=\frac32\ \ (\alpha=135^\circ),\qquad \nabla z(P)=-\frac{3\sqrt2}{4}\,i+\frac{3\sqrt2}{4}\,j,\qquad \|\nabla z\|=\frac32,\qquad \theta=\frac{3\pi}{4}=135^\circ$$
+$$\frac{\partial z}{\partial s}\Big|_P=\frac32\ \ \big(-\tfrac32\text{ si }\alpha=315^\circ\big),\qquad \nabla z(P)=-\frac{3\sqrt2}{4}\,i+\frac{3\sqrt2}{4}\,j,\qquad \|\nabla z\|=\frac32,\qquad \theta=\frac{3\pi}{4}=135^\circ$$
 
 **Ojo con:** (1) usar $\arctan$ sin mirar el cuadrante; (2) dejar la pendiente $-1$ como "vector $(1;-1)$" sin normalizar (la fórmula pide **versor**); (3) olvidar que la recta tangente da dos sentidos y el signo de la respuesta depende de cuál elijas.
 
@@ -261,7 +267,7 @@ $$\frac{\partial z}{\partial s}\Big|_P=\frac32\ \ (\alpha=135^\circ),\qquad \nab
 </Solucion>
 <Comprobacion>
 
-Dos caminos independientes, ahora **por definición**.
+Dos caminos independientes, ahora **por definición** y con **otro sentido**.
 
 **1) Límite por definición.** Sobre la recta $P+t\,s^\circ$ la función es una sola variable:
 
@@ -269,11 +275,21 @@ $$g(t)=\sin^3\!\left(\frac{3\pi}{4}-\sqrt2\,t\right)$$
 
 porque $x-y=\left(\pi-\frac{\sqrt2}{2}t\right)-\left(\frac\pi4+\frac{\sqrt2}{2}t\right)$. La derivada direccional es $\displaystyle\lim_{t\to0}\frac{g(t)-g(0)}{t}=g'(0)$:
 
-$$g'(0)=3\sin^2\frac{3\pi}{4}\cos\frac{3\pi}{4}\cdot(-\sqrt2)=3\cdot\frac12\cdot\left(-\frac{\sqrt2}{2}\right)\cdot(-\sqrt2)=\frac32$$
+$$g'(0)=3\sin^2\frac{3\pi}{4}\cos\frac{3\pi}{4}\cdot(-\sqrt2)$$
 
-**2) Dirección nula.** Con $\alpha=45^\circ$ resulta $x-y=\frac{3\pi}{4}$ constante a lo largo de la recta, así que $g$ es constante y el límite vale $0$, como debe ser en una dirección tangente a la curva de nivel.
+Con $3\sin^2\frac{3\pi}{4}=\frac32$ y $\cos\frac{3\pi}{4}=-\frac{\sqrt2}{2}$:
 
-**3) Gradiente por módulo.** Como $s^\circ=\nabla z/\|\nabla z\|$, la derivada direccional vale $\|\nabla z\|=\frac32$, igual que en el cálculo directo.
+$$g'(0)=\frac32\cdot\left(-\frac{\sqrt2}{2}\right)\cdot(-\sqrt2)$$
+
+$$g'(0)=\frac32\cdot\frac{2}{2}=\frac32$$
+
+**2) Otro $\alpha$ (sentido opuesto).** Con $\alpha=315^\circ$ el versor es $\left(\frac{\sqrt2}{2};-\frac{\sqrt2}{2}\right)$ y $x-y=\frac{3\pi}{4}+\sqrt2\,t$, o sea $g(t)=\sin^3\!\left(\frac{3\pi}{4}+\sqrt2\,t\right)$. Derivando en $t=0$:
+
+$$g'(0)=\frac32\cdot\left(-\frac{\sqrt2}{2}\right)\cdot\sqrt2=-\frac32$$
+
+Es el valor opuesto, como corresponde a invertir el sentido.
+
+**Dirección nula (control extra).** Con $\alpha=45^\circ$ resulta $x-y=\frac{3\pi}{4}$ constante a lo largo de la recta, así que $g$ es constante y el límite vale $0$, como debe ser en una dirección tangente a la curva de nivel.
 
 </Comprobacion>
 <ResolucionOficial examen="p1-1h9-2025-05-g1" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1H9 (1) May-25.pdf" paginas="3–4" />
@@ -301,6 +317,8 @@ Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un míni
 <Pista>
 
 Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28). Plan: (1) puntos críticos: resolver $z'_x=0,\ z'_y=0$; (2) derivadas segundas $z''_{xx},z''_{yy},z''_{xy}$; (3) $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$ en cada punto; (4) si $H<0$ silla; si $H>0$, el signo de $z''_{xx}$ dice mínimo (+) o máximo (−).
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>

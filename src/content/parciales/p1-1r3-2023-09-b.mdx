@@ -38,7 +38,9 @@ Fijate qué operaciones hay: un logaritmo y un arco coseno. Para cada una pregun
 </Pista>
 <Pista>
 
-Es un **dominio por restricciones**: logaritmo, argumento $\gt0$; $\arccos$, argumento entre $-1$ y $1$. La primera es el interior de una elipse y la segunda una franja entre dos rectas. Machete: [dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/). Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+Es un **dominio por restricciones**: logaritmo, argumento $\gt0$; $\arccos$, argumento entre $-1$ y $1$. La primera es el interior de una elipse y la segunda una franja entre dos rectas. Teoría: Rocha-Giordano, *Dominio de Funciones* (1_Dominio.pdf, p. 1).
+
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
 
 </Pista>
 <Pista>
@@ -83,7 +85,19 @@ $$x^2+\frac{(1-x)^2}{4}=1$$
 
 Multiplicando por $4$:
 
-$$4x^2+1-2x+x^2=4\ \Rightarrow\ 5x^2-2x-3=0\ \Rightarrow\ (5x+3)(x-1)=0$$
+$$4x^2+(1-x)^2=4$$
+
+Desarrollando el cuadrado:
+
+$$4x^2+1-2x+x^2=4$$
+
+Pasando el $4$ y juntando términos:
+
+$$5x^2-2x-3=0$$
+
+Factorizando (se verifica: $(5x+3)(x-1)=5x^2-5x+3x-3$):
+
+$$(5x+3)(x-1)=0$$
 
 Sale $x=1$ (punto $(1;0)$) y $x=-\frac35$ (punto $\left(-\frac35;\frac85\right)$). En $y=-1-x$, por simetría, $(-1;0)$ y $\left(\frac35;-\frac85\right)$. Los cuatro puntos están sobre la elipse, así que **no** pertenecen al dominio.
 
@@ -148,7 +162,9 @@ Antes de nada: ¿qué da la fórmula si reemplazás $(1;-1)$? Si da una indeterm
 </Pista>
 <Pista>
 
-Es un **límite doble con indeterminación $\frac00$ que se levanta factorizando**: se saca factor común en el denominador (agrupando de a dos términos), se cancela lo que es común con el numerador y se reemplaza. La verificación pedida es el **haz de rectas** por el punto, $y-y_0=m(x-x_0)$. Machete: [límites dobles](../../machetes/limites-dobles/). Teoría: Monllor, *01 Funciones de varias variables* (pp. 11–15).
+Es un **límite doble con indeterminación $\frac00$ que se levanta factorizando**: se saca factor común en el denominador (agrupando de a dos términos), se cancela lo que es común con el numerador y se reemplaza. La verificación pedida es el **haz de rectas** por el punto, $y-y_0=m(x-x_0)$. Teoría: Monllor, *01 Funciones de varias variables* (pp. 11–15).
+
+Machete: [Límites dobles](../../machetes/limites-dobles/).
 
 </Pista>
 <Pista>
@@ -242,7 +258,9 @@ El enunciado habla de medidas que **cambian un poquito** y pregunta cuánto camb
 </Pista>
 <Pista>
 
-Es **diferencial total**: $dV=V'_A\,dA+V'_B\,dB+V'_H\,dH$, con los incrementos como datos (los que **bajan** llevan signo negativo) y $E\%=\dfrac{dV}{V}\cdot100$. Machete: [diferencial total y errores](../../machetes/diferencial-total-y-errores/). Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+Es **diferencial total**: $dV=V'_A\,dA+V'_B\,dB+V'_H\,dH$, con los incrementos como datos (los que **bajan** llevan signo negativo) y $E\%=\dfrac{dV}{V}\cdot100$. Teoría: Rocha-Giordano, *Incremento y Diferencial* (4_Diferencial.pdf, p. 1).
+
+Machete: [Diferencial total y errores](../../machetes/diferencial-total-y-errores/).
 
 </Pista>
 <Pista>
@@ -353,7 +371,9 @@ $u$ depende de tres letras, pero $y$ y $z$ a su vez dependen de $x$. Si dibujás
 </Pista>
 <Pista>
 
-Es **regla de la cadena con una variable independiente**: $\dfrac{du}{dx}=u'_x+u'_y\,\dfrac{dy}{dx}+u'_z\,\dfrac{dz}{dx}$ (un camino directo y dos a través de $y$ y de $z$). Machete: [derivada de funciones compuestas](../../machetes/derivada-compuesta/). Teoría: *U2 - Derivadas Compuestas e Implicitas* (de la p. 3, "derivada de la función compuesta").
+Es **regla de la cadena con una variable independiente**: $\dfrac{du}{dx}=u'_x+u'_y\,\dfrac{dy}{dx}+u'_z\,\dfrac{dz}{dx}$ (un camino directo y dos a través de $y$ y de $z$). Teoría: *U2 - Derivadas Compuestas e Implicitas* (de la p. 3, "derivada de la función compuesta").
+
+Machete: [Derivada compuesta](../../machetes/derivada-compuesta/).
 
 </Pista>
 <Pista>
@@ -372,7 +392,11 @@ $$\frac{du}{dx}=\frac{\partial u}{\partial x}+\frac{\partial u}{\partial y}\cdot
 
 **Qué:** derivadas parciales de $u$. **Por qué:** en cada una las otras dos letras se tratan como constantes. En la última, $\frac{d}{dz}\ln(z^2)=\frac{2z}{z^2}=\frac2z$.
 
-$$u'_x=\frac{2x}{y}+y^2\ln(z^2)\qquad u'_y=-\frac{x^2}{y^2}+2xy\ln(z^2)\qquad u'_z=xy^2\cdot\frac{2z}{z^2}=\frac{2xy^2}{z}$$
+$$u'_x=\frac{2x}{y}+y^2\ln(z^2)$$
+
+$$u'_y=-\frac{x^2}{y^2}+2xy\ln(z^2)$$
+
+$$u'_z=xy^2\cdot\frac{2z}{z^2}=\frac{2xy^2}{z}$$
 
 </Paso>
 <Paso>
@@ -386,7 +410,13 @@ $$\frac{dy}{dx}=\frac1x\qquad\frac{dz}{dx}=2x+3$$
 
 **Qué:** reemplazar en los valores dados. **Por qué:** la consigna pide la derivada "para valores de $(x,y,z)=(1,1,1)$". **Lectura usada:** se evalúan las parciales con $(x;y;z)=(1;1;1)$ y las derivadas de las intermedias con $x=1$, que es lo que hace la cátedra (ver la nota al final: el punto $(1;1;1)$ no está sobre la curva $y=\ln x$, $z=x^2+3x-1$).
 
-$$u'_x=\frac{2}{1}+1\cdot\ln1=2\qquad u'_y=-\frac11+2\ln1=-1\qquad u'_z=\frac{2}{1}=2$$
+Como $\ln1=0$, los términos con logaritmo se anulan:
+
+$$u'_x=\frac{2}{1}+1\cdot\ln1=2+0=2$$
+
+$$u'_y=-\frac11+2\ln1=-1+0=-1$$
+
+$$u'_z=\frac{2\cdot1\cdot1^2}{1}=2$$
 
 $$\frac{dy}{dx}=1\qquad\frac{dz}{dx}=2\cdot1+3=5$$
 
@@ -405,6 +435,8 @@ $$\frac{du}{dx}=2-1+10=11$$
 $$\frac{du}{dx}\Big|_{(1,1,1)}=11$$
 
 **Ojo con:** olvidar el camino **directo** ($u'_x$) y quedarse solo con los dos a través de $y$ y $z$; derivar $\ln(z^2)$ como $\frac{1}{z^2}$ (falta la derivada interna $2z$); y no olvidar que $\ln1=0$ anula varios términos.
+
+El punto $(1;1;1)$ no está sobre $y=\ln x$, $z=x^2+3x-1$ (en $x=1$ resulta $y=0$, $z=3$); como la resolución del profe, se evalúan las expresiones con los valores dados; ver ⚠️ en la resolución oficial.
 
 **Criterio estimado — no oficial** (la consigna pide la derivada en los valores dados):
 
@@ -452,7 +484,9 @@ Te piden dos cosas sobre la misma función y el mismo punto: cuánto cambia $f$ 
 </Pista>
 <Pista>
 
-Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Machete: [derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/). Plan: (1) derivadas parciales en $P$; (2) versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\dfrac{\partial f}{\partial s}=f'_x\cos\alpha+f'_y\sin\alpha$; (4) $\nabla f$, módulo y ángulo **mirando el cuadrante**.
+Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; Rocha-Giordano, 8_Derivada Direccional.pdf, pp. 1–2). Plan: (1) derivadas parciales en $P$; (2) versor $s^\circ=(\cos\alpha;\sin\alpha)$; (3) $\dfrac{\partial f}{\partial s}=f'_x\cos\alpha+f'_y\sin\alpha$; (4) $\nabla f$, módulo y ángulo **mirando el cuadrante**.
+
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
 
 </Pista>
 <Pista>
@@ -518,6 +552,8 @@ $$\frac{\partial f}{\partial s}\Big|_P=-\frac{11\sqrt2}{2}\approx-7{,}78,\qquad\
 
 **Ojo con:** los signos de seno y coseno de $135^\circ$, y escribir la misma derivada parcial en las dos cuentas (la $f'_y=-5$ que se usa en la direccional es la misma que va en el gradiente).
 
+La resolución del profe da $\nabla f=6\,i-\frac92\,j$, $\|\nabla f\|=\frac{15}{2}$ y $\theta=\arctan\left(-\frac34\right)$ (aunque su propia direccional usa $-5$); acá $\nabla f=6\,i-5\,j$, $\|\nabla f\|=\sqrt{61}$ y $\theta=\arctan\left(-\frac56\right)$; ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (la consigna pide valor, expresión cartesiana, módulo, ángulo y gráfico marcándolo):
 
 - **Bien:** parciales en $P$ correctas, versor, $\frac{\partial f}{\partial s}=-\frac{11\sqrt2}{2}$, gradiente con módulo $\sqrt{61}$ y $\theta\approx-39{,}81^\circ$ con el gráfico del gradiente en $P$ y el ángulo marcado.
@@ -533,9 +569,13 @@ Dos caminos independientes.
 
 **1) Cociente incremental.** Se mide $\dfrac{f(P+t\,s^\circ)-f(P)}{t}$ con $t$ chico: con $t=10^{-6}$ da $-7{,}7782$, y $-\frac{11\sqrt2}{2}=-7{,}7782$.
 
-**2) Propiedad del gradiente.** El ángulo entre $s$ ($135^\circ$) y $\nabla f$ ($-39{,}81^\circ$) es $\omega=174{,}81^\circ$ (casi opuestos, por eso la direccional es casi $-\|\nabla f\|$), y
+**2) Otros sentidos, con el mismo cociente incremental (sin usar las parciales).** Con $t=10^{-6}$:
 
-$$\|\nabla f\|\cos\omega=\sqrt{61}\cdot\cos(174{,}81^\circ)\approx7{,}81\cdot(-0{,}9957)=-7{,}78$$
+- hacia $\frac{1}{\sqrt{61}}(6;-5)$ (la dirección que se afirma como la de máximo crecimiento) da $7{,}8102=\sqrt{61}$;
+- hacia $\frac{1}{\sqrt{61}}(5;6)$ (perpendicular, una dirección nula) da $0$;
+- hacia $135^\circ$ da $-7{,}7782$, como en el inciso (a).
+
+Como no usan las derivadas parciales y coinciden con lo calculado, el gradiente $6i-5j$ y su ángulo están confirmados. (Con la componente $-\frac92$ que escribe el escaneo, la dirección de máximo daría un valor distinto de $\sqrt{61}$.)
 
 </Comprobacion>
 <ResolucionOficial examen="p1-1r3-2023-09-b" fuente="parciales/1er-parcial/Practicos de otros años/1° Parcial 1R3 (B) Sep-23.pdf" paginas="6" />
@@ -564,7 +604,9 @@ Te piden dos cosas en orden: primero **dónde** puede haber un máximo, un míni
 </Pista>
 <Pista>
 
-Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1). Machete: [extremos relativos y hessiano](../../machetes/extremos-relativos-hessiano/). Plan: (1) $f'_x=0,\ f'_y=0$; (2) derivadas segundas; (3) $H=f''_{xx}f''_{yy}-(f''_{xy})^2$ en cada punto; (4) $H\lt0$ silla; $H\gt0$ extremo y el signo de $f''_{xx}$ dice mínimo (+) o máximo (−).
+Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28; Rocha-Giordano, 10_Extremos.pdf, p. 1). Plan: (1) $f'_x=0,\ f'_y=0$; (2) derivadas segundas; (3) $H=f''_{xx}f''_{yy}-(f''_{xy})^2$ en cada punto; (4) $H\lt0$ silla; $H\gt0$ extremo y el signo de $f''_{xx}$ dice mínimo (+) o máximo (−).
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>
@@ -661,7 +703,9 @@ Hay una función que querés hacer lo más chica posible (la altura del parabolo
 </Pista>
 <Pista>
 
-Es **extremo condicionado (Lagrange)**: función principal $f$ y condición $g(x,y)=x+y-1=0$. Se arma $F(x,y,\lambda)=f-\lambda\,g$ y se anulan las **tres** derivadas. Machete: [extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/). Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+Es **extremo condicionado (Lagrange)**: función principal $f$ y condición $g(x,y)=x+y-1=0$. Se arma $F(x,y,\lambda)=f-\lambda\,g$ y se anulan las **tres** derivadas. Teoría: Rocha-Giordano, *Extremos Condicionados* (10_Extremos.pdf, p. 2).
+
+Machete: [Extremos ligados (Lagrange)](../../machetes/extremos-ligados-lagrange/).
 
 </Pista>
 <Pista>
@@ -731,7 +775,15 @@ $$(x;y)=(0;1),\qquad z=f(0;1)=0\qquad(\lambda=1)$$
 
 Sin multiplicadores: sobre $x+y=1$ es $y=1-x$ y la función queda de una variable.
 
-$$f(x;1-x)=\frac{x^2}{2}+(1-x)^2+x-(1-x)=\frac{x^2}{2}+1-2x+x^2+x-1+x=\frac32x^2$$
+$$f(x;1-x)=\frac{x^2}{2}+(1-x)^2+x-(1-x)$$
+
+Desarrollando $(1-x)^2=1-2x+x^2$ y distribuyendo el signo menos:
+
+$$f(x;1-x)=\frac{x^2}{2}+1-2x+x^2+x-1+x$$
+
+Juntando: $\frac{x^2}{2}+x^2=\frac32x^2$; $-2x+x+x=0$; $1-1=0$:
+
+$$f(x;1-x)=\frac32x^2$$
 
 Es una parábola abierta hacia arriba con mínimo en $x=0$ (y $y=1-0=1$), valor $0$: coincide con $z=f(0;1)=0$.
 

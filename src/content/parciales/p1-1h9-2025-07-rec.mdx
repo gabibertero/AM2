@@ -41,6 +41,8 @@ Fijate qué hay en la fórmula: un arcocoseno cuyo argumento es una fracción, y
 
 Es un **dominio por restricciones**: (i) $\arccos(u)$ existe solo para $-1\le u\le1$; (ii) la fracción $\frac{y}{x^3}$ pide $x\neq0$; (iii) la raíz cuarta en el denominador pide radicando **estrictamente positivo**. El dominio es la intersección de las tres. Ojo con cómo se despeja $y$ de $-1\le\frac{y}{x^3}\le1$ cuando $x$ puede ser negativo.
 
+Machete: [Dominio de funciones de dos variables](../../machetes/dominio-de-funciones-de-dos-variables/).
+
 </Pista>
 <Pista>
 
@@ -105,6 +107,8 @@ $$D=\Big\{(x;y)\in\mathbb{R}^2\ :\ |y|\le|x|^3\ \ \wedge\ \ \frac{x^2}{9}+\frac{
 
 **Ojo con:** despejar $y$ de $-1\le\frac{y}{x^3}\le1$ como $-x^3\le y\le x^3$ **sin distinguir el signo de $x$**: eso solo vale para $x>0$ y deja afuera el lóbulo de la izquierda.
 
+La resolución del profe da $-x^3\le y\le x^3$ (solo el lóbulo $x>0$); acá el dominio incluye también el lóbulo $x<0$; ver ⚠️ en la resolución oficial.
+
 **Criterio estimado — no oficial** (la consigna pide "gráfica y analíticamente"; la nota del recuperatorio exige adjuntar los cálculos auxiliares):
 
 - **Bien:** las tres condiciones, borde de la elipse excluido, $x\neq0$, gráfico consolidado y conjunto escrito. Queda **pendiente de confirmar con la cátedra** si el lóbulo $x<0$ es exigido, porque la resolución manuscrita solo muestra el de $x>0$ (ver contraste abajo).
@@ -157,6 +161,8 @@ Hay dos pedidos sobre la misma función y el mismo punto: el cambio de $z$ en un
 
 Es **derivada direccional + gradiente** (teoría: *Derivada Direccional*, pp. 15–19; el recuperatorio prohíbe tabla de derivadas, hay que justificar cada derivada). Plan: parciales en $P$; pendiente de la tangente → ángulo $\alpha$ → versor $s^\circ$; $\frac{\partial z}{\partial s}=z'_x\cos\alpha+z'_y\sin\alpha$; $\nabla z=z'_x\,i+z'_y\,j$, cuyo módulo es el valor máximo y cuyo ángulo es la dirección de máximo crecimiento.
 
+Machete: [Derivada direccional y gradiente](../../machetes/derivada-direccional-y-gradiente/).
+
 </Pista>
 <Pista>
 
@@ -181,9 +187,13 @@ $$z'_x=-\frac{y}{x^2}-\frac{2x}{y}\qquad z'_y=\frac{1}{x}+\frac{x^2}{y^2}$$
 
 **Qué:** evaluar en $P(1;-1)$. **Por qué:** son los números que usan las fórmulas.
 
-$$z'_x(P)=-\frac{-1}{1}-\frac{2\cdot1}{-1}=1+2=3$$
+$$z'_x(P)=-\frac{-1}{1^2}-\frac{2\cdot1}{-1}$$
 
-$$z'_y(P)=\frac11+\frac{1}{1}=2$$
+Cada fracción vale: $-\frac{-1}{1}=1$ y $-\frac{2}{-1}=2$. Entonces
+
+$$z'_x(P)=1+2=3$$
+
+$$z'_y(P)=\frac11+\frac{1^2}{(-1)^2}=1+1=2$$
 
 </Paso>
 <Paso>
@@ -234,7 +244,7 @@ $$\theta_{\text{máx}}=\arctan\frac23\approx33{,}7^\circ$$
 </Paso>
 <Solucion>
 
-$$\frac{\partial z}{\partial s}\Big|_P=\frac{\sqrt2}{2}\ (\alpha=-45^\circ),\qquad \nabla z(P)=3\,i+2\,j,\qquad \text{valor máximo}=\sqrt{13},\qquad \theta_{\text{máx}}=\arctan\frac23\approx33{,}7^\circ$$
+$$\frac{\partial z}{\partial s}\Big|_P=\frac{\sqrt2}{2}\ \Big(-\tfrac{\sqrt2}{2}\text{ si }\alpha=135^\circ\Big),\qquad \nabla z(P)=3\,i+2\,j,\qquad \text{valor máximo}=\sqrt{13},\qquad \theta_{\text{máx}}=\arctan\frac23\approx33{,}7^\circ$$
 
 **Ojo con:** (1) evaluar la pendiente en $x=1$ (la del punto $P$) en vez de $x=3$ (la que pide el enunciado); (2) no normalizar el vector dirección; (3) con el cociente $\frac{y^2-x^3}{xy}$ sin simplificar, equivocarse en la regla del cociente.
 
@@ -251,7 +261,11 @@ $$\frac{\partial z}{\partial s}\Big|_P=\frac{\sqrt2}{2}\ (\alpha=-45^\circ),\qqu
 
 **1) Límite por definición.** Sobre $P+t\,s^\circ$: $x=1+\frac{\sqrt2}{2}t$, $y=-1-\frac{\sqrt2}{2}t$. Se arma $g(t)=z(x(t);y(t))$ y la derivada direccional es $\displaystyle\lim_{t\to0}\frac{g(t)-g(0)}{t}=\frac{\sqrt2}{2}$ (con sympy, el mismo valor); en el sentido contrario, $-\frac{\sqrt2}{2}$.
 
-**2) Con el ángulo entre vectores.** $s$ está a $-45^\circ$ y el gradiente a $33{,}7^\circ$: $\omega=78{,}7^\circ$, y $\|\nabla z\|\cos\omega=\sqrt{13}\cdot0{,}196\approx0{,}707$.
+**2) Cociente incremental numérico (independiente de las parciales).** Con $t=10^{-5}$ y $s^\circ=\left(\frac{\sqrt2}{2};-\frac{\sqrt2}{2}\right)$:
+
+$$\frac{z(P+t\,s^\circ)-z(P)}{t}\approx0{,}7071$$
+
+que coincide con $\frac{\sqrt2}{2}\approx0{,}7071$.
 
 **3) Dirección nula.** Un versor perpendicular al gradiente, $\left(-\frac{2}{\sqrt{13}};\frac{3}{\sqrt{13}}\right)$, da por el mismo límite $0$.
 
@@ -283,6 +297,8 @@ Te piden los **candidatos** y después decidir qué es cada uno, **justificando*
 <Pista>
 
 Es **extremos relativos con hessiano** (teoría: *Taylor y Extremos Relativos*, pp. 25–28). Plan: $z'_x=0,\ z'_y=0$ (cada una tiene una sola variable); segundas; $H=z''_{xx}\,z''_{yy}-(z''_{xy})^2$ en cada punto. $H<0$: silla; $H>0$: el signo de $z''_{xx}$ da mínimo (+) o máximo (−).
+
+Machete: [Extremos relativos con hessiano](../../machetes/extremos-relativos-hessiano/).
 
 </Pista>
 <Pista>
