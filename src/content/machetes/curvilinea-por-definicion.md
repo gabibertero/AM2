@@ -3,61 +3,88 @@ slug: curvilinea-por-definicion
 titulo: "Integral curvilínea por definición"
 unidad: U5
 orden: 3
-ejerciciosOficiales: ["1r3-2025-11-14#3", "1r7-2025-11-11#3", "1v1-2025-11-13-a#3", "1v1-2025-11-13-b#3", "2s2-2025-11-07-a#3", "2s2-2025-11-07-b#3", "1h9-2026-06-27-a#2", "1h9-2026-06-27-b#2", "recup-1h9-2025-07-05#2", "recup-1h10-2025-11-08#3", "recup-2025-11-20#2"]
+ejerciciosOficiales: ["1h10-2026-10-31-a#3", "1r3-2025-11-14#3", "1r7-2025-11-11#3", "1v1-2025-11-13-a#3", "1v1-2025-11-13-b#3", "2s2-2025-11-07-a#3", "2s2-2025-11-07-b#3", "1h9-2026-06-27-a#2", "1h9-2026-06-27-b#2", "recup-1h9-2025-07-05#2", "recup-1h10-2025-11-08#3", "recup-2025-11-20#2"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 2-5"
   - "teoria/Teorico-practico Rocha-Giordano/13_Integrales curvilíneas.pdf, p. 1"
   - "teoria/AM2 Resumen segundo parcial.pdf, p. 15-17"
+  - "parciales/2do-parcial/2026-10-31-1H10-A.png, p. 1 (enunciado aportado por Gabi; resolución elaborada para el sitio)"
 ---
+> **Prioridad alta.** Si dice «por definición», tenés que integrar el campo sobre **cada tramo**. Green sirve después como verificación, si la consigna lo pide.
 
 ## Cómo reconocerlo
-- "Calcular la integral curvilínea por la trayectoria cerrada recorrida en sentido antihorario (+)" o "calcular **por definición**".
-- Trayectoria dada por dos o más curvas ($C_1$, $C_2$, parábolas, rectas, circunferencia) que se cortan y encierran una región.
-- "Trabajo realizado por el campo" a lo largo de una curva paramétrica (cicloide en recup-2025-11-20).
 
-## Qué necesitás antes
-- Campo $F=(P,Q)=P\,\vec i+Q\,\vec j$ continuo sobre la curva.
-- Curva suave **a trozos**: se integra tramo por tramo y se suma.
-- **Sentido positivo = antihorario** (convención de la cátedra). Sin indicación, se toma el antihorario.
-- Puntos de intersección de las curvas: son los extremos de cada tramo.
+Te dan un campo $F(x,y)=P(x,y)\,i+Q(x,y)\,j$ y una trayectoria. $P$ es lo que acompaña a $i$; $Q$, lo que acompaña a $j$.
 
-## Pasos
-1. **Graficar** las curvas y hallar las intersecciones (igualar y resolver). Si las ecuaciones son simétricas (p. ej. $y=x^2-x$ y $x=y^2-y$), restalas: queda $(x-y)(x+y)=0$ y se factoriza fácil. Verificá cada punto en **las dos** ecuaciones.
-2. Marcar con flechas el recorrido antihorario. **Regla general:** al recorrer la curva, la región encerrada queda **a la izquierda**. Con esto se orienta cualquier tramo, sea $y=f(x)$ o $x=g(y)$.
-3. **Parametrizar cada tramo** respetando esa dirección:
-   - $y=f(x)$: $x=t,\ y=f(t)$. Si la región queda **arriba** del tramo, $x$ crece; si queda **abajo**, $x$ decrece (con región entre dos curvas: la inferior va de izquierda a derecha, la superior al revés).
-   - $x=g(y)$: $y=t,\ x=g(t)$. Si la región queda a la izquierda del tramo, $y$ **sube**; si queda a su derecha, $y$ **baja**. Ojo: una rama $x=g(y)$ no es "la de arriba" ni "la de abajo": decidí con el gráfico.
-   - Circunferencia $x^2+y^2=R^2$: $x=R\cos t,\ y=R\sin t$. Los límites de $t$ salen de los ángulos de los extremos del arco (ej.: puntos $(1,1)$ y $(-1,1)$ en radio $\sqrt2$: $t$ de $\pi/4$ a $3\pi/4$). Alternativa válida: usar $y=\sqrt{R^2-x^2}$ como tramo $y=f(x)$.
-   - Elipse $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$: $x=a\cos t,\ y=b\sin t$, $t\in[0,2\pi]$ (completa) o el arco que corresponda; para la circunferencia es $a=b=R$.
-   - Semicírculo / sector: los extremos del arco dan $t_1,t_2$ (los ángulos de los puntos); el tramo recto que cierra se parametriza aparte.
-   - Recta: $x=x_0+(x_1-x_0)t,\ y=y_0+(y_1-y_0)t$, $0\le t\le1$ (de $A$ a $B$).
-4. Calcular $dx=x'(t)dt$, $dy=y'(t)dt$ y sustituir en $P\,dx+Q\,dy$.
-5. Integrar en $t$ cada tramo.
-6. **Sumar los tramos.**
+**Parametrizar** significa escribir las coordenadas de un punto de la curva usando una sola letra, por ejemplo $t$: $x=x(t)$, $y=y(t)$.
 
-## Fórmulas clave
-$$\oint_C P\,dx+Q\,dy=\sum_i\int_{t_i}^{t_f}\Big[P(x(t),y(t))\,x'(t)+Q(x(t),y(t))\,y'(t)\Big]dt$$
-- $P\,dx+Q\,dy=F\cdot d\vec r$: trabajo de la fuerza $F$ a lo largo de la curva.
-- $x'(t),\,y'(t)$: derivadas de la parametrización (vector tangente).
-- Si $C$ es $y=f(x)$: $\int_a^b[P(x,f)+Q(x,f)\,f'(x)]\,dx$.
-- Invertir el sentido cambia el signo; partir la curva en puntos intermedios no cambia el valor.
+## Pasos cortos
 
-## Por qué funciona
-La integral curvilínea es el límite de sumas $\sum F(A_i)\cdot\Delta\vec s_i$ (trabajo por cada pedacito de arco). Al parametrizar, cada $\Delta\vec s$ se vuelve $\vec r'(t)\,dt$ y todo queda como una integral definida común.
+1. Copiá $P$ y $Q$ por separado.
+2. Hallá los puntos donde se cortan las curvas. Reemplazá una ecuación en la otra.
+3. Verificá cada punto en las dos ecuaciones originales.
+4. Dibujá qué tramo va de un punto al otro y cuál vuelve.
+5. Respetá el sentido indicado. En sentido antihorario, la región queda a tu **izquierda** al caminar por el borde.
+6. Si no indican sentido, **declará tu elección**: «adopto orientación antihoraria». El valor cambia de signo si se recorre al revés.
+7. En cada tramo elegí $x=t$ o $y=t$, según la ecuación más simple.
+8. Derivá ambas coordenadas: $dx=x'(t)dt$, $dy=y'(t)dt$.
+9. Reemplazá **todas** las $x$ e $y$ de $P$ y $Q$ por sus expresiones en $t$.
+10. Formá $P(x(t),y(t))x'(t)+Q(x(t),y(t))y'(t)$.
+11. Integrá entre el valor de $t$ al **salir** y al **llegar**. Pueden estar en orden descendente.
+12. Sumá los resultados de todos los tramos.
 
-## Errores frecuentes
-- Recorrer algún tramo al revés (el cierre de la curva debe ser antihorario).
-- Olvidar el $dy=f'(x)\,dx$ (o el $dx$ si la curva es $x=g(y)$).
-- Poner los límites de $t$ al revés en el tramo de arriba (debe ir de derecha a izquierda).
-- Usar mal las intersecciones: verificalas en **las dos** ecuaciones.
-- Perder el signo del tramo recorrido hacia atrás.
-- "Trayectoria superior" en un enunciado significa el arco superior de la circunferencia: ubicá bien los extremos.
-- Dejar sin sumar algún tramo (o contarlo dos veces).
+$$I_C=\sum_{\rm tramos}\int_{t_{\rm salida}}^{t_{\rm llegada}}\big[P(x(t),y(t))x'(t)+Q(x(t),y(t))y'(t)\big]dt.$$
 
-## Cómo comprobar el resultado
-- Hacelo también por **Green** (machete siguiente): deben dar igual.
-- Si $F$ es conservativo ($Q_x=P_y$), la cerrada da $0$.
-- Cuidado: una integral cerrada nula no prueba que $F$ sea conservativo. Calculá $Q_x-P_y$ para decidir.
-- Revisá signo y orientación en el gráfico (antihorario deja la región a la izquierda).
+## Ejemplo del parcial del 31/10
 
-> **Elaborado para el sitio — verificar con la cátedra:** la regla "región a la izquierda" es consecuencia del sentido antihorario y no figura textual en las fuentes; las parametrizaciones de elipse y arcos son estándar.
+**Ejercicio 3:** $F=(x-y,x+y)$, con $y=x$ y $x=y^2-2$.
+
+La foto **no especifica orientación**. Para este ejemplo elegimos antihoraria y lo escribimos antes de calcular.
+
+1. En la recta, $x=y$. Sustituí en la parábola: $y=y^2-2$.
+2. Pasá todo a un lado: $y^2-y-2=0=(y-2)(y+1)$.
+3. Sale $y=2$ o $y=-1$. Como $x=y$, los puntos son $A=(-1,-1)$ y $B=(2,2)$.
+4. Entre esos valores de $y$, la parábola $x=y^2-2$ está a la izquierda y la recta $x=y$ a la derecha.
+5. Para dejar la región a la izquierda, **subí por la recta** de $A$ a $B$ y **bajá por la parábola** de $B$ a $A$.
+
+**Tramo 1: recta, de $A$ a $B$.**
+
+6. Elegí $x=t$, $y=t$, con $-1\le t\le2$.
+7. Derivá: $dx=dt$, $dy=dt$.
+8. Sustituí: $P=t-t=0$, $Q=t+t=2t$.
+
+$$I_1=\int_{-1}^{2}(0+2t)dt=[t^2]_{-1}^{2}=4-1=3.$$
+
+**Tramo 2: parábola, de $B$ a $A$.**
+
+9. Elegí $y=t$, $x=t^2-2$. Esta vez $t$ va **de $2$ a $-1$**.
+10. Derivá: $dx=2t\,dt$, $dy=dt$.
+11. Sustituí: $P=t^2-t-2$, $Q=t^2+t-2$.
+12. Multiplicá por los diferenciales y sumá:
+
+$$(t^2-t-2)2t+(t^2+t-2)=2t^3-t^2-3t-2.$$
+
+13. Integrá y evaluá:
+
+$$I_2=\int_2^{-1}(2t^3-t^2-3t-2)dt=\left[\frac{t^4}{2}-\frac{t^3}{3}-\frac{3t^2}{2}-2t\right]_2^{-1}=\frac43-\left(-\frac{14}{3}\right)=6.$$
+
+14. Sumá: $I_C=3+6$.
+
+$$\boxed{I_C=9\quad\text{en sentido antihorario}}$$
+
+En sentido horario, el resultado es $-9$.
+
+## Si aparece otra curva
+
+- Recta de $A=(a,b)$ a $B=(c,d)$: $x=a+(c-a)t$, $y=b+(d-b)t$, de $0$ a $1$.
+- Circunferencia de radio $R$: $x=R\cos t$, $y=R\sin t$. Los ángulos de los puntos inicial y final fijan los límites.
+- Elipse: $x=a\cos t$, $y=b\sin t$. Derivá las dos coordenadas antes de reemplazar.
+- Si ya dan $x(t)$ e $y(t)$, como una cicloide, usalas directamente: no inventes otra parametrización.
+
+## Comprobá y evitá estos errores
+
+- El [machete de Green](../teorema-de-green/) verifica el mismo ejemplo y da $9$.
+- Al terminar un tramo tenés que estar en el punto donde empieza el siguiente.
+- No copies $dy=dx$ en la parábola: acá $dx=2t\,dt$ y $dy=dt$.
+- No inviertas solo los límites sin reconocer que cambia el signo.
+- **Prueba sin mirar:** escribí la tabla «tramo, coordenadas, salida, llegada, $dx$, $dy$» antes de integrar.

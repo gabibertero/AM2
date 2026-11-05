@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { esP2, ordenarParciales } from '../../lib/preparacion.js';
+const base=import.meta.env.BASE_URL;
+const examenes=(await getCollection('parciales')).filter(esP2).sort(ordenarParciales);
+const ejercicios=examenes.flatMap(e=>[...e.body.matchAll(/<Ejercicio\b([^>]+)>/g)].map(m=>{
+const a=Object.fromEntries([...m[1].matchAll(/(\w+)="([^"]*)"/g)].map(x=>[x[1],x[2]]));
+return {id:a.id,tema:a.tema,numero:a.id.split('#')[1],examen:e.data.titulo,href:`${base}parciales/${e.id}/#ej-${a.id.split('#')[1]}`};}));
+---
+<Layout titulo="Mis errores">
+<p class="eyebrow">VOLVER A INTENTAR TAMBIÉN ES AVANZAR</p><h1>Lo que vas a<br /><span class="titulo-suave">resolver mejor la próxima.</span></h1><p class="lead">Al final de cada ejercicio, registrá si lo hiciste con ayuda o si necesitás repetirlo. Tus notas quedan en este navegador.</p>
+<div class="info-strip"><strong>No mide tu nota</strong><span>Te ayuda a decidir qué practicar después.</span></div>
+<p data-errores-vacio>Todavía no registraste ejercicios para repetir. <a href={`${base}parciales/`}>Abrí un parcial para empezar →</a></p>
+<ul class="errores-list">{ejercicios.map(e=><li class="error-row" data-error-id={e.id} hidden><span class="error-simbolo" aria-hidden="true">↺</span><div><p class="eyebrow">{e.examen} · EJERCICIO {e.numero}</p><h2><a href={e.href}>{e.tema}</a></h2><p data-error-estado></p><p class="error-nota" data-error-nota></p></div><a class="btn" href={e.href}>Reintentar →</a></li>)}</ul>
+</Layout>

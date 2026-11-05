@@ -1,10 +1,70 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import LabGeneradores from '../../components/LabGeneradores.astro';
+import { getCollection } from 'astro:content';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import { createHash } from 'node:crypto';
+import { esP2, ordenarParciales } from '../../lib/preparacion.js';
+import { controlesGuiados } from '../../lib/controles-guiados.js';
+import { llavesMatematicas } from '../../lib/llaves-matematicas.js';
+const base=import.meta.env.BASE_URL;
+const processor=await createMarkdownProcessor({remarkPlugins:[remarkMath],rehypePlugins:[rehypeKatex,llavesMatematicas]});
+const examenes=(await getCollection('parciales')).filter(esP2).sort(ordenarParciales);
+const catalog=[];
+for(const examen of examenes){
+ const exercises=[];
+ for(const m of examen.body.matchAll(/<Ejercicio\b([^>]+)>([\s\S]*?)<\/Ejercicio>/g)){
+  const id=/\bid="([^"]+)"/.exec(m[1])?.[1],spec=controlesGuiados.get(id);
+  if(!spec)throw new Error(`Faltan controles guiados para ${id}`);
+  const official=/<Enunciado\b[^>]*>([\s\S]*?)<\/Enunciado>/.exec(m[2])?.[1];
+  if(!official)throw new Error(`Falta enunciado oficial de ${id}`);
+  const markdown=official.replace(/\$\$([\s\S]*?)\$\$/g,(_,math)=>`\n\n$$\n${math.trim()}\n$$\n\n`);
+  const {code}=await processor.render(markdown);
+  const signature=createHash('sha256').update(JSON.stringify(spec)).digest('hex').slice(0,16);
+  exercises.push({...spec,signature,officialHtml:code,source:examen.data.fuente,page:examen.data.paginasEnunciado,href:`${base}parciales/${examen.id}/#ej-${id.split('#')[1]}`});
+ }
+ catalog.push({id:examen.id,title:examen.data.titulo,date:examen.data.fecha,commission:examen.data.comision,theme:examen.data.tema,exercises});
+}
 ---
-<Layout titulo="Laboratorio">
-  <p class="eyebrow">Ejercicios nuevos con semilla</p>
-  <h1>Laboratorio</h1>
-  <p class="lead">Ejercicios al azar con números lindos, con pasos en la notación de la cátedra. Las soluciones son elaboradas para el sitio, no oficiales.</p>
-  <LabGeneradores />
+<Layout titulo="Laboratorio guiado">
+<p class="eyebrow">PRÁCTICA CON COMPROBACIÓN · SOBRE TUS PARCIALES</p>
+<h1>Laboratorio guiado</h1>
+<p class="lead">Elegí un parcial y un ejercicio. Escribí una respuesta por paso y comprobala antes de seguir.</p>
+<noscript><div class="info-strip"><p>El laboratorio necesita JavaScript para comprobar respuestas. Podés <a href={`${base}parciales/`}>leer los parciales y sus pasos</a> sin activarlo.</p></div></noscript>
+<section data-guiado hidden aria-label="Laboratorio de parciales oficiales">
+ <div class="lab-selector tarjeta">
+  <label for="guiado-parcial">1. Elegí tu parcial<select id="guiado-parcial" data-g-parcial>{catalog.map(e=><option value={e.id}>{e.date} · {e.commission}{e.theme?` · ${e.theme}`:''}</option>)}</select></label>
+  <label for="guiado-ejercicio">2. Elegí el ejercicio<select id="guiado-ejercicio" data-g-ejercicio></select></label>
+  <button class="btn btn-primario guiado-ir" type="button" data-g-ir>Ir al paso actual ↓</button>
+ </div>
+ <p class="lab-storage" role="status" data-g-storage></p>
+ <div class="guiado-layout">
+  <div class="guiado-trabajo">
+   <details class="guiado-enunciado" open><summary>Enunciado oficial <span data-g-nombre></span></summary><div data-g-enunciado class="capa oficial"></div><p class="meta" data-g-fuente></p><a data-g-original>Ver el parcial completo ↗</a></details>
+   <p class="guiado-advertencia" data-g-warning hidden></p>
+   <article class="guiado-paso" aria-labelledby="guiado-titulo">
+    <div class="guiado-paso-top"><span class="eyebrow" data-g-numero></span><span class="pill">CONTROL DE PRÁCTICA · NO OFICIAL</span></div>
+    <h2 id="guiado-titulo" tabindex="-1" data-g-titulo></h2><p data-g-pregunta class="guiado-pregunta"></p>
+    <figure data-g-figura hidden><div class="dibujo-scroll" tabindex="0" role="region" aria-label="Esquema didáctico desplazable"><img data-g-img alt="" width="640" height="470" /></div><figcaption>Esquema didáctico. En celular podés deslizar el dibujo.</figcaption></figure>
+    <form data-g-form novalidate><div data-g-campos></div><div class="guiado-comprobar"><button class="btn-primario" type="submit">Comprobar este paso</button><span data-g-intentos class="mini"></span></div></form>
+    <div class="guiado-feedback" data-g-feedback role="status" aria-live="polite" hidden></div>
+    <div class="guiado-ayudas"><button type="button" data-g-pista aria-expanded="false" aria-controls="guiado-pista">Necesito una pista</button><button type="button" data-g-mostrar aria-expanded="false" aria-controls="guiado-explicacion">Mostrar cómo hacerlo</button></div>
+    <div id="guiado-pista" class="guiado-pista" data-g-hint hidden></div>
+    <div id="guiado-explicacion" class="guiado-explicacion" data-g-explicacion hidden></div>
+    <p class="guiado-guardado mini" data-g-guardado></p>
+    <div class="guiado-acciones"><button type="button" data-g-atras>← Paso anterior</button><button type="button" class="btn-primario" data-g-siguiente disabled>Siguiente paso →</button></div>
+   </article>
+   <section class="guiado-final tarjeta" data-g-final hidden aria-labelledby="guiado-final-t"><p class="eyebrow">TERMINASTE ESTE RECORRIDO</p><h2 id="guiado-final-t" tabindex="-1">Ahora sabés qué volver a practicar.</h2><p data-g-resumen></p><p>El resumen distingue los pasos que resolviste por tu cuenta de los que hiciste con ayuda. Podés repetir el ejercicio para comprobar si lo recordás.</p><div class="guiado-final-acciones"><button data-g-rehacer type="button">Rehacer sin ayudas</button><button data-g-proximo type="button" class="btn-primario">Próximo ejercicio →</button></div></section>
+   <details class="guiado-historial"><summary>Ver mis pasos y los intentos anteriores</summary><div data-g-historial></div></details>
+  </div>
+  <aside class="guiado-aside">
+   <section class="guiado-recorrido"><p class="eyebrow">TU RECORRIDO</p><p data-g-contador></p><span class="barra" data-g-barra></span><nav aria-label="Pasos de este ejercicio"><ol data-g-indice></ol></nav><p class="mini">Podés volver a un paso anterior. Al cambiarlo, se vuelven a comprobar los siguientes.</p></section>
+   <details class="guiado-formatos"><summary>Cómo escribir las cuentas</summary><p>Usá <code>^</code> para potencias, <code>*</code> para multiplicar y <code>/</code> para fracciones.</p><p>Ejemplos: <code>r^2/5</code>, <code>2*pi</code>, <code>exp(x)</code>, <code>ln(1+x^2)</code>, <code>sqrt(2)</code>.</p><p>Si no podemos verificar una forma, te lo decimos. Eso no significa que esté mal.</p></details>
+  </aside>
+ </div>
+</section>
+<p class="guiado-mas">¿Buscás ejercicios nuevos? <a href={`${base}laboratorio/generador/`}>Abrir el generador de práctica adicional →</a></p>
+<script id="guiado-catalogo" type="application/json" set:html={JSON.stringify(catalog).replace(/</g,'\\u003c')}></script>
+<script>import '../../scripts/guiado/ui.js';</script>
 </Layout>

@@ -6,7 +6,7 @@ orden: 13
 ejerciciosOficiales: ["p1-1h9-2025-05-g1#1", "p1-1h9-2025-05-g2#1", "p1-1h9-2025-07-rec#1", "p1-1h9-2024-05#1", "p1-1h10-2024-b#1", "p1-1h10-2025-09#1", "p1-1r3-2024-10-a#1", "p1-1r3-2024-10-b#1", "p1-1r7-2025-10#1", "p1-2s2-2025-06-b#1", "p1-2s2-2024-06-b#1", "p1-todas-2025-11-rec#1", "p1-1h9-2023-05#1", "p1-1h9-2023-07-rec#1", "p1-1h10-2023-10-rec#1", "p1-2s2-2023-07#1", "p1-1r3-2023-09-a#1", "p1-1r3-2023-09-b#1"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 7-9"
-  - "U1.pdf (cónicas y signos S1/S2), p. 15-33 (casi solo imagen)"
+  - "teoria/U1.pdf (cónicas y signos S1/S2), p. 15-33 (casi solo imagen)"
   - "fotos de método de WhatsApp w12 y w19 (hoja resumen de dominio y apunte de cónicas), docs/inventario/P1-B-fotos.md"
 ---
 

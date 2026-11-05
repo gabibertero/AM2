@@ -6,7 +6,7 @@ orden: 14
 ejerciciosOficiales: ["p1-1r3-2023-09-a#2", "p1-1r3-2023-09-b#2"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/01-FUNCIONES DE VARIAS VARIABLES 2015.pdf, p. 11-15 (Ej. 1-7)"
-  - "AM2_A 2025.pdf, p. 1-2 (cuestionario, preguntas 13-18)"
+  - "teoria/AM2_A 2025.pdf, p. 1-2 (cuestionario, preguntas 13-18)"
 ---
 
 ## Cómo reconocerlo

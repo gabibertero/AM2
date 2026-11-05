@@ -2,37 +2,47 @@
 import { getCollection, render } from 'astro:content';
 import { idsDeEjercicios } from '../../scripts/ids.js';
 import ExamenPanel from '../../components/ExamenPanel.astro';
+import EntregaParcial from '../../components/EntregaParcial.astro';
+import { resultadosDelParcial } from '../../lib/controles-guiados.js';
 import Layout from '../../layouts/Layout.astro';
 import { limpiarFuente } from '../../lib/fuente.js';
+import { esP2, ordenarParciales } from '../../lib/preparacion.js';
 
 export async function getStaticPaths() {
-  const todos = (await getCollection('parciales')).sort((a, b) => a.data.orden - b.data.orden);
+  const todos = (await getCollection('parciales')).sort(ordenarParciales);
   return todos.map((entry) => ({ params: { id: entry.id }, props: { entry, todos } }));
 }
 const { entry, todos } = Astro.props;
 const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL;
 const d = entry.data;
+const resultados = resultadosDelParcial(entry.id);
+const ruta = todos.filter(t => esP2(t) === esP2(entry));
+const posicion = ruta.findIndex(t => t.id === entry.id);
+const anterior = ruta[posicion - 1], siguiente = ruta[posicion + 1];
 const corto = (v, alt) => (/^(no figura|xx)/i.test(v) ? alt : v);
 const tema = (t, c = '') => t.replace(/^tema\s+/i, '').replace(new RegExp(`^${c}\\s+`, 'i'), '');
 ---
 <Layout titulo={d.titulo}>
-  <ul class="tabs" aria-label="Exámenes">
-    {todos.map((t) => (
-      <li><a href={`${base}parciales/${t.id}/`} aria-current={t.id === entry.id ? 'page' : undefined}>{corto(t.data.comision, 'sin comisión')} · {corto(t.data.fecha, 'sin fecha')}{t.data.tema && ` · ${tema(t.data.tema, t.data.comision)}`}</a></li>
-    ))}
-  </ul>
+  <p class="eyebrow"><a href={`${base}parciales/`}>← PARCIALES</a> · {esP2(entry) ? '2º PRÁCTICO' : 'ARCHIVO'} · {posicion + 1} DE {ruta.length}</p>
   <div class="examen-cab tarjeta">
     <h1>{d.titulo}</h1>
     <p class="meta">{corto(d.fecha, 'sin fecha')} · {d.tipo}{d.tema && ` · ${/^grupo/i.test(d.tema) ? '' : 'Tema '}${tema(d.tema, d.comision)}`} · Unidades: {d.unidades.map((u) => <span class="chip chip-u" data-unidad={u}>{u}</span>)}</p>
-    <p class="meta">Fuente: {limpiarFuente(d.fuente.split('/').pop())} (enunciado p.{d.paginasEnunciado}, resolución p.{d.paginasResolucion})</p>
+    <p class="meta">Fuente: {limpiarFuente(d.fuente.split('/').pop())} · enunciado p.{d.paginasEnunciado}. {d.paginasResolucion === 'No provistas' ? 'Se recibió solo el enunciado. Las soluciones de esta página son elaboradas para estudiar.' : `Resolución oficial: p.${d.paginasResolucion}.`}</p>
     <span class="barra" aria-hidden="true" data-barra data-ids={idsDeEjercicios(entry.body).join(',')}></span>
   </div>
-  <ExamenPanel id={entry.id} />
+  <div class="modo-guia"><p><strong>¿Arrancás desde cero?</strong> Leé el enunciado, abrí el machete y hacé una operación por vez en tu hoja. «Explicame paso a paso» abre la primera operación. Después cerrá las ayudas e intentá de nuevo.</p></div>
+  {esP2(entry) && <div class="lab-acceso"><p><strong>¿Querés comprobar cada paso?</strong><br />Escribí tus respuestas y recibí ayuda antes de seguir.</p><a class="btn btn-primario" href={`${base}laboratorio/?parcial=${entry.id}`}>Abrir laboratorio →</a></div>}
+  <ExamenPanel id={entry.id} minutos={120} entregaFinal={resultados.length > 0} />
   <div class="examen-grid">
     <nav class="indice" aria-label="Ejercicios del examen" data-indice><p class="indice-t">Ejercicios</p><ol></ol></nav>
     <div class="examen-cont"><Content /></div>
   </div>
+  {resultados.length > 0 && <EntregaParcial examId={entry.id} resultados={resultados} />}
+  <nav class="examen-siguiente" aria-label="Seguir la ruta cronológica">
+    {anterior ? <a class="btn" href={`${base}parciales/${anterior.id}/`}>← Más reciente</a> : <a class="btn" href={`${base}parciales/`}>← Todos los parciales</a>}
+    {siguiente && <a class="btn btn-primario" href={`${base}parciales/${siguiente.id}/`}>Siguiente: {siguiente.data.fecha} {siguiente.data.tema || siguiente.data.comision} →</a>}
+  </nav>
 </Layout>
 <script>
   // la pestaña del examen actual queda a la vista (hay 30+ pestañas)

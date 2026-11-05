@@ -1,6 +1,6 @@
 ---
 slug: edo-exacta
-titulo: "EDO exacta (y factor integrante)"
+titulo: "EDO exacta, paso a paso"
 unidad: U8
 orden: 9
 ejerciciosOficiales: ["1r3-2025-11-14#4", "1r7-2025-11-11#4", "1v1-2025-11-13-a#4", "2s2-2025-11-07-a#4", "recup-1h10-2025-11-08#4", "recup-2025-11-20#3"]
@@ -9,53 +9,57 @@ fuentes:
   - "teoria/AM2 Resumen segundo parcial.pdf, p. 25-26"
   - "teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 10-20 (función potencial)"
 ---
+> **Para los modelos anteriores.** No es el método que necesita la EDO del 31/10, pero aparece varias veces en los parciales de 2025.
 
 ## Cómo reconocerlo
-- Enunciado tipo "verificar si la EDO es exacta, y en ese caso resolverla": $P(x,y)\,dx+Q(x,y)\,dy=0$.
-- Mezcla de términos en $x$ e $y$ (productos como $2x\cos 2y$, $y\sin x$, $\ln y+\dfrac yx$).
-- A veces falta escribir el $dy$ en el original: se lee igual como $P\,dx+Q\,dy=0$.
 
-## Qué necesitás antes
-- $P,Q$ continuas y con derivadas parciales continuas.
-- **Condición de exactitud:** $\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$.
-- El enunciado puede pedir "desarrollo analítico como visto en clase, sin fórmula directa": desarrollá los pasos.
+La consigna suele decir «verificar si es exacta y, en ese caso, resolver». Se presenta como:
 
-## Pasos
-0. Si viene como $y'=-A/B$, pasar a $A\,dx+B\,dy=0$.
-1. Identificar $P$ (lo que multiplica a $dx$) y $Q$ (lo que multiplica a $dy$).
-2. **Verificar** $P_y=Q_x$ y escribirlo. Si no se cumple, **no es exacta**: ver factor integrante abajo.
-3. Buscar $u(x,y)$ con $u_x=P$ y $u_y=Q$.
-4. Integrar $P$ en $x$: $u=\int P\,dx+\varphi(y)$.
-5. Derivar respecto de $y$ e igualar a $Q$: $\varphi'(y)=Q-\dfrac{\partial}{\partial y}\!\int P\,dx$.
-6. Integrar $\varphi'$ para hallar $\varphi(y)$ (sin constante).
-7. Solución general (implícita): $u(x,y)=C$.
-8. Alternativa equivalente: empezar por $Q$ e integrar en $y$.
+$$M(x,y)\,dx+N(x,y)\,dy=0.$$
 
-## Fórmulas clave
-$$P\,dx+Q\,dy=0\ \text{ exacta }\Leftrightarrow\ \frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x},\qquad u(x,y)=C,\ \ du=P\,dx+Q\,dy$$
-- $u$: función potencial (la misma de campos conservativos, U5).
-- $\varphi(y)$: "constante" de integración que puede depender de $y$.
-- $C$: constante que indexa la familia de curvas solución.
+Acá llamamos $M$ al coeficiente de $dx$ y $N$ al de $dy$, para no confundirlos con los $P,Q$ de la lineal.
 
-**Factor integrante** (no figura en las fuentes relevadas): si $P_y\ne Q_x$, buscar $\mu$ tal que $\mu P\,dx+\mu Q\,dy=0$ sea exacta.
-- Si $\dfrac{P_y-Q_x}{Q}$ depende solo de $x$: $\mu(x)=e^{\int\frac{P_y-Q_x}{Q}dx}$.
-- Si $\dfrac{Q_x-P_y}{P}$ depende solo de $y$: $\mu(y)=e^{\int\frac{Q_x-P_y}{P}dy}$.
+## Pasos cortos
 
-## Por qué funciona
-$P\,dx+Q\,dy$ es el diferencial total $du=u_x\,dx+u_y\,dy$ exactamente cuando $u_{xy}=u_{yx}$, o sea $P_y=Q_x$. Entonces $du=0$ implica $u=$ constante. Es el mismo argumento que para la función potencial de un campo conservativo.
+1. Copiá $M$ y $N$ por separado.
+2. Derivá $M$ en $y$: tratá $x$ como constante.
+3. Derivá $N$ en $x$: tratá $y$ como constante.
+4. Compará: si $M_y=N_x$ en el dominio de trabajo, seguí con el método de exactas.
+5. Integrá **$M$ respecto de $x$**. En esa integral, todo lo que tenga solo $y$ es constante.
+6. A ese resultado sumale una función desconocida $g(y)$, no solo un número.
+7. Llamá $H(x,y)$ a lo obtenido. Derivalo respecto de $y$.
+8. Igualá $H_y$ al coeficiente $N$ del principio.
+9. Despejá $g'(y)$ y después integrá para hallar $g(y)$.
+10. Escribí la solución como $H(x,y)=C$.
+11. Comprobá $H_x=M$ y $H_y=N$.
 
-## Errores frecuentes
-- Comparar mal: $P_y$ es la derivada de **$P$** respecto de $y$ (no de $Q$).
-- Olvidar $\varphi(y)$ y poner solo la constante.
-- Después de derivar $u$ respecto de $y$, no igualar a $Q$ (sino a $P$).
-- Dejar términos con $x$ en $\varphi'(y)$: si queda $x$, hubo un error (o no es exacta).
-- Escribir la solución sin la $=C$.
-- Cometer errores en $\int \sin$ y $\int\cos$ con argumentos $2y$ (hay factores $\tfrac12$).
+## Ejemplo oficial de 2025, en pasos
 
-## Cómo comprobar el resultado
-- Calculá $u_x$ y $u_y$: tienen que dar $P$ y $Q$.
-- Derivá implícitamente $u(x,y)=C$: da $P+Q\,y'=0$.
-- Con condición inicial, reemplazá y hallá $C$.
-- Si preguntan teoría: la equivalencia requiere $P,Q$ con derivadas continuas en un dominio simplemente conexo.
+$$[2x\sin y-y\sin x]\,dx+[x^2\cos y+\cos x]\,dy=0.$$
 
-> **Elaborado para el sitio — verificar con la cátedra:** el factor integrante no aparece en las fuentes relevadas ni en los parciales oficiales; las fórmulas son estándar y se incluyen por si la cátedra lo toma.
+1. $M=2x\sin y-y\sin x$ y $N=x^2\cos y+\cos x$.
+2. Derivá en $y$: $M_y=2x\cos y-\sin x$.
+3. Derivá en $x$: $N_x=2x\cos y-\sin x$. Son iguales.
+4. Integrá $M$ en $x$ término a término:
+   - $\int2x\sin y\,dx=x^2\sin y$, porque $\sin y$ es constante en esta cuenta.
+   - $\int-y\sin x\,dx=y\cos x$, porque $\int\sin x\,dx=-\cos x$.
+5. Entonces $H=x^2\sin y+y\cos x+g(y)$.
+6. Derivá en $y$: $H_y=x^2\cos y+\cos x+g'(y)$.
+7. Igualá a $N=x^2\cos y+\cos x$: queda $g'(y)=0$.
+8. Elegí $g(y)=0$; la constante se incluirá en la solución final.
+
+$$\boxed{x^2\sin y+y\cos x=C}$$
+
+Es una solución **implícita**: no hace falta despejar $y$ para que sea válida.
+
+## Si no da exacta
+
+Volvé a revisar signos y derivadas. Si sigue siendo $M_y\ne N_x$, no escribas una función $H$ por este método como si nada. Buscá si la consigna pide otro procedimiento. El factor integrante para volver exacta una ecuación no aparece en los prácticos relevados: no lo agregues a tu carga inicial de estudio.
+
+## Comprobá y evitá estos errores
+
+- $\partial/\partial y$ significa derivar en $y$, manteniendo $x$ fija.
+- No reemplaces $g(y)$ por $C$ antes de comparar con $N$: podrías perder términos.
+- Si al despejar $g'(y)$ siguen quedando $x$, revisá la cuenta o la exactitud.
+- La solución termina con **$=C$**.
+- **Prueba sin mirar:** escribí qué dos derivadas comparar y qué función integrar primero.

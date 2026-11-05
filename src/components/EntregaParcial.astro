@@ -1,0 +1,30 @@
+---
+const { examId, resultados } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<section class="entrega-parcial tarjeta" id="entrega-parcial" data-entrega-parcial={examId} hidden aria-labelledby="entrega-titulo">
+  <p class="eyebrow">COMPROBACIÓN DEL PARCIAL</p>
+  <h2 id="entrega-titulo" tabindex="-1">Entregá tus resultados</h2>
+  <p>Escribí los resultados que obtuviste. Usá <code>pi</code> para π, <code>^</code> para potencias y <code>/</code> para fracciones. Ingresá la expresión pedida sin el signo igual.</p>
+  <form data-entrega-form novalidate>
+    {resultados.map(({numero, title, fields, warning}) => (
+      <fieldset>
+        <legend>Ejercicio {numero} · {title}</legend>
+        {fields.length ? fields.map(field => (
+          <div class="entrega-campo">
+            <label for={`entrega-${numero}-${field.id}`}>{field.label}</label>
+            <input type="text" id={`entrega-${numero}-${field.id}`} name={`${numero}-${field.id}`}
+              data-resultado-esperado={field.expected} maxlength="360" autocomplete="off" spellcheck="false"
+              aria-describedby={`entrega-info-${numero}-${field.id}`} />
+            <p id={`entrega-info-${numero}-${field.id}`} data-entrega-resultado hidden></p>
+          </div>
+        )) : <p class="guiado-advertencia">{warning}</p>}
+        <a class="entrega-volver" href={`${base}laboratorio/?parcial=${examId}&ejercicio=${numero}`}>Revisar este ejercicio paso a paso →</a>
+      </fieldset>
+    ))}
+    <button type="submit" class="btn-primario">Entregar</button>
+  </form>
+  <p data-entrega-resumen tabindex="-1" role="status" aria-live="polite"></p>
+  <p data-entrega-guardado class="meta" role="status"></p>
+</section>
+<script>import '../scripts/guiado/entrega.js';</script>

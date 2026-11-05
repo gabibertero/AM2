@@ -25,6 +25,7 @@ function iniciarEjercicio(ej) {
     pasos.forEach((e, i) => (e.hidden = !(vista.full || i < vista.s)));
     soluciones.forEach((e) => (e.hidden = !vista.full));
     botones.pista.disabled = vista.full || vista.p >= pistas.length;
+    botones.paso.textContent = vista.s ? 'Siguiente paso' : 'Explicame paso a paso';
     botones.paso.disabled = vista.full || vista.s >= pasos.length;
     botones.solucion.disabled = vista.full;
     botones.pista.setAttribute('aria-expanded', vista.full || vista.p > 0);

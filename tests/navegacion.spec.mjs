@@ -12,9 +12,9 @@ for (const [nombre, viewport] of Object.entries(vistas)) {
     page.on('response', (r) => r.status() >= 400 && problemas.push(`${r.status()} ${r.url()}`));
 
     await page.goto('');
-    const hrefs = await page.locator('nav a').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
-    expect(hrefs.length).toBeGreaterThanOrEqual(6);
-    expect(hrefs.some((h) => h.endsWith('/anteriores/'))).toBe(true);
+    const hrefs = await page.locator('nav[aria-label="Principal"] a').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    expect(hrefs.length).toBe(5);
+    expect(hrefs.some((h) => h.endsWith('/errores/'))).toBe(true);
 
     const visitar = async (href) => {
       const r = await page.goto(href, { waitUntil: 'networkidle' });

@@ -6,7 +6,7 @@ orden: 19
 ejerciciosOficiales: ["p1-1h9-2024-05#4"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 14-16"
-  - "U2 - Derivadas Compuestas e Implicitas.pdf, p. 14-17 (superficie implícita)"
+  - "teoria/U2 - Derivadas Compuestas e Implicitas.pdf, p. 14-17 (superficie implícita)"
   - "Demostraciones parcial 1.pdf, p. 6 (Demostración 7: el gradiente es normal; como imagen)"
 ---
 

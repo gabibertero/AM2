@@ -6,7 +6,7 @@ orden: 21
 ejerciciosOficiales: ["p1-1h9-2024-05#4", "p1-1h10-2024-b#4", "p1-1h10-2025-09#5", "p1-1r3-2024-10-a#6", "p1-1r3-2024-10-b#6", "p1-1r7-2025-10#5", "p1-2s2-2024-06-b#5", "p1-todas-2025-11-rec#4", "p1-1h9-2023-07-rec#5", "p1-2s2-2023-07#5", "p1-1r3-2023-09-a#7", "p1-1r3-2023-09-b#7"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 14-19 (método, Lagrange y Ej. 1-3)"
-  - "AM2_A 2025.pdf, p. 1-2 (cuestionario, preguntas 46-47)"
+  - "teoria/AM2_A 2025.pdf, p. 1-2 (cuestionario, preguntas 46-47)"
   - "teoria/Teorico-practico Rocha-Giordano/10_Extremos.pdf, p. 1"
 ---
 

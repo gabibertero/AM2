@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { llavesMatematicas } from './src/lib/llaves-matematicas.js';
 import { unified } from '@astrojs/markdown-remark';
 
 // remark-math 6 lee `$$…$$` en un solo renglón como fórmula en línea: si un párrafo es solo eso, lo pasa a bloque.
@@ -24,6 +25,6 @@ export default defineConfig({
   output: 'static',
   integrations: [mdx()],
   markdown: {
-    processor: unified({ remarkPlugins: [remarkMath, displayEnUnRenglon], rehypePlugins: [rehypeKatex] }),
+    processor: unified({ remarkPlugins: [remarkMath, displayEnUnRenglon], rehypePlugins: [rehypeKatex, llavesMatematicas] }),
   },
 });

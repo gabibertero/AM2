@@ -3,54 +3,86 @@ slug: edo-lineal
 titulo: "EDO lineal de 1.er orden (y = u·v)"
 unidad: U8
 orden: 7
-ejerciciosOficiales: ["1h9-2026-06-27-b#3"]
+ejerciciosOficiales: ["1h10-2026-10-31-a#4", "1h9-2026-06-27-b#3"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/08-ECUACIONES DIFERENCIALES 2015.pdf, p. 6-8"
   - "teoria/AM2 Resumen segundo parcial.pdf, p. 23-24"
   - "teoria/Teorico-practico Rocha-Giordano/14_Ecuaciones Diferenciales de Primer Orden.pdf, p. 1 (fórmula cerrada)"
+  - "parciales/2do-parcial/2026-10-31-1H10-A.png, p. 1 (enunciado aportado por Gabi; resolución elaborada para el sitio)"
 ---
+> **Ejercicio 4 del parcial del 31/10.** Vas a transformar una EDO en dos cuentas más cortas, usando $y=u\cdot v$. No alcanza con copiar una fórmula final: escribí el desarrollo.
 
 ## Cómo reconocerlo
-- $y'$ e $y$ aparecen **a la primera potencia**, sin productos entre ellas: $y'+P(x)\,y=Q(x)$.
-- Los coeficientes dependen solo de $x$. Ejemplo de forma: $y'-3x^2y-6x^2=0$.
 
-## Qué necesitás antes
-- La ecuación en forma estándar: el coeficiente de $y'$ debe ser $1$ (dividí si hace falta).
-- $P$ y $Q$ continuas en el intervalo.
-- Dominar las dos separables que salen del método.
+Una **EDO** es una ecuación que contiene una función desconocida $y(x)$ y sus derivadas. $y'$ significa «derivada de $y$ respecto de $x$».
 
-## Pasos (método de la cátedra, $y=u\cdot v$)
-1. Llevar a $y'+P\,y=Q$ (pasar términos, dividir).
-2. Proponer $y=u(x)\,v(x)$ y derivar: $y'=u'v+uv'$.
-3. Sustituir: $u'v+u\,(v'+P\,v)=Q$.
-4. **Elegir $v$** tal que $v'+P\,v=0$ (variables separables). Basta una solución, con $C=0$: $v=e^{-\int P\,dx}$.
-5. Con ese $v$ queda $u'\,v=Q$, también separable: $u=\int Q\,e^{\int P\,dx}dx+C$.
-6. Armar $y=u\cdot v$.
-7. Condición inicial (si hay): hallar $C$.
+Es lineal de primer orden si podés ordenarla así:
 
-## Fórmulas clave
-$$v=e^{-\int P\,dx},\qquad u=\int Q\,e^{\int P\,dx}\,dx+C,\qquad y=e^{-\int P\,dx}\Big[\int Q\,e^{\int P\,dx}\,dx+C\Big]$$
-- $P$: coeficiente de $y$ en la forma estándar. $Q$: término independiente.
-- $v$: solución de la ecuación homogénea asociada $v'+Pv=0$.
-- $u$: lo que le falta a $v$ para resolver la completa.
-- Ejemplo de la fuente: $y'+3x^2y=6x^2$ da $y=2+Ce^{-x^3}$; con $y(0)=5$ resulta $C=3$.
+$$y'+P(x)y=Q(x).$$
 
-- Coeficiente de $y'$ distinto de $1$: $x\,y'+y=2x$ se divide por $x$ y queda $y'+\tfrac1xy=2$, con $P=\tfrac1x$ (el signo y el factor salen **después** de dividir). Da $v=\tfrac1x$, $u=x^2+C$ e $y=x+\dfrac Cx$ (Rocha 14, ej. 18).
-- Signo de $P$: para $y'-2xy=4x$ es $P=-2x$, $v=e^{x^2}$ y $y=-2+Ce^{x^2}$.
+$P$ y $Q$ dependen solo de $x$. $y$ e $y'$ están a la primera potencia, sin multiplicarse entre sí.
 
-## Por qué funciona
-Al poner $y=uv$ aparecen dos funciones y una sola ecuación: hay libertad para imponer una condición. Se elige que el paréntesis $v'+Pv$ valga $0$, y el problema se parte en **dos** ecuaciones separables.
+## Pasos cortos
 
-## Errores frecuentes
-- No pasar a forma estándar (el signo de $P$ depende de eso: en $y'-3x^2y=6x^2$ es $P=-3x^2$).
-- Signo de $v$: es $e^{-\int P}$, no $e^{+\int P}$.
-- Sumar constante al calcular $v$ (no hace falta) o olvidar $C$ al calcular $u$.
-- No distribuir $v$ en el producto final $y=(\ldots+C)\,v$.
-- Errores en las integrales de $e^{\int P}$: integrar por partes si $Q$ es un polinomio por exponencial.
+1. Juntá todos los términos con $y'$.
+2. Pasá al otro lado lo que no tiene $y$ ni $y'$.
+3. Dividí **todos** los términos por el coeficiente de $y'$. Ahora ese coeficiente debe ser $1$.
+4. Anotá $P(x)$ con su signo y $Q(x)$.
+5. Escribí $y=u(x)v(x)$.
+6. Derivá el producto: $y'=u'v+uv'$.
+7. Reemplazá: $u'v+u(v'+Pv)=Q$.
+8. Elegí $v$ para que el paréntesis sea cero: $v'+Pv=0$.
+9. Separá: $dv/v=-P(x)dx$ e integrá. Para $v$ alcanza elegir una solución no nula.
+10. Con ese $v$, resolvé $u'v=Q$: despejá $u'=Q/v$.
+11. Integrá para hallar $u$. **Acá agregá la constante $C$.**
+12. Volvé a $y=uv$ y comprobá en la ecuación original.
 
-## Cómo comprobar el resultado
-- Derivá $y$ y reemplazá en $y'+Py$: tiene que dar $Q$.
-- La parte con $C$ debe resolver la homogénea $y'+Py=0$.
-- Si hay condición inicial, revisá $y(x_0)=y_0$.
+## Ejemplo del parcial del 31/10
 
-> **Elaborado para el sitio — verificar con la cátedra:** Rocha-Giordano da la fórmula cerrada y Monllor/el resumen de alumno el método $u\cdot v$; el examen de 1H9 tema B está rotulado "EDO lineal, método $y=u\cdot v$".
+$$y'+x^2y'-2xy-2x-2x^3=0.$$
+
+1. Agrupá: $(1+x^2)y'-2xy=2x+2x^3$.
+2. Factorizá el segundo miembro: $2x+2x^3=2x(1+x^2)$.
+3. Dividí por $1+x^2$ (siempre es positivo):
+
+$$y'-\frac{2x}{1+x^2}y=2x.$$
+
+4. Leé $P=-2x/(1+x^2)$ y $Q=2x$.
+5. Poné $y=uv$, derivá y reemplazá:
+
+$$u'v+u\left(v'-\frac{2x}{1+x^2}v\right)=2x.$$
+
+6. Elegí $v$ para anular el paréntesis:
+
+$$\frac{dv}{v}=\frac{2x}{1+x^2}\,dx.$$
+
+7. Para integrar el lado derecho, llamá $w=1+x^2$. Su derivada es $dw=2x\,dx$.
+8. Queda $\int dw/w=\ln|w|$. Como $1+x^2>0$, obtenés $\ln|v|=\ln(1+x^2)$ eligiendo constante cero.
+9. Elegí $v=1+x^2$.
+10. La ecuación restante es $u'(1+x^2)=2x$, de donde $u'=2x/(1+x^2)$.
+11. Repetí la misma integral: $u=\ln(1+x^2)+C$.
+12. Multiplicá $u$ por $v$:
+
+$$\boxed{y=(1+x^2)\big[\ln(1+x^2)+C\big]}.$$
+
+No hay condición inicial en este ejercicio: $C$ queda libre.
+
+## Comprobación del ejemplo
+
+Llamá $L=\ln(1+x^2)+C$. Entonces $y=(1+x^2)L$ y, por producto,
+
+$$y'=2xL+(1+x^2)\frac{2x}{1+x^2}=2xL+2x.$$
+
+En la ecuación ordenada:
+
+$$(1+x^2)y'-2xy=(1+x^2)(2xL+2x)-2x(1+x^2)L=2x(1+x^2).$$
+
+Se cancelan los términos con $L$ y queda el segundo miembro correcto.
+
+## Errores que conviene revisar
+
+- El signo de $P$ se lee **después de dividir**: acá es negativo.
+- No dividas solamente el término con $y'$.
+- Derivar $uv$ da **dos términos**: $u'v+uv'$.
+- No olvides $C$ al integrar $u$.
+- **Prueba sin mirar:** ordená la ecuación y escribí las dos ecuaciones que resolverías para $v$ y $u$.

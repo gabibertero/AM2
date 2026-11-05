@@ -98,7 +98,7 @@ for (const [nombre, viewport] of Object.entries(vistas)) {
 test('laboratorio sin JS: se ve la lista de tipos y no hay controles rotos', async ({ browser }) => {
   const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const page = await ctx.newPage();
-  await page.goto('laboratorio/');
+  await page.goto('laboratorio/generador/');
   await expect(page.locator('.lab-lista li').first()).toBeVisible();
   await expect(page.locator('[data-lab]')).toBeHidden();
   await sinScrollH(page);
@@ -107,7 +107,7 @@ test('laboratorio sin JS: se ve la lista de tipos y no hay controles rotos', asy
 
 test('el Home enlaza al laboratorio', async ({ page }) => {
   await page.goto('');
-  await page.locator('.accesos a[href$="/laboratorio/"]').click();
+  await page.getByRole('link',{name:'Entrar al laboratorio →'}).click();
   await expect(page.getByRole('heading', { level: 1, name: 'Laboratorio' })).toBeVisible();
 });
 

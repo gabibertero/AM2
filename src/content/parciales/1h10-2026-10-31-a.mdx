@@ -1,0 +1,638 @@
+---
+id: "1h10-2026-10-31-a"
+titulo: "2º Parcial Práctico — Tu curso · 1H10 (Tema A)"
+comision: "1H10"
+fecha: "31/10/2026"
+tipo: "práctico"
+tema: "A"
+fuente: "parciales/2do-parcial/2026-10-31-1H10-A.png"
+paginasEnunciado: "1"
+paginasResolucion: "No provistas"
+orden: -1
+unidades: ["U4", "U5", "U8", "U9"]
+---
+
+import Ejercicio from '../../components/Ejercicio.astro';
+import Enunciado from '../../components/Enunciado.astro';
+import Pista from '../../components/Pista.astro';
+import Paso from '../../components/Paso.astro';
+import Solucion from '../../components/Solucion.astro';
+import Comprobacion from '../../components/Comprobacion.astro';
+
+Universidad Tecnológica Nacional – FRC · Análisis Matemático II · Comisión 1H10 · 2° Parcial Práctico – 31/10/2026 · TEMA A
+
+<aside class="capa elaborado">
+
+**Este es el Tema A que compartiste de tu curso.** Los enunciados se transcribieron de tu foto. No se recibió el Tema B ni la resolución del profesor. Las pistas, pasos y resultados de abajo son **elaborados para estudiar, no oficiales**. La foto completa se conserva solo en la carpeta local porque contiene datos personales parcialmente tapados.
+
+Si empezás desde cero, podés empezar por el **ejercicio 5** y seguir con el **1**. Hacé una operación por renglón y probá repetirla antes de abrir el paso siguiente.
+
+</aside>
+
+<Ejercicio id="1h10-2026-10-31-a#1" numero={1} fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina={1} unidad="U4" tema="Volumen entre paraboloide y plano" machete="volumen-polares-cilindricas">
+<Enunciado fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina="1">
+
+Calcular el volumen del sólido limitado por:
+
+$$\begin{cases}x^2+y^2=5z\\z=5\end{cases}$$
+
+(Integral doble o triple)
+
+</Enunciado>
+<Pista>
+
+Despejá $z$ en la primera ecuación. Te queda el piso del sólido. El plano $z=5$ es el techo. Para un volumen por integral doble vas a sumar **altura = techo − piso**.
+
+</Pista>
+<Pista>
+
+Donde aparece $x^2+y^2$, usá polares: $x^2+y^2=r^2$. La intersección con $z=5$ da $r^2=25$, entonces el disco llega hasta $r=5$. No te olvides del factor $r$ del elemento de área.
+
+</Pista>
+<Paso>
+
+**1. Encontrá piso y techo.** Dividí $x^2+y^2=5z$ por $5$:
+
+$$z_{\text{piso}}=\frac{x^2+y^2}{5},\qquad z_{\text{techo}}=5.$$
+
+En el centro $(x,y)=(0,0)$ el piso vale $0$, así que el techo está arriba. El sólido está entre ambos.
+
+</Paso>
+<Paso>
+
+**2. Encontrá el borde.** En el borde las superficies tienen la misma altura. Reemplazá $z=5$ en el paraboloide:
+
+$$x^2+y^2=5\cdot5=25.$$
+
+Es una circunferencia de radio $5$. Desde arriba, el sólido ocupa el disco completo $x^2+y^2\le25$.
+
+<figure class="figura-ayuda">
+  <p class="dibujo-aviso">← Deslizá el dibujo para verlo completo →</p>
+  <div class="dibujo-scroll" tabindex="0" role="region" aria-label="Dibujo didáctico desplazable">
+  <img src={`${import.meta.env.BASE_URL}figuras/practico-2026-volumen.svg`} alt="Corte radial: el piso es la parábola z=r²/5, el techo es z=5 y se encuentran en r=5. La región entre ambos está sombreada. Una columna muestra la altura 5−r²/5." width="640" height="470" loading="lazy" style={{maxWidth: '100%', height: 'auto'}} />
+  </div>
+  <figcaption>Esquema didáctico — no oficial. Corte radial del ejercicio 1. El sombreado gira alrededor del eje z para formar el sólido. <a href={`${import.meta.env.BASE_URL}figuras/practico-2026-volumen.svg`} target="_blank" rel="noopener">Ver dibujo en tamaño completo ↗</a></figcaption>
+</figure>
+
+</Paso>
+<Paso>
+
+**3. Pasá a polares.** $r$ mide la distancia al centro; $\theta$ indica hacia dónde mirás. Para cubrir el disco completo:
+
+$$0\le r\le5,\qquad0\le\theta\le2\pi.$$
+
+Reemplazá $x^2+y^2$ por $r^2$. El elemento de área cambia a $dA=r\,dr\,d\theta$. Ese factor $r$ se escribe aunque el integrando no lo tenga.
+
+</Paso>
+<Paso>
+
+**4. Escribí altura por área.** La altura es $5-r^2/5$. Entonces:
+
+$$V=\int_0^{2\pi}\int_0^5\left(5-\frac{r^2}{5}\right)r\,dr\,d\theta.$$
+
+Antes de seguir, comprobá: hay techo menos piso, un factor $r$ y límites para las dos variables.
+
+</Paso>
+<Paso>
+
+**5. Integrá primero en $r$.** Distribuí el factor $r$ y usá $\int r^n\,dr=r^{n+1}/(n+1)$:
+
+$$\int_0^5\left(5r-\frac{r^3}{5}\right)dr=\left[\frac{5r^2}{2}-\frac{r^4}{20}\right]_0^5.$$
+
+Evaluar significa reemplazar primero por $5$ y restar lo que da en $0$:
+
+$$\frac{125}{2}-\frac{625}{20}=\frac{125}{2}-\frac{125}{4}=\frac{125}{4}.$$
+
+</Paso>
+<Paso>
+
+**6. Integrá en $\theta$.** Ya no queda ninguna $\theta$ dentro del integrando; multiplicás la constante por el largo del intervalo:
+
+$$V=\frac{125}{4}\int_0^{2\pi}d\theta=\frac{125}{4}\cdot2\pi=\frac{125\pi}{2}.$$
+
+</Paso>
+<Solucion>
+
+$$\boxed{V=\frac{125\pi}{2}}$$
+
+Unidades de volumen. Si elegís integral triple, el planteo equivalente es:
+
+$$V=\int_0^{2\pi}\int_0^5\int_{r^2/5}^5r\,dz\,dr\,d\theta.$$
+
+**Control antes de entregar:** radio $5$; piso $r^2/5$; techo $5$; jacobiano $r$; resultado positivo. Un error típico es usar radio $25$: $25$ es el radio **al cuadrado**.
+
+</Solucion>
+<Comprobacion>
+
+**Otro orden de integración.** A altura $z$, el corte horizontal es un disco con $r^2\le5z$: su área es $5\pi z$. Sumando esos cortes desde $z=0$ a $z=5$:
+
+$$V=\int_0^5 5\pi z\,dz=\left[\frac{5\pi z^2}{2}\right]_0^5=\frac{125\pi}{2}.$$
+
+Coincide con el cálculo en polares. Verificado también por integración simbólica.
+
+</Comprobacion>
+</Ejercicio>
+
+<Ejercicio id="1h10-2026-10-31-a#2" numero={2} fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina={1} unidad="U4" tema="Integral triple en un cono" machete="integral-triple-cilindricas-esfericas">
+<Enunciado fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina="1">
+
+Calcular la integral triple de la función integrando:
+
+$$u=\sqrt{4x^2+4y^2}$$
+
+Siendo el dominio de integración la región limitada por:
+
+$$\begin{cases}z^2=x^2+y^2\\z=2\end{cases}$$
+
+</Enunciado>
+<Pista>
+
+El cuerpo acotado es el cono superior cerrado por el plano $z=2$. En cilíndricas el cono superior es $z=r$. La función a integrar no es $1$: tenés que transformar también la raíz.
+
+</Pista>
+<Pista>
+
+Como $r\ge0$, $\sqrt{4x^2+4y^2}=\sqrt{4r^2}=2r$. Después multiplicás por otro $r$, el jacobiano. Queda $2r^2$, no $2r$.
+
+</Pista>
+<Paso>
+
+**1. Identificá el sólido cerrado.** $z^2=x^2+y^2$ tiene dos hojas: una arriba y otra abajo. El plano $z=2$ cierra una región acotada con la hoja **superior**. Ahí $z\ge0$, por lo tanto $z=r$.
+
+La hoja inferior no forma un sólido acotado con esa tapa. Esta elección explica qué región estamos integrando.
+
+<figure class="figura-ayuda">
+  <p class="dibujo-aviso">← Deslizá el dibujo para verlo completo →</p>
+  <div class="dibujo-scroll" tabindex="0" role="region" aria-label="Dibujo didáctico desplazable">
+  <img src={`${import.meta.env.BASE_URL}figuras/practico-2026-cono.svg`} alt="Corte radial del cono superior: región triangular sombreada entre z=r y z=2, con radio entre 0 y 2. Una columna vertical muestra que z va desde r hasta 2." width="640" height="470" loading="lazy" style={{maxWidth: '100%', height: 'auto'}} />
+  </div>
+  <figcaption>Esquema didáctico — no oficial. Corte radial del ejercicio 2. El cono es el piso y el plano z=2 es la tapa. <a href={`${import.meta.env.BASE_URL}figuras/practico-2026-cono.svg`} target="_blank" rel="noopener">Ver dibujo en tamaño completo ↗</a></figcaption>
+</figure>
+
+</Paso>
+<Paso>
+
+**2. Buscá el radio de la tapa.** Poné $z=2$ en el cono:
+
+$$2^2=r^2\quad\Rightarrow\quad r=2.$$
+
+El cuerpo da una vuelta completa: $\theta$ va de $0$ a $2\pi$.
+
+</Paso>
+<Paso>
+
+**3. Fijá el piso y el techo de $z$.** Si elegís primero un punto de radio $r$, la columna empieza en el cono $z=r$ y termina en el plano $z=2$:
+
+$$0\le r\le2,\qquad r\le z\le2.$$
+
+El límite inferior de $z$ depende de $r$: no es siempre $0$.
+
+</Paso>
+<Paso>
+
+**4. Transformá la función y el volumen por separado.**
+
+$$u=\sqrt{4(x^2+y^2)}=\sqrt{4r^2}=2r.$$
+
+$$dV=r\,dz\,dr\,d\theta.$$
+
+Al multiplicar: $u\,dV=2r^2\,dz\,dr\,d\theta$.
+
+</Paso>
+<Paso>
+
+**5. Escribí la triple completa.** El orden de los diferenciales es el orden en que vas a calcular, desde adentro hacia afuera:
+
+$$I=\int_0^{2\pi}\int_0^2\int_r^2 2r^2\,dz\,dr\,d\theta.$$
+
+Primero $z$, después $r$, al final $\theta$.
+
+</Paso>
+<Paso>
+
+**6. Integrá en $z$.** En este cálculo $r$ es una constante:
+
+$$\int_r^2 2r^2\,dz=2r^2[z]_r^2=2r^2(2-r)=4r^2-2r^3.$$
+
+</Paso>
+<Paso>
+
+**7. Integrá las potencias de $r$.**
+
+$$\int_0^2(4r^2-2r^3)\,dr=\left[\frac{4r^3}{3}-\frac{r^4}{2}\right]_0^2=\frac{32}{3}-8=\frac83.$$
+
+</Paso>
+<Paso>
+
+**8. Terminá con $\theta$.**
+
+$$I=\frac83\int_0^{2\pi}d\theta=\frac83\cdot2\pi=\frac{16\pi}{3}.$$
+
+</Paso>
+<Solucion>
+
+$$\boxed{I=\frac{16\pi}{3}}$$
+
+**Control antes de entregar:** función $2r$; jacobiano $r$; producto $2r^2$; cono como piso $z=r$; tapa $z=2$. Este ejercicio no pregunta el volumen: pide integrar la función dada sobre el cuerpo.
+
+</Solucion>
+<Comprobacion>
+
+**Invertí el orden.** A altura fija $z$, el radio va desde $0$ hasta $z$:
+
+$$I=\int_0^{2\pi}\int_0^2\int_0^z2r^2\,dr\,dz\,d\theta=2\pi\int_0^2\frac{2z^3}{3}\,dz=\frac{16\pi}{3}.$$
+
+Dos órdenes distintos dan el mismo resultado. Verificado simbólicamente.
+
+</Comprobacion>
+</Ejercicio>
+
+<Ejercicio id="1h10-2026-10-31-a#3" numero={3} fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina={1} unidad="U5" tema="Curvilínea por definición y Green" machete="curvilinea-por-definicion">
+<Enunciado fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina="1">
+
+Sea el campo vectorial:
+
+$$F(x,y)=(x-y)\,i+(x+y)\,j$$
+
+Calcular por definición la integral curvilínea a través de la trayectoria cerrada:
+
+$$\begin{cases}y=x\\x=y^2-2\end{cases}$$
+
+Verificar el cálculo aplicando la fórmula de Green.
+
+</Enunciado>
+<Pista>
+
+El campo tiene dos componentes: llamalas $P=x-y$ y $Q=x+y$. Por definición tenés que calcular $\int P\,dx+Q\,dy$ sobre **cada tramo** y sumar. Green viene después, como verificación.
+
+</Pista>
+<Pista>
+
+Las curvas se cortan en $(-1,-1)$ y $(2,2)$. Para antihorario, subí por la recta y volvé por la parábola. Conviene parametrizar ambas usando $y=t$: así no necesitás despejar raíces.
+
+</Pista>
+<Paso>
+
+**1. Aclaración de sentido.** La foto dice «trayectoria cerrada» pero no especifica orientación. Para esta solución **elegimos sentido antihorario** y lo dejamos escrito. Si se recorre al revés, el resultado cambia de signo.
+
+Esta elección es didáctica; no se agregó al enunciado oficial.
+
+</Paso>
+<Paso>
+
+**2. Hallá los cortes.** Como en la recta $x=y$, reemplazá $x$ por $y$ en la parábola:
+
+$$y=y^2-2\quad\Rightarrow\quad y^2-y-2=0\quad\Rightarrow\quad(y-2)(y+1)=0.$$
+
+Entonces $y=-1$ o $y=2$. Como $x=y$, los puntos son $A=(-1,-1)$ y $B=(2,2)$.
+
+</Paso>
+<Paso>
+
+**3. Dibujá qué queda a cada lado.** Para $-1\le y\le2$, la parábola $x=y^2-2$ es el borde izquierdo y la recta $x=y$ es el derecho. Por ejemplo, a altura $y=0$ van de $x=-2$ a $x=0$.
+
+Para sentido antihorario, la región debe quedar a tu izquierda mientras avanzás: **recta de $A$ a $B$**, luego **parábola de $B$ a $A$**.
+
+<figure class="figura-ayuda">
+  <p class="dibujo-aviso">← Deslizá el dibujo para verlo completo →</p>
+  <div class="dibujo-scroll" tabindex="0" role="region" aria-label="Dibujo didáctico desplazable">
+  <img src={`${import.meta.env.BASE_URL}figuras/practico-2026-curva.svg`} alt="Región sombreada entre la parábola x=y²−2 a la izquierda y la recta y=x a la derecha. Cortes A=(-1,-1) y B=(2,2). Flechas: subir por la recta de A a B y regresar por la parábola de B a A, en sentido antihorario." width="640" height="470" loading="lazy" style={{maxWidth: '100%', height: 'auto'}} />
+  </div>
+  <figcaption>Esquema didáctico — no oficial. Orientación elegida para resolver: recta A → B y parábola B → A. La foto no indica el sentido. <a href={`${import.meta.env.BASE_URL}figuras/practico-2026-curva.svg`} target="_blank" rel="noopener">Ver dibujo en tamaño completo ↗</a></figcaption>
+</figure>
+
+</Paso>
+<Paso>
+
+**4. Parametrizá la recta.** Poné $x=t$, $y=t$, con $t$ de $-1$ a $2$. Derivá respecto de $t$:
+
+$$dx=dt,\qquad dy=dt.$$
+
+Reemplazá también en el campo:
+
+$$P=t-t=0,\qquad Q=t+t=2t.$$
+
+</Paso>
+<Paso>
+
+**5. Calculá el primer tramo.**
+
+$$I_1=\int_{-1}^{2}(0\cdot1+2t\cdot1)\,dt=\int_{-1}^2 2t\,dt=[t^2]_{-1}^{2}=4-1=3.$$
+
+Los factores $1$ vienen de $dx/dt=1$ y $dy/dt=1$.
+
+</Paso>
+<Paso>
+
+**6. Parametrizá la parábola.** Elegí $y=t$, $x=t^2-2$. Para volver de $B$ a $A$, $t$ va de $2$ a $-1$:
+
+$$dx=2t\,dt,\qquad dy=dt.$$
+
+$$P=t^2-t-2,\qquad Q=t^2+t-2.$$
+
+</Paso>
+<Paso>
+
+**7. Armá y simplificá el segundo tramo.** Multiplicá cada componente por su diferencial:
+
+$$P\,dx+Q\,dy=[(t^2-t-2)2t+(t^2+t-2)]\,dt.$$
+
+Distribuí y agrupá:
+
+$$2t^3-2t^2-4t+t^2+t-2=2t^3-t^2-3t-2.$$
+
+</Paso>
+<Paso>
+
+**8. Integrá respetando el regreso.**
+
+$$I_2=\int_2^{-1}(2t^3-t^2-3t-2)\,dt.$$
+
+$$I_2=\left[\frac{t^4}{2}-\frac{t^3}{3}-\frac{3t^2}{2}-2t\right]_2^{-1}.$$
+
+En $t=-1$ da $4/3$; en $t=2$ da $-14/3$. Restá en ese orden:
+
+$$I_2=\frac43-\left(-\frac{14}{3}\right)=6.$$
+
+</Paso>
+<Paso>
+
+**9. Sumá y verificá con Green.** Por definición:
+
+$$I=I_1+I_2=3+6=9.$$
+
+Ahora derivá las componentes: $Q_x=1$ y $P_y=-1$. Green para sentido antihorario da:
+
+$$I=\iint_D(Q_x-P_y)\,dA=\iint_D2\,dA.$$
+
+</Paso>
+<Paso>
+
+**10. Integrá sobre la región.** El borde izquierdo es $x=y^2-2$, el derecho $x=y$, y $-1\le y\le2$:
+
+$$I=\int_{-1}^2\int_{y^2-2}^{y}2\,dx\,dy=2\int_{-1}^2(-y^2+y+2)\,dy.$$
+
+$$I=2\left[-\frac{y^3}{3}+\frac{y^2}{2}+2y\right]_{-1}^2=2\left(\frac{10}{3}+\frac76\right)=9.$$
+
+Coincide con el cálculo por tramos.
+
+</Paso>
+<Solucion>
+
+$$\boxed{I=9\quad\text{en sentido antihorario}}$$
+
+En sentido horario: $I=-9$. La orientación no figura en la foto; hay que explicitar la elegida.
+
+**Control antes de entregar:** dos tramos; cortes correctos; límites de regreso invertidos; $I_1=3$ e $I_2=6$; verificación de Green completa. Green por sí solo no reemplaza lo que pide «por definición».
+
+</Solucion>
+<Comprobacion>
+
+La región tiene área $\int_{-1}^2[y-(y^2-2)]\,dy=9/2$. Como $Q_x-P_y=2$, la circulación antihoraria debe ser $2\cdot9/2=9$. El cálculo simbólico independiente reproduce ambos tramos y verifica que invertir los límites cambia el signo.
+
+</Comprobacion>
+</Ejercicio>
+
+<Ejercicio id="1h10-2026-10-31-a#4" numero={4} fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina={1} unidad="U8" tema="EDO lineal de primer orden" machete="edo-lineal">
+<Enunciado fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina="1">
+
+Resolver la siguiente EDO de 1º orden expresando su solución general.
+
+Se pide desarrollo analítico (como visto en clases)
+
+$$y'+x^2y'-2xy-2x-2x^3=0$$
+
+</Enunciado>
+<Pista>
+
+Hay dos términos con $y'$: sacalo como factor común. Después dividí toda la ecuación por $1+x^2$ para dejar el coeficiente de $y'$ igual a $1$.
+
+</Pista>
+<Pista>
+
+Queda $y'-\frac{2x}{1+x^2}y=2x$: es lineal. Para desarrollarla sin aplicar una fórmula final, usá $y=u\,v$ y derivá como producto: $y'=u'v+uv'$.
+
+</Pista>
+<Paso>
+
+**1. Juntá los términos con $y'$.** $y'$ significa la derivada de $y$ respecto de $x$. Sacalo como factor común y pasá los términos sin $y$ al otro lado:
+
+$$y'(1+x^2)-2xy=2x+2x^3.$$
+
+Del lado derecho también podés sacar factor común: $2x+2x^3=2x(1+x^2)$.
+
+</Paso>
+<Paso>
+
+**2. Dividí todo por $1+x^2$.** Siempre es positivo para $x$ real, así que no excluís ningún $x$:
+
+$$y'-\frac{2x}{1+x^2}y=2x.$$
+
+Es lineal porque $y$ y $y'$ aparecen a la primera potencia, sin productos entre ellas. No hace falta adivinar una solución.
+
+</Paso>
+<Paso>
+
+**3. Usá $y=u\,v$.** $u$ y $v$ son dos funciones de $x$ que vamos a encontrar. Al derivar un producto:
+
+$$y'=u'v+uv'.$$
+
+Reemplazá esas dos expresiones en la ecuación:
+
+$$u'v+uv'-\frac{2x}{1+x^2}uv=2x.$$
+
+</Paso>
+<Paso>
+
+**4. Agrupá los términos con $u$.**
+
+$$u'v+u\left(v'-\frac{2x}{1+x^2}v\right)=2x.$$
+
+Elegimos $v$ para hacer cero el paréntesis. Así desaparece una parte de la cuenta:
+
+$$v'-\frac{2x}{1+x^2}v=0.$$
+
+</Paso>
+<Paso>
+
+**5. Encontrá una $v$ no nula.** Despejá y separá:
+
+$$\frac{v'}{v}=\frac{2x}{1+x^2},\qquad\frac{dv}{v}=\frac{2x}{1+x^2}\,dx.$$
+
+Integrá. La derivada de $1+x^2$ es $2x$, por eso:
+
+$$\ln|v|=\ln(1+x^2)+K.$$
+
+Nos alcanza una solución no nula: elegimos $v=1+x^2$. La constante general quedará después en $u$.
+
+</Paso>
+<Paso>
+
+**6. Volvé a la ecuación simplificada.** El paréntesis del paso 4 ya vale cero, así que queda $u'v=2x$. Como $v=1+x^2$:
+
+$$u'(1+x^2)=2x\quad\Rightarrow\quad u'=\frac{2x}{1+x^2}.$$
+
+</Paso>
+<Paso>
+
+**7. Integrá para hallar $u$.** Es la misma integral del paso 5:
+
+$$u=\int\frac{2x}{1+x^2}\,dx=\ln(1+x^2)+C.$$
+
+No aparece valor absoluto porque $1+x^2>0$ para todo $x$ real.
+
+</Paso>
+<Paso>
+
+**8. Recuperá $y$.** Al principio escribimos $y=u\,v$; ahora multiplicá las dos funciones encontradas:
+
+$$y=(1+x^2)\big[\ln(1+x^2)+C\big].$$
+
+La consigna pide solución general: como no hay condición inicial, $C$ queda libre.
+
+</Paso>
+<Solucion>
+
+$$\boxed{y=(1+x^2)\big[\ln(1+x^2)+C\big]}$$
+
+Válida para todo $x\in\mathbb R$. **Control antes de entregar:** haber dividido por $1+x^2$ todos los términos; derivar $uv$ como producto; mostrar cómo se obtuvieron $u$ y $v$; incluir $C$.
+
+</Solucion>
+<Comprobacion>
+
+Escribí $L=\ln(1+x^2)+C$ para hacer la cuenta más corta. Entonces $y=(1+x^2)L$ y:
+
+$$y'=2xL+(1+x^2)\frac{2x}{1+x^2}=2xL+2x.$$
+
+En la ecuación agrupada:
+
+$$(1+x^2)y'-2xy=(1+x^2)(2xL+2x)-2x(1+x^2)L=2x(1+x^2).$$
+
+Es exactamente el lado derecho. La sustitución simbólica en la ecuación original también da cero.
+
+</Comprobacion>
+</Ejercicio>
+
+<Ejercicio id="1h10-2026-10-31-a#5" numero={5} fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina={1} unidad="U9" tema="EDO2: raíz doble y coeficientes indeterminados" machete="edo2-coeficientes-indeterminados">
+<Enunciado fuente="parciales/2do-parcial/2026-10-31-1H10-A.png" pagina="1">
+
+Resolver por el método de los coeficientes indeterminados la siguiente EDO de 2º orden expresando su solución general:
+
+$$y''-2y'+y=2e^x+1$$
+
+</Enunciado>
+<Pista>
+
+La solución se arma con dos partes: la homogénea $y_h$ (resolvé poniendo cero a la derecha) y una particular $y_p$ (que produzca $2e^x+1$). Al final se suman: $y=y_h+y_p$.
+
+</Pista>
+<Pista>
+
+La característica es $(m-1)^2=0$: raíz doble $m=1$. En la homogénea ya están $e^x$ y $xe^x$, por eso para la parte particular exponencial necesitás $Ax^2e^x$. Para el $1$ proponé una constante $B$.
+
+</Pista>
+<Paso>
+
+**1. Armá la ecuación característica.** Primero resolvé $y''-2y'+y=0$. Con coeficientes constantes, reemplazá $y''$ por $m^2$, $y'$ por $m$ e $y$ por $1$:
+
+$$m^2-2m+1=0\quad\Rightarrow\quad(m-1)^2=0.$$
+
+La raíz es $m=1$ y aparece dos veces.
+
+</Paso>
+<Paso>
+
+**2. Escribí la homogénea.** Con raíz doble $m=1$, las dos funciones necesarias son $e^x$ y $xe^x$:
+
+$$y_h=C_1e^x+C_2xe^x.$$
+
+$C_1$ y $C_2$ son constantes libres. Hay dos porque la ecuación es de segundo orden.
+
+</Paso>
+<Paso>
+
+**3. Proponé la particular.** La derecha es una exponencial más una constante. Para $2e^x$ intentarías $Ae^x$, pero esa forma ya está en $y_h$. También $Axe^x$ está ahí. Subí una potencia más: $Ax^2e^x$.
+
+Para el término $1$ proponé $B$. Juntando ambas partes:
+
+$$y_p=Ax^2e^x+B.$$
+
+$A$ y $B$ se calculan; no son las constantes libres de la solución general.
+
+</Paso>
+<Paso>
+
+**4. Derivá una vez.** Para $x^2e^x$ usá la regla del producto: derivada del primero por el segundo, más primero por derivada del segundo. La constante $B$ deriva a cero:
+
+$$y_p'=A(2xe^x+x^2e^x)=A(x^2+2x)e^x.$$
+
+</Paso>
+<Paso>
+
+**5. Derivá otra vez.** Ahora el producto es $(x^2+2x)e^x$:
+
+$$y_p''=A[(2x+2)e^x+(x^2+2x)e^x]=A(x^2+4x+2)e^x.$$
+
+</Paso>
+<Paso>
+
+**6. Reemplazá en la izquierda.** Conservá el signo menos y el factor $2$ del término del medio:
+
+$$y_p''-2y_p'+y_p=A(x^2+4x+2)e^x-2A(x^2+2x)e^x+Ax^2e^x+B.$$
+
+Agrupá lo que multiplica a $Ae^x$:
+
+$$[(x^2+4x+2)-2(x^2+2x)+x^2]Ae^x+B=2Ae^x+B.$$
+
+Los términos con $x^2$ y con $x$ se cancelan.
+
+</Paso>
+<Paso>
+
+**7. Compará con la derecha.** Necesitamos que $2Ae^x+B=2e^x+1$ para cualquier $x$:
+
+$$2A=2\Rightarrow A=1,\qquad B=1.$$
+
+Entonces $y_p=x^2e^x+1$.
+
+</Paso>
+<Paso>
+
+**8. Sumá homogénea y particular.**
+
+$$y=C_1e^x+C_2xe^x+x^2e^x+1.$$
+
+Podés dejarla así o sacar factor $e^x$:
+
+$$y=(C_1+C_2x+x^2)e^x+1.$$
+
+</Paso>
+<Solucion>
+
+$$\boxed{y=(C_1+C_2x+x^2)e^x+1}$$
+
+**Control antes de entregar:** raíz doble; las dos constantes $C_1,C_2$; particular con $x^2e^x$ por resonancia; derivadas y sustitución; sumar la homogénea. Dejar solo $y_p$ no es la solución general.
+
+</Solucion>
+<Comprobacion>
+
+Control de la particular $y_p=x^2e^x+1$:
+
+$$y_p'=(x^2+2x)e^x,\qquad y_p''=(x^2+4x+2)e^x.$$
+
+Al sustituir, $y_p''-2y_p'+y_p=2e^x+1$. La homogénea produce cero, por eso agregarla conserva ese lado derecho. Verificado simbólicamente con $C_1$ y $C_2$ arbitrarias.
+
+</Comprobacion>
+</Ejercicio>
+
+<div class="capa oficial">
+
+**Importante:** Todos los ejercicios deben ser resueltos, o al menos 2 de ellos con planteo y desarrollo consistente. No se permite el uso de tabla de derivadas ni integrales, tampoco el uso de calculadora. Se solicita prolijidad, orden y escritura grande y legible, adjuntado todos los cálculos auxiliares para poder controlar y evaluar los procedimientos.
+
+</div>
+
+<aside class="capa elaborado">
+
+Estas son las indicaciones impresas en el parcial del 31/10. La frase sobre planteos no determina por sí sola una nota de aprobación. La duración de práctica del sitio es de **2 horas**, según lo que nos contaste sobre tu examen; ese dato no está impreso en esta foto.
+
+</aside>

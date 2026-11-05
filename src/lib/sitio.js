@@ -1,6 +1,6 @@
 // Única fuente de datos editables del Home.
 // Fecha del 2º parcial en formato 'aaaa-mm-dd'. null = todavía no se conoce → el Home muestra "Fecha a confirmar".
-export const FECHA_PARCIAL = '2026-10-31';
+export const FECHA_PARCIAL = '2026-11-07';
 export const FECHA_FINAL = null; // final de diciembre: null = "fecha a confirmar"
 export const NOMBRE_MATERIA = 'Análisis Matemático II';
 export const FECHA_RECUP = '2026-11-07'; // recuperatorio del 2º parcial

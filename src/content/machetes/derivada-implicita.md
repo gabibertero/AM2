@@ -6,7 +6,7 @@ orden: 16
 ejerciciosOficiales: ["p1-1r3-2024-10-a#3", "p1-1r3-2024-10-b#3", "p1-1r3-2023-09-a#4"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 22-30"
-  - "U2 - Derivadas Compuestas e Implicitas.pdf, p. 1-25 (documento completo)"
+  - "teoria/U2 - Derivadas Compuestas e Implicitas.pdf, p. 1-25 (documento completo)"
   - "Ejercicios Funciones Implícitas .pdf, p. 1-6 (fórmulas y ejercicios resueltos, manuscrito de Gabi)"
   - "foto de método de WhatsApp w18 (implícita de sen(3x²−xy+z)+e^(y−x²+z)=0), docs/inventario/P1-B-fotos.md"
 ---

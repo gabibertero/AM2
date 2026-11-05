@@ -15,7 +15,7 @@ if (m) {
 try {
   const u = JSON.parse(localStorage.getItem('am2:v1:ultimo'));
   const url = new URL(u.href, location.origin);
-  if (url.origin === location.origin && url.pathname.startsWith(base)) {
+  if (url.origin === location.origin && url.pathname.startsWith(base + 'parciales/') && !url.pathname.includes('/p1-')) {
     const a = $('[data-seguir]');
     a.href = url.pathname + url.hash;
     $('[data-seguir-t]').textContent = String(u.t).slice(0, 80);

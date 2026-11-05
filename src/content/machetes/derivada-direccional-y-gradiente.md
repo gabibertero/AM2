@@ -6,8 +6,8 @@ orden: 18
 ejerciciosOficiales: ["p1-1h9-2025-05-g1#2", "p1-1h9-2025-05-g2#2", "p1-1h9-2025-07-rec#2", "p1-1h9-2024-05#3", "p1-1h10-2024-b#2", "p1-1h10-2025-09#3", "p1-1r3-2024-10-a#4", "p1-1r3-2024-10-b#4", "p1-1r7-2025-10#3", "p1-2s2-2025-06-b#3", "p1-2s2-2024-06-b#3", "p1-todas-2025-11-rec#3", "p1-1h9-2023-05#3", "p1-1h10-2023-10-rec#3", "p1-1h9-2023-07-rec#3", "p1-2s2-2023-07#3", "p1-1r3-2023-09-a#5", "p1-1r3-2023-09-b#5"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 31-39"
-  - "U2- Derivada Direccional.pdf, p. 1-22"
-  - "Ejercicios Direccionales .pdf, p. 1-3 (ejercicios resueltos, manuscrito de Gabi)"
+  - "teoria/U2- Derivada Direccional.pdf, p. 1-22"
+  - "practica/Ejercicios Direccionales .pdf, p. 1-3 (ejercicios resueltos, manuscrito de Gabi)"
   - "foto de método de WhatsApp w19 (pasos 1-9 de la derivada direccional) y w12, docs/inventario/P1-B-fotos.md"
 ---
 

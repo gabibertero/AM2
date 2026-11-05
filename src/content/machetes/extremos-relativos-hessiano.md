@@ -6,7 +6,7 @@ orden: 20
 ejerciciosOficiales: ["p1-1h9-2025-05-g1#3", "p1-1h9-2025-05-g2#3", "p1-1h9-2025-07-rec#3", "p1-1h10-2024-b#3", "p1-1h10-2025-09#4", "p1-1r3-2024-10-a#5", "p1-1r3-2024-10-b#5", "p1-1r7-2025-10#4", "p1-2s2-2025-06-b#4", "p1-2s2-2024-06-b#4", "p1-1h9-2023-05#4", "p1-1h10-2023-10-rec#4", "p1-1h9-2023-07-rec#4", "p1-2s2-2023-07#4", "p1-1r3-2023-09-a#6", "p1-1r3-2023-09-b#6"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/03-MAXIMOS Y MINIMOS 2015.pdf, p. 6-12"
-  - "U2 - Taylor y Extremos Relativos .pdf, p. 20-40"
+  - "teoria/U2 - Taylor y Extremos Relativos .pdf, p. 20-40"
   - "teoria/Teorico-practico Rocha-Giordano/10_Extremos.pdf, p. 1"
   - "foto de método de WhatsApp w12 (criterio de H), docs/inventario/P1-B-fotos.md"
 ---

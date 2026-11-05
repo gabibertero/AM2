@@ -33,6 +33,7 @@ test('Reiniciar progreso borra solo claves am2:v1:', async ({ page }) => {
   await page.evaluate(() => localStorage.setItem('otra-app:x', '1'));
 
   await page.goto('');
+  await page.getByText('Más material y opciones', { exact: true }).click();
   await page.getByRole('button', { name: 'Reiniciar progreso' }).click();
   await page.getByRole('button', { name: 'Sí, borrar todo' }).click();
   await expect(page.getByText('Progreso borrado.')).toBeVisible();

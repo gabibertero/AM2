@@ -11,6 +11,8 @@ interface Props {
 const { id, numero, fuente, pagina, unidad, tema, machete } = Astro.props;
 import IA from './IA.astro';
 import { getCollection } from 'astro:content';
+import { controlesGuiados } from '../lib/controles-guiados.js';
+const guiado = controlesGuiados.has(id);
 const archivo = fuente.split('/').pop().replace(/\.[a-z]+$/i, '');
 const ayudas = `ayudas-${id.replace(/\W/g, '-')}`;
 const base = import.meta.env.BASE_URL;
@@ -28,6 +30,7 @@ const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelt
         <span class="chip chip-u" data-unidad={unidad}>{unidad}</span>
         <span class="chip" data-ia-tit>{tema}</span>
         <span class="ej-fuente">{archivo}, p.{pagina}</span>
+        {guiado && <a class="chip chip-link" href={`${base}laboratorio/?parcial=${id.split('#')[0]}&ejercicio=${numero}`}>Resolver en laboratorio →</a>}
         {machete && <a class="chip chip-link" href={hrefMachete}>Machete: {m ? m.data.titulo : machete}</a>}
       </p>
     </div>
@@ -43,9 +46,20 @@ const estados = [['pendiente', 'Pendiente'], ['en-curso', 'En curso'], ['resuelt
   <div id={ayudas} aria-live="polite"><slot /></div>
   <div class="acciones" data-js hidden>
     <button type="button" data-accion="pista" aria-expanded="false" aria-controls={ayudas}>Ver pista</button>
-    <button type="button" data-accion="paso" aria-expanded="false" aria-controls={ayudas}>Siguiente paso</button>
+    <button type="button" data-accion="paso" aria-expanded="false" aria-controls={ayudas}>Explicame paso a paso</button>
     <button type="button" data-accion="solucion" aria-expanded="false" aria-controls={ayudas}>Ver solución completa</button>
     <button type="button" data-accion="ocultar">Ocultar todo</button>
+  </div>
+  <div class="aprendizaje" data-aprendizaje hidden>
+    <h3>¿Cómo te salió este intento?</h3>
+    <p>Seguir una solución es el primer paso. Resolverla sin mirar es el siguiente.</p>
+    <div class="autonomia-botones" role="group" aria-label={`Autonomía del ejercicio ${numero}`}>
+      <button type="button" data-autonomia="ayuda" aria-pressed="false">Lo seguí con ayuda</button>
+      <button type="button" data-autonomia="repetir" aria-pressed="false">Necesito repetirlo</button>
+      <button type="button" data-autonomia="solo" aria-pressed="false">Lo hice solo</button>
+    </div>
+    <label>¿En qué paso te trabaste? <textarea maxlength="1200" placeholder="Ej.: no sabía de dónde salía el límite de r." aria-label={`Mi dificultad en el ejercicio ${numero}`}></textarea></label>
+    <p role="status" data-aprendizaje-status></p>
   </div>
   <IA modo="corregir" numero={numero} />
   <div class="autocorr" data-autocorr hidden role="group" aria-label={`Autocorrección del ejercicio ${numero}`}>

@@ -1,115 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import HomeHero from '../components/HomeHero.astro';
-import HomeMapa from '../components/HomeMapa.astro';
 import { getCollection } from 'astro:content';
+import { esP2, ordenarParciales, TIPOS, DIAS } from '../lib/preparacion.js';
 import { idsDeEjercicios } from '../scripts/ids.js';
-import { FECHA_PARCIAL, FECHA_RECUP, FECHA_FINAL, INSTANCIAS } from '../lib/sitio.js';
-const dm = (f) => f.split('-').reverse().slice(0, 2).join('/');
-const base = import.meta.env.BASE_URL;
-const parciales = await getCollection('parciales');
-const cuerpos = [...parciales, ...(await getCollection('anteriores'))];
-const todosIds = cuerpos.flatMap((e) => idsDeEjercicios(e.body));
-const nPracticos = parciales.filter((p) => p.data.tipo !== 'teórico').length;
-
-// Temas que aparecieron en los parciales oficiales, por unidad (los 3 más frecuentes).
-const cuenta = {};
-for (const p of parciales) {
-  for (const m of p.body.matchAll(/<Ejercicio\b[^>]*?unidad="(U\d+)"[^>]*?tema="([^"]+)"/g)) {
-    const o = (cuenta[m[1]] ??= {});
-    o[m[2]] = (o[m[2]] ?? 0) + 1;
-  }
-}
-const temas = Object.fromEntries(Object.entries(cuenta).map(([u, o]) => [u, Object.entries(o).sort((a, b) => b[1] - a[1]).slice(0, 3)]));
-
-const accesos = [
-  ['M5 3h11l3 3v15H5z M8 9h8 M8 13h8 M8 17h5', 'Parciales oficiales', `${nPracticos} resueltos`, 'parciales/'],
-  ['M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M12 9v4l2.500 2 M9 2h6', 'Rendir como examen', 'Con reloj y nota', 'parciales/'],
-  ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M9.500 9.500a2.500 2.500 0 1 1 3.500 2.300c-.7.400-1 .9-1 1.700 M12 17v.5', 'Preguntero', 'Teoría por unidad', 'preguntero/'],
-  ['M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z M8 8v.01 M16 8v.01 M12 12v.01 M8 16v.01 M16 16v.01', 'Simulacro teórico', '2 temas + 4 cortas + 3 choice', 'preguntero/simulacro/'],
-  ['M13 2 4 14h7l-1 8 9-12h-7z', 'Machetes', 'Guías por tipo de problema', 'machetes/'],
-  ['M9 3h6 M10 3v6l-5 9a2 2 0 0 0 1.800 3h10.400A2 2 0 0 0 19 18l-5-9V3 M7.500 14h9', 'Laboratorio', 'Ejercicios nuevos con semilla', 'laboratorio/'],
-  ['M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'Años anteriores', 'Fotos de clase', 'anteriores/'],
-];
+const base=import.meta.env.BASE_URL;
+const examenes=(await getCollection('parciales')).filter(esP2).sort(ordenarParciales);
+const primero=examenes[0];
+const ids=examenes.flatMap(e=>idsDeEjercicios(e.body));
+const recursos = {
+ hoy: [null, ['parciales/1h10-2026-10-31-a/#ej-5', 'Abrir ejercicio 5'], null, ['parciales/1h10-2026-10-31-a/#ej-1', 'Abrir ejercicio 1'], ['errores/', 'Anotar qué necesito repetir']],
+ jueves: [['parciales/1h10-2026-10-31-a/#ej-3', 'Abrir ejercicio 3'], ['parciales/1h10-2026-10-31-a/#ej-4', 'Abrir ejercicio 4'], ['parciales/1h10-2026-10-31-a/', 'Volver al parcial de tu curso'], ['parciales/1h9-2026-06-27-a/', 'Seguir con junio de 2026'], ['parciales/', 'Ver la ruta completa']],
+ viernes: [['parciales/', 'Elegir el próximo parcial'], ['errores/', 'Ver mis dificultades'], ['machetes/', 'Buscar mi método'], ['parciales/', 'Continuar la ruta']],
+};
 ---
-<Layout titulo="Inicio">
-  <section class="hero">
-    <div class="hero-txt">
-      <p class="eyebrow">UTN FRC · Ingeniería en Sistemas</p>
-      <h1>Análisis Matemático II</h1>
-      <p class="lead">Preparate para los dos parciales y el final con exámenes reales, ejercicio por ejercicio, con pistas de a poco y sin spoilers.</p>
-      <p class="hero-acc">
-        <a class="btn btn-primario" href={`${base}parciales/`}>Empezar a practicar</a>
-        <a class="btn" href={`${base}machetes/`}>Ver machetes</a>
-      </p>
-    </div>
-    <HomeHero />
-  </section>
-
-  <section class="estado-home" aria-label="Tu estado">
-    <div class="tarjeta" data-cuenta data-fecha={FECHA_PARCIAL ?? ''}>
-      <strong>2º parcial</strong>
-      {FECHA_PARCIAL === null ? (
-        <p class="big-txt">Fecha a confirmar</p>
-      ) : (
-        <p class="big-txt"><b class="num" data-dias>{FECHA_PARCIAL}</b> <span class="suave" data-dias-txt></span></p>
-      )}
-      {FECHA_PARCIAL && <p class="suave">Parcial {dm(FECHA_PARCIAL)} · Recuperatorio {dm(FECHA_RECUP)}</p>}
-      <p class="suave" data-final>Final: {FECHA_FINAL ? dm(FECHA_FINAL) : 'diciembre, fecha a confirmar'}</p>
-    </div>
-    <div class="tarjeta" data-tu-progreso data-ids={todosIds.join(',')}>
-      <strong>Tu progreso</strong>
-      <p class="big-txt"><b class="num" data-n>0</b> <span class="suave">de <span data-t>{todosIds.length}</span> ejercicios</span></p>
-      <span class="barra" aria-hidden="true" data-barra data-ids={todosIds.join(',')}></span>
-    </div>
-    <div class="tarjeta">
-      <strong>Seguir donde dejaste</strong>
-      <p class="suave" data-seguir-vacio>Cuando empieces un ejercicio, lo retomás desde acá.</p>
-      <a class="btn btn-primario" data-seguir hidden href={base}><span data-seguir-t></span>&nbsp;→</a>
-    </div>
-  </section>
-
-  <h2>Accesos</h2>
-  <div class="grilla accesos">
-    {accesos.map(([ico, t, d, href]) => (
-      <a class="tarjeta tarjeta-link" href={`${base}${href}`}>
-        <span class="emo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d={ico} /></svg></span>
-        <strong>{t}</strong>
-        <span class="suave">{d}</span>
-      </a>
-    ))}
+<Layout titulo="Hoy · Prepará tu práctico">
+ <section class="saludo"><p class="eyebrow">TU PLAN PARA EL SÁBADO</p><h1>Un ejercicio a la vez.<br /><span>Vos podés empezar de cero.</span></h1><p class="lead">Parciales reales de tu curso, explicados en pasos cortos.<br />Primero entendé cómo se hace. Después, probá sin mirar.</p></section>
+ <div class="lab-acceso"><p><strong>Ahora podés resolver y comprobar.</strong><br />Un paso a la vez, sobre los parciales que ya tenés cargados.</p><a class="btn btn-primario" href={`${base}laboratorio/?parcial=1h10-2026-10-31-a&ejercicio=5`}>Entrar al laboratorio →</a></div>
+ <div class="dashboard">
+  <div class="dashboard-main">
+   <section class="empezar-card">
+    <div class="empezar-top"><span class="pill"><span class="status-dot"></span> EMPEZÁ POR ACÁ</span><span class="mini">TU CURSO · 31 OCT 2026</span></div>
+    <h2>El parcial del sábado pasado.</h2><p>Los 5 ejercicios que tomó Mazzuchelli en tu curso.<br />Elegí uno y abrí el machete si no sabés cómo arrancar.</p>
+    <div class="mini-temas"><span>Volumen</span><span>Triple</span><span>Curvilínea</span><span>EDO 1</span><span>EDO 2</span></div>
+    <div class="empezar-bottom"><a class="btn btn-primario" href={`${base}parciales/${primero.id}/`}>Empezar este parcial <span aria-hidden="true">↗</span></a><span class="mini">5 ejercicios · con guía desde cero</span></div>
+   </section>
+   <section class="plan-diario" aria-labelledby="plan-t"><div class="section-title"><h2 id="plan-t">Tu recorrido hasta el sábado</h2><span class="mini">Papel y lápiz, a tu ritmo</span></div>
+    <div class="day-tabs" role="group" aria-label="Elegir día del plan">{DIAS.map((d,i)=><button type="button" data-dia={d.id} aria-pressed={i===0}>{d.dia}<small>{d.tiempo}</small></button>)}</div>
+    {DIAS.map((d,i)=><div data-plan-dia={d.id} hidden={i!==0}><h3>{d.titulo}</h3><ol class="plan-pasos">{d.pasos.map(([tiempo,titulo,detalle],j)=><li><span class="paso-bullet">{String(j+1).padStart(2,'0')}</span><div><strong>{titulo}</strong><p>{detalle}</p>{recursos[d.id]?.[j] && <a class="plan-recurso" href={`${base}${recursos[d.id][j][0]}`}>{recursos[d.id][j][1]} →</a>}</div><span class="tiempo">{tiempo}</span></li>)}</ol></div>)}
+   </section>
+   <section><div class="section-title"><h2>¿Cómo se resuelve cada tipo?</h2><a href={`${base}machetes/`}>Todos los machetes ↗</a></div><div class="tipos-grid">{TIPOS.map(t=><a class={`tipo-card ${t.color}`} href={`${base}machetes/${t.slug}/`}><span class="tipo-num">{t.n}</span><div><h3>{t.titulo}</h3><p>{t.pista}</p></div><span aria-hidden="true">↗</span></a>)}</div></section>
   </div>
-
-  <h2>Mapa de la materia</h2>
-  <p class="suave sec-nota">Dos instancias: 1º parcial (U1 a U3) y 2º parcial (U4 a U10; programa 2025, Fourier queda fuera). Los números cuentan cuántas veces apareció cada tema en los parciales prácticos.</p>
-  {INSTANCIAS.map(({ i, nombre, rango }) => (
-    <section class="inst-home" data-instancia={i} aria-labelledby={`mapa-${i}`}>
-      <h3 id={`mapa-${i}`}>{nombre} <span class="suave">· {rango}</span></h3>
-      <HomeMapa temas={temas} instancia={i} />
-    </section>
-  ))}
-
-  <h2>Cómo distinguir lo oficial de lo demás</h2>
-  <div class="leyenda">
-    <div class="capa oficial"><p class="rotulo">Oficial</p>Enunciados tal cual el examen y resolución del profe (escaneo). Acento azul.</div>
-    <div class="capa elaborado"><p class="rotulo">Elaborado para el sitio — no oficial</p>Pistas, pasos, soluciones y comprobaciones escritas para estudiar. Acento verde.</div>
-    <div class="capa generado"><p class="rotulo">Simulacro generado — no oficial</p>Ejercicios inventados por el sitio. Borde punteado ámbar.</div>
-  </div>
-
-  <h2>Dónde se guarda tu progreso</h2>
-  <p>
-    En tu navegador (localStorage), con claves que empiezan con <code>am2:v1:</code>. No hay cuentas ni servidor: no se comparte entre dispositivos
-    y se pierde si borrás los datos del navegador. Actualizar el sitio no lo borra.
-  </p>
-  <button type="button" data-reiniciar>Reiniciar progreso</button>
-  <div class="capa generado" data-confirmar hidden role="group" aria-label="Confirmar reinicio">
-    <p><strong>¿Seguro?</strong> Se borran los estados y las ayudas reveladas de todos los ejercicios. No se puede deshacer.</p>
-    <button type="button" data-si>Sí, borrar todo</button>
-    <button type="button" data-no>Cancelar</button>
-  </div>
-  <p role="status" tabindex="-1" data-resultado></p>
-  <style>.inst-home { margin-top: var(--s-24); } .inst-home > h3 { margin-bottom: var(--s-12); font-size: 1.25rem; }</style>
-  <script>
-    import '../scripts/home.js';
-  </script>
+  <aside class="dashboard-aside">
+   <section class="objetivo-card"><p class="eyebrow">EL OBJETIVO</p><div class="fecha-grande"><b>07</b><span>NOVIEMBRE<br />SÁBADO · 2026</span></div><div class="objetivo-datos"><p><strong>2 horas</strong><span>para resolver</span></p><p><strong>4–5</strong><span>ejercicios</span></p></div><p class="nota-pequena">En el parcial del 31/10 pidieron desarrollo y cálculos auxiliares, sin calculadora ni tablas.</p></section>
+   <section class="progreso-card" data-tu-progreso data-ids={ids.join(',')}><p class="eyebrow">TU AVANCE EN LOS PARCIALES</p><p class="numero-progreso"><b data-n>0</b><span> / <span data-t>{ids.length}</span></span></p><span class="barra" data-barra data-ids={ids.join(',')}></span><p class="nota-pequena">Ejercicios marcados como resueltos. En «Mis errores» podés separar los que hiciste con ayuda.</p><a href={`${base}errores/`}>Ver qué necesito repetir ↗</a></section>
+   <section class="retomar-card"><span class="eyebrow">DONDE TE QUEDASTE</span><p data-seguir-vacio>Todavía no empezaste. Tu último ejercicio aparecerá acá.</p><a data-seguir hidden href={base}><span data-seguir-t></span> →</a></section>
+   <section class="consejo-card"><span aria-hidden="true">✳</span><h3>No hace falta saberlo antes.</h3><p>Abrí «Siguiente paso», entendé una sola operación y hacela en tu hoja. Después seguí con la próxima.</p></section>
+  </aside>
+ </div>
+ <script>import '../scripts/home.js';</script>
 </Layout>

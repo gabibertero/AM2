@@ -1,35 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import InstanciaSec from '../../components/InstanciaSec.astro';
 import { idsDeEjercicios } from '../../scripts/ids.js';
-import { INSTANCIAS, instanciaDeUnidades } from '../../lib/sitio.js';
-const corto = (v, alt) => { const r = /^(no figura|xx)/i.test(v) ? alt : v; return r[0].toUpperCase() + r.slice(1); };
-const tema = (t, c = '') => t.replace(/^tema\s+/i, '').replace(new RegExp(`^${c}\\s+`, 'i'), '');
-const base = import.meta.env.BASE_URL;
-const examenes = (await getCollection('parciales')).sort((a, b) => a.data.orden - b.data.orden);
+import { esP2, ordenarParciales } from '../../lib/preparacion.js';
+const base=import.meta.env.BASE_URL;
+const examenes=(await getCollection('parciales')).filter(esP2).sort(ordenarParciales);
 ---
 <Layout titulo="Parciales oficiales">
-  <h1>Parciales oficiales</h1>
-  <p class="lead">Exámenes reales de 2025–2026, separados por instancia, con sus ejercicios en el orden original.</p>
-  {INSTANCIAS.map(({ i }) => { const lista = examenes.filter((e) => instanciaDeUnidades(e.data.unidades) === i); return (
-  <InstanciaSec i={i} vacio={!lista.length}>
-  <ul class="grilla lista-tarjetas">
-    {lista.map((e) => (
-      <li class="tarjeta examen-card">
-        <div class="ec-top">
-          <span class="chip chip-fuerte">{corto(e.data.comision, 'sin comisión')}{e.data.tema && ` · ${tema(e.data.tema, e.data.comision)}`}</span>
-          {e.body.includes('<Solucion') && <span class="chip chip-ok">✔ Con solución</span>}
-        </div>
-        <a class="ec-titulo" href={`${base}parciales/${e.id}/`}>{e.data.titulo}</a>
-        <p class="meta">{corto(e.data.fecha, 'sin fecha')} · {e.data.tipo}</p>
-        <p class="chips">{e.data.unidades.map((u) => <span class="chip chip-u" data-unidad={u}>{u}</span>)}</p>
-        <span class="barra" aria-hidden="true" data-barra data-ids={idsDeEjercicios(e.body).join(',')}></span>
-        <span class="progreso" data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span>
-      </li>
-    ))}
-  </ul>
-  </InstanciaSec>
-  ); })}
-  <p class="meta">¿Buscás más práctica? Mirá los <a href={`${base}anteriores/`}>exámenes de años anteriores</a>.</p>
+<p class="eyebrow">LA RUTA DE PRÁCTICA</p><h1>Del más reciente<br /><span class="titulo-suave">al próximo que vas a dominar.</span></h1><p class="lead">Empezá por el del 31/10 de tu curso. Después seguí hacia atrás.<br />En cada parcial podés aprender con ayuda o simular 2 horas de examen.</p>
+<div class="info-strip"><strong>{examenes.length} parciales prácticos</strong><span>Ordenados por fecha real · temas A/B separados</span></div>
+<ol class="exam-list">{examenes.map((e,i)=><li class:list={['exam-row',{'reciente':i===0}]}><span class="exam-orden">{String(i+1).padStart(2,'0')}</span><div class="exam-info"><div class="exam-meta">{e.data.fecha} <span>· {e.data.comision}{e.data.tema?` · ${e.data.tema}`:''}</span>{i===0&&<span class="pill pill-curso">TU CURSO</span>}</div><h2><a href={`${base}parciales/${e.id}/`}>{e.data.titulo}</a></h2><p>{idsDeEjercicios(e.body).length} ejercicios · {e.data.tipo==='recuperatorio'?'Recuperatorio':'Parcial práctico'}</p></div><div class="exam-avance"><span data-progreso data-ids={idsDeEjercicios(e.body).join(',')}></span><span class="barra" data-barra data-ids={idsDeEjercicios(e.body).join(',')}></span></div><a class="exam-abrir" href={`${base}parciales/${e.id}/`} aria-label={`Abrir ${e.data.titulo}`}><span aria-hidden="true">↗</span></a></li>)}</ol>
 </Layout>

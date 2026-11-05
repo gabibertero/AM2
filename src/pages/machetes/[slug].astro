@@ -31,7 +31,7 @@ const d = entry.data;
     ) : (
       <ul>
         {d.ejerciciosOficiales.map((e) => (
-          <li><a href={`${base}parciales/${e.split('#')[0]}/`}><code>{e}</code></a></li>
+          <li><a href={`${base}parciales/${e.split('#')[0]}/#ej-${e.split('#')[1]}`}><code>{e}</code></a></li>
         ))}
       </ul>
     )}

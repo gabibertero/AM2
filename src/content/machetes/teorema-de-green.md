@@ -3,63 +3,70 @@ slug: teorema-de-green
 titulo: "Teorema de Green"
 unidad: U5
 orden: 4
-ejerciciosOficiales: ["1r3-2025-11-14#3", "1r7-2025-11-11#3", "1v1-2025-11-13-a#3", "1v1-2025-11-13-b#3", "2s2-2025-11-07-a#3", "2s2-2025-11-07-b#3", "recup-1h10-2025-11-08#3", "modelo-teorico#1"]
+ejerciciosOficiales: ["1h10-2026-10-31-a#3", "1r3-2025-11-14#3", "1r7-2025-11-11#3", "1v1-2025-11-13-a#3", "1v1-2025-11-13-b#3", "2s2-2025-11-07-a#3", "2s2-2025-11-07-b#3", "recup-1h10-2025-11-08#3"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/06-INTEGRALES CURVILINEAS 2015.pdf, p. 6-10 (Green: p. 9)"
   - "teoria/Teorico-practico Rocha-Giordano/13_Integrales curvilíneas.pdf, p. 3"
   - "teoria/AM2 Resumen segundo parcial.pdf, p. 18-19"
   - "parciales/2do-parcial/Modelo P2 teorico.pdf, p. 1 (enunciado de la pregunta)"
+  - "parciales/2do-parcial/2026-10-31-1H10-A.png, p. 1 (enunciado aportado por Gabi; resolución elaborada para el sitio)"
 ---
+> **Para verificar una curvilínea cerrada.** Si el ejercicio pide definición **y** Green, entregá ambos cálculos. Este machete explica cómo usar la fórmula, sin demostraciones.
 
 ## Cómo reconocerlo
-- "Verificar el cálculo aplicando la fórmula de Green" o "realizar planteo y desarrollo por Teorema de Green (en cartesianas / en polares)".
-- Curva cerrada (dos o más tramos) que encierra una región $D$ del plano.
-- Aparece junto con la integral curvilínea por definición: una sirve de control de la otra.
 
-## Qué necesitás antes
-- $L$ curva **cerrada, simple, suave a trozos**, orientada **antihorario** (positiva).
-- $P,Q$ continuas con derivadas parciales continuas en $D$ y en su borde.
-- $D$ la región encerrada por $L$ (sin "agujeros" no encerrados por la curva).
-- Si el sentido es horario, hay que cambiar el signo del resultado.
+Dice «verificar por Green» o «calcular aplicando Green». La curva tiene que estar cerrada. Para usar este procedimiento, el campo y sus derivadas deben ser continuos en toda la región y su borde; los campos polinómicos de estos ejemplos lo cumplen.
 
-## Pasos
-1. Identificar $P$ y $Q$ ($F=P\,\vec i+Q\,\vec j$).
-2. Calcular $\dfrac{\partial Q}{\partial x}$ y $\dfrac{\partial P}{\partial y}$ y restar: $Q_x-P_y$.
-3. **Graficar $D$** e identificar las intersecciones de las curvas.
-4. Elegir sistema:
-   - **Cartesianas:** $a\le x\le b,\ f_{inf}(x)\le y\le f_{sup}(x)$ (o al revés con $x(y)$).
-   - **Polares:** si $D$ es círculo/sector/anillo; reemplazar $x=r\cos\theta$, $y=r\sin\theta$ en $Q_x-P_y$ y agregar el factor $r$.
-5. Integrar la doble integral.
-6. Comparar con el valor por definición.
+## Pasos cortos
 
-## Fórmulas clave
-$$\oint_L P\,dx+Q\,dy=\iint_D\Big(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\Big)\,dx\,dy$$
+1. Separá $P$ y $Q$ del campo $F=(P,Q)$.
+2. Derivá $Q$ respecto de $x$: escribí $Q_x$. Durante esa derivada, $y$ es constante.
+3. Derivá $P$ respecto de $y$: escribí $P_y$. Durante esa derivada, $x$ es constante.
+4. Restá **$Q_x-P_y$**, en ese orden.
+5. Reutilizá el dibujo y las intersecciones de la curvilínea.
+6. Describí la región por franjas. Si las curvas vienen como $x=f(y)$, suele convenir integrar primero en $x$.
+7. Escribí el límite izquierdo y el derecho de cada franja. Después, los valores inferior y superior de $y$.
+8. Integrá la expresión del paso 4 sobre esa región.
+9. Si el recorrido es horario, cambiá el signo.
+10. Compará con la suma de tramos por definición.
 
-$$\text{En polares: } \iint_D \big(Q_x-P_y\big)\big|_{x=r\cos\theta,\ y=r\sin\theta}\; r\,dr\,d\theta$$
-- $Q_x-P_y$: "circulación por unidad de área" (rotacional escalar de $F$).
-- $D$: región plana encerrada por $L$.
-- Sentido horario: $\oint_L=\iint_D(P_y-Q_x)\,dx\,dy$ (Monllor 06 p. 9).
-- Área de $D$: con $Q_x-P_y=1$, p. ej. $\text{Área}=\tfrac12\oint_L(x\,dy-y\,dx)$ (Rocha 13 p. 2). Para la elipse da $\pi ab$.
+$$\oint_C P\,dx+Q\,dy=\iint_D(Q_x-P_y)\,dA\qquad\text{(sentido antihorario)}.$$
 
-## Por qué funciona
-Se demuestra para regiones tipo I y II: $-\iint P_y\,dA$ se reduce con el teorema fundamental del cálculo a una integral de $P\,dx$ sobre el borde, y $\iint Q_x\,dA$ a una de $Q\,dy$. Sumar ambas da la fórmula. Para $D$ cualquiera se parte en regiones de ese tipo.
+## Ejemplo del parcial del 31/10
 
-## Errores frecuentes
-- Aplicar Green a una curva **no cerrada** (o sin cerrarla con otro tramo).
-- Usar $P_y-Q_x$ en lugar de $Q_x-P_y$ (signo).
-- Recorrido horario y no cambiar el signo.
-- Olvidar el factor $r$ en polares, o no reescribir $Q_x-P_y$ en $r,\theta$.
-- Límites mal ordenados: la curva "de arriba" menos la "de abajo".
-- Error de signo en las derivadas: $P_y$ es derivar $P$ respecto de $y$ (no $x$).
-- **Región no tipo I** respecto de la variable elegida (o curvas que se cruzan fuera de $[a,b]$): el esquema "arriba menos abajo" falla. Dibujá la región completa (puede extenderse a $x<0$ aunque las curvas se corten en $x\ge0$, como en 1h9-2026-06-27-a#2), y o bien **partila** en regiones tipo I, o integrá primero en $dx$ (tipo II: $y_1\le y\le y_2$, $x_{izq}(y)\le x\le x_{der}(y)$).
-- Semicírculo (p. ej. $x^2+y^2=2$ con $y=-x$ en 1v1-a#3): hay dos semicírculos posibles; dibujá y fijá $\theta$ según el sentido antihorario de la trayectoria completa; si el enunciado es ambiguo, declaralo.
-- Si dan "sin necesidad de obtener el resultado final", alcanza con dejar la integral doble **bien planteada** (integrando y límites).
+**Ejercicio 3:** $P=x-y$, $Q=x+y$, entre la recta $x=y$ y la parábola $x=y^2-2$. Adoptamos sentido antihorario porque la foto no especifica orientación.
 
-## Cómo comprobar el resultado
-- Debe coincidir con la integral curvilínea por definición.
-- Si $Q_x=P_y$ en todo $D$, la integral cerrada da $0$ (verificá).
-- Si $Q_x-P_y>0$ en todo $D$, el resultado es positivo con recorrido antihorario.
-- Chequeá que $D$ de tu gráfico sea la región encerrada (no su complemento).
-- Curva abierta: cerrala con un tramo auxiliar y restá su integral (opcional: los parciales no lo piden).
+1. Derivá $Q=x+y$ en $x$: $Q_x=1$.
+2. Derivá $P=x-y$ en $y$: $P_y=-1$.
+3. Restá: $Q_x-P_y=1-(-1)=2$.
+4. Las intersecciones son $(-1,-1)$ y $(2,2)$: $-1\le y\le2$.
+5. A la izquierda está $x=y^2-2$; a la derecha, $x=y$.
+6. Escribí primero los límites de $x$ y después los de $y$:
 
-> **Elaborado para el sitio — verificar con la cátedra:** Enunciado y signos siguen a Monllor 06 p. 9. El comentario de "área" y la verificación por signo son elaborados: verificar con la cátedra.
+$$I=\int_{-1}^{2}\int_{y^2-2}^{y}2\,dx\,dy.$$
+
+7. Integrá en $x$: la primitiva de $2$ es $2x$.
+
+$$[2x]_{y^2-2}^{y}=2y-2(y^2-2)=2y-2y^2+4.$$
+
+8. Integrá en $y$:
+
+$$I=\left[y^2-\frac{2y^3}{3}+4y\right]_{-1}^{2}=\frac{20}{3}-\left(-\frac73\right)=\boxed{9}.$$
+
+La [cuenta por definición](../curvilinea-por-definicion/) da $3+6=9$: coinciden. En sentido horario, ambas dan $-9$.
+
+## Si conviene usar polares
+
+1. Cambiá $x=r\cos\theta$ e $y=r\sin\theta$ en $Q_x-P_y$.
+2. Multiplicá por el jacobiano $r$.
+3. Fijá radio y ángulos de la región encerrada.
+4. Integrá $(Q_x-P_y)r$ en $dr\,d\theta$.
+
+## Comprobá y evitá estos errores
+
+- No es $P_y-Q_x$: esa resta cambia el signo.
+- No apliques Green a un arco abierto como si ya encerrara una región.
+- En este ejemplo, el integrando es $2$: la integral debe ser dos veces el área, no el área sola.
+- El orden $dx\,dy$ exige límites de $x$ adentro y de $y$ afuera.
+- Una integral cerrada igual a cero no alcanza para afirmar que el campo es conservativo.
+- **Prueba sin mirar:** obtené las dos derivadas y señalá «izquierda» y «derecha» en un dibujo.

@@ -7,7 +7,7 @@ ejerciciosOficiales: ["p1-1h10-2025-09#2", "p1-1r7-2025-10#2", "p1-2s2-2025-06-b
 fuentes:
   - "teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 8-13 (diferencial, aplicaciones y errores)"
   - "teoria/Teorico-practico Rocha-Giordano/4_Diferencial.pdf, p. 1"
-  - "AM2_A 2025.pdf, p. 1-2 (cuestionario, preguntas 24, 27, 28)"
+  - "teoria/AM2_A 2025.pdf, p. 1-2 (cuestionario, preguntas 24, 27, 28)"
 ---
 
 ## Cómo reconocerlo

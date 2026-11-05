@@ -367,3 +367,26 @@ body[data-examen='entregado'] .ejercicio .capa[data-pista], body[data-examen='en
 .aviso-disc > :last-child { margin-bottom: 0; }
 .scan { max-height: 480px; overflow-y: auto; margin-top: var(--s-8); border-radius: var(--r-s); }
 .scan img { margin-top: 0 !important; }
+
+/* El trazo se ajusta a todos los renglones aunque el navegador no cargue KaTeX_Size4. */
+.katex .sistema-con-llave {
+  display: inline-flex;
+  align-items: stretch;
+  gap: .16em;
+  vertical-align: middle;
+}
+.katex .sistema-con-llave > .llave-trazo {
+  position: relative;
+  top: auto !important;
+  flex: 0 0 .62em;
+  min-height: 1.8em;
+}
+.katex .llave-trazo > * { display: none; }
+.katex .llave-trazo::before {
+  content: '';
+  position: absolute;
+  inset: .08em 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 64' preserveAspectRatio='none'%3E%3Cpath d='M11 1C3 1 6 13 6 22C6 27 4 31 1 32C4 33 6 37 6 42C6 51 3 63 11 63' fill='none' stroke='black' stroke-width='1.5' vector-effect='non-scaling-stroke' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 64' preserveAspectRatio='none'%3E%3Cpath d='M11 1C3 1 6 13 6 22C6 27 4 31 1 32C4 33 6 37 6 42C6 51 3 63 11 63' fill='none' stroke='black' stroke-width='1.5' vector-effect='non-scaling-stroke' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}

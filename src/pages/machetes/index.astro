@@ -1,28 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import InstanciaSec from '../../components/InstanciaSec.astro';
-import { INSTANCIAS, instanciaDeUnidad } from '../../lib/sitio.js';
-import { UNIDADES_MACHETES } from '../../unidades-machetes';
-const base = import.meta.env.BASE_URL;
-const items = (await getCollection('machetes')).sort((a, b) => a.data.orden - b.data.orden);
-const unidades = UNIDADES_MACHETES;
+import { TIPOS } from '../../lib/preparacion.js';
+const base=import.meta.env.BASE_URL;
+const items=(await getCollection('machetes')).filter(e=>['U4','U5','U8','U9'].includes(e.data.unidad)).sort((a,b)=>a.data.orden-b.data.orden);
 ---
-<Layout titulo="Machetes">
-  <h1>Machetes</h1>
-  <p class="lead">Guías de bolsillo por tipo de problema. Contenido elaborado para el sitio, no oficial.</p>
-  {INSTANCIAS.map(({ i }) => { const us = unidades.filter((u) => instanciaDeUnidad(u) === i && items.some((m) => m.data.unidad === u)); return (
-  <InstanciaSec i={i} vacio={!us.length}>
-  {us.map((u) => (
-    <section class="unidad-sec" data-unidad={u}>
-      <h2><span class="chip chip-u chip-lg" data-unidad={u}>{u}</span></h2>
-      <ul class="grilla lista-tarjetas">
-        {items.filter((i) => i.data.unidad === u).map((i) => (
-          <li class="tarjeta tarjeta-u" data-unidad={u}><a class="ec-titulo" href={`${base}machetes/${i.data.slug}/`}>{i.data.titulo}</a></li>
-        ))}
-      </ul>
-    </section>
-  ))}
-  </InstanciaSec>
-  ); })}
+<Layout titulo="Machetes paso a paso">
+<p class="eyebrow">NO SABÉS CÓMO EMPEZAR · EMPEZÁ ACÁ</p><h1>Una receta para<br /><span class="titulo-suave">cada tipo de ejercicio.</span></h1><p class="lead">Cómo reconocerlo, qué escribir primero y cómo seguir.<br />Pasos cortos, un ejemplo resuelto y una forma de comprobarlo.</p>
+<div class="info-strip"><strong>Usalos con papel al lado</strong><span>Leé un paso → hacelo → recién después seguí.</span></div>
+<div class="tipos-grid tipos-principales">{TIPOS.map(t=><a class={`tipo-card ${t.color}`} href={`${base}machetes/${t.slug}/`}><span class="tipo-num">{t.n}</span><div><p class="eyebrow">{t.tema}</p><h2>{t.titulo}</h2><p>{t.pista}</p></div><span aria-hidden="true">↗</span></a>)}</div>
+<h2>Elegí el método que te pide el ejercicio</h2><p class="suave">También aparecen en los parciales anteriores. No todos se usan en el del 31/10.</p><ul class="metodos-list">{items.map(i=><li><span class="chip">{i.data.unidad}</span><a href={`${base}machetes/${i.data.slug}/`}>{i.data.titulo}</a><span aria-hidden="true">→</span></li>)}</ul>
 </Layout>

@@ -6,7 +6,7 @@ orden: 17
 ejerciciosOficiales: ["p1-1r3-2023-09-b#4"]
 fuentes:
   - "teoria/Apuntes Ing. Monllor/02-DERIVADAS Y DIFERENCIALES 2015.pdf, p. 19-21"
-  - "U2 - Derivadas Compuestas e Implicitas.pdf, p. 1-25 (documento completo)"
+  - "teoria/U2 - Derivadas Compuestas e Implicitas.pdf, p. 1-25 (documento completo)"
   - "Demostraciones parcial 1.pdf, p. 4-5 (Demostración 4, cadena; como imagen)"
 ---
 
